@@ -13,32 +13,200 @@
       <title>Abstraction of hardware</title>
 
       <para>The fundamental operation of the operating system (OS) is
-      to abstract the hardware to the programmer and user.</para>
+      to abstract the hardware to the programmer and user.  The
+      operating system provides generic interfaces to services
+      provided by the underlying hardware.</para>
+
+      <para>In a world without operating systems, every programmer
+      would need to know the most intimate details of the underlying
+      hardware to get anything to run.  Worse still, their programs
+      would not run on other hardware, even with only slight
+      differences.</para>
+
+      <para>The operating system abstracts the hardware in many
+      different ways; this will become much clearer over the following
+      weeks.</para>
+
+    </sect2>
+
+    <sect2>
+      <title>Multitasking</title>
+
+      <para>We expect modern computers to do many different things at
+      once, and we need some way to arbitrate between all the
+      different programs running on the system.  It is the operating
+      systems job to allow this to happen seamlessly.</para>
+
+      <para>The operating system is responsible for <emphasis>resource
+      management</emphasis>; that means things like the formatting,
+      reading and writing disks and making sure one program does not
+      take up all the system memory.  You have probably experienced
+      when this has failed as it usually ends up with your computer
+      crashing.</para>
 
     </sect2>
 
     <sect2>
       <title>Standardised Interfaces</title>
 
-      <para>POSIX</para>
+      <para>Programmers want to write programs that will run on as
+      many different hardware platforms as possible.  By having
+      operating system support for standardised interfaces,
+      programmers can get this functionality.</para>
+
+      <para>For example, if the function to open a file on one system
+      is <computeroutput>open()</computeroutput>, on another is
+      <computeroutput>open_file()</computeroutput> and on yet another
+      <computeroutput>openf()</computeroutput> programmers will have
+      the dual problem of having to remember what each system does and
+      their programs will not work on multiple systems.</para>
+
+      <para>The Portable Operating System Interface (POSIX) defined by
+      the IEEE is a very important standard implemented by UNIX type
+      operating systems.  Microsoft Windows has similar proprietary
+      standards.
+      </para>
 
     </sect2>
 
     <sect2>
       <title>Security</title>
-      <para></para>
+      
+      <para>On multi-user systems, security is very important.
+      Ultimately, as the arbitrator of access to the system, the
+      operating system is responsible for ensuring that only those
+      with the correct permission can access resources.</para>
+
+      <para>For example, if a file is owned by one user, another user
+      should not be allowed to <computeroutput>open()</computeroutput>
+      it.</para>
+
+      <para>Operating systems are large and complex programs, and
+      often security issues will be found.  Often a virus or worm will
+      take advantage of these bugs; to fight them you must install
+      <emphasis>patches</emphasis> or updates provided by your
+      operating system vendor.</para>
     </sect2>
 
     <sect2>
       <title>Performance</title>
-      <para></para>
+
+      <para>As the operating system provides so many services to the
+      computer, it's performance is critical.  As an operating systems
+      programmer, you must always be thinking about the performance of
+      any code you write.</para>
+
     </sect2>
 
   </sect1>
 
   <sect1>
-    <title>The Kernel</title>
-    <para></para>
+    <title>Operating System Organisation</title>
+
+    <para>The operating system is roughly organised as in the figure below.</para>
+
+    <figure>
+      <title>The Operating System</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="wk3/figures/kernel.eps" format="EPS">
+	</imageobject>
+	<imageobject>
+	  <imagedata fileref="wk3/figures/kernel.png" format="PNG">
+	</imageobject>
+	<textobject>
+	  <phrase>The organisation of the kernel.  Processes the
+	  kernel is running live in <emphasis>userspace</emphasis>,
+	  and the kernel talks both directly to hardware and through
+	  <emphasis>drivers</emphasis>.
+	  </phrase>
+	</textobject>
+      </mediaobject>
+    </figure>
+
+    <sect2>
+      <title>The Kernel</title>
+      
+      <para>The kernel <emphasis>is</emphasis> the operating system.
+      As the figure illustrates, the kernel communicates to hardware
+      both directly and through <emphasis>drivers</emphasis>.</para>
+
+      <para>Just as the kernel abstracts the hardware to user
+      programs, drivers abstract hardware to the kernel.  For example,
+      there are many different types of graphic card, each one with
+      slightly different features.  As long as the kernel exports an
+      API, people who have access to the specifications for the
+      hardware can write drivers to implement that API.  This way the
+      kernel can access many different types of hardware.</para>
+
+      <para>The kernel is generally what we called
+      <emphasis>privileged</emphasis>.  As you will learn, the
+      hardware has important roles to play in running multiple tasks
+      and keeping the system secure, but these rules do not apply to
+      the kernel.  We know that the kernel must handle programs that
+      crash (remember it is the operating systems job arbitrate
+      between multiple programs running on the same system, and there
+      is no guarantee that they will behave), but if any internal part
+      of the operating system crashes chances are the entire system
+      will become useless.</para>
+
+      <sect3>
+	<title>Monolithic v Microkernels</title>
+
+	<para>One debate that is often comes up surrounding operating
+	systems is whether the kernel should be a
+	<emphasis>microkernel</emphasis> or
+	<emphasis>monolithic</emphasis>.</para>
+
+	<para>As discussed above, the kernel is always privileged,
+	which means if any part of it crashes the whole system is
+	likely to become unstable.  A microkernel architecture tries
+	to minimise this possibility by making the kernel as small as
+	possible.  This means that many parts of the system run in
+	exactly the same way as programs, and if they crash the system
+	will not necessarily become useless.</para>
+
+	<para>Whilst this sounds like the most obvious idea, the
+	problem comes back two main issues</para>
+
+	<orderedlist>
+	  <listitem>
+	    <para>Performance is decreased.  Talking between many
+	    different components can decrease performance.</para>
+	  </listitem>
+	  <listitem>
+	    <para>It is slightly more difficult for the
+	    programmer.</para>
+	  </listitem>
+	</orderedlist>
+
+	<para>Thus most common operating systems use a
+	<emphasis>monolithic</emphasis> kernel, where all components
+	are integrated into the privileged kernel.</para>
+
+	<para>There is no definitive answer as to which is the best
+	type, though as you start to learn more about operating
+	systems you will definately be able to make up your own
+	mind!</para>
+
+      </sect3>
+
+    </sect2>
+
+    <sect2>
+      <title>Userspace</title>
+
+      <para>We call the theoretical place where programs run by the
+      user <emphasis>userspace</emphasis>.  Each program runs in
+      userspace, talking to the kernel through <emphasis>system
+      calls</emphasis> (discussed below).</para>
+
+      <para>As previously discussed, userspace is
+      <emphasis>unprivledged</emphasis>.  User programs can only do a
+      limited range of things, and should never be able to crash other
+      programs, even if they crash themselves.</para>
+
+    </sect2>
 
   </sect1>
 
@@ -46,15 +214,94 @@
   <sect1>
     <title>System Calls</title>
 
-    <para></para>
 
     <sect2>
-      <title>libc</title>
+      <title>Overview</title>
 
-      <para></para>
+      <para>System calls are how userspace programs interact with the
+    kernel.  The general principle behind how they work is described
+    below.
+    </para>
+      
+    <sect3>
+      <title>System call numbers</title> <para>Each and every system
+      call has a <emphasis>system call number</emphasis> which is
+      known by both the userspace and the kernel.  For example, both
+      know that system call number 10 is
+      <computeroutput>open()</computeroutput>, system call number 11
+      is <computeroutput>read()</computeroutput>, etc.</para>
+
+      <para>The <emphasis>Application Binary Interface</emphasis>
+      (ABI) is very similar to an API but rather than being for
+      software is for hardware.  The API will define which register
+      the system call number should be put in so the kernel can find
+      it when it is asked to do the system call.</para>
+    </sect3>
+
+    <sect3>
+      <title>Arguments</title>
+
+      <para>System calls are no good without arguments; for example
+      <computeroutput>open()</computeroutput> needs to tell the kernel
+      exactly <emphasis>what</emphasis> file to open.  Once again the
+      ABI will define which registers arguments should be put into for
+      the system call.
+    </sect3>
+
+    <sect3>
+      <title>The trap</title>
+
+      <para>To actually perform the system call, there needs to be
+      some way to communicate to the kernel we wish to make a system
+      call.  All architectures define an instruction, usually called
+      <computeroutput>break</computeroutput> or something similar,
+      that signals to the hardware we wish to make a system
+      call.</para>
+
+      <para>Specifically, this instruction will tell the hardware to
+      modify the instruction pointer to point to the kernels system
+      call handler (when the operating system sets its self up it
+      tells the hardware where its system call handler lives).  So
+      once the userspace calls the break instruction, it has lost
+      control of the program and passed it over to the kernel.</para>
+
+      <para>The rest of the operation is fairly striaght forward.  The
+      kernel looks in the predefined register for the system call
+      number, and looks it up in a table to see which function it
+      should call.  This function is called, does what it needs to do,
+      and places it's return value into <emphasis>another</emphasis>
+      register defined by the ABI as the return register.</para>
+
+      <para>The final step is for the kernel to make a jump
+      instruction back to the userspace program, so it can continue
+      off where it left from.  The userpsace program gets the data it
+      needs from the return register, and continues happily on it's
+      way!</para>
+
+      <para>Although the details of the process can get quite hariy,
+      this is basically all their is to a system call.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>libc</title>
+	
+	<para>Although you can do all of the above by hand for each
+	system call, system libraries usually do most of the work for
+	you.  The standard library that deals with system calls on
+	UNIX like systems is <computeroutput>libc</computeroutput>; we
+	will learn more about it's roles in future weeks.</para>
+	
+      </sect3>
 
     </sect2>
 
+
+    <sect2>
+      <title>Analysing a system call</title>
+
+      <para>first real look at assembly</para>
+    </sect2>
   </sect1>
 
 </chapter>

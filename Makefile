@@ -1,5 +1,5 @@
 sourcedirs=wk0 wk1 wk2 wk3 wk4 wk5 wk6 wk7 wk8 wk9
-imagedirs=wk0/figures wk1/figures wk2/figures
+imagedirs=wk0/figures wk1/figures wk2/figures wk3/figures
 
 sources := $(foreach dir,$(sourcedirs),$(wildcard $(dir)/*.sgml))
 images := $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.xfig))
