@@ -1,0 +1,8 @@
+init-+-apmd
+     |-atd
+     |-cron
+     ...
+     |-dhclient
+     |-firefox-bin-+-firefox-bin---2*[firefox-bin]
+     |             |-java_vm---java_vm---13*[java_vm]
+     |             `-swf_play

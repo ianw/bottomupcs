@@ -1,7 +1,94 @@
 <chapter id="wk4">
   
-  <title>The Process Part 1</title>
-  <para></para>
+  <title>The Process</title>
+
+  <sect1>
+    <title>What is a process?</title>
+
+    <para>We are all familar with the modern operating system running
+    many tasks all at once or <emphasis>multitasking</emphasis>.  
+    </para>
+
+  </sect1>
+
+  <sect1>
+    <title>Elements of a process</title>
+
+    <sect2>
+      <title>Process ID</title> 
+
+      <para>The <emphasis>process ID</emphasis> (or the PID) is
+      assigned by the operating system and is unique to each running
+      process.</para>
+
+    </sect2>
+
+    <sect2>
+      <title>Memory</title> <para>We will learn exactly how a process
+      gets it's memory in the following weeks -- it is one of the most
+      fundamental parts of how the operating system works.  However,
+      for now it is sufficient to know that each process gets it's own
+      section of memory.</para>
+
+      <para>Parts of the memory can be shared between process (called,
+      not surprisingly <emphasis>shared memory</emphasis>).  You will
+      often see this called <emphasis>System Five Shared
+      Memory</emphasis> (or SysV SHM) after the original
+      implementation in an older operating system.</para>
+
+      <para>Another important concept a process may utilise is that of
+      <emphasis>mmap</emphasis>ing a file on disk to memory.  This
+      means that instead of having to open the file and use commands
+      such as <computeroutput>read()</computeroutput> and
+      <computeroutput>write()</computeroutput> the file looks as if it
+      were any other type of RAM.</para>
+    </sect2>
+
+    <sect2>
+      <title>File Descriptors</title>
+      <para>fds</para>
+    </sect2>
+
+  </sect1>
+
+  <sect1>
+    <title>Fork and Exec</title>
+    <sect2>
+      <title>Fork</title>
+      <para>fork</para>
+    </sect2>
+    <sect2>
+      <title>Exec</title>
+      <para></para>
+    </sect2>
+
+  </sect1>
+
+  <sect1>
+    <title>Process Hierarchy</title>
+    <para>The init process spawns more</para>
+
+    <example id="pstree">
+      <title><command>pstree</command> example</title>
+      <programlisting><inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="wk4/code/pstree.txt" format="linespecific">
+	  </imageobject>
+	</inlinemediaobject></programlisting>
+    </example>    
+
+  </sect1>
+
+  <sect1>
+    <title>Context Switching</title>
+    <para></para>
+  </sect1>
+
+  <sect1>
+    <title>Scheduling</title>
+    <para></para>
+  </sect1>
+
 </chapter>
 
 <!--
