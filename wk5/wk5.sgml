@@ -29,34 +29,45 @@
     <para>Virtual memory is all about making use of <emphasis>address
     space</emphasis>.</para>
 
-    <para>The address space of a processor refers the addresses that
-    it can use when loading and storing memory.  Most current
-    processors have registers that are 32 bits wide; this means the
-    addresses that can be stored in a register range from
+    <para>The address space of a processor refers the range of
+    possible addresses that it can use when loading and storing to
+    memory.  The address space is limited by the width of the
+    regisers, since as we know to load an address we need to issue a
+    <computeroutput>load</computeroutput> instruction with the address
+    to load from in a register.  Most current processors have
+    registers that are 32 bits wide; this means the addresses that can
+    be stored in a register range from
     <computeroutput>0x00000000</computeroutput> to
     <computeroutput>0xFFFFFFF</computeroutput>.
     2^<superscript>32</superscript> is equal to 4GB, so a 32 bit
-    processor can access load or store only from 4GB of memory.  Most
-    new processors are moving towards 64 bit processors, which have
-    registers 64 bits wide.  As an exercise, you should work out the
-    address space available to these processors (hint: it's
-    big!).</para>
+    processor can load or store to up to 4GB of memory.</para>
+
+    <sect2>
+      <title>64 bit computing</title>
+
+      <para>Most new processors are moving towards 64 bit processors,
+    which have registers 64 bits wide.  As an exercise, you should
+    work out the address space available to these processors (hint:
+    it's big!).</para>
+    </sect2>
 
     <sect2>
       <title>Using the address space</title>
+    
+      <para>As with most componets of the operating system, virtual
+    memory acts as an abstraction between the address space and the
+    physical memory available in the system.  This means that when a
+    program uses an address that address does not refer to the bits in
+    an actual physical location in memory, but must be translated by
+    the operating system.</para>
       
-      <para>We make best use of the address space adding a layer of
-    abstraction between the physical memory and the address space of
-    the processor.</para>
-      
-      <para>To do this, we say that all addresses the programmer uses
+    <para>So to this end, we say that all addresses the program uses
       are <emphasis>virtual</emphasis>.  The operating system keeps
-      track of which virtual address points to which
+      track of virtual addresses and how they point to
       <emphasis>physical address</emphasis>.  When a program does a
       load or store from an address, the processor and operating
       system work together to convert this virtual address to the
-      actual address in the system memory chips.  It will become clear
-      how this happens below.
+      actual address in the system memory chips.
       </para>
 
       <para>Over time, physical memory becomes
@@ -78,29 +89,18 @@
     and if the operating system is to keep track of it all it needs to
     divide it into more managable parts.</para>
 
-    <para>To this end, the operating system divides the address space
-    into <emphasis>pages</emphasis>.  Pages can be many different
-    sizes, generally they are around 4KB, but this is not a hard and
-    fast rule and they can be much larger.</para>
+    <para>The operating system divides the address space into
+    <emphasis>pages</emphasis>.  Pages can be many different sizes,
+    generally they are around 4KB, but this is not a hard and fast
+    rule and they can be much larger.</para>
 
     <para>The page is the smallest unit of memory that the operating
-    system and hardware can deal with.  Pages point to areas of
-    physical memory where the data in the page is stored.</para>
+    system and hardware can deal with.</para>
 
-    <para>Each page has a number of attributes set by the operating
-    system.  Generally, these include read, write and execute
-    permissions for the current page. XXX - don't like this bit</para>
-
-    <para>The page is simply a pointer to an area of memory (of the
-    same size as the page) called a <emphasis>physical frame
-    number</emphasis>.  This address is the actual physical address
-    that is passed to the memory chips to store and retrieve
-    data.</para>
-
-    <para>Now we can see how the swap memory is implemented.  If
-      instead of pointing to an area of system memory the page
-      attributes are changed to indicate it exists on disk, the page
-      can then be defined as pointing to an area on disk.</para>
+    <para>Additionally, each page has a number of attributes set by
+    the operating system.  Generally, these include read, write and
+    execute permissions for the current page.  For example, a page
+    must be marked if it contains executable code.</para>
 
     <figure>
       <title>Virtual memory pages</title>
@@ -116,42 +116,60 @@
 	</textobject>
       </mediaobject>
     </figure>
-  
+
   </sect1>
 
+  <sect1>
+    <title>Physical Memory</title>
+
+    <para>Just as the operating system divides the possible address
+    space up into pages, it divides the available physical memory up
+    into <emphasis>frames</emphasis>.</para>
+
+    <para>A frame is just a hunk of physical memory the same size as
+    the system page size.</para>
+
+  </sect1>
 
   <sect1>
-    <title>Virtual Adresses</title>
+    <title>Pages + Frames = Page Tables</title>
 
-    <para>When user programs access memory, they do so using
-    <emphasis>virtual addresses</emphasis>.  These addresses are
-    translated by the operating system (with a little help from the
-    processor) into the physical addresses which the hardware
-    use.</para>
+    <para>The job of the operating system is to keep track of which
+    page points to which frame.  This information is kept in a
+    <emphasis>page table</emphasis> which, in its simplest form, is
+    simply a table where each row has a page and an associated
+    frame.</para>
 
-    <para>The virtual address consists of two parts; an index to a
-    page in a page table and an offset.</para>
-
-    <sect2>
-      <title>Page Tables</title>
-
-      <para>In it's simplest form, a page table simply provides a list
-      of virtual addresses and their corresponding physical page
-      frame.  To find the physical address of a virtual address, you
-      simply look up the virtual address in the table which then
-      points to the physical frame.
-      </para>
-
-      <para>With a 32 bit address space and 4K pages there will be
+    <para>With a 32 bit address space and 4K pages there will be
       1048576 pages in the page table.  Assuming each entry in the
       page table takes up 32 bits (or 4 bytes) we have 1048576 * 4 ==
       4194304 bytes == 4MB of page table data to map the entire
       address space. </para>
-
-      <para>Page tables can have many different structures and are
+    
+    <para>Page tables can have many different structures and are
       generally highly optimised, as the process of finding a page in
       the page table can be a lenghtly process.</para>
 
+  </sect1>
+
+  <sect1>
+    <title>Virtual Adresses</title>
+
+    <para>When a program accesses memory, it does not know or care
+    where the physical memory backing the address is stored.  It knows
+    it is up to the operating system to map the address to the right
+    place and provide it with the data it wants.</para>
+
+    <para>We call the address the userspace program is using to access
+    memory a <emphasis>virtual address</emphasis>.  The virtual
+    address consists of two parts; an index to a page in a page table
+    and an offset.</para>
+
+    <sect2>
+      <title>Page Index</title>
+
+      <para>The index portion of the virtual address is the index
+      into the page table.</para>
     </sect2>
 
     <sect2>
@@ -159,16 +177,22 @@
 
       <para>The last bits of the virtual address are called the
       <emphasis>offset</emphasis> which is the location within the
-      physical page of the address.  Obviously you need enough bits
-      here to be able to offset into the entire page, so for a 4K page
-      you could have 4K == (4 * 1024) == 4096 ==
-      2<superscript>12</superscript> == 12 bits.</para>
+      physical page of the address.  You require enough bits in the
+      offset to be able to get to any byte in the page.  For a 4K page
+      you require (4K == (4 * 1024) == 4096 ==
+      2<superscript>12</superscript> ==) 12 bits.</para>
 
     </sect2>
 
-
     <sect2>
       <title>Virtual Address Translation</title>
+
+      <para>When the operating system needs to find the actual memory
+      behind a virtual address, it firstly takes the page pointer
+      component of the address and looks it up in the page table.
+      This gives a pointer to a physical address, to which the offset
+      from the virtual address is added, giving the actual location in
+      memory.</para>
 
       <figure>
 	<title>Virtual Address Translation</title>
@@ -185,6 +209,80 @@
 	</mediaobject>
       </figure>
 
+    </sect2>
+  </sect1>
+
+
+  <sect1>
+    <title>Consequences of virtual addresses, pages and page tables</title>
+
+    <para>Virtual addressing, pages and page tables opens up a number
+    of interesting opportunities for the operating system.</para>
+
+    <sect2>
+      <title>Individual address spaces</title>
+      
+      <para>If the operating system gives each process its own page
+	table, then every process can pretend that it has access to
+	the entire address space available from the processor.  It
+	doesn't matter that two processes might use the same address,
+	since the page table will map it to a different place in
+	physical memory.  Every modern operating system provides each
+	process with its own address space like this.</para>
+    </sect2>
+
+    <sect2>
+      <title>Swap</title>
+
+      <para>We can also now see how the swap memory is implemented.
+      If instead of pointing to an area of system memory the page
+      pointer can be changed to point to a location on a
+      disk.</para>
+
+      <para>When this page is referenced, the operating system needs
+      to move it from the disk back into system memory (remember,
+      program code can only execute from system memory).  If system
+      memory is full, then <emphasis>another</emphasis> page needs to
+      be kicked out of system memory and put into the swap disk before
+      the required page can be put in memory.  If another process
+      wants that page that was just kicked out back again, the process
+      repeats.</para>
+
+      <para>This can be a major issue for swap memory.  Loading from
+      the harddisk is very slow (compared to operations done in
+      memory) and most people will be familiar with sitting infront of
+      the computer whilst the hard disk churns and churns whilst the
+      system remains unresponsive.</para>
+
+      <sect3>
+	<title>mmap</title>
+
+	<para>A different but related process is the
+	<computeroutput>mmap</computeroutput>.</para>
+
+      </sect3>
+
+    </sect2>
+  
+    <sect2>
+      <title>Sharing memory</title>
+
+      <para>Usually, each process gets its own page table, so any
+      address it uses is mapped to a unique frame in physical memory.
+      But what if the operating system points two page table entries
+      to the same frame?  This means that this frame will be shared;
+      and any changes that one process makes will be visible to the
+      other.</para>
+
+      <para>You can see now how threads are implemented.  Remember
+      from previously we said that the Linux
+      <computeroutput>clone()</computeroutput> function could share as
+      much or as little of a new process with the old process as it
+      required.  If a process calls
+      <computeroutput>clone()</computeroutput> to create a new
+      process, but requests that the two processes share the same page
+      table, then you effectively have a
+      <emphasis>thread</emphasis>.</para>
 
     </sect2>
 
