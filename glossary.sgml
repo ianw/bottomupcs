@@ -37,6 +37,22 @@
       </glossentry>
     </glossdiv>
     
+
+    <glossdiv>
+      <title>M</title>
+      <glossentry id="mutuallyexclusive">
+	<glossterm>Mutually Excusive</glossterm>
+	<glossdef>
+
+	  <para>When a number of things are mutually exclusive, only
+	  one can be valid at a time.  The fact that one of the things
+	  is valid makes the others invalid. </para>
+
+	</glossdef>
+      </glossentry>
+    </glossdiv>
+    
+
     <glossdiv>
       <title>O</title>
       <glossentry id="opensource">
