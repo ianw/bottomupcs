@@ -1,7 +1,234 @@
 <chapter id="wk6">
   
-  <title>ELF</title>
-  <para></para>
+  <title>The Toolchain</title>
+
+  <sect1>
+    <title>Compiled v Interpreted Programs</title>
+
+    <sect2>
+      <title>Compiled Programs</title>
+
+      <para>So far we have discussed how a program is loaded into
+    virtual memory, started as a process kept track of by the
+    operating system and interacts with via system calls.</para>
+      
+      <para>A program that can be loaded directly into memory needs to
+    be in a straight <emphasis>binary</emphasis> format.  The process
+    of converting source code, written in a language such as C, to a
+    binary file ready to be executed is called
+    <emphasis>compiling</emphasis>.  Not surprisingly, the process is
+    done by a <emphasis>compiler</emphasis>; the most widespread
+    example being <productname>gcc</productname>.
+    </para>
+
+    </sect2>
+
+    <sect2>
+      <title>Interpreted programs</title>
+
+      <para>Compiled programs have some disadvantages for modern
+      software development.  Every time a developer makes a change,
+      the compiler must be invoked to recreate the executable file.
+      It is a logical extension to design a compiled program that can
+      read <emphasis>another</emphasis> program listing and execute
+      the code line by line.
+      </para>
+
+      <para>We call this type of compiled program a
+      <emphasis>interpreter</emphasis> because it interprets each line
+      of the input file and executes it as code.  This way the program
+      does does not need to be compiled, and any changes will be seen
+      the next time the interpreter runs the code.</para>
+
+      <para>For their convenience, interpreted programs usually run
+      slower than a compiled counterpart.  The overhead in the program
+      reading and interpreting the code each time is only encountered
+      once for a compiled program, whilst an interpreted program
+      encounters it each time it is run.</para>
+
+      <para>But interpreted languages have many positive aspects.
+      Many interpreted languages actually run in a
+      <computeroutput>virtual machine</computeroutput> that is
+      abstracted from the underlying hardware.  Python and Perl 6 are
+      languages that implement a virtual machine that interpreted code
+      runs on.</para>
+
+      <sect3>
+	<title>Virtual Machines</title>
+	
+	<para>A compiled program is completely dependent on the
+	hardware of the machine it is compiled for, since it must be
+	able to simply be copied to memory an executed.  A virtual
+	machine is an abstraction of hardware into software.</para>
+
+	<para>For example, Java is a hybrid language that is partly
+      compiled and partly interpreted.  Java code is complied into a
+      program that runs inside a <emphasis>Java Virtual
+      Machine</emphasis> or more commonly referred to as a JVM.  This
+      means that a compiled program can run on any hardware that has a
+      JVM written for it; so called <emphasis>write one, run
+      anywhere</emphasis>.</para>
+
+      </sect3>
+
+
+    </sect2>
+
+  </sect1>
+
+  <sect1>
+    <title>Building an executable</title>
+
+    <para>When we talk about the compiler, there are actually three
+    separate steps involved in creating the executable file.</para>
+
+    <orderedlist>
+      <listitem>
+	<para>Compiling</para>
+      </listitem>
+      <listitem>
+	<para>Assembling</para>
+      </listitem>
+      <listitem>
+	<para>Linking</para>
+      </listitem>
+    </orderedlist>
+
+    <para>The components involved in this process are collectively
+    called the <emphasis>toolchain</emphasis> because the tools
+    <emphasis>chain</emphasis> the output of one to the input of the
+    other to create the final output.</para>
+
+    <para>Each link in the chain takes the source code progressively
+    closer to being binary code suitable for execution.</para>
+
+  </sect1>
+
+  <sect1>
+    <title>Compiling</title>
+
+    <sect2>
+      <title>The process of compiling</title>
+
+    <para>The first step of compiling a source file to an executable
+    file is converting the code from the high level, human
+    understandable language to <emphasis>assembly code</emphasis>.  We
+    know from previous chapters than assembly code works directly with
+    the instructions and registers provided by the processor.</para>
+
+    <para>The compiler is the most complex step of process for a
+    number of reasons.  Firstly, humans are very unpredictable and
+    have their source code in many different forms.  The compiler is
+    only interested the actual code, however humans need things like
+    comments and whitespace (spaces, tabs, indents, etc) to understand
+    code.  The process that the compiler takes to convert the
+    human-written source code to its internal representation is called
+    <emphasis>parsing</emphasis>.</para>
+
+      <sect3>
+	<title>C code</title>
+
+	<para>With C code, there is actually a step
+	<emphasis>before</emphasis> parsing the source code called the
+	<emphasis>pre-processor</emphasis>.  The pre-processor is at
+	its core a text replacement program.  For example, any
+	variable declared as <computeroutput>#define variable
+	text</computeroutput> will have
+	<computeroutput>variable</computeroutput> replaced with
+	<computeroutput>text</computeroutput>.  This preprocessed code
+	is then passed into the compiler.</para>
+
+      </sect3>
+
+    </sect2>
+
+    <sect2>
+      <title>Syntax</title>
+      
+      <para>Any computing language has a particular
+      <emphasis>syntax</emphasis> that describes the rules of the
+      language.  Both you and the compiler know the syntax rules, and
+      all going well you will understand each other.  Humans, being as
+      they are, often forget the rules or break them, leading the
+      compiler to be unable to understand your intentions.  For
+      example, if you were to leave the closing bracket off a
+      <computeroutput>if</computeroutput> condition, the compiler does
+      not know where the actual conditional is.</para>
+
+      <para>Syntax is most often described in <emphasis>Backus-Naur
+      Form</emphasis> (BNF)<footnote><para>In fact the most common
+      form is Extended Backus-Naur Form, or EBNF, as it allows some
+      extra rules which are more suitable for modern
+      languages.</para></footnote> which is a language with which you
+      can describe languages!</para>
+
+    </sect2>
+
+    <sect2>
+      <title>Optimisation</title> 
+
+      <para>Once the compiler has an internal representation of the
+      code, the <emphasis>really</emphasis> interesting part of the
+      compiler starts.  The compiler wants to find the most optimised
+      assembly language output for the given input code.  This is a
+      large and varied problem and requires knowledge of everything
+      from efficient algorithms based in computer science to deep
+      knowledge about the particular processor the code is to be run
+      on.</para>
+
+    </sect2>
+
+  </sect1>
+
+  <sect1>
+    <title>Assembler</title>
+
+    <para>The assembly code outputted by the compiler is still in a
+    human readable form, should you know the specifics of the assembly
+    code for the processor.  Developers will often take a peek at the
+    assembly output to manually check that the code is the most
+    optimised or to discover any bugs in the compiler (this is more
+    common than one might think, especially when the compiler is
+    being very aggressive with optimisations).</para>
+
+    <para>The assembler is a more mechanical process of converting the
+    assembly code into a binary form.  Essentially, the assembler
+    keeps a large table of each possible instruction and its binary
+    counterpart (called an <emphasis>op code</emphasis> for operation
+    code).  It combines these opcodes with the registers specified in
+    the assembly to produce a binary output file.</para>
+
+    <para>This code is called <emphasis>object code</emphasis> and, at
+    this stage, is not executable.  Object code is simply a binary
+    representation of specific input source code file.  Good
+    programming practice dictates that a programmer should not "put
+    all the eggs in one basket" by placing all your source code in one
+    file.</para>
+
+  </sect1>
+
+  <sect1>
+    <title>Linker</title>
+
+    <para>As discussed, object code is not executable, as it is simply
+    a representation of a particular input source code file.  To
+    create an executable, multiple object code outputs need to be
+    <emphasis>linked</emphasis> together to make a cohesive
+    program.</para>
+
+    <para>Even if your program does fit in one file, it still needs to
+    be linked against certain system libraries to operate
+    correctly.</para>
+
+  </sect1>
+
+
+  <sect1>
+    <title>A practical example</title>
+    <para></para>
+  </sect1>
+
+
 </chapter>
 
 <!--
