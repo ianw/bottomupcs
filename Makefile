@@ -27,7 +27,7 @@ csbu.pdf : csbu.sgml $(sources)
 html: csbu.sgml $(pngs)
 	mkdir -p ./html
 #copy all .c files into appropriate places
-	for dir in $(sourcedirs); do \
+	-for dir in $(sourcedirs); do \
 	cp -r --parents $$dir/code/* html; \
 	done
 	docbook2html --output html csbu.sgml
