@@ -67,7 +67,7 @@
       RAM. <computeroutput>mmaped</computeroutput> areas have
       permissions such as read, write and execute which need to be
       kept track of.  As we know, it is the job of the operating
-      system to maintain security and stabilitiy, so it needs to check
+      system to maintain security and stability, so it needs to check
       if a process tries to write to a read only area and return an
       error.</para>
 
@@ -96,7 +96,7 @@
       <title>Registers</title>
 
       <para>We know from the previous chapter that the processor
-      esentially performs generally simple operations on values in
+      essentially performs generally simple operations on values in
       registers.  These values are read (and written) to memory -- we
       mentioned above that each process is allocated memory which the
       kernel keeps track of.</para>
@@ -195,38 +195,274 @@
   <sect1>
     <title>Fork and Exec</title>
 
-    <para></para>
+    <para>New processes are created by the two related interfaces
+    <computeroutput>fork</computeroutput> and
+    <computeroutput>exec</computeroutput>.</para>
 
     <sect2>
       <title>Fork</title>
-      <para>fork</para>
+
+      <para>When you come to metaphorical "fork in the road" you
+      generally have two options to take, and your decision effects
+      your future.  Computer programs reach this fork in the road when
+      they hit the <computeroutput>fork()</computeroutput> system
+      call. </para>
+
+      <para>At this point, the operating system will create a new
+      process that is exactly the same as the parent process.  This
+      means all the state that was talked about previously is copied,
+      including open files, register state and all memory
+      allocations, which includes the program code.</para>
+
+      <para>The return value from the system call is the only way the
+      process can determine if it was the existing process or a new
+      one.  The return value to the parent process will be the Process
+      ID (PID) of the child, whilst the child will get a return value
+      of 0.</para>
+
+      <para>At this point, we say the process has
+      <computeroutput>forked</computeroutput> and we have the
+      parent-child relationship as described above.</para>
+
     </sect2>
 
     <sect2>
       <title>Exec</title>
-      <para></para>
+
+      <para>Forking provides a way for an existing process to start a
+      new one, but what about the case where the new process is not
+      part of the same program as parent process?  This is the case in
+      the shell; when a user starts a command it needs to run in a new
+      process, but it is unrelated to the shell.</para>
+
+      <para>This is where the <computeroutput>exec</computeroutput>
+      system call comes into
+      play. <computeroutput>exec</computeroutput> will
+      <emphasis>replace</emphasis> the contents of the currently
+      running process with the information from a program
+      binary.</para>
+
+      <para>Thus the process the shell follows when launching a new
+      program is to firstly <computeroutput>fork</computeroutput>,
+      creating a new process, and then
+      <computeroutput>exec</computeroutput> (i.e. load into memory and
+      execute) the program binary it is supposed to run.</para>
+
+    </sect2>
+
+    <sect2>
+      <title>How Linux actually handles fork and exec</title>
+      <sect3>
+	<title><computeroutput>clone</computeroutput></title>
+
+	<para>In the kernel, fork is actually implemented by a
+	<computeroutput>clone</computeroutput> system call.  This
+	<computeroutput>clone</computeroutput> interfaces effectively
+	provides a level of abstraction in how the Linux kernel can
+	create processes.</para>
+
+	<para><computeroutput>clone</computeroutput> allows you to
+	explicitly specify which parts of the new process are copied
+	into the new process, and which parts are shared between the
+	two processes.  This may seem a bit strange at first, but
+	allows us to easily implement <emphasis>threads</emphasis> with
+	one very simple interface.</para>
+
+	<sect4>
+	  <title>Threads</title> <para>While
+	  <computeroutput>fork</computeroutput> copies all of the
+	  attributes we mentioned above, imagine if everything was
+	  copied for the new process <emphasis>except</emphasis> for
+	  the memory.  This means the parent and child share the same
+	  memory, which includes program code and data.</para>
+
+	  <para>This hybrid child is called a
+	  <emphasis>thread</emphasis>.  Threads have a number of
+	  advantages over where you might use <emphasis>fork</emphasis></para>
+
+	  <orderedlist>
+
+	    <listitem>
+	      <para>Separate processes can not see each others memory.
+	      They can only communicate with each other via other
+	      system calls.</para>
+
+	      <para>Threads however, share the same memory.  So you
+	      have the advantage of multiple processes, with the
+	      expense of having to use system calls to communicate
+	      between them.</para>
+
+	      <para>The problem that this raises is that threads can
+	      very easily step on each others toes.  One thread might
+	      increment a variable, and another may decrease it
+	      without informing the first thread.  These type of
+	      problems are called <emphasis>concurrency
+	      problems</emphasis> and they are many and varied.</para>
+
+	      <para>To help with this, there are userspace libraries
+	      that help programmers work with threads properly.  The
+	      most common one is called <computeroutput>POSIX
+	      threads</computeroutput> or, as it more commonly
+	      referred to
+	      <computeroutput>pthreads</computeroutput></para>
+	    </listitem>
+
+	    <listitem>
+	      <para>Switching processes is quite expensive, and one of
+	      the major expenses is keeping track of what memory each
+	      process is using.  By sharing the memory this overhead
+	      is avoided and performance can be significantly
+	      increased.</para>
+	    </listitem>
+
+	  </orderedlist>
+
+	</sect4>
+
+	<sect4>
+	  <title>Copy on write</title> <para>As we mentioned, copying
+	  the entire memory of one process to another when
+	  <computeroutput>fork</computeroutput> is called is an
+	  expensive operation.</para>
+
+	  <para>One optimisation is called <emphasis>copy on
+	  write</emphasis>.  This means that similar to threads above,
+	  the memory is actually shared, rather than copied, between
+	  the two processes when fork is called.  If the processes are
+	  only going to be reading the memory, then actually
+	  copying the data is unecessary.</para>
+
+	  <para>However, when a process writes to it's memory, it
+	  needs to be a private copy that is not shared.  As the name
+	  suggests, copy on write optimises this by only doing the
+	  actual copy of the memory at the point when it is written
+	  to.</para>
+
+	  <para>Copy on write also has a big advantage for
+	  <computeroutput>exec</computeroutput>.  Since
+	  <computeroutput>exec</computeroutput> will simply be
+	  overwriting all the memory with the new program, actually
+	  copying the memory would waste a lot of time.  Copy on write
+	  saves us actually doing the copy.</para>
+	</sect4>
+
+      </sect3>
     </sect2>
 
     <sect2>
       <title>The <application>init</application> process</title>
 
-      <para></para>
+      <para>We discussed the overal goal of the init process
+      previously, and we are now in a position to understand how it
+      works.</para>
+
+      <para>On boot the kernel starts the init process, which then
+      forks and execs the systems boot scripts.  These fork and exec
+      more programs, eventually ending up forking a login
+      process.</para>
 
     </sect2>
   </sect1>
 
   <sect1>
     <title>Context Switching</title>
-    <para></para>
+
+    <para>Context switching refers to the process the kernel
+    undertakes to switch from one process to another. XXX ?</para>
+
   </sect1>
 
   <sect1>
     <title>Scheduling</title>
-    <para></para>
+
+    <para>A running system has many processes, maybe even into the
+    hundreds or thousands.  The part of the kernel that keeps track of
+    all these processes is called the <emphasis>scheduler</emphasis>
+    because it schedules which process should be run next.</para>
+
+    <para>Scheduling algoritms are many and varied.  Most users have
+    different goals relating to what they want their computer to do,
+    so this affects scheduling decisions.  For example, for a desktop
+    PC you want to make sure that your graphical applications for your
+    desktop are given plenty of time to run, even if system processes
+    take a little longer.  This will increase the responsivness the
+    user feels, as their actions will have more immediate responses.
+    For a server, you might want your webserver application to be
+    given prioroity.</para>
+
+    <para>People are always coming up with new algorithms, and you can
+    probably think of your own fairly easily.  But there are a number
+    of different components of scheduling.</para>
 
     <sect2>
-      <title>Hard v Soft Realtime</title>
-      <para></para>
+      <title>Premptive v co-operative scheduling</title>
+      <para>Scheduling strategies can broadly fall into two categories</para>
+      <orderedlist>
+	<listitem>
+
+	  <para><emphasis>Co-operative</emphasis> scheduling is where
+	  the currently running process voluntarily gives up executing
+	  to allow another process to run.  The obvious disadvantage
+	  of this is that the process may decide to never give up
+	  execution, probably because of a bug causing some form of
+	  infinite loop, and consequently nothing else can ever
+	  run.</para>
+
+	</listitem>
+
+	<listitem>
+	  <para><emphasis>Premptive</emphasis> scheduling is where the
+	  process is interrupted to stop it an allow another process
+	  to run.  Each process gets a <emphasis>timeslice</emphasis>
+	  to run in; at the point of each context switch a timer will
+	  be reset and will deliver and interrupt when the timeslice
+	  is over.</para>
+
+	  <para>We know that the hardware handles the interrupt
+	  independently of the running process, and so at this point
+	  control will return to the operating system.  At this point,
+	  the scheduler can decide which process to run next.</para>
+
+	  <para>This is the type of scheduling used by all modern
+	  operating systems.</para>
+	</listitem>
+      </orderedlist>
+
+    </sect2>
+
+    <sect2>
+      <title>Realtime</title>
+
+      <para>Some processes need to know exactly how long thier
+      timeslice will be, and how long it will be before they get
+      another timeslice to run.  Say you have a system running a
+      heart-lung machine; you don't want the next pulse to be delayed
+      because something else decided to run in the system!</para>
+
+      <para>Hard realtime systems make garuntees about scheduling
+      decisions like the maximum amount of time a process will be
+      interrupted before it can run again.  They are often used in
+      life critical applications like medical, aircraft and military
+      applications.</para>
+
+      <para>Soft realtime is a variation on this, where gaurntees
+      aren't as strict but general system behaviour is predicatable.
+      Linux can be used like this, and it is often used in systems
+      dealing with audio and video.  If you are recording an audio
+      stream, you don't want to be interrupted for long periods of
+      time as you will loose audio data which can not be
+      retreived.</para>
+
+    </sect2>
+
+    <sect2>
+      <title>Nice value</title>
+
+      <para>UNIX systems assign each process a
+      <emphasis>nice</emphasis> value.  The schedular looks at the
+      nice value and can give priority to those processes that have a
+      higher "niceness".</para>
+
     </sect2>
 
   </sect1>
