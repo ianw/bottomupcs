@@ -349,6 +349,15 @@
       as both processes see the same underlying physical
       memory.</para>
 
+      <para>You can also see now how copy on write is done.  If you
+      set the permissions of a page to be read-only, when a process
+      tries to write to the page the operating system will be
+      notified.  If it knows that this page is a copy-on-write page,
+      then it needs to make a new copy of the page in system memory
+      and point the page in the page table to this new page.  This can
+      then have its attributes updated to have write permissions and
+      the process has its own unique copy of the page.</para>
+
     </sect2>
 
     <sect2>
