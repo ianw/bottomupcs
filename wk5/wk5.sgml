@@ -300,6 +300,45 @@
 
     </sect2>
 
+    <sect2>
+      <title>Disk Cache</title>
+
+      <para>In a modern system, it is often the case that rather than
+      having too little memory and having to swap memory out, there is
+      more memory available than the system is currently using.</para>
+
+      <para>The memory heirarchy tells us that disk access is much
+      slower than memory access, so it makes sense to move as much
+      data from disk into system memory if possible.</para>
+
+      <para>Linux, and many other systems, will copy data from files
+      on disk into memory when they are used.  Even if a program only
+      initially requests a small part of the file, it is highly likely
+      that as it continues processing it will want to access the rest
+      of file.  When the operating system has to read or write to a
+      file, it first checks if the file is in it's memory
+      cache.</para>
+
+      <para>These pages should be the first to be removed as memory
+      pressure in the system increases.</para>
+
+      <sect3>
+	<title>Page Cache</title>
+
+	<para>A term you might hear when disucssing the kernel is the
+	<emphasis>page cache</emphasis>.</para>
+
+	<para>The <emphasis>page cache</emphasis> refers to a list of
+      pages the kernel keeps that refer to files on disk.  From above,
+      swap page, mmaped pages and disk cache pages all fall into this
+      category.  The kernel keeps this list because it needs to be
+      able to look them up quickly in response to read and write
+      requests XXX: this bit doesn't file?</para>
+
+      </sect3>
+
+    </sect2>
+
   </sect1>
 
   <sect1>
@@ -441,6 +480,61 @@
 
 	<para>The access can then be tried again, and, all going well,
 	should be found in the TLB and translated correctly.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Other page related faults</title>
+
+	<para>There are two other important faults that the TLB can
+	generally generate which help to mange accessed and dirty
+	pages.  Each page generally contains an attribute in the form
+	of a single bit which flags if the page has been accessed or
+	is dirty.</para>
+
+	<para>An accessed page is simply any page that has been
+	accessed.  When a page translation is initially loaded into
+	the TLB the page can be marked as having been accessed (else
+	why were you loading it in?<footnote><para>Actually, if you
+	were loading it in without a pending access this would be
+	called <emphasis>speculation</emphasis>, which is where you do
+	something with the expectation that it will pay off.  For
+	example, if code was reading along memory linearly putting the
+	next page translation in the TLB might save time and give a
+	performance improvement.</para></footnote>)</para>
+
+	<para>The operating system can periodically go through
+	<emphasis>all</emphasis> the pages and clear the accessed bit
+	to get an idea of what pages are currently in use.  When
+	system memory becomes full and it comes time for the operating
+	system to choose pages to be swapped out to disk, obviously
+	those pages whose accessed bit has not been reset are the best
+	candidates for removal, because they have not been used the
+	longest.</para>
+
+	<para>A dirty page is one that has data written to it, and so
+	does not match any data already on disk.  For example, if a
+	page is loaded in from swap and then written to by a process,
+	before it can be moved out of swap it needs to have its on
+	disk copy updated.  A page that is clean has had no changes,
+	so we do not need the overhead of copying the page back to
+	disk.</para>
+
+	<para>Both are similar in that they help the operating system
+	to manage pages.  The general concept is that a page has two
+	extra bits; the dirty bit and the accessed bit.  When the page
+	is put into the TLB, these bits are set to indicate that the
+	CPU should raise a fault .</para>
+
+	<para>When a process trys to reference memory, the hardware
+	does the usual translation process.  However, it also does an
+	extra check to see if the accessed flag is
+	<emphasis>not</emphasis> set.  If so, it raises a fault to the
+	operating system, which should set the bit and allow the
+	process to continue.  Similarly if the hardware detects that
+	it is writing to a page that does not have the dirty bit set,
+	it will raise a fault for the operating system to mark the
+	page as dirty.</para>
 
       </sect3>
 
