@@ -19,6 +19,62 @@
 
   </sect1>
 
+  <sect1>
+    <title>Representing executable files</title>
+
+    <para>Each operating system could choose its own arbitrary format
+    for its on disk representation of executables, as due to the
+    nature of compiled binaries they are generally not portable
+    between systems.  However, the defacto standard for executable
+    representation is <computeroutput>Executable and Linker
+    Format</computeroutput>, or ELF for short.</para>
+
+    <para>ELF is an extremely flexible format that can represent a
+    kernel binary just as easily as a normal executable or a system
+    library.  This means that developers who understand the ELF file
+    format can translate their skills to most modern UNIX
+    systems.</para>
+
+  </sect1>
+
+  <sect1>
+    <title>A general overview</title>
+
+    <para>The basic principle of an ELF file is straight forward to
+    understand.  The file is divided up into separate components, each
+    with a small header describing each of those components (note we
+    have been careful not to use the words "sections" or "segments"
+    here as they have special meanings when talking about ELF).</para>
+
+    <figure>
+      <title>ELF Overview</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="wk7/figures/elf-overview.eps" format="EPS">
+	</imageobject>
+	<imageobject>
+	  <imagedata fileref="wk7/figures/elf-overview.png" format="PNG">
+	</imageobject>
+	<textobject>
+	  <phrase>ELF Overview</phrase>
+	</textobject>
+      </mediaobject>
+    </figure>
+
+    <para>Overall, the file has a <emphasis>file header</emphasis>
+    which describes the file in general and then has pointers to each
+    of the individual components that make up the file.  This header
+    is in a fixed, specific format that is described in the
+    appropriate standards document.</para>
+
+    <para>Each of the individual components has another header that
+    holds data pertinent to the type of componenet it is and the
+    length of data it holds.  Note the file format never cares about
+    the actual data inside the component, the only important thing is
+    what that data represents.</para>
+
+  </sect1>
+
 </chapter>
 
 <!--
