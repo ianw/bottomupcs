@@ -145,7 +145,7 @@
   </sect1>
 
   <sect1>
-    <title>Virtual Adresses</title>
+    <title>Virtual Addresses</title>
 
     <para>When a program accesses memory, it does not know or care
     where the physical memory backing the address is stored.  It knows
@@ -177,7 +177,7 @@
       4096 == 2<superscript>12</superscript> ==) 12 bits.  Remember
       that the smallest amount of memory that the operating system or
       hardware deals with is a page, so each of these 4096 addresses
-      reside within a single page and are delt with as "one".</para>
+      reside within a single page and are dealt with as "one".</para>
 
     </sect2>
 
@@ -269,7 +269,7 @@
 
       <para>Since each page has extra attributes, a page can be set
       read only, write only or have any number of other interesting
-      attributes.  When the process trys to access the page, the
+      attributes.  When the process tries to access the page, the
       operating system can check if it has sufficient permissions and
       stop it if it does not (writing to a read only page, for
       example).</para>
@@ -300,7 +300,7 @@
       repeats.</para>
 
       <para>This can be a major issue for swap memory.  Loading from
-      the harddisk is very slow (compared to operations done in
+      the hard disk is very slow (compared to operations done in
       memory) and most people will be familiar with sitting in front of
       the computer whilst the hard disk churns and churns whilst the
       system remains unresponsive.</para>
@@ -367,7 +367,7 @@
       having too little memory and having to swap memory out, there is
       more memory available than the system is currently using.</para>
 
-      <para>The memory heirarchy tells us that disk access is much
+      <para>The memory hierarchy tells us that disk access is much
       slower than memory access, so it makes sense to move as much
       data from disk into system memory if possible.</para>
 
@@ -385,7 +385,7 @@
       <sect3>
 	<title>Page Cache</title>
 
-	<para>A term you might hear when disucssing the kernel is the
+	<para>A term you might hear when discussing the kernel is the
 	<emphasis>page cache</emphasis>.</para>
 
 	<para>The <emphasis>page cache</emphasis> refers to a list of
@@ -423,7 +423,7 @@
       mode, the hardware knows that addresses will need to be
       translated to find their physical address.</para>
 
-      <para>In many processors, this two modes are simply refered to
+      <para>In many processors, this two modes are simply referred to
       as physical and virtual mode.  Itanium is one such example.  The
       most common processor, the x86, has a lot of baggage from days
       before virtual memory and so the two modes are referred to as
@@ -455,14 +455,14 @@
 	bits; in this case the entire address space could be accessed
 	as an offset from a segment at
 	<computeroutput>0x00000000</computeroutput> and you would
-	essentily have a flat layout -- but it still isn't as good as
+	essentially have a flat layout -- but it still isn't as good as
 	virtual memory as you will see.  In fact, the only reason it
 	is 16 bits is because the original Intel processors were
 	limited to this, and the chips maintain backwards
-	compatability.</para></footnote> .  This causes all sorts of
+	compatibility.</para></footnote> .  This causes all sorts of
 	havoc if one wants to use an address that is more than 64K
 	away, which as memory grew into the megabytes (and now
-	gigabytes) became more than a slight inconvience to a complete
+	gigabytes) became more than a slight inconvenience to a complete
 	failure.
 	</para>
 
@@ -486,7 +486,7 @@
 	</figure>
 
 	<para>In the above figure, there are three segment registers
-	which are all pointing to segments.  The maxiumum offset
+	which are all pointing to segments.  The maximum offset
 	(constrained by the number of bits available) is shown by
 	shading.  If the program wants an address outside this range,
 	the segment registers must be reconfigured.  This quickly
@@ -597,7 +597,7 @@
 	is put into the TLB, these bits are set to indicate that the
 	CPU should raise a fault .</para>
 
-	<para>When a process trys to reference memory, the hardware
+	<para>When a process tries to reference memory, the hardware
 	does the usual translation process.  However, it also does an
 	extra check to see if the accessed flag is
 	<emphasis>not</emphasis> set.  If so, it raises a fault to the
@@ -612,7 +612,7 @@
     </sect2>
 
     <sect2>
-      <title>TLB Managment</title>
+      <title>TLB Management</title>
 
       <para>We can say that the TLB used by the hardware but managed
       by software.  It is up to the operating system to load the TLB
@@ -623,9 +623,9 @@
 	
 	<para>The process of removing entries from the TLB is called
       <emphasis>flushing</emphasis>.  Updating the TLB is a crucial
-      part of mantaing separate address spaces for processes; since
-      each proccess can be using the same virtual address not updating
-      the TLB would mean a process might end up overwriting anothers
+      part of maintaining separate address spaces for processes; since
+      each process can be using the same virtual address not updating
+      the TLB would mean a process might end up overwriting another's
       memory. </para>
 
 	<para> On some processors, every time there is a context
@@ -656,7 +656,51 @@
   <sect1>
     <title>Linux Specifics</title>
 
-    <para>We have been introduced to the general concepts.</para>
+    <para>Although the basic concepts of virtual memory remain
+    constant, the specifics of implementations are highly dependent
+    on the operating system and hardware.</para>
+    
+    <sect2>
+      <title>Address Space Layout</title>
+
+      <para>Linux divides the available address space up into a shared
+      kernel component and private user space addresses.  This means
+      that addresses in the kernel port of the address space map to
+      the same physical memory for each process, whilst userspace
+      addresses are private to the process.  On Linux, the shared
+      kernel space is at the very top of the available address space.
+      On the most common processor, the 32 bit x86, this split happens
+      at the 3GB point.  As 32 bits can map a maximum of 4GB, this
+      leaves the top 1GB for the shared kernel region<footnote>
+      <para>This is unfortunately an over-simplification, because many
+      machines wanted to support more than 4GB per process.
+      <emphasis>High memory</emphasis> support allows processors to
+      get access to a full 4GB via special
+      extensions.</para></footnote>.</para>
+
+      <figure>
+	<title>Linux address space layout</title>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="wk5/figures/linux-layout.eps" format="EPS">
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="wk5/figures/linux-layout.png" format="PNG">
+	  </imageobject>
+	  <textobject>
+	    <phrase>The Linux address space layout.</phrase>
+	  </textobject>
+	</mediaobject>
+      </figure>
+
+    </sect2>
+
+    <sect2>
+      <title>Three Level Page Table</title>
+
+      <para>Three level page table</para>
+
+    </sect2>
 
   </sect1>
 
