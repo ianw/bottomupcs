@@ -1,7 +1,24 @@
 <chapter id="wk7">
   
-  <title>The compiler and linker</title>
-  <para></para>
+
+  <title>ELF</title>
+
+  <sect1>
+    <title>Executable files</title>
+
+    <para>We know that a program running in memory has two major
+    components in <emphasis>code</emphasis> and
+    <emphasis>data</emphasis>.  However, an executable does not live
+    its life in memory, but spends most of its life as a file on a
+    disk.</para>
+
+    <para>This file needs to be in a specific format that the
+    operating system can identify and load into memory.  This
+    <emphasis>executable file format</emphasis> is specific to the
+    operating system.</para>
+
+  </sect1>
+
 </chapter>
 
 <!--
