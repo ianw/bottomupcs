@@ -49,6 +49,18 @@
       </glossentry>
     </glossdiv>
     
+    
+    <glossdiv>
+      <title>S</title>
+      <glossentry id="shell">
+	<glossterm>Shell</glossterm>
+	<glossdef>
+	  <para>The interface used to interact with the operating system.</para>
+	</glossdef>
+      </glossentry>
+    </glossdiv>
+    
+
     <!--
     Local Variables:
     mode: sgml

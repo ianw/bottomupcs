@@ -162,28 +162,116 @@
 	  <row>
 	    <entry>Descriptive Name</entry>
 	    <entry>File Number</entry>
-	    <entry>Descriptions</entry>
+	    <entry>Description</entry>
 	  </row>
 	</thead>
 	<tbody>
 	  <row>
 	    <entry>Standard In</entry>
 	    <entry>0</entry>
-	    <entry>Standard Input</entry>
+	    <entry>Input from the keyboard</entry>
 	  </row>
 	  <row>
 	    <entry>Standard Out</entry>
 	    <entry>1</entry>
-	    <entry>Standard Output</entry>
+	    <entry>Output to the console</entry>
 	  </row>
 	  <row>
 	    <entry>Standard Error</entry>
 	    <entry>2</entry>
-	    <entry>Standard Error</entry>
+	    <entry>Error output to the console</entry>
 	  </row>
 	</tbody>
       </tgroup>
     </table>
+
+    <para>So by default, all input will come from the keyboard and all
+    output (both normal and error output) will go to the screen.</para>
+
+    <figure>
+      <title>Default Unix Files</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="wk0/figures/stdfds.eps" format="EPS">
+	</imageobject>
+	<imageobject>
+	  <imagedata fileref="wk0/figures/stdfds.png" format="PNG">
+	</imageobject>
+	<textobject>
+	  <phrase>The standard files opened with any UNIX program.</phrase>
+	</textobject>
+      </mediaobject>
+    </figure>
+
+    <sect2>
+      <title>The Shell</title> 
+      
+      <para>The shell is your gateway to interacting with the
+      operating system.  It has only one major task -- to allow you to
+      execute programs (you will begin to understand how the shell
+      actually does this when we talk about some of the internals of
+      the operating system later).</para>
+
+      <para>But modern shells do much more than allow you to simply
+      execute a program.  They have powerful abilities to redirect
+      files, allow you to execute multiple programs simultaneously and
+      script complete programs.</para>
+      
+    </sect2>
+
+    <sect2>
+      <title>Redirection</title> <para>Often we do not want the
+      standard files mentioned above to point to their default places.
+      For example, you may wish to capture all the output of a program
+      into a file on disk, or, alternativley have it read its commands
+      from a file you prepared earlier.  Another useful task might
+      like to pass the output of one program to the input of another.
+      It should come as no surprise you shell allows you to do all of
+      this (and more!)</para>
+
+    <table>
+      <title>Standard Shell Redirection Facilities</title>
+      <tgroup cols="3">
+	<thead>
+	  <row>
+	    <entry>Name</entry>
+	    <entry>Command</entry>
+	    <entry>Description</entry>
+	    <entry>Example</entry>
+	  </row>
+	</thead>
+	<tbody>
+	  <row>
+	    <entry>Redirect to a file</entry>
+	    <entry><computeroutput>&gt; filename</computeroutput></entry>
+	    <entry>Take all output from standard out and place it into
+	    <computeroutput>filename</computeroutput>.  Note using
+	    <computeroutput>&gt;&gt;</computeroutput> will append to
+	    the file, rather than overwrite it.</entry>
+	    <entry><computeroutput>ls &gt; filename</computeroutput></entry>
+	  </row>
+	  <row>
+	    <entry>Read from a file</entry>
+	    <entry>&lt; <computeroutput>filename</computeroutput></entry>
+	    <entry>Copy all data from the file to the standard input of the program</entry>
+	    <entry><computeroutput>echo &lt; filename</computeroutput></entry>
+	  </row>
+	  <row>
+	    <entry>Pipe</entry>
+	    <entry><computeroutput>program1 | program2</computeroutput></entry>
+	    <entry>Take everything from standard out of
+	    <computeroutput>program1</computeroutput> and pass it to
+	    standard input of
+	    <computeroutput>program2</computeroutput></entry>
+	    <entry><computeroutput>ls | more</computeroutput></entry>
+	  </row>
+	</tbody>
+      </tgroup>
+    </table>
+
+    </sect2>
+
+
   </sect1>
 
 
