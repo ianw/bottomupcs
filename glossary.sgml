@@ -1,4 +1,4 @@
-<glossary><title>&csbu; Glossary</title>
+`<glossary><title>&csbu; Glossary</title>
     
 <!-- glossary -->
 
@@ -41,7 +41,7 @@
     <glossdiv>
       <title>M</title>
       <glossentry id="mutuallyexclusive">
-	<glossterm>Mutually Excusive</glossterm>
+	<glossterm>Mutually Exclusive</glossterm>
 	<glossdef>
 
 	  <para>When a number of things are mutually exclusive, only

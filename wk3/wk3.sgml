@@ -186,7 +186,7 @@
 
 	<para>There is no definitive answer as to which is the best
 	type, though as you start to learn more about operating
-	systems you will definately be able to make up your own
+	systems you will definitely be able to make up your own
 	mind!</para>
 
       </sect3>
@@ -202,7 +202,7 @@
       calls</emphasis> (discussed below).</para>
 
       <para>As previously discussed, userspace is
-      <emphasis>unprivledged</emphasis>.  User programs can only do a
+      <emphasis>unprivileged</emphasis>.  User programs can only do a
       limited range of things, and should never be able to crash other
       programs, even if they crash themselves.</para>
 
@@ -265,7 +265,7 @@
       once the userspace calls the break instruction, it has lost
       control of the program and passed it over to the kernel.</para>
 
-      <para>The rest of the operation is fairly striaght forward.  The
+      <para>The rest of the operation is fairly straight forward.  The
       kernel looks in the predefined register for the system call
       number, and looks it up in a table to see which function it
       should call.  This function is called, does what it needs to do,
@@ -278,7 +278,7 @@
       needs from the return register, and continues happily on it's
       way!</para>
 
-      <para>Although the details of the process can get quite hariy,
+      <para>Although the details of the process can get quite hairy,
       this is basically all their is to a system call.</para>
 
       </sect3>

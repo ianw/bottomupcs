@@ -13,7 +13,7 @@
 
 	<para>Binary is a number system which builds numbers from
 	elements called <emphasis>bits</emphasis>.  Each bit can be
-	represented by any two mutually excuslive states.  Generally,
+	represented by any two mutually exclusive states.  Generally,
 	when we write it down or code bits, we represent them with
 	<computeroutput>1</computeroutput> and
 	<computeroutput>0</computeroutput>.  We also talk about them
@@ -60,14 +60,14 @@
       <sect3>
 	<title>Boolean Operations</title>
 
-	<para>George Boole was a mathemetician who discovered a whole
+	<para>George Boole was a mathematician who discovered a whole
 	area of mathematics called <emphasis>Boolean
 	Algebra</emphasis>.  Whilst he made his discoveries in the mid
 	1800's, his mathematics are the fundamentals of all computer
 	science.  Boolean algebra is a wide ranging topic, we present
-	here only the bare miniumum to get you started.</para>
+	here only the bare minimum to get you started.</para>
 
-	<para>Booelan operations simply take a particular input and
+	<para>Boolean operations simply take a particular input and
 	produce a particular output following a rule.  For example,
 	the simplest boolean operation,
 	<computeroutput>not</computeroutput> simply inverts the value
@@ -76,7 +76,7 @@
 
 	<para>The fundamental Boolean operations used in computer
 	science are easy to remember and listed below.  <para>We
-	repesent them below with <emphasis>truth tables</emphasis>;
+	represent them below with <emphasis>truth tables</emphasis>;
 	they simply show all possible inputs and outputs.  The term
 	<emphasis>true</emphasis> simply reflects
 	<computeroutput>1</computeroutput> in binary.</para>
@@ -314,7 +314,7 @@
 	
 	<para>We use these operations on variables to modify the bits
 	within the variable.  Before we see examples of this, first we
-	must understand hexadeciaml notation.</para>
+	must understand hexadecimal notation.</para>
 
       </sect3>
 
@@ -323,13 +323,13 @@
     <sect2>
       <title>Hexadecimal</title>
 
-      <para>Hexadeicmal refers to a base 16 number system.  We use
+      <para>Hexadecimal refers to a base 16 number system.  We use
       this in computer science for only one reason, it makes it easy
       for humans to think about binary numbers.  Computers only ever
-      deal in binary, hexadeciaml is simply a shortcut for us humans
+      deal in binary, hexadecimal is simply a shortcut for us humans
       trying to work with the computer.  </para>
 
-      <para>So why base 16?  Well, the most natural choise is base 10,
+      <para>So why base 16?  Well, the most natural choice is base 10,
       since we are used to thinking in base 10 from our every day
       number system.  But base 10 does not work well with binary -- to
       represent 10 different elements in binary, we need four bits.
@@ -473,7 +473,7 @@
       computer, it is entirely practical to program a computer in high
       level languages without knowing the first thing about it.
       However, for the low level code we are interested in a few
-      funamental binary principles are used repeatadly.</para>
+      fundamental binary principles are used repeatedly.</para>
 
     </sect3>
 
@@ -485,7 +485,7 @@
 
 	<para>In low level code, it is often important to keep your
 	structures and variables as space efficient as possible.  In
-	some cases, this can involve effectivley packing two
+	some cases, this can involve effectively packing two
 	(generally related) variables into one.</para>
 
 	<para>Remember each bit represents two states, so if we know a
@@ -497,7 +497,7 @@
 	over bits.</para>
 
 	<para>We can easily do this by the process of
-	<emphasis>masking</emphasis>.  Remebering the rules of the
+	<emphasis>masking</emphasis>.  Remembering the rules of the
 	logical operations, it should become clear how the values are
 	extracted.</para>
 
@@ -507,7 +507,7 @@
 	the <computeroutput>logical and</computeroutput> operation
 	will only set the bit if <emphasis>both</emphasis> bits are
 	<computeroutput>1</computeroutput>, those bits of the mask set
-	to <computeroutput>0</computeroutput> effectivly hide the bits
+	to <computeroutput>0</computeroutput> effectively hide the bits
 	we are not interested in.</para>
 
     <figure>

@@ -9,12 +9,12 @@
     everything is a file.</para>
 
     <para>Let's think about the file for a minute.  Imagine this in
-    the context something familar like a word processing file.  There
+    the context something familiar like a word processing file.  There
     are exactly two fundamental operations we can do to this imaginary
-    wordprocessing file</para>
+    word processing file</para>
 
     <orderedlist>
-      <listitem><para>Read it (existing saved data from the wordprocessor).</para></listitem>
+      <listitem><para>Read it (existing saved data from the word processor).</para></listitem>
       <listitem><para>Write to it (new data from the user).</para></listitem>
     </orderedlist>
 
@@ -43,7 +43,7 @@
     <para>What you have really just learnt about is an extremely
     powerful concept of <emphasis>abstraction</emphasis>.  To the
     programmer, reading data from the keyboard or the CDROM is
-    esentially the same thing, all you care about is that the bits of
+    essentially the same thing, all you care about is that the bits of
     data came from <emphasis>somewhere</emphasis>.  Abstraction is
     really the reason operating systems were developed, and it will
     become clear over the following weeks just what that means.</para>
@@ -82,19 +82,19 @@
       </example>
       
       <para>Code such as the above is the simplest example of
-    constructs used repeatadly through the Linux Kernel (and many other
+    constructs used repeatedly through the Linux Kernel (and many other
     projects).  Lets have a look at some specific elements.</para>
       
       <para>We start out with a structure that defines the API.  The
     functions whose names are encased in parenthesis with a pointer
     marker describe a <emphasis>function
     pointer</emphasis><footnote><para>Often you will see that the
-    names of the paramters are omitted, and only the type of the
-    paramter is specified.  This allows the implementer to specify
-    their own paramater names avoiding warnings from the compiler.
+    names of the parameters are omitted, and only the type of the
+    parameter is specified.  This allows the implementer to specify
+    their own parameter names avoiding warnings from the compiler.
     names</para></footnote>.  The function pointer describes the type
     of function it must point to; pointing it at a function without
-    the correct return type or paramaters will return an error.</para>
+    the correct return type or parameters will return an error.</para>
       
       <para>We then have our implementation of the API.  Often, for more
     complex functionality, you will see an idiom where API
@@ -223,7 +223,7 @@
       <title>Redirection</title> <para>Often we do not want the
       standard files mentioned above to point to their default places.
       For example, you may wish to capture all the output of a program
-      into a file on disk, or, alternativley have it read its commands
+      into a file on disk, or, alternatively have it read its commands
       from a file you prepared earlier.  Another useful task might
       like to pass the output of one program to the input of another.
       It should come as no surprise you shell allows you to do all of

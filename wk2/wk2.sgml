@@ -42,7 +42,7 @@
 	respectively.</para>
       </listitem>
       <listitem>
-	<para>Those that operatate on values stored in
+	<para>Those that operate on values stored in
 	registers.</para>
       </listitem>
     </orderedlist>
@@ -57,7 +57,7 @@
 	operation of a CPU is <emphasis>branching</emphasis>.
 	Internally, the CPU keeps a record of the next instruction to
 	be executed in the <emphasis>instruction pointer</emphasis>.
-	Usually, the instruction pointer is incremeted to point to the
+	Usually, the instruction pointer is incremented to point to the
 	next instruction sequentially; the branch instruction will
 	usually check if a specific register zero or if a flag is set
 	and, if so, will modify the pointer to a different address.
@@ -119,13 +119,13 @@
 	perform each of the above steps, and generally they can all
 	happen at the same time.  The CPU can be smart and schedule
 	many different parts of different operations all at the same
-	time, effectivley doing multiple instructions in the one clock
+	time, effectively doing multiple instructions in the one clock
 	cycle.  This is called
 	<emphasis>pipelining</emphasis><footnote><para>In fact, any
 	modern processor has many more than four stages it can
 	pipeline.  The more stages that can be executed at the same
 	time, the deeper the pipeline.</para></footnote>, and a
-	processor that can do this is refered to as a
+	processor that can do this is referred to as a
 	<emphasis>superscalar architecture</emphasis>.  All modern
 	processors are superscalar.</para>
 
@@ -134,7 +134,7 @@
 	different place.  If you are pipelining, you will have to
 	basically guess which way the branch will go, so you know
 	which instructions to bring into the pipeline.  If the CPU has
-	predicted correctly, everything goes fine! Converslely, if the
+	predicted correctly, everything goes fine! Conversely, if the
 	processor has predicted incorrectly it has wasted a lot of
 	time and has to clear the pipeline and start again.</para>
 
@@ -148,11 +148,11 @@
       <emphasis>Reduced Instruction Set Computer</emphasis>
       (RISC).</para>
 
-      <para>Note in the first example, we have explictley loaded
+      <para>Note in the first example, we have explicitly loaded
       values into registers, performed an addition and stored the
       result value held in another register back to memory.  This is
       an example of a RISC approach to computing -- only performing
-      operations on values in registers and explictley loading and
+      operations on values in registers and explicitly loading and
       storing values to and from memory.
       </para>
 
@@ -175,7 +175,7 @@
 	<listitem>
 	  <para>Whilst RISC makes assembly programming becomes more
 	  complex, since virtually all programmers use high level
-	  languages and leave the hard work of producing assembley
+	  languages and leave the hard work of producing assembly
 	  code to the compiler, so the other advantages outweigh this
 	  disadvantage.</para>
 	</listitem>
@@ -184,7 +184,7 @@
 	  <para>Because the instructions in a RISC processor are much
 	  more simple, there is more space inside the chip for
 	  registers.  As we know from the memory hierarchy, registers
-	  are the fastest type of memory and ultimatley all
+	  are the fastest type of memory and ultimately all
 	  instructions must be performed on values held in registers,
 	  so all other things being equal more registers leads to
 	  higher performance.</para>
@@ -236,7 +236,7 @@
 	      <entry>Cache</entry>
 	      <entry>Cache memory is memory actually embedded inside
 		the CPU.  Cache memory is very fast, typically taking
-		only once cycle to access, but since it is embeded
+		only once cycle to access, but since it is embedded
 		directly into the CPU there is a limit to how big it
 		can be.  In fact, there are several sub-levels of
 		cache memory (termed L1, L2, L3) all with slightly
@@ -251,7 +251,7 @@
 		fast, there is still some significant time taken for
 		the CPU to access it (this is termed
 		<emphasis>latency</emphasis>). RAM is stored in
-		seperate, dedicated chips attached to the motherboard,
+		separate, dedicated chips attached to the motherboard,
 		meaning it is much larger than cache memory.
 		</entry>
 	    </row>
@@ -262,7 +262,7 @@
 		<entry>We are all familiar with software arriving on a
 		floppy disk or CDROM, and saving our files to the hard
 		disk.  We are also familiar with the long time a
-		program can take to load from the harddisk -- having
+		program can take to load from the hard disk -- having
 		physical mechanisms such as spinning disks and moving
 		heads means disks are the slowest form of storage.
 		But they are also by far the largest form of
@@ -272,10 +272,10 @@
 	  </tgroup>
 	</table>
 
-	<para>The important point to know about the memory heirarchy
+	<para>The important point to know about the memory hierarchy
 	is the trade offs between speed an size -- the faster the
 	memory the smaller it is.  Of course, if you can find a way to
-	change this equation, you'll end up a billionare!</para>
+	change this equation, you'll end up a billionaire!</para>
 
       </sect2>
 
@@ -285,7 +285,7 @@
     <title>The rest</title>
 
     <sect2>
-      <title>Pehperials</title>
+      <title>Pepherials</title>
       <para>communicate over busses.</para>
 
       <sect3>
@@ -307,7 +307,7 @@
       <itemizedlist>
 	<listitem>
 	  <para>Explain why the clock speed, given in cycles per
-	  second, is not the best indicator of acutal processor
+	  second, is not the best indicator of actual processor
 	  speed.</para>
 	</listitem>
       </itemizedlist>

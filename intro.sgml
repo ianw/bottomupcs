@@ -5,17 +5,17 @@
   <sect1><title>Welcome</title>
     <para>Welcome to &csbu;</para>
     <sect2>
-      <title>Philosphy</title>
+      <title>Philosophy</title>
 
       <para>In a nutshell, what you are reading is intended to be a
       shop class for computer science.  Young computer science
       students are taught to "drive" the computer; but where do you go
       to learn what is under the hood?  Trying to understand the
-      operating system is unfortunatley not as easy as just opening
+      operating system is unfortunately not as easy as just opening
       the bonnet.  The current Linux kernel runs into the millions of
       lines of code, add to that the other critical parts of a modern
       operating system (the compiler, assembler and system libraries)
-      and your codebase becomes unimaginable.  Further still, add a
+      and your code base becomes unimaginable.  Further still, add a
       University level operating systems course (or four), some good
       reference manuals, two or three years of C experience and, just
       maybe, you might be able to figure out where to <emphasis>start
@@ -26,7 +26,7 @@
       starting out trying to work on a Forumla One engine without ever
       knowing how a two stroke motor operates.  During their shop
       class the student should pull apart, twist, turn and put back
-      together that two stroke motor, and consequentally have a pretty
+      together that two stroke motor, and consequentially have a pretty
       good framework for understanding just how the Formula One engine
       works.  Nobody will expect them to be a Formula One engineer,
       but they are well on their way!</para>
@@ -41,7 +41,7 @@
 
       <para>Not everyone wants to attend shop class.  Most people only
       want to drive the car, not know how to build one from scratch.
-      Obviously any general computer science curriculm has to take
+      Obviously any general computer science curriculum has to take
       this into account else it won't be relevant to it's students.
       So computer science is taught from the "top down"; applications,
       high level programming, software design and development theory,
@@ -69,7 +69,7 @@
 
     <sect2>
       <title>Who is this aimed at?</title>
-      <para>I belive that any interested high school student should be
+      <para>I believe that any interested high school student should be
       able to follow this course under instruction.</para>
     </sect2>
 
@@ -77,7 +77,7 @@
       <title>Who should be <emphasis>teaching</emphasis> this course?</title>
 
       <para>I imagine there would be no end of benevolent hackers
-      willing to spend a few hours a week emparting their knowledge to
+      willing to spend a few hours a week imparting their knowledge to
       a new generation using this course as a general framework.
       Obviously you'll need to understand a fair bit about how an
       operating system and it's components works, but if you read
