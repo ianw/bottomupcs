@@ -32,7 +32,7 @@
     <para>The address space of a processor refers the range of
     possible addresses that it can use when loading and storing to
     memory.  The address space is limited by the width of the
-    regisers, since as we know to load an address we need to issue a
+    registers, since as we know to load an address we need to issue a
     <computeroutput>load</computeroutput> instruction with the address
     to load from in a register.  Most current processors have
     registers that are 32 bits wide; this means the addresses that can
@@ -54,7 +54,7 @@
     <sect2>
       <title>Using the address space</title>
     
-      <para>As with most componets of the operating system, virtual
+      <para>As with most components of the operating system, virtual
     memory acts as an abstraction between the address space and the
     physical memory available in the system.  This means that when a
     program uses an address that address does not refer to the bits in
@@ -75,7 +75,7 @@
       of free space in the physical memory.  Having to work around
       these holes would be at best annoying and would become a serious
       limit to programmers.  By using a virtual address that maps to
-      an arbitary physical address the programmer can leave working
+      an arbitrary physical address the programmer can leave working
       around fragmentation up to the operating system.</para>
 
     </sect2>
@@ -87,7 +87,7 @@
 
     <para>The address space of even a 32 bit processor is quite large,
     and if the operating system is to keep track of it all it needs to
-    divide it into more managable parts.</para>
+    divide it into more manageable parts.</para>
 
     <para>The operating system divides the address space into
     <emphasis>pages</emphasis>.  Pages can be many different sizes,
@@ -148,7 +148,7 @@
     
     <para>Page tables can have many different structures and are
       generally highly optimised, as the process of finding a page in
-      the page table can be a lenghtly process.</para>
+      the page table can be a lengthly process.</para>
 
   </sect1>
 
@@ -250,15 +250,28 @@
 
       <para>This can be a major issue for swap memory.  Loading from
       the harddisk is very slow (compared to operations done in
-      memory) and most people will be familiar with sitting infront of
+      memory) and most people will be familiar with sitting in front of
       the computer whilst the hard disk churns and churns whilst the
       system remains unresponsive.</para>
 
       <sect3>
 	<title>mmap</title>
 
-	<para>A different but related process is the
-	<computeroutput>mmap</computeroutput>.</para>
+	<para>A different but related process is the memory map, or
+	<computeroutput>mmap</computeroutput> (from the system call
+	name).  If instead of the page table pointing to physical
+	memory or swap the page table points to a file, on disk, we
+	say the file is
+	<computeroutput>mmap</computeroutput>ed.</para>
+
+	<para>Normally, you need to
+	<computeroutput>open</computeroutput> a file on disk to obtain
+	a file descriptor, and then
+	<computeroutput>read</computeroutput> and
+	<computeroutput>write</computeroutput> it in a sequential
+	form.  When a file is mmaped it can be accessed just like
+	system RAM.  
+	</para>
 
       </sect3>
 
@@ -281,8 +294,155 @@
       required.  If a process calls
       <computeroutput>clone()</computeroutput> to create a new
       process, but requests that the two processes share the same page
-      table, then you effectively have a
-      <emphasis>thread</emphasis>.</para>
+      table, then you effectively have a <emphasis>thread</emphasis>
+      as both processes see the same underlying physical
+      memory.</para>
+
+    </sect2>
+
+  </sect1>
+
+  <sect1>
+    <title>Hardware Support</title>
+
+    <para>So far, we have only mentioned that hardware works with the
+    operating system to implement virtual memory.  However we have
+    glossed over the details of exactly how this happens.</para>
+
+    <para>Virtual memory is necessarily quite dependent on the
+    hardware architecture, and each architecture has its own
+    subtleties.  However, there are are a few universal
+    elements to virtual memory in hardware.</para>
+
+    <sect2>
+      <title>Physical v Virtual Mode</title>
+
+      <para>All processors have some concept of either operating is
+      <emphasis>physical</emphasis> or <emphasis>virtual</emphasis>
+      mode.  In physical mode, the hardware expects that any address
+      will refer to an address in actual system memory.  In virtual
+      mode, the hardware knows that addresses will need to be
+      translated to find their physical address.</para>
+
+      <para>In many processors, this two modes are simply refered to
+      as physical and virtual mode.  Itanium is one such example.  The
+      most common processor, the x86, has a lot of baggage from days
+      before virtual memory and so the two modes are referred to as
+      <emphasis>real</emphasis> and <emphasis>protected</emphasis>
+      mode.  The first processor to implement protected mode was the
+      386, and even the most modern processors in the x86 family line
+      (Pentiums) can still do real mode, though it is not used.  In
+      real mode the processor implements a form of memory organisation
+      called segmentation.</para>
+
+      <sect3>
+	<title>Segmentation</title>
+
+	<para>Segmentation is really only interesting as a historical
+	note, since virtual memory has made it less relevant.
+	Segmentation has a number of drawbacks, not the least of which
+	it is very confusing for inexperienced programmers, which
+	virtual memory systems were largely invented to get around.
+	</para>
+
+	<para>In segmentation there are a number of registers which
+	hold an address that is the start of a segment.  The size of
+	the segment is determined by the number of bits available to
+	offset from segment base register.  In the x86, the maximum
+	offset is 16 bits, or only 64K.  This causes all sorts of
+	havoc if one wants to use an address that is more than 64K
+	away, which as memory grew into the megabytes (and now
+	gigabytes) became more than a slight inconvience to a complete
+	failure.
+	</para>
+
+	<figure>
+	  <title>Segmentation</title>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk5/figures/segmentation.eps" format="EPS">
+	    </imageobject>
+	    <imageobject>
+	      <imagedata fileref="wk5/figures/segmentation.png" format="PNG">
+	    </imageobject>
+	    <textobject>
+	      <phrase>A segmentation problem.  You only have three
+	      segment registers, and can only offset a short distance
+	      from each segment.  How do you get to another address?
+	      You need to manually reorganise the segment registers,
+	      which quickly becomes a bottleneck.</phrase>
+	    </textobject>
+	  </mediaobject>
+	</figure>
+
+	<para>In the above figure, there are three segment registers
+	which are all pointing to segments.  The maxiumum offset
+	(constrained by the number of bits available) is shown by
+	shading.  If the program wants an address outside this range,
+	the segment registers must be reconfigured.  This quickly
+	becomes a major annoyance.  Virtual memory, on the other hand,
+	allows the program to specify any address and the operating
+	system and hardware do the hard work of translating to a
+	physical address.</para>
+
+      </sect3>
+
+    </sect2>
+
+    <sect2>
+      <title>The TLB</title>
+
+      <para>The <emphasis>Translation Lookaside Buffer</emphasis> (or
+      TLB for short) is analogous to a page table inside the CPU.  The
+      operating system and hardware work together to manage the
+      TLB as the system runs.</para>
+
+      <para>The TLB, being implemented in hardware, is necessarily
+      small and can not contain a copy of the entire page table.  It
+      needs to be managed by the operating system.
+      </para>
+
+      <sect3>
+	<title>Page Faults</title>
+
+	<para>When a virtual address is requested of the hardware, it
+	processor looks it up in the TLB, and if it has a translation
+	can use the offset to go straight to the physical
+	address.</para>
+
+	<para>If the processor can <emphasis>not</emphasis> find a
+	translation in the TLB, the processor must raise a
+	<emphasis>page fault</emphasis>.  This is an interrupt (as
+	discussed before) which the operating system must
+	handle.</para>
+
+	<para>When the operating system gets a page fault, it needs to
+	go through the page table in memory to find the correct
+	translation and insert it into the TLB.</para>
+
+	<para> In the case that the operating system can not find a
+	translation in the page table, or alternatively if the
+	operating system checks the permissions of the page in
+	question and the process is not authorised to view it, the
+	operating system must kill the process.  If you have ever seen
+	a segmentation fault (or a segfault) this is the operating
+	system killing a process that has overstepped its
+	bounds.</para>
+
+	<para>Should the translation be found, and the TLB currently
+	be full, then one translation needs to be removed before
+	another can be inserted.  It does not make sense to remove a
+	translation that is likely to be used in the future, as you
+	will incur the cost of finding the entry in the page tables
+	all over again.  TLBs usually use something like a
+	<emphasis>Least Recently Used</emphasis> or LRU algorithm,
+	where the oldest translation that has not been used is ejected
+	in favour of the new one.</para>
+
+	<para>The access can then be tried again, and, all going well,
+	should be found in the TLB and translated correctly.</para>
+
+      </sect3>
 
     </sect2>
 
