@@ -63,7 +63,14 @@
       means that instead of having to open the file and use commands
       such as <computeroutput>read()</computeroutput> and
       <computeroutput>write()</computeroutput> the file looks as if it
-      were any other type of RAM.</para>
+      were any other type of
+      RAM. <computeroutput>mmaped</computeroutput> areas have
+      permissions such as read, write and execute which need to be
+      kept track of.  As we know, it is the job of the operating
+      system to maintain security and stabilitiy, so it needs to check
+      if a process tries to write to a read only area and return an
+      error.</para>
+
     </sect2>
 
     <sect2>
@@ -77,16 +84,33 @@
 
       <para>Thus, file descriptors are kept by the kernel individually
       for each process.</para>
+
+      <para>File descriptors also have permissions.  For example, you
+      may be able to read from a file but not write to it.  When the
+      file is opened, the operating system keeps a record of the
+      processes permissions to that file in the file descriptor and
+      doesn't allow the process to do anything it shouldn't.</para>
     </sect2>
 
     <sect2>
       <title>Registers</title>
-      <para>When it comes time for the currently running process to
-      give up the processor, it needs to save it's current state.  To
-      do this, a copy of the CPU registers needs to be stored to
-      memory.  When it is time for the process to run again, the
-      operating system will copy the register values back from memory
-      to the CPU registers.
+
+      <para>We know from the previous chapter that the processor
+      esentially performs generally simple operations on values in
+      registers.  These values are read (and written) to memory -- we
+      mentioned above that each process is allocated memory which the
+      kernel keeps track of.</para>
+
+      <para>So the other side of the equation is keeping track of the
+      registers.  When it comes time for the currently running process
+      to give up the processor so another process can run, it needs to
+      save it's current state.  Equally, we need to be able to restore
+      this state when the process is given more time to run on the
+      CPU.  To do this the operating system needs to store a copy of
+      the CPU registers to memory.  When it is time for the process to
+      run again, the operating system will copy the register values
+      back from memory to the CPU registers and the process will be
+      right back where it left off.
       </para>
     </sect2>
 
@@ -112,7 +136,7 @@
       the disk is available in memory.  Thus it can mark the process
       as <emphasis>disk wait</emphasis> (or similar) until the data is
       ready.</para>
-	
+
       </sect3>
 
       <sect3>
@@ -131,8 +155,42 @@
 
     </sect2>
 
+  </sect1>
+
+  <sect1>
+    <title>Process Hierarchy</title>
+ 
+    <para>Whilst the operating system can run many processes at the
+    same time, in fact it only ever directly starts one process called
+    the <emphasis>init</emphasis> (short for inital) process.  This
+    isn't a particularly special process except that it's PID is
+    always 0 and it will <emphasis>always</emphasis> be
+    running.</para>
+
+    <para>All other processes can be considered
+    <emphasis>children</emphasis> of this inital process.  Processes
+    have a family tree just like any other; each process has a
+    <emphasis>parent</emphasis> and can have many
+    <emphasis>siblings</emphasis>, which are processes
+    created<footnote> <para>The term <emphasis>spawn</emphasis> is
+    often used when talking about parent processes creating children;
+    as in "the process spawned a child".</para></footnote> by the same
+    parent.</para>
+
+    <para>Certainly children can create more children and so on and so
+    forth.</para>
+
+    <example id="pstree">
+      <title><command>pstree</command> example</title>
+      <programlisting><inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="wk4/code/pstree.txt" format="linespecific">
+	  </imageobject>
+	</inlinemediaobject></programlisting>
+    </example>    
 
   </sect1>
+
 
   <sect1>
     <title>Fork and Exec</title>
@@ -155,21 +213,6 @@
       <para></para>
 
     </sect2>
-  </sect1>
-
-  <sect1>
-    <title>Process Hierarchy</title>
-    <para>The init process spawns more</para>
-
-    <example id="pstree">
-      <title><command>pstree</command> example</title>
-      <programlisting><inlinemediaobject>
-	  <imageobject>
-	    <imagedata fileref="wk4/code/pstree.txt" format="linespecific">
-	  </imageobject>
-	</inlinemediaobject></programlisting>
-    </example>    
-
   </sect1>
 
   <sect1>
