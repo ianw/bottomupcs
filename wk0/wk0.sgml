@@ -1,0 +1,199 @@
+<chapter id="wk0">
+  
+  <title>General Unix and Advanced C</title>
+
+  <sect1>
+    <title><emphasis>Everything is a file!</emphasis></title>
+
+    <para>If you learn nothing else, you should remember that in UNIX
+    everything is a file.</para>
+
+    <para>Let's think about the file for a minute.  Imagine this in
+    the context something familar like a word processing file.  There
+    are exactly two fundamental operations we can do to this imaginary
+    wordprocessing file</para>
+
+    <orderedlist>
+      <listitem><para>Read it (existing saved data from the wordprocessor).</para></listitem>
+      <listitem><para>Write to it (new data from the user).</para></listitem>
+    </orderedlist>
+
+    <para>Now, think about some of the things attached to a computer
+    and what you can do to them, in terms of our fundamental file
+    operations.</para>
+
+    <orderedlist>
+      <listitem><para>The screen</para></listitem>
+      <listitem><para>The keyboard</para></listitem>
+      <listitem><para>A printer</para></listitem>
+      <listitem><para>A CDROM</para></listitem>
+    </orderedlist>
+
+    <para>The screen and printer are both like a write-only file, but
+    instead of being stored as bits on a disk the information is
+    stored as dots on a screen or dots on a page. The keyboard is like
+    a read only file with the data is coming from keystrokes,
+    similarly the CDROM is a read only device.</para>
+
+  </sect1>
+
+  <sect1>
+    <title>Abstraction and function pointers</title>
+
+    <para>What you have really just learnt about is an extremely
+    powerful concept of <emphasis>abstraction</emphasis>.  To the
+    programmer, reading data from the keyboard or the CDROM is
+    esentially the same thing, all you care about is that the bits of
+    data came from <emphasis>somewhere</emphasis>.  Abstraction is
+    really the reason operating systems were developed, and it will
+    become clear over the following weeks just what that means.</para>
+
+    <figure>
+      <title>Abstraction</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="wk0/figures/abstraction.eps" format="EPS">
+	</imageobject>
+	<imageobject>
+	  <imagedata fileref="wk0/figures/abstraction.png" format="PNG">
+	</imageobject>
+	<textobject>
+	  <phrase>Can you spot the difference between a CDROM and a keyboard?  As an application programmer, you should not be able to.</phrase>
+	</textobject>
+      </mediaobject>
+    </figure>
+
+    <sect2>
+      <title>Application Programming Interfaces</title>
+
+      <para>Abstraction is implemented by an <emphasis>Application
+    Programming Interface</emphasis>.  The programmer designs a set of
+    functions and variables as the API which other programmers will
+    use.  A common method used in the Linux Kernel is function
+    pointers.</para>
+      
+      <example id="abstraction-code">
+	<title>Abstraction with function pointers</title>
+	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk0/code/abstraction.c" format="linespecific">
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+      
+      <para>Code such as the above is the simplest example of
+    constructs used repeatadly through the Linux Kernel (and many other
+    projects).  Lets have a look at some specific elements.</para>
+      
+      <para>We start out with a structure that defines the API.  The
+    functions whose names are encased in parenthesis with a pointer
+    marker describe a <emphasis>function
+    pointer</emphasis><footnote><para>Often you will see that the
+    names of the paramters are omitted, and only the type of the
+    paramter is specified.  This allows the implementer to specify
+    their own paramater names avoiding warnings from the compiler.
+    names</para></footnote>.  The function pointer describes the type
+    of function it must point to; pointing it at a function without
+    the correct return type or paramaters will return an error.</para>
+      
+      <para>We then have our implementation of the API.  Often, for more
+    complex functionality, you will see an idiom where API
+    implementation functions will only be a wrapper around another
+    function that is conventionally prepended with an underscore
+    (i.e. <computeroutput>say_hello_fn()</computeroutput> would call
+    another function
+    <computeroutput>_say_hello_function()</computeroutput>.  This is
+    to enable significant change in the internal workings leaving the
+    API constant.  Our implementation is very simple however, and
+    doesn't even need it's own support functions.</para>
+      
+      <para>Second to last, we fill out the function pointers in
+    <computeroutput>struct greet_api greet_api</computeroutput>.
+    There is no need to take the address of the function
+    (i.e. <computeroutput>&amp;say_hello_fn</computeroutput>).  Finally,
+    we can call the API functions through the structure in
+    <computeroutput>main</computeroutput>.</para>
+      
+    </sect2>
+
+    <sect2>
+      <title>Summary</title>
+      <para>The essential points to note are</para>
+      
+      <itemizedlist>
+	<listitem>
+	  <para>We are free to change the internal implementation at any
+	time; say to write to a file rather than the screen.</para>
+      </listitem>
+      <listitem>
+	<para>We can setup function pointers as handy ways to implement an API</para>
+      </listitem>
+    </itemizedlist>
+    </sect2>
+
+    <sect2>
+      <title>Exercises</title>
+      <itemizedlist>
+	<listitem>
+	  <para>Compile the above program with
+	  <application>gcc</application> and run it.</para>
+	<listitem>
+	  <para>Using the <computeroutput>%p</computeroutput>
+	  specifier of <computeroutput>printf</computeroutput> find
+	  the <emphasis>address</emphasis> of the
+	  <computeroutput>say_hello_fn</computeroutput> function.
+	  Compare this to the <emphasis>values</emphasis> of the same
+	  function.  Are they the same?</para>
+	</listitem>
+	<listitem>
+	  <para>Extend the API in some creative way by specifying a
+	  new function in the <computeroutput>struct
+	  greet_api</computeroutput> and implementing it.</para>
+	</listitem>
+  </sect1>
+
+  <sect1>
+    <title>Standard File Descriptors</title>
+    <para>Every running program under Unix starts with three files already opened</para>
+    <table>
+      <title>Standard Files Provided by Unix</title>
+      <tgroup cols="3">
+	<thead>
+	  <row>
+	    <entry>Descriptive Name</entry>
+	    <entry>File Number</entry>
+	    <entry>Descriptions</entry>
+	  </row>
+	</thead>
+	<tbody>
+	  <row>
+	    <entry>Standard In</entry>
+	    <entry>0</entry>
+	    <entry>Standard Input</entry>
+	  </row>
+	  <row>
+	    <entry>Standard Out</entry>
+	    <entry>1</entry>
+	    <entry>Standard Output</entry>
+	  </row>
+	  <row>
+	    <entry>Standard Error</entry>
+	    <entry>2</entry>
+	    <entry>Standard Error</entry>
+	  </row>
+	</tbody>
+      </tgroup>
+    </table>
+  </sect1>
+
+
+
+
+</chapter>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-parent-document: ("../csbu.sgml" "book" "chapter")
+End:
+-->

@@ -1,0 +1,89 @@
+<!-- Computer Science from the Bottom UP 
+     a short course on the practical side of computer science for
+     highschool students
+
+    Copyright (c)  2004  Ian Wienand
+    Permission is granted to copy, distribute and/or modify this document
+    under the terms of the GNU Free Documentation License, Version 1.2
+    or any later version published by the Free Software Foundation;
+    with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+    A copy of the license is included in the section entitled "GNU
+    Free Documentation License".
+-->
+
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.2//EN" [
+<!ENTITY intro SYSTEM "intro.sgml">
+<!ENTITY wk0 SYSTEM "wk0/wk0.sgml">
+<!ENTITY wk1 SYSTEM "wk1/wk1.sgml">
+<!ENTITY wk2 SYSTEM "wk2/wk2.sgml">
+<!ENTITY wk3 SYSTEM "wk3/wk3.sgml">
+<!ENTITY wk4 SYSTEM "wk4/wk4.sgml">
+<!ENTITY wk5 SYSTEM "wk5/wk5.sgml">
+<!ENTITY wk6 SYSTEM "wk6/wk6.sgml">
+<!ENTITY wk7 SYSTEM "wk7/wk7.sgml">
+<!ENTITY wk8 SYSTEM "wk8/wk8.sgml">
+<!ENTITY wk9 SYSTEM "wk9/wk9.sgml">
+
+<!ENTITY glossary SYSTEM "glossary.sgml">
+
+<!ENTITY csbu "Computer Science from the Bottom Up">
+
+]>
+
+
+<book>
+
+<title>&csbu;</title>
+
+ <bookinfo>
+  <author>
+   <firstname>Ian</firstname>
+   <surname>Wienand</surname>
+   <affiliation>
+    <address><email>ianw@ieee.org</email></address>
+   </affiliation>
+  </author>
+
+  <copyright>
+   <year>2004</year>
+   <holder role="mailto:ianw@ieee.org">Ian Wienand</holder>
+  </copyright>
+  <pubdate role="rcs">$Id$</pubdate>
+
+  <abstract>
+   <para>&csbu; is a short course teaching students about the computer from the bottom end up.  Topics covered include binary and binary logic, operating systems fundamentals, compiler fundamentails, system library fundamentals and more.</para>
+  </abstract>
+ </bookinfo>
+
+ &intro;
+ &wk0;
+ &wk1;
+ &wk2;
+ &wk3;
+ &wk4;
+ &wk5;
+ &wk6;
+ &wk7;
+ &wk8;
+ &wk9;
+ &glossary;
+  
+</book>
+
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-general-insert-case:lower
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:1
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->

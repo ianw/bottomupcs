@@ -1,0 +1,57 @@
+<glossary><title>&csbu; Glossary</title>
+    
+<!-- glossary -->
+
+
+    <glossdiv>
+      <title>A</title>      
+      <glossentry id="API"><glossterm>Application Programming Interface</glossterm>
+	<acronym>API</acronym>
+	<glossdef>
+	  <para>The set of variables and functions used to communicate between different parts of programs.</para>
+	  <glossseealso otherterm="ABI"></glossdef>
+      </glossentry>
+
+      <glossentry id="ABI"><glossterm>Application Binary Interface</glossterm>
+	<acronym>ABI</acronym>
+	<glossdef>
+	  <para>A technical description of how the operating system should interface with hardware.</para>
+	  <glossseealso otherterm="API"></glossdef>
+      </glossentry>
+      
+    </glossdiv>
+
+
+    <glossdiv>
+      <title>E</title>      
+      <glossentry id="xml"><glossterm>Extensible Markup Language</glossterm>
+	<acronym>XML</acronym>
+	<glossdef>
+	  <para>Some reasonable definition here.</para>
+	  <glossseealso otherterm="sgml"></glossdef>
+      </glossentry>
+      
+      <glossentry id="sgml">
+	<glossterm>Standardised Generalised Markup Language</glossterm><acronym>SGML</acronym>
+	<glossdef><para>The grand daddy of all documents</para><glossseealso otherterm="xml"></glossdef>
+      </glossentry>
+    </glossdiv>
+    
+    <glossdiv>
+      <title>O</title>
+      <glossentry id="opensource">
+	<glossterm>Open Source</glossterm>
+	<glossdef>
+	  <para>Software
+      distributed in source form under licenses guaranteeing anybody
+      rights to freely use, modify, and redistribute the code.</para>
+	</glossdef>
+      </glossentry>
+    </glossdiv>
+    
+    <!--
+    Local Variables:
+    mode: sgml
+    sgml-parent-document: ("csbu.sgml")
+    End:
+    -->
