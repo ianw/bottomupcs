@@ -5,17 +5,36 @@
   <sect1>
     <title>What is a process?</title>
 
-    <para>We are all familar with the modern operating system running
+    <para>We are all familiar with the modern operating system running
     many tasks all at once or <emphasis>multitasking</emphasis>.  
     </para>
+
+    <para>We can think of each process as a bundle of elements kept by
+    the kernel to keep track of all these running tasks.</para>
 
   </sect1>
 
   <sect1>
     <title>Elements of a process</title>
 
+    <figure>
+      <title>The Elements of a Process</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="wk4/figures/theprocess.eps" format="EPS">
+	</imageobject>
+	<imageobject>
+	  <imagedata fileref="wk4/figures/theprocess.png" format="PNG">
+	</imageobject>
+	<textobject>
+	  <phrase>The essential elements of a process; the process ID,
+	  memory, files and registers.</phrase>
+	</textobject>
+      </mediaobject>
+    </figure>
+
     <sect2>
-      <title>Process ID</title> 
+      <title>Process ID</title>
 
       <para>The <emphasis>process ID</emphasis> (or the PID) is
       assigned by the operating system and is unique to each running
@@ -29,6 +48,9 @@
       fundamental parts of how the operating system works.  However,
       for now it is sufficient to know that each process gets it's own
       section of memory.</para>
+
+      <para>In this memory all the program code is stored, along with
+      variables and any other allocated storage.</para>
 
       <para>Parts of the memory can be shared between process (called,
       not surprisingly <emphasis>shared memory</emphasis>).  You will
@@ -45,23 +67,94 @@
     </sect2>
 
     <sect2>
-      <title>File Descriptors</title>
-      <para>fds</para>
+      <title>File Descriptors</title> 
+      <para>In the first week we learnt about
+      <computeroutput>stdin</computeroutput>,
+      <computeroutput>stdout</computeroutput> and
+      <computeroutput>stderr</computeroutput>; the default files given
+      to each process.  You will remember that these files always have
+      the same file descriptor number (0,1,2 respectively).</para>
+
+      <para>Thus, file descriptors are kept by the kernel individually
+      for each process.</para>
     </sect2>
+
+    <sect2>
+      <title>Registers</title>
+      <para>When it comes time for the currently running process to
+      give up the processor, it needs to save it's current state.  To
+      do this, a copy of the CPU registers needs to be stored to
+      memory.  When it is time for the process to run again, the
+      operating system will copy the register values back from memory
+      to the CPU registers.
+      </para>
+    </sect2>
+
+    <sect2>
+      <title>Kernel State</title>
+
+      <para>Internally, the kernel needs to keep track of a number of
+      elements for each process.</para>
+
+      <sect3>
+	<title>Process State</title>
+
+	<para>Another important element for the operating system to keep
+      track of is the process state.  If the process is currently
+      running it makes sense to have it in a
+      <emphasis>running</emphasis> state.</para>
+
+	<para>However, if the process has requested to read a file from
+      disk we know from our memory hierarchy that this may take a
+      significant amount of time.  The process should give up it's
+      current execution to allow another process to run, but the
+      kernel need not let the process run again until the data from
+      the disk is available in memory.  Thus it can mark the process
+      as <emphasis>disk wait</emphasis> (or similar) until the data is
+      ready.</para>
+	
+      </sect3>
+
+      <sect3>
+	<title>Priority</title> 
+	<para>Some processes are more important than others, and get a higher
+	priority.  See the discussion on the scheduler below.</para>
+      </sect3>
+
+      <sect3>
+	<title>Statistics</title>
+	<para>The kernel can keep statistics on each processes
+	behaviour which can help it make decisions about how the
+	process behaves; for example does it mostly read from disk or
+	does it mostly do CPU intensive operations?</para>
+      </sect3>
+
+    </sect2>
+
 
   </sect1>
 
   <sect1>
     <title>Fork and Exec</title>
+
+    <para></para>
+
     <sect2>
       <title>Fork</title>
       <para>fork</para>
     </sect2>
+
     <sect2>
       <title>Exec</title>
       <para></para>
     </sect2>
 
+    <sect2>
+      <title>The <application>init</application> process</title>
+
+      <para></para>
+
+    </sect2>
   </sect1>
 
   <sect1>
@@ -87,6 +180,12 @@
   <sect1>
     <title>Scheduling</title>
     <para></para>
+
+    <sect2>
+      <title>Hard v Soft Realtime</title>
+      <para></para>
+    </sect2>
+
   </sect1>
 
 </chapter>
