@@ -15,7 +15,7 @@
 	  <imagedata fileref="wk2/figures/computer.png" format="PNG">
 	</imageobject>
 	<textobject>
-	      <phrase>The CPU performs instructions on values held in
+	  <phrase>The CPU performs instructions on values held in
 	      registers.  This example shows firstly setting the value
 	      of R1 to 100, loading the value from memory location
 	      0x100 into R2, adding the two values together and
@@ -23,19 +23,19 @@
 	      value (110) to R4 (for further use). </phrase>
 	</textobject>
       </mediaobject>
-
+      
     </figure>
-
-
+    
+    
     <para>To greatly simplify, a computer consists of a central
     processing unit (CPU) attached to memory.  The figure above
     illustrates the general principle behind all computer
     operations.</para>
-
+    
     <para>The CPU executes instructions read from memory.  There are
     two types of instructions</para>
-
-    <itemizedlist>
+    
+    <orderedlist>
       <listitem>
 	<para>Those that <emphasis>load</emphasis> and
 	<emphasis>store</emphasis> values from memory and to memory,
@@ -45,15 +45,15 @@
 	<para>Those that operatate on values stored in
 	registers.</para>
       </listitem>
-    </itemizedlist>
-
+    </orderedlist>
+    
     <para>So in the example we are simply adding 100 to a value stored
     in memory, and storing this new result back into memory.</para>
-
-      <sect2>
-	<title>Branching</title>
-
-	<para>Apart from loading or storing, the other important
+    
+    <sect2>
+      <title>Branching</title>
+      
+      <para>Apart from loading or storing, the other important
 	operation of a CPU is <emphasis>branching</emphasis>.
 	Internally, the CPU keeps a record of the next instruction to
 	be executed in the <emphasis>instruction pointer</emphasis>.
@@ -64,71 +64,72 @@
 	This is how loops and decision statements
 	(i.e. <computeroutput>if</computeroutput> statements) are
 	handled by the processor.</para>
-
-      </sect2>
-
-      <sect2>
-	<title>Cycles</title>
-	
-	<para>We are all familiar with the speed of the computer,
+      
+    </sect2>
+    
+    <sect2>
+      <title>Cycles</title>
+      
+      <para>We are all familiar with the speed of the computer,
 	given in Megahertz or Gigahertz (millions or thousands of
 	millions cycles per second).  This is called the
 	<emphasis>clock speed</emphasis> since it is the speed that an
 	internal clock within the computer pulses.  On each pulse, a
 	new instruction is executed.
 	</para>
-
-      </sect2>
-           
-      <sect2>
-	<title>Fetch, Decode, Execute, Store</title>
-
-	<para>Executing an instruction consists of a particular cycle
+      
+    </sect2>
+    
+    <sect2>
+      <title>Fetch, Decode, Execute, Store</title>
+      
+      <para>Executing an instruction consists of a particular cycle
 	of events, particularly fetching, decoding, executing and
 	storing.</para>
-
-	<para>For example, to do the
+      
+      <para>For example, to do the
 	<computeroutput>add</computeroutput> instruction above it must
 	be</para>
-
-	<itemizedlist>
-	  <listitem>
-	    <para>Fetch : that is from memory into the
+      
+      <orderedlist>
+	<listitem>
+	  <para>Fetch : that is from memory into the
 	    processor.</para>
-	  </listitem>
-	  <listitem>
-	    <para>Decode : the processor must internally decode what
+	</listitem>
+	<listitem>
+	  <para>Decode : the processor must internally decode what
 	    it has to do (in this case add).</para>
-	  </listitem>
-	  <listitem>
-	    <para>Execute : take the values from the registers,
+	</listitem>
+	<listitem>
+	  <para>Execute : take the values from the registers,
 	    actually add them together</para>
-	  </listitem>
-	  <listitem>
-	    <para>Store : store the result back into another
+	</listitem>
+	<listitem>
+	  <para>Store : store the result back into another
 	    register.</para>
-	  </listitem>
-	</itemizedlist>
+	</listitem>
+      </orderedlist>
 
-	<para>Once upon a time, all of these steps would have taken
+      <para>Once upon a time, all of these steps would have taken
 	place during one cycle.  However as hardware engineers started
 	to increase the clock speed, it became impractical to do all
 	those steps in one cycle.</para>
 
-	<para>Internally, the CPU has many different sub components
-	that perform each of the above steps, and generally they can
-	all happen at the same time.  The CPU can be smart and
-	schedule many different parts of different operations all at
-	the same time, effectivley doing multiple instructions in the
-	one clock cycle.  This is called
-	<emphasis>pipelining</emphasis><footnote><para>In fact, any modern
-	processor has many more than four stages it can pipeline.  The
-	more stages that can be executed at the same time, the deeper
-	the pipeline.</para></footnote>, and a processor that can do this is
-	refered to as a <emphasis>superscalar architecture</emphasis>.
-	All modern processors are superscalar.</para>
+      <para>Internally, the CPU has many different sub components that
+	perform each of the above steps, and generally they can all
+	happen at the same time.  The CPU can be smart and schedule
+	many different parts of different operations all at the same
+	time, effectivley doing multiple instructions in the one clock
+	cycle.  This is called
+	<emphasis>pipelining</emphasis><footnote><para>In fact, any
+	modern processor has many more than four stages it can
+	pipeline.  The more stages that can be executed at the same
+	time, the deeper the pipeline.</para></footnote>, and a
+	processor that can do this is refered to as a
+	<emphasis>superscalar architecture</emphasis>.  All modern
+	processors are superscalar.</para>
 
-	<para>Branch instruction play havoc with this model however,
+      <para>Branch instruction play havoc with this model however,
 	since they may or may not cause execution to start from a
 	different place.  If you are pipelining, you will have to
 	basically guess which way the branch will go, so you know
@@ -137,54 +138,53 @@
 	processor has predicted incorrectly it has wasted a lot of
 	time and has to clear the pipeline and start again.</para>
 
-      </sect2>
+    </sect2>
 
-    </sect1>
+  </sect1>
 
-    <sect1>
-      <title>Memory</title>
-
-      <sect2>
-	<title>Memory Hierarchy</title>
-
-	<para>The CPU can only directly fetch instructions and data
+  <sect1>
+    <title>Memory</title>
+    
+    <sect2>
+      <title>Memory Hierarchy</title>
+      
+      <para>The CPU can only directly fetch instructions and data
 	from cache memory, located directly on the processor chip.
 	Cache memory must be loaded in from the main system memory
 	(the Random Access Memory, or RAM).  RAM however, only retains
 	it's contents when the power is on, so needs to be stored on
-	more permanent storage. What we have just described is the
-	memory heirarchy.</para>
-
-	<table>
-	  <title>Memory Hierarchy</title>
-	  <tgroup cols="3">
-	    <thead>
-	      <row>
-		<entry>Speed</entry>
-		<entry>Memory</entry>
-		<entry>Description</entry>
-	      </row>
-	    </thead>
-	    <tbody>
-	      <row>
-		<entry>Fastest</entry>
-		<entry>Cache</entry>
-
-		<entry>Cache memory is memory actually embedded inside
+	more permanent storage.</para>
+      
+      <para>We call these layers of memory the <emphasis>memory
+      hierarchy</emphasis></para>
+      
+      <table>
+	<title>Memory Hierarchy</title>
+	<tgroup cols="3">
+	  <thead>
+	    <row>
+	      <entry>Speed</entry>
+	      <entry>Memory</entry>
+	      <entry>Description</entry>
+	    </row>
+	  </thead>
+	  <tbody>
+	    <row>
+	      <entry>Fastest</entry>
+	      <entry>Cache</entry>
+	      <entry>Cache memory is memory actually embedded inside
 		the CPU.  Cache memory is very fast, typically taking
 		only once cycle to access, but since it is embeded
 		directly into the CPU there is a limit to how big it
 		can be.  In fact, there are several sub-levels of
 		cache memory (termed L1, L2, L3) all with slightly
 		increasing speeds.</entry>
-	      </row>
-
-	      <row>
-		<entry></entry> 
-
-		<entry>RAM</entry> 
-
-		<entry>All instructions and storage addresses for the
+	    </row>
+	    
+	    <row>
+	      <entry></entry> 
+	      <entry>RAM</entry> 
+	      <entry>All instructions and storage addresses for the
 		processor must come from RAM.  Although RAM is very
 		fast, there is still some significant time taken for
 		the CPU to access it (this is termed
@@ -192,7 +192,7 @@
 		seperate, dedicated chips attached to the motherboard,
 		meaning it is much larger than cache memory.
 		</entry>
-	      </row>
+	    </row>
 
 	      <row>
 		<entry>Slowest</entry>

@@ -1,7 +1,62 @@
 <chapter id="wk3">
   
   <title>The Operating System</title>
-  <para></para>
+
+  <sect1>
+    <title>The role of the operating system</title>
+
+    <para>The operating system underpins the entire operation of the
+    modern computer.</para>
+
+
+    <sect2>
+      <title>Abstraction of hardware</title>
+
+      <para>The fundamental operation of the operating system (OS) is
+      to abstract the hardware to the programmer and user.</para>
+
+    </sect2>
+
+    <sect2>
+      <title>Standardised Interfaces</title>
+
+      <para>POSIX</para>
+
+    </sect2>
+
+    <sect2>
+      <title>Security</title>
+
+    </sect2>
+
+    <sect2>
+      <title>Performance</title>
+
+    </sect2>
+
+  </sect1>
+
+  <sect1>
+    <title>The Kernel</title>
+    <para></para>
+
+  </sect1>
+
+
+  <sect1>
+    <title>System Calls</title>
+
+    <para></para>
+
+    <sect2>
+      <title>libc</title>
+
+      <para></para>
+
+    </sect2>
+
+  </sect1>
+
 </chapter>
 
 <!--
