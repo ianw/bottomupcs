@@ -219,6 +219,27 @@
 
     </sect1>
 
+  <sect1>
+    <title>The rest</title>
+
+    <sect2>
+      <title>Pehperials</title>
+      <para>communicate over busses.</para>
+
+      <sect3>
+	<title>Interrupts</title>
+	<para></para>
+      </sect3>
+
+      <sect3>
+	<title>DMA</title>
+	<para></para>
+      </sect3>
+
+    </sect2>
+
+  </sect1>
+
     <sect1>
       <title>Exercises</title>
       <itemizedlist>
