@@ -282,23 +282,116 @@
     </sect1>
 
   <sect1>
-    <title>The rest</title>
+    <title>Peripherals and busses</title>
 
+    <para>Peripherals are any of the many external devices that
+      connect to your computer.  Obviously, the processor must have
+      some way of talking to the peripherals to make them
+      useful.</para>
+    
+    <para>The communication channel between the processor and the
+      peripherals is called a <emphasis>bus</emphasis>.  The devices
+      directly connected to the processor use a type of bus called
+      Peripheral Component Interconnect, commonly refered to as
+      PCI.</para>
+    
     <sect2>
-      <title>Pepherials</title>
-      <para>communicate over busses.</para>
+      <title>PCI Bus</title>
 
+      <para>PCI transfers data between the device and memory, but
+      importantly allows for the automatic configuration of attached
+      peripherals.  The configuration broadly falls into two categories</para>
+      
       <sect3>
 	<title>Interrupts</title>
-	<para></para>
+	  
+	<para>An interrupt allows the device to literally interrupt
+	  the processor to flag some information.  For example, when a
+	  key is pressed, an interrupt is generated and delivered to
+	  the CPU.  An interrupt (called the IRQ) is assigned to the
+	  device on system boot by the system BIOS.</para>
+	
+	<para>When the device wants to interrupt, it will signal to
+	the processor via rasing the voltage of <emphasis>interrupt
+	pins</emphasis>.  The processor will acknowledge the
+	interrupt, and pass the IRQ onto the operating system.  This
+	part of the operating system code is called the
+	<emphasis>interrupt handler</emphasis>.</para>
+	
+	<para>The interrupt handler knows what to do with the
+	interrupt as when each device driver initalises it will
+	register its self with the kernel to accept the interrupt from
+	the peripherial it is written for.  So as the interrupt
+	arrives it is passed to the driver which can deal with the
+	information from the device correctly.</para>
+	
+	<para>Most drivers will spilt up handling of interrupts into
+	<emphasis>bottom</emphasis> and <emphasis>top</emphasis>
+	halves.  The bottom half will acknowledge the interrupt and
+	return the processor to what it was doing quickly.  The top
+	half will then run later when the CPU is free and do the more
+	intensive processing.  This is to stop an interrupt hogging
+	the entire CPU.</para>
+	
       </sect3>
-
+	
       <sect3>
-	<title>DMA</title>
-	<para></para>
+	<title>IO Space</title>
+	  
+	<para>Obviously the processor will need to communicate with
+	the peripherial device, and it does this via IO operations.
+	The most common form of IO is so called <emphasis>memory
+	mapped IO</emphasis> where registers on the device are
+	<emphasis>mapped</emphasis> into memory.</para>
+	
+	<para>This means that to communicate with the device, you need
+	simply read or write to a specific address in memory.  TODO:
+	expand</para>
+	
       </sect3>
 
     </sect2>
+    
+    <sect2>
+      <title>DMA</title>
+
+      <para>Since the speed of devices is far below the speed of processors,
+    there needs to be some way to avoid making the CPU wait around
+    for data from devices.</para>
+      
+      
+      <para>Direct Memory Access (DMA) is a method of transferring
+	data directly between an peripheral and system RAM.</para>
+      
+      <para>The driver can setup a device to do a DMA transfer by
+	giving it the area of RAM to put it's data into.  It can then
+	start the DMA transfer and allow the CPU to continue with
+	other tasks.</para>
+      
+      <para>Once the device is finished, it will raise an interrupt
+	and signal to the driver the transfer is complete.  From this
+	time the data from the device (say a file from a disk, or
+	frames from a video capture card) is in memory and ready to be
+	used.</para>
+
+    </sect2>
+
+
+    <sect2>
+      <title>Other Busses</title>
+
+    <para>Other busses connect between the PCI bus and external
+    devices.  Some you will have heard of</para>
+
+    <itemizedlist>
+      <listitem>
+	<para>USB/Firewire for small external data devices.</para>
+      </listitem>
+      <listitem>
+	<para>IDE/SCSI for disk drives.</para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
 
   </sect1>
 
