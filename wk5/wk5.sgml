@@ -70,14 +70,6 @@
       actual address in the system memory chips.
       </para>
 
-      <para>Over time, physical memory becomes
-      <emphasis>fragmented</emphasis>, meaning that there are "holes"
-      of free space in the physical memory.  Having to work around
-      these holes would be at best annoying and would become a serious
-      limit to programmers.  By using a virtual address that maps to
-      an arbitrary physical address the programmer can leave working
-      around fragmentation up to the operating system.</para>
-
     </sect2>
 
   </sect1>
@@ -112,7 +104,7 @@
 	  <imagedata fileref="wk5/figures/page.png" format="PNG">
 	</imageobject>
 	<textobject>
-	  <phrase>Pages point to physical memory</phrase>
+	  <phrase>Pages</phrase>
 	</textobject>
       </mediaobject>
     </figure>
@@ -162,37 +154,50 @@
 
     <para>We call the address the userspace program is using to access
     memory a <emphasis>virtual address</emphasis>.  The virtual
-    address consists of two parts; an index to a page in a page table
-    and an offset.</para>
+    address consists of two parts; the page that the virtual address
+    is in and an offset into that page.</para>
 
     <sect2>
-      <title>Page Index</title>
+      <title>Page</title>
 
-      <para>The index portion of the virtual address is the index
-      into the page table.</para>
+      <para>The entire address space is divided up into pages, so each
+      possible address must reside within a page.  The page part of
+      the virtual address acts as an index into the page table.</para>
     </sect2>
 
     <sect2>
       <title>Offset</title>
 
-      <para>The last bits of the virtual address are called the
-      <emphasis>offset</emphasis> which is the location within the
-      physical page of the address.  You require enough bits in the
-      offset to be able to get to any byte in the page.  For a 4K page
-      you require (4K == (4 * 1024) == 4096 ==
-      2<superscript>12</superscript> ==) 12 bits.</para>
+      <para>A page has many bytes of memory inside it, so the last
+      bits of the virtual address are called the
+      <emphasis>offset</emphasis> which is the location difference
+      between the address you want and the start of the page.  You
+      require enough bits in the offset to be able to get to any byte
+      in the page.  For a 4K page you require (4K == (4 * 1024) ==
+      4096 == 2<superscript>12</superscript> ==) 12 bits.  Remember
+      that the smallest amount of memory that the operating system or
+      hardware deals with is a page, so each of these 4096 addresses
+      reside within a single page and are delt with as "one".</para>
 
     </sect2>
 
     <sect2>
       <title>Virtual Address Translation</title>
 
+      <para>Virtual address translation refers to the process of
+      finding out which physical page maps to which virtual
+      page.</para>
+
       <para>When the operating system needs to find the actual memory
-      behind a virtual address, it firstly takes the page pointer
-      component of the address and looks it up in the page table.
-      This gives a pointer to a physical address, to which the offset
-      from the virtual address is added, giving the actual location in
-      memory.</para>
+      behind a virtual address, it only deals with the page component
+      of the virtual address (since the smallest amount of memory it
+      will deal with is a page).  It takes the page number and looks
+      it up in the page table.  This gives a pointer to a physical
+      address, to which the offset from the virtual address is added,
+      giving the actual location in system memory.  If it doesn't
+      exist in the page table then the process is trying to access
+      memory that has not been allocated to it by the operating system
+      and the access will not be allowed.</para>
 
       <figure>
 	<title>Virtual Address Translation</title>
@@ -229,6 +234,52 @@
 	since the page table will map it to a different place in
 	physical memory.  Every modern operating system provides each
 	process with its own address space like this.</para>
+
+      <para>Over time, physical memory becomes
+      <emphasis>fragmented</emphasis>, meaning that there are "holes"
+      of free space in the physical memory.  Having to work around
+      these holes would be at best annoying and would become a serious
+      limit to programmers.  By using assigning a virtual address
+      space to each process the programmer can leave working around
+      fragmentation up to the operating system.</para>
+
+    </sect2>
+
+    <sect2>
+      <title>Protection</title>
+
+      <para>We previously mentioned that the virtual mode of the 386
+      processor is called protected mode, and this name arises from
+      the protection that virtual memory can offer to processes
+      running on it.</para>
+
+      <para>In a system without virtual memory, every process has
+      complete access to all of system memory.  This means that there
+      is nothing stopping one process from overwriting another
+      processes memory, causing it to crash (or perhaps worse, return
+      incorrect values, especially if that program is managing your
+      bank account!)</para>
+
+      <para>This level of protection is provided because the operating
+      system is now the layer of abstraction between the process and
+      memory access.  If a process gives a virtual address that is not
+      covered by its page table, then the operating system knows that
+      that process is doing something wrong and can inform the process
+      it has stepped out of its bounds.</para>
+
+      <para>Since each page has extra attributes, a page can be set
+      read only, write only or have any number of other interesting
+      attributes.  When the process trys to access the page, the
+      operating system can check if it has sufficient permissions and
+      stop it if it does not (writing to a read only page, for
+      example).</para>
+
+      <para>Systems that use virtual memory are inherently more stable
+      because, with a well "perfect" operating system, a process can
+      only crash its self and not the entire system (of course, humans
+      write operating systems and we inevitably overlook bugs that can
+      still cause entire systems to crash).</para>
+
     </sect2>
 
     <sect2>
@@ -385,10 +436,21 @@
 	</para>
 
 	<para>In segmentation there are a number of registers which
-	hold an address that is the start of a segment.  The size of
-	the segment is determined by the number of bits available to
-	offset from segment base register.  In the x86, the maximum
-	offset is 16 bits, or only 64K.  This causes all sorts of
+	hold an address that is the start of a segment.  The only way
+	to get to an address in memory is to specify it as an offset
+	from one of these segment registers.  The size of the segment
+	(and hence the maximum offset you can specify) is determined
+	by the number of bits available to offset from segment base
+	register.  In the x86, the maximum offset is 16 bits, or only
+	64K<footnote><para>Imagine that the maximum offset was 32
+	bits; in this case the entire address space could be accessed
+	as an offset from a segment at
+	<computeroutput>0x00000000</computeroutput> and you would
+	essentily have a flat layout -- but it still isn't as good as
+	virtual memory as you will see.  In fact, the only reason it
+	is 16 bits is because the original Intel processors were
+	limited to this, and the chips maintain backwards
+	compatability.</para></footnote> .  This causes all sorts of
 	havoc if one wants to use an address that is more than 64K
 	away, which as memory grew into the megabytes (and now
 	gigabytes) became more than a slight inconvience to a complete
@@ -539,6 +601,53 @@
       </sect3>
 
     </sect2>
+
+    <sect2>
+      <title>TLB Managment</title>
+
+      <para>We can say that the TLB used by the hardware but managed
+      by software.  It is up to the operating system to load the TLB
+      with correct entries and remove old entries.</para>
+
+      <sect3>
+	<title>Flushing the TLB</title>
+	
+	<para>The process of removing entries from the TLB is called
+      <emphasis>flushing</emphasis>.  Updating the TLB is a crucial
+      part of mantaing separate address spaces for processes; since
+      each proccess can be using the same virtual address not updating
+      the TLB would mean a process might end up overwriting anothers
+      memory. </para>
+
+	<para> On some processors, every time there is a context
+      switch the entire TLB is flushed.  This can be quite expensive,
+      since this means the new process will have to go through the
+      whole process of taking a page fault, finding the page in the
+      page tables and inserting the translation.</para>
+
+	<para>Other processors implement an extra <emphasis>address
+	space ID</emphasis> which is also inserted into the TLB
+	translation.  This means each address space (usually each
+	process, but remember threads want to share the same address
+	space) gets its own ID which is stored along with any
+	translations in the TLB.  This means that on a context switch
+	the TLB does <emphasis>not</emphasis> need to be flushed,
+	since the next process will have a different address space ID
+	and even if it asks for the same virtual address, the address
+	space ID will differ and so the translation to physical page
+	will be different.  This scheme reduces flushing and increases
+	overall system performance.</para>
+
+      </sect3>
+
+    </sect2>
+
+  </sect1>
+
+  <sect1>
+    <title>Linux Specifics</title>
+
+    <para>We have been introduced to the general concepts.</para>
 
   </sect1>
 
