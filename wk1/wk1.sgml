@@ -1,7 +1,421 @@
 <chapter id="wk1">
   
   <title>Binary and Number Representation</title>
-  <para></para>
+
+  <sect1>
+    <title>Binary -- the basis of computing</title>
+
+    <sect2>
+      <title>Binary Theory</title>
+
+      <sect3>
+	<title>Introduction</title>
+	<para>Binary is simply a number system based on 2 numbers</para>
+      </sect3>
+
+      <sect3>
+	<title>Boolean Operations</title>
+
+	<para>George Boole was a mathemetician ...</para>
+
+	<para>We repesent the Boolean operations in <emphasis>truth
+	tables</emphasis>.  It will become clear how they work
+	shortly.</para>
+
+	<para>We only need to know about the following boolean
+	operations, and they are easy to remember.</para>
+
+	<sect4>
+	  <title>Not</title> <para>Usually represented by
+	  <computeroutput>!</computeroutput>,
+	  <computeroutput>not</computeroutput> simply inverts the
+	  value, so <computeroutput>0</computeroutput> becomes
+	  <computeroutput>1</computeroutput> and
+	  <computeroutput>1</computeroutput> becomes
+	  <computeroutput>0</computeroutput></para>
+
+	  <table>
+	    <title>Truth table for <emphasis>not</emphasis></title>
+	    <tgroup cols="2">
+	      <thead>
+		<row>
+		  <entry>Input</entry>
+		  <entry>Output</entry>
+		</row>
+	      </thead>
+	      <tbody>
+		<row>
+		  <entry><computeroutput>1</computeroutput></entry>
+		  <entry><computeroutput>0</computeroutput></entry>
+		</row>
+		<row>
+		  <entry><computeroutput>0</computeroutput></entry>
+		  <entry><computeroutput>1</computeroutput></entry>
+		</row>
+	      </tbody>
+	    </tgroup>
+	  </table>
+	</sect4>
+
+	<sect4>
+	  <title>And</title>
+	  <para>Simply think of it as "if one <emphasis>and</emphasis> the other are true, result is true</para>
+
+	  <table>
+	    <title>Truth table for <emphasis>and</emphasis></title>
+	    <tgroup cols="2">
+	      <thead>
+		<row>
+		  <entry>Input 1</entry>
+		  <entry>Input 2</entry>
+		  <entry>Output</entry>
+		</row>
+	      </thead>
+	      <tbody>
+		<row>
+		  <entry><computeroutput>0</computeroutput></entry>
+		  <entry><computeroutput>0</computeroutput></entry>
+		  <entry><computeroutput>0</computeroutput></entry>
+		</row>
+		<row>
+		  <entry><computeroutput>1</computeroutput></entry>
+		  <entry><computeroutput>0</computeroutput></entry>
+		  <entry><computeroutput>0</computeroutput></entry>
+		</row>
+		<row>
+		  <entry><computeroutput>0</computeroutput></entry>
+		  <entry><computeroutput>1</computeroutput></entry>
+		  <entry><computeroutput>0</computeroutput></entry>
+		</row>
+		<row>
+		  <entry><computeroutput>1</computeroutput></entry>
+		  <entry><computeroutput>1</computeroutput></entry>
+		  <entry><computeroutput>1</computeroutput></entry>
+		</row>
+	      </tbody>
+	    </tgroup>
+	  </table>
+	</sect4>
+
+
+	<sect4>
+	  <title>Or</title>
+	  <para>Simply think of it as "if one <emphasis>or</emphasis> the other are true, result is true</para>
+
+	  <table>
+	    <title>Truth table for <emphasis>or</emphasis></title>
+	    <tgroup cols="2">
+	      <thead>
+		<row>
+		  <entry>Input 1</entry>
+		  <entry>Input 2</entry>
+		  <entry>Output</entry>
+		</row>
+	      </thead>
+	      <tbody>
+		<row>
+		  <entry><computeroutput>0</computeroutput></entry>
+		  <entry><computeroutput>0</computeroutput></entry>
+		  <entry><computeroutput>0</computeroutput></entry>
+		</row>
+		<row>
+		  <entry><computeroutput>1</computeroutput></entry>
+		  <entry><computeroutput>0</computeroutput></entry>
+		  <entry><computeroutput>1</computeroutput></entry>
+		</row>
+		<row>
+		  <entry><computeroutput>0</computeroutput></entry>
+		  <entry><computeroutput>1</computeroutput></entry>
+		  <entry><computeroutput>1</computeroutput></entry>
+		</row>
+		<row>
+		  <entry><computeroutput>1</computeroutput></entry>
+		  <entry><computeroutput>1</computeroutput></entry>
+		  <entry><computeroutput>1</computeroutput></entry>
+		</row>
+	      </tbody>
+	    </tgroup>
+	  </table>
+	</sect4>
+
+      </sect3>
+
+
+      <sect3>
+	<title>Working with binary in C</title>
+	<para>& | operators</para>
+      </sect3>
+
+    </sect2>
+
+    <sect2>
+      <title>Hexadecimal</title>
+
+      <para>Hexadeicmal refers to a base 16 number system.  We use
+      this in computer science for only one reason, it makes it easy
+      for humans to think about binary numbers.</para>
+
+      <para>Hexadecimal uses the standard base 10 numerals, but adds
+      additional the additional numerals <computeroutput>A B C D E
+      F</computeroutput> which refer to <computeroutput>10 11 12 13 14
+      15</computeroutput> (n.b. zero is a digit like any other, so we
+      can represent 16 different values).</para>
+
+      <para>Traditionally, any time you see a number prefixed by
+      <computeroutput>0x</computeroutput> this will denote a
+      hexadecimal number.</para>
+
+      <para>To represent 16 different patterns in binary, we would
+      need exactly four bits.  Thus, each hexadecimal numeral
+      represents four bits.  You should consider it an exercise to
+      learn the following table off by heart.</para>
+
+    <table>
+      <title>Hexadecimal, Binary and Decimal</title>
+      <tgroup cols="3">
+	<thead>
+	  <row>
+	    <entry>Hexadecimal</entry>
+	    <entry>Binary</entry>
+	    <entry>Decimal</entry>
+	  </row>
+	</thead>
+	<tbody>
+	  <row>
+	      <entry><computeroutput>0</computeroutput></entry>
+	      <entry><computeroutput>0000</computeroutput></entry>
+	      <entry><computeroutput>0</computeroutput></entry>
+	  </row>
+	  <row>
+	      <entry><computeroutput>1</computeroutput></entry>
+	      <entry><computeroutput>0001</computeroutput></entry>
+	      <entry><computeroutput>1</computeroutput></entry>
+	  </row>
+	  <row>
+	      <entry><computeroutput>2</computeroutput></entry>
+	      <entry><computeroutput>0010</computeroutput></entry>
+	      <entry><computeroutput>2</computeroutput></entry>
+	  </row>
+	  <row>
+	      <entry><computeroutput>3</computeroutput></entry>
+	      <entry><computeroutput>0011</computeroutput></entry>
+	      <entry><computeroutput>3</computeroutput></entry>
+	  </row>
+	  <row>
+	      <entry><computeroutput>4</computeroutput></entry>
+	      <entry><computeroutput>0100</computeroutput></entry>
+	      <entry><computeroutput>4</computeroutput></entry>
+	  </row>
+	  <row>
+	      <entry><computeroutput>5</computeroutput></entry>
+	      <entry><computeroutput>0101</computeroutput></entry>
+	      <entry><computeroutput>5</computeroutput></entry>
+	  </row>
+	  <row>
+	      <entry><computeroutput>6</computeroutput></entry>
+	      <entry><computeroutput>0110</computeroutput></entry>
+	      <entry><computeroutput>6</computeroutput></entry>
+	  </row>
+	  <row>
+	      <entry><computeroutput>7</computeroutput></entry>
+	      <entry><computeroutput>0111</computeroutput></entry>
+	      <entry><computeroutput>7</computeroutput></entry>
+	  </row>
+	  <row>
+	      <entry><computeroutput>8</computeroutput></entry>
+	      <entry><computeroutput>1000</computeroutput></entry>
+	      <entry><computeroutput>8</computeroutput></entry>
+	  </row>
+	  <row>
+	      <entry><computeroutput>9</computeroutput></entry>
+	      <entry><computeroutput>1001</computeroutput></entry>
+	      <entry><computeroutput>9</computeroutput></entry>
+	  </row>
+	  <row>
+	      <entry><computeroutput>A</computeroutput></entry>
+	      <entry><computeroutput>1010</computeroutput></entry>
+	      <entry><computeroutput>10</computeroutput></entry>
+	  </row>
+	  <row>
+	      <entry><computeroutput>B</computeroutput></entry>
+	      <entry><computeroutput>1011</computeroutput></entry>
+	      <entry><computeroutput>11</computeroutput></entry>
+	  </row>
+	  <row>
+	      <entry><computeroutput>C</computeroutput></entry>
+	      <entry><computeroutput>1100</computeroutput></entry>
+	      <entry><computeroutput>12</computeroutput></entry>
+	  </row>
+	  <row>
+	      <entry><computeroutput>D</computeroutput></entry>
+	      <entry><computeroutput>1100</computeroutput></entry>
+	      <entry><computeroutput>13</computeroutput></entry>
+	  </row>
+	  <row>
+	      <entry><computeroutput>E</computeroutput></entry>
+	      <entry><computeroutput>1101</computeroutput></entry>
+	      <entry><computeroutput>14</computeroutput></entry>
+	  </row>
+	  <row>
+	      <entry><computeroutput>F</computeroutput></entry>
+	      <entry><computeroutput>1111</computeroutput></entry>
+	      <entry><computeroutput>15</computeroutput></entry>
+	  </row>
+	</tbody>
+      </tgroup>
+    </table>
+
+      <para>Of course there is no reason not to continue the pattern
+      (say, assign G to the value 16), but 16 values is an excellent
+      trade off between the vagaries of human memory and the number of
+      bits used by a computer (occasionally you will also see base 8
+      used, for example for file permissions under UNIX).  We simply
+      represent larger numbers of bits with more numerals.  For
+      example, a sixteen bit variable can be represented by 0xAB12,
+      and to find it in binary simply take each individual numeral,
+      convert it as per the table and join them all together (so
+      <computeroutput>0xAB12</computeroutput> ends up as the 32 bit
+      binary number
+      <computeroutput>1010101100010010</computeroutput>).</para>
+
+    </sect2>
+
+  <sect2>
+    <title>Practical Implications</title>
+    <sect3>
+      <title>Use of binary in code</title>
+
+      <para>Whilst binary is the underlying language of every
+      computer, it is entirely practical to program a computer in high
+      level languages without knowing the first thing about it.
+      However, for the low level code we are interested in a few
+      funamental binary principles are used repeatadly.</para>
+
+    </sect3>
+
+    <sect3>
+      <title>Masking and Flags</title> 
+
+      <sect4>
+	<title>Masking</title>
+
+	<para>In low level code, it is often important to keep your
+	structures and variables as space efficient as possible.  In
+	some cases, this can involve effectivley packing two
+	(generally related) variables into one.</para>
+
+	<para>Remember each bit represents two states, so if we know a
+	variable only has, say, 16 possible states it can be
+	represented by 4 bits (i.e. 2<superscript>4</superscript> = 16
+	unique values).  But the smallest type we can declare in C is
+	8 bits (a <computeroutput>char</computeroutput>), so we can
+	either waste four bits, or find some way to use those left
+	over bits.</para>
+
+	<para>We can easily do this by the process of
+	<emphasis>masking</emphasis>.  Remebering the rules of the
+	logical operations, it should become clear how the values are
+	extracted.</para>
+
+	<para>The process is illustrated in the figure below.  We are
+	interested in the lower four bits, so set our mask to have
+	these bits set to <computeroutput>1</computeroutput>.  Since
+	the <computeroutput>logical and</computeroutput> operation
+	will only set the bit if <emphasis>both</emphasis> bits are
+	<computeroutput>1</computeroutput>, those bits of the mask set
+	to <computeroutput>0</computeroutput> effectivly hide the bits
+	we are not interested in.</para>
+
+    <figure>
+      <title>Masking</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="wk1/figures/masking.eps" format="EPS">
+	</imageobject>
+	<imageobject>
+	  <imagedata fileref="wk1/figures/masking.png" format="PNG">
+	</imageobject>
+	<textobject>
+
+	      <phrase>By using a <emphasis>mask</emphasis> consisting
+	      of all <computeroutput>1</computeroutput>'s and the
+	      <computeroutput>logical and</computeroutput> operation,
+	      we can extract only the bits we are interested
+	      in.</phrase>
+
+	</textobject>
+      </mediaobject>
+    </figure>
+
+	<para>To get the top (blue) four bits, we would invert the
+	mask.  You will note this gives a result of
+	<computeroutput>0x90</computeroutput> when really we want a
+	value of <computeroutput>0x09</computeroutput>.  To get the
+	bits into the right position we use the <computeroutput>right
+	shift</computeroutput> operation.</para>
+
+	<para><emphasis>Setting</emphasis> the bits requires the
+	<computeroutput>logical or</computeroutput> operation.
+	However, rather than using
+	<computeroutput>1</computeroutput>'s as the mask, we use
+	<computeroutput>0</computeroutput>'s.  You should draw a
+	diagram similar to the above figure and work through setting
+	bits with the <computeroutput>logical
+	or</computeroutput> operation.</para>
+
+      </sect4>
+
+      <sect4>
+	<title>Flags</title>
+
+	<para>Often a program will have a large number of variables
+	that only exist as <emphasis>flags</emphasis> to some
+	condition.  For example, a state machine is an algorithm that
+	transitions through a number of different states but may only
+	be in one at a time.  Say it has 8 different states; we could
+	easily declare 8 different variables, one for each state.  But
+	in many cases it is better to declare <emphasis>one 8 bit
+	variable</emphasis> and assign each bit to
+	<emphasis>flag</emphasis> flag a particular state.</para>
+
+	<para>Flags are a special case of masking, but each bit
+	represents a particular boolean state (on or off).  Thus an
+	<emphasis>n</emphasis> bit variable can hold
+	<emphasis>n</emphasis> different flags.  See the code example
+	below for a typical example of using flags -- you will see
+	variations on this basic code very often.
+	</para>
+
+	<example id="flag-code">
+	  <title>Using flags</title>
+	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk1/code/flags.c" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>    
+
+	</sect4>
+	
+      </sect3>
+    </sect2>
+  </sect1>
+
+  <sect1>
+    <title>Number Representation</title>
+
+    <sect2>
+      <title>Types in C</title>
+      <para>type and their sizes, warnings about 64 bit</para>
+    </sect2>
+
+    <sect2>
+      <title>Floating Point</title>
+      <para>Very short intro to floating point</para>
+    </sect2>
+
+  </sect1>
+
 </chapter>
 
 <!--

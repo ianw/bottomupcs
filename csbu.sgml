@@ -53,6 +53,19 @@
   <abstract>
    <para>&csbu; is a short course teaching students about the computer from the bottom end up.  Topics covered include binary and binary logic, operating systems fundamentals, compiler fundamentails, system library fundamentals and more.</para>
   </abstract>
+
+  <legalnotice>
+ 
+  <para>This work is licensed under the Creative Commons
+  Attribution-ShareAlike License. To view a copy of this license,
+  visit <ulink
+  url="http://creativecommons.org/licenses/by-sa/2.0/">http://creativecommons.org/licenses/by-sa/2.0/</ulink>
+  or send a letter to Creative Commons, 559 Nathan Abbott Way,
+  Stanford, California 94305, USA.
+</para>
+
+  </legalnotice>
+
  </bookinfo>
 
  &intro;
