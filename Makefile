@@ -33,6 +33,10 @@ html: csbu.sgml $(pngs)
 	docbook2html --output html csbu.sgml
 	cp --parents $(pngs) html
 
+.PHONY: timestamp
+timestamp: csbu.sgml
+	touch csbu.sgml
+
 .PHONY: clean
 clean:	
 	rm -rf html csbu.pdf csbu.dvi $(pngs) $(epss)
