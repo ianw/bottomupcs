@@ -292,7 +292,7 @@
     <para>The communication channel between the processor and the
       peripherals is called a <emphasis>bus</emphasis>.  The devices
       directly connected to the processor use a type of bus called
-      Peripheral Component Interconnect, commonly refered to as
+      Peripheral Component Interconnect, commonly referred to as
       PCI.</para>
     
     <sect2>
@@ -312,16 +312,16 @@
 	  device on system boot by the system BIOS.</para>
 	
 	<para>When the device wants to interrupt, it will signal to
-	the processor via rasing the voltage of <emphasis>interrupt
+	the processor via raising the voltage of <emphasis>interrupt
 	pins</emphasis>.  The processor will acknowledge the
 	interrupt, and pass the IRQ onto the operating system.  This
 	part of the operating system code is called the
 	<emphasis>interrupt handler</emphasis>.</para>
 	
 	<para>The interrupt handler knows what to do with the
-	interrupt as when each device driver initalises it will
+	interrupt as when each device driver initialises it will
 	register its self with the kernel to accept the interrupt from
-	the peripherial it is written for.  So as the interrupt
+	the peripheral it is written for.  So as the interrupt
 	arrives it is passed to the driver which can deal with the
 	information from the device correctly.</para>
 	
@@ -339,7 +339,7 @@
 	<title>IO Space</title>
 	  
 	<para>Obviously the processor will need to communicate with
-	the peripherial device, and it does this via IO operations.
+	the peripheral device, and it does this via IO operations.
 	The most common form of IO is so called <emphasis>memory
 	mapped IO</emphasis> where registers on the device are
 	<emphasis>mapped</emphasis> into memory.</para>
