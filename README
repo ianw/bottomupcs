@@ -1,0 +1,28 @@
+Computer Science from the Bottom Up
+-----------------------------------
+
+You should be able to make the course materials by typing
+
+make html (output in ./html directory)
+
+or 
+
+make pdf (output in csbu.pdf)
+
+You will need a number of things for this to work out of the box.  If
+you have the Debian packages
+
+* docbook
+* docbook-xml
+* docbook-dsssl
+* jadetex/openjade
+* docbook-utils
+* transfig (for fig2dev)
+
+you will probably be ok.
+
+I am always interested in contribution and feedback so please feel
+free to email
+
+Ian Wienand
+ianw@ieee.org
