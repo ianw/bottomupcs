@@ -140,6 +140,68 @@
 
     </sect2>
 
+    <sect2>
+      <title>CISC v RISC</title>
+
+      <para>A common way to divide computer architectures is into
+      <emphasis>Complex Instruction Set Computer</emphasis> (CISC) and
+      <emphasis>Reduced Instruction Set Computer</emphasis>
+      (RISC).</para>
+
+      <para>Note in the first example, we have explictley loaded
+      values into registers, performed an addition and stored the
+      result value held in another register back to memory.  This is
+      an example of a RISC approach to computing -- only performing
+      operations on values in registers and explictley loading and
+      storing values to and from memory.
+      </para>
+
+      <para>A CISC approach would use only a single instruction taking
+      values from memory, performing the addition internally and
+      writing the result back.  This means the instruction may take
+      many cycles, but ultimately both approaches achieve the same
+      goal.</para>
+
+      <para>All modern architectures would be considered RISC
+      architectures<footnote><para>Even the most common architecture,
+      the Intel Pentium, whilst having an instruction set that is
+      categorised as CISC, internally breaks down instructions to RISC
+      style sub-instructions inside the chip before
+      executing.</footnote>.</para>
+
+      <para>There are a number of reasons for this</para>
+
+      <itemizedlist>
+	<listitem>
+	  <para>Whilst RISC makes assembly programming becomes more
+	  complex, since virtually all programmers use high level
+	  languages and leave the hard work of producing assembley
+	  code to the compiler, so the other advantages outweigh this
+	  disadvantage.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Because the instructions in a RISC processor are much
+	  more simple, there is more space inside the chip for
+	  registers.  As we know from the memory hierarchy, registers
+	  are the fastest type of memory and ultimatley all
+	  instructions must be performed on values held in registers,
+	  so all other things being equal more registers leads to
+	  higher performance.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Since all instructions execute in the same time,
+	  pipelining is possible.  We know pipelining requires streams
+	  of instructions being constantly fed into the processor, so
+	  if some instructions take a very long time and others do
+	  not, the pipeline becomes far to complex to be
+	  effective.</para>
+	</listitem>
+      </itemizedlist>
+
+    </sect2>
+
   </sect1>
 
   <sect1>
