@@ -1,7 +1,195 @@
 <chapter id="wk5">
   
   <title>Virtual Memory</title>
-  <para></para>
+
+  <sect1>
+    <title>What Virtual Memory <emphasis>isn't</emphasis></title>
+
+    <para>Virtual memory is often naively discussed as a way to
+    extended your RAM by using the hard drive as extra, slower, system
+    memory.  That is, once your system runs out of memory, it flows
+    over onto the hard drive which is used as "virtual" memory.</para>
+
+    <para>In modern operating systems, this is commonly referred to as
+    <emphasis>swap space</emphasis>, because unused parts of memory as
+    swapped out to disk to free up main memory (remember, programs can
+    only execute from main memory).
+    </para>
+
+    <para>Indeed, the ability to swap out memory to disk is an
+    important part of how virtual memory works, but as you will see it
+    is not the purpose of virtual memory, but rather a very useful
+    side effect!</para>
+
+  </sect1>
+
+  <sect1>
+    <title>What virtual memory <emphasis>is</emphasis></title>
+    
+    <para>Virtual memory is all about making use of <emphasis>address
+    space</emphasis>.</para>
+
+    <para>The address space of a processor refers the addresses that
+    it can use when loading and storing memory.  Most current
+    processors have registers that are 32 bits wide; this means the
+    addresses that can be stored in a register range from
+    <computeroutput>0x00000000</computeroutput> to
+    <computeroutput>0xFFFFFFF</computeroutput>.
+    2^<superscript>32</superscript> is equal to 4GB, so a 32 bit
+    processor can access load or store only from 4GB of memory.  Most
+    new processors are moving towards 64 bit processors, which have
+    registers 64 bits wide.  As an exercise, you should work out the
+    address space available to these processors (hint: it's
+    big!).</para>
+
+    <sect2>
+      <title>Using the address space</title>
+      
+      <para>We make best use of the address space adding a layer of
+    abstraction between the physical memory and the address space of
+    the processor.</para>
+      
+      <para>To do this, we say that all addresses the programmer uses
+      are <emphasis>virtual</emphasis>.  The operating system keeps
+      track of which virtual address points to which
+      <emphasis>physical address</emphasis>.  When a program does a
+      load or store from an address, the processor and operating
+      system work together to convert this virtual address to the
+      actual address in the system memory chips.  It will become clear
+      how this happens below.
+      </para>
+
+      <para>Over time, physical memory becomes
+      <emphasis>fragmented</emphasis>, meaning that there are "holes"
+      of free space in the physical memory.  Having to work around
+      these holes would be at best annoying and would become a serious
+      limit to programmers.  By using a virtual address that maps to
+      an arbitary physical address the programmer can leave working
+      around fragmentation up to the operating system.</para>
+
+    </sect2>
+
+  </sect1>
+
+  <sect1>
+    <title>Pages</title>
+
+    <para>The address space of even a 32 bit processor is quite large,
+    and if the operating system is to keep track of it all it needs to
+    divide it into more managable parts.</para>
+
+    <para>To this end, the operating system divides the address space
+    into <emphasis>pages</emphasis>.  Pages can be many different
+    sizes, generally they are around 4KB, but this is not a hard and
+    fast rule and they can be much larger.</para>
+
+    <para>The page is the smallest unit of memory that the operating
+    system and hardware can deal with.  Pages point to areas of
+    physical memory where the data in the page is stored.</para>
+
+    <para>Each page has a number of attributes set by the operating
+    system.  Generally, these include read, write and execute
+    permissions for the current page. XXX - don't like this bit</para>
+
+    <para>The page is simply a pointer to an area of memory (of the
+    same size as the page) called a <emphasis>physical frame
+    number</emphasis>.  This address is the actual physical address
+    that is passed to the memory chips to store and retrieve
+    data.</para>
+
+    <para>Now we can see how the swap memory is implemented.  If
+      instead of pointing to an area of system memory the page
+      attributes are changed to indicate it exists on disk, the page
+      can then be defined as pointing to an area on disk.</para>
+
+    <figure>
+      <title>Virtual memory pages</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="wk5/figures/page.eps" format="EPS">
+	</imageobject>
+	<imageobject>
+	  <imagedata fileref="wk5/figures/page.png" format="PNG">
+	</imageobject>
+	<textobject>
+	  <phrase>Pages point to physical memory</phrase>
+	</textobject>
+      </mediaobject>
+    </figure>
+  
+  </sect1>
+
+
+  <sect1>
+    <title>Virtual Adresses</title>
+
+    <para>When user programs access memory, they do so using
+    <emphasis>virtual addresses</emphasis>.  These addresses are
+    translated by the operating system (with a little help from the
+    processor) into the physical addresses which the hardware
+    use.</para>
+
+    <para>The virtual address consists of two parts; an index to a
+    page in a page table and an offset.</para>
+
+    <sect2>
+      <title>Page Tables</title>
+
+      <para>In it's simplest form, a page table simply provides a list
+      of virtual addresses and their corresponding physical page
+      frame.  To find the physical address of a virtual address, you
+      simply look up the virtual address in the table which then
+      points to the physical frame.
+      </para>
+
+      <para>With a 32 bit address space and 4K pages there will be
+      1048576 pages in the page table.  Assuming each entry in the
+      page table takes up 32 bits (or 4 bytes) we have 1048576 * 4 ==
+      4194304 bytes == 4MB of page table data to map the entire
+      address space. </para>
+
+      <para>Page tables can have many different structures and are
+      generally highly optimised, as the process of finding a page in
+      the page table can be a lenghtly process.</para>
+
+    </sect2>
+
+    <sect2>
+      <title>Offset</title>
+
+      <para>The last bits of the virtual address are called the
+      <emphasis>offset</emphasis> which is the location within the
+      physical page of the address.  Obviously you need enough bits
+      here to be able to offset into the entire page, so for a 4K page
+      you could have 4K == (4 * 1024) == 4096 ==
+      2<superscript>12</superscript> == 12 bits.</para>
+
+    </sect2>
+
+
+    <sect2>
+      <title>Virtual Address Translation</title>
+
+      <figure>
+	<title>Virtual Address Translation</title>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="wk5/figures/virtaddress.eps" format="EPS">
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="wk5/figures/virtaddress.png" format="PNG">
+	  </imageobject>
+	  <textobject>
+	    <phrase>Converting a virtual address to a physical address</phrase>
+	  </textobject>
+	</mediaobject>
+      </figure>
+
+
+    </sect2>
+
+  </sect1>
+
 </chapter>
 
 <!--
