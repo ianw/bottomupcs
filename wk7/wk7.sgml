@@ -1,5 +1,4 @@
 <chapter id="wk7">
-  
 
   <title>ELF</title>
 
@@ -12,28 +11,89 @@
     its life in memory, but spends most of its life as a file on a
     disk.</para>
 
-    <para>This file needs to be in a specific format that the
-    operating system can identify and load into memory.  This
-    <emphasis>executable file format</emphasis> is specific to the
-    operating system.</para>
+    <para>The executable is created by the compiler from the source
+    code.  This file consequently needs to be in a specific format
+    well defined enough that the compiler can create it and the
+    operating system can identify it and load into memory.  This
+    <emphasis>executable file format</emphasis> can be specific to the
+    operating system, as we would not normally expect that a program
+    compiled for one system will execute on another (for example, you
+    don't expect your Windows programs to run on Linux, or you Linux
+    programs to run on OS X).</para>
+
+    <sect2>
+      <title>Libraries</title>
+
+      <para>Developers soon tired of having to write everything
+      themselves from scratch, so one of the first inventions of
+      computer science was <emphasis>libraries</emphasis>.</para>
+
+      <para>A library is simply a collection of functions which you
+      can call from your program.  Obviously a library has many
+      advantages, not least of which is that you can save much time by
+      reusing work someone else has already done and generally be more
+      confident that it has fewer bugs (since probably many other
+      people use the libraries too, and you benefit from having them
+      finding and fixing bugs).  A library is exactly like an
+      executable, except instead of running directly the library
+      functions are invoked with parameters from your
+      executable.</para>
+
+      <para>When a library is linked right in to your executable, it's
+      called a <emphasis>static</emphasis> library.  This has two main
+      disadvantages; firstly if the library code is updated (to fix a
+      bug, say) you have to recompile your program into a new
+      exectuable and secondly every program in the system that uses
+      that library contains a copy in it's executable, which is very
+      inefficient (and a pain if you find a bug and have to recompile,
+      as per point one).</para>
+
+      <para>We know that for the operating system code is considered
+      read only, and separate from data.  It seems logical then that
+      if programs can not modify code and have large amounts of common
+      code, instead of replicating it for every executable it should
+      be shared between many executables.</para>
+
+      <para>With virtual memory this can be easily done.  The physical
+      pages of memory the library code is loaded into can be easily
+      referenced by any number of virtual pages in any number of
+      address spaces.  So while you only have one physical copy of the
+      library code in system memory, every process can have access to
+      that library code at any virtual address it likes.</para>
+
+      <para>Thus people quickly came up with the idea of a
+      <emphasis>shared library</emphasis> which, as the name suggests,
+      is shared by multiple exectuables.  Each exectuable contains a
+      reference essentially saying "I need library foo".  When the
+      program is loaded, it is up to the system to either check if
+      some other program has already loaded the code for library foo
+      into memory, and thus share it by mapping pages into the
+      exeutable for that physical memory, or otherwise load the
+      library into memory for the executable.</para>
+
+      <para></para>
+
+    </sect2>
 
   </sect1>
 
   <sect1>
     <title>Representing executable files</title>
 
-    <para>Each operating system could choose its own arbitrary format
-    for its on disk representation of executables, as due to the
-    nature of compiled binaries they are generally not portable
-    between systems.  However, the defacto standard for executable
-    representation is <computeroutput>Executable and Linker
-    Format</computeroutput>, or ELF for short.</para>
+    <para>Previously many systems have created their own
+    representation of compiled programs despite the obvious
+    disadvantages, but in recent times one particular format has
+    become the defacto standard for executable representation for
+    modern UNIX type systems.  It is called the
+    <computeroutput>Executable and Linker Format</computeroutput>, or
+    ELF for short.</para>
 
-    <para>ELF is an extremely flexible format that can represent a
-    kernel binary just as easily as a normal executable or a system
-    library.  This means that developers who understand the ELF file
-    format can translate their skills to most modern UNIX
-    systems.</para>
+    <para>ELF is an extremely flexible format for representing binary
+    code in a system.  By following the ELF standard you can represent
+    a kernel binary just as easily as a normal executable or a system
+    library.  The same tools can be used to inspect and operate on all
+    ELF files amd developers who understand the ELF file format can
+    translate their skills to most modern UNIX systems.</para>
 
   </sect1>
 
@@ -41,10 +101,11 @@
     <title>A general overview</title>
 
     <para>The basic principle of an ELF file is straight forward to
-    understand.  The file is divided up into separate components, each
-    with a small header describing each of those components (note we
-    have been careful not to use the words "sections" or "segments"
-    here as they have special meanings when talking about ELF).</para>
+    understand.  The file is divided up into separate compartments,
+    each with a small header describing each of those compartments
+    (note we have been careful not to use the words "sections" or
+    "segments" here as they have special meanings when talking about
+    ELF, which we introduce later).</para>
 
     <figure>
       <title>ELF Overview</title>
@@ -63,15 +124,26 @@
 
     <para>Overall, the file has a <emphasis>file header</emphasis>
     which describes the file in general and then has pointers to each
-    of the individual components that make up the file.  This header
+    of the individual compartments that make up the file.  This header
     is in a fixed, specific format that is described in the
     appropriate standards document.</para>
 
-    <para>Each of the individual components has another header that
-    holds data pertinent to the type of componenet it is and the
-    length of data it holds.  Note the file format never cares about
-    the actual data inside the component, the only important thing is
-    what that data represents.</para>
+    <para>Each of the individual compartments has another header that
+    holds data pertinent to the type of compartment it is and the
+    length of data it holds.  Note the file format does not have to
+    worry about the actual data inside the component, the only
+    important thing is what that data represents.</para>
+
+    <para>There are number of standard compartment types required to
+    create a working executable, which are documented in the standard.
+    But what makes the format so flexible is that there are no
+    restrictions about how many compartments you can have, or what
+    must be in them.  As long as you satisfy the requirements to
+    create working executables you are free to include extra
+    compartments as you require.  This means ELF is flexible enough to
+    create binary representations for any architecture in any number
+    of situations (such as a kernel binary or a shared
+    library).</para>
 
   </sect1>
 
