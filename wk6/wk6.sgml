@@ -340,10 +340,266 @@
 
   </sect1>
 
-
   <sect1>
     <title>A practical example</title>
-    <para></para>
+
+    <para>We can walk through the steps taken to build a simple
+    application step by step.</para>
+
+    <para>Note that when you type <computeroutput>gcc</computeroutput>
+    that actually runs a driver program that hides most of the steps
+    from you.  Under normal circumstances this is exactly what you
+    want, because the exact commands and options to get a real life
+    working executable on a real system can be quite complicated and
+    architecture specific.</para>
+    
+    <para>We will show the compliation process with the two following
+    examples.  Both are C source files, one defined the
+    <computeroutput>main()</computeroutput> function for the inital
+    program entry point, and another declares a helper type function.
+    There is one global variable too, just for illustration.</para>
+
+    <example id="c-hello">
+      <title>Hello World</title>
+      <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="wk7/code/hello.c" format="linespecific">
+	  </imageobject>
+	</inlinemediaobject></programlisting>
+    </example>    
+
+    <example>
+      <title>Function Example</title>
+      <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="wk7/code/function.c" format="linespecific">
+	  </imageobject>
+	</inlinemediaobject></programlisting>
+    </example>
+
+    <sect2>
+      <title>Compiling</title>
+
+      <para>All compilers have an option to only execute the first
+      step of compilation.  Usually this is something like
+      <computeroutput>-S</computeroutput> and the output will
+      generally be put into a file with the same name as the input
+      file but with a <computeroutput>.s</computeroutput>
+      extension.</para>
+
+      <para>Thus we can show the first step with <computeroutput>gcc
+      -S</computeroutput> as illustrated in the example below.</para>
+
+      <example>
+	<title>Compilation Example</title>
+	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk7/code/compiled.txt" format="linespecific">
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+
+      <para>The assembly is a little to complex to fully describe, but
+      you should be able to see where i is defined as a
+      <computeroutput>data4</computeroutput> (i.e. 4 bytes or 32 bits,
+      the size of an <computeroutput>int</computeroutput>), where
+      <computeroutput>function</computeroutput> is defined
+      (<computeroutput>function:</computeroutput>) and a call to
+      <computeroutput>printf()</computeroutput>.</para>
+
+      <para>We now have two assembly files ready to be assembled into
+      machine code!</para>
+
+    </sect2>
+
+    <sect2>
+      <title>Assembly</title>
+
+      <para>Assembly is a fairly straight forward process.  The
+      assembler is usually called <computeroutput>as</computeroutput>
+      and takes arguments in a similar fasion to
+      <computeroutput>gcc</computeroutput></para>
+
+      <example>
+	<title>Assembly Example</title>
+	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk7/code/assembly.txt" format="linespecific">
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+
+      <para>After assembling we have <emphasis>object</emphasis> code,
+      which is ready to be linked together into the final executable.
+      You can usually skip having to use the assembler by hand by
+      calling the compiler with <computeroutput>-c</computeroutput>,
+      which will directly convert the input file to object code,
+      putting it in a file with the same prefix but
+      <computeroutput>.o</computeroutput> as an extension.</para>
+
+      <para>We can't inspect the object code directly, as it is in a
+      binary format (in future weeks we will learn about this binary
+      format).  However we can use some tools to inspect the object
+      files, for example <computeroutput>readelf
+      --symbols</computeroutput> will show us symbols in the object
+      file.</para>
+
+      <example>
+	<title>Readelf Example</title>
+	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk7/code/readelf.txt" format="linespecific">
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+
+      <para>Although the output is quite complicated (again!) you
+      should be able to understand much of it.  For example</para>
+
+      <itemizedlist>
+	<listitem>
+	  <para>In the output of
+	  <computeroutput>hello.o</computeroutput> have a look at the
+	  symbol with name <computeroutput>i</computeroutput>.  Notice
+	  how it says it is <computeroutput>LOCAL</computeroutput>?
+	  That is because we declared it
+	  <computeroutput>static</computeroutput> and as such it has
+	  been flagged as being local to this object file.</para>
+	</listitem>
+
+	<listitem>
+	  <para>In the same output, notice that the
+	  <computeroutput>global</computeroutput> variable is defined
+	  as a <computeroutput>GLOBAL</computeroutput>, meaning that
+	  it is visible outside this file.  Similarly the
+	  <computeroutput>main()</computeroutput> function is
+	  externally visable.
+	  </para>
+	</listitem>
+
+	<listitem>
+	  <para>Notice that the
+	  <computeroutput>function</computeroutput> symbol (for the
+	  call to <computeroutput>function()</computeroutput> is left
+	  has <computeroutput>UND</computeroutput> or
+	  <emphasis>undefined</emphasis>.  This means that it has been
+	  left for the linker to find the address of the
+	  function.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Have a look at the symbols in the
+	  <computeroutput>function.c</computeroutput> file and how
+	  they fit into the output.</para>
+	</listitem>
+
+      </itemizedlist>
+
+    </sect2>
+
+    <sect2>
+      <title>Linking</title>
+
+      <para>Actually invoking the linker, called
+      <computeroutput>ld</computeroutput>, is a very complicated
+      process on a real system (are you sick of hearing this yet?).
+      This is why we leave the linking process up to
+      <computeroutput>gcc</computeroutput>.</para>
+
+      <para>But of course we can spy on what
+      <computeroutput>gcc</computeroutput> is doing under the hood
+      with the <computeroutput>-v</computeroutput> (verbose)
+      flag.</para>
+
+
+      <example>
+	<title>Linking Example</title>
+	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk7/code/linking.txt" format="linespecific">
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+
+      <para>The first thing you notice is that a program called
+      <computeroutput>collect2</computeroutput> is being called.  This
+      is a simple wrapper around <computeroutput>ld</computeroutput>.
+      The next thing you notice is object files starting with
+      <computeroutput>crt</computeroutput> being specified to the
+      linker.  These functions are provided by the system to start up
+      a program.  In actuality, the
+      <computeroutput>main()</computeroutput> function is not the
+      first one called when a program runs, but a function called
+      <computeroutput>_start</computeroutput> which is in the
+      <computeroutput>crt</computeroutput> object files.  This
+      function does some generic setup which application programmers
+      do not need to worry about.</para>
+
+      <para>Next you can see that we link in our two object files,
+      <computeroutput>hello.o</computeroutput> and
+      <computeroutput>function.o</computeroutput>.  After that we
+      specify some extra libraries with
+      <computeroutput>-l</computeroutput> flags.  These libraries are
+      system specific and required for every program.  The major one
+      is <computeroutput>-lc</computeroutput> which brings in the C
+      library, which has all common functions like
+      <computeroutput>printf()</computeroutput>.</para>
+
+      <para>After that we again link in some more system object files
+      which do some cleanup after programs exit.</para>
+
+      <para>Although the details are complicated, the concept is
+      straight forward.  All the object files will be linked together
+      into a single executable file, ready to run!</para>
+
+    </sect2>
+
+    <sect2>
+      <title>The Executable</title>
+
+      <para>We will go into more details about the executable in the
+      short future, but we can do some inspection in a similar fashion
+      to the object files to see what has happened.</para>
+
+      <example>
+	<title>Executable Example</title>
+	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk7/code/executable.txt" format="linespecific">
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+
+      <para>Some things to note</para>
+
+      <itemizedlist>
+	<listitem>
+	  <para>Note I built the executable the "easy" way!</para>
+	</listitem>
+
+	<listitem>
+	  <para>See there are two symbol tables; the
+	  <computeroutput>dynsym</computeroutput> and
+	  <computeroutput>symtab</computeroutput> ones.  We explain
+	  how the <computeroutput>dynsym</computeroutput> symbols work
+	  soon, but notice that some of them are
+	  <emphasis>versioned</emphasis> with an
+	  <computeroutput>@</computeroutput> symbol.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Note the many symbols that have been included from the
+	  extra object files.  Many of them start with
+	  <computeroutput>__</computeroutput> to avoid clashing with
+	  any names the programmer might choose.  Read through and
+	  pick out the symbols we mentioned before from the object
+	  files and see if they have changed in any way.</para>
+	</listitem>
+
+      </itemizedlist>
+
+    </sect2>
+
   </sect1>
 
 
