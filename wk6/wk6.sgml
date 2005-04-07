@@ -210,15 +210,133 @@
   <sect1>
     <title>Linker</title>
 
-    <para>As discussed, object code is not executable, as it is simply
-    a representation of a particular input source code file.  To
-    create an executable, multiple object code outputs need to be
-    <emphasis>linked</emphasis> together to make a cohesive
-    program.</para>
+    <para>Often in a large program, you will separate out code into
+      multiple files to keep related functions together.  Each of
+      these files can be compiled into object code: but your final
+      goal is to create a single executable! There needs to be some
+      way combining each of these object files into a single
+      executable.  We call this linking.</para>
 
-    <para>Even if your program does fit in one file, it still needs to
-    be linked against certain system libraries to operate
-    correctly.</para>
+    <para>Note that even if your program does fit in one file it still
+    needs to be linked against certain system libraries to operate
+    correctly.  For example, the
+    <computeroutput>printf</computeroutput> call is kept in a library
+    which must be combined with your executable to work.  So although
+    you do not explicilty have to worry about linking in this case,
+    there is most certainly still a linking process happening to
+    create your executable.</para>
+
+    <para>In the following sections we explain some terms essential to
+    understanding linking.</para>
+
+    <sect2>
+      <title>Symbols</title>
+
+      <sect3>
+      <title>Symbols</title>
+
+      <para>Variables and functions all have names in source code
+      which we refer to them by.  One way of thinking of a statement
+      declaring a variable <computeroutput>int a</computeroutput> is
+      that you are telling the compiler "set aside some memory of
+      <computeroutput>sizeof(int)</computeroutput> and from now on
+      when I use <computeroutput>a</computeroutput> it will refer to
+      this allocated memory.  Similarly a function says "store this
+      code in memory, and when I call
+      <computeroutput>function()</computeroutput> jump to and execute
+      this code".
+      </para>
+
+      <para>In this case, we call <computeroutput>a</computeroutput>
+      and <computeroutput>function</computeroutput>
+      <emphasis>symbols</emphasis> since they are a symbolic
+      representation of an area of memory.</para>
+
+      <para>Symbols help humans to understand programming.  You could
+      say that the primary job of the compilation process is to remove
+      symbols -- the processor doesn't know what
+      <computeroutput>a</computeroutput> represents, all it knows is
+      that it has some data at a particular memory address.  The
+      compilation process needs to convert <computeroutput>a +=
+      2</computeroutput> to something like "increment the value in
+      memory at <computeroutput>0xABCDE</computeroutput> by 2.</para>
+    </sect3>
+
+      <sect3>
+	<title>Symbol Visibility</title>
+
+	<para>In some C programs, you may have seen the terms
+      <computeroutput>static</computeroutput> and
+      <computeroutput>extern</computeroutput> used with variables.
+      These modifiers can effect what we call the visibility of
+      symbols.</para>
+
+	<para>Imagine you have split up your program in two files, but
+      some functions need to share a variable.  You only want one
+      <emphasis>definition</emphasis> (i.e. memory location) of the
+      shared variable (otherwise it wouldn't be shared!), but both
+      files need to reference it.</para>
+	
+	<para>To enable this, we declare the variable in one file, and
+      then in the other file declare a variable of the same name but
+      with the prefix <computeroutput>extern</computeroutput>.
+      <computeroutput>extern</computeroutput> stands for
+      <emphasis>external</emphasis> and to a human means that this
+      variable is declared somewhere else.</para>
+	
+	<para>What <computeroutput>extern</computeroutput> says to a
+      compiler is that it should not allocate any space in memory for
+      this variable, and leave this symbol in the object code where it
+      will be fixed up later.  The compiler can not possibly know
+      where the symbol is actually defined but the
+      <emphasis>linker</emphasis>does, since it is it's job to look at
+      all object files together and combine them into a single
+      executable.  So the linker will see the symbol left over in the
+      second file, and say "I've seen that symbol before in file 1,
+      and I know that it refers to memory location
+      <computeroutput>0x12345</computeroutput>".  Thus it can modify
+      the symbol value to be the memory value of the variable in the
+      first file.</para>
+	
+	<para><computeroutput>static</computeroutput> is almost the
+      opposite of <computeroutput>extern</computeroutput>.  It places
+      restrictions on the visiblity of the symbol it modifies.  If you
+      declare a variable with <computeroutput>static</computeroutput>
+      that says to the compiler "don't leave any symbols for this in
+      the object code".  This means that when the linker is linking
+      together object files it will never see that symbol (and so
+      can't make that "I've seen this before!" connection).
+      <computeroutput>static</computeroutput> is good for separation
+      and reducing conflicts -- by declaring a variable
+      <computeroutput>static</computeroutput> you can reuse the
+      variable name in other files and not end up with symbol clashes.
+      We say we are <emphasis>restricting the visiblity</emphasis> of
+      the symbol, because we are not allowing the linker to see it.
+      Contrast this with a more visible symbol (one not declared with
+      <computeroutput>static</computeroutput>) which can be seen by
+      the linker.</para>
+
+      </sect3>
+    </sect2>
+
+    <sect2>
+      <title>The linking process</title>
+
+      <para>Thus the linking process is really two steps; combining
+      all object files into one exectuable file and then going through
+      each object file to <emphasis>resolve</emphasis> any symbols.
+      This usually requires two passes; one to read all the symbol
+      definitions and take note of unresolved symbols and a second to
+      fix up all those unresolved symbols to the right place.</para>
+
+      <para>The final executable should end up with no unresolved
+      symbols; the linker will fail with an error if there are
+      any.<footnote> <para>We call this <emphasis>static
+      linking</emphasis>.  Dynamic linking is a similar concept done
+      at executable runtime, and is described a little later
+      on.</para></footnote></para>
+
+    </sect2>
 
   </sect1>
 
