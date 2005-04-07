@@ -145,6 +145,10 @@
     of situations (such as a kernel binary or a shared
     library).</para>
 
+    <para>Every modern Linux system uses a standardised format called
+    the <emphasis>Executable and Linking Format</emphasis> or ELF for
+    short.</para>
+
   </sect1>
 
 </chapter>
