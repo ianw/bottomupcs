@@ -1,4 +1,0 @@
-ianw@lime:~/programs/csbu/wk7/code$ as -o function.o function.s
-ianw@lime:~/programs/csbu/wk7/code$ as -o hello.o hello.s
-ianw@lime:~/programs/csbu/wk7/code$ ls
-function.c  function.o  function.s  hello.c  hello.o  hello.s
