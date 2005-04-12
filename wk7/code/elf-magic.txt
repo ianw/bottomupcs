@@ -1,0 +1,4 @@
+ianw@mingus:~$ hexdump -C /bin/ls | more
+00000000  7f 45 4c 46 01 02 01 00  00 00 00 00 00 00 00 00  |.ELF............|
+
+... (rest of the program follows) ...
