@@ -1,0 +1,16 @@
+ /usr/lib/gcc-lib/ia64-linux/3.3.5/collect2 -static 
+/usr/lib/gcc-lib/ia64-linux/3.3.5/../../../crt1.o 
+/usr/lib/gcc-lib/ia64-linux/3.3.5/../../../crti.o 
+/usr/lib/gcc-lib/ia64-linux/3.3.5/crtbegin.o 
+-L/usr/lib/gcc-lib/ia64-linux/3.3.5 
+-L/usr/lib/gcc-lib/ia64-linux/3.3.5/../../.. 
+hello.o 
+function.o 
+--start-group 
+-lgcc 
+-lgcc_eh 
+-lunwind 
+-lc 
+--end-group 
+/usr/lib/gcc-lib/ia64-linux/3.3.5/crtend.o 
+/usr/lib/gcc-lib/ia64-linux/3.3.5/../../../crtn.o

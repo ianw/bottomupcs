@@ -363,7 +363,7 @@
       <title>Hello World</title>
       <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="wk7/code/hello.c" format="linespecific">
+	    <imagedata fileref="wk6/code/hello.c" format="linespecific">
 	  </imageobject>
 	</inlinemediaobject></programlisting>
     </example>    
@@ -372,7 +372,7 @@
       <title>Function Example</title>
       <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="wk7/code/function.c" format="linespecific">
+	    <imagedata fileref="wk6/code/function.c" format="linespecific">
 	  </imageobject>
 	</inlinemediaobject></programlisting>
     </example>
@@ -394,7 +394,7 @@
 	<title>Compilation Example</title>
 	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk7/code/compiled.txt" format="linespecific">
+	      <imagedata fileref="wk6/code/compiled.txt" format="linespecific">
 	    </imageobject>
 	  </inlinemediaobject></programlisting>
       </example>
@@ -424,7 +424,7 @@
 	<title>Assembly Example</title>
 	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk7/code/assembly.txt" format="linespecific">
+	      <imagedata fileref="wk6/code/assembly.txt" format="linespecific">
 	    </imageobject>
 	  </inlinemediaobject></programlisting>
       </example>
@@ -448,7 +448,7 @@
 	<title>Readelf Example</title>
 	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk7/code/readelf.txt" format="linespecific">
+	      <imagedata fileref="wk6/code/readelf.txt" format="linespecific">
 	    </imageobject>
 	  </inlinemediaobject></programlisting>
       </example>
@@ -516,7 +516,7 @@
 	<title>Linking Example</title>
 	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk7/code/linking.txt" format="linespecific">
+	      <imagedata fileref="wk6/code/linking.txt" format="linespecific">
 	    </imageobject>
 	  </inlinemediaobject></programlisting>
       </example>
@@ -565,7 +565,7 @@
 	<title>Executable Example</title>
 	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk7/code/executable.txt" format="linespecific">
+	      <imagedata fileref="wk6/code/executable.txt" format="linespecific">
 	    </imageobject>
 	  </inlinemediaobject></programlisting>
       </example>
