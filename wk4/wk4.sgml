@@ -71,6 +71,192 @@
       if a process tries to write to a read only area and return an
       error.</para>
 
+      <sect3>
+	<title>Code and Data</title>
+
+	<para>A process can be further divided into
+	<emphasis>code</emphasis> and
+	<computeroutput>data</computeroutput> sections.  Program code
+	and data should be kept separately since they require
+	different permissions from the operating system and separation
+	facilitates sharing of code (as you see later).  The operating
+	system needs to give program code permission to be read and
+	executed, but generally not written to.  On the other hand
+	data (variables) require read and write permissions but should
+	not be exectuable<footnote> <para>Not all architectures
+	support this, however.  This has lead to a wide range of
+	security problems on many architectures.</para></footnote>.
+	</para>
+      </sect3>
+
+      <sect3>
+	<title>The Stack</title>
+
+	<para>One other very important part of a process is an area of
+	memory called <emphasis>the stack</emphasis>.  This can be
+	considered part of the data section of a process, and is
+	intiamtely involved in the execution of any program.</para>
+
+	<para> A stack is generic data structure that works exactly
+	like a stack of plates; you can <emphasis>push</emphasis> an
+	item (put a plate on top of a stack of plates), which then
+	becomes the top item, or you can <emphasis>pop</emphasis> an
+	item (take a plate off, exposing the previous plate).</para>
+
+	<para>Stacks are fundamental to function calls.  Each time a
+	function is called it gets a new <computeroutput>stack
+	frame</computeroutput>.  This is an area of memory which
+	usually contains, at a minimum, the address to return to when
+	complete, the arguments and space for local variables.</para>
+
+	<para>By convention, stacks usually <emphasis>grow
+	down</emphasis>.  This means that the stack starts at a high
+	address in memory and progressivly gets lower.</para>
+
+	<figure>
+	  <title>The Stack</title>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk4/figures/stack.eps" format="EPS">
+	    </imageobject>
+	    <imageobject>
+	      <imagedata fileref="wk4/figures/stack.png" format="PNG">
+	    </imageobject>
+	    <textobject>
+	      <phrase>How the stack works with function calls.  Note
+	      that the stack grows downwards, from high addresses in
+	      memory to low addresses.</phrase>
+	    </textobject>
+	  </mediaobject>
+	</figure>
+
+	<para>We can see how having a stack brings about many of the
+	features of functions.</para>
+
+	<itemizedlist>
+	  <listitem>
+	    <para>Each function has its own copy of its input
+	    arguments.  This is because each function is allocated a
+	    new stack frame with its arguments in a fresh area of
+	    memory.</para>
+	  </listitem>
+
+	  <listitem>
+	    <para>This is the reason why a variable defined inside a
+	    function can not be seen by other functions.  Global
+	    variables (which can be seen by any function) are
+	    kept in a separate area of data memory.</para>
+	  </listitem>
+
+	  <listitem>
+  	    <para>This facilitates <emphasis>recursive</emphasis>
+	    calls.  This means a function is free to call its self
+	    again, becuase a new stack frame will be setup
+	    regardless.</para>
+	  </listitem>
+
+	  <listitem>
+	    <para>Each frame contains the address to return to.  C
+	    only allows a single value to be returned from a function,
+	    so by convention this value is returned to the calling
+	    function in a specified register, rather than on the
+	    stack.</para>
+	  </listitem>
+
+	  <listitem>
+	    <para>Because each frame has a reference to the one before
+	    it, a debugger can "walk" backwards, following the
+	    pointers up the stack.  From this it can produce a
+	    <emphasis>stack trace</emphasis> which shows you all
+	    functions that were called leading into this function.
+	    This is extremly useful for debugging.</para>
+
+	    <para>You can see how the way functions works fits exactly
+	    into the nature of a stack.  Any function can call any
+	    other function, which then becomes the upmost function
+	    (put on top of the stack).  Eventually that function will
+	    return to the function that called it (takes itself off
+	    the stack).</para>
+	  </listitem>
+
+	  <listitem>
+	    <para>Stacks do make calling functions slower, because
+	    values must be moved out of registers and into memory.
+	    Some architectures allow arguments to be passed in
+	    registers directly; however to keep the semantics that
+	    each function gets a unique copy of each argument the
+	    registers must <emphasis>rotate</emphasis>.</para>
+	  </listitem>
+
+	  <listitem>
+	    <para>You may have heard of the term a <emphasis>stack
+	    overflow</emphasis>.  This is a common way of hacking a
+	    system by passing bogus values.  If you as a programmer
+	    accept arbitrary input into a stack variable (say, reading
+	    from the keyboard or over the network) you need to
+	    explicitly say how big that data is going to be.</para>
+
+	    <para>Allowing any amount of data unchecked will simply
+	    overwrite memory.  Generally this leads to a crash, but
+	    some people realised that if they overwrote just enough
+	    memory to place a specific value in the return address
+	    part of the stack frame, when the function completed
+	    rather than returning to the correct place (where it was
+	    called from) they could make it return into the data they
+	    just sent.  If that data contains binary executable code
+	    that hacks the system (e.g. starts a terminal for the user
+	    with root privledges) then your computer has been
+	    compromised.</para>
+
+	    <para>This happens because the stack grows downwards, but
+	    data is read in "upwards" (i.e. from lower address to
+	    higher addresses).</para>
+
+	    <para>There are several ways around this; firstly as a
+	    programmer you must ensure that you always check the
+	    amount of data you are receiving into a variable.  The
+	    operating system can help to avoid this on behalf of the
+	    programmer by ensuring that the stack is marked as
+	    <emphasis>not executable</emphasis>; that is that the
+	    processor will not run any code, even if a malicious user
+	    tries to pass some into your program.  Modern
+	    architectures and operating systems support this
+	    functionality.</para>
+	  </listitem>
+
+	  <listitem>
+	    <para>Stacks are ultimately managed by the compiler, as it
+	    is responsible for generating the program code.  To the
+	    operating system the stack just looks like any other area
+	    of memory for the process.</para>
+	  </listitem>
+
+	  <listitem>
+	    <para>The stack is only for local variables whose size you
+	    know at compilation time.  Often you will not know the
+	    exact amount of memory you need until the program is
+	    running, which is where you use the
+	    <computeroutput>malloc()</computeroutput> call.  This
+	    allocates memory (not on the stack) for each process (you
+	    might hear this referred to as <computeroutput>the
+	    heap</computeroutput>, which is another form of data
+	    structure).</para>
+	  </listitem>
+
+	  <listitem>
+	    <para>The lowest possible address of the stack as it grows
+	    downwards is called the
+	    <computeroutput>brk</computeroutput> and can be
+	    manipulated with the
+	    <computeroutput>brk()</computeroutput> call.  Normal
+	    programs should not need to modify this value; if you need
+	    memory not in a local variable you should use the
+	    <computeroutput>malloc()</computeroutput> calls.</para>
+	  </listitem>
+	</itemizedlist>
+
+      </sect3>
+
     </sect2>
 
     <sect2>
