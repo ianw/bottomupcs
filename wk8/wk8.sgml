@@ -83,6 +83,208 @@
       exeutable for that physical memory, or otherwise load the
       library into memory for the executable.</para>
 
+    <para>This process is called <emphasis>dynamic linking</emphasis>
+    becuase it does part of the linking process "on the fly" as
+    programs are executed in the system.</para>
+
+    <sect2>
+      <title>Dynamic Library Details</title>
+
+      <para>Libraries are very much like a program that never gets
+      started.  They have code and data sections (functions and
+      variables) just like every executable; but no where to start
+      running.  They just provide a library of functions for
+      developers to call.e</para>
+
+      <para>Thus ELF can represent a dynamic library just as it does
+      an exectuable.  There are some fundamental differences, but all
+      shared libraries are just ELF objects like any other
+      executable.</para>
+
+      <para>The ELF header has two mutually exclusive flags,
+      <computeroutput>ET_EXEC</computeroutput> and
+      <computeroutput>ET_DYN</computeroutput> to mark an ELF file as
+      either an executable or a shared object file.</para>
+
+    </sect2>
+
+    <sect2>
+      <title>Including libraries in an exectuable</title>
+
+      <sect3>
+	<title>Compilation</title>
+
+	<para>When you compile your program that uses a dynamic
+	library, object files are left with references to the library
+	functions just as for any other external referece.</para>
+
+	<para>You need to include the <emphasis>header</emphasis> for
+	the library so that the compiler knows the specific types of
+	the functions you are calling.  Note the compiler only needs
+	to know the types associated with a function (such as, it
+	takes an <computeroutput>int</computeroutput> and returns a
+	<computeroutput>char *</computeroutput>) so that it can
+	correctly allocate space for the function call.<footnote>
+	<para>This has not always been the case with the C standard.
+	Previously, compilers would assume that any function it did
+	not know about returned an
+	<computeroutput>int</computeroutput>.  On a 32 bit system, the
+	size of a pointer is the same size as an
+	<computeroutput>int</computeroutput>, so there was no problem.
+	However, with a 64 bit system, the size of a pointer is
+	generally twice the size of an
+	<computeroutput>int</computeroutput> so if the function
+	actually returns a pointer, its value will be destroyed.  This
+	is clearly not acceptable, as the pointer will thus not point
+	to valid memory.  The C99 standard has changed such that you
+	are required to specify the types of included
+	functions.</para></footnote></para>
+
+      </sect3>
+
+      <sect3>
+	<title>Linking</title>
+
+	<para>Even though the <emphasis>dynamic linker</emphasis> does
+	a lot of the work for shared libraries, the traditional linker
+	still has a role to play in creating the exectuable.</para>
+
+	<para>The traditional linker needs to leave a pointer in the
+	executable so that the dynamic linker knows what library will
+	satisfy the dependencies at runtime.</para>
+
+	<para>The <computeroutput>dynamic</computeroutput> section of
+	the executable requires a
+	<computeroutput>NEEDED</computeroutput> entry for each shared
+	library that the executable depends on.</para>
+
+	<para>Again, we can inspect these fields with the
+	<computeroutput>readelf</computeroutput> program.  Below we
+	have a look at a very standard binary,
+	<computeroutput>/bin/ls</computeroutput></para>
+
+	<example>
+	  <title>Specifying Dynamic Libraries</title>
+	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk8/code/dynamic-needed.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+
+	<para>You can see that it specifies three libraries.  The most
+	common library shared by most, if not all, programs on the
+	system is <computeroutput>libc</computeroutput>.  There are
+	also some other libraries that the program needs to run
+	correctly.</para>
+
+	<para>Reading the ELF file directly is sometimes useful, but
+	the usual way to inspect a dynamically linked executable is
+	via <computeroutput>ldd</computeroutput>.
+	<computeroutput>ldd</computeroutput> "walks" the dependencies
+	of libraries for you; that is if a library depends on another
+	library, it will show it to you.</para>
+
+	<example>
+	  <title>Looking at dynamic libraries</title>
+	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk8/code/ldd.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+
+	<para>We can see above that
+	<computeroutput>libpthread</computeroutput> has been required
+	from somewhere.  If we do a little digging, we can see that
+	the requirement comes from
+	<computeroutput>librt</computeroutput>.</para>
+
+      </sect3>
+
+    </sect2>
+
+  </sect1>
+
+  <sect1>
+    <title>Position Independent Code</title>
+
+    <para>We mentioned that shared libraries look a lot like
+    exectuables in terms of common ELF structures, but there were some
+    fundamental differences.</para>
+
+    <para>The biggest, and most important, difference is called
+    <emphasis>position independent code</emphasis>, or PIC.</para>
+
+    <para>When an executable file is created, the code and data
+    segment is given a specified base address in virtual memory.  When
+    the executable is loaded and run, you can be sure that the code
+    and data will be where you expect.</para>
+
+    <para>This guarantee can be granted because each time an
+    executable is run it will be in its own process, which has its own
+    view of a fresh address space thanks to virtual memory.</para>
+
+    <para>The result of this is that the compiler knows the address of
+    all code and data so can pre-compute all accesses.</para>
+
+    <para>Shared libraries, however, have no such garuntee about a
+    base address.  This is a fundamental problem; the shared library
+    may be used by any processs that may also load any other number of
+    shared libraries.  If two shared libraries were to specify the
+    same address and one were already loaded, there could be no
+    resoultion.</para>
+
+    <para>Thus all libraries must be produced with code that can
+    execute no matter where it is put into memory (or, position
+    independent code).  Note that the data section is still a fixed
+    offset from the code section; but to actually find the address of
+    data the offset needs to be added to the load address.</para>
+
+    <para>Below we explain the mechanisms for doing this.</para>
+
+
+    <sect2>
+      <title>Relocations</title>
+
+      <para>The essential part of PIC is fixing up addresses at
+      runtime, which is the only time you can know for certain where
+      you are loaded in memory.  A relocation can simply be thought of
+      as a note that a particular address will need to be fixed at
+      load time.  Before the code is ready to run you will need to go
+      through and read all the relocations and fix the addresses it
+      refers to to point to the right place.</para>
+
+      <para>There are many types of relocation for each architecture,
+      and each types exact behaviour is documented as part of the ABI
+      for the system. </para>
+
+    </sect2>
+
+    <sect2>
+      <title>Dynamic lookup tables</title>
+
+      <sect3>
+	<title>GOT</title>
+	<para>got</para>
+      </sect3>
+
+      <sect3>
+	<title>PLT</title>
+	<para>plt</para>
+      </sect3>
+
+    </sect2>
+  </sect1>
+
+  <sect1>
+    <title>The Dyanmic Linker</title>
+
+    <para>The dynamic linker is one of the most critical parts of a
+    modern system.  </para>
+
   </sect1>
 
 </chapter>

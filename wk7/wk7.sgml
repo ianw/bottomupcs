@@ -1,6 +1,6 @@
 <chapter id="wk7">
 
-  <title>ELF</title>
+  <title>ELF and Program Execution</title>
 
   <sect1>
     <title>Review of executable files</title>
@@ -187,7 +187,7 @@
 		  <imagedata fileref="wk7/code/elf-magic.txt" format="linespecific">
 		</imageobject>
 	      </inlinemediaobject></programlisting>
-	  </example>    
+	  </example>
 
 	  <para>Note the 0x7F to start, then the ASCII encoded "ELF"
 	  string".  Have a look at the standard and see what the rest
@@ -206,10 +206,13 @@
     <title>Sections and Segments</title>
 
     <para>The ELF format specifies two "views" of an ELF file -- that
-    which is used for linking and that which is used for
-    execution.  This affords </para>
+    which is used for linking and that which is used for execution.
+    This affords significant flexability for systems designers.</para>
 
-    <para>Thus the </para>
+    <para>We talk about <emphasis>sections</emphasis> in object code
+    waiting to be linked into an executable.  One or more sections map
+    to a <emphasis>segment</emphasis> in the executable.  
+    </para>
 
   </sect1>
 

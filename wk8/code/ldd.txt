@@ -1,0 +1,14 @@
+$ ldd /bin/ls
+        librt.so.1 => /lib/tls/librt.so.1 (0x2000000000058000)
+        libacl.so.1 => /lib/libacl.so.1 (0x2000000000078000)
+        libc.so.6.1 => /lib/tls/libc.so.6.1 (0x2000000000098000)
+        libpthread.so.0 => /lib/tls/libpthread.so.0 (0x20000000002e0000)
+        /lib/ld-linux-ia64.so.2 => /lib/ld-linux-ia64.so.2 (0x2000000000000000)
+        libattr.so.1 => /lib/libattr.so.1 (0x2000000000310000)
+$ readelf --dynamic /lib/librt.so.1
+
+Dynamic segment at offset 0xd600 contains 30 entries:
+  Tag        Type                         Name/Value
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libpthread.so.0]
+ ... snip ...

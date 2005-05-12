@@ -1,0 +1,9 @@
+$ readelf --dynamic /bin/ls 
+
+Dynamic segment at offset 0x22f78 contains 27 entries:
+  Tag        Type                         Name/Value
+ 0x0000000000000001 (NEEDED)             Shared library: [librt.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libacl.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6.1]
+ 0x000000000000000c (INIT)               0x4000000000001e30
+ ... snip ...
