@@ -30,7 +30,7 @@
       called a <emphasis>static</emphasis> library.  This has two main
       disadvantages; firstly if the library code is updated (to fix a
       bug, say) you have to recompile your program into a new
-      exectuable and secondly every program in the system that uses
+      executable and secondly every program in the system that uses
       that library contains a copy in it's executable, which is very
       inefficient (and a pain if you find a bug and have to recompile,
       as per point one).</para>
@@ -42,7 +42,7 @@
     <para>You can create archive files with the
 	<command>ar</command> command (in fact, you can put any type
 	of file in an <command>ar</command> archive, but generally it
-	is only used with object files).  By convetion static library
+	is only used with object files).  By convention static library
 	file names are prefixed with
 	<computeroutput>lib</computeroutput> and have the extension
 	<computeroutput>.a</computeroutput>.  You then specify the
@@ -75,16 +75,16 @@
     
     <para>Thus people quickly came up with the idea of a
       <emphasis>shared library</emphasis> which, as the name suggests,
-      is shared by multiple exectuables.  Each exectuable contains a
+      is shared by multiple executables.  Each executable contains a
       reference essentially saying "I need library foo".  When the
       program is loaded, it is up to the system to either check if
       some other program has already loaded the code for library foo
       into memory, and thus share it by mapping pages into the
-      exeutable for that physical memory, or otherwise load the
+      executable for that physical memory, or otherwise load the
       library into memory for the executable.</para>
 
     <para>This process is called <emphasis>dynamic linking</emphasis>
-    becuase it does part of the linking process "on the fly" as
+    because it does part of the linking process "on the fly" as
     programs are executed in the system.</para>
 
     <sect2>
@@ -97,7 +97,7 @@
       developers to call.e</para>
 
       <para>Thus ELF can represent a dynamic library just as it does
-      an exectuable.  There are some fundamental differences, but all
+      an executable.  There are some fundamental differences, but all
       shared libraries are just ELF objects like any other
       executable.</para>
 
@@ -109,14 +109,14 @@
     </sect2>
 
     <sect2>
-      <title>Including libraries in an exectuable</title>
+      <title>Including libraries in an executable</title>
 
       <sect3>
 	<title>Compilation</title>
 
 	<para>When you compile your program that uses a dynamic
 	library, object files are left with references to the library
-	functions just as for any other external referece.</para>
+	functions just as for any other external reference.</para>
 
 	<para>You need to include the <emphasis>header</emphasis> for
 	the library so that the compiler knows the specific types of
@@ -147,7 +147,7 @@
 
 	<para>Even though the <emphasis>dynamic linker</emphasis> does
 	a lot of the work for shared libraries, the traditional linker
-	still has a role to play in creating the exectuable.</para>
+	still has a role to play in creating the executable.</para>
 
 	<para>The traditional linker needs to leave a pointer in the
 	executable so that the dynamic linker knows what library will
@@ -212,7 +212,7 @@
     <title>Position Independent Code</title>
 
     <para>We mentioned that shared libraries look a lot like
-    exectuables in terms of common ELF structures, but there were some
+    executables in terms of common ELF structures, but there were some
     fundamental differences.</para>
 
     <para>The biggest, and most important, difference is called
@@ -230,12 +230,12 @@
     <para>The result of this is that the compiler knows the address of
     all code and data so can pre-compute all accesses.</para>
 
-    <para>Shared libraries, however, have no such garuntee about a
+    <para>Shared libraries, however, have no such guarantee about a
     base address.  This is a fundamental problem; the shared library
-    may be used by any processs that may also load any other number of
+    may be used by any process that may also load any other number of
     shared libraries.  If two shared libraries were to specify the
     same address and one were already loaded, there could be no
-    resoultion.</para>
+    resolution.</para>
 
     <para>Thus all libraries must be produced with code that can
     execute no matter where it is put into memory (or, position
@@ -257,14 +257,135 @@
       through and read all the relocations and fix the addresses it
       refers to to point to the right place.</para>
 
+      <table>
+	<title>Relocation Example</title>
+	<tgroup cols="2">
+	  <thead>
+	    <row>
+	      <entry>Address</entry>
+	      <entry>Action</entry>
+	    </row>
+	  </thead>
+	  <tbody>
+	    <row>
+	      <entry>0x123456</entry>
+	      <entry>Address of symbol "x"</entry>
+	    </row>
+	    <row>
+	      <entry>0x564773</entry>
+	      <entry>Function X</entry>
+	    </row>
+	  </tbody>
+	</tgroup>
+      </table>
+
       <para>There are many types of relocation for each architecture,
       and each types exact behaviour is documented as part of the ABI
-      for the system. </para>
+      for the system.  The definition of a relocation is quite
+      straight forward.</para>
+
+      <example>
+	<title>Relocation as defined by ELF</title>
+	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk8/code/elfrelocs.txt" format="linespecific">
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+
+      <para>The <computeroutput>r_offset</computeroutput> field refers
+      to the offset in the file that needs to be fixed up.  The
+      <computeroutput>r_info</computeroutput> field specifies the type
+      of relocation which describes what exactly must be done to fix
+      this code up.  The simplest relocation usually defined for an
+      architecture is simply the value of the symbol.  In this case
+      you simply substitute the address of the symbol at the location
+      specified, and the relocation has been "fixed-up".</para>
+
+      <para>The two types, one with an addend and one without specify
+      different ways for the relocation to operate.  An addend is
+      simply something that should be added to the fixed up address to
+      find the correct address.  For example, if the relocation is for
+      the symbol <computeroutput>i</computeroutput> because the
+      original code is doing something like
+      <computeroutput>i[8]</computeroutput> the addend will be set to
+      8.  This means "find the address of
+      <computeroutput>i</computeroutput>, and go 8 past it".</para>
+
+      <para>That addend value needs to be stored somewhere.  The two
+      solutions are covered by the two forms.  In the
+      <computeroutput>REL</computeroutput> form the addend is actually
+      store in the program code in the place where the fixed up
+      address should be.  This means that to fix up the address
+      properly, you need to first read the memory you are about to fix
+      up to get any addend, store that, find the "real" address, add
+      the addend to it and then write it back (over the addend).  The
+      <computeroutput>RELA</computeroutput> format specifies the
+      addend right there in the relocation.</para>
+
+      <para>The trade offs of each approach should be clear.  With
+      <computeroutput>REL</computeroutput> you need to do an extra
+      memory reference to find the addend before the fixup, but you
+      don't waste space in the binary becuase you use relocation
+      target memory.  With <computeroutput>RELA</computeroutput> you
+      keep the addend with the relocation, but waste that space in the
+      on disk binary.  Most modern systems use
+      <computeroutput>RELA</computeroutput> relocations.</para>
+
+      <sect3>
+	<title>Relocations in action</title>
+
+	<para>The example below shows how relocations work.  We create
+	two very simple shared libraries and reference one from in the
+	other.</para>
+
+	<example>
+	  <title>Specifying Dynamic Libraries</title>
+	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk8/code/relocs.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+	<para>We thus have one relocation in
+	<computeroutput>addendtest.so</computeroutput> of type
+	<computeroutput>R_IA64_DIR64LSB</computeroutput>.  If you look
+	this up in the IA64 ABI, the acronym can be broken down to
+	</para>
+
+	<orderedlist>
+	  <listitem>
+	    <para><emphasis>R_IA64</emphasis> : all relocations start with this prefix.</para>
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>DIR64</emphasis> : a 64 bit direct type relocation</para>
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>LSB</emphasis> : Since IA64 can operate in big and
+	    little endian modes, this relocation is little endian
+	    (least significant byte).</para>
+	  </listitem>
+	</orderedlist>
+
+	<para>The ABI continues to say that that relocation means "the
+	value of the symbol pointed to by the relocation, plus any
+	addend".  We can see we have an addend of 8, since
+	<computeroutput>sizeof(int) == 4</computeroutput> and we have
+	moved two int's into the array (<computeroutput>*j = i +
+	2</computeroutput>).  So at runtime, to fix this relocation
+	you need to find the address of symbol
+	<computeroutput>i</computeroutput> and put it's value, plus 8
+	into <computeroutput>0x104f8</computeroutput>.</para>
+
+      </sect3>
 
     </sect2>
 
     <sect2>
       <title>Dynamic lookup tables</title>
+
+      <para>Is this OK?</para>
 
       <sect3>
 	<title>GOT</title>
@@ -280,7 +401,7 @@
   </sect1>
 
   <sect1>
-    <title>The Dyanmic Linker</title>
+    <title>The Dynamic Linker</title>
 
     <para>The dynamic linker is one of the most critical parts of a
     modern system.  </para>
