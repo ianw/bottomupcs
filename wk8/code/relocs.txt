@@ -1,0 +1,15 @@
+$ cat addendtest.c
+extern int i[4];
+int *j = i + 2;
+
+$ cat addendtest2.c
+int i[4];
+
+$ gcc -nostdlib -shared -fpic -s -o addendtest2.so addendtest2.c
+$ gcc -nostdlib -shared -fpic -o addendtest.so addendtest.c ./addendtest2.so
+
+$ readelf -r ./addendtest.so
+
+Relocation section '.rela.dyn' at offset 0x3b8 contains 1 entries:
+  Offset          Info           Type           Sym. Value    Sym. Name + Addend
+0000000104f8  000f00000027 R_IA64_DIR64LSB   0000000000000000 i + 8
