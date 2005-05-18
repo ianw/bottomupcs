@@ -383,19 +383,143 @@
     </sect2>
 
     <sect2>
-      <title>Dynamic lookup tables</title>
+      <title>The Global Offset Table</title>
 
-      <para>Is this OK?</para>
+      <para>You might have noticed a critical problem with relocations
+      when thinking about the goals of a shared library.</para>
+
+      <para>If you modify the code of a shared library with a
+      relocation, that code no longer becomes sharable across the
+      system.  Each process may load the library into a different
+      place in virtual memory, but we can easily point those virtual
+      pages at the same physical pages.  Once you start modifying the
+      code to point to particular addresses you have lost sharability.
+      Each process will require it's own in memory copy with the
+      updated addresses.</para>
+
+      <para>So imagine the situation where we take the value of a
+      symbol.  With only relocations, we would have the dynamic linker
+      look up the memory address of that symbol and re-write the code
+      to load that address.</para>
+
+      <para>A fairly straight forward enhancment would be to set aside
+      space in our binary to hold the address of that symbol, and have
+      the dynamic linker put the address there rather than in the code
+      directly.  This way we never need to touch the code part of the
+      binary.</para>
+
+      <para>The area that is set aside for these addresses is called
+      the Global Offset Table, or GOT.  The GOT lives in a section of
+      the ELF file called <computeroutput>.got</computeroutput>.
+      </para>
+
+      <figure>
+	<title>Memory access via the GOT</title>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="wk8/figures/got-plt.eps" format="EPS">
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="wk8/figures/got-plt.png" format="PNG">
+	  </imageobject>
+	  <textobject>
+	    <phrase>To keep code (green) sharable, we define process
+	    private areas to which we can store the addresses of
+	    common variables.  This allows us to load the code
+	    anywhere in the process address space whilst still sharing
+	    the underlying physical pages.</phrase>
+	  </textobject>
+	</mediaobject>
+      </figure>
+
+      <para>The GOT is private to each process, and the process must
+      have write permissions to it.  Conversley the library code is
+      shared and the process should have only read and execute
+      permissions on the code; it would be a serious security breach
+      if the process could modify code.</para>
 
       <sect3>
-	<title>GOT</title>
-	<para>got</para>
+	<title>The GOT in action</title>
+
+	<example>
+	  <title>Using the GOT</title>
+	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk8/code/got.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+	<para>Above we create a simple shared library which refers to
+	an external symbol.  We do not know the address of this symbol
+	at compile time, so we leave it for the dynamic linker to fix
+	up at runtime.</para>
+
+	<para>But we want our code to remain sharable, in case other
+	processes want to use our code as well.</para>
+
+	<para>The disassembly reveals just how we do this with the
+	<computeroutput>.got</computeroutput>.  On IA64 (the
+	architecture which the library was compiled for) the register
+	<computeroutput>r1</computeroutput> is known as the
+	<emphasis>global pointer</emphasis> and always points to where
+	the <computeroutput>.got</computeroutput> section is loaded
+	into memory.</para>
+
+	<para>If we have a look at the
+	<computeroutput>readelf</computeroutput> output we can see
+	that the <computeroutput>.got</computeroutput> section starts
+	0x10570 bytes past where library was loaded into memory.  Thus
+	if the library were to be loaded into memory at address
+	0x6000000000000000 the <computeroutput>.got</computeroutput>
+	would be at 0x6000000000010570, and register
+	<computeroutput>r1</computeroutput> would always point to this
+	address.</para>
+
+	<para>Working backwards through the disassembly, we can see
+	that we store the value 100 into the memory address held in
+	register <computeroutput>r15</computeroutput>.  If we look
+	back we can see that register 15 holds the value of the memory
+	address stored in register 14.  Going back one more step, we
+	see we load this address is found by adding a small number to
+	register 1.  The GOT is simply a big long list of entries, one
+	for each external variable.  This means that the GOT entry for
+	the external variable <computeroutput>i</computeroutput> is
+	stored 24 bytes (that is 3 64 bit addresses).
+	</para>
+
+	<example>
+	  <title>Relocations against the GOT</title>
+	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk8/code/got-relocs.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+	<para>We can also check out the relocation for this entry too.
+	The relocation says "replace the value at offset 10588 with
+	the memory location that symbol i is stored at".</para>
+
+	<para>We know that the <computeroutput>.got</computeroutput>
+	starts at offset 0x10570 from the previous output.  We have
+	also seen how the code loads an address 0x18 (24 in decimal)
+	past this, giving us an address of 0x10570 + 0x18 =
+	0x10588 ... the address which the relocation is for!</para>
+
+	<para>So before the program begins, the dynamic linker will
+	have fixed up the relocation to ensure that the value of the
+	memory at offset 0x10588 is the address of the global variable
+	<computeroutput>i</computeroutput>!</para>
+
       </sect3>
 
-      <sect3>
-	<title>PLT</title>
-	<para>plt</para>
-      </sect3>
+    </sect2>
+
+    <sect2>
+      <title>The Procedure Lookup Table</title>
+
+      <para>blah</para>
 
     </sect2>
   </sect1>

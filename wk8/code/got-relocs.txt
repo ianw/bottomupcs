@@ -1,0 +1,5 @@
+$ readelf --relocs ./got.so
+
+Relocation section '.rela.dyn' at offset 0x3f8 contains 1 entries:
+  Offset          Info           Type           Sym. Value    Sym. Name + Addend
+000000010588  000f00000027 R_IA64_DIR64LSB   0000000000000000 i + 0
