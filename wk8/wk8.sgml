@@ -519,7 +519,157 @@
     <sect2>
       <title>The Procedure Lookup Table</title>
 
-      <para>blah</para>
+      <para>Libraries may contain many functions, and a program may
+      end up including many libraries to get its work done.  A program
+      may only use one or two functions from each library of the many
+      available, and depending on the run-time path through the code
+      may use some functions and not others.</para>
+
+      <para>As we have seen, the process of dynamic linking is a
+      fairly computationally intensive one, since it involves looking
+      up and searching through many tables.  Anything that can be done
+      to reduce the overheads will increase performance.</para>
+
+      <para>The Procedure Lookup Table (PLT) facilitates what is
+      called <emphasis>lazy binding</emphasis> in programs.  Binding
+      is synonymous with the fix-up process described above for
+      variables located in the GOT.  When an entry has been "fixed-up"
+      it is said to be "bound" to its real address.</para>
+
+      <para>As we mentioned, sometimes a program will include a
+      function from a library but never actually call that function,
+      depending on user input.  The process of binding this function
+      is quite intensive, involving loading code, searching through
+      tables and writing memory.  To go through the process of binding
+      a function that is not used is simply a waste of time.</para>
+
+      <para>Lazy binding defers this expense until the actual function
+      is called by using a PLT.</para>
+
+      <para>Each library function has an entry in the PLT, which
+      initially points to some special dummy code.  When the program
+      calls the function, it actually calls the PLT entry (in the same
+      was as varaibles are referenced through the GOT).</para>
+
+      <para>This dummy function will load a few paramaters that need
+      to be passed to the dynamic linker for it to resolve the
+      function and then call into a special lookup function of the
+      dynamic linker.  The dynamic linker finds the real address of
+      the function, and writes that location into the calling
+      binary over the top of the dummy function call.</para>
+
+      <para>Thus, the next time the function is called the address can
+      be loaded without having to go back into the dynamic loader
+      again.  If a function is never called, then the PLT entry will
+      never be modified but there will be no runtime overhead.</para>
+
+      <sect3>
+	<title>The PLT in action</title>
+
+	<para>Things start to get a bit hairy here!  If nothing else,
+	you should begin to appreciate that there is a fair bit of
+	work in resolving a dynamic symbol!</para>
+
+	<para>Let us consider the simple "hello World" application.
+	This will only make one library call to
+	<computeroutput>printf</computeroutput> to output the
+	string to the user.</para>
+
+	<example>
+	  <title>Hello World PLT example</title>
+	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk8/code/hello.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+
+	<para>We can see above that we have a
+	<computeroutput>R_IA64_IPLTLSB</computeroutput> relocation for
+	our <computeroutput>printf</computeroutput> symbol.  This is
+	saying "put the address of symbol printf into memory address
+	0x6000000000000f10".  We have to start digging deeper to find
+	the exact procedure that gets us the function.</para>
+
+	<para>Below we have a look at the disassembley of the
+	<computeroutput>main()</computeroutput> function of the
+	program.</para>
+
+	<example>
+	  <title>Hello world main()</title>
+	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk8/code/hello-main-dis.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+	<para>The call to 0x4000000000000520 must be us calling the
+	<computeroutput>printf</computeroutput> function.  We can find
+	out where this is by looking at the sections with
+	<computeroutput>readelf</computeroutput>.</para>
+
+	<example>
+	  <title>Hello world sections</title>
+	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk8/code/hello-sections.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+	<para>That address is (unsurprisingly) in the
+	<computeroutput>.plt</computeroutput> section.  So there we
+	have our call into the PLT! But we're not satisfied with that,
+	let's keep digging further to see what we can uncover.  We
+	disassemble the <computeroutput>.plt</computeroutput>
+	section to see what that call actually does.</para>
+
+	<example>
+	  <title>Hello world PLT</title>
+	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk8/code/hello-plt.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+	<para>Let us step through the instructions.  Firstly, we add
+	80 to the value in r1, storing it in r15.  We know from before
+	that r1 will be pointing to the GOT, so this is saying "store
+	in r15 80 bytes into the GOT".  The next thing we do is load
+	into r16 the value stored in this location in the GOT, and
+	post increment the value in r15 by 8 bytes.  We then store r1
+	(the location of the GOT) in r14 and set r1 to be the value in
+	the next 8 bytes after r15.  Then we branch to r16.</para>
+
+	<para>In the previous chapter we discussed how functions are
+	actually called through a function descriptor which contains
+	the function address and the address of the global pointer.
+	Here we can see that the PLT entry is first loading the
+	function value, moving on 8 bytes to the second part of the
+	function descriptor and then loading that value into the gp
+	register before calling the function.</para>
+
+	<para>But what exactly are we loading?  We know that r1 will
+	be pointing to the GOT.  We go 80 bytes past the got
+	(0x50)</para>
+
+	<example>
+	  <title>Hello world GOT</title>
+	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk8/code/hello-got.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+	<para>0x6000000000000ec0 + 0x50 = 0x6000000000000f10, or the
+	<computeroutput>.IA_64.pltoff</computeroutput> section.  Now
+	we're starting to get somewhere!</para>
+
+      </sect3>
 
     </sect2>
   </sect1>

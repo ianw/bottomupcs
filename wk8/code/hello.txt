@@ -1,0 +1,23 @@
+$ cat hello.c
+#include <stdio.h>
+
+int main(void)
+{
+        printf("Hello, World!\n");
+        return 0;
+}
+
+$ gcc -o hello hello.c
+
+$ readelf --relocs ./hello
+
+Relocation section '.rela.dyn' at offset 0x3f0 contains 2 entries:
+  Offset          Info           Type           Sym. Value    Sym. Name + Addend
+6000000000000ed8  000700000047 R_IA64_FPTR64LSB  0000000000000000 _Jv_RegisterClasses + 0
+6000000000000ee0  000900000047 R_IA64_FPTR64LSB  0000000000000000 __gmon_start__ + 0
+
+Relocation section '.rela.IA_64.pltoff' at offset 0x420 contains 3 entries:
+  Offset          Info           Type           Sym. Value    Sym. Name + Addend
+6000000000000f10  000200000081 R_IA64_IPLTLSB    0000000000000000 printf + 0
+6000000000000f20  000800000081 R_IA64_IPLTLSB    0000000000000000 __libc_start_main + 0
+6000000000000f30  000900000081 R_IA64_IPLTLSB    0000000000000000 __gmon_start__ + 0

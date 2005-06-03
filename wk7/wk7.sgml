@@ -1,6 +1,6 @@
 <chapter id="wk7">
 
-  <title>ELF and Program Execution</title>
+  <title>ELF, Program Execution and ABI's</title>
 
   <sect1>
     <title>Review of executable files</title>
@@ -213,6 +213,79 @@
     waiting to be linked into an executable.  One or more sections map
     to a <emphasis>segment</emphasis> in the executable.  
     </para>
+
+  </sect1>
+
+  <sect1>
+    <title>ABI's</title>
+
+    <para>An ABI is a term you will hear a lot about when working with
+    systems programming.  We have talked extensivly about
+    <emphasis>API</emphasis>, which are interfaces the programmer sees
+    to your code.</para>
+
+    <para>ABI's refer to lower level interfaces which the compiler,
+    operating system and, to some extent, processor, must agree on to
+    communicate together.  Below we introduce a number of concepts
+    which are important to understanding ABI considerations.</para>
+
+    <sect2>
+      <title>Byte Order</title>
+
+      <para>Endianess</para>
+    </sect2>
+
+    <sect2>
+      <title>Calling Conventions</title>
+
+      <sect3>
+	<title>Passing parameters</title>
+	<para>registers or stack?</para>
+      </sect3>
+
+      <sect3>
+	<title>Function Descriptors</title>
+
+	<para>On many architectures you must call a function through a
+	<emphasis>function descriptor</emphasis>, rather than
+	directly.</para>
+
+	<para>For example, on IA64 a function descriptor consists of
+	two components; the address of the function (that being a 64
+	bit, or 8 byte value) and the address of the <emphasis>global
+	pointer</emphasis> (gp).  The ABI specifies that r1 should
+	always contain the gp value for a function.  This means that
+	when you call a function, it is the
+	<computeroutput>callees</computeroutput> job to save their gp
+	value, set r1 to be the new value (from the function
+	descriptor) and <computeroutput>then</computeroutput> call the
+	function.</para>
+
+	<para>This may seem like a strange way to do things, but it
+	has very useful practical implications as you will see in the
+	next chapter about global offset tables.  On IA64 an
+	<computeroutput>add</computeroutput> instruction can only take
+	a maximum 22 bit <emphasis>immediate
+	value</emphasis><footnote><para>Technically this is because of
+	the way IA64 bundles instructions.  Three instructions are put
+	into each bundle, and there is only enough room to keep a 22
+	bit value to keep the bundle together.</para></footnote>.  An
+	immediate value is one that is specified directly, rather than
+	in a register (e.g. in <computeroutput>add r1 +
+	100</computeroutput> 100 is the immediate value).</para>
+
+	<para>You might recognise 22 bits as being able to represent
+	4194304 bytes, or 4MB.  Thus each function can directly offset
+	into an area of memory 4MB big without having to take the
+	penatly of loading any values into a register.  If the
+	compiler, linker and loader all agree on what the global
+	pointer is pointing to (as specified in the ABI) performance
+	can be improved by less loading.</para>
+
+      </sect3>
+
+    </sect2>
+
 
   </sect1>
 
