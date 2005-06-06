@@ -30,8 +30,9 @@ html: csbu.sgml $(pngs)
 	-for dir in $(sourcedirs); do \
 	cp -r --parents $$dir/code/* html; \
 	done
-	docbook2html --output html csbu.sgml
+	docbook2html --dsl ./csbu.dsl --output html csbu.sgml
 	cp --parents $(pngs) html
+	cp csbu.css html
 
 .PHONY: clean
 clean:	
