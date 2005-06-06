@@ -1,5 +1,102 @@
 /* CSBU stylesheet */
 
-.sect1{ 
-        color: #FF0000;
-        }
+body {
+       font-family: "Trebuchet MS", verdana, sans-serif;
+       background-image: url(draft.png);
+       }
+
+
+/* FIGURES AND LISTINGS */
+
+.PROGRAMLISTING { 
+                  background: #ddd;
+                  border: 1px solid #333;
+                  padding: 10px;
+                  width: 80%;
+
+ }
+
+.FIGURE { 
+          background: #fff;
+          border: 1px solid #333;
+          padding: 5px;
+          width: 80%;
+          margin-left: auto;
+          margin-right: auto;
+          
+
+ }
+
+/* TABLE OF CONTENTS */
+.TOC { 
+       border: 1px solid #009933;
+       background: #AAFF99;
+       padding: 5px;
+ }
+
+
+/* TITLE */
+h1.TITLE { 
+           color: #336699;
+           padding: 5px;
+           border-left: 5px solid #336699;
+           background: #BCD2EE;
+ }
+
+/* FIGURE */
+/* hack just to get the title */
+.FIGURE p b { 
+              background: #ddd;
+              width: 400px;
+ }
+
+/* CHAPTER AND SECT1 HEADERS */
+.CHAPTER h1 { 
+              color: #990000;
+              padding: 5px;
+              background: #FFCCCC;
+              border-left: 5px solid #990000;
+             }
+
+.SECT1 h1 { 
+              color: #990000;
+              padding: 5px;
+              background: #FFCCCC;
+              border-left: 5px solid #990000;
+
+            }
+
+.SECT2 h2 { 
+            color: #006400;
+            background: #B4EEB4;
+            padding: 2px;
+            padding-left: 5px;
+            border-left: 3px solid #006400;
+ }
+
+/* HEADER */
+.NAVHEADER { 
+             background: #ccc;
+             color: #333;
+             padding: 5px;
+             }
+
+.NAVHEADER hr { 
+                padding: 0px;
+                margin: 0px;
+                border: 0px;
+                }
+
+/* FOOTER */
+.NAVFOOTER { 
+             margin-top: 10px;
+             background: #ccc;
+             color: #333;
+             padding: 5px;
+             }
+
+.NAVFOOTER hr { 
+                padding: 0px;
+                margin: 0px;
+                border: 0px;
+  }
