@@ -23,7 +23,6 @@ csbu.pdf : csbu.sgml $(sources)
 	dvipdf csbu.dvi $@
 
 #html depends on having png figures around.
-.PHONY: html
 html: csbu.sgml $(pngs)
 	mkdir -p ./html
 #copy all .c files into appropriate places
@@ -32,7 +31,12 @@ html: csbu.sgml $(pngs)
 	done
 	docbook2html --dsl ./csbu.dsl --output html csbu.sgml
 	cp --parents $(pngs) html
-	cp csbu.css html
+	cp csbu.css draft.png html
+
+.PHONY: upload
+upload:
+	rsync -avz html \
+	delsarto@shell.sourceforge.net:/home/groups/b/bo/bottomupcs/htdocs/csbu/
 
 .PHONY: clean
 clean:	
