@@ -35,8 +35,8 @@ html: csbu.sgml $(pngs)
 
 .PHONY: upload
 upload:
-	rsync -avz html \
-	delsarto@shell.sourceforge.net:/home/groups/b/bo/bottomupcs/htdocs/csbu/
+	rsync -avz html/ \
+	delsarto@shell.sourceforge.net:/home/groups/b/bo/bottomupcs/htdocs/csbu
 
 .PHONY: clean
 clean:	
