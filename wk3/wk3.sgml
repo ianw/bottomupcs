@@ -281,6 +281,21 @@
       <para>Although the details of the process can get quite hairy,
       this is basically all their is to a system call.</para>
 
+	<sect4>
+	  <title>Privilege escalation</title>
+
+	  <para>As you will constantly see, things are never quite as
+	  simple as they first seem!  One problem with traps is that
+	  they are very expensive for the processor to implement.
+	  </para>
+
+	  <para>When you take a trap you need to transfer into the
+	  kernel, which means doing a lot of work to save the current
+	  processes state (as we see in future weeks).  This might
+	  require the processor flushing it's pipeline.</para>
+
+	</sect4>
+
       </sect3>
 
       <sect3>
@@ -300,7 +315,12 @@
     <sect2>
       <title>Analysing a system call</title>
 
-      <para>first real look at assembly</para>
+      <para>As the system libraries usually deal with making systems
+      call for you, we need to do some low level hacking to
+      illustrate exactly how the system calls work.</para>
+
+      <para></para>
+
     </sect2>
   </sect1>
 
