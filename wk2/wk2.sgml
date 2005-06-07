@@ -23,18 +23,17 @@
 	      value (110) to R4 (for further use). </phrase>
 	</textobject>
       </mediaobject>
-      
+
     </figure>
-    
-    
+
     <para>To greatly simplify, a computer consists of a central
     processing unit (CPU) attached to memory.  The figure above
     illustrates the general principle behind all computer
     operations.</para>
-    
+
     <para>The CPU executes instructions read from memory.  There are
-    two types of instructions</para>
-    
+    two categories of instructions</para>
+
     <orderedlist>
       <listitem>
 	<para>Those that <emphasis>load</emphasis> and
@@ -46,13 +45,13 @@
 	registers.</para>
       </listitem>
     </orderedlist>
-    
+
     <para>So in the example we are simply adding 100 to a value stored
     in memory, and storing this new result back into memory.</para>
-    
+
     <sect2>
       <title>Branching</title>
-      
+
       <para>Apart from loading or storing, the other important
 	operation of a CPU is <emphasis>branching</emphasis>.
 	Internally, the CPU keeps a record of the next instruction to
@@ -64,33 +63,35 @@
 	This is how loops and decision statements
 	(i.e. <computeroutput>if</computeroutput> statements) are
 	handled by the processor.</para>
-      
     </sect2>
-    
+
     <sect2>
       <title>Cycles</title>
-      
-      <para>We are all familiar with the speed of the computer,
-	given in Megahertz or Gigahertz (millions or thousands of
-	millions cycles per second).  This is called the
-	<emphasis>clock speed</emphasis> since it is the speed that an
-	internal clock within the computer pulses.  On each pulse, a
-	new instruction is executed.
-	</para>
-      
+
+      <para>We are all familiar with the speed of the computer, given
+	in Megahertz or Gigahertz (millions or thousands of millions
+	cycles per second).  This is called the <emphasis>clock
+	speed</emphasis> since it is the speed that an internal clock
+	within the computer pulses.</para>
+
+      <para>The pulses are used within the processor to keep
+      everything happening inside it sync.  On each pulse another
+      operation can be started; think of the clock like the person
+      beating the drum to keep the rower's oars in sync. </para>
+
     </sect2>
-    
+
     <sect2>
       <title>Fetch, Decode, Execute, Store</title>
-      
+
       <para>Executing an instruction consists of a particular cycle
 	of events, particularly fetching, decoding, executing and
 	storing.</para>
-      
+
       <para>For example, to do the
 	<computeroutput>add</computeroutput> instruction above it must
 	be</para>
-      
+
       <orderedlist>
 	<listitem>
 	  <para>Fetch : that is from memory into the
@@ -129,6 +130,13 @@
 	<emphasis>superscalar architecture</emphasis>.  All modern
 	processors are superscalar.</para>
 
+      <para>We can think of the pipeline like a normal every day pipe
+      that is being filled with marbles.  Ideally you will be putting
+      your marbles in one end, one after the other (synchronised with
+      clock pulses), filling up the pipe.  Once full, for each marble
+      (instruction) you push in all the others will move to the next
+      position and one will fall out the end (the result).</para>
+
       <para>Branch instruction play havoc with this model however,
 	since they may or may not cause execution to start from a
 	different place.  If you are pipelining, you will have to
@@ -137,6 +145,10 @@
 	predicted correctly, everything goes fine! Conversely, if the
 	processor has predicted incorrectly it has wasted a lot of
 	time and has to clear the pipeline and start again.</para>
+
+      <para>This process is usually referred to as a
+      <emphasis>pipeline flush</emphasis> and is analogous to having
+      to stop and empty out all your marbles from your hose!</para>
 
     </sect2>
 
@@ -200,26 +212,80 @@
 	</listitem>
       </itemizedlist>
 
+      <sect3>
+	<title>EPIC</title>
+
+	<para>The Itanium processor, which is used in many example
+	through this book, is an example of a modified architecture
+	called Explictily Parallel Instruction Computing.</para>
+
+	<para>We have discussed how superscaler processors have
+	pipelines that have many instructions in flight at the same
+	time in different parts of the processor.  Obviously for this
+	to work as well as possible instructions should be given the
+	processor in an order that can make best use of the
+	available elements of the CPU.</para>
+
+	<para>Traditionally organising the incoming instruction stream
+	has been the job of the hardware.  Instructions are issued by
+	the program in a sequental manner; the processor must look
+	ahead and try to make decisions about how to organise the
+	incoming instructions.</para>
+
+	<para>The theory behind EPIC is that there is more information
+	available at higher levels which can make these decisions
+	better than the processor.  Analysing a stream of assebembly
+	language instructions, as current processors do, looses a lot
+	of information that the programmer may have provided in the
+	original source code.  Think of it as the difference between
+	studying a Shakespeare play and reading the Cliff's Notes
+	version of the same.  Both give you the same result, but the
+	orignal has all sorts of pehperial information that sets the
+	scene and gives you insight into the characters.</para>
+
+	<para>Thus the logic of ordering instructions can be moved
+	from the processor to the compiler.  This means that compiler
+	writers need to be smarter to try and find the best ordering
+	of code for the processor.  The processor is also
+	significantly simplified, since a lot of its work has been
+	moved to the compiler.<footnote> <para>Another term often used
+	around EPIC is Very Long Instruction World (VLIW), which is
+	where each instruction to the processor is extended to tell
+	the processor about where it should execute the instruction in
+	it's internal units.  The problem with this approach is that
+	code is then completly dependent on the model of processor is
+	has been compiled for.  Companies are always making revisions
+	to hardware, and making customers recompile their application
+	every single time, and maintain a range of different binaries
+	was impractical.</para> <para>EPIC solves this in the usual
+	computer science manner by adding a layer of abstraction.
+	Rather than explicitly specifying the exact part of the
+	processor the instructions should exectue on, EPIC creates a
+	simplified view with a few core units like memory, integer and
+	floating point.</para></footnote></para>
+
+      </sect3>
+
     </sect2>
 
   </sect1>
 
   <sect1>
     <title>Memory</title>
-    
+
     <sect2>
       <title>Memory Hierarchy</title>
-      
+
       <para>The CPU can only directly fetch instructions and data
 	from cache memory, located directly on the processor chip.
 	Cache memory must be loaded in from the main system memory
 	(the Random Access Memory, or RAM).  RAM however, only retains
 	it's contents when the power is on, so needs to be stored on
 	more permanent storage.</para>
-      
+
       <para>We call these layers of memory the <emphasis>memory
       hierarchy</emphasis></para>
-      
+
       <table>
 	<title>Memory Hierarchy</title>
 	<tgroup cols="3">
@@ -242,7 +308,7 @@
 		cache memory (termed L1, L2, L3) all with slightly
 		increasing speeds.</entry>
 	    </row>
-	    
+
 	    <row>
 	      <entry></entry> 
 	      <entry>RAM</entry> 
