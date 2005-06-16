@@ -23,9 +23,8 @@
   </sect1>
 
   <sect1>
-    
     <title>Static Libraries</title>
-	
+
     <para>When a library is linked right in to your executable, it's
       called a <emphasis>static</emphasis> library.  This has two main
       disadvantages; firstly if the library code is updated (to fix a
@@ -35,9 +34,9 @@
       inefficient (and a pain if you find a bug and have to recompile,
       as per point one).</para>
 
-    <para>In fact, a static library is simply a group of object
-	files in an <emphasis>archive</emphasis>.  This is a very
-	simple format similar to a <command>zip</command> file.</para>
+    <para>In fact, a static library is simply a group of object files
+	in an <emphasis>archive</emphasis>.  This is a very simple
+	format similar to a <command>zip</command> file.</para>
 
     <para>You can create archive files with the
 	<command>ar</command> command (in fact, you can put any type
@@ -72,7 +71,7 @@
       address spaces.  So while you only have one physical copy of the
       library code in system memory, every process can have access to
       that library code at any virtual address it likes.</para>
-    
+
     <para>Thus people quickly came up with the idea of a
       <emphasis>shared library</emphasis> which, as the name suggests,
       is shared by multiple executables.  Each executable contains a
@@ -94,10 +93,11 @@
       started.  They have code and data sections (functions and
       variables) just like every executable; but no where to start
       running.  They just provide a library of functions for
-      developers to call.e</para>
+      developers to call.</para>
 
       <para>Thus ELF can represent a dynamic library just as it does
-      an executable.  There are some fundamental differences, but all
+      an executable.  There are some fundamental differences, such as
+      there is no pointer to where execution should start, but all
       shared libraries are just ELF objects like any other
       executable.</para>
 
@@ -203,59 +203,55 @@
 	<computeroutput>librt</computeroutput>.</para>
 
       </sect3>
-
     </sect2>
-
   </sect1>
 
   <sect1>
-    <title>Position Independent Code</title>
+    <title>The Dynamic Linker</title>
 
-    <para>We mentioned that shared libraries look a lot like
-    executables in terms of common ELF structures, but there were some
-    fundamental differences.</para>
+    <para>The dynamic linker is the program that manages shared
+    dynamic libraries on behalf of an exectuable.  It works to load
+    libraries into memory and modify the program at runtime to call
+    the functions in the library.</para>
 
-    <para>The biggest, and most important, difference is called
-    <emphasis>position independent code</emphasis>, or PIC.</para>
+    <para>ELF allows executables to specify an
+    <emphasis>interpreter</emphasis>, which is a program that should
+    be used to run the executable.  The compiler and static linker set
+    the interpreter of executables that rely on dynamic libraries to
+    be the dynamic linker.</para>
 
-    <para>When an executable file is created, the code and data
-    segment is given a specified base address in virtual memory.  When
-    the executable is loaded and run, you can be sure that the code
-    and data will be where you expect.</para>
+    <example>
+      <title>Checking the program interpreter</title>
+      <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="wk8/code/interpreter.txt" format="linespecific">
+	      </imageobject>
+	</inlinemediaobject></programlisting>
+    </example>
 
-    <para>This guarantee can be granted because each time an
-    executable is run it will be in its own process, which has its own
-    view of a fresh address space thanks to virtual memory.</para>
+    <para>You can see above that the interpreter is set to be
+    <application>/lib/ld-linux-ia64.so.2</application>, which is the
+    dynamic linker.  When the kernel loads the binary for execution,
+    it will check if the <computeroutput>PT_INTERP</computeroutput>
+    field is present, and if so load what it points to into memory and
+    start it.</para>
 
-    <para>The result of this is that the compiler knows the address of
-    all code and data so can pre-compute all accesses.</para>
-
-    <para>Shared libraries, however, have no such guarantee about a
-    base address.  This is a fundamental problem; the shared library
-    may be used by any process that may also load any other number of
-    shared libraries.  If two shared libraries were to specify the
-    same address and one were already loaded, there could be no
-    resolution.</para>
-
-    <para>Thus all libraries must be produced with code that can
-    execute no matter where it is put into memory (or, position
-    independent code).  Note that the data section is still a fixed
-    offset from the code section; but to actually find the address of
-    data the offset needs to be added to the load address.</para>
-
-    <para>Below we explain the mechanisms for doing this.</para>
-
+    <para>We mentioned that dynamically linked exectuables leave
+    behind references that need to be fixed with information that
+    isn't available until runtime, such as the address of a function
+    in a shared library.  The references that are left behind are
+    called <emphasis>relocations</emphasis>.</para>
 
     <sect2>
       <title>Relocations</title>
 
-      <para>The essential part of PIC is fixing up addresses at
-      runtime, which is the only time you can know for certain where
-      you are loaded in memory.  A relocation can simply be thought of
-      as a note that a particular address will need to be fixed at
-      load time.  Before the code is ready to run you will need to go
-      through and read all the relocations and fix the addresses it
-      refers to to point to the right place.</para>
+      <para>The essential part of the dynamic linker is fixing up
+      addresses at runtime, which is the only time you can know for
+      certain where you are loaded in memory.  A relocation can simply
+      be thought of as a note that a particular address will need to
+      be fixed at load time.  Before the code is ready to run you will
+      need to go through and read all the relocations and fix the
+      addresses it refers to to point to the right place.</para>
 
       <table>
 	<title>Relocation Example</title>
@@ -382,20 +378,62 @@
 
     </sect2>
 
+
+    <sect2>
+      <title>Position Independence</title>
+
+      <para>In an emphasis>executable</emphasis> file, the code and
+    data segment is given a specified base address in virtual memory.
+    The executable code is not shared, and each executable gets its
+    own fresh address space.  This means that the compiler knows
+    exactly where the data section will be, and can reference it
+    directly.</para>
+
+      <para>Libraries have no such guarantee.  They can know that their
+    data section will be a specified <emphasis>offset</emphasis> from
+    the base address; but exactly where that base address is can only
+    be known at runtime.</para>
+
+      <para>Consequently all libraries must be produced with code that
+    can execute no matter where it is put into memory, known as
+    <emphasis>position independent code</emphasis> (or PIC for short).
+    Note that the data section is still a fixed offset from the code
+    section; but to actually find the address of data the offset needs
+    to be added to the load address.</para>
+
+    </sect2>
+  </sect1>
+
+  <sect1>
+    <title>Global Offset Tables</title>
+
+    <para>You might have noticed a critical problem with relocations
+      when thinking about the goals of a shared library.  We mentioned
+      previously that the big advantage of a shared library with
+      virutal memory is that multiple programs can use the code in
+      memory by sharing of pages.</para>
+
+    <para>The problem stems from the fact that libraries have no
+    guarantee about where they will be put into memory.  The dynamic
+    linker will find the most convenient place in virtual memory for
+    each library required and place it there.  Think about the
+    alternative if this were <emphasis>not</emphasis> to happen; every
+    library in the system would require its own chunk of virtual
+    memory so that no two overlapped.  Every time a new library were
+    added to the system it would require allocation.  Someone could
+    potentially be a hog and write a <emphasis>huge</emphasis>
+    library, not leaving enough space for other libraries!  And
+    chances are, your program doesn't ever want to use that library
+    anyway.</para>
+
+    <para>Thus, if you modify the code of a shared library with a
+      relocation, that code no longer becomes sharable.  We've lost
+      the advantage of our shared library.</para>
+
+    <para>Below we explain the mechanism for doing this.</para>
+
     <sect2>
       <title>The Global Offset Table</title>
-
-      <para>You might have noticed a critical problem with relocations
-      when thinking about the goals of a shared library.</para>
-
-      <para>If you modify the code of a shared library with a
-      relocation, that code no longer becomes sharable across the
-      system.  Each process may load the library into a different
-      place in virtual memory, but we can easily point those virtual
-      pages at the same physical pages.  Once you start modifying the
-      code to point to particular addresses you have lost sharability.
-      Each process will require it's own in memory copy with the
-      updated addresses.</para>
 
       <para>So imagine the situation where we take the value of a
       symbol.  With only relocations, we would have the dynamic linker
@@ -515,6 +553,12 @@
       </sect3>
 
     </sect2>
+
+
+  </sect1>
+
+  <sect1>
+    <title>Libraries</title>
 
     <sect2>
       <title>The Procedure Lookup Table</title>
@@ -669,17 +713,157 @@
 	<computeroutput>.IA_64.pltoff</computeroutput> section.  Now
 	we're starting to get somewhere!</para>
 
+	<para>We can decode the <application>objdump</application>
+	output so we can see exactly what is being loaded here.
+	Swapping the byte order of the first 8 bytes
+	<computeroutput>f0 04 00 00 00 00 00 40</computeroutput> we
+	end up with
+	<computeroutput>0x4000000000004f0</computeroutput>.  Now that
+	address looks familiar!  Looking back up at the assembley
+	output of the PLT we see that address.</para>
+
+	<para>The code at
+	<computeroutput>0x4000000000004f0</computeroutput> firstly
+	puts a zero value into r15, and then branches back to
+	<computeroutput>0x40000000000004c0</computeroutput>.  Wait a
+	minute!  That's the start of our PLT section.</para>
+
+	<para>We can trace this code through too.  Firstly we save the
+	value of the global pointer
+	(<computeroutput>r2</computeroutput>) then we load three 8
+	byte values into <computeroutput>r16</computeroutput>,
+	<computeroutput>r17</computeroutput> and finally,
+	<computeroutput>r1</computeroutput>.  We then branch to the
+	address in <computeroutput>r17</computeroutput>.  What we are
+	seeing here is the actual call into the dynamic linker!</para>
+
+	<para>We need to delve into the ABI to understand exactly what
+	is being loaded at this point.  The ABI says two things --
+	dynamically linked programs must have a special section
+	(called the
+	<computeroutput>DT_IA_64_PLT_RESERVE</computeroutput> section)
+	that can hold three 8 byte values.  There is a pointer where
+	this reserved area in the dynamic segment of the binary.</para>
+
+	<example>
+	  <title>Dynamic Segment</title>
+	  <programlisting linenumbering="numbered"
+	  lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk8/code/hello-dynamic.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+	<para>Do you notice anything about it?  It's the same value as
+	the GOT.  This means that the first three 8 byte entires in
+	the GOT are actually the reserved area; thus will always be
+	pointed to by the global pointer.</para>
+
+	<para>When the dynamic linker starts it is its duty to fill
+	these values in.  The ABI says that the first value will be
+	filled in by the dynamic linker giving this
+	<emphasis>module</emphasis> a unique ID.  The second value is
+	the global pointer value for the dynamic linker, and the third
+	value is the address of the function that finds and fixes up
+	the symbol.</para>
+
+	<example>
+	  <title>Code in the dynamic linker for setting up special
+	  values
+	  (from libc <computeroutput>sysdeps/ia64/dl-machine.h</computeroutput>)</title>
+	  <programlisting linenumbering="numbered"
+	  lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk8/code/runtime_setup.c" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+	<para>We can see how this gets setup by the dynamic linker by
+	looking at the function that does this for the binary.  The
+	<computeroutput>reserve</computeroutput> variable is set from
+	the PLT_RESERVE section pointer in the binary.  The unique
+	value (put into <computeroutput>reserve[0]</computeroutput>)
+	is the address of the <emphasis>link map</emphasis> for this
+	object.  Link maps are the internal representation within
+	<computeroutput>glibc</computeroutput> for shared objects.  We
+	then put in the address of
+	<computeroutput>_dl_runtime_resolve</computeroutput> to the
+	second value (assuming we are not using profiling).
+	<computeroutput>reserve[2]</computeroutput> is finally set to
+	gp, which has been found from r2 with the
+	<computeroutput>__asm__</computeroutput> call.</para>
+
+	<para>Looking back at the ABI, we see that the
+	<computeroutput>relocation index</computeroutput> for the
+	entry must be placed in <computeroutput>r15</computeroutput>
+	and the unique identifier must be passed in
+	<computeroutput>r16</computeroutput>.</para>
+
+	<para><computeroutput>r15</computeroutput> has previously been
+	set in the stub code, before we jumped back to the start of
+	the PLT.  Have a look down the entires, and notice how each
+	PLT entry loads <computeroutput>r15</computeroutput> with an
+	incremented value?  It should come as no surprise if you look
+	at the relocations the <computeroutput>printf</computeroutput>
+	relocation is number zero.</para>
+
+	<para><computeroutput>r16</computeroutput> we load up from the
+	values that have been initalised by the dynamic linker, as
+	previously discussed.  Once that is ready, we can load the
+	function address and global pointer and branch into the
+	function.</para>
+
+	<para>What happens at this point is the dynamic linker
+	function <computeroutput>_dl_runtime_resolve</computeroutput>
+	is run.  It finds the relocation; remember how the relocation
+	specified the name of the symbol?  It uses this name to find
+	the right function; this might involve loading the library
+	from disk if it is not already in memory, or otherwise sharing
+	the code.</para>
+
+	<para>The relocation record provides the dynamic linker with
+	the address it needs to "fix up"; remember it was in the GOT
+	and loaded by the inital PLT stub?  This means that after the
+	first time the function is called, the
+	<emphasis>second</emphasis> time it is loaded it will get the
+	direct address of the function; short circuiting the dynamic
+	linker.</para>
+
+      <sect3>
+	<title>Summary</title>
+
+	<para>You've seen the <emphasis>exact</emphasis> mechanism
+	behind the PLT, and consequently the inner workings of the
+	dynamic linker.  The important points to remember are
+<itemizedlist>
+	    <listitem>
+	      <para>Library calls in your program actually call a stub
+	      of code in the PLT of the binary.</para>
+	    </listitem>
+
+	    <listitem>
+	      <para>That stub code loads an address and jumps to
+	      it.</para>
+	    </listitem>
+
+	    <listitem>
+	      <para>Initially, that address points to a function in
+	      the dynamic linker which is capable of looking up the
+	      "real" function, given the information in the relocation
+	      entry for that function.</para>
+	    </listitem>
+
+	    <listitem>
+	      <para>The dynamic linker re-writes the address that the
+	      stub code reads, so that the next time the function is
+	      called it will go straight to the right address.</para>
+	    </listitem>
+
+	  </itemizedlist>
       </sect3>
-
     </sect2>
-  </sect1>
-
-  <sect1>
-    <title>The Dynamic Linker</title>
-
-    <para>The dynamic linker is one of the most critical parts of a
-    modern system.  </para>
-
   </sect1>
 
 </chapter>
