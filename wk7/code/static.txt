@@ -1,0 +1,38 @@
+$ cat library.c
+/* Library Function */
+int function(int input)
+{
+        return input + 10;
+}
+
+$ cat library.h
+/* Function Definition */
+int function(int);
+
+$ cat program.c
+#include <stdio.h>
+/* Library header file */
+#include "library.h"
+
+int main(void)
+{
+        int d = function(100);
+
+        printf("%d\n", d);
+}
+
+$ gcc -c library.c
+$ ar rc libtest.a library.o
+$ ranlib ./libtest.a
+$ nm --print-armap ./libtest.a
+
+Archive index:
+function in library.o
+
+library.o:
+00000000 T function
+
+$ gcc -L . program.c -ltest -o program
+
+$ ./program
+110

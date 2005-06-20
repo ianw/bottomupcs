@@ -1,44 +1,23 @@
 <chapter id="wk7">
 
-  <title>ELF, Program Execution and ABI's</title>
+  <title>Behind the process</title>
 
   <sect1>
     <title>Review of executable files</title>
 
     <para>We know that a program running in memory has two major
     components in <emphasis>code</emphasis> and
-    <emphasis>data</emphasis>. However, an executable does not live
-    its life in memory, but spends most of its life as a file on a
-    disk.  This file is in what is referred to as a binary format,
-    since the bits and bytes of the file are to be interpreted
+    <emphasis>data</emphasis>.  We also know, however, an executable
+    does not live its life in memory, but spends most of its life as a
+    file on a disk.  This file is in what is referred to as a binary
+    format, since the bits and bytes of the file are to be interpreted
     directly by processor hardware.</para>
-
-    <para>The executable is created by the compiler from the source
-    code.  This file needs to be in a format explicitly defined such
-    that the compiler can create it and the operating system can
-    identify it and load into memory.  This <emphasis>executable file
-    format</emphasis> can be specific to the operating system, as we
-    would not normally expect that a program compiled for one system
-    will execute on another (for example, you don't expect your
-    Windows programs to run on Linux, or you Linux programs to run on
-    OS X).</para>
-
-    <para>However, the common thread between all exectuable file
-    formats is that they include a predefined, standardised header
-    which describes how program code and data are stored in the rest
-    of the file.  In words, it would generally describe "the program
-    code starts 20 bytes into this file, and is 50 kilobytes long.
-    The program data follows it and is 20 kilobytes long".</para>
-
-    <para>In recent times one particular format has become
-      the defacto standard for executable representation for modern
-      UNIX type systems.  It is called the <computeroutput>Executable
-      and Linker Format</computeroutput>, or ELF for short.</para>
 
   </sect1>
 
   <sect1>
     <title>Representing executable files</title>
+
 
     <sect2>
       <title>Three Standard Sections</title>
@@ -47,19 +26,49 @@
       code and data are in the binary file.</para>
 
       <para>One additional component we have not mentioned until now
-      is storage space of uninitalised global variables.  If we
-      declare a variable and give it an inital value this obviously
+      is storage space of uninitialised global variables.  If we
+      declare a variable and give it an initial value this obviously
       needs to be stored in the executable file so that upon execution
-      the value is correct.  However many variables are uninitalised
+      the value is correct.  However many variables are uninitialised
       (or zero) when the program is first executed.  Making space for
       these in the executable and then simply storing zero or NULL
       values in it is a waste of space, needlessly bloating the
-      executable file size.  Thus each exectuable file can define a
-      BSS section which simply gives a size for the uninitalised data;
+      executable file size.  Thus each executable file can define a
+      BSS section which simply gives a size for the uninitialised data;
       on program load the extra memory can be allocated (and set to
       zero!).<footnote> <para>BSS probably stands for Block Started by
       Symbol, an assembly command for a old IBM
       computer.</para></footnote></para>
+    </sect2>
+
+
+    <sect2>
+      <title>Binary Format</title>
+
+      <para>The executable is created by the toolchain from the source
+    code.  This file needs to be in a format explicitly defined such
+    that the compiler can create it and the operating system can
+    identify it and load into memory, turning it into a running
+    process that the operating system can manage.  This
+    <emphasis>executable file format</emphasis> can be specific to the
+    operating system, as we would not normally expect that a program
+    compiled for one system will execute on another (for example, you
+    don't expect your Windows programs to run on Linux, or your Linux
+    programs to run on OS X).</para>
+
+      <para>However, the common thread between all executable file
+    formats is that they include a predefined, standardised header
+    which describes how program code and data are stored in the rest
+    of the file.  In words, it would generally describe "the program
+    code starts 20 bytes into this file, and is 50 kilobytes long.
+    The program data follows it and is 20 kilobytes long".</para>
+
+    <para>In recent times one particular format has become the defacto
+      standard for executable representation for modern UNIX type
+      systems.  It is called the <computeroutput>Executable and Linker
+      Format</computeroutput>, or ELF for short; we'll be looking at
+      it in more detail soon.</para>
+
     </sect2>
 
     <sect2>
@@ -71,7 +80,7 @@
 	<para>ELF was not always the standard; original UNIX systems
       used a file format called
       <computeroutput>a.out</computeroutput>.  We can see the
-      vestiages of this if you compile a program without the
+      vestiges of this if you compile a program without the
       <option>-o</option> option to specify an output file name; the
       executable will be created with a default name of
       <computeroutput>a.out</computeroutput><footnote> <para>In fact,
@@ -105,28 +114,23 @@
       </sect3>
 
     </sect2>
-
-    <sect2>
-      <title>ELF</title>
-
-      <para>ELF is an extremely flexible format for representing binary
-    code in a system.  By following the ELF standard you can represent
-    a kernel binary just as easily as a normal executable or a system
-    library.  The same tools can be used to inspect and operate on all
-    ELF files amd developers who understand the ELF file format can
-    translate their skills to most modern UNIX systems.</para>
-    </sect2>
-
   </sect1>
 
   <sect1>
-    <title>ELF in depth</title>
-
+    <title>ELF</title>
+    
+    <para>ELF is an extremely flexible format for representing binary
+    code in a system.  By following the ELF standard you can represent
+    a kernel binary just as easily as a normal executable or a system
+    library.  The same tools can be used to inspect and operate on all
+    ELF files and developers who understand the ELF file format can
+    translate their skills to most modern UNIX systems.</para>
+    
     <sect2>
-      <title>Overview</title>
-
+      <title>ELF in depth</title>
+      
       <para>ELF extends on COFF and gives the header sufficient
-    flexability to define an arbitrary number of sections, each with
+    flexibility to define an arbitrary number of sections, each with
     it's own properties.  This facilitates easier dynamic linking and
     debugging (XXX need more talk of debug).</para>
       
@@ -144,83 +148,227 @@
 	  </textobject>
 	</mediaobject>
       </figure>
-    </sect2>
-    
-    <sect2>
-      <title>ELF File Header</title>
-
-      <para>Overall, the file has a <emphasis>file header</emphasis>
-    which describes the file in general and then has pointers to each
-    of the individual sections that make up the file.</para>
       
-      <example id="elf-header">
-	<title>The ELF Header</title>
-	<programlisting linenumbering="numbered"><inlinemediaobject>
-	    <imageobject>
-	      <imagedata fileref="wk7/code/elf-header.txt" format="linespecific">
-	    </imageobject>
-	  </inlinemediaobject></programlisting>
-      </example>    
-      
-      <para>The relevant standards document describes each field in
-    detail, but there are some points to note from looking at the
-    definition of the header.</para>
+      <sect3>
 
-      <itemizedlist>
-	<listitem>
-	  <para>ELF defines both 32 and 64 bit versions; here we
+	<title>ELF File Header</title>
+	
+	<para>Overall, the file has a <emphasis>file
+	  header</emphasis> which describes the file in general and
+	  then has pointers to each of the individual sections that
+	  make up the file.</para>
+	
+	<example id="elf-header">
+	  <title>The ELF Header</title>
+	  <programlisting><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk7/code/elf-header.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>    
+	
+	<para>The relevant standards document describes each field in
+	detail, but there are some points to note from looking at the
+	definition of the header.</para>
+	
+	<itemizedlist>
+	  <listitem>
+	    <para>ELF defines both 32 and 64 bit versions; here we
 	  inspect the 32 bit version.</para> 
-	</listitem>
+	  </listitem>
+	  
+	  <listitem>
+	    <para>The <computeroutput>e_ident</computeroutput> array
+	    always starts with a few "magic" bytes.  The first byte is
+	    0x7F and then the next three bytes are "ELF".  You can
+	    inspect an ELF binary to see this for yourself with
+	    something like the <command>hexdump</command> command.</para>
+	    
+	    <example id="elf-magic">
+	      <title>Inspecting the ELF magic number</title>
+	      <programlisting><inlinemediaobject>
+		  <imageobject>
+		    <imagedata fileref="wk7/code/elf-magic.txt" format="linespecific">
+		  </imageobject>
+		  </inlinemediaobject></programlisting>
+	    </example>
+	    
+	    <para>Note the 0x7F to start, then the ASCII encoded "ELF"
+	    string.  Have a look at the standard and see what the rest
+	    of the array defines and what the values are in a
+	    binary.</para>
+	    </listitem>
+	  </itemizedlist>
+      </sect3>
 
-	<listitem>
-	  <para>The <computeroutput>e_ident</computeroutput> array
-	  always starts with a few "magic" bytes.  The first byte is
-	  0x7F and then the next three bytes are "ELF".  You can
-	  inspect an ELF binary to see this for yourself with
-	  something like the <command>hexdump</command> command.
-	  </para>
+      <sect3>
 
-	  <example id="elf-magic">
-	    <title>Inspecting the ELF magic number</title>
-	    <programlisting><inlinemediaobject>
-		<imageobject>
-		  <imagedata fileref="wk7/code/elf-magic.txt" format="linespecific">
-		</imageobject>
-	      </inlinemediaobject></programlisting>
-	  </example>
+	<title>Sections and Segments</title>
+	
+	<para>The ELF format specifies two "views" of an ELF file --
+	that which is used for linking and that which is used for
+	execution.  This affords significant flexibility for systems
+	designers.</para>
 
-	  <para>Note the 0x7F to start, then the ASCII encoded "ELF"
-	  string".  Have a look at the standard and see what the rest
-	  of the array defines and what the values are in a
-	  binary.</para>
+	<para>We talk about <emphasis>sections</emphasis> in object
+	code waiting to be linked into an executable.  One or more
+	sections map to a <emphasis>segment</emphasis> in the
+	executable.</para>
+      </sect3>
 
-	</listitem>
-
-
-
-      </itemizedlist>
     </sect2>
+
   </sect1>
 
   <sect1>
-    <title>Sections and Segments</title>
+    <title>Libraries</title>
 
-    <para>The ELF format specifies two "views" of an ELF file -- that
-    which is used for linking and that which is used for execution.
-    This affords significant flexability for systems designers.</para>
+    <para>Developers soon tired of having to write everything from
+      scratch, so one of the first inventions of computer science was
+      <emphasis>libraries</emphasis>.</para>
 
-    <para>We talk about <emphasis>sections</emphasis> in object code
-    waiting to be linked into an executable.  One or more sections map
-    to a <emphasis>segment</emphasis> in the executable.  
-    </para>
+    <para>A library is simply a collection of functions which you
+      can call from your program.  Obviously a library has many
+      advantages, not least of which is that you can save much time by
+      reusing work someone else has already done and generally be more
+      confident that it has fewer bugs (since probably many other
+      people use the libraries too, and you benefit from having them
+      finding and fixing bugs).  A library is exactly like an
+      executable, except instead of running directly the library
+      functions are invoked with parameters from your
+      executable.</para>
 
-  </sect1>
+
+  <sect2>
+    <title>Static Libraries</title>
+
+    <para>The most straight forward way of using a library function is
+      to have the object files from the library linked directly into
+      your executable, just as with those you have compiled yourself.
+      When linked right in to your executable like this it is called a
+      <emphasis>static</emphasis> library, because the library will
+      remain unchanged unless the program is recompiled.</para>
+
+      <para>This is the most straight forward way of using a library
+      as the final result is a simple executable.</para>
+
+      <sect3>
+	<title>Inside static libraries</title>
+
+	<para>As we mentioned, a static library is simply a group of
+	object files.  The object files are kept in an
+	<emphasis>archive</emphasis>, which gives Linux libraries
+	their <computeroutput>.a</computeroutput> extension.  You can
+	think of archives as similar to a <command>zip</command>
+	file, but without compression.</para>
+	
+	<para>Below we show the creation of basic static
+	library.</para>
+
+	<example>
+	  <title>Creating and using a static library</title>
+	  <programlisting lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk7/code/static.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+	<para>Firstly we compile or library to an object file, just as
+	we have seen in the previous chapter.</para>
+
+	<para>Notice that we define the library API in the header
+	file.  The API consists of function definitions for the
+	functions in the library; this is so that the compiler knows
+	what types the functions take when building object files that
+	reference the library
+	(e.g. <computeroutput>program.c</computeroutput>, which
+	<computeroutput>#include</computeroutput>s the header
+	file).</para>
+
+	<para>We create the library <command>ar</command> (short for
+	"archive") command.  By convention static library file names
+	are prefixed with <computeroutput>lib</computeroutput> and
+	have the extension <computeroutput>.a</computeroutput>.  The
+	<computeroutput>c</computeroutput> argument tells the program
+	to create the archive, and <computeroutput>a</computeroutput>
+	tells archive to add the object files specified into the
+	library file.</para>
+
+	<para>Next we use the <application>ranlib</application>
+	application to make a header in the library with the symbols
+	of the object file contents.  This helps the compiler to
+	quickly reference symbols; in the case where we just have one
+	this seems a little redundant however a large library may
+	have thousands of symbols, so the index can significantly
+	speed references.  We inspect this new header with the
+	<application>nm</application> application.  We see the
+	<computeroutput>function</computeroutput> symbol for the
+	<computeroutput>function()</computeroutput> function at offset
+	zero, as we expect.</para>
+
+	<para>You then specify the library to the compiler with
+	<option>-lname</option> where name is the filename of the
+	library without the prefix
+	<computeroutput>lib</computeroutput>.  We also provide an
+	extra search directory for libraries, namely the current
+	directory (<option>-L .</option>), since by default the
+	current directory is not searched for libraries.</para>
+	
+	<para>The final result is a single executable with our new
+	library included.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Static Linking Drawbacks</title>
+	
+	<para>Static linking is very straight forward, but has a number
+      of drawbacks.</para>
+
+	<para>There are two main disadvantages; firstly if the library
+      code is updated (to fix a bug, say) you have to recompile your
+      program into a new executable and secondly, every program in the
+      system that uses that library contains a copy in it's
+      executable.  This is very inefficient (and a pain if you find a
+      bug and have to recompile, as per point one).</para>
+	
+	<para>For example, the C library
+      (<application>glibc</application>) is included in all programs,
+      and provides all the common functions such as
+      <computeroutput>printf</computeroutput>.</para>
+
+      </sect3>
+
+    </sect2>
+
+    <sect2>
+      <title>Shared Libraries</title>
+
+      <para>Shared libraries are an elegant way around the problems
+      posed by a static library.  A shared library is a library that
+      is loaded dynamically at runtime for each application that
+      requires it.</para>
+
+      <para>The application simply leaves pointers that it will
+      require a certain library, and when the function call is made
+      the library is loaded into memory and executed.  If the library
+      is already loaded for another application, the code can be
+      shared between the two, saving considerable resources with
+      commonly used libraries.</para>
+
+      <para>This process, called dynamic linking, is one of the more
+      intricate parts of a modern operating system.  As such, we
+      dedicate the next chapter to investigating the dynamic linking
+      process.</para>
+
+    </sect2>
 
   <sect1>
     <title>ABI's</title>
 
     <para>An ABI is a term you will hear a lot about when working with
-    systems programming.  We have talked extensivly about
+    systems programming.  We have talked extensively about
     <emphasis>API</emphasis>, which are interfaces the programmer sees
     to your code.</para>
 
@@ -277,7 +425,7 @@
 	<para>You might recognise 22 bits as being able to represent
 	4194304 bytes, or 4MB.  Thus each function can directly offset
 	into an area of memory 4MB big without having to take the
-	penatly of loading any values into a register.  If the
+	penalty of loading any values into a register.  If the
 	compiler, linker and loader all agree on what the global
 	pointer is pointing to (as specified in the ABI) performance
 	can be improved by less loading.</para>

@@ -1,63 +1,10 @@
 <chapter id="wk8">
+
+  <title>Dynamic Linking</title>
   
-  <title>Libraries and Dynamic Linking</title>
-
-  <sect1>
-    <title>Libraries</title>
-
-    <para>Developers soon tired of having to write everything
-      themselves from scratch, so one of the first inventions of
-      computer science was <emphasis>libraries</emphasis>.</para>
-
-    <para>A library is simply a collection of functions which you
-      can call from your program.  Obviously a library has many
-      advantages, not least of which is that you can save much time by
-      reusing work someone else has already done and generally be more
-      confident that it has fewer bugs (since probably many other
-      people use the libraries too, and you benefit from having them
-      finding and fixing bugs).  A library is exactly like an
-      executable, except instead of running directly the library
-      functions are invoked with parameters from your
-      executable.</para>
-
-  </sect1>
-
-  <sect1>
-    <title>Static Libraries</title>
-
-    <para>When a library is linked right in to your executable, it's
-      called a <emphasis>static</emphasis> library.  This has two main
-      disadvantages; firstly if the library code is updated (to fix a
-      bug, say) you have to recompile your program into a new
-      executable and secondly every program in the system that uses
-      that library contains a copy in it's executable, which is very
-      inefficient (and a pain if you find a bug and have to recompile,
-      as per point one).</para>
-
-    <para>In fact, a static library is simply a group of object files
-	in an <emphasis>archive</emphasis>.  This is a very simple
-	format similar to a <command>zip</command> file.</para>
-
-    <para>You can create archive files with the
-	<command>ar</command> command (in fact, you can put any type
-	of file in an <command>ar</command> archive, but generally it
-	is only used with object files).  By convention static library
-	file names are prefixed with
-	<computeroutput>lib</computeroutput> and have the extension
-	<computeroutput>.a</computeroutput>.  You then specify the
-	library to the compiler with <option>-lname</option> where
-	name is the filename of the library (you may need to provide
-	an extra directory to search to the compiler with
-	<option>-L</option>). XXX</para>
-
-    <para>Below we show an example of creating a simple static
-	library and linking it into an application.</para>
-
-  </sect1>
-
   <sect1>
 
-    <title>Dynamic Libraries</title>
+    <title>Code Sharing</title>
 
     <para>We know that for the operating system code is considered
       read only, and separate from data.  It seems logical then that
@@ -165,7 +112,7 @@
 
 	<example>
 	  <title>Specifying Dynamic Libraries</title>
-	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	  <programlisting lang="C"><inlinemediaobject>
 	      <imageobject>
 		<imagedata fileref="wk8/code/dynamic-needed.txt" format="linespecific">
 	      </imageobject>
@@ -188,7 +135,7 @@
 
 	<example>
 	  <title>Looking at dynamic libraries</title>
-	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	  <programlisting lang="C"><inlinemediaobject>
 	      <imageobject>
 		<imagedata fileref="wk8/code/ldd.txt" format="linespecific">
 	      </imageobject>
@@ -222,7 +169,7 @@
 
     <example>
       <title>Checking the program interpreter</title>
-      <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+      <programlisting lang="C"><inlinemediaobject>
 	  <imageobject>
 	    <imagedata fileref="wk8/code/interpreter.txt" format="linespecific">
 	      </imageobject>
@@ -382,7 +329,7 @@
     <sect2>
       <title>Position Independence</title>
 
-      <para>In an emphasis>executable</emphasis> file, the code and
+      <para>In an <emphasis>executable</emphasis> file, the code and
     data segment is given a specified base address in virtual memory.
     The executable code is not shared, and each executable gets its
     own fresh address space.  This means that the compiler knows
@@ -837,7 +784,7 @@
 	<para>You've seen the <emphasis>exact</emphasis> mechanism
 	behind the PLT, and consequently the inner workings of the
 	dynamic linker.  The important points to remember are
-<itemizedlist>
+        <itemizedlist>
 	    <listitem>
 	      <para>Library calls in your program actually call a stub
 	      of code in the PLT of the binary.</para>
