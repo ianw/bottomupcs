@@ -18,7 +18,6 @@
   <sect1>
     <title>Representing executable files</title>
 
-
     <sect2>
       <title>Three Standard Sections</title>
 
@@ -40,7 +39,6 @@
       Symbol, an assembly command for a old IBM
       computer.</para></footnote></para>
     </sect2>
-
 
     <sect2>
       <title>Binary Format</title>
