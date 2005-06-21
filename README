@@ -13,7 +13,7 @@ You will need a number of things for this to work out of the box.  If
 you have the Debian packages
 
 * docbook
-* docbook-xml
+* docbook-sgml
 * docbook-dsssl
 * jadetex/openjade
 * docbook-utils
