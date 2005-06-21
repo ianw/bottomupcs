@@ -220,22 +220,23 @@
 
       <para>System calls are how userspace programs interact with the
     kernel.  The general principle behind how they work is described
-    below.
-    </para>
+    below.</para>
       
     <sect3>
-      <title>System call numbers</title> <para>Each and every system
-      call has a <emphasis>system call number</emphasis> which is
-      known by both the userspace and the kernel.  For example, both
-      know that system call number 10 is
-      <computeroutput>open()</computeroutput>, system call number 11
-      is <computeroutput>read()</computeroutput>, etc.</para>
+      <title>System call numbers</title> 
 
-      <para>The <emphasis>Application Binary Interface</emphasis>
-      (ABI) is very similar to an API but rather than being for
-      software is for hardware.  The API will define which register
-      the system call number should be put in so the kernel can find
-      it when it is asked to do the system call.</para>
+	<para>Each and every system call has a <emphasis>system call
+	number</emphasis> which is known by both the userspace and the
+	kernel.  For example, both know that system call number 10 is
+	<computeroutput>open()</computeroutput>, system call number 11
+	is <computeroutput>read()</computeroutput>, etc.</para>
+
+	<para>The <emphasis>Application Binary Interface</emphasis>
+	(ABI) is very similar to an API but rather than being for
+	software is for hardware.  The API will define which register
+	the system call number should be put in so the kernel can find
+	it when it is asked to do the system call.</para>
+
     </sect3>
 
     <sect3>
@@ -319,16 +320,211 @@
       call for you, we need to do some low level hacking to
       illustrate exactly how the system calls work.</para>
 
-      <para></para>
+      <para>We will illustrate how probably the most simple system
+      call, <computeroutput>getpid()</computeroutput>, works.  This
+      call takes no arguments and returns the ID of the currently
+      running program (or process; we'll look more at the process in
+      later weeks).</para>
+
+      <example>
+	<title>getpid() example</title>
+	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk3/code/getpid.c" format="linespecific">
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+
+      <para>We start by writing a small C program which we can start
+      to illustrate the mechanism behind system calls.  The first
+      thing to note is that there is a
+      <computeroutput>syscall</computeroutput> argument provided by
+      the system libraries for directly making system calls.  This
+      provides an easy way for programmers to directly make systems
+      calls without having to know the exact assembly language
+      routines for making the call on their hardware.  So why do we
+      use <computeroutput>getpid()</computeroutput> at all?  Firstly,
+      it is much clearer to use a symbolic function name in your code.
+      However, more importantly,
+      <computeroutput>getpid()</computeroutput> may work in very
+      different ways on different systems.  For example, on Linux the
+      <computeroutput>getpid()</computeroutput> call can be cached, so
+      if it is run twice the system library will not take the penalty
+      of having to make an entire system call to find out the same
+      information again.</para>
+
+      <para>By convention under Linux, system calls numbers are
+      defined in the <computeroutput>asm/unistd.h</computeroutput>
+      file from the kernel source.  Being in the
+      <computeroutput>asm</computeroutput> subdirectory, this is
+      different for each architecture Linux runs on.  Again by
+      convention, system calls numbers are given a
+      <computeroutput>#define</computeroutput> name consisting of
+      <computeroutput>__NR_</computeroutput>.  Thus you can see our
+      code will be making the <computeroutput>getpid</computeroutput>
+      system call, storing the value in
+      <computeroutput>pid</computeroutput>.</para>
+
+      <para>We will have a look at how several architectures implement
+      this code under the hood.  We're going to look at real code, so
+      things can get quite hairy.  But stick with it -- this is
+      <emphasis>exactly</emphasis> how your system works!</para>
+
+      <sect3>
+	<title>PowerPC</title>
+
+	<para>PowerPC is a RISC architecture common in older Apple
+	computers, and the core of devices such as the latest
+	version of the Xbox.</para>
+
+	<example>
+	  <title>PowerPC system call example</title>
+	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk3/code/unistd-powerpc.h" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+	
+	<para>This code snippet from the kernel header file
+	<computeroutput>asm/unistd.h</computeroutput> shows how we can
+	implement system calls on PowerPC.  It looks very complicated,
+	but it can be broken down step by step.</para>
+
+	<para>Firstly, jump to the end of the example where the
+	<computeroutput>_syscallN</computeroutput> macros are defined.
+	You can see there are many macros, each one taking
+	progressively one more argument.  We'll concentrate on the
+	most simple version,
+	<computeroutput>_syscall0</computeroutput> to start with.  It
+	only takes two arguments, the return type of the system call
+	(e.g. a C <computeroutput>int</computeroutput> or
+	<computeroutput>char</computeroutput>, etc) and the name of
+	the system call.  For <computeroutput>getpid</computeroutput>
+	this would be done as
+	<computeroutput>_syscall0(int,getpid)</computeroutput>.</para>
+
+	<para>Easy so far!  We now have to start pulling apart
+	<computeroutput>__syscall_nr</computeroutput> macro.  This is
+	not dissimilar to where we were before, we take the number of
+	arguments as the first paramater, the type, name and then the
+	actual arugments.</para>
+
+	<para>The first step is declaring some names for registers.
+	What this essentially does is says
+	<computeroutput>__sc_0</computeroutput> refers to
+	<computeroutput>r0</computeroutput> (i.e. register 0).  The
+	compiler will usually use registers how it wants, so it is
+	important we give it constraints so that it doesn't decide to
+	go using register we need in some ad-hoc manner.</para>
+
+	<para>We then call
+	<computeroutput>sc_loadargs</computeroutput> with the
+	interesting <computeroutput>##</computeroutput> paramater.
+	That is just a <emphasis>paste</emphasis> command, which gets
+	replaced by the <computeroutput>nr</computeroutput> variable.
+	Thus for our example it expands to
+	<computeroutput>__sc_loadargs_0(name, args);</computeroutput>.
+	<computeroutput>__sc_loadargs</computeroutput> we can see
+	below sets <computeroutput>__sc_0</computeroutput> to be the
+	system call number; notice the paste operater again with the
+	<computeroutput>__NR_</computeroutput> prefix we talked about,
+	and the variable name that refers to a specific
+	register.</para>
+
+	<para>So, all this tricky looking code actually does is puts
+	the system call number in register 0!  Following the code
+	through, we can see that the other macros will place the
+	system call arguments into <computeroutput>r3</computeroutput>
+	through <computeroutput>r7</computeroutput> (you can only have
+	a maximum of 5 arguments to your system call).</para>
+
+	<para>Now we are ready to tackle the
+	<computeroutput>__asm__</computeroutput> section.  What we
+	have here is called <emphasis>inline assembely</emphasis>
+	because it is assembler code mixed right in with source code.
+	The exact syntax is a little to complicated to go into right
+	here, but we can point out the important parts.</para>
+
+	<para>Just ignore the
+	<computeroutput>__volatile__</computeroutput> bit for now; it
+	is telling the compiler that this code is unpredicable so it
+	shouldn't try and be clever with it.  Again we'll start at the
+	end and work backwards.  All the stuff after the colons is a
+	way of communicating to the compiler about what the inline
+	assembly is doing to the CPU registers.  The compiler needs to
+	know so that it doesn't try using any of these registers in
+	ways that might cause a crash.</para>
+
+	<para>But the interesting part is the two assembly statements
+	in the first argument.  The one that does all the work is the
+	<computeroutput>sc</computeroutput> call.  That's all you need
+	to do to make your system call!</para>
+
+	<para>So what happens when this call is made?  Well, the
+	processor is interrupted knows to transfer control to a
+	specific piece of code setup at system boot time to handle
+	interrupts.  There are many interrupts; system calls are just
+	one.  This code will then look in register 0 to find the
+	system call number; it then looks up a table and finds the
+	right function to jump to to handle that system call.  This
+	function receives it's arguments in registers 3 - 7.</para>
+
+	<para>So, what happens once the system call handler runs and
+	completes?  Control returns to the next instruction after the
+	<computeroutput>sc</computeroutput>, in this case a
+	<emphasis>memory fence</emphasis> instruction.  What this
+	essentially says is "make sure everything is committed to
+	memory"; remember how we talked about pipelines in the
+	superscalar architecture?  This instruction ensures that
+	everything we think has been written to memory actually has
+	been, and isn't making it's way through a pipeline
+	somewhere.</para>
+
+	<para>Well, we're almost done!  The only thing left is to
+	return the value from the system call.  We see that
+	<computeroutput>__sc_ret</computeroutput> is set from r3 and
+	<computeroutput>__sc_err</computeroutput> is set from r0.
+	This is interesting; what are these two values all
+	about?</para>
+
+	<para>One is the return value, and one is the error value.
+	Why do we need two variables?  System calls can fail, just as
+	any other function.  The problem is that a system call can
+	return any possible value; we can not say "a negative value
+	indicates failure" since a negative value might be perfectly
+	acceptable for some particular system call.</para>
+
+	<para>So our system call function, before returning, ensures
+	its result is in register r3 and any error code is in register
+	r0.  We check the error code to see if the top bit is set;
+	this would indicate a negative number.  If so, we set the
+	global <computeroutput>errno</computeroutput> value to it
+	(this is the standard varaible for getting error information
+	on call failure) and set the return to be
+	<computeroutput>-1</computeroutput>.  Of course, if a valid
+	result is received we return it directly.</para>
+
+	<para>So our calling function should check the return value is
+	not <computeroutput>-1</computeroutput>; if it is it can check
+	errno to find the exact reason why the call failed.</para>
+
+	<para>And that is an entire system call on a PowerPC!</para>
+
+      </sect3>
+
+      <sect3>
+	<title>x86 system calls</title>
+
+	<para>XXX Compare and Contrast with register starved x86, esp on
+	return</para>
+
+      </sect3>
 
     </sect2>
   </sect1>
 
 </chapter>
 
-<!--
-Local Variables:
-mode: sgml
-sgml-parent-document: ("../csbu.sgml" "book" "chapter")
-End:
--->
+<!-- Local Variables: mode: sgml sgml-parent-document: ("../csbu.sgml"
+"book" "chapter") End: -->
