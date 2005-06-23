@@ -8,7 +8,6 @@
     <para>The operating system underpins the entire operation of the
     modern computer.</para>
 
-
     <sect2>
       <title>Abstraction of hardware</title>
 
@@ -407,8 +406,8 @@
 	<para>Easy so far!  We now have to start pulling apart
 	<computeroutput>__syscall_nr</computeroutput> macro.  This is
 	not dissimilar to where we were before, we take the number of
-	arguments as the first paramater, the type, name and then the
-	actual arugments.</para>
+	arguments as the first parameter, the type, name and then the
+	actual arguments.</para>
 
 	<para>The first step is declaring some names for registers.
 	What this essentially does is says
@@ -420,14 +419,14 @@
 
 	<para>We then call
 	<computeroutput>sc_loadargs</computeroutput> with the
-	interesting <computeroutput>##</computeroutput> paramater.
+	interesting <computeroutput>##</computeroutput> parameter.
 	That is just a <emphasis>paste</emphasis> command, which gets
 	replaced by the <computeroutput>nr</computeroutput> variable.
 	Thus for our example it expands to
 	<computeroutput>__sc_loadargs_0(name, args);</computeroutput>.
 	<computeroutput>__sc_loadargs</computeroutput> we can see
 	below sets <computeroutput>__sc_0</computeroutput> to be the
-	system call number; notice the paste operater again with the
+	system call number; notice the paste operator again with the
 	<computeroutput>__NR_</computeroutput> prefix we talked about,
 	and the variable name that refers to a specific
 	register.</para>
@@ -441,14 +440,14 @@
 
 	<para>Now we are ready to tackle the
 	<computeroutput>__asm__</computeroutput> section.  What we
-	have here is called <emphasis>inline assembely</emphasis>
+	have here is called <emphasis>inline assembly</emphasis>
 	because it is assembler code mixed right in with source code.
 	The exact syntax is a little to complicated to go into right
 	here, but we can point out the important parts.</para>
 
 	<para>Just ignore the
 	<computeroutput>__volatile__</computeroutput> bit for now; it
-	is telling the compiler that this code is unpredicable so it
+	is telling the compiler that this code is unpredictable so it
 	shouldn't try and be clever with it.  Again we'll start at the
 	end and work backwards.  All the stuff after the colons is a
 	way of communicating to the compiler about what the inline
@@ -500,7 +499,7 @@
 	r0.  We check the error code to see if the top bit is set;
 	this would indicate a negative number.  If so, we set the
 	global <computeroutput>errno</computeroutput> value to it
-	(this is the standard varaible for getting error information
+	(this is the standard variable for getting error information
 	on call failure) and set the return to be
 	<computeroutput>-1</computeroutput>.  Of course, if a valid
 	result is received we return it directly.</para>
@@ -516,8 +515,88 @@
       <sect3>
 	<title>x86 system calls</title>
 
-	<para>XXX Compare and Contrast with register starved x86, esp on
-	return</para>
+	<para>Below we have the same interface as implemented for the
+	x86 processor.</para>
+
+	<example>
+	  <title>x86 system call example</title>
+	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk3/code/unistd-x86.h" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+	<para>The x86 architecture is very different from the PowerPC
+	that we looked at previously.  The x86 is classed as a CISC
+	processor as opposed to the RISC PowerPC, and has dramatically
+	less registers.</para>
+
+	<para>Start by looking at the most simple
+	<computeroutput>_syscall0</computeroutput> macro.  It simply
+	calls the <computeroutput>int</computeroutput> instruction
+	with a value of <computeroutput>0x80</computeroutput>.  This
+	instruction makes the CPU raise interrupt 0x80, which will
+	jump to code that handles system calls in the kernel.</para>
+
+	<para>We can start inspecting how to pass arguments with the
+	longer macros.  Notice how the PowerPC implementation cascaded
+	macros downwards, adding one argument per time.  This
+	implementation has slightly more copied code, but is a little
+	easier to follow.</para>
+
+	<para>x86 register names are based around letters, rather than
+	the numerical based register names of PowerPC.  We can see
+	from the zero argument macro that only the
+	<computeroutput>A</computeroutput> register gets loaded; from
+	this we can tell that the system call number is expected in
+	the <computeroutput>EAX</computeroutput> register.  As we
+	start loading registers in the other macros you can see the
+	short names of the registers in the arguments to the
+	<computeroutput>__asm__</computeroutput> call.</para>
+
+	<para>We see something a little more interesting in
+	<computeroutput>__syscall6</computeroutput>, the macro taking
+	6 arguments.  Notice the <computeroutput>push</computeroutput>
+	and <computeroutput>pop</computeroutput> instructions?  These
+	work with the stack on x86, "pushing" a value onto the top of
+	the stack in memory, and popping the value from the stack back
+	into memory.  Thus in the case of having six registers we need
+	to store the value of the <computeroutput>ebp</computeroutput>
+	register in memory, put our argument in in (the
+	<computeroutput>mov</computeroutput> instruction), make our
+	system call and then restore the original value into
+	<computeroutput>ebp</computeroutput>.  Here you can see the
+	disadvantage of not having enough registers; stores to memory
+	are expensive so the more you can avoid them, the
+	better.</para>
+
+	<para>Another thing you might notice there is nothing like the
+	<emphasis>memory fence</emphasis> instruction we saw
+	previously with the PowerPC.  This is because on x86 the
+	effect of all instructions will be guaranteed to be visible
+	when the complete.  This is easier for the compiler (and
+	programmer) to program for, but offers less
+	flexibility.</para>
+
+	<para>The only thing left to contrast is the return value.  On
+	the PowerPC we had two registers with return values from the
+	kernel, one with the value and one with an error code.
+	However on x86 we only have one return value that is passed
+	into <computeroutput>__syscall_return</computeroutput>.  That
+	macro casts the return value to <computeroutput>unsigned
+	long</computeroutput> and compares it to an (architecture and
+	kernel dependent) range of negative values that might
+	represent error codes (note that the
+	<computeroutput>errno</computeroutput> value is positive, so
+	the negative result from the kernel is negated).  However,
+	this means that system calls can not return small negative
+	values, since they are indistinguishable from error codes.
+	Some system calls that have this requirement, such as
+	<computeroutput>getpriority()</computeroutput>, add an offset
+	to their return value to force it to always be positive; it is
+	up to the userspace to realise this and subtract this constant
+	value to get back to the "real" value.</para>
 
       </sect3>
 
@@ -526,5 +605,9 @@
 
 </chapter>
 
-<!-- Local Variables: mode: sgml sgml-parent-document: ("../csbu.sgml"
-"book" "chapter") End: -->
+<!-- 
+Local Variables: 
+mode: sgml 
+sgml-parent-document: ("../csbu.sgml" "book" "chapter") 
+End: 
+-->
