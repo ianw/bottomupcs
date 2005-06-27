@@ -281,21 +281,6 @@
       <para>Although the details of the process can get quite hairy,
       this is basically all their is to a system call.</para>
 
-	<sect4>
-	  <title>Privilege escalation</title>
-
-	  <para>As you will constantly see, things are never quite as
-	  simple as they first seem!  One problem with traps is that
-	  they are very expensive for the processor to implement.
-	  </para>
-
-	  <para>When you take a trap you need to transfer into the
-	  kernel, which means doing a lot of work to save the current
-	  processes state (as we see in future weeks).  This might
-	  require the processor flushing it's pipeline.</para>
-
-	</sect4>
-
       </sect3>
 
       <sect3>
@@ -603,6 +588,79 @@
     </sect2>
   </sect1>
 
+  <sect1>
+    <title>Privileges</title>
+
+    <sect2>
+      <title>Hardware</title>
+
+	<para>We mentioned how one of the major tasks of the operating
+      system is to implement secuirty; that is to not allow one
+      application or user to interfer with any other that is running
+      in the system.  This means applications should not be able to
+      overwrite each others memory or files, and only access system
+      resources as dictated by system policy.</para>
+
+	<para>However, when an application is running it has exclusive
+      use of the processor.  We see how this works when we examine
+      processes in the next chapter.  Ensuring the application only
+      accesses memory it owns is implemented by the virtual memory
+      system, which we examine in the chapter after next.  The
+      essential point is that the hardware is responsible for
+      enforcing these rules.</para>
+      
+      <para>The system call interface we have examined is the
+	gateway to the application getting to system resources.  By
+	forcing the application to request resources through a system
+	call into the kernel, the kernel can enforce rules about what
+	sort of access can be provided.  For example, when an
+	application makes an <computeroutput>open()</computeroutput>
+	system call to open a file on disk, it will check the
+	persmissions of the user agasinst the file permissions and
+	allow or deny access.</para>
+  
+
+      <sect3>
+	<title>Privilege Levels</title>
+
+	<para>The hardware will usually enforce protection.</para>
+
+	<figure>
+	  <title>Rings</title>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk3/figures/priv.eps" format="EPS">
+	    </imageobject>
+	    <imageobject>
+	      <imagedata fileref="wk3/figures/priv.png" format="PNG">
+	    </imageobject>
+	    <textobject>
+	      <phrase>Privilege levels on x86</phrase>
+	    </textobject>
+	  </mediaobject>
+	</figure>
+
+
+      </sect3>
+    
+    </sect2>
+    
+    <sect2>
+      <title>Escalation</title>
+      
+      <para>One problem with traps is that they are very expensive for
+      the processor to implement.  When you take a trap you need to
+      save all the state of the running process and jump into the
+      system call handler, which looks up the system call and further
+      transfers into the system call handler.  Then the process needs
+      to be reversed to get back to the program that called it.  An
+      additional overhead is that this also probably requires flushing
+      the pipeline of instructions.</para>
+      
+    </sect2>
+    
+  </sect1>
+  
 </chapter>
 
 <!-- 
