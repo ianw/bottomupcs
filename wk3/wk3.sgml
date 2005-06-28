@@ -190,6 +190,38 @@
 
       </sect3>
 
+      <sect3>
+	<title>Virtualisation</title>
+
+	<para>Closely related to kernel is the concept of
+	virtualisation of hardware.  Modern computers are very
+	powerful, and often it is useful to not thing of them as one
+	whole system but split a single physical computer up into
+	seperate "virtual" machines.  Each of these virtual machines
+	looks for all intents and purposes as a completely separate
+	machine, although physically they are all in the same box, in
+	the same place.</para>
+
+	<para>This is useful for any number of reasons.</para>
+
+	<figure>
+	  <title>The Operating System</title>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk3/figures/virtual.eps" format="EPS">
+	    </imageobject>
+	    <imageobject>
+	      <imagedata fileref="wk3/figures/virtual.png" format="PNG">
+	    </imageobject>
+	    <textobject>
+	  <phrase>Some different virtualisation methods.</phrase>
+	    </textobject>
+	  </mediaobject>
+	</figure>
+
+	<para>describe above models</para>
+      </sect3>
+
     </sect2>
 
     <sect2>
@@ -623,7 +655,8 @@
       <sect3>
 	<title>Privilege Levels</title>
 
-	<para>The hardware will usually enforce protection.</para>
+	<para>Hardware protection can usually be seen as a set of
+	concentric rings around a core set of operations.</para>
 
 	<figure>
 	  <title>Rings</title>
@@ -640,25 +673,86 @@
 	  </mediaobject>
 	</figure>
 
+	<para>In the inner most ring are the most protected
+	instructions; those that only the kernel should be allowed to
+	call.  For example, the <computeroutput>HLT</computeroutput>
+	instruction to halt the processor should not be allowed to be
+	run by a user application, since it would stop the entire
+	computer from working.  However, the kernel needs to be able
+	to call this instruction when the computer is legitimatlely
+	shut down.<footnote> <para>What happens when a "naughty"
+	appliction calls that instruction anyway?  The hardware will
+	usually raise an exception, which will involve jumping to a
+	specified handler in the operating system similar to the
+	system call handler.  The operating system will then probably
+	terminate the program, usually giving the user some error
+	about how the application has crashed.</para></footnote></para>
+
+	<para>Each inner ring can access any instructions protected by
+	a further out ring, but not any protected by a futher in ring.
+	Not all architectures have multiple levels of rings as above,
+	but most will either provide for at least a "kernel" and
+	"user" level.</para>
+
+	<sect4>
+	  <title>386 protection model</title>
+
+	  <para>The 386 protection model has four rings, though most
+	  operating systems (such as Linux and Windows) only use two
+	  of the rings to maintain compatability with other
+	  architectures that do now allow as many discrete protection
+	  levels.</para>
+
+	  <para>386 maintains privliges by making each piece of
+	  application code running in the system have a small
+	  descriptor, called a <emphasis>code descriptor</emphasis>,
+	  which describes, amongst other things, its privilge level.
+	  When running application code makes a jump into some other
+	  code outside the region described by its code descriptor,
+	  the privilge level of the target is checked.  If it is
+	  higher than the currently running code, the jump is
+	  disallowed by the hardware (and the application will crash).
+	  </para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Raising Privilge</title>
+
+	  <para>Applications may only raise their privilege level by
+	specific calls that allow it, such as the instruction to
+	implement a system call.  These are usually referred to as a
+	<emphasis>call gate</emphasis> because they function just as a
+	physical gate; a small entry through an otherwise inpenatrable
+	wall.  When that instruction is called we have seen how the
+	hardware completely stops the running application and hands
+	control over to the kernel.  The kernel must act as a
+	gatekeeper; ensuring that nothing nasty is coming through the
+	gate.  This means it must check system call arguments
+	carefully to make sure it will not be fooled into doing
+	anything it shouldn't (if it can be, that is a security bug).
+	As the kernel runs in the innermost ring, it has permissions
+	to do any operation it wants; when it is finished it will
+	return control back to the application which will again be
+	running with it's lower privilege level.</para>
+	</sect4>
+
+	<sect4>
+	  <title>Fast System Calls</title>
+
+	  <para>One problem with traps is that they are very expensive
+	  for the processor to implement.  The process of looking up
+	  the tables </para>
+
+	  <para>Modern processors have realised this overhead and
+	  strive to reduce it.</para>
+	</sect4>
 
       </sect3>
-    
+
     </sect2>
-    
-    <sect2>
-      <title>Escalation</title>
-      
-      <para>One problem with traps is that they are very expensive for
-      the processor to implement.  When you take a trap you need to
-      save all the state of the running process and jump into the
-      system call handler, which looks up the system call and further
-      transfers into the system call handler.  Then the process needs
-      to be reversed to get back to the program that called it.  An
-      additional overhead is that this also probably requires flushing
-      the pipeline of instructions.</para>
-      
-    </sect2>
-    
+
+
   </sect1>
   
 </chapter>
