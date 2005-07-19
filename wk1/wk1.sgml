@@ -26,7 +26,7 @@
 	one's column, a two's columns, a four's column, an eight's
 	column (and so on).  In fact we generalise it as below.
 	</para>
-
+	
 	<table>
 	  <title>Binary</title>
 	  <tgroup cols="8">
@@ -54,6 +54,166 @@
 	    </tbody>
 	  </tgroup>
 	</table>
+	
+      </sect3>
+
+      <sect3>
+	<title>Bits and Bytes</title>
+
+	<para>We call one binary digit a <emphasis>bit</emphasis>.
+	Thus one bit can represent two states; on or off, true or
+	false, high or low voltage.</para>
+
+	<para>If we want to represent more than two things, we need
+	more bits.  For example, to represent all the letters of the
+	alphabet we would need at least enough different combinations
+	to represent all the lower case letters, the upper case
+	letters, numbers and punctuation, plus a few extras.  Adding
+	this up means we need probably around 80 different
+	combinations.</para>
+
+	<para>If we have two bits, we can represent four possible
+	unique combinations (<computeroutput>00 01 10
+	11</computeroutput>).  If we have three bits, we can represent
+	8 different combinations.  Thus for every
+	<computeroutput>n</computeroutput> bits we can represent
+	<computeroutput>2<superscript>n</superscript></computeroutput>
+	unique combinations.</para>
+
+	<para>Thus 8 bits gives us
+	<computeroutput>2<superscript>8</superscript> =
+	128</computeroutput> unique representations.  One less bit and
+	we would only have 64 unique representations; not enough for
+	our alphabet as we described above.  Thus the lowest common
+	grouping of bits is in groups of 8, which we call a
+	<emphasis>byte</emphasis>.  Guess how bit a C
+	<computeroutput>char</computeroutput> variable is?  One
+	byte.</para>
+
+	<sect4>
+	  <title>16, 32 and 64 bit computers</title>
+
+	  <para>Numbers do not fit into bytes; hopefully your bank
+	  balance in dollars will need more range than can fit into
+	  one byte!  Most modern architectures are <emphasis>32
+	  bit</emphasis> computers.  This means they work with 4 bytes
+	  at a time when processing and reading or writing to memory.
+	  We refer to 4 bytes as a <emphasis>word</emphasis>; this is
+	  analogous to language where letters (bits) make up words in a
+	  sentence, except in computing every word has the same size!
+	  The size of a C <computeroutput>int</computeroutput>
+	  variable is 32 bits.  Newer architectures are 64 bits, which
+	  doubles the size the processor works with (8 bytes).</para>
+
+	</sect4>
+
+
+	<sect4>
+	  <title>Kilo, Mega and Giga Bytes</title>
+
+	  <para>Computers deal with a lot of bytes; that's what makes
+	  them so powerful!</para>
+
+	  <para>Computer scientists soon needed a way to talk about
+	  these huge amounts of bytes.  A natural way was to use the
+	  "International System of Units" (SI) prefixes as used in
+	  most other scientific areas.  So for example, kilo refers to
+	  10<superscript>3</superscript> or 1000 units, as in a
+	  kilogram has 1000 grams.</para>
+
+	  <para>1000 is a nice round number in base 10, but in binary
+	  it is <computeroutput>1111101000</computeroutput> which is
+	  not a particularly "round" number.  However, 1024 (or
+	  2<superscript>10</superscript>) is
+	  (<computeroutput>10000000000></computeroutput>), and happens
+	  to be quite close to the base ten meaning of kilo (1000 as
+	  opposed to 1024).</para>
+
+	  <para>Thus 1024 bytes became known as a
+	  <emphasis>kilobyte</emphasis>.  The first mass market
+	  computer was the Commodore 64, so named because it
+	  had 64 kilobytes of storage.</para>
+
+	  <para>Kilobytes soon ran out however.  The next SI unit is
+	  "mega" for <computeroutput>10<superscript>6</superscript>.
+	  As it happens,
+	  <computeroutput>2<superscript>20</superscript></computeroutput>
+	  is again close to the SI base 10 definition; 1048576 as
+	  opposed to 1000000.</para>
+
+	  <para>The units keep increasing by powers of 10; each
+	  time it diverges further from the base SI meaning.</para>
+
+	  <table>
+	    <title>Bytes</title>
+	    <tgroup cols="2">
+	      <tbody>
+		<row>
+		  <entry>2<superscript>10</superscript></entry>
+		  <entry>Kilobyte</entry>
+		</row>
+		<row>
+		  <entry>2<superscript>20</superscript></entry>
+		  <entry>Megabyte</entry>
+		</row>
+		<row>
+		  <entry>2<superscript>30</superscript></entry>
+		  <entry>Gigabyte</entry>
+		</row>
+		<row>
+		  <entry>2<superscript>40</superscript></entry>
+		  <entry>Terrabyte</entry>
+		</row>
+		<row>
+		  <entry>2<superscript>50</superscript></entry>
+		  <entry>Petabyte</entry>
+		</row>
+		<row>
+		  <entry>2<superscript>60</superscript></entry>
+		  <entry>Exabyte</entry>
+		</row>
+	      </tbody>
+	    </tgroup>
+	  </table>
+
+	  <para>Thus a 32 bit computer can address up to four
+	  gigabytes of memory since the extra two bits can represent
+	  four groups of
+	  <computeroutput>2<superscript>30</superscript>
+	  bytes.</computeroutput>.  A 64 bit computer can address up
+	  to 8 exabytes; you might be interested in working out just
+	  how bit a number this is!  To get a feel for how bit that
+	  number is, calculate how long it would take to count to
+	  <computeroutput>2<superscript>64</superscript></computeroutput>
+	  if you incremented once per second.</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Kilo, Mega and Giga Bits</title>
+
+	  <para>Apart from the confusion related to the overloading of
+	  SI units between binary and base 10 capacities will often be
+	  quoted in terms of <emphasis>bits</emphasis> rather than
+	  bytes.</para>
+
+	  <para>Generally this happens when talking about networking
+	  devices; you may have noticed that your ADSL connection is
+	  described as something like 1500 kilobits/second.  The
+	  calculation is simple; multiply by 1000 (for the kilo),
+	  divide by 8 to get bytes and then 1024 to get kilobytes (so
+	  1500 kilobits/s = 183 kilobytes/s).</para>
+
+	  <para>The SI standardisation body has recognised these dual
+	  uses, and has specified unique prefixes for binary usage.
+	  Under the standard 1024 bytes is a
+	  <computeroutput>kibibyte</computeroutput>, short for
+	  <emphasis>kilo binary</emphasis> byte (shortened to KiB).
+	  The other prefixes have a similar prefix (Mebibyte, for
+	  example).  Tradition largely prevents use of these terms,
+	  but you may seem them in some literature.</para>
+
+	</sect4>
 
       </sect3>
 
