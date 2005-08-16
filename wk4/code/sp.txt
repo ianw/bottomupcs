@@ -1,0 +1,25 @@
+$ cat sp.c
+void function(void)
+{
+        int i = 100;
+        int j = 200;
+        int k = 300;
+}
+
+$ gcc -fomit-frame-pointer -S sp.c
+
+$ cat sp.s
+        .file   "sp.c"
+        .text
+.globl function
+        .type   function, @function
+function:
+        subl    $16, %esp
+        movl    $100, 4(%esp)
+        movl    $200, 8(%esp)
+        movl    $300, 12(%esp)
+        addl    $16, %esp
+        ret
+        .size   function, .-function
+        .ident  "GCC: (GNU) 4.0.2 20050806 (prerelease) (Debian 4.0.1-4)"
+        .section        .note.GNU-stack,"",@progbits

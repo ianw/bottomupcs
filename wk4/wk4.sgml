@@ -107,11 +107,17 @@
 	function is called it gets a new <computeroutput>stack
 	frame</computeroutput>.  This is an area of memory which
 	usually contains, at a minimum, the address to return to when
-	complete, the arguments and space for local variables.</para>
+	complete, the input arguments to the function and space for
+	local variables.</para>
 
 	<para>By convention, stacks usually <emphasis>grow
-	down</emphasis>.  This means that the stack starts at a high
-	address in memory and progressivly gets lower.</para>
+	down</emphasis><footnote> <para>Some architectures, such as
+	PA-RISC from HP, have stacks that grow upwards.  On some other
+	architectures, such as IA64, there are other storage areas
+	(the register backing store) that grow from the bottom toward
+	the stack.</para></footnote> .  This means that the stack
+	starts at a high address in memory and progressivly gets
+	lower.</para>
 
 	<figure>
 	  <title>The Stack</title>
@@ -151,8 +157,8 @@
 	  <listitem>
   	    <para>This facilitates <emphasis>recursive</emphasis>
 	    calls.  This means a function is free to call its self
-	    again, becuase a new stack frame will be setup
-	    regardless.</para>
+	    again, becuase a new stack frame will be created for all
+	    its local variables.</para>
 	  </listitem>
 
 	  <listitem>
@@ -243,17 +249,55 @@
 	    structure).</para>
 	  </listitem>
 
-	  <listitem>
-	    <para>The lowest possible address of the stack as it grows
-	    downwards is called the
-	    <computeroutput>brk</computeroutput> and can be
-	    manipulated with the
-	    <computeroutput>brk()</computeroutput> call.  Normal
-	    programs should not need to modify this value; if you need
-	    memory not in a local variable you should use the
-	    <computeroutput>malloc()</computeroutput> calls.</para>
-	  </listitem>
 	</itemizedlist>
+
+	<para>To keep track of the current growth of the stack, the
+	hardware defines a register as the <emphasis>stack
+	pointer</emphasis>.  The compiler (or the programmer, when
+	writing in assembley) uses this register to keep track of the
+	current top of the stack.</para>
+
+	<example id="stack-pointer">
+	  <title>Stack pointer example</title>
+	  <programlisting><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk4/code/sp.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>    
+	
+	<para>Above we show a simple function allocating three
+	variables on the stack.  The disassembley illustrates the use
+	of the stack pointer on the x86 architecture<footnote>
+	<para>Note we used the special flag to gcc
+	<computeroutput>-fomit-frame-pointer</computeroutput> which
+	specifies that an extra register should
+	<emphasis>not</emphasis> be used to keep a pointer to the
+	start of the stack frame.  Having this pointer helps debuggers
+	to walk upwards through the stack frames, however it makes one
+	less register available for other
+	applications.</para></footnote>.  Firstly we allocate some
+	space on the stack for our local variables.  Since the stack
+	grows down, we subtract from the value held in the stack
+	pointer.  The value 16 is a value large enough to hold our
+	local variables, but may not be exactly the size required (for
+	example with 3 4 byte <computeroutput>int</computeroutput>
+	values we really only need 12 bytes, not 16) to keep alignment
+	of the stack in memory on certain boundaries as the compiler
+	requires. </para>
+
+	<para>Then we move the values into the stack memory (and in a
+	real function, use them).  Finally, before returning to our
+	parent function we "pop" the values off the stack by moving
+	the stack pointer back to where it was before we started.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Memory Layout</title>
+
+	<para>show layout kernel -- stack -- mmap -- brk -- bss --
+	data -- code </para>
 
       </sect3>
 

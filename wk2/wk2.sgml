@@ -343,6 +343,19 @@
 	memory the smaller it is.  Of course, if you can find a way to
 	change this equation, you'll end up a billionaire!</para>
 
+      <sect3>
+	<title>Cache in depth</title>
+
+	<para>Cache is one of the most important elements of the CPU
+	  architecture.  To write efficient code developers need to
+	  have an understanding of how the cache in their systems
+	  works.</para>
+
+	<para>l1, l2, l3.  cache line size.  example of thrashing
+	cache. write-through v write-back.  </para>
+
+      </sect3>
+
       </sect2>
 
     </sect1>
