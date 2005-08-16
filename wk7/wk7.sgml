@@ -6,7 +6,8 @@
     <title>Review of executable files</title>
 
     <para>We know that a program running in memory has two major
-    components in <emphasis>code</emphasis> and
+    components in <emphasis>code</emphasis> (also commonly known as a
+    <emphasis>text</emphasis> for historical reasons) and
     <emphasis>data</emphasis>.  We also know, however, an executable
     does not live its life in memory, but spends most of its life as a
     file on a disk.  This file is in what is referred to as a binary
@@ -212,10 +213,275 @@
 	code waiting to be linked into an executable.  One or more
 	sections map to a <emphasis>segment</emphasis> in the
 	executable.</para>
+
+	<sect4>
+	  <title>Segments</title>
+
+	  <para>As we have done before, it is sometimes easier to look
+	  at the higher level of abstraction (segments) before
+	  inspecting the lower layers.</para>
+
+	  <para>As we mentioned the ELF file has an header that
+	  describes the overall layout of the file.  The ELF header
+	  actually points to another group of headers called the
+	  <emphasis>program headers</emphasis>.  These headers
+	  describe to the operating system anything that might be
+	  required for it to load the binary into memory and execute
+	  it.  Segments are described by program headers, but so are
+	  some other things reuquired to get the executable
+	  running.</para>
+
+	  <example id="program-header">
+	    <title>The Program Header</title>
+	    <programlisting><inlinemediaobject>
+		<imageobject>
+		  <imagedata fileref="wk7/code/program-header.txt" format="linespecific">
+	      </imageobject>
+	      </inlinemediaobject></programlisting>
+	  </example>    
+	  
+	  <para>The definition of the program header is seen above.
+	  You might have noticed from the ELF header definition above
+	  how there were fields
+	  <computeroutput>e_phoff</computeroutput>,
+	  <computeroutput>e_phnum</computeroutput> and
+	  <computeroutput>e_phentsize</computeroutput>; these are
+	  simply the offset in the file where the program headers
+	  start, how many program headers there are and how big each
+	  program header is.  With these three bits of information you
+	  can easily find and read the program headers.</para>
+
+	  <para>As we mentioned, program headers more than just
+	  segments.  The <computeroutput>p_type</computeroutput> field
+	  defines just what the program header is defining.  For
+	  example, if this field is
+	  <computeroutput>PT_INTERP</computeroutput> the header is
+	  defined as meaning a string pointer to an
+	  <emphasis>interpreter</emphasis> for the binary file.  We
+	  discussed compiled versus interpreted languages previously
+	  and made the distinction that a compiler builds a binary
+	  which can be run in a stand alone fashion.  Why should it
+	  need an interpreter?  As always, the true picture is a
+	  little more complicated.  There are several reasons why a
+	  modern system wants flexibility when loading executable
+	  files, and to do this some information can only be
+	  adequately acquired at the actual time the program is set up
+	  to run.  We see this in future chapters where we look into
+	  dynamic linking.  Consequently some minor changes might need
+	  to be made to the binary to allow it to work properly at
+	  runtime.  Thus the usual interpreter of a binary file is the
+	  <emphasis>dyanmic loader</emphasis>, so called because it
+	  takes the final steps to complete loading of the exectable
+	  and prepare the binary image for running.
+	  </para>
+
+	  <para>Segments are described with a value of
+	  <computeroutput>PT_LOAD</computeroutput> in the
+	  <computeroutput>p_type</computeroutput> field.  Each segment
+	  is then described by the other fields in the program header.
+	  The <computeroutput>p_offset</computeroutput> field tells
+	  you how far into the file on disk the data for the segment
+	  is.  The <computeroutput>p_vaddr</computeroutput> field
+	  tells you what address that data is to live at in virtual
+	  memory (<computeroutput>p_paddr</computeroutput> describes
+	  the physical address, which for modern system is not used).
+	  The two flags <computeroutput>p_filesz</computeroutput> and
+	  <computeroutput>p_memsz</computeroutput> work to tell you
+	  how big the segment is on disk and how big it should be in
+	  memory.  If the memory size is greater than the disk size,
+	  then the overlap should be filled with zeros.  In this way
+	  you can save considerable space in your binaries by not
+	  having to waste space for empty global variables.  Finally
+	  <computeroutput>p_flags</computeroutput> indicates the
+	  permissions on the segment.  Execute, read and write
+	  permissions can be specified in any combiation; for example
+	  code segements should be marked as read and execute only,
+	  data sections as read and write with no exectue.
+	  </para>
+
+	  <para>There are a few other segment types defined in the
+	  program headers, they are described more fully in the
+	  standards specification (XXX).</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Sections</title>
+
+	  <para>As we have mentioned, sections make up segments.
+	  Sections are a way to organise the binary into logical areas
+	  to communicate information between the compiler and the
+	  linker.  In some special binaries, such as the linux kernel,
+	  sections are used in more specific ways.</para>
+
+	  <para>We've seen how segments utimatley come down to a blob
+	  of data in a file on disk with some descriptions about where
+	  it should be loaded and what permissions it has. (XXX)</para>
+
+	  <para>Sections have a similar header to segments.</para>
+
+	  <example id="section-header">
+	    <title>Sections </title>
+	    <programlisting><inlinemediaobject>
+		<imageobject>
+		  <imagedata fileref="wk7/code/section-header.txt" format="linespecific">
+		</imageobject>
+	      </inlinemediaobject></programlisting>
+	  </example>    
+
+	  <para>Sections have a few more types defined for the
+	  <computeroutput>sh_type</computeroutput> field; for example
+	  a section of type
+	  <computeroutput>SH_PROGBITS</computeroutput> is defined as a
+	  section that hold binary data for use by the program.  Other
+	  flags say if this section is a symbol table (used by the
+	  linker or debugger for example) or maybe something for the
+	  dynamic loader.</para>
+
+	  <para>There are also more attributes, such as the
+	  <emphasis>allocate</emphasis> attribute which flags that
+	  this section will need memory allocated for it.</para>
+
+	  <para>It is probably best to examine sections through an
+	  example of them in use.  Consier the following
+	  program.</para>
+
+	  <example id="section">
+	    <title>Sections </title>
+	    <programlisting><inlinemediaobject>
+		<imageobject>
+		  <imagedata fileref="wk7/code/sections.c" format="linespecific">
+		</imageobject>
+	      </inlinemediaobject></programlisting>
+	  </example>    
+
+	  <example id="section-readelf">
+	    <title>Sections readelf output </title>
+	    <programlisting>
+	    <inlinemediaobject>
+		<imageobject>
+		  <imagedata fileref="wk7/code/sections.txt" format="linespecific">
+		</imageobject>
+	      </inlinemediaobject></programlisting>
+	  </example>
+
+	  <para>Above we have stripped some parts of the
+	  <application>readelf</application> output for clarity.  We
+	  can analyse each part of our simple program and see what
+	  happens to it.</para>
+
+	  <para>Firstly, let us look at the variable
+	  <computeroutput>big_big_array</computeroutput>, which as the
+	  name suggests is a fairly large global array.  If we skip
+	  down to the symbol table we can see that the variable is at
+	  location <computeroutput>0x100109cc</computeroutput> which
+	  we can correlate to the
+	  <computeroutput>.bss</computeroutput> section in the section
+	  listing, since it starts just below it at
+	  <computeroutput>0x100109c8</computeroutput>.  Note the size,
+	  and how it is quite large.  We mentioned that BSS is a
+	  standard part of a binary image since it would be silly to
+	  require that binary on disk have 10 megabytes of space
+	  allocated to it, when all of that space is going to be zero.
+	  Note that this section has a type of
+	  <computeroutput>NOBITS</computeroutput> meaning that it does
+	  not have any bytes on disk.</para>
+
+	  <para>Thus the <computeroutput>.bss</computeroutput> section
+	  is defined for global variables whose value should be zero
+	  when the program starts.  We have seen how the memory size
+	  can be different to the on disk size in our discussion of
+	  segments; variables being in the
+	  <computeroutput>.bss</computeroutput> section are an
+	  indication that they will be given zero value on program
+	  start.</para>
+
+	  <para>The <computeroutput>a_string</computeroutput> variable
+	  lives in the <computeroutput>.sdata</computeroutput>
+	  section, which stands for <emphasis>small data</emphasis>.
+	  Small data (and the corresponding
+	  <computeroutput>.sbss</computeroutput> section) are sections
+	  that can be reached by an offset from some known pointer.
+	  This means it is much faster to get to data in the sections
+	  as there are no extra lookups and loading of addresses into
+	  memory required.  On the other hand, most architectures are
+	  limited to the size of immediate values you can add to a
+	  register (e.g. saying <computeroutput>r1 = add r2,
+	  70;</computeroutput> 70 is an immediate value, as opposed to
+	  say, adding two values stored in registers
+	  <computeroutput>r1 = add r2,r3</computeroutput>) and can
+	  thus only offset a certain "small" distance from an address
+	  (XXX).
+	  </para>
+
+	  <para>We can also see that our
+	  <computeroutput>a_var_with_value</computeroutput> lives in
+	  the same place.</para>
+
+	  <para><computeroutput>main</computeroutput> however lives in
+	  the <computeroutput>.text</computeroutput> section, as we
+	  expect (remeber the name "text" and "code" are used
+	  interchanably to refer to a program in memory.</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Sections and Segments together</title>
+
+	  <example id="sections-segments">
+	    <title>Sections and Segments</title>
+	    <programlisting><inlinemediaobject>
+		<imageobject>
+		  <imagedata fileref="wk7/code/sections-segments.txt" format="linespecific">
+		</imageobject>
+	    </inlinemediaobject></programlisting>
+	  </example>    
+
+	  <para><computeroutput>readelf</computeroutput> shows us the
+	  segments and section mappings in the ELF file for the binary
+	  <computeroutput>/bin/ls</computeroutput>. </para>
+
+	  <para>Skipping to the bottom of the output, we can see what
+	  sections have been moved into what segments.  So, for
+	  example the <computeroutput>.interp</computeroutput> section
+	  is placed into an <computeroutput>INTERP</computeroutput>
+	  flagged segment.  Notice that readelf tells us it is
+	  requesting the interpreter
+	  <computeroutput>/lib/ld.so.1</computeroutput>; this is the
+	  dynamic linker which is run to prepare the binary for
+	  execution.</para>
+
+	  <para>Looking at the two
+	  <computeroutput>LOAD</computeroutput> segments we can see
+	  the distinction between text and data.  Notice how the first
+	  one has only "read" and "execute" permissions, whilst the
+	  next one has read, write and execute permissions?  These
+	  describe the code (r/w) and data (r/w/e) segments.</para>
+
+	  <para>But data should not need to be executable!  Indeed, on
+	  most architectures (for example, the most common x86) the
+	  data section will not be marked as having the data section
+	  executable.  However, the example output above was taken
+	  from a PowerPC machine which has a slightly different
+	  programming model (ABI, see below) requiring that the data
+	  section be executable <footnote> <para>For those that are
+	  curious, the PowerPC ABI calls stubs for functions in
+	  dynamic libraries directly in the GOT, rather than having
+	  them bounce through a seperate PLT entry.  Thus the
+	  processor needs exectute permissions for the GOT section,
+	  which you can see is embedded in the data segment.  This
+	  should make sense after reading the dyanmic linking
+	  chapter!</para></footnote>.  Such is the life of a systems
+	  programmer, where rules were made to be broken!</para>
+
+	  <para>The other intereseting thing to note is that the file
+	  size is the same as the memory size for the code segment,
+	  however memory size is greater than the file size for the
+	  data segment.  This comes from the BSS section which holds
+	  zeroed global variables.</para>
+	</sect4>
       </sect3>
-
     </sect2>
-
   </sect1>
 
   <sect1>
