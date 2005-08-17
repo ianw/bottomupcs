@@ -163,6 +163,82 @@
       can describe languages!</para>
 
     </sect2>
+    <sect2>
+      <title>Assembly Generation</title>
+
+      <para>The job of the compiler is to translate the higher level
+      language into assembely code suitable for the target being
+      compiled for.  Obviously each different architecture has a
+      different instruction set, different numbers of registers and
+      different rules for correct operation.</para>
+
+      <sect3>
+	<title>Alignment</title>
+	
+	<figure>
+	  <title>Alignment</title>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk6/figures/alignment.eps" format="EPS">
+	    </imageobject>
+	    <imageobject>
+	      <imagedata fileref="wk6/figures/alignment.png" format="PNG">
+	    </imageobject>
+	    <textobject>
+	      
+	      <phrase>CPU's can generally only load values into
+		registers from memory on specific alignments.
+		Unaligned loads lead to, at best, performance
+		degredation.</phrase>
+	      
+	    </textobject>
+	  </mediaobject>
+	</figure>
+	
+	<para>Alignment of variables in memory is an important
+	consideration for the compiler, and it requires systems
+	programmers to take alignment into consideration to help it
+	along.</para>
+
+	<para>CPUs can generally not load a value into a register from
+	an aribtrary memory location.  It requires that variables be
+	<emphasis>aligned</emphasis> on certain boundaries.  In the
+	example above, we can see how a 32 bit (4 byte) value is
+	loaded into a register on a machine that requires 4 byte
+	alignment of variables.</para>
+
+	<para>The first variable can be directly loaded into a
+	register, as it falls between 4 byte boundaries.  The second
+	variable, however, spans the 4 byte boundary.  This means that
+	at minimum two loads will be required to get the variable into
+	a single register; firstly the lower half and then the upper
+	half.</para>
+
+	<para>Some architectures can handle unaligned loads in
+	hardware (x86), however others can not have alignment rules
+	violated and will raise an exception (which is generally
+	caught by the operating system which has to manually load the
+	register in parts, causing even more overheads).</para>
+
+	<para>Programmers need to consider alignment especially when
+	creating <computeroutput>struct</computeroutput>s.  Whilst the
+	compiler knows the alignment rules for the architecture it is
+	building for, at times programmers can cause suboptimal
+	behaviour.</para>
+
+	<sect4>
+	  <title>Cache line alignment</title>
+
+	  <para>One particular area where systems programmers can
+	  cause suboptimal behaviour is by creating structures and
+	  variables that span cache lines. (XXX)</para>
+
+	</sect4>
+
+      </sect3>
+
+    </sect2>
+
 
     <sect2>
       <title>Optimisation</title> 
@@ -176,7 +252,78 @@
       knowledge about the particular processor the code is to be run
       on.</para>
 
+      <para>There are some common optimisations the compiler can look
+      at when generating output.  There are many, many more strategies
+      for generating the best code, and it is always an active
+      research area.</para>
+
+      <sect3>
+	<title>General Optimising</title>
+
+	<para>The compiler can often see that a particular piece of
+	code can not be used and so leave it out optimise a particular
+	language construct into something smaller with the same
+	outcome.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Unrolling loops</title>
+
+	<para>If code contains a loop, such as a
+	<computeroutput>for</computeroutput> or
+	<computeroutput>while</computeroutput> loop and the compiler
+	has some idea how many times it will execute, it may be more
+	efficient to <emphasis>unroll</emphasis> the loop so that it
+	executes sequentially.  This means that instead of doing the
+	inside of the loop and then branching back to the start to do
+	repeat the process, the inner loop code is duplicated to be
+	executed again.</para>
+
+	<para>Whilst this increases the size of the code, it may allow
+	the processor to work through the instructions more
+	efficiently as branches can cause inefficiencies in the
+	pipeline of instructions coming into the processor.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Inlining functions</title>
+
+	<para>Similar to unrolling loops, it is possible to put embed
+	called functions within the callee.  The programmer can
+	specify that the compiler should try to do this by specifying
+	the function as <computeroutput>inline</computeroutput> in the
+	function definition.  Once again, you may trade code size for
+	sequentiality in the code by doing this.</para>
+      </sect3>
+
+      <sect3>
+	<title>Branch Prediction</title>
+
+	<para>Any time the computer comes across an
+	<computeroutput>if</computeroutput> statement there are two
+	possible outcomes; true or false.  The processor wants to keep
+	its incoming pipes as full as possible, so it can not wait for
+	the outcome of the test before putting code into the
+	pipeline.</para>
+
+	<para>Thus the compiler can make a prediction about what way
+	the test is likely to go.  There are some simple rules the
+	compiler can use to guess things like this, for example
+	<computeroutput>if (val == -1)</computeroutput> is probably
+	<emphasis>not</emphasis> likely to be true, since -1 usually
+	indicates an error code and hopefully that will not be
+	triggered too often.</para>
+
+	<para>Some compilers can actually compile the program, have
+	the user run it and take note of which way the branches go
+	under real conditions.  It can then re-compile it based on
+	what it has seen.</para>
+
+      </sect3>
     </sect2>
+
 
   </sect1>
 

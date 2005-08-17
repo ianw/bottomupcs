@@ -670,26 +670,26 @@
 	to <computeroutput>0</computeroutput> effectively hide the bits
 	we are not interested in.</para>
 
-    <figure>
-      <title>Masking</title>
-      <mediaobject>
-	<imageobject>
-	  <imagedata fileref="wk1/figures/masking.eps" format="EPS">
-	</imageobject>
-	<imageobject>
-	  <imagedata fileref="wk1/figures/masking.png" format="PNG">
-	</imageobject>
-	<textobject>
+	  <figure>
+	    <title>Masking</title>
+	    <mediaobject>
+	      <imageobject>
+		<imagedata fileref="wk1/figures/masking.eps" format="EPS">
+	      </imageobject>
+	      <imageobject>
+		<imagedata fileref="wk1/figures/masking.png" format="PNG">
+	      </imageobject>
+	      <textobject>
 
-	      <phrase>By using a <emphasis>mask</emphasis> consisting
+		<phrase>By using a <emphasis>mask</emphasis> consisting
 	      of all <computeroutput>1</computeroutput>'s and the
 	      <computeroutput>logical and</computeroutput> operation,
 	      we can extract only the bits we are interested
 	      in.</phrase>
-
-	</textobject>
-      </mediaobject>
-    </figure>
+		
+	      </textobject>
+	    </mediaobject>
+	  </figure>
 
 	<para>To get the top (blue) four bits, we would invert the
 	mask.  You will note this gives a result of
