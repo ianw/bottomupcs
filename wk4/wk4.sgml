@@ -237,18 +237,6 @@
 	    of memory for the process.</para>
 	  </listitem>
 
-	  <listitem>
-	    <para>The stack is only for local variables whose size you
-	    know at compilation time.  Often you will not know the
-	    exact amount of memory you need until the program is
-	    running, which is where you use the
-	    <computeroutput>malloc()</computeroutput> call.  This
-	    allocates memory (not on the stack) for each process (you
-	    might hear this referred to as <computeroutput>the
-	    heap</computeroutput>, which is another form of data
-	    structure).</para>
-	  </listitem>
-
 	</itemizedlist>
 
 	<para>To keep track of the current growth of the stack, the
@@ -294,10 +282,74 @@
       </sect3>
 
       <sect3>
+	<title>The Heap</title>
+
+	<para>The heap is an area of memory that is managed by the
+	process for on the fly memory allocation.  This is for
+	variables whose memory requirements are not known at compile
+	time.</para>
+
+	<para>The bottom of the heap is known as the
+	<emphasis>brk</emphasis>, so called for the system call which
+	modifies it.  By using the
+	<computeroutput>brk</computeroutput> call to grow the area
+	downwards the process can request the kernel allocate
+	more memory for it to use.</para>
+
+	<para>The heap is most commonly managed by the
+	<computeroutput>malloc</computeroutput> library call.  This
+	makes managing the heap easy for the programmer by allowing
+	them to simply allocate and free (via the
+	<computeroutput>free</computeroutput> call) heap memory.
+	<computeroutput>malloc</computeroutput> can use schemes like a
+	<emphasis>buddy allocator</emphasis> to manage the heap memory
+	for the user.  <computeroutput>malloc</computeroutput> can
+	also be smarter about allocation and potentially use
+	<emphasis>anonymous mmaps</emphasis> for extra process memory.
+	This is where instead of mmaping a <emphasis>file</emphasis>
+	into the process memory it directly maps an area of system
+	RAM.  This can be more efficient.  Due to the complexity of
+	managing memory correctly, it is very uncommon for any modern
+	program to have a reason to call
+	<computeroutput>brk</computeroutput> directly.</para>
+
+      </sect3>
+
+      <sect3>
 	<title>Memory Layout</title>
 
-	<para>show layout kernel -- stack -- mmap -- brk -- bss --
-	data -- code </para>
+	<figure>
+	  <title>Process memory layout</title>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk4/figures/memory-layout.eps" format="EPS">
+	    </imageobject>
+	    <imageobject>
+	      <imagedata fileref="wk4/figures/memory-layout.png" format="PNG">
+	    </imageobject>
+	    <textobject>
+	      <phrase>A sample of how process memory is allocated.</phrase>
+	    </textobject>
+	  </mediaobject>
+	</figure>
+
+
+	<para>As we have seen a process has smaller areas of memory
+	allocated to it, each with a specific purpose.</para>
+
+	<para>An example of how the process is layed out in memory by
+	the kernel is given above.  Starting from the top, the kernel
+	reserves its self some memory at the top of the process (we
+	see with virtual memory how this memory is actually shared
+	between all processes).</para>
+
+	<para>Underneath that is room for
+	<computeroutput>mmaped</computeroutput> files and libraries.
+	Underneath that is the stack, and below that the heap.</para>
+
+	<para>At the bottom is the program image, as loaded from the
+	executable file on disk.  We take a closer look at the
+	process of loading this data in later chapters.</para>
 
       </sect3>
 
