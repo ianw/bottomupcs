@@ -547,8 +547,8 @@
 	explicitly specify which parts of the new process are copied
 	into the new process, and which parts are shared between the
 	two processes.  This may seem a bit strange at first, but
-	allows us to easily implement <emphasis>threads</emphasis> with
-	one very simple interface.</para>
+	allows us to easily implement <emphasis>threads</emphasis>
+	with one very simple interface.</para>
 
 	<sect4>
 	  <title>Threads</title> <para>While
@@ -557,6 +557,25 @@
 	  copied for the new process <emphasis>except</emphasis> for
 	  the memory.  This means the parent and child share the same
 	  memory, which includes program code and data.</para>
+
+	  <figure>
+	    <title>Threads</title>
+	    <mediaobject>
+	      <imageobject>
+		<imagedata fileref="wk4/figures/threads.eps" format="EPS">
+	      </imageobject>
+	      <imageobject>
+		<imagedata fileref="wk4/figures/threads.png" format="PNG">
+	      </imageobject>
+	      <textobject>
+		<phrase>The memory (including program code and
+		variables) of the process are shared by the threads,
+		but each has it's own kernel state, so they can be
+		running different parts of the code at the same
+		time.</phrase>
+	      </textobject>
+	    </mediaobject>
+	  </figure>
 
 	  <para>This hybrid child is called a
 	  <emphasis>thread</emphasis>.  Threads have a number of
@@ -598,6 +617,33 @@
 	    </listitem>
 
 	  </orderedlist>
+
+	  <para>There are many different ways to implement threads.
+	  On the one hand, a userspace implementation could implement
+	  threads within a process without the kernel having any idea
+	  about it.  The threads all look like they are running in a
+	  single process to the kernel.</para>
+
+	  <para>This is suboptimal mainly because the kernel is being
+	  withheld information about what is running in the system.
+	  It is the kernels job to make sure that the system resources
+	  are utlised in the best way possible, and if what the kernel
+	  thinks is a single process is actually running multiple
+	  threads it may make suboptimal decisions.</para>
+
+	  <para>Thus the other method is that the kernel has full
+	  knowledge of the thread.  Under Linux, this is established
+	  by making all processes able to share resources via the
+	  <computeroutput>clone</computeroutput> system call.  Each
+	  thread still has associated kernel resources, so the kernel
+	  can take it into account when doing resource
+	  allocations.</para>
+
+	  Other operating systems have a hybrid method, where some
+	  threads can be specified to run in userspace only ("hidden"
+	  from the kernel) and others might be a <emphasis>light
+	  weight process</emphasis>, a similar indication to the
+	  kernel that the processes is part of a thread group.</para>
 
 	</sect4>
 
@@ -642,6 +688,63 @@
       forks and execs the systems boot scripts.  These fork and exec
       more programs, eventually ending up forking a login
       process.</para>
+
+      <para>The other job of the <computeroutput>init</computeroutput>
+      process is "reaping".  When a process calls
+      <computeroutput>exit</computeroutput> with a return code, the
+      parent usually wants to check this code to see if the child
+      exited correctly or not.</para>
+
+      <para>However, this exit code is part of the process which has
+      just called <computeroutput>exit</computeroutput>.  So the
+      process is "dead" (e.g. not running) but still needs to stay
+      around until the return code is collected.  A process in this
+      state is called a <emphasis>zombie</emphasis> (the traits of
+      which you can contrast with a mystical zombie!)</para>
+
+      <para>A process stays as a zombie until the parent collects the
+      return code with the <computeroutput>wait</computeroutput> call.
+      However, if the parent exits before collecting this return code,
+      the zombie process is still around, waiting aimlessly to give
+      it's status to someone.</para>
+
+      <para>In this case, the zombie child will be
+      <emphasis>reparented</emphasis> to the init process which has a
+      special handler that <emphasis>reaps</emphasis> the return
+      value.  Thus the process is finally free and can the descriptor
+      can be removed from the kernels process table.</para>
+
+      <sect3>
+	<title>Zombie example</title>
+
+	<example id="zombie-example">
+	  <title>Zombie example process</title>
+	  <programlisting><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk4/code/zombie.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>    
+
+	<para>Above we create a zombie process.  The parent process
+	will sleep forever, whilst the child will exit after a few
+	seconds.</para>
+
+	<para>Below the code you can see the results of running the
+	program.  The parent process (16168) is in state
+	<computeroutput>S</computeroutput> for sleep (as we expect)
+	and the child is in state <computeroutput>Z</computeroutput>
+	for zombie.  The <application>ps</application> output also
+	tells us that the process is
+	<computeroutput>defunct</computeroutput> in the process
+	description.<footnote> <para>The square brackets around the
+	"z" of "zombie" are a little trick to remove the grep
+	processes its self from the ps output.
+	<application>grep</application> interprets everything between
+	the square brackets as a character class, but because the
+	process name will be "grep [z]ombie" (with the brackets) this
+	will not match!</para></footnote></para>
+      </sect3>
 
     </sect2>
   </sect1>

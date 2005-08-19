@@ -1,0 +1,29 @@
+$ cat zombie.c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+        pid_t pid;
+
+        printf("parent : %d\n", getpid());
+
+        pid = fork();
+
+        if (pid == 0) {
+                printf("child : %d\n", getpid());
+                sleep(2);
+                printf("child exit\n");
+                exit(1);
+        }
+
+        /* in parent */
+        while (1)
+        {
+                sleep(1);
+        }
+}
+
+ianw@lime:~$ ps ax | grep [z]ombie
+16168 pts/9    S      0:00 ./zombie
+16169 pts/9    Z      0:00 [zombie] <defunct>
