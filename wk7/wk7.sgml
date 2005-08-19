@@ -283,9 +283,10 @@
 	  you how far into the file on disk the data for the segment
 	  is.  The <computeroutput>p_vaddr</computeroutput> field
 	  tells you what address that data is to live at in virtual
-	  memory (<computeroutput>p_paddr</computeroutput> describes
-	  the physical address, which for modern system is not used).
-	  The two flags <computeroutput>p_filesz</computeroutput> and
+	  memory (<computeroutput>p_addr</computeroutput> describes
+	  the physical address, which is only really useful for small
+	  embedded systems that do not implement virtual memory).  The
+	  two flags <computeroutput>p_filesz</computeroutput> and
 	  <computeroutput>p_memsz</computeroutput> work to tell you
 	  how big the segment is on disk and how big it should be in
 	  memory.  If the memory size is greater than the disk size,
