@@ -639,7 +639,7 @@
 	  can take it into account when doing resource
 	  allocations.</para>
 
-	  Other operating systems have a hybrid method, where some
+	  <para>Other operating systems have a hybrid method, where some
 	  threads can be specified to run in userspace only ("hidden"
 	  from the kernel) and others might be a <emphasis>light
 	  weight process</emphasis>, a similar indication to the
