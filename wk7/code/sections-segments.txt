@@ -1,0 +1,28 @@
+$ readelf --segments /bin/ls
+
+Elf file type is EXEC (Executable file)
+Entry point 0x100026c0
+There are 8 program headers, starting at offset 52
+
+Program Headers:
+  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
+  PHDR           0x000034 0x10000034 0x10000034 0x00100 0x00100 R E 0x4
+  INTERP         0x000154 0x10000154 0x10000154 0x0000d 0x0000d R   0x1
+      [Requesting program interpreter: /lib/ld.so.1]
+  LOAD           0x000000 0x10000000 0x10000000 0x14d5c 0x14d5c R E 0x10000
+  LOAD           0x014d60 0x10024d60 0x10024d60 0x002b0 0x00b7c RWE 0x10000
+  DYNAMIC        0x014f00 0x10024f00 0x10024f00 0x000d8 0x000d8 RW  0x4
+  NOTE           0x000164 0x10000164 0x10000164 0x00020 0x00020 R   0x4
+  GNU_EH_FRAME   0x014d30 0x10014d30 0x10014d30 0x0002c 0x0002c R   0x4
+  GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RWE 0x4
+
+ Section to Segment mapping:
+  Segment Sections...
+   00
+   01     .interp
+   02     .interp .note.ABI-tag .hash .dynsym .dynstr .gnu.version .gnu.version_ r .rela.dyn .rela.plt .init .text .fini .rodata .eh_frame_hdr
+   03     .data .eh_frame .got2 .dynamic .ctors .dtors .jcr .got .sdata .sbss .p lt .bss
+   04     .dynamic
+   05     .note.ABI-tag
+   06     .eh_frame_hdr
+   07
