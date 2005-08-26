@@ -904,21 +904,23 @@
     specifically deal with interrupt.  Often the signal will be sent
     from inside the kernel its self, however it is also common for one
     process to send a signal to another process (one form of
-    <emphasis>interprocess communication</emphasis>).</para>
+    <emphasis>interprocess communication</emphasis>).  The signal
+    handler gets called <emphasis>asynchronously</emphasis>; that is
+    the currently running program is interrupted from what it is doing
+    to process the signal event.</para>
 
     <para>For example, one type of signal is an
-    <emphasis>interrupt</emphasis> (known as
-    <computeroutput>SIGINT</computeroutput>) which is usually
-    delivered to the process when the
-    <computeroutput>ctrl-c</computeroutput> combination is
-    pressed.</para>
+    <emphasis>interrupt</emphasis> (defined in system headers as
+    <computeroutput>SIGINT</computeroutput>) is delivered to the
+    process when the <computeroutput>ctrl-c</computeroutput>
+    combination is pressed.</para>
 
-    <para>As a process uses <computeroutput>read</computeroutput> to
-    read input from the keyboard, the kernel will be watching the
-    input stream looking for special characters.  Should it see a
-    <computeroutput>ctrl-c</computeroutput> it will jump into signal
-    handling mode.  The kernel will look to see if the process has
-    registered a handler for this interrupt.  If it has, then
+    <para>As a process uses the <computeroutput>read</computeroutput>
+    system call to read input from the keyboard, the kernel will be
+    watching the input stream looking for special characters.  Should
+    it see a <computeroutput>ctrl-c</computeroutput> it will jump into
+    signal handling mode.  The kernel will look to see if the process
+    has registered a handler for this interrupt.  If it has, then
     execution will be passed to that function where the function will
     <emphasis>handle</emphasis> it.  Should the process have not
     registered a handler for this particular signal, then the kernel
@@ -970,6 +972,93 @@
     received.  Once the signal handler has finished running, control
     is returned to the process which continues on from where it left
     off.</para>
+
+    <sect2>
+      <title>Example</title>
+
+      <para>The following simple program introduces a lot of signals
+      to run!</para>
+
+      <example id="signal-example">
+	<title>Signals Example</title>
+	<programlisting><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk4/code/signal.txt" format="linespecific">
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>    
+
+      <para>We have simple program that simply defines a handler for
+      the <computeroutput>SIGINT</computeroutput> signal, which is
+      sent when the user presses
+      <computeroutput>ctrl-c</computeroutput>.  All the signals for
+      the system are defined in
+      <computeroutput>signal.h</computeroutput>, including the
+      <computeroutput>signal</computeroutput> function which allows us
+      to register the handling function.</para>
+
+      <para>The program simply sits in a tight loop doing nothing
+      until it quits.  When we start the program, we try pressing
+      <computeroutput>ctrl-c</computeroutput> to make it quit.  Rather
+      than taking the default action, or handler is invoked and we get
+      the output as expected.</para>
+
+      <para>We then press <computeroutput>ctrl-z</computeroutput>
+      which sends a <computeroutput>SIGSTOP</computeroutput> which by
+      default puts the process to sleep.  This means it is not put in
+      the queue for the scheduler to run and is thus dormant in the
+      system.</para>
+
+      <para>As an illustration, we use the
+      <application>kill</application> program to send the same signal
+      from another terminal window.  This is actually implemented with
+      the <computeroutput>kill</computeroutput> system call, which
+      takes a signal and PID to send to (this function is a little
+      misnamed because not all signals do actually kill the process,
+      as we are seeing, but the
+      <computeroutput>signal</computeroutput> function was already
+      taken to register the handler).  As the process is stopped, the
+      signal gets <emphasis>queued</emphasis> for the process.  This
+      means the kernel takes note of the signal and will deliver it
+      when appropriate.</para>
+
+      <para>At this point we wake the process up by using the command
+      <computeroutput>fg</computeroutput>.  This actually sends a
+      <computeroutput>SIGCONT</computeroutput> signal to the process,
+      which by default will wake the process back up.  The kernel
+      knows to put the process on the run queue and give it CPU time
+      again.  We see at this point the queued signal is
+      delivered.</para>
+
+      <para>In desperation to get rid of the program, we finally try
+      <computeroutput>ctrl-\</computeroutput> which sends a
+      <computeroutput>SIGABRT</computeroutput> (abort) to the process.
+      But if the process has aborted, where did the
+      <computeroutput>Quit</computeroutput> output come from?</para>
+
+      <para>You guessed it, more signals!  When a parent child has a
+      process that dies, it gets a
+      <computeroutput>SIGCHLD</computeroutput> signal back.  In this
+      case the shell was the parent process and so it got the signal.
+      Remember how we have the zombie process that needs to be reaped
+      with the <computeroutput>wait</computeroutput> call to get the
+      return code from the child process?  Well another thing it also
+      gives the parent is the signal number that the child may have
+      died from.  Thus the shell knows that child process died from a
+      <computeroutput>SIGABRT</computeroutput> and as an informational
+      service prints as much for the user (the same process happens to
+      print out "Segmenation Fault" when the child process dies from a
+      <computeroutput>SIGSEGV</computeroutput>).</para>
+
+      <para>You can see how in even a simple program, around 5
+      different signals were used to communicate between processes and
+      the kernel and keep things running.  There are many other
+      signals, but these are certainly amongst the most common.  Most
+      have system functions defined by the kernel, but there are a few
+      signals reserved for users to use for their own purposes within
+      their programs (<computeroutput>SIGUSR</computeroutput>).</para>
+
+    </sect2>
 
   </sect1>
 

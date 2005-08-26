@@ -1,0 +1,31 @@
+$ cat signal.c
+#include <stdio.h>
+#include <unistd.h>
+#include <signal.h>
+
+void sigint_handler(int signum)
+{
+        printf("got SIGINT\n");
+}
+
+int main(void)
+{
+        signal(SIGINT, sigint_handler);
+        printf("pid is %d\n", getpid());
+        while (1)
+                sleep(1);
+}
+$ gcc -Wall -o signal signal.c
+$ ./signal
+pid is 2859
+got SIGINT # press ctrl-c 
+           # press ctrl-z
+[1]+  Stopped                 ./signal
+
+$ kill -SIGINT 2859
+$ fg
+./signal
+got SIGINT
+Quit # press ctrl-\
+
+$
