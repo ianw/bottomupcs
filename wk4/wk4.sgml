@@ -852,6 +852,127 @@
 
   </sect1>
 
+  <sect1>
+    <title>The Shell</title>
+
+    <para>On a UNIX system, the shell is the standard interface to
+    handling processes on your system.  Once the shell was the primary
+    interface, however modern Linux systems have a GUI and provide a
+    shell via a "terminal application" or similar.  The primary job of
+    the shell is to help the user handle starting, stopping and
+    otherwise controlling processes running in the system.</para>
+
+    <para>When you type a command at the prompt of the shell, it will
+    <computeroutput>fork</computeroutput> a copy of it's self and
+    <computeroutput>exec</computeroutput> the command that you have
+    specified.</para>
+
+    <para>The shell then, by default, waits for that process to finish
+    running before returning to a prompt to start the whole process
+    over again.</para>
+
+    <para>As an enhancement, the shell also allows you to
+    <emphasis>background</emphasis> a job, usually by placing an
+    <computeroutput>&amp;</computeroutput> after the command name.
+    This is simply a signal that the shell should fork and execute the
+    command, but <emphasis>not</emphasis> wait for the command to
+    complete before showing you the prompt again.</para>
+
+    <para>The new process runs in the background, and the shell is
+    ready waiting to start a new process should you desire.  You can
+    usually tell the shell to <emphasis>foreground</emphasis> a
+    process, which means we do actually want to wait for it to
+    finish.</para>
+
+    <para>XXX : a bit of history about bourne shell</para>
+
+  </sect1>
+
+  <sect1>
+    <title>Signals</title>
+
+    <para>Processes running in the system require a way to be told
+    about events that influence them.  On UNIX there is
+    intfrastructure between the kernel and processes called
+    <emphasis>signals</emphasis> which allows a process to receive
+    notification about events important to it.</para>
+
+    <para>When a signal is sent to a process, the kernel invokes a
+    <emphasis>handler</emphasis> which the process must register with
+    the kernel to deal with that signal.  A handler is simply a
+    designed function in the code that has been written to
+    specifically deal with interrupt.  Often the signal will be sent
+    from inside the kernel its self, however it is also common for one
+    process to send a signal to another process (one form of
+    <emphasis>interprocess communication</emphasis>).</para>
+
+    <para>For example, one type of signal is an
+    <emphasis>interrupt</emphasis> (known as
+    <computeroutput>SIGINT</computeroutput>) which is usually
+    delivered to the process when the
+    <computeroutput>ctrl-c</computeroutput> combination is
+    pressed.</para>
+
+    <para>As a process uses <computeroutput>read</computeroutput> to
+    read input from the keyboard, the kernel will be watching the
+    input stream looking for special characters.  Should it see a
+    <computeroutput>ctrl-c</computeroutput> it will jump into signal
+    handling mode.  The kernel will look to see if the process has
+    registered a handler for this interrupt.  If it has, then
+    execution will be passed to that function where the function will
+    <emphasis>handle</emphasis> it.  Should the process have not
+    registered a handler for this particular signal, then the kernel
+    will take some default action.  With
+    <computeroutput>ctrl-c</computeroutput> the default action is to
+    terminate the process.</para>
+
+    <para>A process can choose to ignore some signals, but other
+    signals are not allowed to be ignored.  For example,
+    <computeroutput>SIGKILL</computeroutput> is the signal sent when a
+    process should be terminated.  The kernel will see that the
+    process has been sent this signal and terminate the process from
+    running, no questions asked.  The process can not ask the kernel
+    to ignore this signal, and the kernel is very careful about which
+    process is allowed to send this signal to another process; you may
+    only send it to processes owned by you unless you are the root
+    user.  You may have seen the command <computeroutput>kill
+    -9</computeroutput>; this comes from the implemenation
+    <computeroutput>SIGKILL</computeroutput> signal.  It is commonly
+    known that <computeroutput>SIGKILL</computeroutput> is actually
+    defined to be <computeroutput>0x9</computeroutput>, and so when
+    specified as an argument to the
+    <computeroutput>kill</computeroutput> program means that the
+    process specified is going to be stopped immediately.  Since the
+    process can not choose to ignore or handle this signal, it is seen
+    as an avenue of last resort, since the program will have no chance
+    to clean up or exit cleanly.  It is considered better to first
+    send a <computeroutput>SIGTERM</computeroutput> (for terminate) to
+    the process first, and if it has crashed or otherwise will not
+    exit then resort to the <computeroutput>SIGKILL</computeroutput>.
+    As a matter of convention, most programs will install a handler
+    for <computeroutput>SIGHUP</computeroutput> (hangup -- a left over
+    from days of serial terminals and modems) which will reload the
+    program, perhaps to pick up changes in a configuration file or
+    similar.</para>
+
+    <para>If you have programmed on a Unix system you would be
+    familiar with <computeroutput>segmentation faults</computeroutput>
+    when you try to read or write to memory that has not been
+    allocated to you.  When the kernel notices that you are touching
+    memory outside your allocation, it will send you the segmenation
+    fault signal.  Usually the process will not have a handler
+    installed for this, and so the default action to terminate the
+    program ensues (hence your program "crashes").  In some cases a
+    program may install a handler for segmentation faults, although
+    reasons for doing this are limited.</para>
+
+    <para>This raises the question of what happens after the signal is
+    received.  Once the signal handler has finished running, control
+    is returned to the process which continues on from where it left
+    off.</para>
+
+  </sect1>
+
 </chapter>
 
 <!--
