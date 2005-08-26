@@ -83,7 +83,7 @@
 	system needs to give program code permission to be read and
 	executed, but generally not written to.  On the other hand
 	data (variables) require read and write permissions but should
-	not be exectuable<footnote> <para>Not all architectures
+	not be executable<footnote> <para>Not all architectures
 	support this, however.  This has lead to a wide range of
 	security problems on many architectures.</para></footnote>.
 	</para>
@@ -95,7 +95,7 @@
 	<para>One other very important part of a process is an area of
 	memory called <emphasis>the stack</emphasis>.  This can be
 	considered part of the data section of a process, and is
-	intiamtely involved in the execution of any program.</para>
+	intimately involved in the execution of any program.</para>
 
 	<para> A stack is generic data structure that works exactly
 	like a stack of plates; you can <emphasis>push</emphasis> an
@@ -116,7 +116,7 @@
 	architectures, such as IA64, there are other storage areas
 	(the register backing store) that grow from the bottom toward
 	the stack.</para></footnote> .  This means that the stack
-	starts at a high address in memory and progressivly gets
+	starts at a high address in memory and progressively gets
 	lower.</para>
 
 	<figure>
@@ -157,7 +157,7 @@
 	  <listitem>
   	    <para>This facilitates <emphasis>recursive</emphasis>
 	    calls.  This means a function is free to call its self
-	    again, becuase a new stack frame will be created for all
+	    again, because a new stack frame will be created for all
 	    its local variables.</para>
 	  </listitem>
 
@@ -175,11 +175,11 @@
 	    pointers up the stack.  From this it can produce a
 	    <emphasis>stack trace</emphasis> which shows you all
 	    functions that were called leading into this function.
-	    This is extremly useful for debugging.</para>
+	    This is extremely useful for debugging.</para>
 
 	    <para>You can see how the way functions works fits exactly
 	    into the nature of a stack.  Any function can call any
-	    other function, which then becomes the upmost function
+	    other function, which then becomes the up most function
 	    (put on top of the stack).  Eventually that function will
 	    return to the function that called it (takes itself off
 	    the stack).</para>
@@ -211,7 +211,7 @@
 	    called from) they could make it return into the data they
 	    just sent.  If that data contains binary executable code
 	    that hacks the system (e.g. starts a terminal for the user
-	    with root privledges) then your computer has been
+	    with root privileges) then your computer has been
 	    compromised.</para>
 
 	    <para>This happens because the stack grows downwards, but
@@ -242,7 +242,7 @@
 	<para>To keep track of the current growth of the stack, the
 	hardware defines a register as the <emphasis>stack
 	pointer</emphasis>.  The compiler (or the programmer, when
-	writing in assembley) uses this register to keep track of the
+	writing in assembler) uses this register to keep track of the
 	current top of the stack.</para>
 
 	<example id="stack-pointer">
@@ -255,7 +255,7 @@
 	</example>    
 	
 	<para>Above we show a simple function allocating three
-	variables on the stack.  The disassembley illustrates the use
+	variables on the stack.  The disassembly illustrates the use
 	of the stack pointer on the x86 architecture<footnote>
 	<para>Note we used the special flag to gcc
 	<computeroutput>-fomit-frame-pointer</computeroutput> which
@@ -337,7 +337,7 @@
 	<para>As we have seen a process has smaller areas of memory
 	allocated to it, each with a specific purpose.</para>
 
-	<para>An example of how the process is layed out in memory by
+	<para>An example of how the process is laid out in memory by
 	the kernel is given above.  Starting from the top, the kernel
 	reserves its self some memory at the top of the process (we
 	see with virtual memory how this memory is actually shared
@@ -444,13 +444,13 @@
  
     <para>Whilst the operating system can run many processes at the
     same time, in fact it only ever directly starts one process called
-    the <emphasis>init</emphasis> (short for inital) process.  This
+    the <emphasis>init</emphasis> (short for initial) process.  This
     isn't a particularly special process except that it's PID is
     always 0 and it will <emphasis>always</emphasis> be
     running.</para>
 
     <para>All other processes can be considered
-    <emphasis>children</emphasis> of this inital process.  Processes
+    <emphasis>children</emphasis> of this initial process.  Processes
     have a family tree just like any other; each process has a
     <emphasis>parent</emphasis> and can have many
     <emphasis>siblings</emphasis>, which are processes
@@ -627,7 +627,7 @@
 	  <para>This is suboptimal mainly because the kernel is being
 	  withheld information about what is running in the system.
 	  It is the kernels job to make sure that the system resources
-	  are utlised in the best way possible, and if what the kernel
+	  are utilised in the best way possible, and if what the kernel
 	  thinks is a single process is actually running multiple
 	  threads it may make suboptimal decisions.</para>
 
@@ -658,7 +658,7 @@
 	  the memory is actually shared, rather than copied, between
 	  the two processes when fork is called.  If the processes are
 	  only going to be reading the memory, then actually
-	  copying the data is unecessary.</para>
+	  copying the data is unnecessary.</para>
 
 	  <para>However, when a process writes to it's memory, it
 	  needs to be a private copy that is not shared.  As the name
@@ -680,7 +680,7 @@
     <sect2>
       <title>The <application>init</application> process</title>
 
-      <para>We discussed the overal goal of the init process
+      <para>We discussed the overall goal of the init process
       previously, and we are now in a position to understand how it
       works.</para>
 
@@ -765,22 +765,22 @@
     all these processes is called the <emphasis>scheduler</emphasis>
     because it schedules which process should be run next.</para>
 
-    <para>Scheduling algoritms are many and varied.  Most users have
+    <para>Scheduling algorithms are many and varied.  Most users have
     different goals relating to what they want their computer to do,
     so this affects scheduling decisions.  For example, for a desktop
     PC you want to make sure that your graphical applications for your
     desktop are given plenty of time to run, even if system processes
-    take a little longer.  This will increase the responsivness the
+    take a little longer.  This will increase the responsiveness the
     user feels, as their actions will have more immediate responses.
-    For a server, you might want your webserver application to be
-    given prioroity.</para>
+    For a server, you might want your web server application to be
+    given priority.</para>
 
     <para>People are always coming up with new algorithms, and you can
     probably think of your own fairly easily.  But there are a number
     of different components of scheduling.</para>
 
     <sect2>
-      <title>Premptive v co-operative scheduling</title>
+      <title>Preemptive v co-operative scheduling</title>
       <para>Scheduling strategies can broadly fall into two categories</para>
       <orderedlist>
 	<listitem>
@@ -796,7 +796,7 @@
 	</listitem>
 
 	<listitem>
-	  <para><emphasis>Premptive</emphasis> scheduling is where the
+	  <para><emphasis>Preemptive</emphasis> scheduling is where the
 	  process is interrupted to stop it an allow another process
 	  to run.  Each process gets a <emphasis>timeslice</emphasis>
 	  to run in; at the point of each context switch a timer will
@@ -818,25 +818,25 @@
     <sect2>
       <title>Realtime</title>
 
-      <para>Some processes need to know exactly how long thier
+      <para>Some processes need to know exactly how long their
       timeslice will be, and how long it will be before they get
       another timeslice to run.  Say you have a system running a
       heart-lung machine; you don't want the next pulse to be delayed
       because something else decided to run in the system!</para>
 
-      <para>Hard realtime systems make garuntees about scheduling
+      <para>Hard realtime systems make guarantees about scheduling
       decisions like the maximum amount of time a process will be
       interrupted before it can run again.  They are often used in
       life critical applications like medical, aircraft and military
       applications.</para>
 
-      <para>Soft realtime is a variation on this, where gaurntees
-      aren't as strict but general system behaviour is predicatable.
+      <para>Soft realtime is a variation on this, where guarantees
+      aren't as strict but general system behaviour is predictable.
       Linux can be used like this, and it is often used in systems
       dealing with audio and video.  If you are recording an audio
       stream, you don't want to be interrupted for long periods of
       time as you will loose audio data which can not be
-      retreived.</para>
+      retrieved.</para>
 
     </sect2>
 
@@ -844,7 +844,7 @@
       <title>Nice value</title>
 
       <para>UNIX systems assign each process a
-      <emphasis>nice</emphasis> value.  The schedular looks at the
+      <emphasis>nice</emphasis> value.  The scheduler looks at the
       nice value and can give priority to those processes that have a
       higher "niceness".</para>
 
@@ -893,7 +893,7 @@
 
     <para>Processes running in the system require a way to be told
     about events that influence them.  On UNIX there is
-    intfrastructure between the kernel and processes called
+    infrastructure between the kernel and processes called
     <emphasis>signals</emphasis> which allows a process to receive
     notification about events important to it.</para>
 
@@ -938,7 +938,7 @@
     process is allowed to send this signal to another process; you may
     only send it to processes owned by you unless you are the root
     user.  You may have seen the command <computeroutput>kill
-    -9</computeroutput>; this comes from the implemenation
+    -9</computeroutput>; this comes from the implementation
     <computeroutput>SIGKILL</computeroutput> signal.  It is commonly
     known that <computeroutput>SIGKILL</computeroutput> is actually
     defined to be <computeroutput>0x9</computeroutput>, and so when
@@ -961,7 +961,7 @@
     familiar with <computeroutput>segmentation faults</computeroutput>
     when you try to read or write to memory that has not been
     allocated to you.  When the kernel notices that you are touching
-    memory outside your allocation, it will send you the segmenation
+    memory outside your allocation, it will send you the segmentation
     fault signal.  Usually the process will not have a handler
     installed for this, and so the default action to terminate the
     program ensues (hence your program "crashes").  In some cases a
@@ -1047,7 +1047,7 @@
       died from.  Thus the shell knows that child process died from a
       <computeroutput>SIGABRT</computeroutput> and as an informational
       service prints as much for the user (the same process happens to
-      print out "Segmenation Fault" when the child process dies from a
+      print out "Segmentation Fault" when the child process dies from a
       <computeroutput>SIGSEGV</computeroutput>).</para>
 
       <para>You can see how in even a simple program, around 5
