@@ -524,11 +524,11 @@
 	object files.  The object files are kept in an
 	<emphasis>archive</emphasis>, which gives Linux libraries
 	their <computeroutput>.a</computeroutput> extension.  You can
-	think of archives as similar to a <command>zip</command>
-	file, but without compression.</para>
+	think of archives as similar to a <command>zip</command> file,
+	but without compression.</para>
 	
-	<para>Below we show the creation of basic static
-	library.</para>
+	<para>Below we show the creation of basic static library and
+	introduce some common tools for working with libraries.</para>
 
 	<example>
 	  <title>Creating and using a static library</title>
@@ -551,26 +551,39 @@
 	<computeroutput>#include</computeroutput>s the header
 	file).</para>
 
-	<para>We create the library <command>ar</command> (short for
-	"archive") command.  By convention static library file names
-	are prefixed with <computeroutput>lib</computeroutput> and
-	have the extension <computeroutput>.a</computeroutput>.  The
+	<para>We create the library <application>ar</application>
+	(short for "archive") command.  By convention static library
+	file names are prefixed with
+	<computeroutput>lib</computeroutput> and have the extension
+	<computeroutput>.a</computeroutput>.  The
 	<computeroutput>c</computeroutput> argument tells the program
 	to create the archive, and <computeroutput>a</computeroutput>
 	tells archive to add the object files specified into the
-	library file.</para>
+	library file.<footnote><para>Archives created with
+	<application>ar</application> pop up in a few different places
+	around Linux systems other than just creating static
+	libraries.  One widely used application is in the
+	<computeroutput>.deb</computeroutput> packaging format used
+	with Debian, Ubuntu and some other Linux systems is one
+	example.  <computeroutput>debs</computeroutput> use archives
+	to keep all the application files together in the one package
+	file.  Redhat RPM packages use an alternate but similar format
+	called <application>cpio</application>.  Of course the
+	canonical application for keeping files together is the
+	<computeroutput>tar</computeroutput> file, which is a common
+	format to distribute source code.</para></footnote></para>
 
 	<para>Next we use the <application>ranlib</application>
 	application to make a header in the library with the symbols
 	of the object file contents.  This helps the compiler to
 	quickly reference symbols; in the case where we just have one
-	this seems a little redundant however a large library may
-	have thousands of symbols, so the index can significantly
-	speed references.  We inspect this new header with the
-	<application>nm</application> application.  We see the
-	<computeroutput>function</computeroutput> symbol for the
-	<computeroutput>function()</computeroutput> function at offset
-	zero, as we expect.</para>
+	this step may seem a little redundant; however a large library
+	may have thousands of symbols meaning an index can
+	significantly speed up finding references.  We inspect this
+	new header with the <application>nm</application> application.
+	We see the <computeroutput>function</computeroutput> symbol
+	for the <computeroutput>function()</computeroutput> function
+	at offset zero, as we expect.</para>
 
 	<para>You then specify the library to the compiler with
 	<option>-lname</option> where name is the filename of the
