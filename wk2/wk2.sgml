@@ -471,6 +471,50 @@
       </listitem>
     </itemizedlist>
   </sect2>
+  </sect1>
+  
+  <sect1>
+    <title>Small and big systems</title>
+    
+    <para>Introduction to how systems scale up.  image might be
+    good.</para>
+    
+    <sect2>
+      <title>SMP</title>
+      
+      <para>multiple cpus in a system.  talk about how cache is kept
+      coherent.</para>
+
+      <sect3>
+	<title>Hyperthreading</title>
+
+	<para>Discuss how two registers, but shared logic.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Dual Core</title>
+
+	<para>talk about dual cores, note that memory bus is
+	shared.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Clusters</title>
+
+	<para>talk about clusters, slower interconnects, software
+	shared memory.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Non-Uniform Memory Access</title>
+
+	<para>Talk about numa, mention ccNUMA</para>
+      </sect3>
+
+    </sect2>
 
   </sect1>
 
