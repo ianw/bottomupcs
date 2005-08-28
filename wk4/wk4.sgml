@@ -850,6 +850,76 @@
 
     </sect2>
 
+    <sect2>
+      <title>A brief look at the Linux Scheduler</title>
+
+      <para>The Linux scheduler has and is constantly undergoing many
+      changes as new developers attempt to improve its
+      behaviour.</para>
+
+      <para>The current scheduler is known as the O(1) scheduler,
+which refers to the property that no many how many processes the
+scheduler has to choose from, it will choose the next one to run in a
+constant amount of time<footnote><para><emphasis>Big-O</emphasis>
+notation is a way of describing how long an algorithm takes to run
+given increasing inputs.  If the algorithm takes twice as long to run
+for twice as much input, this is increasing linearly.  If another
+algorithm takes four times as long to run given twice as much input,
+then it is increasing exponentially.  Finally if it takes the same
+amount of time now matter how much input, then the algorithm runs in
+constant time.  Intuitively you can see that the slower the algorithm
+grows for more input, the better it is.  Computer science text books
+deal with algorithm analysis in more detail.</para></footnote>.</para>
+
+      <para>Previous incarnations of the Linux scheduler used the
+concept of <emphasis>goodness</emphasis> to determine which process to
+run next.  All possible tasks are kept on a
+<emphasis>run queue</emphasis>, which is simply a linked list of
+processes which the kernel knows are in a "runnable" state (i.e. not
+waiting on disk activity or otherwise asleep).  The problem arises
+that to calculate the next process to run, every possible runnable
+process must have its goodness calculated and the one with the highest
+goodness ``wins''.  You can see that for more tasks, it will take
+longer and longer to decide which processes will run next.</para>
+
+    <figure>
+      <title>The O(1) scheduler</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="wk4/figures/o1queue.eps" format="EPS">
+	</imageobject>
+	<imageobject>
+	  <imagedata fileref="wk4/figures/o1queue.png" format="PNG">
+	</imageobject>
+	<textobject>
+	  <phrase>A view of how the Linux scheduler manages
+	  processes.</phrase>
+	</textobject>
+      </mediaobject>
+    </figure>
+
+      <para>In contrast, the O(1) scheduler uses a run queue structure
+as shown above.  The run queue has a number of
+<emphasis>buckets</emphasis> in priority order and a bitmap that flags
+which buckets have processes available.  Finding the next process to
+run is a matter of reading the bitmap to find the first bucket with
+processes, then picking the first process off that bucket's queue.
+The scheduler keeps two such structures, an
+<emphasis>active</emphasis> and <emphasis>expired</emphasis> array for
+processes that are runnable and those which have utilised their entire
+time slice respectively.  These can be swapped by simply modifying
+pointers when all processes have had some CPU time.</para>
+
+      <para>The really interesting part, however, is how it is decided
+where in the run queue a process should go.  Some of the things that
+need to be taken into account are the nice level, processor affinity
+(keeping processes tied to the processor they are running on, since
+moving a process to another CPU in a SMP system can be an expensive
+operation) and better support for identifying interactive programs
+(applications such as a GUI which may spend much time sleeping,
+waiting for user input, but when the user <emphasis>does</emphasis>
+get around to interacting with it wants a fast response).<para></sect2>
+
   </sect1>
 
   <sect1>
