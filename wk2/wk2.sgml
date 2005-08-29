@@ -474,16 +474,117 @@
   </sect1>
   
   <sect1>
-    <title>Small and big systems</title>
+    <title>Small to big systems</title>
     
-    <para>Introduction to how systems scale up.  image might be
-    good.</para>
+    <para>As Moore's law has prediced, computing power has been
+    growing at a furious pace and shows no signs of slowing down.  It
+    is realtively uncommon for any high end servers to contain only a
+    single CPU.  This is achieved in a number of different
+    fashions.</para>
     
     <sect2>
-      <title>SMP</title>
+      <title>Symmetric Multi-Processing</title>
       
-      <para>multiple cpus in a system.  talk about how cache is kept
-      coherent.</para>
+      <para>Symmetric Multi-Processing, commonly shortended to
+      <emphasis>SMP</emphasis>, is currently the most common
+      configuration for including multiple CPUs in a single
+      system.</para>
+
+      <para>The symmetric term refers to the fact that all the CPUs in
+      the system are the same (e.g. architecture, clock speed).  In a
+      SMP system there are multiple processors that share other all
+      other system resources (memory, disk, etc).</para>
+
+      <sect3>
+	<title>Cache Coherency</title>
+
+
+	<para>For the most part, the CPUs in the system work
+      independently; each has its own set of registers, program
+      counter, etc.  Despite running separately, there is one
+      component that requires strict syncronisation.</para>
+
+      <para>This is the CPU cache; remember the cache is a small area
+      of quickly accessable memory that mirrors values stored in main
+      system memory.  If one CPU modifies data in main memory and
+      another CPU has an old copy of that memory in its cache the
+      system will obviously not be in a consistent state.  Note that
+      the problem only occurs when processors are writing to memory,
+      since if a value is only read the data will be
+      consistent.</para>
+
+	<para>To co-ordinate keeping the cache coherent on all
+	processors an SMP system uses <emphasis>snooping</emphasis>.
+	Snooping is where a processor listens on a bus which all
+	processors are connected to for cache events, and updates its
+	cache accordingly.</para>
+
+	<para>One protocol for doing this is the
+	<emphasis>MOESI</emphasis> protocol; standing for Modified,
+	Owner, Exclusive, Shared, Invalid.  Each of these is a state
+	that a cache line can be in on a processor in the system.
+	There are other protocols for doing as much, however they all
+	share similar concepts.  Below we examine MOESI so you have an
+	idea of what the process entails.</para>
+
+	<para>When a processor requires reading a cache line from main
+	memory, it firstly has to snoop all other processors in the
+	system to see if they currently know anything about that area
+	of memory (e.g. have it cached).  If it does not exist in any
+	other process, then the processor can load the memory into
+	cache and mark it as <emphasis>exclusive</emphasis>.  When it
+	writes to the cache, it then changes state to be
+	<emphasis>modified</emphasis>.  Here the specific details of
+	the cache come into play; some caches will immediately write
+	back the modified cache to system memory (known as a
+	<emphasis>write-through</emphasis> cache, because writes go
+	through to main memory).  Others will not, and leave the
+	modified value only in the cache until it is evicted, when the
+	cache becomes full for example.</para>
+
+	<para>The other case is where the processor snoops and finds
+	that the value is in another processors cache.  If this value
+	has already been marked as <emphasis>modified</emphasis>, it
+	will copy the data into its own cache and mark it as
+	<emphasis>shared</emphasis>.  It will send a message for the
+	other processor (that we got the data from) to mark its cache
+	line as <emphasis>owner</emphasis>.  Now imagine that a third
+	processor in the system wants to use that memory too.  It will
+	snoop and find both a <emphasis>shared</emphasis> and a
+	<emphasis>owner</emphasis> copy; it will thus take its value
+	from the <emphasis>owner</emphasis> value.  While all the
+	other processors are only reading the value, the cache line
+	stays <emphasis>shared</emphasis> in the system.  However,
+	when one processor needs to update the value it sends an
+	<emphasis>invalidate</emphasis> message through the system.
+	Any processors with that cache line must then mark it as
+	invalid, because it not longer reflects the "true" value.
+	When the processor sends the invalidate message, it marks the
+	cache line as <emphasis>modified</emphasis> in its cache and
+	all others will mark as <emphasis>invalid</emphasis> (note
+	that if the cache line is <emphasis>exclusive</emphasis> the
+	processor knows that no other processor is depending on it so
+	can avoid sending an invalidate message).</para>
+
+	<para>From this point the process starts all over.  Thus
+	whichever processor has the <emphasis>modified</emphasis>
+	value has the responsiblity of writing the true value back to
+	RAM when it is evicted from the cache.  By thinking through
+	the protocol you can see that this ensures consistency of
+	cache lines between processors.</para>
+
+	<para>The only problem with this system is that all the snoop
+	traffic does not scale very well.  With only a few processors,
+	the overhead of checking if another processor has the cache
+	line (a read snoop) or invalidating the data in every other
+	processor (invalidate snoop) is managable; but as the number
+	of processors increase so does the bus traffic.  This is why
+	SMP systems usually only scale up to around 8
+	processors.</para>
+
+      </sect3>
+
+      <para></para>
 
       <sect3>
 	<title>Hyperthreading</title>
