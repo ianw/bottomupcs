@@ -582,9 +582,12 @@
 	SMP systems usually only scale up to around 8
 	processors.</para>
 
-      </sect3>
+	<para>Note that system software usually has no part in this
+	process, although programmers should be aware of what the
+	hardware is doing underneath in response to the programs they
+	design to maximise performance.</para>
 
-      <para></para>
+      </sect3>
 
       <sect3>
 	<title>Hyperthreading</title>
