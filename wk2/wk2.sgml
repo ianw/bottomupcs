@@ -36,13 +36,16 @@
 
     <orderedlist>
       <listitem>
-	<para>Those that <emphasis>load</emphasis> and
-	<emphasis>store</emphasis> values from memory and to memory,
-	respectively.</para>
+	<para>Those that <emphasis>load</emphasis> values from memory
+	into registers and <emphasis>store</emphasis> values from
+	registers to memory.</para>
       </listitem>
       <listitem>
-	<para>Those that operate on values stored in
-	registers.</para>
+	<para>Those that operate on values stored in registers.  For
+	example adding, subtracting multiplying or dividing the values
+	in two registers, performing bitwise operations (and, or, xor,
+	etc) or performing other mathematical operations (square root,
+	sin, cos, tan, etc). </para>
       </listitem>
     </orderedlist>
 
@@ -56,13 +59,23 @@
 	operation of a CPU is <emphasis>branching</emphasis>.
 	Internally, the CPU keeps a record of the next instruction to
 	be executed in the <emphasis>instruction pointer</emphasis>.
-	Usually, the instruction pointer is incremented to point to the
-	next instruction sequentially; the branch instruction will
-	usually check if a specific register zero or if a flag is set
-	and, if so, will modify the pointer to a different address.
-	This is how loops and decision statements
-	(i.e. <computeroutput>if</computeroutput> statements) are
-	handled by the processor.</para>
+	Usually, the instruction pointer is incremented to point to
+	the next instruction sequentially; the branch instruction will
+	usually check if a specific register is zero or if a flag is
+	set and, if so, will modify the pointer to a different
+	address.  Thus the next instruction to execute will be from a
+	different part of program; this is how loops and decision
+	statements work.</para>
+
+      <para>For example, a statement like <computeroutput>if
+      (x==0)</computeroutput> might be implemented by finding the
+      <computeroutput>or</computeroutput> of two registers, one
+      holding <computeroutput>x</computeroutput> and the other zero;
+      if the result is zero the comparison is true (i.e. all bits of
+      <computeroutput>x</computeroutput> were zero) and the body of
+      the statement should be taken, otherwise branch past the body
+      code.</para>
+
     </sect2>
 
     <sect2>
@@ -74,8 +87,8 @@
 	speed</emphasis> since it is the speed that an internal clock
 	within the computer pulses.</para>
 
-      <para>The pulses are used within the processor to keep
-      everything happening inside it sync.  On each pulse another
+      <para>The pulses are used within the processor to keep it
+      internally synchronised.  On each tick or pulse another
       operation can be started; think of the clock like the person
       beating the drum to keep the rower's oars in sync. </para>
 
@@ -84,30 +97,30 @@
     <sect2>
       <title>Fetch, Decode, Execute, Store</title>
 
-      <para>Executing an instruction consists of a particular cycle
-	of events, particularly fetching, decoding, executing and
+      <para>Executing a single instruction consists of a particular
+	cycle of events; fetching, decoding, executing and
 	storing.</para>
 
       <para>For example, to do the
-	<computeroutput>add</computeroutput> instruction above it must
-	be</para>
+	<computeroutput>add</computeroutput> instruction above the CPU
+	must</para>
 
       <orderedlist>
 	<listitem>
-	  <para>Fetch : that is from memory into the
-	    processor.</para>
+	  <para>Fetch : get the instruction from memory into the
+	  processor.</para>
 	</listitem>
 	<listitem>
-	  <para>Decode : the processor must internally decode what
-	    it has to do (in this case add).</para>
+	  <para>Decode : internally decode what it has to do (in this
+	    case add).</para>
 	</listitem>
 	<listitem>
-	  <para>Execute : take the values from the registers,
-	    actually add them together</para>
+	  <para>Execute : take the values from the registers, actually
+	  add them together</para>
 	</listitem>
 	<listitem>
 	  <para>Store : store the result back into another
-	    register.</para>
+	  register.</para>
 	</listitem>
       </orderedlist>
 
@@ -116,24 +129,33 @@
 	to increase the clock speed, it became impractical to do all
 	those steps in one cycle.</para>
 
-      <para>Internally, the CPU has many different sub components that
+      <para>Internally the CPU has many different sub components that
 	perform each of the above steps, and generally they can all
-	happen at the same time.  The CPU can be smart and schedule
-	many different parts of different operations all at the same
-	time, effectively doing multiple instructions in the one clock
-	cycle.  This is called
-	<emphasis>pipelining</emphasis><footnote><para>In fact, any
-	modern processor has many more than four stages it can
+	happen independently of each other.  This is analgous to a
+	physical production line, where there are many stations where
+	each step has a particular task to perform.  Once done it can
+	pass the results to the next station and take a new input to
+	work on.</para>
+
+      <para>In the same way the CPU can be smart and schedule many
+	different parts of different operations all at the same time
+	in different parts of the CPU.  For example, the logic for
+	adding two registers together is completly separate to the
+	logic for writing the result back to memory, so there is no
+	reason why the CPU can not be doing both at once; effectively
+	doing multiple instructions in the one clock cycle.  This is
+	called <emphasis>pipelining</emphasis><footnote><para>In fact,
+	any modern processor has many more than four stages it can
 	pipeline.  The more stages that can be executed at the same
 	time, the deeper the pipeline.</para></footnote>, and a
 	processor that can do this is referred to as a
 	<emphasis>superscalar architecture</emphasis>.  All modern
 	processors are superscalar.</para>
 
-      <para>We can think of the pipeline like a normal every day pipe
-      that is being filled with marbles.  Ideally you will be putting
-      your marbles in one end, one after the other (synchronised with
-      clock pulses), filling up the pipe.  Once full, for each marble
+      <para>Another analogy might be to think of the pipeline like a
+      hose that is being filled with marbles.  Ideally you will be
+      putting your marbles in one end, one after the other (one per
+      clock pulse), filling up the pipe.  Once full, for each marble
       (instruction) you push in all the others will move to the next
       position and one will fall out the end (the result).</para>
 
@@ -150,6 +172,42 @@
       <emphasis>pipeline flush</emphasis> and is analogous to having
       to stop and empty out all your marbles from your hose!</para>
 
+      <sect3>
+	<title>Reordering</title>
+
+	<para>In fact, if the CPU is the hose, it is free to reorder
+	the marbles within the hose, as long as they pop out the end
+	in the same order you put them in.  We call this
+	<emphasis>program order</emphasis> since this is the order
+	that instructions are given in the computer program.</para>
+
+	<para>Most modern CPUs will have some way to reorder the
+	instructions inside the pipeline to make most efficient use of
+	resources.  For the most part you do not need to worry about
+	how this works, as the CPU ensures what comes out the other
+	end is in "program order".</para>
+
+	<para>However, when writing very low level code some
+	instructions may require some security about how operations
+	are ordered.  We call this requirement <emphasis>memory
+	semantics</emphasis>.  If you require
+	<emphasis>acquire</emphasis> semantics this means that for
+	this instruction you must ensure that the results of all
+	previous instructions have been completed.  If you require
+	<emphasis>release</emphasis> semantics you are saying that all
+	instructions after this one must see the current result.
+	Another even stricter semantic is a <emphasis>memory
+	barrier</emphasis> or <emphasis>memory fence</emphasis> which
+	requires that operations have been committed to memory before
+	continuing.</para>
+
+	<para>On some architectures these semantics are guarunteed for
+	you by the processor, whilst on others you must specify them
+	explicitly.  Most programmers do not need to worry directly
+	about them, although you may see the terms.</para>
+
+      </sect3>
+
     </sect2>
 
     <sect2>
@@ -165,10 +223,9 @@
       result value held in another register back to memory.  This is
       an example of a RISC approach to computing -- only performing
       operations on values in registers and explicitly loading and
-      storing values to and from memory.
-      </para>
+      storing values to and from memory.</para>
 
-      <para>A CISC approach would use only a single instruction taking
+      <para>A CISC approach may only a single instruction taking
       values from memory, performing the addition internally and
       writing the result back.  This means the instruction may take
       many cycles, but ultimately both approaches achieve the same
@@ -351,8 +408,53 @@
 	  have an understanding of how the cache in their systems
 	  works.</para>
 
-	<para>l1, l2, l3.  cache line size.  example of thrashing
-	cache. write-through v write-back.  </para>
+	<para>The cache is a very fast copy of the slower main system
+	memory.  Cache is much smaller than main memories because it
+	is included inside the processor chip alongside the registers
+	and proessor logic.  This is prime realestate in computing
+	terms, and there are both economic and physical limits to it's
+	maximum size.  As manufacturers find more and more ways to
+	cram more and more transistors onto a chip cache sizes grow
+	considerably, but even the largest caches are tens of
+	megabytes, rather than the gigabytes of main memory or
+	terrabytes of harddisk otherwise common. (XXXexample)</para>
+
+	<para>The cache is made up of small chunks of mirrored main
+	memory.  The size of these chunks is called the <emphasis>line
+	size</emphasis>, and is typically something like 64 kilobytes.
+	When talking about cache, it is very common to talk about the
+	line size, or a cache line, which refers to one chunk of
+	mirrored main memory.  The cache can only load and store
+	memory in sizes a multiple of a cache line.</para>
+
+	<para>As the cache is quite small compared to main memory, it
+	will obviously fill up quite quickly as a process goes about
+	its execution.  Once the cache is full the processor needs to
+	get rid of a line to make room for a new line.  There are many
+	algorithms by which the processor can choose which line to
+	evict; for example <emphasis>least recently used</emphasis>
+	(LRU) is an algorithm where the oldest unused line is
+	discarded to make room for the new line.</para>
+
+	<para>When data is only read from the cache there is no need
+	to ensure consistency with main memory.  However, when the
+	processor starts writing to cache lines it needs to make some
+	decisions about how to update the underlying main memory.  A
+	<emphasis>write-through</emphasis> cache will write the
+	changes directly into the main system memory as the processor
+	updates the cache.  This is slower since the process of
+	writing to the main memory is, as we have seen, slower.
+	Alternatively a <emphasis>write-back</emphasis> cache delays
+	writing the changes to RAM until absoultely necessary.  The
+	obvious advatantage is that less main memory access is
+	required when cache entries are written.  Cache lines that
+	have been written but not comitted to memory are referred to
+	as <emphasis>dirty</emphasis>.  The disadvantage is that when
+	a cache entry is evicted, it may require two memory accesses
+	(one to write dirty data main memory, and another to load the
+	new data).</para>
+
+	<para>XXX: associativity, thrashing?</para>
 
       </sect3>
 
