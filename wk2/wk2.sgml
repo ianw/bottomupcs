@@ -137,6 +137,8 @@
 	pass the results to the next station and take a new input to
 	work on.</para>
 
+      <para>XXX block diagram of units and flow</para>
+
       <para>In the same way the CPU can be smart and schedule many
 	different parts of different operations all at the same time
 	in different parts of the CPU.  For example, the logic for
@@ -173,7 +175,9 @@
       to stop and empty out all your marbles from your hose!</para>
 
       <sect3>
-	<title>Reordering</title>
+	<title>XXX : Reordering</title>
+
+	<para>This bit is crap</para>
 
 	<para>In fact, if the CPU is the hose, it is free to reorder
 	the marbles within the hose, as long as they pop out the end
@@ -181,11 +185,35 @@
 	<emphasis>program order</emphasis> since this is the order
 	that instructions are given in the computer program.</para>
 
-	<para>Most modern CPUs will have some way to reorder the
-	instructions inside the pipeline to make most efficient use of
-	resources.  For the most part you do not need to worry about
-	how this works, as the CPU ensures what comes out the other
-	end is in "program order".</para>
+	<para>Consider an instruction stream such as</para>
+
+	<figure>
+	  <title>Reorder buffer example</title>
+	  <mediaobject>
+	    <textobject>
+
+	      <programlisting>
+1: r3 = r1 * r2
+2: r4 = r2 + r3
+3: r7 = r5 * r6
+4: r8 = r1 + r7
+              </programlisting>
+
+	    </textobject>
+	  </mediaobject>
+	</figure>
+
+	<para>Instruction 2 needs to wait for instruction 1 to
+	complete fully before it can start.  This means that the
+	pipeline has to <emphasis>stall</emphasis> as it waits for the
+	value to be calculated.  Similarly instructions 3 and 4 have a
+	dependency on <emphasis>r7</emphasis>.  However, instructions
+	2 and 3 have no <emphasis>dependency</emphasis> on each other
+	at all; this means they operate on completely separate
+	registers.  If we swap instructions 2 and 3 we can get a much
+	better ordering for the pipeline since the processor can be
+	doing useful work rather than waiting for the pipeline to
+	complete to get the result of a previous instruction.</para>
 
 	<para>However, when writing very low level code some
 	instructions may require some security about how operations
@@ -694,23 +722,112 @@
       <sect3>
 	<title>Hyperthreading</title>
 
-	<para>Discuss how two registers, but shared logic.</para>
+	<para>Much of the time of a modern processor is spent waiting
+	for much slower devices in the memory heirarchy to deliver
+	data for processing.</para>
+
+	<para>Thus strategies to keep the pipeline of the processor
+	full are paramount.  One strategy is to include enough
+	registers and state logic such that two instruction streams
+	can be processed at the same time.  This makes one CPU look
+	for all intents and purposes like two CPUs.</para>
+
+	<para>While each CPU has its own registers, they still have to
+	share the core logic, cache and input and output bandwidth
+	from the CPU to memory.  So while two instruction streams can
+	keep the core logic of the processor busier, the performance
+	increase will not be as great has having two physically
+	separate CPUs.  Typically the performance improvement is below
+	20% (XXX check), however it can be drastially better or worse
+	depending on the workloads.</para>
 
       </sect3>
 
       <sect3>
-	<title>Dual Core</title>
+	<title>Multi Core</title>
 
-	<para>talk about dual cores, note that memory bus is
-	shared.</para>
+	<para>With increased ability to fit more and more transistors
+	on a chip, it became possible to put two or more processors in
+	the same physical package.  Most common is dual-core, where
+	two processor cores are in the same chip.  These cores, unlike
+	hyperthreading, are full processors and so appear as two
+	physically separate processors a la a SMP system.</para>
+
+	<para>While generally the processors have their own L1 cache,
+	they do have to share the bus connecting to main memory and
+	other devices.  Thus performance is not as great as a full SMP
+	system, but considerably better than a hyperthreading system
+	(in fact, each core can still implement hyperthreading for an
+	additional enhancement).</para>
+
+	<para>Multi core processors also have some advantages not
+	performance related.  The power requirements for multi core
+	processors are much less than for two separate
+	processors. This means that there is less heat needing to be
+	dissapated which can be a big advantage in datacentre
+	applications where computers are packed together and cooling
+	considerations can be considerable.  By having the cores in
+	the same physial package it makes muti-processing practical in
+	applications where it otherwise would not be, such as laptops.
+	It is also considerably cheaper to only have to produce one
+	chip rather than two.</para>
 
       </sect3>
 
       <sect3>
 	<title>Clusters</title>
 
-	<para>talk about clusters, slower interconnects, software
-	shared memory.</para>
+	<para>Many applications require systems much larger than the
+	number of processors a SMP system can scale to.  One way of
+	scaling up the system further is a
+	<emphasis>cluster</emphasis>.</para>
+
+	<para>A cluster is simply a number of individual computers
+	which have some ability to talk to each other.  At the
+	hardware level the systems have no knowledge of each other;
+	the task of stiching the individual computers together is left
+	up to software.</para>
+
+	<para>Software such as MPI allow programmers to write thier
+	software and then "farm out" parts of the program to other
+	computers in the system.  For example, image a loop that
+	executes several thousand times performing independent action
+	(that is no iteration of the loop affects any other
+	iteration).  With four computers in a cluster, the software
+	could make each computer do 250 loops each.</para>
+
+	<para>The interconnect between the computers varies, and may
+	be as slow as an internet link or as fast as dedicated,
+	special busses (Infiniband).  Whatever the interconnect,
+	however, it is still going to be further down the memory
+	heirarchy and much, much slower than RAM.  Thus a cluster will
+	not perform well in a situation when each CPU requires access
+	to data that may be stored in the RAM of another computer;
+	since each time this happens the software will need to request
+	a copy of the data from the other computer, copy across the
+	slow link and into local RAM before the processor can get any
+	work done.</para>
+
+	<para>However, many applications <emphasis>do not</emphasis>
+	require this constant copying around between computers.  One
+	large scale example is SETI@Home, where data collected from a
+	radio antenna is analysed for signs of Alien life.  Each
+	computer can be distributed a few minutes of data to analyse,
+	and only needs report back a summary of what it found.
+	SETI@Home is effectively a very large, dedicated
+	cluster.</para>
+
+	<para>Another application is rendering of images, especially
+	for special effects in films.  Each computer can be handed a
+	single frame of the movie which contains the wireframe models,
+	textures and light sources which needs to be combined
+	(rendered) into the amazing special effects we now take for
+	gratned.  Since each frame is static, once the computer has
+	the initial input it does not need any more communication
+	until the final frame is ready to be sent back and combined
+	into the move.  For example the block-buster Lord of the Rings
+	had their special effects rendered on a huge cluster running
+	Linux.</para>
 
       </sect3>
 
