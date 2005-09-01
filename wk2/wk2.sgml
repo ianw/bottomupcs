@@ -774,7 +774,7 @@
 
       </sect3>
 
-      <sect3>
+      <sect2>
 	<title>Clusters</title>
 
 	<para>Many applications require systems much larger than the
@@ -829,16 +829,13 @@
 	had their special effects rendered on a huge cluster running
 	Linux.</para>
 
-      </sect3>
+      </sect2>
 
-      <sect3>
+      <sect2>
 	<title>Non-Uniform Memory Access</title>
 
 	<para>Talk about numa, mention ccNUMA</para>
-      </sect3>
-
-    </sect2>
-
+      </sect2>
   </sect1>
 
     <sect1>
