@@ -119,15 +119,14 @@
 	  add them together</para>
 	</listitem>
 	<listitem>
-	  <para>Store : store the result back into another
-	  register.</para>
+	  <para>Store : store the result back into another register.
+	  You might also see the term <emphasis>retiring</emphasis>
+	  the instruction.</para>
 	</listitem>
       </orderedlist>
 
-      <para>Once upon a time, all of these steps would have taken
-	place during one cycle.  However as hardware engineers started
-	to increase the clock speed, it became impractical to do all
-	those steps in one cycle.</para>
+      <sect3>
+	<title>Looking inside a CPU</title>
 
       <para>Internally the CPU has many different sub components that
 	perform each of the above steps, and generally they can all
@@ -137,45 +136,117 @@
 	pass the results to the next station and take a new input to
 	work on.</para>
 
-      <para>XXX block diagram of units and flow</para>
+	<figure>
+	  <title>Inside the CPU</title>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk2/figures/block.eps" format="EPS">
+	    </imageobject>
+	    <imageobject>
+	      <imagedata fileref="wk2/figures/block.png" format="PNG">
+	    </imageobject>
+	    <textobject>
+	      <phrase>The CPU is made up of many different
+	      sub-compontents, each doing a dedicated task.</phrase>
+	    </textobject>
+	  </mediaobject>
+	</figure>
 
-      <para>In the same way the CPU can be smart and schedule many
-	different parts of different operations all at the same time
-	in different parts of the CPU.  For example, the logic for
-	adding two registers together is completly separate to the
-	logic for writing the result back to memory, so there is no
-	reason why the CPU can not be doing both at once; effectively
-	doing multiple instructions in the one clock cycle.  This is
-	called <emphasis>pipelining</emphasis><footnote><para>In fact,
-	any modern processor has many more than four stages it can
-	pipeline.  The more stages that can be executed at the same
-	time, the deeper the pipeline.</para></footnote>, and a
-	processor that can do this is referred to as a
-	<emphasis>superscalar architecture</emphasis>.  All modern
-	processors are superscalar.</para>
+	<para>Above we have a very simple block diagram illustrating
+	some of the main parts of a modern CPU.</para>
 
-      <para>Another analogy might be to think of the pipeline like a
-      hose that is being filled with marbles.  Ideally you will be
-      putting your marbles in one end, one after the other (one per
-      clock pulse), filling up the pipe.  Once full, for each marble
-      (instruction) you push in all the others will move to the next
-      position and one will fall out the end (the result).</para>
+	<para>You can see the instructions come in and are decoded by
+	the processor.  The CPU has two main types of registers, those
+	for <emphasis>integer</emphasis> calcuations and those for
+	<emphasis>floating point</emphasis> calculations.  Floating
+	point is a way of representing numbers with a decimal place in
+	binary form, and is handled differently within the CPU.
+	<emphasis>MMX</emphasis> (multimedia extension) and
+	<emphasis>SSE</emphasis> (Streaming Single Instruction
+	Multiple Data) or <emphasis>Altivec</emphasis> registers are
+	similar to floating point registers.</para>
 
-      <para>Branch instruction play havoc with this model however,
+	<para>A <emphasis>register file</emphasis> is the collective
+	name for the registers inside the CPU.  Below that we have the
+	parts of the CPU which really do all the work.</para>
+
+	<para>We said that processors are either loading or storing a
+	value into a register or from a register into memory, or doing
+	some operation on values in registers.</para>
+
+	<para>The <emphasis>Arithmetic Logic Unit</emphasis> (ALU) is
+	the heart of the CPU operation.  It takes values in registers
+	and performs any of the multitude of operations the CPU is
+	capable of.  All modern processors have a number of ALUs so
+	each can be working independently.  In fact, processors such
+	as the Pentium have both <emphasis>fast</emphasis> and
+	<emphasis>slow</emphasis> ALUs; the fast ones are smaller (so
+	you can fit more on the CPU) but can do only the most common
+	operations, slow ALUs can do all operations but are
+	bigger.</para>
+
+	<para>The <emphasis>Address Generation Unit</emphasis> (AGU)
+	handles talking to cache and main memory to get values into
+	the registers for the ALU to operate on and get values out of
+	registers back into main memory.</para>
+
+	<para>Floating point registers have the same concepts, but use
+	slightly different terminology for their components.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Pipelining</title>
+
+	<para>As we can see above, whilst the ALU is adding registers
+	together is completly separate to the AGU writing values back
+	to memory, so there is no reason why the CPU can not be doing
+	both at once.  We also have multiple ALUs in the system, each
+	which can be working on separate instructions.  Finally the
+	CPU could be doing some floating point operations with its
+	floating point logic whilst integer instructions are in flight
+	too.  This process is called
+	<emphasis>pipelining</emphasis><footnote><para>In fact, any
+	modern processor has many more than four stages it can
+	pipeline, above we have only shown a very similified view.
+	The more stages that can be executed at the same time, the
+	deeper the pipeline.</para></footnote>, and a processor that
+	can do this is referred to as a <emphasis>superscalar
+	architecture</emphasis>.  All modern processors are
+	superscalar.</para>
+
+	<para>Another analogy might be to think of the pipeline like a
+      hose that is being filled with marbles, except our marbles are
+      instructions for the CPU.  Ideally you will be putting your
+      marbles in one end, one after the other (one per clock pulse),
+      filling up the pipe.  Once full, for each marble (instruction)
+      you push in all the others will move to the next position and
+      one will fall out the end (the result).</para>
+
+	<para>Branch instruction play havoc with this model however,
 	since they may or may not cause execution to start from a
 	different place.  If you are pipelining, you will have to
 	basically guess which way the branch will go, so you know
 	which instructions to bring into the pipeline.  If the CPU has
-	predicted correctly, everything goes fine! Conversely, if the
-	processor has predicted incorrectly it has wasted a lot of
-	time and has to clear the pipeline and start again.</para>
+	predicted correctly, everything goes
+	fine!<footnote><para>Processors such as the Pentium use a
+	<emphasis>trace cache</emphasis> to keep a track of which way
+	branches are going.  Much of the time it can predict which way
+	a branch will go by remembering its previous result.  For
+	example, in a loop that happens 100 times, if you remember the
+	last result of the branch you will be right 99 times, since
+	only the last time will you actually continute with the
+	program.</para></footnote> Conversely, if the processor has
+	predicted incorrectly it has wasted a lot of time and has to
+	clear the pipeline and start again.</para>
 
-      <para>This process is usually referred to as a
+	<para>This process is usually referred to as a
       <emphasis>pipeline flush</emphasis> and is analogous to having
       to stop and empty out all your marbles from your hose!</para>
+      </sect3>
 
       <sect3>
-	<title>XXX : Reordering</title>
+	<title>Reordering</title>
 
 	<para>This bit is crap</para>
 
