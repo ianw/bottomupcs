@@ -130,7 +130,7 @@
 
       <para>Internally the CPU has many different sub components that
 	perform each of the above steps, and generally they can all
-	happen independently of each other.  This is analgous to a
+	happen independently of each other.  This is analogous to a
 	physical production line, where there are many stations where
 	each step has a particular task to perform.  Once done it can
 	pass the results to the next station and take a new input to
@@ -147,7 +147,7 @@
 	    </imageobject>
 	    <textobject>
 	      <phrase>The CPU is made up of many different
-	      sub-compontents, each doing a dedicated task.</phrase>
+	      sub-components, each doing a dedicated task.</phrase>
 	    </textobject>
 	  </mediaobject>
 	</figure>
@@ -157,7 +157,7 @@
 
 	<para>You can see the instructions come in and are decoded by
 	the processor.  The CPU has two main types of registers, those
-	for <emphasis>integer</emphasis> calcuations and those for
+	for <emphasis>integer</emphasis> calculations and those for
 	<emphasis>floating point</emphasis> calculations.  Floating
 	point is a way of representing numbers with a decimal place in
 	binary form, and is handled differently within the CPU.
@@ -199,7 +199,7 @@
 	<title>Pipelining</title>
 
 	<para>As we can see above, whilst the ALU is adding registers
-	together is completly separate to the AGU writing values back
+	together is completely separate to the AGU writing values back
 	to memory, so there is no reason why the CPU can not be doing
 	both at once.  We also have multiple ALUs in the system, each
 	which can be working on separate instructions.  Finally the
@@ -208,7 +208,7 @@
 	too.  This process is called
 	<emphasis>pipelining</emphasis><footnote><para>In fact, any
 	modern processor has many more than four stages it can
-	pipeline, above we have only shown a very similified view.
+	pipeline, above we have only shown a very simplified view.
 	The more stages that can be executed at the same time, the
 	deeper the pipeline.</para></footnote>, and a processor that
 	can do this is referred to as a <emphasis>superscalar
@@ -235,7 +235,7 @@
 	a branch will go by remembering its previous result.  For
 	example, in a loop that happens 100 times, if you remember the
 	last result of the branch you will be right 99 times, since
-	only the last time will you actually continute with the
+	only the last time will you actually continue with the
 	program.</para></footnote> Conversely, if the processor has
 	predicted incorrectly it has wasted a lot of time and has to
 	clear the pipeline and start again.</para>
@@ -300,7 +300,7 @@
 	requires that operations have been committed to memory before
 	continuing.</para>
 
-	<para>On some architectures these semantics are guarunteed for
+	<para>On some architectures these semantics are guaranteed for
 	you by the processor, whilst on others you must specify them
 	explicitly.  Most programmers do not need to worry directly
 	about them, although you may see the terms.</para>
@@ -384,19 +384,19 @@
 
 	<para>Traditionally organising the incoming instruction stream
 	has been the job of the hardware.  Instructions are issued by
-	the program in a sequental manner; the processor must look
+	the program in a sequential manner; the processor must look
 	ahead and try to make decisions about how to organise the
 	incoming instructions.</para>
 
 	<para>The theory behind EPIC is that there is more information
 	available at higher levels which can make these decisions
-	better than the processor.  Analysing a stream of assebembly
+	better than the processor.  Analysing a stream of assembly
 	language instructions, as current processors do, looses a lot
 	of information that the programmer may have provided in the
 	original source code.  Think of it as the difference between
 	studying a Shakespeare play and reading the Cliff's Notes
 	version of the same.  Both give you the same result, but the
-	orignal has all sorts of pehperial information that sets the
+	original has all sorts of extra information that sets the
 	scene and gives you insight into the characters.</para>
 
 	<para>Thus the logic of ordering instructions can be moved
@@ -409,14 +409,14 @@
 	where each instruction to the processor is extended to tell
 	the processor about where it should execute the instruction in
 	it's internal units.  The problem with this approach is that
-	code is then completly dependent on the model of processor is
+	code is then completely dependent on the model of processor is
 	has been compiled for.  Companies are always making revisions
 	to hardware, and making customers recompile their application
 	every single time, and maintain a range of different binaries
 	was impractical.</para> <para>EPIC solves this in the usual
 	computer science manner by adding a layer of abstraction.
 	Rather than explicitly specifying the exact part of the
-	processor the instructions should exectue on, EPIC creates a
+	processor the instructions should execute on, EPIC creates a
 	simplified view with a few core units like memory, integer and
 	floating point.</para></footnote></para>
 
@@ -510,7 +510,7 @@
 	<para>The cache is a very fast copy of the slower main system
 	memory.  Cache is much smaller than main memories because it
 	is included inside the processor chip alongside the registers
-	and proessor logic.  This is prime realestate in computing
+	and processor logic.  This is prime real estate in computing
 	terms, and there are both economic and physical limits to it's
 	maximum size.  As manufacturers find more and more ways to
 	cram more and more transistors onto a chip cache sizes grow
@@ -544,10 +544,10 @@
 	updates the cache.  This is slower since the process of
 	writing to the main memory is, as we have seen, slower.
 	Alternatively a <emphasis>write-back</emphasis> cache delays
-	writing the changes to RAM until absoultely necessary.  The
-	obvious advatantage is that less main memory access is
+	writing the changes to RAM until absolutely necessary.  The
+	obvious advantage is that less main memory access is
 	required when cache entries are written.  Cache lines that
-	have been written but not comitted to memory are referred to
+	have been written but not committed to memory are referred to
 	as <emphasis>dirty</emphasis>.  The disadvantage is that when
 	a cache entry is evicted, it may require two memory accesses
 	(one to write dirty data main memory, and another to load the
@@ -677,16 +677,16 @@
   <sect1>
     <title>Small to big systems</title>
     
-    <para>As Moore's law has prediced, computing power has been
+    <para>As Moore's law has predicted, computing power has been
     growing at a furious pace and shows no signs of slowing down.  It
-    is realtively uncommon for any high end servers to contain only a
+    is relatively uncommon for any high end servers to contain only a
     single CPU.  This is achieved in a number of different
     fashions.</para>
     
     <sect2>
       <title>Symmetric Multi-Processing</title>
       
-      <para>Symmetric Multi-Processing, commonly shortended to
+      <para>Symmetric Multi-Processing, commonly shortened to
       <emphasis>SMP</emphasis>, is currently the most common
       configuration for including multiple CPUs in a single
       system.</para>
@@ -703,10 +703,10 @@
 	<para>For the most part, the CPUs in the system work
       independently; each has its own set of registers, program
       counter, etc.  Despite running separately, there is one
-      component that requires strict syncronisation.</para>
+      component that requires strict synchronisation.</para>
 
       <para>This is the CPU cache; remember the cache is a small area
-      of quickly accessable memory that mirrors values stored in main
+      of quickly access able memory that mirrors values stored in main
       system memory.  If one CPU modifies data in main memory and
       another CPU has an old copy of that memory in its cache the
       system will obviously not be in a consistent state.  Note that
@@ -769,7 +769,7 @@
 
 	<para>From this point the process starts all over.  Thus
 	whichever processor has the <emphasis>modified</emphasis>
-	value has the responsiblity of writing the true value back to
+	value has the responsibility of writing the true value back to
 	RAM when it is evicted from the cache.  By thinking through
 	the protocol you can see that this ensures consistency of
 	cache lines between processors.</para>
@@ -778,7 +778,7 @@
 	traffic does not scale very well.  With only a few processors,
 	the overhead of checking if another processor has the cache
 	line (a read snoop) or invalidating the data in every other
-	processor (invalidate snoop) is managable; but as the number
+	processor (invalidate snoop) is manageable; but as the number
 	of processors increase so does the bus traffic.  This is why
 	SMP systems usually only scale up to around 8
 	processors.</para>
@@ -794,7 +794,7 @@
 	<title>Hyperthreading</title>
 
 	<para>Much of the time of a modern processor is spent waiting
-	for much slower devices in the memory heirarchy to deliver
+	for much slower devices in the memory hierarchy to deliver
 	data for processing.</para>
 
 	<para>Thus strategies to keep the pipeline of the processor
@@ -809,7 +809,7 @@
 	keep the core logic of the processor busier, the performance
 	increase will not be as great has having two physically
 	separate CPUs.  Typically the performance improvement is below
-	20% (XXX check), however it can be drastially better or worse
+	20% (XXX check), however it can be drastically better or worse
 	depending on the workloads.</para>
 
       </sect3>
@@ -835,10 +835,10 @@
 	performance related.  The power requirements for multi core
 	processors are much less than for two separate
 	processors. This means that there is less heat needing to be
-	dissapated which can be a big advantage in datacentre
+	dissipated which can be a big advantage in data centre
 	applications where computers are packed together and cooling
 	considerations can be considerable.  By having the cores in
-	the same physial package it makes muti-processing practical in
+	the same physical package it makes muti-processing practical in
 	applications where it otherwise would not be, such as laptops.
 	It is also considerably cheaper to only have to produce one
 	chip rather than two.</para>
@@ -856,7 +856,7 @@
 	<para>A cluster is simply a number of individual computers
 	which have some ability to talk to each other.  At the
 	hardware level the systems have no knowledge of each other;
-	the task of stiching the individual computers together is left
+	the task of stitching the individual computers together is left
 	up to software.</para>
 
 	<para>Software such as MPI allow programmers to write thier
@@ -871,7 +871,7 @@
 	be as slow as an internet link or as fast as dedicated,
 	special busses (Infiniband).  Whatever the interconnect,
 	however, it is still going to be further down the memory
-	heirarchy and much, much slower than RAM.  Thus a cluster will
+	hierarchy and much, much slower than RAM.  Thus a cluster will
 	not perform well in a situation when each CPU requires access
 	to data that may be stored in the RAM of another computer;
 	since each time this happens the software will need to request
@@ -890,10 +890,10 @@
 
 	<para>Another application is rendering of images, especially
 	for special effects in films.  Each computer can be handed a
-	single frame of the movie which contains the wireframe models,
+	single frame of the movie which contains the wire-frame models,
 	textures and light sources which needs to be combined
 	(rendered) into the amazing special effects we now take for
-	gratned.  Since each frame is static, once the computer has
+	grained.  Since each frame is static, once the computer has
 	the initial input it does not need any more communication
 	until the final frame is ready to be sent back and combined
 	into the move.  For example the block-buster Lord of the Rings
@@ -905,7 +905,107 @@
       <sect2>
 	<title>Non-Uniform Memory Access</title>
 
-	<para>Talk about numa, mention ccNUMA</para>
+	<para>Non-Uniform Memory Access, more commonly abbreviated to
+	NUMA, is almost the opposite of a cluster system mentioned
+	above.  As in a cluster system it is made up of individual
+	nodes linked together, however the linkage between nodes is
+	highly specialised (and expensive!).  As opposed to a cluster
+	system where the hardware has no knowledge of the linkage
+	between nodes, in a NUMA system the
+	<emphasis>software</emphasis> has no (well, less) knowledge
+	about the layout of the system and the hardware does all the
+	work to link the nodes together.</para>
+
+      <para>The term <emphasis>non uniform memory access</emphasis>
+      comes from the fact that RAM may not be local to the CPU and so
+      data may need to be accessed from a node some distance away.
+      This obviously takes longer, and is in contrast to a single
+      processor or SMP system where RAM is directly attached and
+      always takes a constant (uniform) time to access.</para>
+
+      <para>With so many nodes talking to each other in a system,
+      minimising the distance between each node is of paramount
+      importance.  Obviously it is best if every single node has a
+      direct link to every other node as this minimises the distance
+      any one node needs to go to find data.  This is not a practical
+      situation when the number of nodes starts growing into the
+      hundreds and thousands as it does with large supercomputers; if
+      you remember your high school maths the problem is basically a
+      combination taken two at a time (each node talking to another),
+      and will grow
+      <computeroutput>n!/2*(n-2)!</computeroutput>.</para>
+
+      <para>To combat this exponential growth alternative layouts are
+      used to trade off the distance between nodes with the
+      interconnects required.  One such layout common in modern NUMA
+      architectures is the hypercube.</para>
+
+      <para>A hypercube has a strict mathematical definition (way
+      beyond this discussion) but as a cube is a 3 dimensional
+      counterpart of a square, so a hypercube is a 4 dimensional
+      counterpart of a cube.</para>
+
+      <figure>
+      <title>A Hypercube</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="wk2/figures/hypercube.eps" format="EPS">
+	</imageobject>
+	<imageobject>
+	  <imagedata fileref="wk2/figures/hypercube.png" format="PNG">
+	</imageobject>
+	<textobject>
+	  <phrase>An example of a hypercube.  Hypercubes provide a
+	  good trade off between distance between nodes and number of
+	  interconnections required.</phrase>
+	</textobject>
+      </mediaobject>
+
+    </figure>
+
+      <para>Above we can see the outer cube contains four 8 nodes.
+      The maximum number of paths required for any node to talk to
+      another node is 3.  When another cube is placed inside this
+      cube, we now have double the number of processors but the
+      maximum path cost has only increased to 4.  This means as the
+      number of processors grow by 2<superscript>n</superscript> the
+      maximum path cost grows only linearly.</para>
+
+      <para>Cache coherency is of paramount importance, just as in a
+      SMP system.  As in a SMP system the underlying hardware is
+      required to keep track of the cache without intervention from
+      software.  However, instead of the processors communicating
+      directly on a bus as in the SMP case, a NUMA system usually uses
+      a directory based scheme where utilising special hardware and
+      algorithms to keep the cache coherency traffic to a
+      minimum.</para>
+
+      <para>NUMA systems are best suited to the types of problems that
+      require much interaction between processor and memory.  For
+      example, in weather simulations a common idiom is to divide the
+      environment up into small "boxes" which respond in different
+      ways (oceans and land reflect or store different amounts of
+      heat, for example).  As simulations are run, small variations
+      will be fed in to see what the overall result is.  As each box
+      influences the surrounding boxes (e.g. a bit more sun means a
+      particular box puts out more heat, affecting the boxes next to
+      it) there will be much communication (contrast that with the
+      individual image frames for a rendering process, each of which
+      does not influence the other).  A similar process might happen
+      if you were modelling a car crash, where each small box of the
+      simulated car folds in some way and absorbs some amount of
+      energy.</para>
+
+      <para>Although the software has no directly knowledge that the
+      underlying system is a NUMA system, programmers need to be
+      careful when programming for the system to get maximum
+      performance.  Obviously keeping memory close to the processor
+      that is going to use it will result in the best performance.
+      Programmers need to use techniques such as
+      <emphasis>profiling</emphasis> to analyse the code paths taken
+      and what consequences their code is causing for the system to
+      extract best performance.</para>
+
       </sect2>
   </sect1>
 
