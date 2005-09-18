@@ -373,7 +373,7 @@
 
 	<para>The Itanium processor, which is used in many example
 	through this book, is an example of a modified architecture
-	called Explictily Parallel Instruction Computing.</para>
+	called Explicitly Parallel Instruction Computing.</para>
 
 	<para>We have discussed how superscaler processors have
 	pipelines that have many instructions in flight at the same
@@ -516,7 +516,7 @@
 	cram more and more transistors onto a chip cache sizes grow
 	considerably, but even the largest caches are tens of
 	megabytes, rather than the gigabytes of main memory or
-	terrabytes of harddisk otherwise common. (XXXexample)</para>
+	terrabytes of hard disk otherwise common. (XXXexample)</para>
 
 	<para>The cache is made up of small chunks of mirrored main
 	memory.  The size of these chunks is called the <emphasis>line
@@ -699,7 +699,6 @@
       <sect3>
 	<title>Cache Coherency</title>
 
-
 	<para>For the most part, the CPUs in the system work
       independently; each has its own set of registers, program
       counter, etc.  Despite running separately, there is one
@@ -774,14 +773,22 @@
 	the protocol you can see that this ensures consistency of
 	cache lines between processors.</para>
 
-	<para>The only problem with this system is that all the snoop
-	traffic does not scale very well.  With only a few processors,
+	<para>There are several issues with this system as the number
+	of processors starts to increase.  With only a few processors,
 	the overhead of checking if another processor has the cache
 	line (a read snoop) or invalidating the data in every other
 	processor (invalidate snoop) is manageable; but as the number
 	of processors increase so does the bus traffic.  This is why
 	SMP systems usually only scale up to around 8
 	processors.</para>
+
+	<para>Having the processors all on the same bus starts to
+	present physical problems as well.  Physical properties of
+	wires only allow them to be laid out at certain distances
+	from each other and to only have certain lengths.  With
+	processors that run at many gigahertz the speed of light
+	starts to become a real consideration in how long it takes
+	messages to move around a system.</para>
 
 	<para>Note that system software usually has no part in this
 	process, although programmers should be aware of what the
@@ -832,16 +839,20 @@
 	additional enhancement).</para>
 
 	<para>Multi core processors also have some advantages not
-	performance related.  The power requirements for multi core
-	processors are much less than for two separate
-	processors. This means that there is less heat needing to be
-	dissipated which can be a big advantage in data centre
-	applications where computers are packed together and cooling
-	considerations can be considerable.  By having the cores in
-	the same physical package it makes muti-processing practical in
-	applications where it otherwise would not be, such as laptops.
-	It is also considerably cheaper to only have to produce one
-	chip rather than two.</para>
+	performance related.  As we mentioned, external physical
+	busses between processors have physical limits; by containing
+	the processors on the same piece of silicon extremely close to
+	each other some of these problems can be worked around.  The
+	power requirements for multi core processors are much less
+	than for two separate processors. This means that there is
+	less heat needing to be dissipated which can be a big
+	advantage in data centre applications where computers are
+	packed together and cooling considerations can be
+	considerable.  By having the cores in the same physical
+	package it makes muti-processing practical in applications
+	where it otherwise would not be, such as laptops.  It is also
+	considerably cheaper to only have to produce one chip rather
+	than two.</para>
 
       </sect3>
 
@@ -859,7 +870,7 @@
 	the task of stitching the individual computers together is left
 	up to software.</para>
 
-	<para>Software such as MPI allow programmers to write thier
+	<para>Software such as MPI allow programmers to write their
 	software and then "farm out" parts of the program to other
 	computers in the system.  For example, image a loop that
 	executes several thousand times performing independent action
@@ -923,6 +934,9 @@
       processor or SMP system where RAM is directly attached and
       always takes a constant (uniform) time to access.</para>
 
+      <sect3>
+	<title>NUMA Machine Layout</title>
+
       <para>With so many nodes talking to each other in a system,
       minimising the distance between each node is of paramount
       importance.  Obviously it is best if every single node has a
@@ -971,14 +985,62 @@
       number of processors grow by 2<superscript>n</superscript> the
       maximum path cost grows only linearly.</para>
 
-      <para>Cache coherency is of paramount importance, just as in a
-      SMP system.  As in a SMP system the underlying hardware is
-      required to keep track of the cache without intervention from
-      software.  However, instead of the processors communicating
-      directly on a bus as in the SMP case, a NUMA system usually uses
-      a directory based scheme where utilising special hardware and
-      algorithms to keep the cache coherency traffic to a
-      minimum.</para>
+      </sect3>
+
+      <sect3>
+	<title>Cache Coherency</title>
+
+      <para>Cache coherency can still be maintained in a NUMA system
+      (this is referred to as a cache-coherent NUMA system, or
+      ccNUMA).  As we mentioned, the broadcast based scheme used to
+      keep the processor caches coherent in an SMP system does not
+      scale to hundreds or even thousands of processors in a large
+      NUMA system.  One common scheme for cache coherency in a NUMA
+      system is referred to as a <emphasis>directory based
+      model</emphasis>.  In this model processors in the system
+      communicate to special cache directory hardware.  The directory
+      hardware maintains a consistent picture to each processor; this
+      abstraction hides the working of the NUMA system from the
+      processor.</para>
+
+	<para>The Censier and Feautrier directory based scheme
+	maintains a central directory where each memory block has a
+	flag bit known as the <emphasis>valid bit</emphasis> for each
+	processor and a single <emphasis>dirty</emphasis> bit.  When a
+	processor reads the memory into its cache, the directory sets
+	the valid bit for that processor.</para>
+
+	<para>When a processor wishes to write to the cache line the
+	directory needs to set the dirty bit for the memory block.
+	This involves sending an invalidate message to those
+	processors who are using the cache line (and only those
+	processors whose flag are set; avoiding broadcast
+	traffic).</para>
+
+	<para>After this should any other processor try to read the
+	memory block the directory will find the dirty bit set.  The
+	directory will need to get the updated cache line from the
+	processor with the valid bit currently set, write the dirty
+	data back to main memory and then provide that data back to
+	the requesting processor, setting the valid bit for the
+	requesting processor in the process.  Note that this is
+	transparent to the requesting processor and the directory may
+	need to get that data from somewhere very close or somewhere
+	very far away.
+	</para>
+
+	<para>Obviously having thousands of processors communicating
+	to a single directory does also not scale well.  Extensions to
+	the scheme involve having a hierarchy of directories that
+	communicate between each other using a separate protocol.  The
+	directories can use a more general purpose communications
+	network to talk between each other, rather than a CPU bus,
+	allowing scaling to much larger systems.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>NUMA Applications</title>
 
       <para>NUMA systems are best suited to the types of problems that
       require much interaction between processor and memory.  For
@@ -1005,6 +1067,9 @@
       <emphasis>profiling</emphasis> to analyse the code paths taken
       and what consequences their code is causing for the system to
       extract best performance.</para>
+
+      </sect3>
+
 
       </sect2>
   </sect1>
