@@ -1,0 +1,117 @@
+$ cat test.c
+#include <stdio.h>
+
+void __attribute__((constructor)) program_init(void)  {
+  printf("init\n");
+}
+
+void  __attribute__((destructor)) program_fini(void) {
+  printf("fini\n");
+}
+
+int main(void)
+{
+  return 0;
+}
+
+$ gcc -Wall  -o test test.c
+
+$ ./test
+init
+fini
+
+$ objdump --disassemble ./test | grep program_init
+08048398 <program_init>:
+
+$ objdump --disassemble ./test | grep program_fini
+080483b0 <program_fini>:
+
+$ objdump --disassemble ./test 
+
+[...]
+08048280 <_init>:
+ 8048280:       55                      push   %ebp
+ 8048281:       89 e5                   mov    %esp,%ebp
+ 8048283:       83 ec 08                sub    $0x8,%esp
+ 8048286:       e8 79 00 00 00          call   8048304 <call_gmon_start>
+ 804828b:       e8 e0 00 00 00          call   8048370 <frame_dummy>
+ 8048290:       e8 2b 02 00 00          call   80484c0 <__do_global_ctors_aux>
+ 8048295:       c9                      leave
+ 8048296:       c3                      ret
+[...]
+
+080484c0 <__do_global_ctors_aux>:
+ 80484c0:       55                      push   %ebp
+ 80484c1:       89 e5                   mov    %esp,%ebp
+ 80484c3:       53                      push   %ebx
+ 80484c4:       52                      push   %edx
+ 80484c5:       a1 2c 95 04 08          mov    0x804952c,%eax
+ 80484ca:       83 f8 ff                cmp    $0xffffffff,%eax
+ 80484cd:       74 1e                   je     80484ed <__do_global_ctors_aux+0x2d>
+ 80484cf:       bb 2c 95 04 08          mov    $0x804952c,%ebx
+ 80484d4:       8d b6 00 00 00 00       lea    0x0(%esi),%esi
+ 80484da:       8d bf 00 00 00 00       lea    0x0(%edi),%edi
+ 80484e0:       ff d0                   call   *%eax
+ 80484e2:       8b 43 fc                mov    0xfffffffc(%ebx),%eax
+ 80484e5:       83 eb 04                sub    $0x4,%ebx
+ 80484e8:       83 f8 ff                cmp    $0xffffffff,%eax
+ 80484eb:       75 f3                   jne    80484e0 <__do_global_ctors_aux+0x20>
+ 80484ed:       58                      pop    %eax
+ 80484ee:       5b                      pop    %ebx
+ 80484ef:       5d                      pop    %ebp
+ 80484f0:       c3                      ret
+ 80484f1:       90                      nop
+ 80484f2:       90                      nop
+ 80484f3:       90                      nop
+
+
+$ readelf --sections ./test
+There are 34 section headers, starting at offset 0xfb0:
+
+Section Headers:
+  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al
+  [ 0]                   NULL            00000000 000000 000000 00      0   0  0
+  [ 1] .interp           PROGBITS        08048114 000114 000013 00   A  0   0  1
+  [ 2] .note.ABI-tag     NOTE            08048128 000128 000020 00   A  0   0  4
+  [ 3] .hash             HASH            08048148 000148 00002c 04   A  4   0  4
+  [ 4] .dynsym           DYNSYM          08048174 000174 000060 10   A  5   1  4
+  [ 5] .dynstr           STRTAB          080481d4 0001d4 00005e 00   A  0   0  1
+  [ 6] .gnu.version      VERSYM          08048232 000232 00000c 02   A  4   0  2
+  [ 7] .gnu.version_r    VERNEED         08048240 000240 000020 00   A  5   1  4
+  [ 8] .rel.dyn          REL             08048260 000260 000008 08   A  4   0  4
+  [ 9] .rel.plt          REL             08048268 000268 000018 08   A  4  11  4
+  [10] .init             PROGBITS        08048280 000280 000017 00  AX  0   0  4
+  [11] .plt              PROGBITS        08048298 000298 000040 04  AX  0   0  4
+  [12] .text             PROGBITS        080482e0 0002e0 000214 00  AX  0   0 16
+  [13] .fini             PROGBITS        080484f4 0004f4 00001a 00  AX  0   0  4
+  [14] .rodata           PROGBITS        08048510 000510 000012 00   A  0   0  4
+  [15] .eh_frame         PROGBITS        08048524 000524 000004 00   A  0   0  4
+  [16] .ctors            PROGBITS        08049528 000528 00000c 00  WA  0   0  4
+  [17] .dtors            PROGBITS        08049534 000534 00000c 00  WA  0   0  4
+  [18] .jcr              PROGBITS        08049540 000540 000004 00  WA  0   0  4
+  [19] .dynamic          DYNAMIC         08049544 000544 0000c8 08  WA  5   0  4
+  [20] .got              PROGBITS        0804960c 00060c 000004 04  WA  0   0  4
+  [21] .got.plt          PROGBITS        08049610 000610 000018 04  WA  0   0  4
+  [22] .data             PROGBITS        08049628 000628 00000c 00  WA  0   0  4
+  [23] .bss              NOBITS          08049634 000634 000004 00  WA  0   0  4
+  [24] .comment          PROGBITS        00000000 000634 00018f 00      0   0  1
+  [25] .debug_aranges    PROGBITS        00000000 0007c8 000078 00      0   0  8
+  [26] .debug_pubnames   PROGBITS        00000000 000840 000025 00      0   0  1
+  [27] .debug_info       PROGBITS        00000000 000865 0002e1 00      0   0  1
+  [28] .debug_abbrev     PROGBITS        00000000 000b46 000076 00      0   0  1
+  [29] .debug_line       PROGBITS        00000000 000bbc 0001da 00      0   0  1
+  [30] .debug_str        PROGBITS        00000000 000d96 0000f3 01  MS  0   0  1
+  [31] .shstrtab         STRTAB          00000000 000e89 000127 00      0   0  1
+  [32] .symtab           SYMTAB          00000000 001500 000490 10     33  53  4
+  [33] .strtab           STRTAB          00000000 001990 000218 00      0   0  1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings)
+  I (info), L (link order), G (group), x (unknown)
+  O (extra OS processing required) o (OS specific), p (processor specific)
+
+$ objdump --disassemble-all --section .ctors ./test
+
+./test:     file format elf32-i386
+
+Contents of section .ctors:
+ 8049528 ffffffff 98830408 00000000           ............

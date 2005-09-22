@@ -1,0 +1,62 @@
+$ cat test.c
+
+int main(void)
+{
+	return 0;
+}
+
+$ gcc -o test test.c
+
+$ readelf --headers ./test | grep Entry
+  Entry point address:               0x80482b0
+
+$ objdump --disassemble ./test
+
+[...]
+
+080482b0 <_start>:
+ 80482b0:       31 ed                   xor    %ebp,%ebp
+ 80482b2:       5e                      pop    %esi
+ 80482b3:       89 e1                   mov    %esp,%ecx
+ 80482b5:       83 e4 f0                and    $0xfffffff0,%esp
+ 80482b8:       50                      push   %eax
+ 80482b9:       54                      push   %esp
+ 80482ba:       52                      push   %edx
+ 80482bb:       68 00 84 04 08          push   $0x8048400
+ 80482c0:       68 90 83 04 08          push   $0x8048390
+ 80482c5:       51                      push   %ecx
+ 80482c6:       56                      push   %esi
+ 80482c7:       68 68 83 04 08          push   $0x8048368
+ 80482cc:       e8 b3 ff ff ff          call   8048284 <__libc_start_main@plt>
+ 80482d1:       f4                      hlt
+ 80482d2:       90                      nop
+ 80482d3:       90                      nop
+
+08048368 <main>:
+ 8048368:       55                      push   %ebp
+ 8048369:       89 e5                   mov    %esp,%ebp
+ 804836b:       83 ec 08                sub    $0x8,%esp
+ 804836e:       83 e4 f0                and    $0xfffffff0,%esp
+ 8048371:       b8 00 00 00 00          mov    $0x0,%eax
+ 8048376:       83 c0 0f                add    $0xf,%eax
+ 8048379:       83 c0 0f                add    $0xf,%eax
+ 804837c:       c1 e8 04                shr    $0x4,%eax
+ 804837f:       c1 e0 04                shl    $0x4,%eax
+ 8048382:       29 c4                   sub    %eax,%esp
+ 8048384:       b8 00 00 00 00          mov    $0x0,%eax
+ 8048389:       c9                      leave
+ 804838a:       c3                      ret
+ 804838b:       90                      nop
+ 804838c:       90                      nop
+ 804838d:       90                      nop
+ 804838e:       90                      nop
+ 804838f:       90                      nop
+
+08048390 <__libc_csu_init>:
+ 8048390:       55                      push   %ebp
+ 8048391:       89 e5                   mov    %esp,%ebp
+ [...]
+
+08048400 <__libc_csu_fini>:
+ 8048400:       55                      push   %ebp
+ [...]

@@ -883,8 +883,134 @@
       we).</para>
 
       <para>The dynamic linker will jump to the entry point address as
-      given in the ELF binary. xxx - start disassembling, show
-      constructors/deconstructors.</para>
+      given in the ELF binary.</para>
+
+      <example id="program-startup">
+	<title>Disassembley of program startup</title>
+	<programlisting><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk7/code/startup.txt" format="linespecific">
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+
+      <para>Above we investigate the very simplest program.  Using
+      <application>readelf</application> we can see that the entry
+      point is the <computeroutput>_start</computeroutput> function in
+      the binary.  At this point we can see in the disassembley some
+      values are pushed onto the stack.  The first value,
+      <computeroutput>0x8048400</computeroutput> is the
+      <computeroutput>__libc_csu_fini</computeroutput> function;
+      <computeroutput>0x8048390</computeroutput> is the
+      <computeroutput>__libc_csu_init</computeroutput> and then
+      finally <computeroutput>0x8048368</computeroutput>, the
+      <computeroutput>main()</computeroutput> function.  After this
+      the value <computeroutput>__libc_start_main</computeroutput>
+      function is called.</para>
+
+      <para><computeroutput>__libc_start_main</computeroutput> is
+      defined in the glibc sources
+      <computeroutput>sysdeps/generic/libc-start.c</computeroutput>.
+      The file function is quite complicated and hidden between a
+      large number of defines, as it needs to be portable across the
+      very wide number of systems and architectures that glibc can run
+      on.  It does a number of specific things related to setting up
+      the C library (XXX talk about TLS?).  The next point where the
+      library calls back into the program is to handle
+      <computeroutput>init</computeroutput> code.</para>
+
+      <para><computeroutput>init</computeroutput> and
+      <computeroutput>fini</computeroutput> are two special concepts
+      that call parts of code in shared libraries that may need to be
+      called before the library starts or if the library is unloaded
+      respectivley.  You can see how this might be useful for library
+      programmers to setup variables when the library is started, or
+      to clean up at the end.  Originally the functions
+      <computeroutput>_init</computeroutput> and
+      <computeroutput>_fini</computeroutput> were looked for in the
+      library; however this became somewhat limiting as everything was
+      required to be in these functions.  Below we will examine just
+      how the
+      <computeroutput>init</computeroutput>/<computeroutput>fini</computeroutput>
+      process works.</para>
+
+      <para>At this stage we can see that the
+      <computeroutput>__libc_start_main</computeroutput> function will
+      receive quite a few input paramaters on the stack.  Firstly it
+      will have access to the program arguments, environment variables
+      and auxiliary vector from the kernel.  Then the initalization
+      function will have pushed onto the stack addresses for functions
+      to handle <computeroutput>init</computeroutput>,
+      <computeroutput>fini</computeroutput>, and finally the address
+      of the main function it's self.</para>
+
+      <para>We need some way to indicate in the source code that a
+      function should be called by
+      <computeroutput>init</computeroutput> or
+      <computeroutput>fini</computeroutput>.  With
+      <application>gcc</application> we use
+      <emphasis>attributes</emphasis> to label two functions as
+      <emphasis>constructors</emphasis> and
+      <emphasis>destructors</emphasis> in our main program.  These
+      terms are more commonly used with object orientent langauges to
+      describe object lifecycles.</para>
+
+      <example id="constructor-destructor">
+	<title>Constructors and Destructors</title>
+	<programlisting><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="wk7/code/construct-destruct.txt" format="linespecific">
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+
+      <para>The last value pushed onto the stack for the
+      <computeroutput>__libc_start_main</computeroutput> was the
+      initalisation function
+      <computeroutput>__libc_csu_init</computeroutput>.  If we follow
+      the call chain through from
+      <computeroutput>__libc_csu_init</computeroutput> we can see it
+      does some setup and then calls the
+      <computeroutput>_init</computeroutput> function in the
+      executable.  The <computeroutput>_init</computeroutput> function
+      eventually calls a function called
+      <computeroutput>__do_global_ctors_aux</computeroutput>.  Looking
+      at the disassembley of this function we can see that it appears
+      to start at address <computeroutput>0x804952c</computeroutput>
+      and loop along, reading an value and calling it.  We can see
+      that this starting address is in the
+      <computeroutput>.ctors</computeroutput> section of the file; if
+      we have a look inside this we see that it contains the first
+      value <computeroutput>-1</computeroutput>, a function address
+      (in big endian format) and the value zero.</para>
+
+      <para>The address in big endian format is
+      <computeroutput>0x08048398</computeroutput>, or the address of
+      <computeroutput>program_init</computeroutput> function!  So the
+      format of the <computeroutput>.ctors</computeroutput> section is
+      firstly a -1, and then the address of functions to be called on
+      initalisation, and finally a zero to indicate the list is
+      complete.  Each entry will be called (in this case we only have
+      the one funtion).</para>
+
+      <para>Once <computeroutput>__libc_start_main</computeroutput>
+      has completed with the <computeroutput>_init</computeroutput>
+      call it <emphasis>finally</emphasis> calls the
+      <computeroutput>main()</computeroutput> function!  Remember that
+      it had the stack setup initially with the arguments and
+      environment pointers from the kernel; this is how main gets it's
+      <computeroutput>argc, argv[], envp[]</computeroutput> arguments.
+      The process now runs and the setup phase is complete.</para>
+
+      <para>A similar process is enacted with the
+      <computeroutput>.dtors</computeroutput> for destructors when the
+      program exits.
+      <computeroutput>__libc_start_main</computeroutput> calls these
+      when the <computeroutput>main()</computeroutput> function
+      completes.</para>
+
+      <para>As you can see, a lot is done before the program gets to
+      start, and even a little after you think it is finished!</para>
 
     </sect2>
 
