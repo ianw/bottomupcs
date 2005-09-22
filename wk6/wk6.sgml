@@ -464,6 +464,7 @@
       the linker.</para>
 
       </sect3>
+
     </sect2>
 
     <sect2>
@@ -669,18 +670,42 @@
       </example>
 
       <para>The first thing you notice is that a program called
-      <computeroutput>collect2</computeroutput> is being called.  This
-      is a simple wrapper around <computeroutput>ld</computeroutput>.
-      The next thing you notice is object files starting with
+      <application>collect2</application> is being called.  This is a
+      simple wrapper around <application>ld</application> that
+      is used internally by <application>gcc</application>.</para>
+
+	<para>The next thing you notice is object files starting with
       <computeroutput>crt</computeroutput> being specified to the
-      linker.  These functions are provided by the system to start up
-      a program.  In actuality, the
-      <computeroutput>main()</computeroutput> function is not the
-      first one called when a program runs, but a function called
-      <computeroutput>_start</computeroutput> which is in the
+      linker.  These functions are provided by gcc and the system
+      libraries and contain code required to start the program.  In
+      actuality, the <computeroutput>main()</computeroutput> function
+      is not the first one called when a program runs, but a function
+      called <computeroutput>_start</computeroutput> which is in the
       <computeroutput>crt</computeroutput> object files.  This
       function does some generic setup which application programmers
       do not need to worry about.</para>
+
+	<para>The path heirarchy is quite complicated, but in
+	  essence we can see that the final step is to link in some
+	  extra object files, namely </para>
+	
+	  <itemizedlist>
+	    <listitem>
+	      <para><computeroutput>crt1.o</computeroutput> : provided
+	      by the system libraries (libc) this object file contains
+	      the <computeroutput>_start</computeroutput> function
+	      which is actually the first thing called within the program.</para>
+	      <para><computeroutput>crti.o</computeroutput> : provided
+	      by the system libraries</para>
+	      <para><computeroutput>crtbegin.o</computeroutput></para>
+	      <para><computeroutput>crtsaveres.o</computeroutput></para>
+	      <para><computeroutput>crtend.o</computeroutput></para>
+	      <para><computeroutput>crtn.o</computeroutput></para>
+	    </listitem>
+	  </itemizedlist>
+
+	<para>We discuss how these are used to start the program a
+	little later.</para>
 
       <para>Next you can see that we link in our two object files,
       <computeroutput>hello.o</computeroutput> and
