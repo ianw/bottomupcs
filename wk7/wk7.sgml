@@ -147,16 +147,15 @@
 	  </textobject>
 	</mediaobject>
       </figure>
-      
       <sect3>
 
 	<title>ELF File Header</title>
-	
+
 	<para>Overall, the file has a <emphasis>file
 	  header</emphasis> which describes the file in general and
 	  then has pointers to each of the individual sections that
 	  make up the file.</para>
-	
+
 	<example id="elf-header">
 	  <title>The ELF Header</title>
 	  <programlisting><inlinemediaobject>
@@ -164,25 +163,32 @@
 		<imagedata fileref="wk7/code/elf-header.txt" format="linespecific">
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
-	</example>    
-	
-	<para>The relevant standards document describes each field in
-	detail, but there are some points to note from looking at the
-	definition of the header.</para>
-	
-	<itemizedlist>
-	  <listitem>
-	    <para>ELF defines both 32 and 64 bit versions; here we
-	  inspect the 32 bit version.</para> 
-	  </listitem>
-	  
-	  <listitem>
-	    <para>The <computeroutput>e_ident</computeroutput> array
-	    always starts with a few "magic" bytes.  The first byte is
-	    0x7F and then the next three bytes are "ELF".  You can
-	    inspect an ELF binary to see this for yourself with
-	    something like the <command>hexdump</command> command.</para>
-	    
+	</example>
+
+	<para>Above is the description as given in the API
+	documentation.  This is the layout of the C structure which
+	defines a ELF header.</para>
+
+	<example id="readelf-elf-header">
+	  <title>The ELF Header, as shown by <application>readelf</application></title>
+	  <programlisting><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk7/code/readelf-elf-header.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+	<para>Above is a more human readable form as present by the
+	<application>readelf</application> program, which is part of
+	<application>GNU binutils</application>.</para>
+
+	<para>The <computeroutput>e_ident</computeroutput> array is
+	the first thing at the start of any ELF file, and always
+	starts with a few "magic" bytes.  The first byte is 0x7F and
+	then the next three bytes are "ELF".  You can inspect an ELF
+	binary to see this for yourself with something like the
+	<command>hexdump</command> command.</para>
+
 	    <example id="elf-magic">
 	      <title>Inspecting the ELF magic number</title>
 	      <programlisting><inlinemediaobject>
@@ -191,19 +197,58 @@
 		  </imageobject>
 		  </inlinemediaobject></programlisting>
 	    </example>
-	    
-	    <para>Note the 0x7F to start, then the ASCII encoded "ELF"
-	    string.  Have a look at the standard and see what the rest
-	    of the array defines and what the values are in a
-	    binary.</para>
-	    </listitem>
-	  </itemizedlist>
+
+	<para>Note the 0x7F to start, then the ASCII encoded "ELF"
+	string.  Have a look at the standard and see what the rest of
+	the array defines and what the values are in a binary.</para>
+
+	<para>Next we have some flags for the type of machine this
+	binary is created for.  The first thing we can see is that ELF
+	defines different type sized versions, one for 32 bit and one
+	for 64 bit versions; here we inspect the 32 bit version.  The
+	difference is mostly that on 64 bit machines addresses
+	obviously required to be held in 64 bit variables.  We can see
+	that the binary has been created for a big endian machine that
+	uses 2's complement to represent negative numbers.  Skipping
+	down a bit we can see the
+	<computeroutput>Machine</computeroutput> tells us this is a
+	PowerPC binary.</para>
+
+	<para>The apparently innocuous entry point address seems
+	  straight forward enough; this is the address in memory that
+	  the program code starts at.</para>
+	
+	<para>Beginning C programmers are told that
+	  <emphasis>main()</emphasis> is the first program called in
+	  your program.  Using the entry point address we can actually
+	  verify that it <emphasis>isn't</emphasis>.</para>
+
+	<example id="entry-point">
+	  <title>Investigating the entry point</title>
+	  <programlisting><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk7/code/entry-point.txt" format="linespecific">
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+	
+	<para>Above we can see that the entry point is actually a
+	  function called <computeroutput>_start</computeroutput>.
+	  Our program didn't define this at all, and the leading
+	  underscore suggests that it is in a separate
+	  <emphasis>namespace</emphasis>.  We examine how a program
+	  starts up below.</para>
+
+	<para>After that the header contians pointers to where in the
+	file other important parts of the ELF file start, like a table
+	of contents.</para>
+
       </sect3>
 
       <sect3>
 
 	<title>Sections and Segments</title>
-	
+
 	<para>The ELF format specifies two "views" of an ELF file --
 	that which is used for linking and that which is used for
 	execution.  This affords significant flexibility for systems
@@ -481,6 +526,7 @@
 	  data segment.  This comes from the BSS section which holds
 	  zeroed global variables.</para>
 	</sect4>
+
       </sect3>
     </sect2>
   </sect1>
@@ -621,6 +667,13 @@
     </sect2>
 
     <sect2>
+      <title>Executable Files</title>
+
+      <para>ELF provides all the information the processor requires to get </para>
+
+    </sect2>
+
+    <sect2>
       <title>Shared Libraries</title>
 
       <para>Shared libraries are an elegant way around the problems
@@ -712,6 +765,128 @@
 
     </sect2>
 
+  </sect1>
+
+  <sect1>
+    <title>Starting a process</title>
+
+    <para>We mentioned before that simply saying the program starts
+    with the <computeroutput>main()</computeroutput> function is not
+    quite true.  Below we exaime what happens to a typical dynamically
+    linked program when it is loaded and run (statically linked
+    programs are similar but different XXX should we go into
+    this?).</para>
+
+    <para>Firstly, in response to an
+    <computeroutput>exec</computeroutput> system call the kernel
+    allocates the structures for a new process and reads the ELF file
+    specified from disk.</para>
+
+    <para>We mentioned that ELF has a program interpreter field,
+    <computeroutput>PT_INTERP</computeroutput>, which can be set to
+    'interpret' the program.  For dynamically linked applications that
+    interpreter is the dynamic linker, namely
+    <application>ld.so</application>, which allows some of the linking
+    process to be done on the fly before the program starts.</para>
+
+    <para>In this case, the kernel <emphasis>also</emphasis> reads in
+    the dynamic linker code, and starts the program from the entry
+    point address as specified by it.  We examine the role of the
+    dynamic linker in depth in the next chapter, but suffice to say it
+    does some setup like loading any libraries required by the
+    application (as specified in the dynamic section of the binary)
+    and then starts execution of the program binary at it's entry
+    point address (i.e. the <computeroutput>_init</computeroutput>
+    function).</para>
+
+    <sect2>
+      <title>Kernel communication to programs</title>
+
+      <para>The kernel needs to communicate some things to programs
+      when they start up; namely the arguments to the program, the
+      current environment variables and a special structure called the
+      <computeroutput>Auxiliary Vector</computeroutput> or
+      <computeroutput>auxv</computeroutput> (you can request the the
+      dynamic linker show you some debugging output of the
+      <computeroutput>auxv</computeroutput> by specifying the
+      environment value
+      <computeroutput>LD_SHOW_AUXV=1</computeroutput>).</para>
+
+      <para>The arguments and environment at fairly straight forward,
+      and the various incarnations of the
+      <computeroutput>exec</computeroutput> system call allow you to
+      specify these for the program.</para>
+
+      <para>The kernel communicates this by putting all the required
+      information on the stack for the newly created program to pick
+      up.  Thus when the program starts it can use it's stack pointer
+      to find the all the startup information required.</para>
+
+      <para>The auxiliary vector is a special structure that is for
+      passing information directly from the kernel to the newly
+      running program.  It contains system specific information that
+      may be required, such as the default size of a virtual memory
+      page on the system or <emphasis>hardware
+      capabilities</emphasis>; that is specific features that the
+      kernel has identified the underlying hardware has that userspace
+      programs can take advantage of.</para>
+
+      <sect3>
+	<title>Kernel Library</title>
+
+	<para>We mentioned previously that system calls are slow, and
+	modern systems have mechanisms to avoid the overheads of
+	calling a trap to the processor.</para>
+
+	<para>In Linux, this is implemented by a neat trick between
+	the dyanmic loader and the kernel, all communicated with the
+	AUXV structure.  The kernel actually adds a small shared
+	library into the address space of every newly created process
+	which contains a function that makes system calls for you.
+	The beauty of this system is that if the underlying hardware
+	supports a fast system call mechanism the kernel (being the
+	creater of the library) can use it, otherwise it can use the
+	old scheme of generating a trap.  This library is named
+	<computeroutput>linux-gate.so.1</computeroutput>, so called
+	because it is a <emphasis>gateway</emphasis> to the inner
+	workings of the kernel.</para>
+
+	<para>When the kernel starts the dynamic linker it adds an
+	entry to the auxv called
+	<computeroutput>AT_SYSINFO_EHDR</computeroutput>, which is the
+	address in memory that the special kernel library lives in.
+	When the dynamic linker starts it can look for the
+	<computeroutput>AT_SYSINFO_EHDR</computeroutput> pointer, and
+	if found load that library for the program.  The program has
+	no idea this library exists; this is a private arrangement
+	between the dynamic linker and the kernel.</para>
+
+	<para>We mentioned that programmers make system calls
+	indirectly through calling functions in the system libraries,
+	namely <application>libc</application>.
+	<application>libc</application> can check to see if the
+	special kernel binary is loaded, and if so use the functions
+	within that to make system calls.  As we mentioned, if the
+	kernel determines the hardware is capable, this will use the
+	fast sytem call method.</para>
+
+      </sect3>
+
+    </sect2>
+
+    <sect2>
+      <title>Starting the program</title>
+
+      <para>Once the kernel has loaded the interpreter it passes it to
+      the entry point as given in the interpreter file.  We will not
+      examine how the dynamic linker starts at this stage (XXX should
+      we).</para>
+
+      <para>The dynamic linker will jump to the entry point address as
+      given in the ELF binary. xxx - start disassembling, show
+      constructors/deconstructors.</para>
+
+    </sect2>
 
   </sect1>
 

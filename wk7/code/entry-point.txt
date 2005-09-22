@@ -1,0 +1,21 @@
+$ cat test.c
+#include <stdio.h>
+
+int main(void)
+{
+        printf("main is : %p\n", &main);
+        return 0;
+}
+
+$ gcc -Wall -o test test.c
+
+$ ./test
+main is : 0x10000430
+
+$ readelf --headers ./test | grep 'Entry point'
+  Entry point address:               0x100002b0
+
+$ objdump --disassemble ./test | grep 100002b0
+100002b0 <_start>:
+100002b0:       7c 29 0b 78     mr      r9,r1
+
