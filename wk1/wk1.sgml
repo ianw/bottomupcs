@@ -903,13 +903,13 @@
 	<table>
 	  <title>Standard Scalar Types and Sizes</title>
 
-	  <tgroup cols="5">
+	  <tgroup cols="4">
 	    <thead>
 	      <row>
 		<entry>Type</entry>
 		<entry>C99 minimum size (bits)</entry>
-		<entry>Common size (LP64)<entry>
-		<entry>Common size (Windows)<entry>
+		<entry>Common size (LP64)</entry>
+		<entry>Common size (Windows)</entry>
 	      </row>
 	    </thead>
 	    <tbody>
