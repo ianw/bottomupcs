@@ -1075,15 +1075,30 @@
     <sect2>
       <title>Number Representation</title>
 
-
       <sect3>
 	<title>Negative Values</title>
 
-	<para>Negative Values</para>
+	<para>With our modern base 10 numeral system we indicate a
+	negative number by placing a minus
+	(<computeroutput>-</computeroutput>) sign in front of it.
+	When using binary we need to use a different system to
+	indicate negative numbers.</para>
+
+	<para>There is only one scheme in common use on modern
+	hardware, but C99 defines three acceptable methods for
+	negative value represnetation.</para>
 
 	<sect4>
 	  <title>Sign Bit</title>
-	  <para>single big</para>
+
+	  <para>The most straight forward method is to simply say that
+	  one bit of the number indicates either a negative or
+	  positive value depnding on it being set or not.</para>
+
+	  <para>This is analagous to mathematical approach of having a
+	  <computeroutput>+</computeroutput> and
+	  <computeroutput>-</computeroutput>.</para>
+
 	</sect4>
 
 	<sect4>
