@@ -196,9 +196,9 @@
 	</figure>
 	
 	<para>Alignment of variables in memory is an important
-	consideration for the compiler, and it requires systems
-	programmers to take alignment into consideration to help it
-	along.</para>
+	consideration for the compiler. Systems programmers need to be
+	aware of alignment constratins to help the compiler create the
+	most efficient code it can.</para>
 
 	<para>CPUs can generally not load a value into a register from
 	an aribtrary memory location.  It requires that variables be
@@ -214,17 +214,28 @@
 	a single register; firstly the lower half and then the upper
 	half.</para>
 
-	<para>Some architectures can handle unaligned loads in
-	hardware (x86), however others can not have alignment rules
-	violated and will raise an exception (which is generally
-	caught by the operating system which has to manually load the
-	register in parts, causing even more overheads).</para>
+	<para>Some architectures, such as x86, can handle unaligned
+	loads in hardware and the only symptoms will be lower
+	performance as the hardware does the extra work to get the
+	value into the register.  Others architectures can not have
+	alignment rules violated and will raise an exception which is
+	generally caught by the operating system which then has to
+	manually load the register in parts, causing even more
+	overheads.</para>
 
-	<para>Programmers need to consider alignment especially when
+	<sect4>
+	  <title>Structure Padding</title>
+
+	  <para>Programmers need to consider alignment especially when
 	creating <computeroutput>struct</computeroutput>s.  Whilst the
 	compiler knows the alignment rules for the architecture it is
 	building for, at times programmers can cause suboptimal
 	behaviour.</para>
+
+
+	  <para>XXX: struct alignment examples</para>
+
+	</sect4>
 
 	<sect4>
 	  <title>Cache line alignment</title>
@@ -232,6 +243,13 @@
 	  <para>One particular area where systems programmers can
 	  cause suboptimal behaviour is by creating structures and
 	  variables that span cache lines. (XXX)</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Space - Speed Trade off</title>
+
+	  <para>XXX: space for speed; talk about trade-off</para>
 
 	</sect4>
 
