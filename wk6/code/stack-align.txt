@@ -1,0 +1,27 @@
+$ cat stack.c
+#include <stdio.h>
+
+struct a_struct {
+        int a;
+        int b;
+};
+
+int main(void)
+{
+        int i;
+        struct a_struct s;
+        printf("%p\n%p\ndiff %ld\n", &i, &s, (unsigned long)&s - (unsigned long)&i);
+        return 0;
+}
+$ gcc-3.3 -Wall -o stack-3.3 ./stack.c
+$ gcc-4.0 -o stack-4.0 stack.c
+
+$ ./stack-3.3
+0x60000fffffc2b510
+0x60000fffffc2b520
+diff 16
+
+$ ./stack-4.0
+0x60000fffff89b520
+0x60000fffff89b524
+diff 4

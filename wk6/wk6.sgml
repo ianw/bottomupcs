@@ -232,31 +232,185 @@
 	building for, at times programmers can cause suboptimal
 	behaviour.</para>
 
+	  <para>The C99 standard only says that structures will be
+	  ordered in memory in the same order as they are specified in
+	  the declaration, and that in an array of structures all
+	  elements will be the same size.</para>
 
-	  <para>XXX: struct alignment examples</para>
+	  <example id="struct-padding">
+	    <title>Struct padding example</title>
+	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+		<imageobject>
+		  <imagedata fileref="wk6/code/struct-padding.txt" format="linespecific">
+		</imageobject>
+	      </inlinemediaobject></programlisting>
+	  </example>
+
+	  <para>In the example above, we contrive a structure that has
+	  two bytes (<computeroutput>chars</computeroutput> followed
+	  by a 4 byte integer.  The compiler pads the structure as
+	  below.</para>
+
+	  <figure>
+	    <title>Alignment</title>
+	    <mediaobject>
+	      <imageobject>
+		<imagedata fileref="wk6/figures/padding.eps" format="EPS">
+	      </imageobject>
+	      <imageobject>
+		<imagedata fileref="wk6/figures/padding.png" format="PNG">
+	      </imageobject>
+	      <textobject>
+		<phrase>The compiler pads the structure to align the
+		integer on a 4 byte boundary.</phrase>
+	      </textobject>
+	    </mediaobject>
+	  </figure>
+
+	  <para>In the other example we direct the compiler
+	  <emphasis>not</emphasis> to pad structures and
+	  correspondingly we can see that the integer starts directly
+	  after the two <computeroutput>chars</computeroutput>.</para>
 
 	</sect4>
 
 	<sect4>
 	  <title>Cache line alignment</title>
 
-	  <para>One particular area where systems programmers can
-	  cause suboptimal behaviour is by creating structures and
-	  variables that span cache lines. (XXX)</para>
+	  <para>We talked previously about aliasing in the cache, and
+	  how several addresses may map to the same cache line.
+	  Programmers need to be sure that when they write their
+	  programs they do not cause
+	  <emphasis>bouncing</emphasis> of cache lines.</para>
+
+	  <para>This situation occurs when a program constantly
+	  accesses two areas of memory that map to the same cache
+	  line.  This effectively wastes the cache line, as it gets
+	  loaded in, used for a short time and then must be kicked out
+	  and the other cache line loaded into the same place in the
+	  cache.</para>
+
+	  <para>Obviously if this situation repeats the performance
+	  will be significantly reduced.  The situation would be
+	  releaved if the confilicting data were organised in slightly
+	  different ways to avoid the cache line conflict.</para>
+
+	  <para>One possible way to detect this sort of situation is
+	  <emphasis>profiling</emphasis>.  When you profile your code
+	  you "watch" it to analyse what code paths are taken and how
+	  long they take to execute.  With <emphasis>profile guided
+	  optimisation</emphasis> (PGO) the compiler can put special
+	  extra bits of code in the first binary it builds, which runs
+	  and makes a record of the branches taken, etc.  You can then
+	  recompile the binary with the extra information to possibly
+	  create a better performing binary.  Otherwise the programmer
+	  can look at the output of the profile and possibly detect
+	  situations such as cache line bouncing. (XXX somewhere
+	  else?)
+	  </para>
 
 	</sect4>
 
 	<sect4>
 	  <title>Space - Speed Trade off</title>
 
-	  <para>XXX: space for speed; talk about trade-off</para>
+	  <para>What the compiler has done above is traded off using
+	  some extra memory to gain a speed improvement in running our
+	  code.  The compiler knows the rules of the architecture and
+	  can make decisions about the best way to align data,
+	  possibly by trading off small amounts of wasted memory for
+	  increased (or perhaps even just correct) performance.</para>
 
+	  <para>Consequently as a programmer you should never make
+	  assumptions about the way variables and data will be layed
+	  out by the compiler.  To do so is not portable, as a
+	  different architecture may have different rules and the
+	  compiler may make different decisions based on expicit
+	  commands or optimisation levels.</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Making Assumptions</title>
+
+	  <para>Thus, as a C programmer you need to be familiar with
+	  what you can assume about what the compiler will do and what
+	  may be variable.  What exactly you can assume and can not
+	  assume is detailed in the C99 standard; if you are
+	  programming in C it is certainly worth the investment in
+	  becoming familiar with the rules to avoid writing
+	  non-portable or buggy code.</para>
+
+	  <example id="stack-padding">
+	    <title>Stack alignment example</title>
+	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+		<imageobject>
+		  <imagedata fileref="wk6/code/stack-align.txt" format="linespecific">
+		</imageobject>
+	      </inlinemediaobject></programlisting>
+	  </example>
+
+	  <para>In the example above, taken from an Itanium machine,
+	  we can see that the padding and aligment of the stack has
+	  changed considerably between <application>gcc</application>
+	  versions.  This type of thing is to be expected and must be
+	  considered by the programmer.</para>
+
+	  <para>Generally you should ensure that you do not make
+	  assumptions about the size of types or alignment
+	  rules.</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>C Idioms with alignment</title>
+
+	  <para>There are a few common sequences of code that deal
+	  with alignment; generally most programs will consider it in
+	  some ways.  You may see these "code idioms" in many places
+	  outside the kernel when dealing with programs that deal with
+	  chunks of data in some form or another, so it is worth
+	  investigating.</para>
+
+	  <para>We can take some examples from the Linux kernel, which
+	  often has to deal with alignment of pages of memory within
+	  the system.</para>
+
+	  <example id="page-alignment">
+	    <title>Page alignment manipulations</title>
+	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+		<imageobject>
+		  <imagedata fileref="wk6/code/page.txt" format="linespecific">
+		</imageobject>
+	      </inlinemediaobject></programlisting>
+	  </example>
+
+	  <para>Above we can see that there are a number of different
+	  options for page sizes within the kernel, ranging from 4KB
+	  through 64KB.</para>
+
+	  <para>The <computeroutput>PAGE_SIZE</computeroutput> macro
+	  is fairly self explanatory, giving the current page size
+	  selected within the system by shifting a value of 1 by the
+	  shift number given (remember, this is the equivalent of
+	  saying
+	  <computeroutput>2<superscript>n</superscript></computeroutput>
+	  where <computeroutput>n</computeroutput> is the
+	  <computeroutput>PAGE_SHIFT</computeroutput>).</para>
+
+	  <para>Next we have a definition for
+	  <computeroutput>PAGE_MASK</computeroutput>.  The
+	  <computeroutput>PAGE_MASK</computeroutput> allows us to find
+	  just those bits that are within the current page, that is
+	  the <computeroutput>offset</computeroutput> of an address
+	  within its page.</para>
+
+	  <para>XXX continue short discussion</para>
 	</sect4>
 
       </sect3>
 
     </sect2>
-
 
     <sect2>
       <title>Optimisation</title> 

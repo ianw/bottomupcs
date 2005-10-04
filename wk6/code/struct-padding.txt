@@ -1,0 +1,36 @@
+$ cat struct.c
+#include <stdio.h>
+
+struct a_struct {
+        char char_one;
+        char char_two;
+        int int_one;
+};
+
+int main(void)
+{
+
+        struct a_struct s;
+
+        printf("%p : s.char_one\n" \
+               "%p : s.char_two\n" \
+               "%p : s.int_one\n", &s.char_one,
+               &s.char_two, &s.int_one);
+
+        return 0;
+
+}
+
+$ gcc -o struct struct.c
+
+$ gcc -fpack-struct -o struct-packed struct.c
+
+$ ./struct
+0x7fdf6798 : s.char_one
+0x7fdf6799 : s.char_two
+0x7fdf679c : s.int_one
+
+$ ./struct-packed
+0x7fcd2778 : s.char_one
+0x7fcd2779 : s.char_two
+0x7fcd277a : s.int_one
