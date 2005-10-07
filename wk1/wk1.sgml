@@ -749,6 +749,7 @@
     <title>Types and Number Representation</title>
 
     <sect2>
+
       <title>C Standards</title>
 
       <para>Although a slight divergence, it is important to
@@ -756,25 +757,40 @@
 
       <para>C is the <emphasis>lingua franca</emphasis> of the systems
       programming world.  Every operating system and its associated
-      system libraries in common use is written in C.  Every system
+      system libraries in common use is written in C, and every system
       provides a C compiler.</para>
 
-      <para>To stop the language diverging across each systems making
-      and numerous incompatible changes a strict standard has been
-      written for the language.</para>
+      <para>To stop the language diverging across each of these
+      systems where each would be sure to make numerous incompatible
+      changes, a strict standard has been written for the
+      language.</para>
 
       <para>Officially this standard is known as ISO/IEC 9899:1999(E),
-      but is more commonly referred to by its shortened version C99.
-      The standard is maintained by the International Standards
-      Organisation (ISO) and the full standard is available for
-      purchase online.  Older standards versions such as C89 (the
-      predecesor to C99 released in 1989) and ANSI C are no longer in
-      common usage.</para>
+      but is more commonly referred to by its shortened version
+      <emphasis>C99</emphasis>.  The standard is maintained by the
+      International Standards Organisation (ISO) and the full standard
+      is available for purchase online.  Older standards versions such
+      as C89 (the predecesor to C99 released in 1989) and ANSI C are
+      no longer in common usage and are encompassed within the latest
+      standard.</para>
 
       <para>The standard documenation is very technical, and details
-      every part of the language.  For example it explains the syntax,
-      standard <computeroutput>#define</computeroutput> values and how
+      most every part of the language.  For example it explains the
+      syntax (in Backus Naur form), standard
+      <computeroutput>#define</computeroutput> values and how
       operations should behave.</para>
+
+      <para>It is also important to note what the C standards does
+      <emphasis>not</emphasis> define.  Most importantly the standard
+      needs to be appropriate for every architecture, both present and
+      future.  Thus it does not define things that are architecture
+      dependent; the "glue" between the C standard and the underlying
+      architecture is the Application Binary Interface (or ABI) which
+      we discuss below.  In several places the standard will mention
+      that a particular operation or construct has an unspecified or
+      implemenation dependent result.  Obviously the programmer can
+      not depend on these outcomes if they are to write portable
+      code.</para>
 
       <sect3>
 	<title>GNU C</title>
@@ -788,7 +804,7 @@
 	very low level code and are much more common in the system
 	programming field.  You should however read the
 	<application>gcc</application> documenation and understand
-	when you may be using parts that diverge from the
+	when you may be using features that diverge from the
 	standards.</para>
 
 	<para><application>gcc</application> can be directed to stick
@@ -877,7 +893,8 @@
 
       <para>Above we can see the only divergence from the standard is
       that <computeroutput>int</computeroutput> is commonly a 32 bit
-      quantity, which is twice the minimum size C99 requires.</para>
+      quantity, which is twice the strict minimum 16 bit size that the
+      C99 requires.</para>
 
       <para>Pointers are really just an address (i.e. their value is
       an address and thus "points" somewhere else in memory).  Thus a
@@ -1097,18 +1114,162 @@
 
 	  <para>This is analagous to mathematical approach of having a
 	  <computeroutput>+</computeroutput> and
-	  <computeroutput>-</computeroutput>.</para>
+	  <computeroutput>-</computeroutput>.  This is farily logical,
+	  and some of the original computers did represent negative
+	  numbers in this way.  But using binary numbers opens up some
+	  other possiblities which make the life of hardware designers
+	  easier.</para>
+
+	  <para>However, notice that the value
+	  <computeroutput>0</computeroutput> now has two equivalent
+	  values; one with the sign bit set and one without.
+	  Sometimes these values are referred to as
+	  <computeroutput>+0</computeroutput> and
+	  <computeroutput>-0</computeroutput> respectively.</para>
 
 	</sect4>
 
 	<sect4>
 	  <title>One's Complement</title>
-	  <para>ones</para>
+
+	  <para>One's complement simply applies the
+	  <emphasis>not</emphasis> operation to the positive number to
+	  represent the negative number.  So, for example the value
+	  -90 (-0x5A) is represented by <computeroutput>~01011010 =
+	  10100101</computeroutput><footnote> <para>The
+	  <computeroutput>~</computeroutput> operator is the C
+	  language operator to apply
+	  <computeroutput>NOT</computeroutput> to the value.  It is
+	  also occasionally called the one's complement operator, for
+	  obvious reasons now!</para></footnote></para>
+
+	  <para>With this scheme the biggest advantage is that to add
+	  a negative number to a positive number no special logic is
+	  required, except that any additional carry left over must be
+	  added back to the final value.  Consider</para>
+
+	  <table>
+	    <title>One's Complement Addition</title>
+	    <tgroup cols="2">
+	      <thead>
+		<row>
+		  <entry>Decimal</entry>
+		  <entry>Binary</entry>
+		  <entry>Op</entry>
+		</row>
+	      </thead>
+	      <tbody>
+		<row>
+		  <entry>-90</entry>
+		  <entry>10100101</entry>
+		  <entry>+</entry>
+		</row>
+		<row>
+		  <entry>100</entry>
+		  <entry>01100100</entry>
+		  <entry></entry>
+		</row>
+		<row>
+		  <entry>---</entry>
+		  <entry>--------</entry>
+		  <entry></entry>
+		</row>
+		<row>
+		  <entry>10</entry>
+		  <entry><superscript>1</superscript>00001001</entry>
+		  <entry>9</entry>
+		</row>
+		<row>
+		  <entry></entry>
+		  <entry>00001010</entry>
+		  <entry>10</entry>
+		</row>
+	      </tbody>
+	    </tgroup>
+	  </table>
+
+	  <para>If you add the bits one by one, you find you end up
+	  with a carry bit at the end (highlighted above).  By adding
+	  this back to the original we end up with the correct value,
+	  10</para>
+
+	  <para>Again we still have the problem with two zeros being
+	  represented.  Again no modern computer uses one's
+	  complement, mostly because there is a better scheme.</para>
+
 	</sect4>
 
 	<sect4>
 	  <title>Two's Compelement</title>
-	  <para>twos</para>
+
+	  <para>Two's complement is just like one's complement, except
+	  the negative representation has <emphasis>one</emphasis>
+	  added to it.  So to continue with the example from before,
+	  <computeroutput>-90</computeroutput> would be
+	  <computeroutput>~01011010 + 1 = 10100101 + 1 =
+	  10100110</computeroutput>.</para>
+
+	  <para>This means there is a slightly odd symmetry in the
+	  numbers that can be represented; for example with an 8 bit
+	  integer we have
+	  <computeroutput>2^<superscript>8</superscript> =
+	  256</computeroutput> possible values; with our sign bit
+	  represnetation we could represent -127 thru 127 but with
+	  two's complement we can represent -127 thru 128.  This is
+	  because we have removed the problem of having two zeros, so
+	  we can effectively represent one more value for the same
+	  number of bits.</para>
+
+	  <para>There are no special carry rules for two's complement;
+	  if you have to carry off the end the value is lost.</para>
+
+	  <table>
+	    <title>Two's Complement Addition</title>
+	    <tgroup cols="2">
+	      <thead>
+		<row>
+		  <entry>Decimal</entry>
+		  <entry>Binary</entry>
+		  <entry>Op</entry>
+		</row>
+	      </thead>
+	      <tbody>
+		<row>
+		  <entry>-90</entry>
+		  <entry>10100110</entry>
+		  <entry>+</entry>
+		</row>
+		<row>
+		  <entry>100</entry>
+		  <entry>01100100</entry>
+		  <entry></entry>
+		</row>
+		<row>
+		  <entry>---</entry>
+		  <entry>--------</entry>
+		  <entry></entry>
+		</row>
+		<row>
+		  <entry>10</entry>
+		  <entry>00001010</entry>
+		  <entry></entry>
+		</row>
+	      </tbody>
+	    </tgroup>
+	  </table>
+
+	  <para>You can see that by implementing two's complement
+	  hardware designers only have to add in logic for addition
+	  circuits; subtraction can be done by negating the value to
+	  be subtracted and then adding the new value.  Similarly you
+	  could implement multiplication with repeated addition and
+	  division with repeated subtraction.  So you can see how
+	  two's complement can reduce just about all simple
+	  mathematical operations down to addition!</para>
+
+	  <para>All modern computers use two's complement
+	  representation.</para>
+
 	</sect4>
 
       </sect3>
