@@ -770,11 +770,11 @@
       <emphasis>C99</emphasis>.  The standard is maintained by the
       International Standards Organisation (ISO) and the full standard
       is available for purchase online.  Older standards versions such
-      as C89 (the predecesor to C99 released in 1989) and ANSI C are
+      as C89 (the predecessor to C99 released in 1989) and ANSI C are
       no longer in common usage and are encompassed within the latest
       standard.</para>
 
-      <para>The standard documenation is very technical, and details
+      <para>The standard documentation is very technical, and details
       most every part of the language.  For example it explains the
       syntax (in Backus Naur form), standard
       <computeroutput>#define</computeroutput> values and how
@@ -788,7 +788,7 @@
       architecture is the Application Binary Interface (or ABI) which
       we discuss below.  In several places the standard will mention
       that a particular operation or construct has an unspecified or
-      implemenation dependent result.  Obviously the programmer can
+      implementation dependent result.  Obviously the programmer can
       not depend on these outcomes if they are to write portable
       code.</para>
 
@@ -803,7 +803,7 @@
 	another compiler.  These extensions are usually related to
 	very low level code and are much more common in the system
 	programming field.  You should however read the
-	<application>gcc</application> documenation and understand
+	<application>gcc</application> documentation and understand
 	when you may be using features that diverge from the
 	standards.</para>
 
@@ -832,9 +832,9 @@
       <emphasis>smallest</emphasis> possible size of each of the types
       defined for C.  This is because across different processor
       architectures and operating systems the best size for
-      types can be wildley different.</para>
+      types can be wildly different.</para>
 
-      <para>To be completey safe programmers need to never assume the
+      <para>To be completely safe programmers need to never assume the
       size of any of their variables.  However a functioning system
       obviously needs agreements on what sizes types are going to be
       used in the system.  Thus each architecture and operating system
@@ -883,7 +883,7 @@
 	    </row>
 	    <row>
 	      <entry>Pointers</entry>
-	      <entry>Implemenation dependent</entry>
+	      <entry>Implementation dependent</entry>
 	      <entry>32</entry>
 	    </row>
 	  </tbody>
@@ -962,7 +962,7 @@
 	      </row>
 	      <row>
 		<entry>Pointers</entry>
-		<entry>Implemenation dependent</entry>
+		<entry>Implementation dependent</entry>
 		<entry>64</entry>
 		<entry>64</entry>
 	      </row>
@@ -979,7 +979,7 @@
 
 	<para>In the other model,
 	<computeroutput>long</computeroutput> remains a 32 bit value.
-	This maintains maximum compatability with 32 code.  This model
+	This maintains maximum compatibility with 32 code.  This model
 	is in use with 64 bit Windows.</para>
 
 	<para>There are good reasons why the size of
@@ -1048,7 +1048,7 @@
 	compiler.  This means two things; the compiler can check if
 	you are violating your own rules (e.g. writing to a
 	<computeroutput>const</computeroutput> value) and it can make
-	optimisations based upon the extra knowledge (exaimined in
+	optimisations based upon the extra knowledge (examined in
 	later weeks).</para>
 
       </sect3>
@@ -1103,21 +1103,21 @@
 
 	<para>There is only one scheme in common use on modern
 	hardware, but C99 defines three acceptable methods for
-	negative value represnetation.</para>
+	negative value representation.</para>
 
 	<sect4>
 	  <title>Sign Bit</title>
 
 	  <para>The most straight forward method is to simply say that
 	  one bit of the number indicates either a negative or
-	  positive value depnding on it being set or not.</para>
+	  positive value depending on it being set or not.</para>
 
-	  <para>This is analagous to mathematical approach of having a
+	  <para>This is analogous to mathematical approach of having a
 	  <computeroutput>+</computeroutput> and
-	  <computeroutput>-</computeroutput>.  This is farily logical,
+	  <computeroutput>-</computeroutput>.  This is fairly logical,
 	  and some of the original computers did represent negative
 	  numbers in this way.  But using binary numbers opens up some
-	  other possiblities which make the life of hardware designers
+	  other possibilities which make the life of hardware designers
 	  easier.</para>
 
 	  <para>However, notice that the value
@@ -1200,7 +1200,7 @@
 	</sect4>
 
 	<sect4>
-	  <title>Two's Compelement</title>
+	  <title>Two's Complement</title>
 
 	  <para>Two's complement is just like one's complement, except
 	  the negative representation has <emphasis>one</emphasis>
@@ -1214,7 +1214,7 @@
 	  integer we have
 	  <computeroutput>2^<superscript>8</superscript> =
 	  256</computeroutput> possible values; with our sign bit
-	  represnetation we could represent -127 thru 127 but with
+	  representation we could represent -127 thru 127 but with
 	  two's complement we can represent -127 thru 128.  This is
 	  because we have removed the problem of having two zeros, so
 	  we can effectively represent one more value for the same
@@ -1261,11 +1261,14 @@
 	  <para>You can see that by implementing two's complement
 	  hardware designers only have to add in logic for addition
 	  circuits; subtraction can be done by negating the value to
-	  be subtracted and then adding the new value.  Similarly you
-	  could implement multiplication with repeated addition and
-	  division with repeated subtraction.  So you can see how
-	  two's complement can reduce just about all simple
-	  mathematical operations down to addition!</para>
+	  be subtracted and then adding the new value.  In fact the
+	  hardware doesn't need to know anything at all about negative
+	  numbers, it does the same things regardless. </para>
+
+	  <para>Similarly you could implement multiplication with
+	  repeated addition and division with repeated subtraction.
+	  So you can see how two's complement can reduce just about
+	  all simple mathematical operations down to addition!</para>
 
 	  <para>All modern computers use two's complement
 	  representation.</para>
@@ -1276,13 +1279,302 @@
 
       <sect3>
 	<title>Floating Point</title>
-	<para>Very short intro to floating point</para>
+
+	<para>So far we have only discussed integer or whole numbers;
+	the class of numbers that can represent decimal values is
+	called <emphasis>floating point</emphasis>.</para>
+
+	<para>We need some way to represent to the computer the
+	concept of the decimal place.  The most common scheme for this
+	is known as the <emphasis>IEEE-754 floating point
+	standard</emphasis> because the standard is published by the
+	Institute of Electric and Electronics Engineers.  The scheme is
+	conceptually quite simple and is analogous to "scientific
+	notation" which is commonly taught at schools.</para>
+
+	<para>In scientific notation the value
+	<computeroutput>123.45</computeroutput> might commonly be
+	represented as
+	<computeroutput>1.2345x10<superscript>2</superscript></computeroutput>.
+	In this we call <computeroutput>1.2345</computeroutput> the
+	<emphasis>mantissa</emphasis> or
+	<emphasis>significand</emphasis>,
+	<computeroutput>10</computeroutput> is the
+	<emphasis>radix</emphasis> and
+	<computeroutput>2</computeroutput> is the
+	<emphasis>exponent</emphasis>.
+	</para>
+
+	<para>Thus in the IEEE floating point model, we break up the
+	bits to represent these components.  There are differing
+	widths for a floating point value; we only talk about the 32
+	bit value, more bits works the same way but allows greater
+	precision.</para>
+
+	<table>
+	  <title>IEEE Floating Point</title>
+
+	  <tgroup cols="3">
+	    <thead>
+	      <row>
+		<entry>Sign</entry>
+		<entry>Exponent</entry>
+		<entry>Significand/Mantissa</entry>
+	      </row>
+	    </thead>
+	    <tbody>
+	      <row>
+		<entry>S</entry>
+		<entry>EEEEEEEE</entry>
+		<entry>MMMMMMMMMMMMMMMMMMMMMMM</entry>
+	      </row>
+	    </tbody>
+	  </tgroup>
+	</table>
+
+	<para>Thus our number is represented by the value
+	<computeroutput>sign * significand *
+	2^<superscript>exponent</superscript></computeroutput>.  The
+	sign bit equates to either <computeroutput>1</computeroutput>
+	or <computeroutput>-1</computeroutput>, and we always have an
+	implied radix of <computeroutput>2</computeroutput>.</para>
+
+	<para>The other important factor is <emphasis>bias</emphasis>
+	of the exponent.  The exponent needs to be able to represent
+	both positive and negative values, thus a value of
+	<computeroutput>127</computeroutput> is implied to be added to
+	the exponent.  Thus an exponent of
+	<computeroutput>127</computeroutput> equates to a exponent of
+	<computeroutput>0</computeroutput>.</para>
+
+	<para>Each bit of the significand adds a little more precision
+	to the values we can represent.  Consider the scientific
+	notation representation of the value
+	<computeroutput>198765</computeroutput>.  We could write this
+	as
+	<computeroutput>1.98765x10<superscript>6</superscript></computeroutput>,
+	which corresponds to a representation below</para>
+
+	<table>
+	  <title>Scientific Notation for 1.98765x10^6</title>
+	  <tgroup cols="5">
+	    <thead>
+	      <row>
+		<entry>10<superscript>0</superscript></entry>
+		<entry>.</entry>
+		<entry>10<superscript>-1</superscript></entry>
+		<entry>10<superscript>-2</superscript></entry>
+		<entry>10<superscript>-3</superscript></entry>
+		<entry>10<superscript>-4</superscript></entry>
+		<entry>10<superscript>-5</superscript></entry>
+	      </row>
+	    </thead>
+	    <tbody>
+	      <row>
+		<entry>1</entry>
+		<entry>.</entry>
+		<entry>9</entry>
+		<entry>8</entry>
+		<entry>7</entry>
+		<entry>6</entry>
+		<entry>5</entry>
+	      </row>
+	    </tbody>
+	  </tgroup>
+	</table>
+
+	<para>Each additional digit allows more precision in the
+	decimal values we can represent.  Remember that in base 10,
+	anything after the decimal place is representing a number
+	<emphasis>less</emphasis> than one
+	(i.e. <computeroutput>10<superscript>0</superscript></computeroutput>).
+	This is an infinite range of numbers; the only limit is how
+	many digits we can write down.  In binary, rather than each
+	additional bit being
+	<computeroutput>10<superscript>-n</superscript></computeroutput>
+	each additional <emphasis>bit</emphasis> allows for additional
+	precision of
+	<computeroutput>2<superscript>-n</superscript></computeroutput>.</para>
+
+	<para>This means that our binary representation does not
+	always map in a straight-forward manner to a decimal
+	representation.  </para>
+
+	<table>
+	  <title>Significands in binary</title>
+	  <tgroup cols="5">
+	    <thead>
+	      <row>
+		<entry>2<superscript>0</superscript></entry>
+		<entry>.</entry>
+		<entry>2<superscript>-1</superscript></entry>
+		<entry>2<superscript>-2</superscript></entry>
+		<entry>2<superscript>-3</superscript></entry>
+		<entry>2<superscript>-4</superscript></entry>
+		<entry>2<superscript>-5</superscript></entry>
+	      </row>
+	    </thead>
+	    <tbody>
+	      <row>
+		<entry>1</entry>
+		<entry>.</entry>
+		<entry>1/2</entry>
+		<entry>1/4</entry>
+		<entry>1/8</entry>
+		<entry>1/16</entry>
+		<entry>1/32</entry>
+	      </row>
+	      <row>
+		<entry>1</entry>
+		<entry>.</entry>
+		<entry>0.5</entry>
+		<entry>0.25</entry>
+		<entry>0.125</entry>
+		<entry>0.625</entry>
+		<entry>0.03125</entry>
+	      </row>
+	    </tbody>
+	  </tgroup>
+	</table>
+
+	<para>Thus with only one bit of precision, our fractional
+	precision is not very big, we can say that the fraction is
+	either <computeroutput>0</computeroutput> or
+	<computeroutput>0.5</computeroutput>.  If we add another bit
+	of precision, we can now say that the decimal value is either
+	<computeroutput>0,0.25,0.5,0.75</computeroutput>.  With
+	another bit of precision we can now represent the values
+	<computeroutput>0,0.125,0.25,0.375,0.5,0.625,0.75,0.875</computeroutput>.
+	Increasing the bits therefore allows us greater and greater
+	precisions, but the range of possible numbers is infinite so
+	we will never have enough bits to represent
+	<emphasis>any</emphasis> possible value.</para>
+
+	<para>Thus, if we only have two bits of precision and need to
+	represent the value <computeroutput>0.3</computeroutput> we
+	can only say that it is closest to
+	<computeroutput>0.25</computeroutput>; obviously this is
+	insufficient for most any application.  With 22 bits of
+	significand we have a much finer resolution, but it is still
+	not enough for most applications.  Thus a
+	<computeroutput>double</computeroutput> value increases the
+	number of significand bits to 52 (it also increases the range
+	of exponent values too).  Some hardware has an 84-bit float,
+	with a full 64 bits of significand.  64 bits allows a
+	tremendous precision and should be suitable for all but the
+	most demanding of applications (XXX is this sufficient to
+	represent a length to less than the size of an atom?)</para>
+
+	<sect4>
+	  <title>Normalised Values</title>
+
+	  <para>In scientific notation, we can represent a value in
+	  many different ways.  For example,
+	  <computeroutput>10023x10^<superscript>0</superscript> =
+	  1002.3x10<superscript>1</superscript> =
+	  100.23x10<superscript>2</superscript></computeroutput>.  We
+	  thus define the <emphasis>normalised</emphasis> version as
+	  the one where <computeroutput>1/radix <= significand <
+	  1</computeroutput>.  In binary this ensures that the
+	  leftmost bit of the significand is <emphasis>always
+	  one</emphasis>.  Knowing this, we can gain an extra bit of
+	  precision by having the standard say that the leftmost bit
+	  being one is implied.</para>
+
+	  <table>
+	    <title>Example of normalising 0.375</title>
+	    <tgroup cols="5">
+	      <thead>
+		<row>
+		<entry>2<superscript>0</superscript></entry>
+		  <entry>.</entry>
+		  <entry>2<superscript>-1</superscript></entry>
+		  <entry>2<superscript>-2</superscript></entry>
+		  <entry>2<superscript>-3</superscript></entry>
+		  <entry>2<superscript>-4</superscript></entry>
+		  <entry>2<superscript>-5</superscript></entry>
+		  <entry>Exponent</entry>
+		  <entry>Calculation</entry>
+		</row>
+	      </thead>
+	      <tbody>
+		<row>
+		  <entry>0</entry>
+		  <entry>.</entry>
+		  <entry>0</entry>
+		  <entry>1</entry>
+		  <entry>1</entry>
+		  <entry>0</entry>
+		  <entry>0</entry>
+		  <entry>2^<superscript>0</superscript></entry>
+		  <entry>(0.25 + 0.125) * 1 = 0.375 </entry>
+		</row>
+		<row>
+		  <entry>0</entry>
+		  <entry>.</entry>
+		  <entry>1</entry>
+		  <entry>1</entry>
+		  <entry>0</entry>
+		  <entry>0</entry>
+		  <entry>0</entry
+		  <entry>2^<superscript>-1</superscript></entry>
+		  <entry>(0.5 + 0.25) * .5 = 0.375</entry>
+		</row>
+		<row>
+		  <entry>1</entry>
+		  <entry>.</entry>
+		  <entry>1</entry>
+		  <entry>0</entry>
+		  <entry>0</entry>
+		  <entry>0</entry>
+		  <entry>0</entry>
+		  <entry>2^<superscript>-2</superscript></entry>
+		  <entry>(1 + 0.5) * 0.25 = 0.375</entry>
+		</row>
+	      </tbody>
+	    </tgroup>
+	  </table>
+
+	  <para>As you can see above, we can make the value normalised
+	  by moving the bits upwards; however we also need to
+	  compensate by increasing the exponent.  XXX trade
+	  off?  ffs implementation?</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Zeros</title>
+
+	  <para>zeros</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Bringing it together</title>
+
+	  <para>In the example code below we extract the components of
+	  a floating point number and print out the value it
+	  represents.  This will obviously only work for a 32 bit
+	  floating point value in the IEEE format; however this is
+	  common for most architectures with the
+	  <computeroutput>float</computeroutput> type.</para>
+
+	  <example id="float-examine">
+	    <title>Examining Floats</title>
+	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+		<imageobject>
+		  <imagedata fileref="wk1/code/float.c" format="linespecific">
+		</imageobject>
+	      </inlinemediaobject></programlisting>
+	  </example>
+
+	</sect4>
       </sect3>
+
 
     </sect2>
 
   </sect1>
-
   <sect1>
     <title>Exercises</title>
       <itemizedlist>
