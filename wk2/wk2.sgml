@@ -9,10 +9,10 @@
       <title>The CPU</title>
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="wk2/figures/computer.eps" format="EPS">
+	  <imagedata fileref="wk2/figures/computer.eps" format="EPS" />
 	</imageobject>
 	<imageobject>
-	  <imagedata fileref="wk2/figures/computer.png" format="PNG">
+	  <imagedata fileref="wk2/figures/computer.png" format="PNG" />
 	</imageobject>
 	<textobject>
 	  <phrase>The CPU performs instructions on values held in
@@ -140,10 +140,10 @@
 	  <title>Inside the CPU</title>
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk2/figures/block.eps" format="EPS">
+	      <imagedata fileref="wk2/figures/block.eps" format="EPS" />
 	    </imageobject>
 	    <imageobject>
-	      <imagedata fileref="wk2/figures/block.png" format="PNG">
+	      <imagedata fileref="wk2/figures/block.png" format="PNG" />
 	    </imageobject>
 	    <textobject>
 	      <phrase>The CPU is made up of many different
@@ -335,7 +335,7 @@
       the Intel Pentium, whilst having an instruction set that is
       categorised as CISC, internally breaks down instructions to RISC
       style sub-instructions inside the chip before
-      executing.</footnote>.</para>
+      executing.</para></footnote>.</para>
 
       <para>There are a number of reasons for this</para>
 
@@ -682,10 +682,10 @@
     is relatively uncommon for any high end servers to contain only a
     single CPU.  This is achieved in a number of different
     fashions.</para>
-    
+
     <sect2>
       <title>Symmetric Multi-Processing</title>
-      
+
       <para>Symmetric Multi-Processing, commonly shortened to
       <emphasis>SMP</emphasis>, is currently the most common
       configuration for including multiple CPUs in a single
@@ -855,6 +855,7 @@
 	than two.</para>
 
       </sect3>
+    </sect2>
 
       <sect2>
 	<title>Clusters</title>
@@ -963,10 +964,10 @@
       <title>A Hypercube</title>
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="wk2/figures/hypercube.eps" format="EPS">
+	  <imagedata fileref="wk2/figures/hypercube.eps" format="EPS" />
 	</imageobject>
 	<imageobject>
-	  <imagedata fileref="wk2/figures/hypercube.png" format="PNG">
+	  <imagedata fileref="wk2/figures/hypercube.png" format="PNG" />
 	</imageobject>
 	<textobject>
 	  <phrase>An example of a hypercube.  Hypercubes provide a
@@ -1070,8 +1071,8 @@
 
       </sect3>
 
-
       </sect2>
+
   </sect1>
 
     <sect1>
