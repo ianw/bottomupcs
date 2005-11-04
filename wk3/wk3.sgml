@@ -108,10 +108,10 @@
       <title>The Operating System</title>
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="wk3/figures/kernel.eps" format="EPS">
+	  <imagedata fileref="wk3/figures/kernel.eps" format="EPS" />
 	</imageobject>
 	<imageobject>
-	  <imagedata fileref="wk3/figures/kernel.png" format="PNG">
+	  <imagedata fileref="wk3/figures/kernel.png" format="PNG" />
 	</imageobject>
 	<textobject>
 	  <phrase>The organisation of the kernel.  Processes the
@@ -208,10 +208,10 @@
 	  <title>The Operating System</title>
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk3/figures/virtual.eps" format="EPS">
+	      <imagedata fileref="wk3/figures/virtual.eps" format="EPS" />
 	    </imageobject>
 	    <imageobject>
-	      <imagedata fileref="wk3/figures/virtual.png" format="PNG">
+	      <imagedata fileref="wk3/figures/virtual.png" format="PNG" />
 	    </imageobject>
 	    <textobject>
 	  <phrase>Some different virtualisation methods.</phrase>
@@ -277,7 +277,7 @@
       <computeroutput>open()</computeroutput> needs to tell the kernel
       exactly <emphasis>what</emphasis> file to open.  Once again the
       ABI will define which registers arguments should be put into for
-      the system call.
+      the system call.</para>
     </sect3>
 
     <sect3>
@@ -346,7 +346,7 @@
 	<title>getpid() example</title>
 	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk3/code/getpid.c" format="linespecific">
+	      <imagedata fileref="wk3/code/getpid.c" format="linespecific" />
 	    </imageobject>
 	  </inlinemediaobject></programlisting>
       </example>
@@ -397,7 +397,7 @@
 	  <title>PowerPC system call example</title>
 	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk3/code/unistd-powerpc.h" format="linespecific">
+		<imagedata fileref="wk3/code/unistd-powerpc.h" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -539,7 +539,7 @@
 	  <title>x86 system call example</title>
 	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk3/code/unistd-x86.h" format="linespecific">
+		<imagedata fileref="wk3/code/unistd-x86.h" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -662,10 +662,10 @@
 	  <title>Rings</title>
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk3/figures/priv.eps" format="EPS">
+	      <imagedata fileref="wk3/figures/priv.eps" format="EPS" />
 	    </imageobject>
 	    <imageobject>
-	      <imagedata fileref="wk3/figures/priv.png" format="PNG">
+	      <imagedata fileref="wk3/figures/priv.png" format="PNG" />
 	    </imageobject>
 	    <textobject>
 	      <phrase>Privilege levels on x86</phrase>

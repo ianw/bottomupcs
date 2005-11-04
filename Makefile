@@ -29,7 +29,7 @@ html: csbu.sgml $(sources) $(pngs)
 	-for dir in $(sourcedirs); do \
 	cp -r --parents $$dir/code/* html; \
 	done
-	docbook2html --dsl ./csbu.dsl --output html csbu.sgml
+	jw -o html -d csbu.dsl -f docbook -b html -l /usr/share/xml/declaration/xml.dcl csbu.sgml
 	cp --parents $(pngs) html
 	cp csbu.css draft.png html
 

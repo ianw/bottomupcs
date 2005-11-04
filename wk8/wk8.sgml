@@ -114,7 +114,7 @@
 	  <title>Specifying Dynamic Libraries</title>
 	  <programlisting lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk8/code/dynamic-needed.txt" format="linespecific">
+		<imagedata fileref="wk8/code/dynamic-needed.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -137,7 +137,7 @@
 	  <title>Looking at dynamic libraries</title>
 	  <programlisting lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk8/code/ldd.txt" format="linespecific">
+		<imagedata fileref="wk8/code/ldd.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -171,7 +171,7 @@
       <title>Checking the program interpreter</title>
       <programlisting lang="C"><inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="wk8/code/interpreter.txt" format="linespecific">
+	    <imagedata fileref="wk8/code/interpreter.txt" format="linespecific" />
 	      </imageobject>
 	</inlinemediaobject></programlisting>
     </example>
@@ -231,7 +231,7 @@
 	<title>Relocation as defined by ELF</title>
 	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk8/code/elfrelocs.txt" format="linespecific">
+	      <imagedata fileref="wk8/code/elfrelocs.txt" format="linespecific" />
 	    </imageobject>
 	  </inlinemediaobject></programlisting>
       </example>
@@ -286,7 +286,7 @@
 	  <title>Specifying Dynamic Libraries</title>
 	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk8/code/relocs.txt" format="linespecific">
+		<imagedata fileref="wk8/code/relocs.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -402,10 +402,10 @@
 	<title>Memory access via the GOT</title>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="wk8/figures/got-plt.eps" format="EPS">
+	    <imagedata fileref="wk8/figures/got-plt.eps" format="EPS" />
 	  </imageobject>
 	  <imageobject>
-	    <imagedata fileref="wk8/figures/got-plt.png" format="PNG">
+	    <imagedata fileref="wk8/figures/got-plt.png" format="PNG" />
 	  </imageobject>
 	  <textobject>
 	    <phrase>To keep code (green) sharable, we define process
@@ -430,7 +430,7 @@
 	  <title>Using the GOT</title>
 	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk8/code/got.txt" format="linespecific">
+		<imagedata fileref="wk8/code/got.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -477,7 +477,7 @@
 	  <title>Relocations against the GOT</title>
 	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk8/code/got-relocs.txt" format="linespecific">
+		<imagedata fileref="wk8/code/got-relocs.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -570,7 +570,7 @@
 	  <title>Hello World PLT example</title>
 	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk8/code/hello.txt" format="linespecific">
+		<imagedata fileref="wk8/code/hello.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -591,7 +591,7 @@
 	  <title>Hello world main()</title>
 	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk8/code/hello-main-dis.txt" format="linespecific">
+		<imagedata fileref="wk8/code/hello-main-dis.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -605,7 +605,7 @@
 	  <title>Hello world sections</title>
 	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk8/code/hello-sections.txt" format="linespecific">
+		<imagedata fileref="wk8/code/hello-sections.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -621,7 +621,7 @@
 	  <title>Hello world PLT</title>
 	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk8/code/hello-plt.txt" format="linespecific">
+		<imagedata fileref="wk8/code/hello-plt.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -651,7 +651,7 @@
 	  <title>Hello world GOT</title>
 	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk8/code/hello-got.txt" format="linespecific">
+		<imagedata fileref="wk8/code/hello-got.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -697,7 +697,7 @@
 	  <programlisting linenumbering="numbered"
 	  lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk8/code/hello-dynamic.txt" format="linespecific">
+		<imagedata fileref="wk8/code/hello-dynamic.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -722,7 +722,7 @@
 	  <programlisting linenumbering="numbered"
 	  lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk8/code/runtime_setup.c" format="linespecific">
+		<imagedata fileref="wk8/code/runtime_setup.c" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -777,13 +777,14 @@
 	<emphasis>second</emphasis> time it is loaded it will get the
 	direct address of the function; short circuiting the dynamic
 	linker.</para>
+      </sect3>
 
       <sect3>
 	<title>Summary</title>
 
 	<para>You've seen the <emphasis>exact</emphasis> mechanism
 	behind the PLT, and consequently the inner workings of the
-	dynamic linker.  The important points to remember are
+	dynamic linker.  The important points to remember are</para>
         <itemizedlist>
 	    <listitem>
 	      <para>Library calls in your program actually call a stub
@@ -809,6 +810,7 @@
 	    </listitem>
 
 	  </itemizedlist>
+
       </sect3>
     </sect2>
   </sect1>

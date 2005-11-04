@@ -2,21 +2,20 @@
     
 <!-- glossary -->
 
-
     <glossdiv>
       <title>A</title>      
       <glossentry id="API"><glossterm>Application Programming Interface</glossterm>
 	<acronym>API</acronym>
 	<glossdef>
 	  <para>The set of variables and functions used to communicate between different parts of programs.</para>
-	  <glossseealso otherterm="ABI"></glossdef>
+	  <glossseealso otherterm="ABI" /></glossdef>
       </glossentry>
 
       <glossentry id="ABI"><glossterm>Application Binary Interface</glossterm>
 	<acronym>ABI</acronym>
 	<glossdef>
 	  <para>A technical description of how the operating system should interface with hardware.</para>
-	  <glossseealso otherterm="API"></glossdef>
+	  <glossseealso otherterm="API" /></glossdef>
       </glossentry>
       
     </glossdiv>
@@ -28,12 +27,12 @@
 	<acronym>XML</acronym>
 	<glossdef>
 	  <para>Some reasonable definition here.</para>
-	  <glossseealso otherterm="sgml"></glossdef>
+	  <glossseealso otherterm="sgml" /></glossdef>
       </glossentry>
       
       <glossentry id="sgml">
 	<glossterm>Standardised Generalised Markup Language</glossterm><acronym>SGML</acronym>
-	<glossdef><para>The grand daddy of all documents</para><glossseealso otherterm="xml"></glossdef>
+	<glossdef><para>The grand daddy of all documents</para><glossseealso otherterm="xml" /></glossdef>
       </glossentry>
     </glossdiv>
     
@@ -64,8 +63,7 @@
 	</glossdef>
       </glossentry>
     </glossdiv>
-    
-    
+
     <glossdiv>
       <title>S</title>
       <glossentry id="shell">
@@ -75,11 +73,10 @@
 	</glossdef>
       </glossentry>
     </glossdiv>
-    
-
-    <!--
-    Local Variables:
-    mode: sgml
-    sgml-parent-document: ("csbu.sgml")
-    End:
-    -->
+  </glossary>
+<!--
+Local Variables:
+mode: sgml
+sgml-parent-document: ("csbu.sgml")
+End:
+-->

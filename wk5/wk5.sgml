@@ -98,10 +98,10 @@
       <title>Virtual memory pages</title>
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="wk5/figures/page.eps" format="EPS">
+	  <imagedata fileref="wk5/figures/page.eps" format="EPS" />
 	</imageobject>
 	<imageobject>
-	  <imagedata fileref="wk5/figures/page.png" format="PNG">
+	  <imagedata fileref="wk5/figures/page.png" format="PNG" />
 	</imageobject>
 	<textobject>
 	  <phrase>Pages</phrase>
@@ -203,10 +203,10 @@
 	<title>Virtual Address Translation</title>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="wk5/figures/virtaddress.eps" format="EPS">
+	    <imagedata fileref="wk5/figures/virtaddress.eps" format="EPS" />
 	  </imageobject>
 	  <imageobject>
-	    <imagedata fileref="wk5/figures/virtaddress.png" format="PNG">
+	    <imagedata fileref="wk5/figures/virtaddress.png" format="PNG" />
 	  </imageobject>
 	  <textobject>
 	    <phrase>Converting a virtual address to a physical address</phrase>
@@ -470,10 +470,10 @@
 	  <title>Segmentation</title>
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk5/figures/segmentation.eps" format="EPS">
+	      <imagedata fileref="wk5/figures/segmentation.eps" format="EPS" />
 	    </imageobject>
 	    <imageobject>
-	      <imagedata fileref="wk5/figures/segmentation.png" format="PNG">
+	      <imagedata fileref="wk5/figures/segmentation.png" format="PNG" />
 	    </imageobject>
 	    <textobject>
 	      <phrase>A segmentation problem.  You only have three
@@ -698,10 +698,10 @@
 	<title>Linux address space layout</title>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="wk5/figures/linux-layout.eps" format="EPS">
+	    <imagedata fileref="wk5/figures/linux-layout.eps" format="EPS" />
 	  </imageobject>
 	  <imageobject>
-	    <imagedata fileref="wk5/figures/linux-layout.png" format="PNG">
+	    <imagedata fileref="wk5/figures/linux-layout.png" format="PNG" />
 	  </imageobject>
 	  <textobject>
 	    <phrase>The Linux address space layout.  Note that pages
@@ -747,10 +747,10 @@
 	<title>Linux Three Level Page Table</title>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="wk5/figures/threelevel.eps" format="EPS">
+	    <imagedata fileref="wk5/figures/threelevel.eps" format="EPS" />
 	  </imageobject>
 	  <imageobject>
-	    <imagedata fileref="wk5/figures/threelevel.png" format="PNG">
+	    <imagedata fileref="wk5/figures/threelevel.png" format="PNG" />
 	  </imageobject>
 	  <textobject>
 	    <phrase>A three level page table</phrase>
