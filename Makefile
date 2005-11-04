@@ -19,7 +19,7 @@ epss := $(patsubst %.xfig,%.eps,$(images))
 pdf: $(epss) csbu.pdf 
 
 csbu.pdf : csbu.sgml $(sources)
-	docbook2dvi $<
+	jw -f docbook -b dvi -l /usr/share/xml/declaration/xml.dcl $<
 	dvipdf csbu.dvi $@
 
 #html depends on having png figures around.
