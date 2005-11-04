@@ -135,7 +135,8 @@
 	  had 64 kilobytes of storage.</para>
 
 	  <para>Kilobytes soon ran out however.  The next SI unit is
-	  "mega" for <computeroutput>10<superscript>6</superscript>.
+	  "mega" for
+	  <computeroutput>10<superscript>6</superscript></computeroutput>.
 	  As it happens,
 	  <computeroutput>2<superscript>20</superscript></computeroutput>
 	  is again close to the SI base 10 definition; 1048576 as
@@ -235,9 +236,9 @@
 	and produce a single output.</para>
 
 	<para>The fundamental Boolean operations used in computer
-	science are easy to remember and listed below.  <para>We
-	represent them below with <emphasis>truth tables</emphasis>;
-	they simply show all possible inputs and outputs.  The term
+	science are easy to remember and listed below. We represent
+	them below with <emphasis>truth tables</emphasis>; they simply
+	show all possible inputs and outputs.  The term
 	<emphasis>true</emphasis> simply reflects
 	<computeroutput>1</computeroutput> in binary.</para>
 
@@ -458,7 +459,7 @@
 	      </row>
 	      <row>
 		<entry><computeroutput>and</computeroutput></entry>
-		<entry><computeroutput>&</computeroutput></entry>
+		<entry><computeroutput>&amp;</computeroutput></entry>
 	      </row>
 	      <row>
 		<entry><computeroutput>or</computeroutput></entry>
@@ -674,10 +675,10 @@
 	    <title>Masking</title>
 	    <mediaobject>
 	      <imageobject>
-		<imagedata fileref="wk1/figures/masking.eps" format="EPS">
+		<imagedata fileref="wk1/figures/masking.eps" format="EPS" />
 	      </imageobject>
 	      <imageobject>
-		<imagedata fileref="wk1/figures/masking.png" format="PNG">
+		<imagedata fileref="wk1/figures/masking.png" format="PNG" />
 	      </imageobject>
 	      <textobject>
 
@@ -734,7 +735,7 @@
 	  <title>Using flags</title>
 	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk1/code/flags.c" format="linespecific">
+		<imagedata fileref="wk1/code/flags.c" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>    
@@ -1474,7 +1475,7 @@
 	  1002.3x10<superscript>1</superscript> =
 	  100.23x10<superscript>2</superscript></computeroutput>.  We
 	  thus define the <emphasis>normalised</emphasis> version as
-	  the one where <computeroutput>1/radix <= significand <
+	  the one where <computeroutput>1/radix &lt;= significand &lt;
 	  1</computeroutput>.  In binary this ensures that the
 	  leftmost bit of the significand is <emphasis>always
 	  one</emphasis>.  Knowing this, we can gain an extra bit of
@@ -1516,7 +1517,7 @@
 		  <entry>1</entry>
 		  <entry>0</entry>
 		  <entry>0</entry>
-		  <entry>0</entry
+		  <entry>0</entry>
 		  <entry>2^<superscript>-1</superscript></entry>
 		  <entry>(0.5 + 0.25) * .5 = 0.375</entry>
 		</row>
@@ -1563,7 +1564,7 @@
 	    <title>Examining Floats</title>
 	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 		<imageobject>
-		  <imagedata fileref="wk1/code/float.c" format="linespecific">
+		  <imagedata fileref="wk1/code/float.c" format="linespecific" />
 		</imageobject>
 	      </inlinemediaobject></programlisting>
 	  </example>
@@ -1580,18 +1581,20 @@
       <itemizedlist>
 	<listitem>
 	  <para>Write all 16 hexadecimal digits in binary, from memory.</para>
-	<listitem>
+      </listitem>
+      <listitem>
 	<para>Use the <computeroutput>sizeof</computeroutput> operator
 	in C to find and print the size of ...</para>
-	</listitem>
-	<listitem>
-	  <para>It is possible to use the XOR operation to swap two
+      </listitem>
+      <listitem>
+	<para>It is possible to use the XOR operation to swap two
 	  variables without requiring an temporary variable.  Play
 	  around with it, and see if you can figure out
 	  how.</para>
-	</listitem>
+      </listitem>
+    </itemizedlist>
   </sect1>
-
+  
 </chapter>
 
 <!--
