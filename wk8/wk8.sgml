@@ -815,6 +815,157 @@
     </sect2>
   </sect1>
 
+  <sect1>
+    <title>Working with libraries and the linker</title>
+
+    <para>The presense of the dynamic linker provides both some
+    advantages we can utlisie and some extra issues that need to be
+    resolved to get a functional system.</para>
+
+    <sect2>
+      <title>Library versions</title>
+
+      <para>One potential issue is different versions of libraries.
+      With only static libraries there is much less potential for
+      problems, as all library code is built directly into the binary
+      of the application.  If you want to use a new version of the
+      library you need to recompile it into a new binary, replacing
+      the old one.</para>
+
+      <para>This is obviously fairly impractical for common libraries,
+      the most common of course being <application>libc</application>
+      which is included in most all applications.  If it were only
+      available as a static library any change would require every
+      single application in the system be rebuilt.</para>
+
+      <para>However, changes in the way the dynamic library work could
+      cause multiple problems.  In the best case, the modifications
+      are completely compatable and nothing externally visible is
+      changed.  On the other hand the changes might cause the
+      application to crash; for example if a function that used to
+      take an <computeroutput>int</computeroutput> changes to take an
+      <computeroutput>int *</computeroutput>.  Worse, the new library
+      version could have changed semantics and suddenly start silently
+      returning different, possibly wrong values.  This can be a very
+      nasty bug to try and track down; when an application crashes you
+      can use a debugger to isolate where the error occurs whilst data
+      corruption or modification may only show up in seemingly
+      unrelated parts of the application.</para>
+
+      <para>The dynamic linker requires a way to determine the version
+      of libraries within the system so that newer revisions can be
+      identified.  There are a number of schemes a modern dynamic
+      linker can use to find the right versions of libraries.</para>
+
+      <sect3>
+	<title><computeroutput>sonames</computeroutput></title>
+
+	<para>Using <computeroutput>sonames</computeroutput> we can
+	add some extra information to a library to help identify
+	versions.</para>
+
+	<para>As we have seen previously, an application lists the
+	libraries it requies in
+	<computeroutput>DT_NEEDED</computeroutput> fields in the
+	dynamic section of the binary.  The actual library is held in
+	a file on disc, usually in
+	<computeroutput>/lib</computeroutput> for core system
+	libraries or <computeroutput>/usr/lib</computeroutput> for
+	optional libraries.</para>
+
+	<para>To allow multiple versions of the library to exist on
+	disk, they obviously require differing file names.  The
+	<computeroutput>soname</computeroutput> scheme uses a
+	combination of names and file system links to build a
+	hierarchy of libraries.</para>
+
+	<para>This is done by introducing the concept of
+	<emphasis>major</emphasis> and <emphasis>minor</emphasis>
+	library revisions.  A minor revision is one wholly backwards
+	compatible with a previous version of the library; this
+	usually consists of only bug fixes.  A major revision is
+	therefore any revision that is not compatible; e.g. changes
+	the inputs to functions or the way a function behaves.</para>
+
+	<para>As each library revision, major or minor, will need to
+	be kept in a separate file on disk, this forms the basis of
+	the library heirachy.  The library name is by convetion
+	<computeroutput>libNAME.so.MAJOR.MINOR</computeroutput><footnote>
+	<para>You can optionally have a <emphasis>release</emphasis>
+	as a final identifier after the minor number.  Generally this
+	is enough to distinguish all the various versions
+	library.</para></footnote>.  However, if every application
+	were directly linked against this file we would have the same
+	issue as with a static library; every time a minor change
+	happened we would need to rebuild the application to point to
+	the new library.</para>
+
+	<para>What we really want to refer to is the
+	<emphasis>major</emphasis> number of the library.  If this
+	changes, we reasonably are required to recompile our
+	application, since we need to make sure our program is still
+	compatible with the new library.</para>
+
+	<para>Thus the <computeroutput>soname</computeroutput> is the
+	<computeroutput>libNAME.so.MAJOR</computeroutput>.  The
+	<computeroutput>soname</computeroutput> should be set in the
+	<computeroutput>DT_SONAME</computeroutput> field of the
+	dynamic section in a shared library; the library author can
+	specify this version when they build the library.</para>
+
+	<para>Thus each minor version library file on disc can specify
+	 the same major version number in it's
+	 <computeroutput>DT_SONAME</computeroutput> field, allowing
+	 the dynamic linker to know that this particular library file
+	 implements a particular major revision of the library API and
+	 ABI.</para>
+
+	<para>To keep track of this, an application called
+	<application>ldconfig</application> is commonly run to create
+	symoblic links named for the major version to the latest minor
+	version on the system.  <application>ldconfig</application>
+	works by running through all the libraries that implement a
+	particular major revision number, and then picks out the one
+	with the highest minor revision.  It then creates a symbolic
+	link from <computeroutput>libNAME.so.MAJOR</computeroutput> to
+	the actual library file on disc,
+	i.e. <computeroutput>libNAME.so.MAJOR.MINOR</computeroutput>.</para>
+
+	<para>When the compiler </para>
+
+	<para>The final piece of the heirarchy is the
+	<emphasis>compile name</emphasis> for the library.  When you
+	compile your program, to link against a library you use the
+	<computeroutput>-lNAME</computeroutput> flag, which goes off
+	searching for the <computeroutput>libNAME.so</computeroutput>
+	file in the library search path.  Notice however, we have not
+	specified any version number; we just want to link against the
+	latest library on the system.</para>
+
+	<para>Thus </para>
+
+	<figure>
+	  <title><computeroutput>sonames</computeroutput></title>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="wk8/figures/libs.eps" format="EPS" />
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="wk8/figures/libs.png" format="PNG" />
+	  </imageobject>
+	  <textobject>
+	    <phrase>Describing the soname system</phrase>
+	  </textobject>
+	</mediaobject>
+      </figure>
+
+      </sect3>
+
+    </sect2>
+
+
+  </sect1>
+
 </chapter>
 
 <!--
