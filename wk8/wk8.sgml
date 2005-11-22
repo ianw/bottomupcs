@@ -931,7 +931,7 @@
 	the actual library file on disc,
 	i.e. <computeroutput>libNAME.so.MAJOR.MINOR</computeroutput>.</para>
 
-	<para>When the compiler </para>
+	<para>XXX : talk about libtool versions</para>
 
 	<para>The final piece of the heirarchy is the
 	<emphasis>compile name</emphasis> for the library.  When you
@@ -940,9 +940,19 @@
 	searching for the <computeroutput>libNAME.so</computeroutput>
 	file in the library search path.  Notice however, we have not
 	specified any version number; we just want to link against the
-	latest library on the system.</para>
+	latest library on the system.  It is up to the installation
+	procedure for the library to create the symbolic link between
+	the compile <computeroutput>libNAME.so</computeroutput> name
+	and the latest library code on the system.  Usually this is
+	handled by your package managment system
+	(<application>dpkg</application> or
+	<application>rpm</application>).  This is not an automated
+	process because it is possible that the latest library on the
+	system may not be the one you wish to always complie against;
+	for example if the latest installed library were a development
+	version not approrpiate for general use.</para>
 
-	<para>Thus </para>
+	<para>The general process is illustrated below.</para>
 
 	<figure>
 	  <title><computeroutput>sonames</computeroutput></title>
@@ -958,6 +968,51 @@
 	  </textobject>
 	</mediaobject>
       </figure>
+
+	<sect4>
+	  <title>How the dynamic linker looks up libraries</title>
+
+	  <para>When the application starts, the dynamic linker looks
+	  at the <computeroutput>DT_NEEDED</computeroutput> field to
+	  find the required libraries.  This field contains the
+	  <computeroutput>soname</computeroutput> of the library, so
+	  the next step is for the dynamic linker to walk through all
+	  the libraries in its search path looking for it.</para>
+
+	  <para>This process conceptually involves two steps.  Firstly
+	  the dynamic linker needs to search through all the libraries
+	  to find those that implement the given
+	  <computeroutput>soname</computeroutput>.  Secondly the file
+	  names for the minor revisions need to be compared to find
+	  the latest version, which is then ready to be loaded.</para>
+
+	  <para>We mentioned previously that there is a symbolic link
+	  setup by <application>ldconfig</application> between the
+	  library <computeroutput>soname</computeroutput> and the
+	  latest minor revision.  Thus the dynamic linker should need
+	  to only follow that link to find the correct file to load,
+	  rather than having to open all possible libraries and decide
+	  which one to go with each time the application is
+	  required.</para>
+
+	  <para>Since file system access is so slow,
+	  <application>ldconfig</application> also creates a
+	  <emphasis>cache</emphasis> of libraries installed in the
+	  system.  This cache is simply a list of
+	  <computeroutput>soname</computeroutput>s of libraries
+	  available to the dynamic linker and a pointer to the major
+	  version link on disk, saving the dynamic linker having to
+	  read entire directories full of files to locate the correct
+	  link.  You can analyse this with <application>/sbin/ldconfig
+	  -p</application>; it actually lives in the file
+	  <computeroutput>/etc/ldconfig.so.cache</computeroutput>.  If
+	  the library is not found in the cache the dynamic linker
+	  will fall back to the slower option of walking the file
+	  system, thus it is important to re-run
+	  <application>ldconfig</application> when new libraries are
+	  installed.</para>
+
+	</sect4>
 
       </sect3>
 
