@@ -1,0 +1,49 @@
+$ cat test.c
+static int static_variable;
+
+extern int extern_variable;
+
+int external_function(void);
+
+int function(void)
+{
+        return external_function();
+}
+
+static int static_function(void)
+{
+        return 10;
+}
+
+#pragma weak weak_function
+int weak_function(void)
+{
+        return 10;
+}
+
+$ gcc -c test.c
+$ objdump --syms test.o
+
+test.o:     file format elf32-powerpc
+
+SYMBOL TABLE:
+00000000 l    df *ABS*  00000000 test.c
+00000000 l    d  .text  00000000 .text
+00000000 l    d  .data  00000000 .data
+00000000 l    d  .bss   00000000 .bss
+00000038 l     F .text  00000024 static_function
+00000000 l    d  .sbss  00000000 .sbss
+00000000 l     O .sbss  00000004 static_variable
+00000000 l    d  .note.GNU-stack        00000000 .note.GNU-stack
+00000000 l    d  .comment       00000000 .comment
+00000000 g     F .text  00000038 function
+00000000         *UND*  00000000 external_function
+0000005c  w    F .text  00000024 weak_function
+
+$ nm test.o
+         U external_function
+00000000 T function
+00000038 t static_function
+00000000 s static_variable
+0000005c W weak_function
+

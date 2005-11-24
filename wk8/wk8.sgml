@@ -1,7 +1,7 @@
 <chapter id="wk8">
 
   <title>Dynamic Linking</title>
-  
+
   <sect1>
 
     <title>Code Sharing</title>
@@ -1018,6 +1018,222 @@
 
     </sect2>
 
+    <sect2>
+      <title>Finding symbols</title>
+
+      <para>We've already discussed how the dynamic linker gets the
+      address of a library function and puts it in the PLT for the
+      program to use.  But so far we haven't discussed just
+      <emphasis>how</emphasis> the dynamic linker finds the address of
+      the function.  The whole process is called
+      <emphasis>binding</emphasis>, because the symbol name is bound
+      to the address it represents.</para>
+
+      <para>The dynamic linker has a few pieces of information;
+      firstly the <emphasis>symbol</emphasis> that it is searching
+      for, and secondly a list of libraries that that symbol might be
+      in, as defined by the <computeroutput>DT_NEEDED</computeroutput>
+      fields in the binary.</para>
+
+      <para>Each shared object library has a section, marked
+      <computeroutput>SHT_DYNSYM</computeroutput> and called
+      <computeroutput>.dynsym</computeroutput> which is the minimal
+      set of symbols required for dynamic linking -- that is any
+      symbol in the library that may be called by an external
+      program.</para>
+
+      <sect3>
+	<title>Dynamic Symbol Table</title>
+
+	<para>In fact, there are three sections that all play a part
+	in describing the dynamic sybmols.  Firstly, let us look at
+	the definition of a symbol from the ELF specification</para>
+
+	<example>
+	  <title>Symbol definition from ELF</title>
+	  <programlisting lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk8/code/symbol.txt" format="linespecific" />
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+	<table>
+	  <title>ELF symbol fields</title>
+
+	  <tgroup cols="2">
+	    <thead>
+	      <row>
+		<entry>Field</entry>
+		<entry>Value</entry>
+	      </row>
+	    </thead>
+
+	    <tbody>
+	      <row>
+		<entry><computeroutput>st_name</computeroutput></entry>
+		<entry>An <emphasis>index to the string table</emphasis></entry>
+	      </row>
+	      <row>
+		<entry><computeroutput>st_value</computeroutput></entry>
+		<entry>Value - in a
+		relocatable shared object this holds the offset from
+		the section of index given in
+		<computeroutput>st_shndx</computeroutput></entry>
+	      </row>
+	      <row>
+		<entry><computeroutput>st_size</computeroutput></entry>
+		<entry>Any associated size of the symbol</entry>
+	      </row>
+	      <row>
+		<entry><computeroutput>st_info</computeroutput></entry>
+		<entry>Information on the binding of the symbol
+		(described below) and what type of symbol this is (a
+		function, object, etc).</entry>
+	      </row>
+	      <row>
+		<entry><computeroutput>st_other</computeroutput></entry>
+		<entry>Not currently used</entry>
+	      </row>
+	      <row>
+		<entry><computeroutput>st_shndx</computeroutput></entry>
+		<entry>Index of the section this symbol resides in
+		(see <computeroutput>st_value</computeroutput></entry>
+	      </row>
+	    </tbody>
+	  </tgroup>
+
+	</table>
+
+	<para>As you can see, the actual string of the symbol name is
+	held in a separate section
+	(<computeroutput>.dynstr</computeroutput>; the entry in the
+	<computeroutput>.dynsym</computeroutput> section only holds an
+	index into the string section.  This creates some level of
+	overhead for the dynamic linker; the dynamic linker must read
+	all of the symbol entries in the
+	<computeroutput>.dynsym</computeroutput> section and then
+	follow the index pointer to find the symbol name for
+	comparision.
+	</para>
+
+	<para>To speed this process up, a third section called
+	<computeroutput>.hash</computeroutput> is introduced,
+	containing a <emphasis>hash table</emphasis> of symbol names
+	to symbol table entries.  This hash table is pre-computed when
+	the library is built and allows the dynamic linker to find the
+	symbol entry much faster, generally with only one or two
+	lookups.</para>
+
+      </sect3>
+
+
+      <sect3>
+	<title>Symbol Binding</title>
+
+	<para>In a confusingd dual use of terminology, whilst we
+	usually say the process of finding the address of a symbol
+	refers is the process of binding that symbol, the
+	<emphasis>symbol binding</emphasis> has a separate
+	meaning.</para>
+
+	<para>The binding of a symbol dictates its external visibility
+	during the dynamic linking process.  A
+	<emphasis>local</emphasis> symbol is not visible outside the
+	object file it is defined in.  A <emphasis>global</emphasis>
+	symbol is visible to other object files, and can statisfy
+	undefined references in other objects.</para>
+
+	<para>A <emphasis>weak</emphasis> reference is a special type
+	of lower priority global reference.  This means it is designed
+	to be overriden, as we will see shortly.</para>
+
+	<para>Below we have an example C program which we analyse to
+	inspect the symbol bindings.</para>
+
+	<example>
+	  <title>Examples of symbol bindings</title>
+	  <programlisting lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk8/code/bindings.txt" format="linespecific" />
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+	<para>Notice the use of
+	<computeroutput>#pragma</computeroutput> to define the weak
+	symbol.  A <computeroutput>pragma</computeroutput> is a way of
+	communicating extra information to the compiler; its use is
+	not common but occassionaly is required to get the compiler to
+	do out of the ordinary operations.x</para>
+
+	<para>We inspect the symbols with two different tools; in both
+	cases the binding is shown in the second column; the codes
+	should be quite straight forward (are are documented in the
+	tools <application>man</application> page).</para>
+
+	<sect4>
+	  <title>Overriding symbols</title>
+
+	  <para>It is often very useful for a programmer to be able to
+	  <emphasis>override</emphasis> a symbol in a library; that is
+	  to subvert the normal symbol with a different
+	  definition.</para>
+
+	  <para>We mentioned that the order that libraries is searched
+	  is given by the order of the
+	  <computeroutput>DT_NEEDED</computeroutput> fields within the
+	  library.  However, it is possible to insert libraries as the
+	  <emphasis>last</emphasis> libraries to be searched; this
+	  means that any symbols within them will be found as the
+	  final reference.</para>
+
+	  <para>This is done via an environment variable called
+	  <computeroutput>LD_PRELOAD</computeroutput> which specifies
+	  libraries that the linker should load last.</para>
+
+	  <example>
+	    <title>Example of <computeroutput>LD_PRELOAD</computeroutput></title>
+	    <programlisting lang="C"><inlinemediaobject>
+		<imageobject>
+		  <imagedata fileref="wk8/code/ld_preload.txt" format="linespecific" />
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	  </example>
+
+	  <para>In the above example we override the
+	  <computeroutput>getpid</computeroutput> function to print
+	  out a small statement when it is called.  We use the
+	  <computeroutput>dlysm</computeroutput> function provided by
+	  <computeroutput>libc</computeroutput> with an argument
+	  telling it to continue on and find the
+	  <emphasis>next</emphasis> symbol called
+	  <computeroutput>getpid</computeroutput>.</para>
+
+	  <para>The concept of the <emphasis>weak</emphasis> symbol is
+	  that the reference can be overridden by another
+	  symbol.</para>
+
+
+	  <sect5>
+	    <title>Weak symbols over time</title>
+
+	    <para>Illustrates a good view of compatability and linux
+	    development.</para>
+
+	  </sect5>
+	</sect4>
+
+	<sect4>
+	  <title>Specifying binding order</title>
+
+	  <para></para>
+
+	</sect4>
+
+      </sect3>
+
+    </sect2>
 
   </sect1>
 
