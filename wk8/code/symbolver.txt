@@ -1,0 +1,63 @@
+$ cat Makefile
+all: test testsym
+
+clean:
+        rm -f *.so test testsym
+
+liboverride.so : override.c
+        $(CC) -shared -fPIC -o liboverride.so override.c
+
+libtest.so : libtest.c
+        $(CC) -shared -fPIC -o libtest.so libtest.c
+
+libtestsym.so : libtest.c
+        $(CC) -shared -fPIC -Wl,-Bsymbolic -o libtestsym.so libtest.c
+
+test : test.c libtest.so liboverride.so
+        $(CC) -L. -ltest -o test test.c
+
+testsym : test.c libtestsym.so liboverride.so
+        $(CC) -L. -ltestsym -o testsym test.c
+
+$ cat libtest.c
+#include <stdio.h>
+
+int foo(void) {
+        printf("libtest foo called\n");
+        return 1;
+}
+
+int test_foo(void)
+{
+        return foo();
+}
+
+$ cat override.c
+#include <stdio.h>
+
+int foo(void)
+{
+        printf("override foo called\n");
+        return 0;
+}
+
+$ cat test.c
+#include <stdio.h>
+
+int main(void)
+{
+        printf("%d\n", test_foo());
+}
+
+$ cat Versions
+{global: test_foo;  local: *; };
+
+$ gcc -shared -fPIC -Wl,-version-script=Versions -o libtestver.so libtest.c
+
+$ gcc -L. -ltestver -o testver test.c
+
+$ LD_LIBRARY_PATH=. LD_PRELOAD=./liboverride.so ./testver
+libtest foo called
+
+100000574 l     F .text	00000054              foo
+000005c8 g     F .text	00000038              test_foo
