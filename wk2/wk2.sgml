@@ -1073,6 +1073,125 @@
 
       </sect2>
 
+
+    <sect2>
+      <title>Memory ordering, locking and atomic operations</title>
+
+      <para>The multi-level cache, superscalar multi-processor
+      architecture brings with it some insteresting issues relating to
+      how a programmer sees the processor running code.</para>
+
+      <para>Imagine program code is running on two processors
+      simultaneously, both processors sharing effectively one large
+      area of memory.  If one processor issues a store instruction, to
+      put a register value into memory, when can it be sure that the
+      other processor does a load of that memory it will see the
+      correct value?</para>
+
+      <para>In the simplest situation the system could guarantee that
+      if a program executes a store instruction, any subsequent load
+      instructions will see this value.  This is referred to as
+      <emphasis>strict memory ordering</emphasis>, since the rules
+      allow no room for movement.  You should be starting to realise
+      why this sort of thing is a serious impediment to performance of
+      the system.</para>
+
+      <para>Much of the time, the memory ordering is not required to
+      be so strict.  The programmer can identify points where they
+      need to be sure that all outstanding operations are seen
+      globally, but in between these points there may be many
+      instructions where the semantics are not important.</para>
+
+      <para>Take, for example, the following situation.</para>
+
+      <example>
+	<title>Memory Ordering</title>
+	  <programlisting lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="wk2/code/memorder.c"
+		format="linespecific" />
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+      <para>In this example, we have two stores that can be done in
+      any particular order, as it suits the processor.  However, in
+      the final case, the pointer must only be updated once the two
+      previous stores are known to have been done.  Otherwise another
+      processor might look at the value of
+      <computeroutput>p</computeroutput>, follow the pointer to the
+      memory, load it, and get some completely incorrect value!</para>
+
+      <para>To indicate this, loads and stores have to have
+      <emphasis>semantics</emphasis> that describe what behaviour they
+      must have.  Memory semantics are described in terms of
+      <emphasis>fences</emphasis> that dictate how loads and stores
+      may be reordered around the load or store.</para>
+
+      <para>By default, a load or store can be re-ordered
+      anywhere.</para>
+
+      <para><emphasis>Acquire</emphasis> semantics is like a fence
+      that only allows load and stores to move downwards through it.
+      That is, when this load or store is complete you can be
+      gaurnteed that any later load or stores will see the value
+      (since they can not be moved above it).</para>
+
+      <para><emphasis>Release</emphasis> semantics is the opposite,
+      that is a fence that allows any load or stores to be done before
+      it (move upwards), but nothing before it to move downwards past
+      it.  Thus, when load or store with release semantics is
+      processed, you can be store that any earlier load or stores will
+      have been complete.</para>
+
+      <para>A <emphasis>full memory fence</emphasis> is a combination
+      of both; where no loads or stores can be reordered in any
+      direction around the current load or store.</para>
+
+      <para>The strictest memory model would use a full memory fence
+      for every operation.  The weakest model would leave every load
+      and store as a normal re-orderable instruction.</para>
+
+      <sect3>
+	<title>Processors and memory models</title>
+
+	<para>Different processors implement different memory
+	models.</para>
+
+	<para> The x86 (and AMD64) processor has a quite strict memory
+	model; all stores have release semantics (that is, the result
+	of a store is guaranteed to be seen by any later load or
+	store) but all loads have normal semantics.  lock prefix gives
+	memory fence.</para>
+
+	<para>Itanium allows all load and stores to be normal, unless
+	explicitly told. XXX</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Locking</title>
+
+	<para>programmers generally don't have to worry about memory
+	semantics becuase the higher level concept of locking can
+	take away the problems related with it.</para>
+
+	<para>If two processors could concurrently access a variable,
+	and either might write to it, you need a lock.</para>
+
+	<para>Lock contention.  RCU locks.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Atomic Operations</title>
+
+	<para>Explain what it is.</para>
+
+      </sect3>
+    </sect2>
+
+
   </sect1>
 
     <sect1>
