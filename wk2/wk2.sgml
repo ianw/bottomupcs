@@ -1144,6 +1144,22 @@
       processed, you can be store that any earlier load or stores will
       have been complete.</para>
 
+    <figure>
+	<title>Acquire and Release semantics</title>
+	<mediaobject>
+	<imageobject>
+	  <imagedata fileref="wk2/figures/memorder.eps" format="EPS" />
+	</imageobject>
+	<imageobject>
+	  <imagedata fileref="wk2/figures/memorder.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	  <phrase>An illustration of valid reorderings around
+	  operations with acquire and release semantics. </phrase>
+	</textobject>
+      </mediaobject>
+    </figure>
+
       <para>A <emphasis>full memory fence</emphasis> is a combination
       of both; where no loads or stores can be reordered in any
       direction around the current load or store.</para>
@@ -1172,9 +1188,129 @@
       <sect3>
 	<title>Locking</title>
 
-	<para>programmers generally don't have to worry about memory
-	semantics becuase the higher level concept of locking can
-	take away the problems related with it.</para>
+	<para>Knowing the memory ordering requirements of each
+	architecture is no practical for all programmers, and would
+	make programs difficult to port and debug across different
+	processor types.</para>
+
+	<para>Programmers use a higher level of abstraction called
+	<emphasis>locking</emphasis> to allow simultaneous
+	operation of programs when there are multiple CPUs.</para>
+
+	<para>When a program acquires a lock over a piece of code, no
+	other processor can obtain the lock until it is released.
+	Before any critical pieces of code, the processor must attempt
+	to take the lock; if it can not have it, it does not
+	continue.</para>
+
+	<para>You can see how this is tied into the naming of the
+	memory ordering semantics in the previous section.  We want to
+	ensure that before we <emphasis>acquire</emphasis> a lock, no
+	operations that should be protected by the lock are re-ordered
+	before it.  This is how acquire semantics works.</para>
+
+	<para>Conversly, when we <emphasis>release</emphasis> the
+	lock, we must be sure that every operation we have done whilst
+	we held the lock is complete (remember the example of updating
+	the pointer previously?).  This is release semantics.</para>
+
+	<para>There are many software libraries available that allow
+	programmers to not have to worry about the details of memory
+	semantics and simply use the higher level of abstraction of
+	<computeroutput>lock()</computeroutput> and
+	<computeroutput>unlock()</computeroutput>.</para>
+
+	<sect4>
+	  <title>Locking difficulties</title>
+
+	  <para>Locking schemes make programming more complicated, as
+	  it is possible to <emphasis>deadlock</emphasis> programs.
+	  Imagine if one processor is currently holding a lock over
+	  some data, and is currently waiting for a lock for some
+	  other piece of data.  If that other processor is waiting for
+	  the lock the first processor holds before unlocking the
+	  second lock, we have a deadlock situation.  Each processor
+	  is waiting for the other and neither can continue without
+	  the others lock.</para>
+
+	  <para>Often this situation arises because of a subtle
+	  <emphasis>race condition</emphasis>; one of the hardest bugs
+	  to track down.  If two processors are relying on operations
+	  happening in a specific order in time, there is always the
+	  possiblity of a race condition occuring.  A gamma ray from
+	  an exploding star in a different galaxy might hit one of the
+	  processors, making it skip a beat, throwing the ordering of
+	  operations out.  What will often happen is a deadlock
+	  situation like above.  It is for this reason that program
+	  ordering needs to be ensured by semantics, and not by
+	  relying on one time specific behaviours. (XXX not sure how i
+	  can better word that).</para>
+
+	  <para>A similar situation is the oppostie of deadlock,
+	  called <emphasis>livelock</emphasis>.  One strategy to avoid
+	  deadlock might be to have a "polite" lock; one that you give
+	  up to anyone who asks.  This politeness might cause two
+	  threads to be constantly giving each other the lock, without
+	  either ever taking the lock long enough to get the critical
+	  work done and be finished with the lock (a similar situation
+	  in real life might be two people who meet at a door at the
+	  same time, both saying "no, you first, I insist".  Neither
+	  ends up going through the door!).
+	  </para>
+
+	</sect4>
+
+
+	<sect4>
+	  <title>Locking strategies</title>
+
+	  <para>Underneath, there are many different strategies for
+	  implementing the behaviour of locks.</para>
+
+	  <para>A simple lock that simply has two states - locked or
+	  unlocked, is refered to as a <emphasis>mutex</emphasis>
+	  (short for mutual exclusion; that is if one person has it
+	  the other can not have it).</para>
+
+	  <para>There are, however, a number of ways to implement a
+	  mutex lock.  In the simplest case, we have what its commonly
+	  called a <emphasis>spinlock</emphasis>.  With this type of
+	  lock, the processor sits in a tight loop waiting to take the
+	  lock; equivalent to it saying "can I have it now" constanly
+	  much as a young child might ask of a parent.</para>
+
+	  <para>The problem with this strategy is that it essentially
+	  wastes time.  Whilst the processor is sitting constanly
+	  asking for the lock, it is not doing any useful work.  For
+	  locks that are likely to be only held locked for a very
+	  short amount of time this may be appropriate, but in many
+	  cases the amount of time the lock is held might be
+	  considerably longer.</para>
+
+	  <para>Thus another strategy is to <emphasis>sleep</emphasis>
+	  on a lock.  In this case, if the processor can not have the
+	  lock it will start doing some other work, waiting for
+	  notification that the lock is available for use (we see in
+	  future chapters how the operating system can switch
+	  processes and give the processsor more work to do).</para>
+
+	  <para>A mutex is however just a special case of a
+	  <emphasis>semaphore</emphasis>, famously invented by the
+	  Dutch computer scientist Dijkstra.  In a case where there
+	  are multiple resources available, a semaphore can be set to
+	  count accesses to the resources.  In the case where the
+	  number of resources is one, you have a mutex.  The operation
+	  of semaphores can be detailed in any agorithms book.</para>
+
+	  <para>These locking schemes still have some problems
+	  however.  In many cases, most people only want to read data
+	  which is updated only rarely.  Having all the processors
+	  wanting to only read data require taking a lock can lead to
+	  <emphasis>lock contention</emphasis> where less work gets
+	  done because everyone is waiting to obtain the same lock for
+	  some data.  </para>
+
+	</sect4>
 
 	<para>If two processors could concurrently access a variable,
 	and either might write to it, you need a lock.</para>
