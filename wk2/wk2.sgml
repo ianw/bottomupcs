@@ -1312,11 +1312,6 @@
 
 	</sect4>
 
-	<para>If two processors could concurrently access a variable,
-	and either might write to it, you need a lock.</para>
-
-	<para>Lock contention.  RCU locks.</para>
-
       </sect3>
 
       <sect3>
