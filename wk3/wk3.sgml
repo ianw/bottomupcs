@@ -174,19 +174,44 @@
 	    different components can decrease performance.</para>
 	  </listitem>
 	  <listitem>
-	    <para>It is slightly more difficult for the
-	    programmer.</para>
+
+	    <para>It is slightly more difficult for the programmer.
+	    </para>
+
 	  </listitem>
 	</orderedlist>
 
+	<para>Both of these criticisms come because most microkernels
+	are implemented with a <emphasis>message passing</emphasis>
+	based system, commonly referred to as <emphasis>inter-process
+	communication</emphasis> or IPC.  Communicating between
+	individual components happens via discrete messages, which
+	must be bundled up, sent to the other component, unbundled,
+	operated upon, re-bundled up and sent back, and then unbundled
+	again to get the result.</para>
+
+	<para>This is a lot of steps for what might be a fairly simple
+	request from a foreign component.  Obviously one request might
+	make the other component do more requests of even more
+	components, and the problem can multiply.  Slow message
+	passing implementations were largely responsible for the poor
+	performance of early microkernel systems, and the concepts of
+	passing messages are slightly harder for progammers to program
+	for.  The enhanced protection from having components run
+	separately was not sufficient to overcome these hurdles in
+	early microkernel systems, so they fell out of fashion.</para>
+
 	<para>Thus most common operating systems use a
 	<emphasis>monolithic</emphasis> kernel, where all components
-	are integrated into the privileged kernel.</para>
+	are integrated into the privileged kernel.  Calls between
+	components are simple function calls, as all programmers are
+	familar with.</para>
 
 	<para>There is no definitive answer as to which is the best
-	type, though as you start to learn more about operating
-	systems you will definitely be able to make up your own
-	mind!</para>
+	organisation, and it has started many arguments in both
+	academic and non-academic circles.  Hopefully as you learn
+	more about operating systems you will definitely be able to
+	make up your own mind!</para>
 
       </sect3>
 
@@ -197,12 +222,10 @@
 	virtualisation of hardware.  Modern computers are very
 	powerful, and often it is useful to not thing of them as one
 	whole system but split a single physical computer up into
-	seperate "virtual" machines.  Each of these virtual machines
+	separate "virtual" machines.  Each of these virtual machines
 	looks for all intents and purposes as a completely separate
 	machine, although physically they are all in the same box, in
 	the same place.</para>
-
-	<para>This is useful for any number of reasons.</para>
 
 	<figure>
 	  <title>The Operating System</title>
@@ -219,7 +242,121 @@
 	  </mediaobject>
 	</figure>
 
-	<para>describe above models</para>
+	<para>This can be organised in many different ways.  In the
+	simplest case, a small <emphasis>virtual machine monitor
+	</emphasis> can run directly on the hardware and provide an
+	interface to the guest operating systems running on top.  This
+	VMM is often often called a hypervisor (from the word
+	"supervisor")<footnote> <para>In fact, the hypervisor shares
+	much in common with a micro-kernel; both strive to be small
+	layers to present the hardware in a safe fashion to layers
+	above it.</para></footnote>.  In fact, the operating system on
+	top may have no idea that the hypervisor is even there at all,
+	as the hypervisor presents what appears to be a complete
+	system.  It intercepts operations between the guest operating
+	system and hardware and only presents a subset of the system
+	resources to each.</para>
+
+	<para>This is often used on large machines (with many CPUs and
+	much RAM) to implement <emphasis>partitioning</emphasis>.
+	This means the machine can be split up into smaller virtual
+	machines.  Often you can allocate more resources to running
+	systems on the fly, as requirements dictate.  The hypervisors
+	on many large IBM machines are actually quite complicated
+	affairs, with many millions of lines of code.  It provides a
+	multitude of system management services.</para>
+
+	<para>Another option is to have the operating system aware of
+	the underlying hypervisor, and request system resources
+	through it.  This is sometimes referred to as
+	<emphasis>paravirtualisation</emphasis> due to it's halfway
+	nature.  This is similar to the way early versions of the Xen
+	system works and is a compromise solution.  It hopefully
+	provides better performance since the operating system is
+	explicitly asking for system resources from the hypervisor
+	when required, rather than the hypervisor having to work
+	things out dynamically.</para>
+
+	<para>Finally, you may have a situation where an application
+	running on top of the existing operating system presents a
+	virtualised system (including CPU, memory, BIOS, disk, etc)
+	which a plain operating system can run on.  The application
+	converts the requests to hardware through to the underlying
+	hardware via the existing operating system.  This is similar
+	to how VMWare works.  This approach has many overheads, as the
+	application process has to emulate an entire system and
+	convert everything to requests from the underlying operating
+	system.  However, this lets you emulate an entirely different
+	architecture all together, as you can dynamically translate
+	the instructions from one processor type to another (as the
+	Rosetta system does with Apple software which moved from the
+	PowerPC processor to Intel based processors).</para>
+
+	<para>Performance is major concern when using any of these
+	virtualisation techniques, as what was once fast operations
+	directly on hardware need to make their way through layers of
+	abstraction.</para>
+
+	<para>Intel have discussed hardware support for virtualisation
+	soon to be coming in their latest processors.  These
+	extensions work by raising a special exception for operations
+	that might require the intervention of a virtual machine
+	monitor.  Thus the processor looks the same as a
+	non-virtualised processor to the application running on it,
+	but when that application makes requests for resources that
+	might be shared between other guest operating systems the
+	virtual machine monitor can be invoked.</para>
+
+	<para>This provides superior performance because the virtual
+	machine monitor does not need to monitor every operation to
+	see if it is safe, but can wait until the processor notifies
+	that something <emphasis>unsafe</emphasis> has
+	happened.</para>
+
+	<sect4>
+	  <title>Covert Channels</title>
+
+	  <para>This is a digression, but an interesting security flaw
+	  relating to virtualised machines.  If the partitioning of
+	  the system is not static, but rather
+	  <emphasis>dynamic</emphasis>, there is a potential security
+	  issue involved.</para>
+
+	  <para>In a dynamic system, resources are allocated to the
+	  operating systems running on top as required.  Thus if one
+	  is doing particularly CPU intensive operations whilst the
+	  other is waiting on data to come from disks, more of the CPU
+	  power will be given to the first task.  In a static system,
+	  each would get 50% an the unused portion would go to
+	  waste.</para>
+
+	  <para>Dynamic allocation actually opens up a communications
+	  channel between the two operating systems.  Anywhere that
+	  two states can be indicated is sufficient to communicate in
+	  binary.  Imagine both systems are extremely secure, and no
+	  information should be able to pass between one and the
+	  other, ever.  Two people with access could collude to pass
+	  information between themselves by writing two programs that
+	  try to take large amounts of resources at the same
+	  time.</para>
+
+	  <para>When one takes a large amount of memory there is less
+	  available for the other.  If both keep track of the maximum
+	  allocations, a bit of information can be transferred.  Say
+	  they make a pact to check every second if they can allocate
+	  this large amount of memory.  If the target can, that is
+	  considered binary 0, and if it can not (the other machine
+	  has all the memory), that is considered binary 1.  A data
+	  rate of one bit per second is not astounding, but
+	  information is flowing.</para>
+
+	  <para>This is called a <emphasis>covert channel</emphasis>,
+	  and whilst admittedly far fetched there have been examples
+	  of security breaches from such mechanisms.  It just goes to
+	  show that the life of a systems programmer is never simple!</para>
+
+	</sect4>
+
       </sect3>
 
     </sect2>
@@ -627,8 +764,8 @@
       <title>Hardware</title>
 
 	<para>We mentioned how one of the major tasks of the operating
-      system is to implement secuirty; that is to not allow one
-      application or user to interfer with any other that is running
+      system is to implement security; that is to not allow one
+      application or user to interfere with any other that is running
       in the system.  This means applications should not be able to
       overwrite each others memory or files, and only access system
       resources as dictated by system policy.</para>
@@ -648,7 +785,7 @@
 	sort of access can be provided.  For example, when an
 	application makes an <computeroutput>open()</computeroutput>
 	system call to open a file on disk, it will check the
-	persmissions of the user agasinst the file permissions and
+	permissions of the user against the file permissions and
 	allow or deny access.</para>
   
 
@@ -679,9 +816,9 @@
 	instruction to halt the processor should not be allowed to be
 	run by a user application, since it would stop the entire
 	computer from working.  However, the kernel needs to be able
-	to call this instruction when the computer is legitimatlely
+	to call this instruction when the computer is legitimately
 	shut down.<footnote> <para>What happens when a "naughty"
-	appliction calls that instruction anyway?  The hardware will
+	application calls that instruction anyway?  The hardware will
 	usually raise an exception, which will involve jumping to a
 	specified handler in the operating system similar to the
 	system call handler.  The operating system will then probably
@@ -689,7 +826,7 @@
 	about how the application has crashed.</para></footnote></para>
 
 	<para>Each inner ring can access any instructions protected by
-	a further out ring, but not any protected by a futher in ring.
+	a further out ring, but not any protected by a further in ring.
 	Not all architectures have multiple levels of rings as above,
 	but most will either provide for at least a "kernel" and
 	"user" level.</para>
@@ -699,17 +836,17 @@
 
 	  <para>The 386 protection model has four rings, though most
 	  operating systems (such as Linux and Windows) only use two
-	  of the rings to maintain compatability with other
+	  of the rings to maintain compatibility with other
 	  architectures that do now allow as many discrete protection
 	  levels.</para>
 
-	  <para>386 maintains privliges by making each piece of
+	  <para>386 maintains privileges by making each piece of
 	  application code running in the system have a small
 	  descriptor, called a <emphasis>code descriptor</emphasis>,
-	  which describes, amongst other things, its privilge level.
+	  which describes, amongst other things, its privilege level.
 	  When running application code makes a jump into some other
 	  code outside the region described by its code descriptor,
-	  the privilge level of the target is checked.  If it is
+	  the privilege level of the target is checked.  If it is
 	  higher than the currently running code, the jump is
 	  disallowed by the hardware (and the application will crash).
 	  </para>
@@ -717,13 +854,13 @@
 	</sect4>
 
 	<sect4>
-	  <title>Raising Privilge</title>
+	  <title>Raising Privilege</title>
 
 	  <para>Applications may only raise their privilege level by
 	specific calls that allow it, such as the instruction to
 	implement a system call.  These are usually referred to as a
 	<emphasis>call gate</emphasis> because they function just as a
-	physical gate; a small entry through an otherwise inpenatrable
+	physical gate; a small entry through an otherwise impenetrable
 	wall.  When that instruction is called we have seen how the
 	hardware completely stops the running application and hands
 	control over to the kernel.  The kernel must act as a
