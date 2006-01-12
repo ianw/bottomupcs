@@ -19,12 +19,8 @@
       <para>In a world without operating systems, every programmer
       would need to know the most intimate details of the underlying
       hardware to get anything to run.  Worse still, their programs
-      would not run on other hardware, even with only slight
-      differences.</para>
-
-      <para>The operating system abstracts the hardware in many
-      different ways; this will become much clearer over the following
-      weeks.</para>
+      would not run on other hardware, even if that hardware has only
+      slight differences.</para>
 
     </sect2>
 
@@ -37,12 +33,14 @@
       systems job to allow this to happen seamlessly.</para>
 
       <para>The operating system is responsible for <emphasis>resource
-      management</emphasis>; that means things like the formatting,
-      reading and writing disks and making sure one program does not
-      take up all the system memory.  You have probably experienced
-      when this has failed as it usually ends up with your computer
-      crashing.</para>
-
+      management</emphasis> within the system.  Many tasks will be
+      competing for the resources of the system as it runs, including
+      processor time, memory, disk and user input.  The job of the
+      operating system is to arbitrate these resources to the multiple
+      tasks and allow them access in an orderly fashion.  You have
+      probably experienced when this <emphasis>fails</emphasis> as it
+      usually ends up with your computer crashing (the famous "blue
+      screen of death" for example).</para>
     </sect2>
 
     <sect2>
@@ -60,40 +58,77 @@
       the dual problem of having to remember what each system does and
       their programs will not work on multiple systems.</para>
 
-      <para>The Portable Operating System Interface (POSIX) defined by
-      the IEEE is a very important standard implemented by UNIX type
-      operating systems.  Microsoft Windows has similar proprietary
-      standards.
-      </para>
+      <para>The Portable Operating System Interface (POSIX)<footnote>
+	  <para>The X comes from <emphasis>Unix</emphasis>, from which
+	  the standard grew.  Today, POSIX is the same thing as the
+	  Single UNIX Specification Version 3 or ISO/IEC
+	  9945:2002. This is a free standard, available online.</para>
+
+	  <para>Once upon a time, the Single UNIX specification and
+	  the POSIX Standards were separate entities. The Single UNIX
+	  specification was released by a consortium called the "Open
+	  Group", and was freely available as per their
+	  requirements. The latest version is The Single Unix
+	  Specification Version 3.</para>
+
+	  <para>The IEEE POSIX standards were released as IEEE Std
+	  1003.[insert various years, revisions here], and were not
+	  freely available. The latest version is IEEE 1003.1-2001 and
+	  is equivalent to the Single Unix Specification Version 3.</para>
+
+	  <para>Thus finally the two separate standards were merged
+ into what is known as the Single UNIX Specification Version 3, which
+ is also standardised by the ISO under ISO/IEC 9945:2002. This
+ happened early in 2002.  So when people talk about POSIX, SUS3 or
+ ISO/IEC 9945:2002 they all mean the same thing!</para></footnote> is
+ a very important standard implemented by UNIX type operating systems.
+ Microsoft Windows has similar proprietary standards. </para>
 
     </sect2>
 
     <sect2>
       <title>Security</title>
-      
-      <para>On multi-user systems, security is very important.
-      Ultimately, as the arbitrator of access to the system, the
-      operating system is responsible for ensuring that only those
-      with the correct permission can access resources.</para>
 
-      <para>For example, if a file is owned by one user, another user
-      should not be allowed to <computeroutput>open()</computeroutput>
-      it.</para>
+      <para>On multi-user systems, security is very important.  As the
+      arbitrator of access to the system the operating system is
+      responsible for ensuring that only those with the correct
+      permissions can access resources.</para>
+
+      <para>For example if a file is owned by one user, another user
+      should not be allowed to open and read it.  However there also
+      need to be mechanisms to share that file safely between the
+      users should they want it.</para>
 
       <para>Operating systems are large and complex programs, and
       often security issues will be found.  Often a virus or worm will
-      take advantage of these bugs; to fight them you must install
-      <emphasis>patches</emphasis> or updates provided by your
-      operating system vendor.</para>
+      take advantage of these bugs to access resources it should not
+      be allowed to, such as your files or network connection; to
+      fight them you must install <emphasis>patches</emphasis> or
+      updates provided by your operating system vendor.</para>
+
     </sect2>
 
     <sect2>
       <title>Performance</title>
 
       <para>As the operating system provides so many services to the
-      computer, it's performance is critical.  As an operating systems
-      programmer, you must always be thinking about the performance of
-      any code you write.</para>
+      computer, it's performance is critical.  Many parts of the
+      operating system run extremely frequently, so even an overhead
+      of just a few processor cycles can add up to a big decrease in
+      overall system performance.</para>
+
+      <para>The operating system needs to exploit the features of the
+      underlying hardware to make sure it is getting the best possible
+      performance for the operations, and consequently systems
+      programmers need to understand the intimate details of the
+      architecture they are building for.</para>
+
+      <para>In many cases the systems programmers job is about
+      deciding on policies for the system.  Often the case that the
+      side effects of making one part of the operating system run
+      faster will make another part run slower or less efficiently.
+      Systems programmers need to understand all these trade offs when
+      they are building their operating system.</para>
 
     </sect2>
 
@@ -102,7 +137,8 @@
   <sect1>
     <title>Operating System Organisation</title>
 
-    <para>The operating system is roughly organised as in the figure below.</para>
+    <para>The operating system is roughly organised as in the figure
+    below.</para>
 
     <figure>
       <title>The Operating System</title>
@@ -125,13 +161,13 @@
 
     <sect2>
       <title>The Kernel</title>
-      
+
       <para>The kernel <emphasis>is</emphasis> the operating system.
       As the figure illustrates, the kernel communicates to hardware
       both directly and through <emphasis>drivers</emphasis>.</para>
 
       <para>Just as the kernel abstracts the hardware to user
-      programs, drivers abstract hardware to the kernel.  For example,
+      programs, drivers abstract hardware to the kernel.  For example
       there are many different types of graphic card, each one with
       slightly different features.  As long as the kernel exports an
       API, people who have access to the specifications for the
@@ -147,7 +183,10 @@
       between multiple programs running on the same system, and there
       is no guarantee that they will behave), but if any internal part
       of the operating system crashes chances are the entire system
-      will become useless.</para>
+      will become useless.  Similarly security issues can be exploited
+      by user processes to escalate themselves to the privilege level
+      of the kernel; at that point they can access any part of the
+      system completely unchecked.</para>
 
       <sect3>
 	<title>Monolithic v Microkernels</title>
@@ -157,13 +196,25 @@
 	<emphasis>microkernel</emphasis> or
 	<emphasis>monolithic</emphasis>.</para>
 
-	<para>As discussed above, the kernel is always privileged,
-	which means if any part of it crashes the whole system is
-	likely to become unstable.  A microkernel architecture tries
-	to minimise this possibility by making the kernel as small as
-	possible.  This means that many parts of the system run in
-	exactly the same way as programs, and if they crash the system
-	will not necessarily become useless.</para>
+	<para>The monolithic approach is the most common, as taken by
+	most common Unixes (such as Linux).  In this model the core
+	privileged kernel is large, containing hardware drivers,
+	file system accesses controls, permissions checking and
+	services such as Network File System (NFS).</para>
+
+	<para>Since the kernel is always privileged, if any part of it
+	crashes the whole system has the potential to comes to a halt.
+	If one driver has a bug it can overwrite any memory in the
+	system with no problems, ultimately causing the system to
+	crash.</para>
+
+	<para>A microkernel architecture tries to minimise this
+	possibility by making the privileged part of the kernel as
+	small as possible.  This means that most of the system runs as
+	unprivileged programs, limiting the harm that any one crashing
+	component can influence.  For example, drivers for hardware
+	can run in separate processes, so if one goes astray it can
+	not overwrite any memory but that allocated to it.</para>
 
 	<para>Whilst this sounds like the most obvious idea, the
 	problem comes back two main issues</para>
@@ -175,18 +226,19 @@
 	  </listitem>
 	  <listitem>
 
-	    <para>It is slightly more difficult for the programmer.
-	    </para>
+	    <para>It is slightly more difficult for the
+	    programmer.</para>
 
 	  </listitem>
 	</orderedlist>
 
-	<para>Both of these criticisms come because most microkernels
-	are implemented with a <emphasis>message passing</emphasis>
-	based system, commonly referred to as <emphasis>inter-process
+	<para>Both of these criticisms come because to keep separation
+	between components most microkernels are implemented with a
+	<emphasis>message passing</emphasis> based system, commonly
+	referred to as <emphasis>inter-process
 	communication</emphasis> or IPC.  Communicating between
-	individual components happens via discrete messages, which
-	must be bundled up, sent to the other component, unbundled,
+	individual components happens via discrete messages which must
+	be bundled up, sent to the other component, unbundled,
 	operated upon, re-bundled up and sent back, and then unbundled
 	again to get the result.</para>
 
@@ -196,22 +248,40 @@
 	components, and the problem can multiply.  Slow message
 	passing implementations were largely responsible for the poor
 	performance of early microkernel systems, and the concepts of
-	passing messages are slightly harder for progammers to program
+	passing messages are slightly harder for programmers to program
 	for.  The enhanced protection from having components run
 	separately was not sufficient to overcome these hurdles in
 	early microkernel systems, so they fell out of fashion.</para>
 
-	<para>Thus most common operating systems use a
-	<emphasis>monolithic</emphasis> kernel, where all components
-	are integrated into the privileged kernel.  Calls between
-	components are simple function calls, as all programmers are
-	familar with.</para>
+	<para>In a monolithic kernel calls between components are
+	simple function calls, as all programmers are familiar
+	with.</para>
 
 	<para>There is no definitive answer as to which is the best
 	organisation, and it has started many arguments in both
 	academic and non-academic circles.  Hopefully as you learn
-	more about operating systems you will definitely be able to
-	make up your own mind!</para>
+	more about operating systems you will be able to make up your
+	own mind!</para>
+
+	<sect4>
+	  <title>Modules</title>
+
+	  <para>The Linux kernel implements a module system, where
+	  drivers can loaded into the running kernel "on the fly" as
+	  they are required.  This is good in that drivers, which make
+	  up a large part of operating system code, are not loaded for
+	  devices that are not present in the system.  Someone who
+	  wants to make the most generic kernel possible (i.e. runs on
+	  lots of different hardware, such as RedHat or Debian) can
+	  include most drivers as modules which are only loaded if the
+	  system it is running on has the hardware available.</para>
+
+	  <para>However, the modules are loaded directly in the
+	  privileged kernel and operate at the same privilege level as
+	  the rest of the kernel, so the system is still considered a
+	  monolithic kernel.</para>
+
+	</sect4>
 
       </sect3>
 
@@ -889,14 +959,27 @@
 
     </sect2>
 
+    <sect2>
+      <title>Other ways of communicating with the kernel</title>
 
+
+      <sect3>
+	<title>ioctl</title>
+	<para>about ioctls</para>
+      </sect3>
+    </sect2>
+
+    <sect2>
+      <title>File Systems</title>
+      <para>about proc, sysfs, debugfs, etc</para>
+    </sect2>
   </sect1>
-  
+
 </chapter>
 
-<!-- 
-Local Variables: 
-mode: sgml 
-sgml-parent-document: ("../csbu.sgml" "book" "chapter") 
-End: 
+<!--
+Local Variables:
+mode: sgml
+sgml-parent-document: ("../csbu.sgml" "book" "chapter")
+End:
 -->
