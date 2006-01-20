@@ -243,7 +243,17 @@
 	<para>This process is usually referred to as a
       <emphasis>pipeline flush</emphasis> and is analogous to having
       to stop and empty out all your marbles from your hose!</para>
+
+	<sect4>
+	  <title>Branch Prediction</title>
+
+	  <para>pipeline flush, predict taken, predict not taken,
+	  branch delay slots</para>
+
+	</sect4>
       </sect3>
+
+
 
       <sect3>
 	<title>Reordering</title>
