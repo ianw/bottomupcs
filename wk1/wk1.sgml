@@ -801,10 +801,10 @@
 	programming field; the most common extension being used in
 	this area being inline assembly code.  Programmers should read
 	the <application>gcc</application> documentation and
-	understand when you they may be using features that diverge
-	from the standard.</para>
+	understand when they may be using features that diverge from
+	the standard.</para>
 
-	<para><application>gcc</application> can be directed to stick
+	<para><application>gcc</application> can be directed to adhere
 	strictly to the standard (the
 	<computeroutput>-std=c99</computeroutput> flag for example)
 	and warn or create an error when certain things are done that
@@ -931,12 +931,10 @@
 	bits wide; a topic we discuss in the next week).</para>
 
 	<para>This firstly means that all pointers are required to be
-	a 64 bits wide so that it can represent any possible address
-	in the system.</para>
-
-	<para>However, there are decisions to be made for implementors
-	about the size of the other types.  Two common models are
-	widely used, as shown below.</para>
+	a 64 bits wide so they can represent any possible address in
+	the system.  However, system implementors must then make
+	decisions about the size of the other types.  Two common
+	models are widely used, as shown below.</para>
 
 	<table>
 	  <title>Standard Scalar Types and Sizes</title>
@@ -1013,16 +1011,16 @@
 	type.</para>
 
 	<para>A 64 bit variable is so large that it is not generally
-	required to represent many variables.  Loops for example very
+	required to represent many variables.  For example, loops very
 	rarely repeat more times than would fit in a 32 bit variable
 	(4294967296 times!).  Images usually are usually represented
 	with 8 bits for each of a red, green and blue value and an
 	extra 8 bits for extra (alpha channel) information; a total of
-	32 bits.  In the majority of cases, using a 64 bit variable
-	will be wasting the top 32 bits.  Not only this, but the size
-	of an integer array has now doubled too.  This means the size
-	of programs is bigger; they take up more memory and thus more
-	cache memory (discussed in detail next week) for no real
+	32 bits.  Consequently for many cases, using a 64 bit variable
+	will be wasting at least the top 32 bits (if not more).  Not
+	only this, but the size of an integer array has now doubled
+	too.  This means programs take up more system memory (and thus
+	more cache; discussed in detail next week) for no real
 	improvement.  For the same reason Windows elected to keep
 	their long values as 32 bits; since much of the Windows API
 	was originally written to use long variables on a 32 bit
@@ -1030,14 +1028,14 @@
 	considerable wasted space in the system without having to
 	re-write all the API.</para>
 
-	<para>So consider our proposed alternative where
+	<para>If we consider the proposed alternative where
 	<computeroutput>short</computeroutput> was redefined to be a
 	32 bit variable; programmers working on a 64 bit system could
 	use it for variables they know are bounded to smaller values.
 	However, when moving back to a 32 bit system their same
 	<computeroutput>short</computeroutput> variable would now be
 	only 16 bits long, a value which is much more realistically
-	overflowed.</para>
+	overflowed (65536).</para>
 
 	<para>By making a programmer request larger variables when
 	they know they will be needed strikes a balance with respect
@@ -1053,9 +1051,9 @@
 	<computeroutput>const</computeroutput> means that a variable
 	will never be modified from its original value and
 	<computeroutput>volatile</computeroutput> suggests to the
-	compiler that this value might change without you realising it
-	so it can not try to be smart and re-order access to it in any
-	way.</para>
+	compiler that this value might change outside program
+	execution flow so the compiler must be careful not to re-order
+	access to it in any way.</para>
 
 	<para><computeroutput>signed</computeroutput> and
 	<computeroutput>unsigned</computeroutput> are probably the two
@@ -1063,10 +1061,10 @@
 	on a negative value or not.  We examine this in more detail
 	below.</para>
 
-	<para>These qualifiers are all intended to pass extra
-	information about how the variable will be used to the
-	compiler.  This means two things; the compiler can check if
-	you are violating your own rules (e.g. writing to a
+	<para>Qualifiers are all intended to pass extra information
+	about how the variable will be used to the compiler.  This
+	means two things; the compiler can check if you are violating
+	your own rules (e.g. writing to a
 	<computeroutput>const</computeroutput> value) and it can make
 	optimisations based upon the extra knowledge (examined in
 	later weeks).</para>
@@ -1076,10 +1074,10 @@
       <sect3>
 	<title>Standard Types</title>
 
-	<para>C99 realises that all these rules can become very
-	confusing very quickly.  To help, it provides a series of
-	special types which can specify the exact properties of a
-	variable.  These are defined in
+	<para>C99 realises that all these rules, sizes and portability
+	concerns can become very confusing very quickly.  To help, it
+	provides a series of special types which can specify the exact
+	properties of a variable.  These are defined in
 	<computeroutput>&lt;stdint.h&gt;</computeroutput> and have the
 	form <computeroutput>qtypes_t</computeroutput> where
 	<computeroutput>q</computeroutput> is a qualifier,
@@ -1110,10 +1108,11 @@
       <sect3>
 	<title>Types in action</title>
 
-	<para>Below we see an example of how programmers can often
-      misuse types, and how the compiler helps when use types are used
-      in an incorrect fashion.  In this code, we firstly assign an
-      integer value into a <computeroutput>char</computeroutput>
+	<para>Below we see an example of how types place restrictions
+      on what operations are valid for a variable, and how the
+      compiler can use this information to warn when variables are
+      used in an incorrect fashion.  In this code, we firstly assign
+      an integer value into a <computeroutput>char</computeroutput>
       variable.  Since the <computeroutput>char</computeroutput>
       variable is smaller, we loose the correct value of the integer.
       Further down, we attempt to assign a pointer to a
@@ -1123,12 +1122,12 @@
       32-bit Pentium machine, and the correct value is returned.
       However, as shown in the second example, on a 64-bit Itanium
       machine a pointer is 64 bits (8 bytes) long, but an integer is
-      only 4 bytes long.  Clearly, 8 bytes can not fit into 4!
-      Although we "fool" the compiler by <emphasis>casting</emphasis>
+      only 4 bytes long.  Clearly, 8 bytes can not fit into 4!  We can
+      attempt to "fool" the compiler by <emphasis>casting</emphasis>
       the value before assigning it; note that in this case we have
       shot ourselves in the foot by doing this cast and ignoring the
-      compiler warning; the smaller variable can not hold all the
-      information from the pointer and we thus have an invalid
+      compiler warning since the smaller variable can not hold all the
+      information from the pointer and we end up with an invalid
       address.</para>
 
 	<example id="type-warnings">
@@ -1139,7 +1138,6 @@
 		</imageobject>
 	      </inlinemediaobject></programlisting>
 	</example>
-
 
       </sect3>
 
@@ -1260,7 +1258,8 @@
 
 	  <para>Two's complement is just like one's complement, except
 	  the negative representation has <emphasis>one</emphasis>
-	  added to it.  So to continue with the example from before,
+	  added to it and we discard any left over carry bit.  So to
+	  continue with the example from before,
 	  <computeroutput>-90</computeroutput> would be
 	  <computeroutput>~01011010 + 1 = 10100101 + 1 =
 	  10100110</computeroutput>.</para>
@@ -1272,12 +1271,10 @@
 	  256</computeroutput> possible values; with our sign bit
 	  representation we could represent -127 thru 127 but with
 	  two's complement we can represent -127 thru 128.  This is
-	  because we have removed the problem of having two zeros, so
-	  we can effectively represent one more value for the same
-	  number of bits.</para>
-
-	  <para>There are no special carry rules for two's complement;
-	  if you have to carry off the end the value is lost.</para>
+	  because we have removed the problem of having two zeros;
+	  consider that "negative zero" is <computeroutput>(~00000000
+	  + 1) = (11111111 + 1) = 00000000</computeroutput> (note
+	  discarded carry bit).</para>
 
 	  <table>
 	    <title>Two's Complement Addition</title>
@@ -1315,16 +1312,15 @@
 	  </table>
 
 	  <para>You can see that by implementing two's complement
-	  hardware designers only have to add in logic for addition
-	  circuits; subtraction can be done by negating the value to
-	  be subtracted and then adding the new value.  In fact the
-	  hardware doesn't need to know anything at all about negative
-	  numbers, it does the same things regardless. </para>
+	  hardware designers need only provide logic for addition
+	  circuits; subtraction can be done by two's complement
+	  negating the value to be subtracted and then adding the new
+	  value.</para>
 
 	  <para>Similarly you could implement multiplication with
 	  repeated addition and division with repeated subtraction.
-	  So you can see how two's complement can reduce just about
-	  all simple mathematical operations down to addition!</para>
+	  Consequently two's complement can reduce all simple
+	  mathematical operations down to addition!</para>
 
 	  <para>All modern computers use two's complement
 	  representation.</para>
@@ -1340,19 +1336,19 @@
 	the class of numbers that can represent decimal values is
 	called <emphasis>floating point</emphasis>.</para>
 
-	<para>We require some way to represent to the computer the
-	concept of the decimal place.  The most common scheme for this
-	is known as the <emphasis>IEEE-754 floating point
-	standard</emphasis> because the standard is published by the
-	Institute of Electric and Electronics Engineers.  The scheme
-	is conceptually quite simple and is somewhat analogous to
-	"scientific notation".</para>
+	<para>To create a decimal number, we require some way to
+	represent the concept of the decimal place in binary.  The
+	most common scheme for this is known as the <emphasis>IEEE-754
+	floating point standard</emphasis> because the standard is
+	published by the Institute of Electric and Electronics
+	Engineers.  The scheme is conceptually quite simple and is
+	somewhat analogous to "scientific notation".</para>
 
 	<para>In scientific notation the value
 	<computeroutput>123.45</computeroutput> might commonly be
 	represented as
 	<computeroutput>1.2345x10<superscript>2</superscript></computeroutput>.
-	In this we call <computeroutput>1.2345</computeroutput> the
+	We call <computeroutput>1.2345</computeroutput> the
 	<emphasis>mantissa</emphasis> or
 	<emphasis>significand</emphasis>,
 	<computeroutput>10</computeroutput> is the
@@ -1362,19 +1358,19 @@
 	</para>
 
 	<para>In the IEEE floating point model, we break up the
-	available bits to represent the mantissa, significand and
-	exponents of a deciaml number.  Our number is represented by
+	available bits to represent the sign, mantissa and exponent of
+	a decimal number.  A decimal number is represented by
 	<computeroutput>sign * significand *
 	2^<superscript>exponent</superscript></computeroutput>.</para>
 
 	<para>The sign bit equates to either
 	<computeroutput>1</computeroutput> or
-	<computeroutput>-1</computeroutput>, and since we are working
-	in binary, we always have an implied radix of
+	<computeroutput>-1</computeroutput>.  Since we are working in
+	binary, we always have the implied radix of
 	<computeroutput>2</computeroutput>.</para>
 
-	<para>There are differing widths for a floating point value
-	-- we look below at only a 32 bit value.  More bits allows
+	<para>There are differing widths for a floating point value --
+	we examine below at only a 32 bit value.  More bits allows
 	greater precision.</para>
 
 	<table>
@@ -1400,11 +1396,15 @@
 
 	<para>The other important factor is <emphasis>bias</emphasis>
 	of the exponent.  The exponent needs to be able to represent
-	both positive and negative values, thus a value of
-	<computeroutput>127</computeroutput> is implied to be added to
-	the exponent.  An exponent of
-	<computeroutput>127</computeroutput> equates to a exponent of
-	<computeroutput>0</computeroutput>.</para>
+	both positive and negative values, thus an implied value of
+	<computeroutput>127</computeroutput> is subtracted from the
+	exponent.  For example, an exponent of
+	<computeroutput>0</computeroutput> has an exponent field of
+	<computeroutput>127</computeroutput>,
+	<computeroutput>128</computeroutput> would represent
+	<computeroutput>1</computeroutput> and
+	<computeroutput>126</computeroutput> would represent
+	<computeroutput>-1</computeroutput>.</para>
 
 	<para>Each bit of the significand adds a little more precision
 	to the values we can represent.  Consider the scientific
@@ -1443,21 +1443,19 @@
 	</table>
 
 	<para>Each additional digit allows more precision in the
-	decimal values we can represent.  Remember that in base 10,
-	anything after the decimal place is representing a number
-	<emphasis>less</emphasis> than one
-	(i.e. <computeroutput>10<superscript>0</superscript></computeroutput>).
-	This is an infinite range of numbers; the only limit is how
-	many digits we can write down.  In binary, rather than each
-	additional bit being
-	<computeroutput>10<superscript>-n</superscript></computeroutput>
-	each additional <emphasis>bit</emphasis> allows for additional
-	precision of
-	<computeroutput>2<superscript>-n</superscript></computeroutput>.</para>
-
-	<para>This means that our binary representation does not
-	always map in a straight-forward manner to a decimal
-	representation.  </para>
+	decimal values we can represent.  In base 10, each digit after
+	the decimal place increases the precision of our number by 10
+	times.  For example, we can represent
+	<computeroutput>0.0</computeroutput> through
+	<computeroutput>0.9</computeroutput> (10 values) with one
+	digit of decimal place, <computeroutput>0.00</computeroutput>
+	through <computeroutput>0.99</computeroutput> (100 values)
+	with two digits, and so on.  In binary, rather than each
+	additional digit giving us 10 times the precision, we only get
+	two times the precision, as illustrated in the table below.
+	This means that our binary representation does not always map
+	in a straight-forward manner to a decimal
+	representation.</para>
 
 	<table>
 	  <title>Significands in binary</title>
@@ -1672,20 +1670,13 @@
 	</sect4>
 
 	<sect4>
-	  <title>Zeros</title>
-
-	  <para>zeros</para>
-
-	</sect4>
-
-	<sect4>
 	  <title>Bringing it together</title>
 
 	  <para>In the example code below we extract the components of
 	  a floating point number and print out the value it
-	  represents.  This will obviously only work for a 32 bit
-	  floating point value in the IEEE format; however this is
-	  common for most architectures with the
+	  represents.  This will only work for a 32 bit floating point
+	  value in the IEEE format; however this is common for most
+	  architectures with the
 	  <computeroutput>float</computeroutput> type.</para>
 
 	  <example id="float-examine">
