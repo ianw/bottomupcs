@@ -1,21 +1,27 @@
-#define ia64_getf_exp(x)                                        \
-({                                                              \
-        long ia64_intri_res;                                    \
-                                                                \
-        asm ("getf.exp %0=%1" : "=r"(ia64_intri_res) : "f"(x)); \
-                                                                \
-        ia64_intri_res;                                         \
-})
-
+#include <stdio.h>
 
 int main(void)
 {
+	//  in binary = 1000 0000 0000 0000
+	//  bit num     5432 1098 7654 3210
+	int i = 0x8000;
+	int count = 0;
+	while ( !(i & 0x1) ) {
+		count ++;
+		i = i >> 1;
+	}
+	printf("First non-zero (slow) is %d\n", count);
 
-	long double d = 0x1UL;
+	// this value is normalised when it is loaded
+	long double d = 0x8000UL;
 	long exp;
 
-	exp = ia64_getf_exp(d);
+	// Itanium "get floating point exponent" instruction
+	asm ("getf.exp %0=%1" : "=r"(exp) : "f"(d));
 
-	printf("The first non-zero bit is bit %d\n", exp - 65535);
+	// note exponent include bias
+	printf("The first non-zero (fast) is %d\n", exp - 65535);
+
+
 }
 
