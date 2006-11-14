@@ -13,10 +13,17 @@ int main(void)
         return 0;
 }
 
+$ uname -m
+i686
+
 $ gcc -Wall -o types types.c
 types.c: In function 'main':
-types.c:9: warning: assignment makes integer from pointer without a cast
+types.c:19: warning: assignment makes integer from pointer without a cast
 
+$ ./types
+i is 52
+p is 0x80484e8
+p is 0x80484e8
 
 $ uname -m
 ia64

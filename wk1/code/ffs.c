@@ -22,6 +22,4 @@ int main(void)
 	// note exponent include bias
 	printf("The first non-zero (fast) is %d\n", exp - 65535);
 
-
 }
-
