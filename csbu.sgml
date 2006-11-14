@@ -2,7 +2,7 @@
      a short course on the practical side of computer science for
      highschool students
 
-    Copyright (c)  2004,2005  Ian Wienand
+    Copyright (c)  2004,2005,2006  Ian Wienand
     Permission is granted to copy, distribute and/or modify this document
     under the terms of the GNU Free Documentation License, Version 1.2
     or any later version published by the Free Software Foundation;
@@ -45,6 +45,7 @@
   <copyright>
    <year>2004</year>
    <year>2005</year>
+   <year>2006</year>
    <holder role="mailto:ianw@ieee.org">Ian Wienand</holder>
   </copyright>
   <pubdate role="rcs">$Id$</pubdate>
