@@ -1,0 +1,34 @@
+$ cat float.c
+#include <stdio.h>
+
+int main(void)
+{
+        float a = 0.45;
+        float b = 8.0;
+
+        double ad = 0.45;
+        double bd = 8.0;
+
+        printf("float+float, 6dp    : %f\n", a+b);
+        printf("double+double, 6dp  : %f\n", ad+bd);
+        printf("float+float, 20dp   : %10.20f\n", a+b);
+        printf("dobule+double, 20dp : %10.20f\n", ad+bd);
+
+        return 0;
+}
+
+$ gcc -o float float.c
+
+$ ./float
+float+float, 6dp    : 8.450000
+double+double, 6dp  : 8.450000
+float+float, 20dp   : 8.44999998807907104492
+dobule+double, 20dp : 8.44999999999999928946
+
+$ python
+Python 2.4.4 (#2, Oct 20 2006, 00:23:25)
+[GCC 4.1.2 20061015 (prerelease) (Debian 4.1.1-16.1)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 8.0 + 0.45
+8.4499999999999993
+
