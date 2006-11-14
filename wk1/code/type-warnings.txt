@@ -1,0 +1,19 @@
+$ cat types.c
+#include <stdio.h>
+#include <stdint.h>
+
+int main(void)
+{
+        char *c;
+        int i;
+
+        i = c;
+        i = (int)c;
+
+        return 0;
+}
+
+$ gcc -Wall -o types types.c
+types.c: In function 'main':
+types.c:9: warning: assignment makes integer from pointer without a cast
+
