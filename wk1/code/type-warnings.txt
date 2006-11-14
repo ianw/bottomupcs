@@ -17,3 +17,17 @@ $ gcc -Wall -o types types.c
 types.c: In function 'main':
 types.c:9: warning: assignment makes integer from pointer without a cast
 
+
+$ uname -m
+ia64
+
+$ gcc -Wall  -o types types.c
+types.c: In function 'main':
+types.c:19: warning: assignment makes integer from pointer without a cast
+types.c:21: warning: cast from pointer to integer of different size
+types.c:22: warning: cast to pointer from integer of different size
+
+$ ./types
+i is 52
+p is 0x40000000000009e0
+p is 0x9e0
