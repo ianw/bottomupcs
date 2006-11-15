@@ -1,3 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "/usr/share/xml/docbook/schema/dtd/4.4/docbookx.dtd" [
+
 <!-- Computer Science from the Bottom UP 
      a short course on the practical side of computer science for
      highschool students
@@ -10,7 +14,7 @@
     A copy of the license is included in the section entitled "GNU
     Free Documentation License".
 -->
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.2//EN" [
+
 <!ENTITY intro SYSTEM "intro.sgml">
 <!ENTITY wk0 SYSTEM "wk0/wk0.sgml">
 <!ENTITY wk1 SYSTEM "wk1/wk1.sgml">
