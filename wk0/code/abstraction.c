@@ -22,7 +22,7 @@ int say_goodbye_fn(void)
 }
 
 /* A struct implementing the API */
-struct greet_api greet_api = 
+struct greet_api greet_api =
 {
 	.say_hello = say_hello_fn,
 	.say_goodbye = say_goodbye_fn

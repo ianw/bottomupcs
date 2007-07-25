@@ -8,18 +8,17 @@
     <para>If you learn nothing else, you should remember that in UNIX
     everything is a file.</para>
 
-    <para>Let's think about the file for a minute.  Imagine this in
-    the context something familiar like a word processing file.  There
-    are exactly two fundamental operations we can do to this imaginary
-    word processing file</para>
+    <para>Imagine a file in the context something familiar like a word
+    processor.  There are two fundamental operations we can use on
+    this imaginary word processing file</para>
 
     <orderedlist>
       <listitem><para>Read it (existing saved data from the word processor).</para></listitem>
       <listitem><para>Write to it (new data from the user).</para></listitem>
     </orderedlist>
 
-    <para>Now, think about some of the things attached to a computer
-    and what you can do to them, in terms of our fundamental file
+    <para>Now consider some of the common things attached to a
+    computer and how they relate to our fundamental file
     operations.</para>
 
     <orderedlist>
@@ -31,22 +30,25 @@
 
     <para>The screen and printer are both like a write-only file, but
     instead of being stored as bits on a disk the information is
-    stored as dots on a screen or dots on a page. The keyboard is like
-    a read only file with the data is coming from keystrokes,
-    similarly the CDROM is a read only device.</para>
+    displayer as dots on a screen or lines on a page. The keyboard is
+    like a read only file with the data coming from keystrokes and the
+    CDROM is similar but rather than randomly coming from the user the
+    data is stored directly on the disk.</para>
+
+    <para>Thus a file is a good <emphasis>abstraction</emphasis> of
+    all the devices attached to the computer.  Some files may be
+    read-only, or write-only, or indeed both.</para>
 
   </sect1>
 
   <sect1>
     <title>Abstraction and function pointers</title>
 
-    <para>What you have really just learnt about is an extremely
-    powerful concept of <emphasis>abstraction</emphasis>.  To the
-    programmer, reading data from the keyboard or the CDROM is
-    essentially the same thing, all you care about is that the bits of
-    data came from <emphasis>somewhere</emphasis>.  Abstraction is
-    really the reason operating systems were developed, and it will
-    become clear over the following weeks just what that means.</para>
+    <para>To a programmer, reading data from the keyboard or the CDROM
+    is essentially the same thing.  All the programmer cares about is
+    that the bits of data come from <emphasis>somewhere</emphasis>.
+    It is one of the fundamental roles of the operating system to
+    provide this <emphasis>abstraction</emphasis> for the programmer.</para>
 
     <figure>
       <title>Abstraction</title>
@@ -71,7 +73,7 @@
     functions and variables as the API which other programmers will
     use.  A common method used in the Linux Kernel is function
     pointers.</para>
-      
+
       <example id="abstraction-code">
 	<title>Abstraction with function pointers</title>
 	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
@@ -80,46 +82,77 @@
 	    </imageobject>
 	  </inlinemediaobject></programlisting>
       </example>
-      
+
       <para>Code such as the above is the simplest example of
-    constructs used repeatedly through the Linux Kernel (and many other
-    projects).  Lets have a look at some specific elements.</para>
-      
+    constructs used repeatedly through the Linux Kernel (and indeed
+    many other projects).  Lets have a look at some specific
+    elements.</para>
+
       <para>We start out with a structure that defines the API.  The
     functions whose names are encased in parenthesis with a pointer
     marker describe a <emphasis>function
     pointer</emphasis><footnote><para>Often you will see that the
     names of the parameters are omitted, and only the type of the
     parameter is specified.  This allows the implementer to specify
-    their own parameter names avoiding warnings from the compiler.
-    names</para></footnote>.  The function pointer describes the type
-    of function it must point to; pointing it at a function without
-    the correct return type or parameters will return an error.</para>
-      
-      <para>We then have our implementation of the API.  Often, for more
-    complex functionality, you will see an idiom where API
+    their own parameter names avoiding warnings from the
+    compiler.</para></footnote>.  The function pointer describes the
+    prototype of function it must point to; pointing it at a function
+    without the correct return type or parameters will generate a
+    compiler warning, and will probably lead to incorrect operation or
+    crashes.</para>
+
+      <para>We then have our implementation of the API.  Often for
+    more complex functionality you will see an idiom where API
     implementation functions will only be a wrapper around another
-    function that is conventionally prepended with an underscore
-    (i.e. <computeroutput>say_hello_fn()</computeroutput> would call
-    another function
-    <computeroutput>_say_hello_function()</computeroutput>.  This is
-    to enable significant change in the internal workings leaving the
-    API constant.  Our implementation is very simple however, and
-    doesn't even need it's own support functions.</para>
-      
+    function that is conventionally prepended with or or two
+    underscores (i.e. <computeroutput>say_hello_fn()</computeroutput>
+    would call another function
+    <computeroutput>_say_hello_function()</computeroutput>).  This
+    avoids "namespace pollution" and often enables significant changes
+    in the internal workings whilst leaving the API constant.  Our
+    implementation is very simple however, and doesn't even need it's
+    own support functions.</para>
+
       <para>Second to last, we fill out the function pointers in
-    <computeroutput>struct greet_api greet_api</computeroutput>.
-    There is no need to take the address of the function
-    (i.e. <computeroutput>&amp;say_hello_fn</computeroutput>).  Finally,
-    we can call the API functions through the structure in
-    <computeroutput>main</computeroutput>.</para>
-      
+    <computeroutput>struct greet_api greet_api</computeroutput>.  The
+    name of the function is a pointer, therefore there is no need to
+    take the address of the function
+    (i.e. <computeroutput>&amp;say_hello_fn</computeroutput>).</para>
+
+      <para>Finally we can call the API functions through the
+    structure in <computeroutput>main</computeroutput>.</para>
+    </sect2>
+
+    <sect2>
+      <title>Libraries</title>
+
+      <para>Libraries have two roles which illustrate
+	abstraction.</para>
+
+      <itemizedlist>
+	<listitem>
+	  <para>Allow programmers to reuse commonly accessed code.</para>
+	</listitem>
+	<listitem>
+	  <para>Act as a <emphasis>black box</emphasis> implementing
+	    functionality for the programmer.</para>
+	</listitem>
+      </itemizedlist>
+
+      <para>For example, a library implementing access to the raw data
+	in JPEG files has both the advantage that the many programs
+	who wish to access image files can all use the same library
+	and the programmers building these programs do not need to
+	worry about the exact details of the JPEG file format, but can
+	concentrate their efforts on what their program wants to do
+	with the image.</para>
+
     </sect2>
 
     <sect2>
       <title>Summary</title>
       <para>The essential points to note are</para>
-      
+
       <itemizedlist>
 	<listitem>
 	  <para>We are free to change the internal implementation at any
