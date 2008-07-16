@@ -5,7 +5,7 @@
 #define FLAG1 0x01 // 00000001
 #define FLAG2 0x02 // 00000010
 #define FLAG3 0x04 // 00000100
-#define FLAG4 0x05 // 00001000
+#define FLAG4 0x08 // 00001000
 // ... and so on
 #define FLAG8 0x80 // 10000000
 
