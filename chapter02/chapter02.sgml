@@ -1,4 +1,4 @@
-<chapter id="wk2">
+<chapter id="chapter02">
   
   <title>Computer Architecture for Beginners</title>
 
@@ -9,10 +9,10 @@
       <title>The CPU</title>
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="wk2/figures/computer.eps" format="EPS" />
+	  <imagedata fileref="chapter02/figures/computer.eps" format="EPS" />
 	</imageobject>
 	<imageobject>
-	  <imagedata fileref="wk2/figures/computer.png" format="PNG" />
+	  <imagedata fileref="chapter02/figures/computer.png" format="PNG" />
 	</imageobject>
 	<textobject>
 	  <phrase>The CPU performs instructions on values held in
@@ -140,10 +140,10 @@
 	  <title>Inside the CPU</title>
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk2/figures/block.eps" format="EPS" />
+	      <imagedata fileref="chapter02/figures/block.eps" format="EPS" />
 	    </imageobject>
 	    <imageobject>
-	      <imagedata fileref="wk2/figures/block.png" format="PNG" />
+	      <imagedata fileref="chapter02/figures/block.png" format="PNG" />
 	    </imageobject>
 	    <textobject>
 	      <phrase>The CPU is made up of many different
@@ -974,10 +974,10 @@
       <title>A Hypercube</title>
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="wk2/figures/hypercube.eps" format="EPS" />
+	  <imagedata fileref="chapter02/figures/hypercube.eps" format="EPS" />
 	</imageobject>
 	<imageobject>
-	  <imagedata fileref="wk2/figures/hypercube.png" format="PNG" />
+	  <imagedata fileref="chapter02/figures/hypercube.png" format="PNG" />
 	</imageobject>
 	<textobject>
 	  <phrase>An example of a hypercube.  Hypercubes provide a
@@ -1118,7 +1118,7 @@
 	<title>Memory Ordering</title>
 	  <programlisting lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk2/code/memorder.c"
+		<imagedata fileref="chapter02/code/memorder.c"
 		format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
@@ -1158,10 +1158,10 @@
 	<title>Acquire and Release semantics</title>
 	<mediaobject>
 	<imageobject>
-	  <imagedata fileref="wk2/figures/memorder.eps" format="EPS" />
+	  <imagedata fileref="chapter02/figures/memorder.eps" format="EPS" />
 	</imageobject>
 	<imageobject>
-	  <imagedata fileref="wk2/figures/memorder.png" format="PNG" />
+	  <imagedata fileref="chapter02/figures/memorder.png" format="PNG" />
 	</imageobject>
 	<textobject>
 	  <phrase>An illustration of valid reorderings around

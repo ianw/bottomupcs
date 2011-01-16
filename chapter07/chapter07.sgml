@@ -1,4 +1,4 @@
-<chapter id="wk7">
+<chapter id="chapter07">
 
   <title>Behind the process</title>
 
@@ -137,10 +137,10 @@
 	<title>ELF Overview</title>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="wk7/figures/elf-overview.eps" format="EPS" />
+	    <imagedata fileref="chapter07/figures/elf-overview.eps" format="EPS" />
 	  </imageobject>
 	  <imageobject>
-	    <imagedata fileref="wk7/figures/elf-overview.png" format="PNG" />
+	    <imagedata fileref="chapter07/figures/elf-overview.png" format="PNG" />
 	  </imageobject>
 	  <textobject>
 	    <phrase>ELF Overview</phrase>
@@ -160,7 +160,7 @@
 	  <title>The ELF Header</title>
 	  <programlisting><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk7/code/elf-header.txt" format="linespecific" />
+		<imagedata fileref="chapter07/code/elf-header.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -173,7 +173,7 @@
 	  <title>The ELF Header, as shown by <application>readelf</application></title>
 	  <programlisting><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk7/code/readelf-elf-header.txt" format="linespecific" />
+		<imagedata fileref="chapter07/code/readelf-elf-header.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -193,7 +193,7 @@
 	      <title>Inspecting the ELF magic number</title>
 	      <programlisting><inlinemediaobject>
 		  <imageobject>
-		    <imagedata fileref="wk7/code/elf-magic.txt" format="linespecific" />
+		    <imagedata fileref="chapter07/code/elf-magic.txt" format="linespecific" />
 		  </imageobject>
 		  </inlinemediaobject></programlisting>
 	    </example>
@@ -227,7 +227,7 @@
 	  <title>Investigating the entry point</title>
 	  <programlisting><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk7/code/entry-point.txt" format="linespecific" />
+		<imagedata fileref="chapter07/code/entry-point.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -280,7 +280,7 @@
 	    <title>The Program Header</title>
 	    <programlisting><inlinemediaobject>
 		<imageobject>
-		  <imagedata fileref="wk7/code/program-header.txt" format="linespecific" />
+		  <imagedata fileref="chapter07/code/program-header.txt" format="linespecific" />
 	      </imageobject>
 	      </inlinemediaobject></programlisting>
 	  </example>    
@@ -370,7 +370,7 @@
 	    <title>Sections </title>
 	    <programlisting><inlinemediaobject>
 		<imageobject>
-		  <imagedata fileref="wk7/code/section-header.txt" format="linespecific" />
+		  <imagedata fileref="chapter07/code/section-header.txt" format="linespecific" />
 		</imageobject>
 	      </inlinemediaobject></programlisting>
 	  </example>    
@@ -396,7 +396,7 @@
 	    <title>Sections </title>
 	    <programlisting><inlinemediaobject>
 		<imageobject>
-		  <imagedata fileref="wk7/code/sections.c" format="linespecific" />
+		  <imagedata fileref="chapter07/code/sections.c" format="linespecific" />
 		</imageobject>
 	      </inlinemediaobject></programlisting>
 	  </example>    
@@ -406,7 +406,7 @@
 	    <programlisting>
 	    <inlinemediaobject>
 		<imageobject>
-		  <imagedata fileref="wk7/code/sections.txt" format="linespecific" />
+		  <imagedata fileref="chapter07/code/sections.txt" format="linespecific" />
 		</imageobject>
 	      </inlinemediaobject></programlisting>
 	  </example>
@@ -478,7 +478,7 @@
 	    <title>Sections and Segments</title>
 	    <programlisting><inlinemediaobject>
 		<imageobject>
-		  <imagedata fileref="wk7/code/sections-segments.txt" format="linespecific" />
+		  <imagedata fileref="chapter07/code/sections-segments.txt" format="linespecific" />
 		</imageobject>
 	    </inlinemediaobject></programlisting>
 	  </example>    
@@ -580,7 +580,7 @@
 	  <title>Creating and using a static library</title>
 	  <programlisting lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk7/code/static.txt" format="linespecific" />
+		<imagedata fileref="chapter07/code/static.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -890,7 +890,7 @@
 	<title>Disassembley of program startup</title>
 	<programlisting><inlinemediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk7/code/startup.txt" format="linespecific" />
+	      <imagedata fileref="chapter07/code/startup.txt" format="linespecific" />
 	    </imageobject>
 	  </inlinemediaobject></programlisting>
       </example>
@@ -960,7 +960,7 @@
 	<title>Constructors and Destructors</title>
 	<programlisting><inlinemediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk7/code/construct-destruct.txt" format="linespecific" />
+	      <imagedata fileref="chapter07/code/construct-destruct.txt" format="linespecific" />
 	    </imageobject>
 	  </inlinemediaobject></programlisting>
       </example>

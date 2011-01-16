@@ -6,7 +6,7 @@
      a short course on the practical side of computer science for
      highschool students
 
-    Copyright (c)  2004,2005,2006,2007,2008,2009  Ian Wienand
+    Copyright (c)  2004,2005,2006,2007,2008,2009,2010,2011  Ian Wienand
     Permission is granted to copy, distribute and/or modify this document
     under the terms of the GNU Free Documentation License, Version 1.2
     or any later version published by the Free Software Foundation;
@@ -16,16 +16,16 @@
 -->
 
 <!ENTITY intro SYSTEM "intro.sgml">
-<!ENTITY wk0 SYSTEM "wk0/wk0.sgml">
-<!ENTITY wk1 SYSTEM "wk1/wk1.sgml">
-<!ENTITY wk2 SYSTEM "wk2/wk2.sgml">
-<!ENTITY wk3 SYSTEM "wk3/wk3.sgml">
-<!ENTITY wk4 SYSTEM "wk4/wk4.sgml">
-<!ENTITY wk5 SYSTEM "wk5/wk5.sgml">
-<!ENTITY wk6 SYSTEM "wk6/wk6.sgml">
-<!ENTITY wk7 SYSTEM "wk7/wk7.sgml">
-<!ENTITY wk8 SYSTEM "wk8/wk8.sgml">
-<!ENTITY wk9 SYSTEM "wk9/wk9.sgml">
+<!ENTITY chapter00 SYSTEM "chapter00/chapter00.sgml">
+<!ENTITY chapter01 SYSTEM "chapter01/chapter01.sgml">
+<!ENTITY chapter02 SYSTEM "chapter02/chapter02.sgml">
+<!ENTITY chapter03 SYSTEM "chapter03/chapter03.sgml">
+<!ENTITY chapter04 SYSTEM "chapter04/chapter04.sgml">
+<!ENTITY chapter05 SYSTEM "chapter05/chapter05.sgml">
+<!ENTITY chapter06 SYSTEM "chapter06/chapter06.sgml">
+<!ENTITY chapter07 SYSTEM "chapter07/chapter07.sgml">
+<!ENTITY chapter08 SYSTEM "chapter08/chapter08.sgml">
+<!ENTITY chapter09 SYSTEM "chapter09/chapter09.sgml">
 
 <!ENTITY glossary SYSTEM "glossary.sgml">
 
@@ -53,6 +53,8 @@
    <year>2007</year>
    <year>2008</year>
    <year>2009</year>
+   <year>2010</year>
+   <year>2011</year>
    <holder role="mailto:ian@wienand.org">Ian Wienand</holder>
   </copyright>
   <pubdate role="rcs">$Id$</pubdate>
@@ -76,16 +78,16 @@
  </bookinfo>
 
  &intro;
- &wk0;
- &wk1;
- &wk2;
- &wk3;
- &wk4;
- &wk5;
- &wk6;
- &wk7;
- &wk8;
- &wk9;
+ &chapter00;
+ &chapter01;
+ &chapter02;
+ &chapter03;
+ &chapter04;
+ &chapter05;
+ &chapter06;
+ &chapter07;
+ &chapter08;
+ &chapter09;
  &glossary;
   
 </book>

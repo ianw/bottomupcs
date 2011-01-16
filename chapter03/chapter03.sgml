@@ -1,4 +1,4 @@
-<chapter id="wk3">
+<chapter id="chapter03">
   
   <title>The Operating System</title>
 
@@ -144,10 +144,10 @@
       <title>The Operating System</title>
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="wk3/figures/kernel.eps" format="EPS" />
+	  <imagedata fileref="chapter03/figures/kernel.eps" format="EPS" />
 	</imageobject>
 	<imageobject>
-	  <imagedata fileref="wk3/figures/kernel.png" format="PNG" />
+	  <imagedata fileref="chapter03/figures/kernel.png" format="PNG" />
 	</imageobject>
 	<textobject>
 	  <phrase>The organisation of the kernel.  Processes the
@@ -301,10 +301,10 @@
 	  <title>The Operating System</title>
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk3/figures/virtual.eps" format="EPS" />
+	      <imagedata fileref="chapter03/figures/virtual.eps" format="EPS" />
 	    </imageobject>
 	    <imageobject>
-	      <imagedata fileref="wk3/figures/virtual.png" format="PNG" />
+	      <imagedata fileref="chapter03/figures/virtual.png" format="PNG" />
 	    </imageobject>
 	    <textobject>
 	  <phrase>Some different virtualisation methods.</phrase>
@@ -553,7 +553,7 @@
 	<title>getpid() example</title>
 	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk3/code/getpid.c" format="linespecific" />
+	      <imagedata fileref="chapter03/code/getpid.c" format="linespecific" />
 	    </imageobject>
 	  </inlinemediaobject></programlisting>
       </example>
@@ -604,7 +604,7 @@
 	  <title>PowerPC system call example</title>
 	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk3/code/unistd-powerpc.h" format="linespecific" />
+		<imagedata fileref="chapter03/code/unistd-powerpc.h" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -746,7 +746,7 @@
 	  <title>x86 system call example</title>
 	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk3/code/unistd-x86.h" format="linespecific" />
+		<imagedata fileref="chapter03/code/unistd-x86.h" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -869,10 +869,10 @@
 	  <title>Rings</title>
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk3/figures/priv.eps" format="EPS" />
+	      <imagedata fileref="chapter03/figures/priv.eps" format="EPS" />
 	    </imageobject>
 	    <imageobject>
-	      <imagedata fileref="wk3/figures/priv.png" format="PNG" />
+	      <imagedata fileref="chapter03/figures/priv.png" format="PNG" />
 	    </imageobject>
 	    <textobject>
 	      <phrase>Privilege levels on x86</phrase>

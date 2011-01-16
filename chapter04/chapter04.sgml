@@ -1,4 +1,4 @@
-<chapter id="wk4">
+<chapter id="chapter04">
   
   <title>The Process</title>
 
@@ -21,10 +21,10 @@
       <title>The Elements of a Process</title>
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="wk4/figures/theprocess.eps" format="EPS" />
+	  <imagedata fileref="chapter04/figures/theprocess.eps" format="EPS" />
 	</imageobject>
 	<imageobject>
-	  <imagedata fileref="wk4/figures/theprocess.png" format="PNG" />
+	  <imagedata fileref="chapter04/figures/theprocess.png" format="PNG" />
 	</imageobject>
 	<textobject>
 	  <phrase>The essential elements of a process; the process ID,
@@ -123,10 +123,10 @@
 	  <title>The Stack</title>
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk4/figures/stack.eps" format="EPS" />
+	      <imagedata fileref="chapter04/figures/stack.eps" format="EPS" />
 	    </imageobject>
 	    <imageobject>
-	      <imagedata fileref="wk4/figures/stack.png" format="PNG" />
+	      <imagedata fileref="chapter04/figures/stack.png" format="PNG" />
 	    </imageobject>
 	    <textobject>
 	      <phrase>How the stack works with function calls.  Note
@@ -249,7 +249,7 @@
 	  <title>Stack pointer example</title>
 	  <programlisting><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk4/code/sp.txt" format="linespecific" />
+		<imagedata fileref="chapter04/code/sp.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>    
@@ -322,10 +322,10 @@
 	  <title>Process memory layout</title>
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk4/figures/memory-layout.eps" format="EPS" />
+	      <imagedata fileref="chapter04/figures/memory-layout.eps" format="EPS" />
 	    </imageobject>
 	    <imageobject>
-	      <imagedata fileref="wk4/figures/memory-layout.png" format="PNG" />
+	      <imagedata fileref="chapter04/figures/memory-layout.png" format="PNG" />
 	    </imageobject>
 	    <textobject>
 	      <phrase>A sample of how process memory is allocated.</phrase>
@@ -466,7 +466,7 @@
       <title><command>pstree</command> example</title>
       <programlisting><inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="wk4/code/pstree.txt" format="linespecific" />
+	    <imagedata fileref="chapter04/code/pstree.txt" format="linespecific" />
 	  </imageobject>
 	</inlinemediaobject></programlisting>
     </example>    
@@ -562,10 +562,10 @@
 	    <title>Threads</title>
 	    <mediaobject>
 	      <imageobject>
-		<imagedata fileref="wk4/figures/threads.eps" format="EPS" />
+		<imagedata fileref="chapter04/figures/threads.eps" format="EPS" />
 	      </imageobject>
 	      <imageobject>
-		<imagedata fileref="wk4/figures/threads.png" format="PNG" />
+		<imagedata fileref="chapter04/figures/threads.png" format="PNG" />
 	      </imageobject>
 	      <textobject>
 		<phrase>The memory (including program code and
@@ -721,7 +721,7 @@
 	  <title>Zombie example process</title>
 	  <programlisting><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk4/code/zombie.txt" format="linespecific" />
+		<imagedata fileref="chapter04/code/zombie.txt" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>    
@@ -886,10 +886,10 @@ longer and longer to decide which processes will run next.</para>
       <title>The O(1) scheduler</title>
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="wk4/figures/o1queue.eps" format="EPS" />
+	  <imagedata fileref="chapter04/figures/o1queue.eps" format="EPS" />
 	</imageobject>
 	<imageobject>
-	  <imagedata fileref="wk4/figures/o1queue.png" format="PNG" />
+	  <imagedata fileref="chapter04/figures/o1queue.png" format="PNG" />
 	</imageobject>
 	<textobject>
 	  <phrase>A view of how the Linux scheduler manages
@@ -1053,7 +1053,7 @@ get around to interacting with it wants a fast response).</para></sect2>
 	<title>Signals Example</title>
 	<programlisting><inlinemediaobject>
 	    <imageobject>
-	      <imagedata fileref="wk4/code/signal.txt" format="linespecific" />
+	      <imagedata fileref="chapter04/code/signal.txt" format="linespecific" />
 	    </imageobject>
 	  </inlinemediaobject></programlisting>
       </example>    

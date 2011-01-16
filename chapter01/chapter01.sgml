@@ -1,4 +1,4 @@
-<chapter id="wk1">
+<chapter id="chapter01">
 
   <title>Binary and Number Representation</title>
 
@@ -923,10 +923,10 @@
 	    <title>Masking</title>
 	    <mediaobject>
 	      <imageobject>
-		<imagedata fileref="wk1/figures/masking.eps" format="EPS" />
+		<imagedata fileref="chapter01/figures/masking.eps" format="EPS" />
 	      </imageobject>
 	      <imageobject>
-		<imagedata fileref="wk1/figures/masking.png" format="PNG" />
+		<imagedata fileref="chapter01/figures/masking.png" format="PNG" />
 	      </imageobject>
 	      <textobject>
 
@@ -983,7 +983,7 @@
 	  <title>Using flags</title>
 	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk1/code/flags.c" format="linespecific" />
+		<imagedata fileref="chapter01/code/flags.c" format="linespecific" />
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
@@ -1081,10 +1081,10 @@
 	    <title>Types</title>
 	    <mediaobject>
 	      <imageobject>
-		<imagedata fileref="wk1/figures/types.eps" format="EPS" />
+		<imagedata fileref="chapter01/figures/types.eps" format="EPS" />
 	      </imageobject>
 	      <imageobject>
-		<imagedata fileref="wk1/figures/types.png" format="PNG" />
+		<imagedata fileref="chapter01/figures/types.png" format="PNG" />
 	      </imageobject>
 	      <textobject>
 
@@ -1382,7 +1382,7 @@
 	  <title>Example of warnings when types are not matched</title>
 	  <programlisting><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk1/code/type-warnings.txt" format="linespecific" />
+		<imagedata fileref="chapter01/code/type-warnings.txt" format="linespecific" />
 		</imageobject>
 	      </inlinemediaobject></programlisting>
 	</example>
@@ -1775,7 +1775,7 @@
 	  <title>Floats versus Doubles</title>
 	  <programlisting><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="wk1/code/floatvdouble.txt" format="linespecific" />
+		<imagedata fileref="chapter01/code/floatvdouble.txt" format="linespecific" />
 		</imageobject>
 	      </inlinemediaobject></programlisting>
 	</example>
@@ -1908,7 +1908,7 @@
 	    <title>Program to find first set bit</title>
 	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 		<imageobject>
-		  <imagedata fileref="wk1/code/ffs.c" format="linespecific" />
+		  <imagedata fileref="chapter01/code/ffs.c" format="linespecific" />
 		</imageobject>
 	      </inlinemediaobject></programlisting>
 	  </example>
@@ -1931,7 +1931,7 @@
 	    <title>Examining Floats</title>
 	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 		<imageobject>
-		  <imagedata fileref="wk1/code/float.c" format="linespecific" />
+		  <imagedata fileref="chapter01/code/float.c" format="linespecific" />
 		</imageobject>
 	      </inlinemediaobject></programlisting>
 	  </example>
