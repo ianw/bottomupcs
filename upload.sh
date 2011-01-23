@@ -1,3 +1,4 @@
 #!/bin/bash
 
-rsync -avz ./html/ delsarto,bottomupcs@web.sourceforge.net:htdocs/csbu
+rsync -avz --delete ./html/ basie.netux.com.au:/var/www/bottomupcs
+
