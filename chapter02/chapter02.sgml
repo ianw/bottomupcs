@@ -272,13 +272,11 @@
 	  <title>Reorder buffer example</title>
 	  <mediaobject>
 	    <textobject>
-
 	      <programlisting>
 1: r3 = r1 * r2
 2: r4 = r2 + r3
 3: r7 = r5 * r6
-4: r8 = r1 + r7
-              </programlisting>
+4: r8 = r1 + r7</programlisting>
 
 	    </textobject>
 	  </mediaobject>

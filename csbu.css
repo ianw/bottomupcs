@@ -1,31 +1,39 @@
 /* CSBU stylesheet */
 
 body {
-       font-family: "Trebuchet MS", verdana, sans-serif;
+       font-family: arial, sans-serif;
        background-image: url(draft.png);
        }
 
 
 /* FIGURES AND LISTINGS */
 
-.PROGRAMLISTING { 
-                  background: #ddd;
-                  border: 1px solid #333;
-                  padding: 10px;
-                  width: 80%;
-
+.programlisting { 
+                  background: #efefef;
+                  margin: 0px;
+                  margin-left: auto;
+                  margin-right: auto;
  }
 
-.FIGURE { 
-          background: #fff;
-          border: 1px solid #333;
-          padding: 5px;
-          width: 80%;
+.figure { 
           margin-left: auto;
           margin-right: auto;
-          
-
  }
+.figure img { 
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+ }
+.figure p { 
+            padding: 2px;
+            text-align: right;
+            background: #eee;
+}
+.figure .mediaobject p { 
+                         background: none
+                         }
+
+
 
 /* TABLE OF CONTENTS */
 .TOC { 

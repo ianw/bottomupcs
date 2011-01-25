@@ -6,7 +6,8 @@
 <style-specification id="html" use="docbook">
 <style-specification-body> 
 
-(define %stylesheet% "csbu.css")
+(define %stylesheet% 
+  "csbu.css")
 
 (define %generate-legalnotice-link%
   ;; put legal notice in separate file

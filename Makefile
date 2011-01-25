@@ -23,7 +23,7 @@ csbu.pdf : csbu.sgml $(sources)
 	dvipdf csbu.dvi $@
 
 #html depends on having png figures around.
-html: csbu.sgml $(sources) $(pngs)
+html: csbu.sgml csbu.css $(sources) $(pngs)
 	mkdir -p ./html
 #copy all .c files into appropriate places
 	-for dir in $(sourcedirs); do \
