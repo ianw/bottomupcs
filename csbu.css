@@ -3,6 +3,12 @@
 body {
        font-family: arial, sans-serif;
        background-image: url(draft.png);
+       margin-left: 20%;
+       margin-right: 20%;
+       border-left: 1px #bbb dashed;
+       border-right: 1px #bbb dashed;
+       padding-left: 10px;
+       padding-right: 10px;
        }
 
 
@@ -84,9 +90,11 @@ h1.TITLE {
 
 /* HEADER */
 .NAVHEADER { 
-             background: #ccc;
-             color: #333;
+             background: #eeeeee;
+             border: 1px solid #aaaaaa;
+             color: #333333;
              padding: 5px;
+             font-size: 93%;
              }
 
 .NAVHEADER hr { 
@@ -97,10 +105,12 @@ h1.TITLE {
 
 /* FOOTER */
 .NAVFOOTER { 
-             margin-top: 10px;
-             background: #ccc;
-             color: #333;
+             background: #eeeeee;
+             border: 1px solid #aaaaaa;
+             color: #333333;
              padding: 5px;
+             font-size: 93%;
+             margin-top: 10px;
              }
 
 .NAVFOOTER hr { 
