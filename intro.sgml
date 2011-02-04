@@ -31,26 +31,22 @@
       works.  Nobody will expect them to be a Formula One engineer,
       but they are well on their way!</para>
 
-      <para>I hope that by working through the modules in this course,
-      the student can have the amazing world of computer science
-      opened up to them.</para>
-
     </sect2>
     <sect2>
       <title>Why <emphasis>from the bottom up</emphasis>?</title>
 
       <para>Not everyone wants to attend shop class.  Most people only
       want to drive the car, not know how to build one from scratch.
-      Obviously any general computer science curriculum has to take
-      this into account else it won't be relevant to it's students.
-      So computer science is taught from the "top down"; applications,
-      high level programming, software design and development theory,
-      possibly data structures.  Students will probably be exposed to
-      binary, hopefully binary logic, possibly even some low level
-      concepts such as registers, opcodes and the like at a
-      superficial level.</para>
-      
-      <para>This course aims to move in completely the opposite
+      Obviously any general computing curriculum has to take this into
+      account else it won't be relevant to its students.  So computer
+      science is taught from the "top down"; applications, high level
+      programming, software design and development theory, possibly
+      data structures.  Students will probably be exposed to binary,
+      hopefully binary logic, possibly even some low level concepts
+      such as registers, opcodes and the like at a superficial
+      level.</para>
+
+      <para>This book aims to move in completely the opposite
       direction, working from operating systems fundamentals through
       to how those applications are complied and executed.  </para>
     </sect2>
@@ -58,7 +54,7 @@
     <sect2>
       <title>Enabling technologies</title> 
 
-      <para>This course is only possible thanks to the development of
+      <para>This book is only possible thanks to the development of
       <glossterm linkend="opensource">Open Source</glossterm>
       technologies.  Before Linux it was like taking a shop course
       with a car that had it's bonnet welded shut; today we are in a
@@ -67,46 +63,8 @@
       want.</para>
     </sect2>
 
-    <sect2>
-      <title>Who is this aimed at?</title>
-      <para>I believe that any interested high school student should be
-      able to follow this course under instruction.</para>
-    </sect2>
-
-    <sect2>
-      <title>Who should be <emphasis>teaching</emphasis> this course?</title>
-
-      <para>I imagine there would be no end of benevolent hackers
-      willing to spend a few hours a week imparting their knowledge to
-      a new generation using this course as a general framework.
-      Obviously you'll need to understand a fair bit about how an
-      operating system and it's components works, but if you read
-      through this course and none of it is news to you, you would
-      probably be perfect!</para>
-    </sect2>
-
-    <sect2>
-      <title>The Open Source Philosophy</title> <para>I look forward
-      to your contributions to this course.
-      </para>
-    </sect2>
   </sect1>
 
-  <sect1>
-    <title>About the course</title>
-
-    <para>The course is broken up int 10 distinct modules which I have
-    planned to be taught one a week.  These are not lecture notes, nor
-    is it a text book.  I envisage the teacher reading the module and
-    giving a seminar style lecture for around an hour, and then
-    students can play with the ideas they have just been exposed to.
-    I doubt that there would be sufficient time to go through all the
-    material, but the student can always use the module as a reference
-    for their own learning.
-    </para>
-
-  </sect1>
-  
 </preface>
 
 <!--

@@ -1176,7 +1176,7 @@
 	<para>One area that causes confusion is the introduction of 64
 	bit computing.  This means that the processor can handle
 	addresses 64 bits in length (specifically the registers are 64
-	bits wide; a topic we discuss in the next week).</para>
+	bits wide; a topic we discuss in the next chapter).</para>
 
 	<para>This firstly means that all pointers are required to be
 	a 64 bits wide so they can represent any possible address in
@@ -1268,7 +1268,7 @@
 	will be wasting at least the top 32 bits (if not more).  Not
 	only this, but the size of an integer array has now doubled
 	too.  This means programs take up more system memory (and thus
-	more cache; discussed in detail next week) for no real
+	more cache; discussed in detail next chapter) for no real
 	improvement.  For the same reason Windows elected to keep
 	their long values as 32 bits; since much of the Windows API
 	was originally written to use long variables on a 32 bit
@@ -1315,7 +1315,7 @@
 	your own rules (e.g. writing to a
 	<computeroutput>const</computeroutput> value) and it can make
 	optimisations based upon the extra knowledge (examined in
-	later weeks).</para>
+	later chapters).</para>
 
       </sect3>
 

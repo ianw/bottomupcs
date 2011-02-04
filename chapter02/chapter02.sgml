@@ -507,7 +507,28 @@
 	memory the smaller it is.  Of course, if you can find a way to
 	change this equation, you'll end up a billionaire!</para>
 
-      <sect3>
+        <para>The reason caches are effective is becuase computer code
+        generally exhibits two forms of locality<indexterm id="locality">
+	  <primary>locality</primary>
+	</indexterm>
+	<orderedlist>
+	  <listitem>
+	    <para><emphasis>Spatial</emphasis> locality suggests that
+	    data within blocks is likely to be accessed together.</para>
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>Temporal</emphasis> locality suggests that
+	    data that was used recently will likely be used again
+	    shortly.</para>
+	  </listitem>
+	</orderedlist>
+	This means that benefits are gained by implementing as much
+	quickly accessible memory (temporal) storing small blocks of
+	relevant information (spatial) as practically possible.
+        </para>
+    </sect2>
+
+      <sect2>
 	<title>Cache in depth</title>
 
 	<para>Cache is one of the most important elements of the CPU
@@ -524,24 +545,122 @@
 	cram more and more transistors onto a chip cache sizes grow
 	considerably, but even the largest caches are tens of
 	megabytes, rather than the gigabytes of main memory or
-	terrabytes of hard disk otherwise common. (XXXexample)</para>
+	terrabytes of hard disk otherwise common.</para>
 
 	<para>The cache is made up of small chunks of mirrored main
 	memory.  The size of these chunks is called the <emphasis>line
-	size</emphasis>, and is typically something like 64 kilobytes.
-	When talking about cache, it is very common to talk about the
-	line size, or a cache line, which refers to one chunk of
-	mirrored main memory.  The cache can only load and store
-	memory in sizes a multiple of a cache line.</para>
+	size</emphasis>, and is typically something like 32 or 64
+	bytes.  When talking about cache, it is very common to talk
+	about the line size, or a cache line, which refers to one
+	chunk of mirrored main memory.  The cache can only load and
+	store memory in sizes a multiple of a cache line.</para>
 
-	<para>As the cache is quite small compared to main memory, it
-	will obviously fill up quite quickly as a process goes about
-	its execution.  Once the cache is full the processor needs to
-	get rid of a line to make room for a new line.  There are many
-	algorithms by which the processor can choose which line to
-	evict; for example <emphasis>least recently used</emphasis>
-	(LRU) is an algorithm where the oldest unused line is
-	discarded to make room for the new line.</para>
+	<para>Caches have their own hierarchy, commonly termed L1, L2
+	and L3.  L1 cache is the fastest and smallest; L2 is bigger
+	and slower, and L3 more so.</para>
+
+	<para>L1 caches are generally further split into instruction
+	  caches and data, known as the "Harvard Architecture" after
+	  the relay based Harvard Mark-1 computer which introduced it.
+	  Split caches help to reduce pipeline bottlenecks as earlier
+	  pipeline stages tend to reference the instruction cache and
+	  later stages the data cache.  Apart from reducing contention
+	  for a shared resource, providing separate caches for
+	  instructions also allows for alternate implementations which
+	  may take advantage of the nature of instruction streaming;
+	  they are read-only so do not need expensive on-chip features
+	  such as multi-porting, nor need to handle handle sub-block
+	  reads because the instruction stream generally uses more
+	  regular sized accesses.</para>
+
+	<figure id="cache_associativity">
+	  <title>Cache Associativity</title>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="chapter02/figures/sets.eps" format="EPS" />
+	    </imageobject>
+	    <imageobject>
+	      <imagedata fileref="chapter02/figures/sets.png" format="PNG" />
+	    </imageobject>
+	    <textobject>
+	      <phrase>A given cache line may find a valid home in one
+	      of the shaded entries.</phrase>
+	    </textobject>
+	  </mediaobject>
+	</figure>
+
+	<para>During normal operation the processor is constantly
+	      asking the cache to check if a particular address is
+	      stored in the cache, so the cache needs some way to very
+	      quickly find if it has a valid line present or not. If a
+	      given address can be cached anywhere within the cache,
+	      every cache line needs to be searched every time a
+	      reference is made to determine a hit or a miss. To keep
+	      searching fast this is done in parallel in the cache
+	      hardware, but searching every entry is generally far too
+	      expensive to implement for a reasonable sized cache.
+	      Thus the cache can be made simpler by enforcing limits
+	      on where a particular address must live.  This is a
+	      trade-off; the cache is obviously much, much smaller
+	      than the system memory, so some addresses must
+	      <emphasis>alias</emphasis> others. If two addresses
+	      which alias each other are being constantly updated they
+	      are said to <emphasis>fight</emphasis> over the cache
+	      line.  Thus we can categorise caches into three general
+	      types, illustrated in <xref
+	      linkend="cache_associativity"></xref>.
+
+	  <itemizedlist>
+	    <listitem>
+	      <para>
+		<emphasis>Direct mapped</emphasis> caches will allow a
+	      cache line to exist only in a singe entry in the
+	      cache. This is the simplest to implement in hardware,
+	      but as illustrated in <xref
+	      linkend="cache_associativity"></xref> there is no
+	      potential to avoid aliasing because the two shaded
+	      addresses must share the same cache line.
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para>
+	      <emphasis>Fully Associative</emphasis> caches will allow
+	      a cache line to exist in any entry of the cache. This
+	      avoids the problem with aliasing, since any entry is
+	      available for use. But it is very expensive to implement
+	      in hardware because every possible location must be
+	      looked up simultaneously to determine if a value is in
+	      the cache.
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para>
+	      <emphasis>Set Associative</emphasis> caches are a hybrid
+	      of direct and fully associative caches, and allow a
+	      particular cache value to exist in some subset of the
+	      lines within the cache. The cache is divided into even
+	      compartments called <emphasis>ways</emphasis>, and a
+	      particular address could be located in any way. Thus an
+	      <emphasis>n</emphasis>-way set associative cache will
+	      allow a cache line to exist in any entry of a set sized
+	      total blocks mod n &mdash; <xref
+	      linkend="cache_associativity"></xref> shows a sample
+	      8-element, 4-way set associative cache; in this case the
+	      two addresses have four possible locations, meaning only
+	      half the cache must be searched upon lookup.  The more
+	      ways, the more possible locations and the less aliasing,
+	      leading to overall better performance.
+	      </para>
+	    </listitem>
+	  </itemizedlist>
+	</para>
+
+	<para>Once the cache is full the processor needs to get rid of
+	a line to make room for a new line.  There are many algorithms
+	by which the processor can choose which line to evict; for
+	example <emphasis>least recently used</emphasis> (LRU) is an
+	algorithm where the oldest unused line is discarded to make
+	room for the new line.</para>
 
 	<para>When data is only read from the cache there is no need
 	to ensure consistency with main memory.  However, when the
@@ -560,10 +679,6 @@
 	a cache entry is evicted, it may require two memory accesses
 	(one to write dirty data main memory, and another to load the
 	new data).</para>
-
-	<para>XXX: associativity, thrashing?</para>
-
-      </sect3>
 
       </sect2>
 
