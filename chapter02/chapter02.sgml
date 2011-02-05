@@ -1,6 +1,6 @@
 <chapter id="chapter02">
   
-  <title>Computer Architecture for Beginners</title>
+  <title>Computer Architecture</title>
 
   <sect1>
     <title>The CPU</title>
@@ -14,14 +14,12 @@
 	<imageobject>
 	  <imagedata fileref="chapter02/figures/computer.png" format="PNG" />
 	</imageobject>
-	<textobject>
-	  <phrase>The CPU performs instructions on values held in
+	  <caption>The CPU performs instructions on values held in
 	      registers.  This example shows firstly setting the value
 	      of R1 to 100, loading the value from memory location
 	      0x100 into R2, adding the two values together and
 	      placing the result in R3 and finally storing the new
-	      value (110) to R4 (for further use). </phrase>
-	</textobject>
+	      value (110) to R4 (for further use). </caption>
       </mediaobject>
 
     </figure>
@@ -136,7 +134,7 @@
 	pass the results to the next station and take a new input to
 	work on.</para>
 
-	<figure>
+	<figure id="inside_the_cpu">
 	  <title>Inside the CPU</title>
 	  <mediaobject>
 	    <imageobject>
@@ -145,15 +143,14 @@
 	    <imageobject>
 	      <imagedata fileref="chapter02/figures/block.png" format="PNG" />
 	    </imageobject>
-	    <textobject>
-	      <phrase>The CPU is made up of many different
-	      sub-components, each doing a dedicated task.</phrase>
-	    </textobject>
+	      <caption>The CPU is made up of many different
+	      sub-components, each doing a dedicated task.</caption>
 	  </mediaobject>
 	</figure>
 
-	<para>Above we have a very simple block diagram illustrating
-	some of the main parts of a modern CPU.</para>
+	<para><xref linkend="inside_the_cpu"></xref> shows a very
+	      simple block diagram illustrating some of the main parts
+	      of a modern CPU.</para>
 
 	<para>You can see the instructions come in and are decoded by
 	the processor.  The CPU has two main types of registers, those
@@ -266,9 +263,7 @@
 	<emphasis>program order</emphasis> since this is the order
 	that instructions are given in the computer program.</para>
 
-	<para>Consider an instruction stream such as</para>
-
-	<figure>
+	<figure id="reorder_buffer">
 	  <title>Reorder buffer example</title>
 	  <mediaobject>
 	    <textobject>
@@ -282,7 +277,9 @@
 	  </mediaobject>
 	</figure>
 
-	<para>Instruction 2 needs to wait for instruction 1 to
+	<para>Consider an instruction stream such as that shown in
+	<xref linkend="reorder_buffer"></xref>
+	  Instruction 2 needs to wait for instruction 1 to
 	complete fully before it can start.  This means that the
 	pipeline has to <emphasis>stall</emphasis> as it waits for the
 	value to be calculated.  Similarly instructions 3 and 4 have a
@@ -528,7 +525,7 @@
         </para>
     </sect2>
 
-      <sect2>
+      <sect2 id="cache_in_depth">
 	<title>Cache in depth</title>
 
 	<para>Cache is one of the most important elements of the CPU
@@ -582,10 +579,10 @@
 	    <imageobject>
 	      <imagedata fileref="chapter02/figures/sets.png" format="PNG" />
 	    </imageobject>
-	    <textobject>
-	      <phrase>A given cache line may find a valid home in one
-	      of the shaded entries.</phrase>
-	    </textobject>
+	     <caption>
+	      A given cache line may find a valid home in one
+	      of the shaded entries.
+	    </caption>
 	  </mediaobject>
 	</figure>
 
@@ -679,6 +676,96 @@
 	a cache entry is evicted, it may require two memory accesses
 	(one to write dirty data main memory, and another to load the
 	new data).</para>
+
+      <para>If an entry exists in both a higher-level and lower-level
+	cache at the same time, we say the higher-level cache is
+	<emphasis>inclusive</emphasis>. Alternatively, if the
+	higher-level cache having a line removes the possibility of a
+	lower level cache having that line, we say it is
+	<emphasis>exclusive</emphasis>.  This choice is discussed
+	further in <xref
+	linkend="cache_exclusivity_in_smp"></xref>.
+      </para>
+
+      <sect3>
+	<title>Cache Addressing</title>
+
+	<para>So far we have not discussed how a cache decides if a
+	  given address resides in the cache or not.  Clearly, caches
+	  must keep a directory of what data currently resides in the
+	  cache lines. The cache directory and data may co-located on
+	  the processor, but may also be separate &mdash; such as in
+	  the case of the POWER5 processor which has an on-core L3
+	  directory, but actually accessing the data requires
+	  traversing the L3 bus to access off-core memory. An
+	  arrangement like this can facilitate quicker hit/miss
+	  processing without the other costs of keeping the entire
+	  cache on-core.
+	</para>
+
+	<figure id="cache_tags">
+	  <title>Cache tags</title>
+	  <mediaobject>
+	  <imageobject>
+	    <imagedata fileref="chapter02/figures/tags.eps" format="EPS" />
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="chapter02/figures/tags.png" format="PNG" />
+	  </imageobject>
+	  <caption><para>Tags need to be checked in parallel to keep
+latency times low; more tag bits (i.e. less set associativity)
+requires more complex hardware to achieve this. Alternatively more set
+associativity means less tags, but the processor now needs hardware to
+multiplex the output of the many sets, which can also add latency.
+</para></caption>
+	</mediaobject>
+	</figure>
+
+	<para>To quickly decide if an address lies within the cache it
+	  is separated into three parts; the <emphasis>tag</emphasis>
+	  and the <emphasis>index</emphasis> and the
+	  <emphasis>offset</emphasis>.</para>
+
+	<para>The offset bits depend on the line size of the cache.
+	  For example, a 32-byte line size would use the last 5-bits
+	  (i.e. 2<superscript>5</superscript>) of the address as the
+	  offset into the line.</para>
+
+	<para>The <emphasis>index</emphasis> is the particular cache
+	line that an entry may reside in.  As an example, let us
+	consider a cache with 256 entries.  If this is a direct-mapped
+	cache, we know the data may reside in only one possible line,
+	so the next 8-bits (2<superscript>8</superscript>) after the
+	offset describe the line to check - between 0 and 255.</para>
+
+	<para>Now, consider the same 256 element cache, but divided
+	into two ways.  This means there are two groups of 128 lines,
+	and the given address may reside in either of these groups.
+	Consequently only 7-bits are required as an index to offset
+	into the 128-entry ways.  For a given cache size, as we
+	increase the number of ways, we decrease the number of bits
+	required as an index since each way gets smaller.</para>
+
+	<para>The cache directory still needs to check if the
+	particular address stored in the cache is the one it is
+	interested in.  Thus the remaining bits of the address are the
+	<emphasis>tag</emphasis> bits which the cache directory checks
+	against the incoming address tag bits to determine if there is
+	a cache hit or not.  This relationship is illustrated in <xref
+	linkend="cache_tags"></xref>.</para>
+
+	<para>When there are multiple ways, this check must happen in
+	parallel within each way, which then passes its result into a
+	multiplexor which outputs a final <emphasis>hit</emphasis> or
+	<emphasis>miss</emphasis> result.  As describe above, the more
+	associative a cache is, the less bits are required for index
+	and the more as tag bits &mdash; to the extreme of a
+	fully-associative cache where no bits are used as index bits.
+	The parallel matching of tags bits is the expensive component
+	of cache design and generally the limiting factor on how many
+	lines (i.e, how big) a cache may grow.</para>
+
+      </sect3>
 
       </sect2>
 
@@ -806,7 +893,7 @@
     single CPU.  This is achieved in a number of different
     fashions.</para>
 
-    <sect2>
+    <sect2 id="symmetric_multi_processing">
       <title>Symmetric Multi-Processing</title>
 
       <para>Symmetric Multi-Processing, commonly shortened to
@@ -917,6 +1004,38 @@
 	process, although programmers should be aware of what the
 	hardware is doing underneath in response to the programs they
 	design to maximise performance.</para>
+
+	<sect4 id="cache_exclusivity_in_smp">
+	  <title>Cache exclusivity in SMP systems</title>
+
+	  <para>In <xref linkend="cache_in_depth"></xref> we described
+	    <emphasis>inclusive</emphasis> v
+	    <emphasis>exclusive</emphasis> caches.  In general, L1
+	    caches are usually inclusive &mdash; that is all data in
+	    the L1 cache also resides in the L2 cache. In a
+	    multiprocessor system, an inclusive L1 cache means that
+	    only the L2 cache need snoop memory traffic to maintain
+	    coherency, since any changes in L2 will be guaranteed to
+	    be reflected by L1. This reduces the complexity of the L1
+	    and de-couples it from the snooping process allowing it to
+	    be faster.</para>
+
+	    <para>Again, in general, most all modern high-end
+	    (e.g. not targeted at embedded) processors have a
+	    write-through policy for the L1 cache, and a write-back
+	    policy for the lower level caches. There are several
+	    reasons for this.  Since in this class of processors L2
+	    caches are almost exclusively on-chip and generally quite
+	    fast the penalties from having L1 write-through are not
+	    the major consideration. Further, since L1 sizes are
+	    small, pools of written data unlikely to be read in the
+	    future could cause pollution of the limited L1 resource.
+	    Additionally, a write-through L1 does not have to be
+	    concerned if it has outstanding dirty data, hence can pass
+	    the extra coherency logic to the L2 (which, as we
+	    mentioned, already has a larger part to play in cache
+	    coherency).</para>
+	</sect4>
 
       </sect3>
 
@@ -1092,11 +1211,9 @@
 	<imageobject>
 	  <imagedata fileref="chapter02/figures/hypercube.png" format="PNG" />
 	</imageobject>
-	<textobject>
-	  <phrase>An example of a hypercube.  Hypercubes provide a
+	  <caption>An example of a hypercube.  Hypercubes provide a
 	  good trade off between distance between nodes and number of
-	  interconnections required.</phrase>
-	</textobject>
+	  interconnections required.</caption>
       </mediaobject>
 
     </figure>
@@ -1276,10 +1393,8 @@
 	<imageobject>
 	  <imagedata fileref="chapter02/figures/memorder.png" format="PNG" />
 	</imageobject>
-	<textobject>
-	  <phrase>An illustration of valid reorderings around
-	  operations with acquire and release semantics. </phrase>
-	</textobject>
+	  <caption>An illustration of valid reorderings around
+	  operations with acquire and release semantics. </caption>
       </mediaobject>
     </figure>
 

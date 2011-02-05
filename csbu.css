@@ -39,7 +39,9 @@ body {
                          background: none
                          }
 
-
+.caption { 
+           font-size: 85%;
+}
 
 /* TABLE OF CONTENTS */
 .TOC { 
