@@ -47,6 +47,26 @@
   })();
 // --" ">"))))
 
+(define ($html-body-content-end$)
+  (make element gi: "div"
+	attributes: '(("id" "disqus_thread"))
+	(make formatting-instruction
+	  data: (string-append "<" "script type=\"text/javascript\"" ">"
+			       "var disqus_shortname = 'bottomupcs';"
+			       "(function() { "
+			       "var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;"
+			       "dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';"
+			       "(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);"
+			       "})();"
+			       "<" "/script" ">"
+			       ))))
+
+(define %callout-graphics-path%
+  "images/callouts/")
+
+(define %admon-graphics-path%
+  "images/")
+
 </style-specification-body>
 </style-specification>
 

@@ -33,11 +33,6 @@ html: csbu.sgml csbu.css $(sources) $(pngs)
 	cp --parents $(pngs) html
 	cp csbu.css draft.png html
 
-.PHONY: upload
-upload:
-	rsync -avz html/ \
-	delsarto@shell.sourceforge.net:/home/groups/b/bo/bottomupcs/htdocs/csbu
-
 .PHONY: clean
 clean:	
 	rm -rf html csbu.pdf csbu.dvi $(pngs) $(epss)
