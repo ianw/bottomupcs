@@ -37,7 +37,7 @@
 	(make formatting-instruction 
 	  data: (string-append "<" "!--
  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-20920636-1']);
+  _gaq.push(['_setAccount', 'UA-25195980-1']);
   _gaq.push(['_trackPageview']);
 
   (function() {
