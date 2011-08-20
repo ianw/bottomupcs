@@ -1574,6 +1574,37 @@
 	  <para>All modern computers use two's complement
 	  representation.</para>
 
+	  <sect5 id="sign_extension">
+	    <title>Sign-extension</title>
+
+	    <para>Becuase of two's complement format, when increasing
+	      the size of signed value, it is important that the
+	      additional bits be <emphasis>sign-extended</emphasis>;
+	      that is, copied from the top-bit of the existing
+	      value.</para>
+
+	    <para>For example, the value of an 32-bit
+	    <computeroutput>int</computeroutput>
+	    <computeroutput>-10</computeroutput> would be represented
+	    in two's complement binary as
+	    <computeroutput>11111111111111111111111111110110</computeroutput>.
+	    If one were to cast this to a 64-bit <computeroutput>long
+	    long int</computeroutput>, we would need to ensure that
+	    the additional 32-bits were set to
+	    <computeroutput>1</computeroutput> to maintain the same
+	    sign as the original.</para>
+
+	    <para>Thanks to two's complement, it is sufficient to take
+	    the top bit of the exiting value and replace all the added
+	    bits with this value.  This processes is referred to as
+	    <emphasis>sign-extension</emphasis> and is usually handled
+	    by the compiler in situations as defined by the language
+	    standard, with the processor generally providing special
+	    instructions to take a value an sign-extended it to some
+	    larger value.</para>
+
+	  </sect5>
+
 	</sect4>
 
       </sect3>

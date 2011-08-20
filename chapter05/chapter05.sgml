@@ -1,5 +1,5 @@
 <chapter id="chapter05">
-  
+
   <title>Virtual Memory</title>
 
   <sect1>
@@ -25,7 +25,7 @@
 
   <sect1>
     <title>What virtual memory <emphasis>is</emphasis></title>
-    
+
     <para>Virtual memory is all about making use of <emphasis>address
     space</emphasis>.</para>
 
@@ -34,9 +34,8 @@
     memory.  The address space is limited by the width of the
     registers, since as we know to load an address we need to issue a
     <computeroutput>load</computeroutput> instruction with the address
-    to load from in a register.  Most current processors have
-    registers that are 32 bits wide; this means the addresses that can
-    be stored in a register range from
+    to load from stored in a register.  For example, registers that
+    are 32 bits wide can hold addresses in a register range from
     <computeroutput>0x00000000</computeroutput> to
     <computeroutput>0xFFFFFFF</computeroutput>.
     2^<superscript>32</superscript> is equal to 4GB, so a 32 bit
@@ -45,26 +44,96 @@
     <sect2>
       <title>64 bit computing</title>
 
-      <para>Most new processors are moving towards 64 bit processors,
-    which have registers 64 bits wide.  As an exercise, you should
-    work out the address space available to these processors (hint:
-    it's big!).</para>
+      <para>New processors are generally all 64-bit processors, which
+    as the name suggests has registers 64 bits wide.  As an exercise,
+    you should work out the address space available to these
+    processors (hint: it's big!).</para>
+
+      <para>64-bit computing does have some trade-offs against using
+      smaller bit-width processors.  Every program compiled in 64-bit
+      mode requires 8-byte pointers, which can increase code and data
+      size, and hence cache performance.  However, 64-bit processers
+      tend to have more registers, which means less need to save
+      temporary variables to memory when the compiler is under
+      register pressure.</para>
+
+      <sect3>
+	<title>Canonical Addresses</title>
+
+	<para>While 64-bit processors have 64-bit wide registers,
+	systems generally do not implement all 64-bits for addressing
+	&mdash; it is not actually possible to do
+	<computeroutput>load</computeroutput> or
+	<computeroutput>store</computeroutput> to all 16 exabytes of
+	theoretical physical memory!</para>
+
+	<para>Thus most architectures define an
+	<emphasis>unimplemented</emphasis> region of the address space
+	which the processor will consider invalid for use.  x86-64 and
+	Itanium both define the most-significant valid bit of an
+	address, which must then be sign-extended (see <xref
+	linkend="sign_extension"></xref>) to create a valid address.
+	The result of this is that the total address space is
+	effectively divided into two parts, an upper and a lower
+	portion, with the addresses in-between considered invalid.
+	This is illustrated in <xref
+	linkend="canonical_address"></xref>.  Valid addresses are
+	termed <emphasis>canonical addresses</emphasis> (invalid
+	addresses being <emphasis>non</emphasis>-canonical).</para>
+
+      <figure id="canonical_address">
+	<title>Illustration of canonical addresses</title>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="chapter05/figures/canonical.eps" format="EPS" />
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="chapter05/figures/canonical.png" format="PNG" />
+	  </imageobject>
+	  <textobject>
+	    <phrase>By defining a most-significant bit that must be
+	    sign-extended to create a full address, the address-space
+	    is effectively partitioned into upper and lower portions,
+	    with intermediate addresses considered invalid by the
+	    processor.</phrase>
+	  </textobject>
+	</mediaobject>
+      </figure>
+
+	<para>The exact most-significant bit value for the processor
+	can usually be found by querying the processor itself using
+	its informational instructions.  Although the exact value is
+	implementation dependent, a typical value would be 48;
+	providing 2<superscript>48</superscript> = 256 TiB of usable
+	address-space.
+	</para>
+
+	<para>Reducing the possible address-space like this means that
+	significant savings can be made with all parts of the
+	addressing logic in the processor and related components, as
+	they know they will not need to deal with full 64-bit
+	addresses.  Since the implementation defines the upper-bits as
+	being signed-extended, this prevents portable operating
+	systems using these bits to store or flag additional
+	information and ensuring compatibility if the implementation
+	wishes to implement more address-space in the future.</para>
+      </sect3>
+
     </sect2>
 
     <sect2>
       <title>Using the address space</title>
-    
+
       <para>As with most components of the operating system, virtual
     memory acts as an abstraction between the address space and the
     physical memory available in the system.  This means that when a
     program uses an address that address does not refer to the bits in
-    an actual physical location in memory, but must be translated by
-    the operating system.</para>
-      
+    an actual physical location in memory.</para>
+
     <para>So to this end, we say that all addresses the program uses
       are <emphasis>virtual</emphasis>.  The operating system keeps
-      track of virtual addresses and how they point to
-      <emphasis>physical address</emphasis>.  When a program does a
+      track of virtual addresses and how they are allocated to
+      <emphasis>physical</emphasis> addresses.  When a program does a
       load or store from an address, the processor and operating
       system work together to convert this virtual address to the
       actual address in the system memory chips.
@@ -77,22 +146,19 @@
   <sect1>
     <title>Pages</title>
 
-    <para>The address space of even a 32 bit processor is quite large,
-    and if the operating system is to keep track of it all it needs to
-    divide it into more manageable parts.</para>
-
-    <para>The operating system divides the address space into
-    <emphasis>pages</emphasis>.  Pages can be many different sizes,
+    <para>The total address-space is divided into individual
+    <emphasis>pages</emphasis>.  Pages can be many different sizes;
     generally they are around 4KB, but this is not a hard and fast
-    rule and they can be much larger.</para>
-
-    <para>The page is the smallest unit of memory that the operating
-    system and hardware can deal with.</para>
+    rule and they can be much larger.  The page is the smallest unit
+    of memory that the operating system and hardware can deal
+    with.</para>
 
     <para>Additionally, each page has a number of attributes set by
     the operating system.  Generally, these include read, write and
-    execute permissions for the current page.  For example, a page
-    must be marked if it contains executable code.</para>
+    execute permissions for the current page.  For example, the
+    operating system can generally mark the code pages of a process
+    with an executable flag and the processor can choose to not
+    execute any code from pages without this bit set.</para>
 
     <figure>
       <title>Virtual memory pages</title>
@@ -118,8 +184,8 @@
     space up into pages, it divides the available physical memory up
     into <emphasis>frames</emphasis>.</para>
 
-    <para>A frame is just a hunk of physical memory the same size as
-    the system page size.</para>
+    <para>A frame is just the conventional name for a hunk of physical
+    memory the same size as the system page size.</para>
 
   </sect1>
 
@@ -127,20 +193,20 @@
     <title>Pages + Frames = Page Tables</title>
 
     <para>The job of the operating system is to keep track of which
-    page points to which frame.  This information is kept in a
-    <emphasis>page table</emphasis> which, in its simplest form, is
-    simply a table where each row has a page and an associated
-    frame.</para>
+    virtual-page points to which physical frame.  This information is
+    kept in a <emphasis>page-table</emphasis> which, in its simplest
+    form, could simply be a table where each row contains its
+    associated frame.  If you were to use this simple system, with a
+    32 bit address space and 4K pages there would be 1048576 possible
+    pages to keep track of in the page table
+    (2<superscript>32</superscript> &divide; 4096); hence the table
+    would be 1048576 entries long to ensure we can always find the
+    physical address of any virtual-page.</para>
 
-    <para>With a 32 bit address space and 4K pages there will be
-      1048576 pages in the page table.  Assuming each entry in the
-      page table takes up 32 bits (or 4 bytes) we have 1048576 * 4 ==
-      4194304 bytes == 4MB of page table data to map the entire
-      address space. </para>
-    
     <para>Page tables can have many different structures and are
-      generally highly optimised, as the process of finding a page in
-      the page table can be a lengthly process.</para>
+    highly optimised, as the process of finding a page in the page
+    table can be a lengthly process.  We will examine page-tables in
+    more depth later.</para>
 
   </sect1>
 
@@ -153,9 +219,9 @@
     place and provide it with the data it wants.</para>
 
     <para>We call the address the userspace program is using to access
-    memory a <emphasis>virtual address</emphasis>.  The virtual
-    address consists of two parts; the page that the virtual address
-    is in and an offset into that page.</para>
+    memory a <emphasis>virtual address</emphasis>.  A virtual address
+    consists of two parts; the page and an offset into that
+    page.</para>
 
     <sect2>
       <title>Page</title>
@@ -214,9 +280,20 @@
 	</mediaobject>
       </figure>
 
+      <para>We can follow this through for our previous example of a
+      simple <emphasis>linear</emphasis> page table.  We calculated
+      that a 32-bit address-space would require a table of 1048576
+      entries when using 4KiB pages.  Thus to map a theoretical
+      address of 0x80001234, the first step would be to remove the
+      offset bits.  In this case, with 4KiB pages, we know we have
+      12-bits (2<superscript>12</superscript> == 4096) of offset.  So
+      we would right-shift out 12-bits of the virtual address, leaving
+      us with 0x80001.  Thus (in decimal) the value in row 524289 of
+      the linear page table would be the physical frame corresponding
+      to this page.</para>
+
     </sect2>
   </sect1>
-
 
   <sect1>
     <title>Consequences of virtual addresses, pages and page tables</title>
@@ -226,7 +303,7 @@
 
     <sect2>
       <title>Individual address spaces</title>
-      
+
       <para>If the operating system gives each process its own page
 	table, then every process can pretend that it has access to
 	the entire address space available from the processor.  It
@@ -416,7 +493,7 @@
     <sect2>
       <title>Physical v Virtual Mode</title>
 
-      <para>All processors have some concept of either operating is
+      <para>All processors have some concept of either operating in
       <emphasis>physical</emphasis> or <emphasis>virtual</emphasis>
       mode.  In physical mode, the hardware expects that any address
       will refer to an address in actual system memory.  In virtual
@@ -430,9 +507,9 @@
       <emphasis>real</emphasis> and <emphasis>protected</emphasis>
       mode.  The first processor to implement protected mode was the
       386, and even the most modern processors in the x86 family line
-      (Pentiums) can still do real mode, though it is not used.  In
-      real mode the processor implements a form of memory organisation
-      called segmentation.</para>
+      can still do real mode, though it is not used.  In real mode the
+      processor implements a form of memory organisation called
+      segmentation.</para>
 
       <sect3>
 	<title>Segmentation</title>
@@ -503,25 +580,24 @@
       <title>The TLB</title>
 
       <para>The <emphasis>Translation Lookaside Buffer</emphasis> (or
-      TLB for short) is analogous to a page table inside the CPU.  The
-      operating system and hardware work together to manage the
-      TLB as the system runs.</para>
-
-      <para>The TLB, being implemented in hardware, is necessarily
-      small and can not contain a copy of the entire page table.  It
-      needs to be managed by the operating system.
-      </para>
+      TLB for short) is a cache of virtual-page to physical-frame
+      translations inside the processor.  The operating system and
+      hardware work together to manage the TLB as the system
+      runs.</para>
 
       <sect3>
 	<title>Page Faults</title>
 
-	<para>When a virtual address is requested of the hardware, it
-	processor looks it up in the TLB, and if it has a translation
-	can use the offset to go straight to the physical
-	address.</para>
+	<para>When a virtual address is requested of the hardware; say
+	  via a <computeroutput>load</computeroutput> instruction
+	  requesting to get some data, the processor looks for the
+	  virtual-address to physical-address translation in its TLB.
+	  If it has a valid translation it can then combine this with
+	  the offset portion to go straight to the physical address
+	  and complete the load.</para>
 
-	<para>If the processor can <emphasis>not</emphasis> find a
-	translation in the TLB, the processor must raise a
+	<para>However, if the processor can <emphasis>not</emphasis>
+	find a translation in the TLB, the processor must raise a
 	<emphasis>page fault</emphasis>.  This is an interrupt (as
 	discussed before) which the operating system must
 	handle.</para>
