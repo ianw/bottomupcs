@@ -588,19 +588,19 @@
       <sect3>
 	<title>Page Faults</title>
 
-	<para>When a virtual address is requested of the hardware; say
-	  via a <computeroutput>load</computeroutput> instruction
-	  requesting to get some data, the processor looks for the
-	  virtual-address to physical-address translation in its TLB.
-	  If it has a valid translation it can then combine this with
-	  the offset portion to go straight to the physical address
-	  and complete the load.</para>
+	<para>When a virtual address is requested of the hardware
+	  &mdash; say via a <computeroutput>load</computeroutput>
+	  instruction requesting to get some data &mdash; the
+	  processor looks for the virtual-address to physical-address
+	  translation in its TLB.  If it has a valid translation it
+	  can then combine this with the offset portion to go straight
+	  to the physical address and complete the load.</para>
 
 	<para>However, if the processor can <emphasis>not</emphasis>
 	find a translation in the TLB, the processor must raise a
-	<emphasis>page fault</emphasis>.  This is an interrupt (as
-	discussed before) which the operating system must
-	handle.</para>
+	<emphasis>page fault</emphasis>.  This is similar to an
+	interrupt (as discussed before) which the operating system
+	must handle.</para>
 
 	<para>When the operating system gets a page fault, it needs to
 	go through the page table in memory to find the correct

@@ -780,84 +780,215 @@ multiplex the output of the many sets, which can also add latency.
       useful.</para>
     
     <para>The communication channel between the processor and the
-      peripherals is called a <emphasis>bus</emphasis>.  The devices
-      directly connected to the processor use a type of bus called
-      Peripheral Component Interconnect, commonly referred to as
-      PCI.</para>
+      peripherals is called a <emphasis>bus</emphasis>.</para>
     
     <sect2>
-      <title>PCI Bus</title>
+      <title>Peripheral Bus concepts</title>
 
-      <para>PCI transfers data between the device and memory, but
-      importantly allows for the automatic configuration of attached
-      peripherals.  The configuration broadly falls into two categories</para>
-      
+      <para>A device requires both input and output to be useful.
+      There are a number of common concepts required for useful
+      communication with peripherals.</para>
+
       <sect3>
 	<title>Interrupts</title>
-	  
+
 	<para>An interrupt allows the device to literally interrupt
 	  the processor to flag some information.  For example, when a
-	  key is pressed, an interrupt is generated and delivered to
-	  the CPU.  An interrupt (called the IRQ) is assigned to the
-	  device on system boot by the system BIOS.</para>
-	
-	<para>When the device wants to interrupt, it will signal to
-	the processor via raising the voltage of <emphasis>interrupt
-	pins</emphasis>.  The processor will acknowledge the
-	interrupt, and pass the IRQ onto the operating system.  This
-	part of the operating system code is called the
-	<emphasis>interrupt handler</emphasis>.</para>
-	
-	<para>The interrupt handler knows what to do with the
-	interrupt as when each device driver initialises it will
-	register its self with the kernel to accept the interrupt from
-	the peripheral it is written for.  So as the interrupt
-	arrives it is passed to the driver which can deal with the
-	information from the device correctly.</para>
-	
+	  key is pressed, an interrupt is generated to deliver the
+	  key-press event to the operating system.  Each device is
+	  assigned an interrupt by some combination of the operating
+	  system and BIOS.</para>
+
+	<para>Devices are generally connected to an
+	<emphasis>programmable interrupt controller</emphasis> (PIC),
+	a separate chip that is part of the motherboard which buffers
+	and communicates interrupt information to the main processor.
+	Each device has a physical <emphasis>interrupt line</emphasis>
+	between it an one of the PIC's provided by the system.  When
+	the device wants to interrupt, it will modify the voltage on
+	this line.</para>
+
+	<para>A very broad description of the PIC's role is that it
+	receives this interrupt and converts it to a message for
+	consumption by the main processor.  While the exact procedure
+	varies by architecture, the general principle is that the
+	operating system has configured an <emphasis>interrupt
+	descriptor table</emphasis> which pairs each of the possible
+	interrupts with a code address to jump to when the interrupt
+	is received.  This is illustrated in <xref
+	linkend="interrupt_handling"></xref>.</para>
+
+	<para>Writing this <emphasis>interrupt handler</emphasis> is
+	the job of the device driver author in conjunction with the
+	operating system.</para>
+
+	<figure id="interrupt_handling">
+	  <title>Overview of handling an interrupt</title>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="chapter02/figures/interrupt.eps" format="EPS" />
+	    </imageobject>
+	    <imageobject>
+	      <imagedata fileref="chapter02/figures/interrupt.png" format="PNG" />
+	    </imageobject>
+	    <caption>A generic overview of handling an interrupt.  The
+	    device raises the interrupt to the interrupt controller,
+	    which passes the information onto the processor.  The
+	    processor looks at its descriptor table, filled out by the
+	    operating system, to find the code to handle the
+	    fault.</caption>
+	  </mediaobject>
+	</figure>
+
 	<para>Most drivers will spilt up handling of interrupts into
 	<emphasis>bottom</emphasis> and <emphasis>top</emphasis>
-	halves.  The bottom half will acknowledge the interrupt and
-	return the processor to what it was doing quickly.  The top
-	half will then run later when the CPU is free and do the more
-	intensive processing.  This is to stop an interrupt hogging
-	the entire CPU.</para>
-	
+	halves.  The bottom half will acknowledge the interrupt, queue
+	actions for processing and return the processor to what it was
+	doing quickly.  The top half will then run later when the CPU
+	is free and do the more intensive processing.  This is to stop
+	an interrupt hogging the entire CPU.</para>
+
+	<sect4>
+	  <title>Saving state</title>
+
+	  <para>Since an interrupt can happen at any time, it is
+	  important that you can return to the running operation when
+	  finished handling the interrupt.  It is generally the job of
+	  the operating system to ensure that upon entry to the
+	  interrupt handler, it saves any <emphasis>state</emphasis>;
+	  i.e. registers, and restores them when returning from the
+	  interrupt handler.  In this way, apart from some lost time,
+	  the interrupt is completely transparent to whatever happens
+	  to be running at the time.</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Interrupts v traps and exceptions</title>
+
+	  <para>While an interrupt is generally associated with an
+	  external event from a physical device, the same mechanism is
+	  useful for handling internal system operations.  For
+	  example, if the processor detects conditions such as an
+	  access to invalid memory, an attempt to divide-by-zero or an
+	  invalid instruction, it can internally raise an
+	  <emphasis>exception</emphasis> to be handled by the
+	  operating system.  It is also the mechanism used to trap
+	  into the operating system for <emphasis>system
+	  calls</emphasis>, as discussed in <xref
+	  linkend="system_calls"></xref> and to implement virtual
+	  memory, as discussed in <xref linkend="chapter05"></xref>.
+	  Although generated internally rather than from an external
+	  source, the principles of asynchronously interrupting the
+	  running code remains the same.</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Types of interrupts</title>
+
+	  <para>There are two main ways of signalling interrupts on a
+	    line &mdash; <emphasis>level</emphasis> and
+	    <emphasis>edge</emphasis> triggered.</para>
+
+	  <para>Level-triggered interrupts define voltage of the
+	  interrupt line being held high to indicate an interrupt is
+	  pending.  Edge-triggered interrupts detect
+	  <emphasis>transitions</emphasis> on the bus; that is when
+	  the line voltage goes from low to high.  With an
+	  edge-triggered interrupt, a square-wave pulse is detected by
+	  the PIC as signalling and interrupt has been raised.</para>
+
+	  <para>The difference is pronounced when devices share an
+	  interrupt line.  In a level-triggered system, the interrupt
+	  line will be high until all devices that have raised an
+	  interrupt have been processed and un-asserted their
+	  interrupt.</para>
+
+	  <para>In an edge-triggered system, a pulse on the line will
+	  indicate to the PIC that an interrupt has occurred, which it
+	  will signal to the operating system for handling.  However,
+	  if further pulses come in on the already asserted line from
+	  another device.</para>
+
+	  <para>The issue with level-triggered interrupts is that it
+	  may require some considerable amount of time to handle an
+	  interrupt for a device.  During this time, the interrupt
+	  line remains high and it is not possible to determine if any
+	  other device has raised an interrupt on the line.  This
+	  means there can be considerable unpredictable latency in
+	  servicing interrupts.</para>
+
+	  <para>With edge-triggered interrupts, a long-running
+	  interrupt can be noticed and queued, but other devices
+	  sharing the line can still transition (and hence raise
+	  interrupts) while this happens.  However, this introduces
+	  new problems; if two devices interrupt at the same time it
+	  may be possible to miss one of the interrupts, or
+	  environmental or other interference may create a
+	  <emphasis>spurious</emphasis> interrupt which should be
+	  ignored.</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Non-maskable interrupts</title>
+
+	  <para>It is important for the system to be able to
+	  <emphasis>mask</emphasis> or prevent interrupts at certain
+	  times.  Generally, it is possible to put interrupts on hold,
+	  but a particular class of interrupts, called
+	  <emphasis>non-maskable interrupts</emphasis> (NMI), are the
+	  exception to this rule.  The typical example is the
+	  <emphasis>reset</emphasis> interrupt.</para>
+
+	  <para>NMIs can be useful for implementing things such as a
+	  system watchdog, where a NMI is raised periodically and sets
+	  some flag that must be acknowledged by the operating system.
+	  If the acknowledgement is not seen before the next periodic
+	  NMI, then system can be considered to be not making forward
+	  progress.  Another common usage is for profiling a system.
+	  A periodic NMI can be raised and used to evaluate what code
+	  the processor is currently running; over time this builds a
+	  profile of what code is being run and create a very useful
+	  insight into system performance.</para>
+
+	</sect4>
+
       </sect3>
-	
+
       <sect3>
 	<title>IO Space</title>
-	  
+
 	<para>Obviously the processor will need to communicate with
 	the peripheral device, and it does this via IO operations.
 	The most common form of IO is so called <emphasis>memory
 	mapped IO</emphasis> where registers on the device are
 	<emphasis>mapped</emphasis> into memory.</para>
-	
+
 	<para>This means that to communicate with the device, you need
 	simply read or write to a specific address in memory.  TODO:
 	expand</para>
-	
+
       </sect3>
 
     </sect2>
-    
+
     <sect2>
       <title>DMA</title>
 
       <para>Since the speed of devices is far below the speed of processors,
     there needs to be some way to avoid making the CPU wait around
     for data from devices.</para>
-      
-      
+
       <para>Direct Memory Access (DMA) is a method of transferring
 	data directly between an peripheral and system RAM.</para>
-      
+
       <para>The driver can setup a device to do a DMA transfer by
 	giving it the area of RAM to put it's data into.  It can then
 	start the DMA transfer and allow the CPU to continue with
 	other tasks.</para>
-      
+
       <para>Once the device is finished, it will raise an interrupt
 	and signal to the driver the transfer is complete.  From this
 	time the data from the device (say a file from a disk, or

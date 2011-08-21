@@ -449,9 +449,8 @@
   </sect1>
 
 
-  <sect1>
+  <sect1 id="system_calls">
     <title>System Calls</title>
-
 
     <sect2>
       <title>Overview</title>
@@ -459,9 +458,9 @@
       <para>System calls are how userspace programs interact with the
     kernel.  The general principle behind how they work is described
     below.</para>
-      
+
     <sect3>
-      <title>System call numbers</title> 
+      <title>System call numbers</title>
 
 	<para>Each and every system call has a <emphasis>system call
 	number</emphasis> which is known by both the userspace and the
