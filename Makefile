@@ -1,11 +1,14 @@
 sourcedirs=chapter00 chapter01 chapter02 chapter03 chapter04 chapter05 chapter06 chapter07 chapter08 chapter09
-imagedirs=chapter00/figures chapter01/figures chapter02/figures chapter03/figures chapter04/figures chapter05/figures chapter06/figures chapter07/figures chapter08/figures
+figuredirs=chapter00/figures chapter01/figures chapter02/figures chapter03/figures chapter04/figures chapter05/figures chapter06/figures chapter07/figures chapter08/figures
+imagedirs=chapter02/images
 
 sources := $(foreach dir,$(sourcedirs),$(wildcard $(dir)/*.sgml))
-images := $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.xfig))
-pngs := $(patsubst %.xfig,%.png,$(images))
-epss := $(patsubst %.xfig,%.eps,$(images))
+figures := $(foreach dir,$(figuredirs),$(wildcard $(dir)/*.xfig))
+pngs := $(patsubst %.xfig,%.png,$(figures))
+epss := $(patsubst %.xfig,%.eps,$(figures))
 
+pngs += $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.png))
+epss += $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.eps))
 
 #rules to convert xfigs to png/eps
 %.png : %.xfig

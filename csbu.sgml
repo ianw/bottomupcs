@@ -2,9 +2,7 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
   "/usr/share/xml/docbook/schema/dtd/4.4/docbookx.dtd" [
 
-<!-- Computer Science from the Bottom UP 
-     a short course on the practical side of computer science for
-     highschool students
+<!-- Computer Science from the Bottom Up
 
     Copyright (c)  2004,2005,2006,2007,2008,2009,2010,2011  Ian Wienand
     Permission is granted to copy, distribute and/or modify this document
@@ -57,10 +55,12 @@
    <year>2011</year>
    <holder role="mailto:ian@wienand.org">Ian Wienand</holder>
   </copyright>
-  <pubdate role="rcs">$Id$</pubdate>
 
   <abstract>
-   <para>&csbu; is a short course teaching students about the computer from the bottom end up.  Topics covered include binary and binary logic, operating systems fundamentals, compiler fundamentals, system library fundamentals and more.</para>
+   <para>&csbu; A book designed to teach computer science from the
+   bottom end up.  Topics covered include binary and binary logic,
+   operating systems fundamentals, toolchain fundamentals and system
+   library fundamentals.</para>
   </abstract>
 
   <legalnotice>

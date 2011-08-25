@@ -1001,23 +1001,112 @@ multiplex the output of the many sets, which can also add latency.
     <sect2>
       <title>Other Busses</title>
 
-    <para>Other busses connect between the PCI bus and external
-    devices.  Some you will have heard of</para>
+      <para>Other buses connect between the PCI bus and external
+	devices.</para>
 
-    <itemizedlist>
-      <listitem>
-	<para>USB/Firewire for small external data devices.</para>
-      </listitem>
-      <listitem>
-	<para>IDE/SCSI for disk drives.</para>
-      </listitem>
-    </itemizedlist>
+      <sect3>
+	<title>USB</title>
+
+	<para>From an operating system point of view, a USB device is
+	a group of end-points grouped together into an interface. An
+	end-point can be either <emphasis>in</emphasis> or
+	<emphasis>out</emphasis> and hence transfers data in one
+	direction only. End-points can have a number of different
+	types:</para>
+
+	<itemizedlist>
+
+	  <listitem>
+	    <para><emphasis>Control</emphasis> end-points are for
+	    configuring the device, etc.</para>
+	  </listitem>
+
+	  <listitem>
+	    <para><emphasis>Interrupt</emphasis> end-points are for
+	    transferring small amounts of data. They have higher
+	    priority than ...</para>
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>Bulk</emphasis> end-points, which transfer
+	    large amounts of data but do not get guaranteed time
+	    constraints.</para>
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>Isochronous</emphasis> transfers are
+	    high-priority real-time transfers, but if they are missed
+	    they are not re-tried. This is for streaming data like
+	    video or audio where there is no point sending data again.</para>
+	  </listitem>
+	</itemizedlist>
+
+	<para>There can be many interfaces (made of multiple
+	end-points) and interfaces are grouped into
+	<emphasis>configurations</emphasis>.  However Most devices
+	only have a single configuration.</para>
+
+      <figure id="uhci">
+      <title>Overview of a UHCI controller operation</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="chapter02/images/uhci.eps" format="EPS" />
+	</imageobject>
+	<imageobject>
+	  <imagedata fileref="chapter02/images/uhci.png" format="PNG" />
+	</imageobject>
+	    <caption><para>An overview of a UCHI controller, taken
+  from <ulink
+  url="http://download.intel.com/technology/usb/UHCI11D.pdf">Intel
+  documentation</ulink>.</para></caption>
+	  </mediaobject>
+	</figure>
+
+	<para><xref linkend="uhci"></xref> shows an overview of a
+	universal host controller interface, or UHCI.  It provides an
+	overview of how USB data is moved out of the system by a
+	combination of hardware and software.  Essentially, the
+	software sets up a template of data in a specified format for
+	the host controller to read and send across the USB
+	bus.</para>
+
+	<para>Starting at the top-left of the overview, the controller
+	has a <emphasis>frame</emphasis> register with a counter which
+	is incremented periodically &mdash; every millisecond.  This
+	value is used to index into a <emphasis>frame list</emphasis>
+	created by software.  Each entry in this table points to a
+	queue of <emphasis>transfer descriptors</emphasis>.  Software
+	sets up this data in memory, and it is read by the host
+	controller which is a separate chip the drives the USB bus.
+	Software needs to schedule the work queues so that 90% of a
+	frame time is given to isochronous data, and 10% left for
+	interrupt, control and bulk data..</para>
+
+	<para>As you can see from the diagram, the way the data is
+	linked means that transfer descriptors for isochronous data
+	are associated with only one particular frame pointer &mdash;
+	in other words only one particular time period &mdash and
+	after that will be discarded.  However, the interrupt, control
+	and bulk data are all <emphasis>queued</emphasis> after the
+	isochronous data and thus if not transmitted in one frame
+	(time period) will be done in the next.</para>
+
+	<para>The USB layer communicates through USB <emphasis>request
+	blocks</emphasis>, or URBs. A URB contains information about
+	what end-point this request relates to, data, any related
+	information or attributes and a call-back function to be
+	called when the URB is complete. USB drivers submit URBs in a
+	fixed format to the USB core, which manages them in
+	co-ordination with the USB host controller as above. Your data
+	gets sent off to the USB device by the USB core, and when its
+	done your call-back is triggered.</para>
+
+      </sect3>
+
   </sect2>
   </sect1>
-  
+
   <sect1>
     <title>Small to big systems</title>
-    
+
     <para>As Moore's law has predicted, computing power has been
     growing at a furious pace and shows no signs of slowing down.  It
     is relatively uncommon for any high end servers to contain only a
