@@ -5,12 +5,7 @@
 <!-- Computer Science from the Bottom Up
 
     Copyright (c)  2004,2005,2006,2007,2008,2009,2010,2011  Ian Wienand
-    Permission is granted to copy, distribute and/or modify this document
-    under the terms of the GNU Free Documentation License, Version 1.2
-    or any later version published by the Free Software Foundation;
-    with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
-    A copy of the license is included in the section entitled "GNU
-    Free Documentation License".
+
 -->
 
 <!ENTITY intro SYSTEM "intro.sgml">
@@ -63,12 +58,12 @@
    library fundamentals.</para>
   </abstract>
 
-  <legalnotice>
+  <legalnotice id="legal">
  
   <para>This work is licensed under the Creative Commons
   Attribution-ShareAlike License. To view a copy of this license,
   visit <ulink
-  url="http://creativecommons.org/licenses/by-sa/2.0/">http://creativecommons.org/licenses/by-sa/2.0/</ulink>
+  url="http://creativecommons.org/licenses/by-sa/3.0/">http://creativecommons.org/licenses/by-sa/3.0/</ulink>
   or send a letter to Creative Commons, 559 Nathan Abbott Way,
   Stanford, California 94305, USA.
 </para>
