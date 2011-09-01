@@ -1,8 +1,8 @@
 <chapter id="chapter03">
-  
+
   <title>The Operating System</title>
 
-  <sect1>
+  <sect1 id="role_of_operating_system">
     <title>The role of the operating system</title>
 
     <para>The operating system underpins the entire operation of the
@@ -134,7 +134,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="organisation_of_os">
     <title>Operating System Organisation</title>
 
     <para>The operating system is roughly organised as in the figure
@@ -826,7 +826,7 @@
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="privileges">
     <title>Privileges</title>
 
     <sect2>

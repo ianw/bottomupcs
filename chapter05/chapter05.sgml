@@ -2,7 +2,7 @@
 
   <title>Virtual Memory</title>
 
-  <sect1>
+  <sect1 id="virtual_memory_isnt">
     <title>What Virtual Memory <emphasis>isn't</emphasis></title>
 
     <para>Virtual memory is often naively discussed as a way to
@@ -23,7 +23,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="virtual_memory_is">
     <title>What virtual memory <emphasis>is</emphasis></title>
 
     <para>Virtual memory is all about making use of <emphasis>address
@@ -143,7 +143,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="virtual_memory_pages">
     <title>Pages</title>
 
     <para>The total address-space is divided into individual
@@ -177,7 +177,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="physical_memory">
     <title>Physical Memory</title>
 
     <para>Just as the operating system divides the possible address
@@ -189,7 +189,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="page_tables">
     <title>Pages + Frames = Page Tables</title>
 
     <para>The job of the operating system is to keep track of which
@@ -210,7 +210,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="virtual_addresses">
     <title>Virtual Addresses</title>
 
     <para>When a program accesses memory, it does not know or care
@@ -295,7 +295,7 @@
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="virtual_address_and_page_tables">
     <title>Consequences of virtual addresses, pages and page tables</title>
 
     <para>Virtual addressing, pages and page tables opens up a number
@@ -478,7 +478,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="virtual_memory_hardware">
     <title>Hardware Support</title>
 
     <para>So far, we have only mentioned that hardware works with the
@@ -745,7 +745,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="virtual_memory_linux">
     <title>Linux Specifics</title>
 
     <para>Although the basic concepts of virtual memory remain

@@ -67,6 +67,8 @@
 (define %admon-graphics-path%
   "images/")
 
+(define %use-id-as-filename% #t)
+
 </style-specification-body>
 </style-specification>
 

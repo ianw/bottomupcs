@@ -2,7 +2,7 @@
 
   <title>Dynamic Linking</title>
 
-  <sect1>
+  <sect1 id="code_sharing">
 
     <title>Code Sharing</title>
 
@@ -153,7 +153,7 @@
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="dynamic_linker">
     <title>The Dynamic Linker</title>
 
     <para>The dynamic linker is the program that manages shared
@@ -351,7 +351,7 @@
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="global_offset_tables">
     <title>Global Offset Tables</title>
 
     <para>You might have noticed a critical problem with relocations
@@ -504,7 +504,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="dynamic_libraries">
     <title>Libraries</title>
 
     <sect2>
@@ -815,7 +815,7 @@
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="libraries_and_the_linker">
     <title>Working with libraries and the linker</title>
 
     <para>The presence of the dynamic linker provides both some

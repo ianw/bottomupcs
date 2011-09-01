@@ -2,7 +2,7 @@
   
   <title>General Unix and Advanced C</title>
 
-  <sect1>
+  <sect1 id="everything_is_a_file">
     <title><emphasis>Everything is a file!</emphasis></title>
 
     <para>If you learn nothing else, you should remember that in UNIX
@@ -41,7 +41,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="abstration">
     <title>Abstraction and function pointers</title>
 
     <para>To a programmer, reading data from the keyboard or the CDROM
@@ -188,7 +188,7 @@
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="file_descriptors">
     <title>Standard File Descriptors</title>
     <para>Every running program under Unix starts with three files already opened</para>
     <table>
@@ -309,9 +309,6 @@
 
 
   </sect1>
-
-
-
 
 </chapter>
 

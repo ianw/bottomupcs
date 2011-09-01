@@ -2,7 +2,7 @@
 
   <title>Binary and Number Representation</title>
 
-  <sect1>
+  <sect1 id="binary">
     <title>Binary -- the basis of computing</title>
 
     <sect2>
@@ -993,7 +993,7 @@
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="types">
     <title>Types and Number Representation</title>
 
     <sect2>
@@ -1993,25 +1993,7 @@ $ ./float 8.45
     </sect2>
 
   </sect1>
-  <sect1>
-    <title>Exercises</title>
-      <itemizedlist>
-	<listitem>
-	  <para>Write all 16 hexadecimal digits in binary, from memory.</para>
-      </listitem>
-      <listitem>
-	<para>Use the <computeroutput>sizeof</computeroutput> operator
-	in C to find and print the size of ...</para>
-      </listitem>
-      <listitem>
-	<para>It is possible to use the XOR operation to swap two
-	  variables without requiring an temporary variable.  Play
-	  around with it, and see if you can figure out
-	  how.</para>
-      </listitem>
-    </itemizedlist>
-  </sect1>
-  
+
 </chapter>
 
 <!--

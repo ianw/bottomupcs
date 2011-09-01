@@ -2,7 +2,8 @@
   
   <title>Introduction</title>
   
-  <sect1><title>Welcome</title>
+  <sect1 id="welcome">
+    <title>Welcome</title>
     <para>Welcome to &csbu;</para>
     <sect2>
       <title>Philosophy</title>

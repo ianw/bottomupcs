@@ -2,7 +2,7 @@
   
   <title>Computer Architecture</title>
 
-  <sect1>
+  <sect1 id="the_cpu">
     <title>The CPU</title>
     
     <figure>
@@ -431,7 +431,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="memory">
     <title>Memory</title>
 
     <sect2>
@@ -771,7 +771,7 @@ multiplex the output of the many sets, which can also add latency.
 
     </sect1>
 
-  <sect1>
+  <sect1 id="peripherals">
     <title>Peripherals and busses</title>
 
     <para>Peripherals are any of the many external devices that
@@ -1104,7 +1104,7 @@ multiplex the output of the many sets, which can also add latency.
   </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="small_to_big_systems">
     <title>Small to big systems</title>
 
     <para>As Moore's law has predicted, computing power has been
@@ -1782,17 +1782,6 @@ multiplex the output of the many sets, which can also add latency.
 
 
   </sect1>
-
-    <sect1>
-      <title>Exercises</title>
-      <itemizedlist>
-	<listitem>
-	  <para>Explain why the clock speed, given in cycles per
-	  second, is not the best indicator of actual processor
-	  speed.</para>
-	</listitem>
-      </itemizedlist>
-    </sect1>
 
 </chapter>
 

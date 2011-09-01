@@ -2,7 +2,7 @@
 
   <title>Behind the process</title>
 
-  <sect1>
+  <sect1 id="executable_files">
     <title>Review of executable files</title>
 
     <para>We know that a program running in memory has two major
@@ -16,7 +16,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="representing_executables">
     <title>Representing executable files</title>
 
     <sect2>
@@ -115,7 +115,7 @@
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="elf">
     <title>ELF</title>
     
     <para>ELF is an extremely flexible format for representing binary
@@ -531,7 +531,7 @@
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="libraries">
     <title>Libraries</title>
 
     <para>Developers soon tired of having to write everything from
@@ -768,7 +768,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="starting_a_process">
     <title>Starting a process</title>
 
     <para>We mentioned before that simply saying the program starts

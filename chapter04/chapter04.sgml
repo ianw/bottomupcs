@@ -1,8 +1,8 @@
 <chapter id="chapter04">
-  
+
   <title>The Process</title>
 
-  <sect1>
+  <sect1 id="process">
     <title>What is a process?</title>
 
     <para>We are all familiar with the modern operating system running
@@ -14,7 +14,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="elements_of_a_process">
     <title>Elements of a process</title>
 
     <figure>
@@ -439,7 +439,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="process_hierarchy">
     <title>Process Hierarchy</title>
  
     <para>Whilst the operating system can run many processes at the
@@ -474,7 +474,7 @@
   </sect1>
 
 
-  <sect1>
+  <sect1 id="fork_and_exec">
     <title>Fork and Exec</title>
 
     <para>New processes are created by the two related interfaces
@@ -749,7 +749,7 @@
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="context_switching">
     <title>Context Switching</title>
 
     <para>Context switching refers to the process the kernel
@@ -757,7 +757,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="scheduling">
     <title>Scheduling</title>
 
     <para>A running system has many processes, maybe even into the
@@ -922,7 +922,7 @@ get around to interacting with it wants a fast response).</para></sect2>
 
   </sect1>
 
-  <sect1>
+  <sect1 id="the_shell">
     <title>The Shell</title>
 
     <para>On a UNIX system, the shell is the standard interface to
@@ -958,7 +958,7 @@ get around to interacting with it wants a fast response).</para></sect2>
 
   </sect1>
 
-  <sect1>
+  <sect1 id="signals">
     <title>Signals</title>
 
     <para>Processes running in the system require a way to be told

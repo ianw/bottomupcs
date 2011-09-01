@@ -2,7 +2,7 @@
   
   <title>The Toolchain</title>
 
-  <sect1>
+  <sect1 id="compiled_v_interpreted">
     <title>Compiled v Interpreted Programs</title>
 
     <sect2>
@@ -76,7 +76,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="building_an_executable">
     <title>Building an executable</title>
 
     <para>When we talk about the compiler, there are actually three
@@ -104,7 +104,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="compiling">
     <title>Compiling</title>
 
     <sect2>
@@ -499,7 +499,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="assembler">
     <title>Assembler</title>
 
     <para>The assembly code outputted by the compiler is still in a
@@ -526,7 +526,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="linker">
     <title>Linker</title>
 
     <para>Often in a large program, you will separate out code into
@@ -660,7 +660,7 @@
 
   </sect1>
 
-  <sect1>
+  <sect1 id="compilation_example">
     <title>A practical example</title>
 
     <para>We can walk through the steps taken to build a simple
@@ -945,7 +945,6 @@
     </sect2>
 
   </sect1>
-
 
 </chapter>
 
