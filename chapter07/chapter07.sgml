@@ -832,7 +832,7 @@
       kernel has identified the underlying hardware has that userspace
       programs can take advantage of.</para>
 
-      <sect3>
+      <sect3 id="kernel_library">
 	<title>Kernel Library</title>
 
 	<para>We mentioned previously that system calls are slow, and

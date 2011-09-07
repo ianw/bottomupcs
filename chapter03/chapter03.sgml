@@ -149,13 +149,13 @@
 	<imageobject>
 	  <imagedata fileref="chapter03/figures/kernel.png" format="PNG" />
 	</imageobject>
-	<textobject>
-	  <phrase>The organisation of the kernel.  Processes the
+	<caption>
+	  <para>The organisation of the kernel.  Processes the
 	  kernel is running live in <emphasis>userspace</emphasis>,
 	  and the kernel talks both directly to hardware and through
 	  <emphasis>drivers</emphasis>.
-	  </phrase>
-	</textobject>
+	  </para>
+	</caption>
       </mediaobject>
     </figure>
 
@@ -306,9 +306,9 @@
 	    <imageobject>
 	      <imagedata fileref="chapter03/figures/virtual.png" format="PNG" />
 	    </imageobject>
-	    <textobject>
-	  <phrase>Some different virtualisation methods.</phrase>
-	    </textobject>
+	    <caption>
+	  <para>Some different virtualisation methods.</para>
+	    </caption>
 	  </mediaobject>
 	</figure>
 
@@ -873,9 +873,9 @@
 	    <imageobject>
 	      <imagedata fileref="chapter03/figures/priv.png" format="PNG" />
 	    </imageobject>
-	    <textobject>
-	      <phrase>Privilege levels on x86</phrase>
-	    </textobject>
+	    <caption>
+	      <para>Privilege levels on x86</para>
+	    </caption>
 	  </mediaobject>
 	</figure>
 
@@ -900,7 +900,7 @@
 	but most will either provide for at least a "kernel" and
 	"user" level.</para>
 
-	<sect4>
+	<sect4 id="x86_protection">
 	  <title>386 protection model</title>
 
 	  <para>The 386 protection model has four rings, though most
@@ -922,7 +922,7 @@
 
 	</sect4>
 
-	<sect4>
+	<sect4 id="raising_privilege">
 	  <title>Raising Privilege</title>
 
 	  <para>Applications may only raise their privilege level by
@@ -941,17 +941,171 @@
 	to do any operation it wants; when it is finished it will
 	return control back to the application which will again be
 	running with it's lower privilege level.</para>
+
 	</sect4>
 
 	<sect4>
 	  <title>Fast System Calls</title>
 
-	  <para>One problem with traps is that they are very expensive
-	  for the processor to implement.  The process of looking up
-	  the tables </para>
+	  <para>One problem with traps as described above is that they
+	  are very expensive for the processor to implement.  There is
+	  a lot of state to be saved before context can switch.
+	  Modern processors have realised this overhead and strive to
+	  reduce it.</para>
 
-	  <para>Modern processors have realised this overhead and
-	  strive to reduce it.</para>
+          <para>To understand the call-gate mechanism described above
+          requires investigation of the ingenious but complicated
+          segmentation scheme used by the processor.  The original
+          reason for segmentation was to be able to use more than the
+          16 bits available in a register for an address, as
+          illustrated in <xref
+          linkend="x86_segmentation"></xref>.</para>
+
+	  <figure id="x86_segmentation">
+	    <title>x86 Segmentation Adressing</title>
+	    <mediaobject>
+	      <imageobject>
+		<imagedata fileref="chapter03/figures/ia32-segmentation.eps" format="EPS" />
+	      </imageobject>
+	      <imageobject>
+		<imagedata fileref="chapter03/figures/ia32-segmentation.png" format="PNG" />
+	      </imageobject>
+	      <caption>
+		<para>Segmentation expanding the address space of a
+		  processor by dividing it into chunks.  The processor
+		  keeps special segment registers, and addresses are
+		  specified by a segment register and offset
+		  combination.  The value of the segment register is
+		  added to the offset portion to find a final address.
+		</para>
+	      </caption>
+	    </mediaobject>
+	  </figure>
+
+	  <para>When x86 moved to 32 bit registers, the segmentation
+	    scheme remained but in a different format.  Rather than
+	    fixed segment sizes, segments are allowed to be any size.
+	    This means the processor needs to keep track of all these
+	    different segments and their sizes, which it does using
+	    <emphasis>descriptors</emphasis>.  The segment descriptors
+	    available to everyone are kept in the <emphasis>global
+	    descriptor table</emphasis> or GDT for short.  Each
+	    process has a number of registers which point to entries
+	    in the GDT; these are the segments the process can access
+	    (there are also <emphasis>local</emphasis> descriptor
+	    tables, and it all interacts with task state segments, but
+	    that's not important now).  The overall situation is
+	    illustrated in <xref
+	    linkend="x86_segments"></xref>.</para>
+
+	  <figure id="x86_segments">
+	    <title>x86 segments</title>
+	    <mediaobject>
+	      <imageobject>
+		<imagedata fileref="chapter03/figures/ia32-segments.eps" format="EPS" />
+	      </imageobject>
+	      <imageobject>
+		<imagedata fileref="chapter03/figures/ia32-segments.png" format="PNG" />
+	      </imageobject>
+	      <caption>
+		<para>x86 segments in action.  Notice how a "far-call"
+		passes via a call-gate which redirects to a segment of
+		code running at a lower ring level.  The only way to
+		modify the code-segment selector, implicitly used for
+		all code addresses, is via the call mechanism.  Thus
+		the call-gate mechanism ensures that to choose a new
+		segment descriptor, and hence possibly change
+		protection levels, you must transition via a known
+		entry point.</para>
+	      </caption>
+	    </mediaobject>
+	  </figure>
+
+	  <para>Since the operating system assigns the segment
+	    registers as part of the process state, the processor
+	    hardware knows what segments of memory the currently
+	    running process can access and can enforce
+	    <emphasis>protection</emphasis> to ensure the process
+	    doesn't touch anything it is not supposed to.  If it does
+	    go out of bounds, you receive a <emphasis>segmentation
+	    fault</emphasis>, which most programmers are familiar
+	    with.</para>
+
+	  <para>The picture becomes more interesting when running code
+	    needs to make calls into code that resides in
+	    <emphasis>another</emphasis> segment.  As discussed in
+	    <xref linkend="x86_protection"></xref>, x86 does this with
+	    <emphasis>rings</emphasis>, where ring 0 is the highest
+	    permission, ring 3 is the lowest, and inner rings can
+	    access outer rings but not vice-versa.</para>
+
+	  <para>As discussed in <xref
+	    linkend="raising_privilege"></xref>, when ring 3 code
+	    wants to jump into ring 0 code, it is essentially
+	    modifying its code segment selector to point to a
+	    different segment.  To do this, it must use a special
+	    <emphasis>far-call</emphasis> instruction which hardware
+	    ensures passes through the call gate.  There is no other
+	    way for the running process to choose a new code-segment
+	    descriptor, and hence the processor will start executing
+	    code at the known offset within the ring 0 segment, which
+	    is responsible for maintaining integrity (e.g. not reading
+	    arbitrary and possibly malicious code and executing it.
+	    Of course nefarious attackers will always look for ways to
+	    make your code do what you did not intend it to!).</para>
+
+	  <para>This allows a whole hierarchy of segments and
+	    permissions between them.  You might have noticed a cross
+	    segment call sounds exactly like a system call.  If you've
+	    ever looked at Linux x86 assembly the standard way to make
+	    a system call is <computeroutput>int
+	    0x80</computeroutput>, which raises interrupt
+	    <computeroutput>0x80</computeroutput>.  An interrupt stops
+	    the processor and goes to an interrupt gate, which then
+	    works the same as a call gate -- it changes privilege
+	    level and bounces you off to some other area of code
+	    .</para>
+
+	  <para>The problem with this scheme is that it is
+	    <emphasis>slow</emphasis>.  It takes a lot of effort to do
+	    all this checking, and many registers need to be saved to
+	    get into the new code.  And on the way back out, it all
+	    needs to be restored again.</para>
+
+	  <para>On a modern x86 system segmentation and the four-level
+	    ring system is not used thanks to virtual memory,
+	    discussed fully in <xref linkend="chapter05"></xref>.  The
+	    only thing that really happens with segmentation switching
+	    is system calls, which essentially switch from mode 3
+	    (userspace) to mode 0 and jump to the system call handler
+	    code inside the kernel.  Thus the processor provides extra
+	    <emphasis>fast system call</emphasis> instructions called
+	    <computeroutput>sysenter</computeroutput> (and
+	    <computeroutput>sysexit</computeroutput> to get back)
+	    which speed up the whole process over a
+	    <computeroutput>int 0x80</computeroutput> call by removing
+	    the general nature of a far-call &mdash; that is the
+	    possibility of transitioning into any segment at any ring
+	    level &mdash; and restricting the call to only transition
+	    to ring 0 code at a specific segment and offset, as stored
+	    in registers.</para>
+
+	  <para>Because the general nature has been replaced with so
+	    much prior-known information, the whole process can be
+	    speed up, and hence we have a the aforementioned
+	    <emphasis>fast system call</emphasis>.  The other thing to
+	    note is that state is not preserved when the kernel gets
+	    control.  The kernel has to be careful to not to destroy
+	    state, but it also means it is free to only save as little
+	    state as is required to do the job, so can be much more
+	    efficient about it.  This is a very RISC philosophy, and
+	    illustrates how the line blurs between RISC and CISC
+	    processors.</para>
+
+	  <para>For more information on how this is implemented in the
+	    Linux kernel, see <xref
+	    linkend="kernel_library"></xref>.</para>
+
 	</sect4>
 
       </sect3>

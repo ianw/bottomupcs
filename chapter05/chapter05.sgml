@@ -511,8 +511,8 @@
       processor implements a form of memory organisation called
       segmentation.</para>
 
-      <sect3>
-	<title>Segmentation</title>
+      <sect3 id="issues_with_segmentation">
+	<title>Issues with segmentation</title>
 
 	<para>Segmentation is really only interesting as a historical
 	note, since virtual memory has made it less relevant.
