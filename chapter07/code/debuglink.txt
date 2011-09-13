@@ -1,0 +1,10 @@
+$ gcc -g -shared -o libtest.so libtest.c
+$ objcopy --only-keep-debug libtest.so libtest.debug
+$ objcopy --add-gnu-debuglink=libtest.debug libtest.so
+$ objdump -s -j .gnu_debuglink libtest.so
+
+libtest.so:     file format elf32-i386
+
+Contents of section .gnu_debuglink:
+ 0000 6c696274 6573742e 64656275 67000000  libtest.debug...
+ 0010 52a7fd0a                             R... 
