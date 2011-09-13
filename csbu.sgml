@@ -52,10 +52,10 @@
   </copyright>
 
   <abstract>
-   <para>&csbu; A book designed to teach computer science from the
-   bottom end up.  Topics covered include binary and binary logic,
-   operating systems fundamentals, toolchain fundamentals and system
-   library fundamentals.</para>
+   <para>&csbu; &mdash; A free, online book designed to teach computer
+   science from the bottom end up.  Topics covered include binary and
+   binary logic, operating systems internals, toolchain fundamentals
+   and system library fundamentals.</para>
   </abstract>
 
   <legalnotice id="legal">

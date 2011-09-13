@@ -117,22 +117,22 @@
 
   <sect1 id="elf">
     <title>ELF</title>
-    
+
     <para>ELF is an extremely flexible format for representing binary
     code in a system.  By following the ELF standard you can represent
     a kernel binary just as easily as a normal executable or a system
     library.  The same tools can be used to inspect and operate on all
     ELF files and developers who understand the ELF file format can
     translate their skills to most modern UNIX systems.</para>
-    
+
     <sect2>
       <title>ELF in depth</title>
-      
+
       <para>ELF extends on COFF and gives the header sufficient
     flexibility to define an arbitrary number of sections, each with
     it's own properties.  This facilitates easier dynamic linking and
-    debugging (XXX need more talk of debug).</para>
-      
+    debugging.</para>
+
       <figure>
 	<title>ELF Overview</title>
 	<mediaobject>
@@ -147,6 +147,7 @@
 	  </textobject>
 	</mediaobject>
       </figure>
+
       <sect3>
 
 	<title>ELF File Header</title>
@@ -217,7 +218,7 @@
 	<para>The apparently innocuous entry point address seems
 	  straight forward enough; this is the address in memory that
 	  the program code starts at.</para>
-	
+
 	<para>Beginning C programmers are told that
 	  <emphasis>main()</emphasis> is the first program called in
 	  your program.  Using the entry point address we can actually
@@ -231,7 +232,7 @@
 	      </imageobject>
 	    </inlinemediaobject></programlisting>
 	</example>
-	
+
 	<para>Above we can see that the entry point is actually a
 	  function called <computeroutput>_start</computeroutput>.
 	  Our program didn't define this at all, and the leading
@@ -242,6 +243,39 @@
 	<para>After that the header contians pointers to where in the
 	file other important parts of the ELF file start, like a table
 	of contents.</para>
+
+      </sect3>
+
+      <sect3 id="symbols_and_relocations">
+	<title>Symbols and Relocations</title>
+
+	<para>The ELF specification provides for <emphasis>symbol
+	tables</emphasis> which are simply mappings of strings
+	(symbols) to locations in the file.  Symbols are required for
+	linking; for example assigning a value to a variable
+	<computeroutput>foo</computeroutput> declared as
+	<computeroutput>extern int foo;</computeroutput> would require
+	the linker to find the address of
+	<computeroutput>foo</computeroutput>, which would involve
+	looking up "foo" in the symbol table and finding the
+	address.</para>
+
+	<para>Closely related to symbols are
+	<emphasis>relocations</emphasis>.  A relocation is simply a
+	blank space left to be patched up later.  In the previous
+	example, until the address of
+	<computeroutput>foo</computeroutput> is known it can not be
+	used.  However, on a 32-bit system, we know the
+	<emphasis>address</emphasis> of
+	<computeroutput>foo</computeroutput> must be a 4-byte value,
+	so any time the compiler needs to use that address (to say,
+	assign a value) it can simply leave 4-byes of blank space and
+	keep a relocation that essentially says to the linker "place
+	the real value of "foo" into the 4 bytes at this address".  As
+	mentioned, this requires the symbol "foo" to be resolved.
+	<xref linkend="dynamic_relocations"></xref> contains further
+	information on relocations.
+	</para>
 
       </sect3>
 
@@ -283,8 +317,8 @@
 		  <imagedata fileref="chapter07/code/program-header.txt" format="linespecific" />
 	      </imageobject>
 	      </inlinemediaobject></programlisting>
-	  </example>    
-	  
+	  </example>
+
 	  <para>The definition of the program header is seen above.
 	  You might have noticed from the ELF header definition above
 	  how there were fields
@@ -373,7 +407,7 @@
 		  <imagedata fileref="chapter07/code/section-header.txt" format="linespecific" />
 		</imageobject>
 	      </inlinemediaobject></programlisting>
-	  </example>    
+	  </example>
 
 	  <para>Sections have a few more types defined for the
 	  <computeroutput>sh_type</computeroutput> field; for example
@@ -399,7 +433,7 @@
 		  <imagedata fileref="chapter07/code/sections.c" format="linespecific" />
 		</imageobject>
 	      </inlinemediaobject></programlisting>
-	  </example>    
+	  </example>
 
 	  <example id="section-readelf">
 	    <title>Sections readelf output </title>
@@ -531,6 +565,115 @@
     </sect2>
   </sect1>
 
+  <sect1>
+    <title>ELF Executables</title>
+
+    <sect2 id="elf_debugging">
+      <title>Debugging</title>
+
+      <para>Tradionally the primary method of post mortem debugging is
+	referred to as the <emphasis>core dump</emphasis>.  The term
+	<emphasis>core</emphasis> comes from the original physical
+	characteristics of magnetic core memory, which uses the
+	orientation of small magnetic rings to store state.
+      </para>
+
+      <para>Thus a core dump is simply a complete snapshot of the
+	program as it was running at a particular time.  A
+	<emphasis>debugger</emphasis> can then be used to examine this
+	dump and reconstruct the program state.  <xref
+	linkend="coredump_gdb"></xref> shows a sample program that
+	writes to a random memory location in order to force a crash.
+	At this point the processes will be halted and a dump of the
+	current state is recorded.</para>
+
+      <example id="coredump_gdb">
+	<title>Example of creating a core dump and using it with <productname>gdb</productname></title>
+	<programlisting><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="chapter07/code/core-gdb.txt" format="linespecific" />
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+
+      <sect3>
+	<title>Symbols and Debugging Information</title>
+
+	<para>As the example shows, the debugger
+	  <productname>gdb</productname> requires the original
+	  executable and the core dump to provide the debugging session.
+	  Note that the original executable was built with the
+	  <computeroutput>-g</computeroutput> flag, which instructs the
+	  compiler to include all <emphasis>debugging
+	    information</emphasis>.  Debugging information created by the
+	  compiler and is kept in special sections of the ELF file.  It
+	  describes in detail things like what register values currently
+	  hold which variables used in the code, size of variables,
+	  length of arrays, etc.  It is generally in the standard
+	  <emphasis>DWARF</emphasis> format (a pun on the homonym ELF).
+	</para>
+
+	<para>Including debugging information can make executable
+	  files and libraries very large; although this data is not
+	  required resident in memory for actually running it can
+	  still take up considerable disk space.  Thus the usual
+	  process is to <emphasis>strip</emphasis> this information
+	  from the ELF file.  While it is possible to arrange for
+	  shipping of both stripped and unstripped files, most all
+	  current binary distribution methods provide the debugging
+	  information in separate files.  The
+	  <productname>objcopy</productname> tool can be used to
+	  extract the debugging information
+	  (<computeroutput>--only-keep-debug</computeroutput>) and
+	  then add a link in the original executable to this stripped
+	  information
+	  (<computeroutput>--add-gnu-debuglink</computeroutput>).
+	  After this is done, a special section called
+	  <computeroutput>.gnu_debuglink</computeroutput> will be
+	  present in the original executable, which contains a hash so
+	  that when a debugging sessions starts the debugger can be
+	  sure it associates the right debugging information with the
+	  right executable.</para>
+
+	  <example id="strip_debug">
+	    <title>Example of stripping debugging information into
+	    separate files using
+	    <productname>objcopy</productname></title>
+	    <programlisting><inlinemediaobject>
+		<imageobject>
+		  <imagedata fileref="chapter07/code/debuglink.txt" format="linespecific" />
+	    </imageobject>
+	    </inlinemediaobject></programlisting>
+	  </example>
+
+	<para>Symbols take up much less space, but are also targets
+	for removal from final output.  Once the individual object
+	files of an executable are linked into the single final image
+	there is generally no need for most symbols to remain.  As
+	discussed in <xref linkend="symbols_and_relocations"></xref>
+	symbols are required to fix up relocation entries, but once
+	this is done the symbols are not strictly necessary for
+	running the final program.  On Linux the GNU toolchain
+	<productname>strip</productname> program provides options to
+	remove symbols.  Note that some symbols are required to be
+	resolved at run-time (for <emphasis>dynamic
+	linking</emphasis>, the focus of <xref
+	linkend="chapter08"></xref>) but these are put in separate
+	<emphasis>dynamic</emphasis> symbol tables so they will not be
+	removed and render the final output useless.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Coredumps</title>
+
+	<para>foo</para>
+      </sect3>
+    </sect2>
+
+
+  </sect1>
+
   <sect1 id="libraries">
     <title>Libraries</title>
 
@@ -572,7 +715,7 @@
 	their <computeroutput>.a</computeroutput> extension.  You can
 	think of archives as similar to a <command>zip</command> file,
 	but without compression.</para>
-	
+
 	<para>Below we show the creation of basic static library and
 	introduce some common tools for working with libraries.</para>
 
@@ -638,7 +781,7 @@
 	extra search directory for libraries, namely the current
 	directory (<option>-L .</option>), since by default the
 	current directory is not searched for libraries.</para>
-	
+
 	<para>The final result is a single executable with our new
 	library included.</para>
 
@@ -646,7 +789,7 @@
 
       <sect3>
 	<title>Static Linking Drawbacks</title>
-	
+
 	<para>Static linking is very straight forward, but has a number
       of drawbacks.</para>
 
@@ -656,20 +799,13 @@
       system that uses that library contains a copy in it's
       executable.  This is very inefficient (and a pain if you find a
       bug and have to recompile, as per point one).</para>
-	
+
 	<para>For example, the C library
       (<application>glibc</application>) is included in all programs,
       and provides all the common functions such as
       <computeroutput>printf</computeroutput>.</para>
 
       </sect3>
-
-    </sect2>
-
-    <sect2>
-      <title>Executable Files</title>
-
-      <para>ELF provides all the information the processor requires to get </para>
 
     </sect2>
 
@@ -692,8 +828,9 @@
       intricate parts of a modern operating system.  As such, we
       dedicate the next chapter to investigating the dynamic linking
       process.</para>
-
     </sect2>
+
+
   </sect1>
 
   <sect1 id="abi">

@@ -189,7 +189,7 @@
     in a shared library.  The references that are left behind are
     called <emphasis>relocations</emphasis>.</para>
 
-    <sect2>
+    <sect2 id="dynamic_relocations">
       <title>Relocations</title>
 
       <para>The essential part of the dynamic linker is fixing up
