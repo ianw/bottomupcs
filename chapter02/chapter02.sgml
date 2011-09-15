@@ -1,10 +1,10 @@
 <chapter id="chapter02">
-  
+
   <title>Computer Architecture</title>
 
   <sect1 id="the_cpu">
     <title>The CPU</title>
-    
+
     <figure>
       <title>The CPU</title>
       <mediaobject>

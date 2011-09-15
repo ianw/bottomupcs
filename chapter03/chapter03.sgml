@@ -944,7 +944,7 @@
 
 	</sect4>
 
-	<sect4>
+	<sect4 id="fast_system_calls">
 	  <title>Fast System Calls</title>
 
 	  <para>One problem with traps as described above is that they

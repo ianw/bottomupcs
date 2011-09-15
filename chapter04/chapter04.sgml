@@ -550,7 +550,7 @@
 	allows us to easily implement <emphasis>threads</emphasis>
 	with one very simple interface.</para>
 
-	<sect4>
+	<sect4 id="threads">
 	  <title>Threads</title> <para>While
 	  <computeroutput>fork</computeroutput> copies all of the
 	  attributes we mentioned above, imagine if everything was

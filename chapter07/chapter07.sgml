@@ -563,10 +563,6 @@
 
       </sect3>
     </sect2>
-  </sect1>
-
-  <sect1>
-    <title>ELF Executables</title>
 
     <sect2 id="elf_debugging">
       <title>Debugging</title>
@@ -665,13 +661,95 @@
       </sect3>
 
       <sect3>
-	<title>Coredumps</title>
+	<title>Inside coredumps</title>
 
-	<para>foo</para>
+	<para>A coredump is really just another ELF file; this
+	illustrates the flexibility of ELF as a binary format.</para>
+
+	<example id="coredump_internal">
+	  <title>Example of using <productname>readelf</productname>
+	  and <productname>eu-readelf</productname> to examine a
+	  coredump.</title>
+	  <programlisting>
+	    <inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="chapter07/code/core-internal.txt" format="linespecific" />
+	  </imageobject>
+	  </inlinemediaobject>
+	  </programlisting>
+	</example>
+
+	<para>In <xref linkend="coredump_internal"></xref> we can see
+	an examination of the core file produced by <xref
+	linkend="coredump_gdb"></xref> using firstly the
+	<productname>readelf</productname> tool.  There are no
+	sections, relocations or other extraneous information in the
+	file that may be required for loading an executable or
+	library; it simply consists of a series of program headers
+	describing <computeroutput>LOAD</computeroutput> segments.
+	These segments are raw data dumps, created by the kernel, of
+	the current memory allocations.
+	</para>
+
+	<para>The other component of the core dump is the
+	<computeroutput>NOTE</computeroutput> sections which contain
+	data necessary for debugging but not necessarily captured in
+	straight snapshot of the memory allocations.  The
+	<productname>eu-readelf</productname> program used in the
+	second part of the figure provides a more complete view of the
+	data by decoding it.</para>
+
+	<para>The <computeroutput>PRSTATUS</computeroutput> note gives
+	a range of interesting information about the process as it was
+	running; for example we can see from
+	<computeroutput>cursig</computeroutput> that the program
+	received a signal 11, or segmentation fault, as we would
+	expect.  Along with process number information, it also
+	includes a dump of all the current registers.  Given the
+	register values, the debugger can reconstruct the stack state
+	and hence provide a <emphasis>backtrace</emphasis>; combined
+	with the symbol and debugging information from the original
+	binary the debugger can show exactly how you reached the
+	current point of execution.</para>
+
+	<para>Another interesting output is the current
+	  <emphasis>auxiliary vector</emphasis>
+	  (<computeroutput>AUXV</computeroutput>), discussed in <xref
+	  linkend="auxv"></xref>.  The
+	  <computeroutput>386_TLS</computeroutput> describes
+	  <emphasis>global descriptor table</emphasis> entries used
+	  for the x86 implementation of <emphasis>thread-local
+	  storage</emphasis> (see <xref
+	  linkend="fast_system_calls"></xref> for more information on
+	  use of segmentation, and <xref linkend="threads"></xref> for
+	  information on threads<footnote> <para>For a multi-threaded
+	  application, there would be duplicate entries for each
+	  thread running.  The debugger will understand this, and it
+	  is how <productname>gdb</productname> implements the
+	  <computeroutput>thread</computeroutput> command to show and
+	  switch between threads.</para>
+	  </footnote>).
+	  </para>
+
+	<para>The kernel creates the core dump file within the bounds
+	  of the current <computeroutput>ulimit</computeroutput>
+	  settings &mdash; since a program using a lot of memory could
+	  result in a very large dump, potentially filling up disk and
+	  making problems even worse, generally the
+	  <computeroutput>ulimit</computeroutput> is set low or even
+	  at zero, since most non-developers have little use for a
+	  core dump file.  However the core dump remains the single
+	  most useful way to debug an unexpected situation in a
+	  postmortem fashion.</para>
+
       </sect3>
     </sect2>
 
+  </sect1>
 
+  <sect1 id="executables">
+    <title>ELF Executables</title>
+      <para>executables</para>
   </sect1>
 
   <sect1 id="libraries">
@@ -937,7 +1015,7 @@
     point address (i.e. the <computeroutput>_init</computeroutput>
     function).</para>
 
-    <sect2>
+    <sect2 id="auxv">
       <title>Kernel communication to programs</title>
 
       <para>The kernel needs to communicate some things to programs
