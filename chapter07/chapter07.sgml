@@ -749,7 +749,55 @@
 
   <sect1 id="executables">
     <title>ELF Executables</title>
-      <para>executables</para>
+
+    <para>Executables are of course one of the primary uses of the ELF
+      format.  Contained within the <emphasis>binary</emphasis> is
+      everything required for the operating system to execute the
+      code as intended.</para>
+
+    <para>Since an executable is designed to be run in a process with
+    a unique address space (see <xref linkend="chapter05"></xref>) the
+    code can make assumptions about where the various parts of the
+    program will be loaded in memory.  <xref
+    linkend="elf_executable"></xref> shows an example using the
+    <productname>readelf</productname> tool to examine the segments of
+    an executable file.  We can see the virtual addresses at which the
+    <computeroutput>LOAD</computeroutput> segments are required to be
+    placed at.  We can further see that one segment is for code
+    &mdash; it has read and execute permissions only &mdash; and one
+    is for data, unsurprisingly with read and write permissions, but
+    importantly no execute permissions (without execute permissions,
+    even if a bug allowed an attacker to introduce arbitrary data the
+    pages backing it would not be marked with execute permissions, and
+    most processors will hence disallow any execution of code in those
+    pages).</para>
+
+    <example id="elf_executable">
+      <title>Segments of an executable file</title>
+      <programlisting><inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="chapter07/code/executable.txt" format="linespecific" />
+      </imageobject>
+      </inlinemediaobject></programlisting>
+    </example>
+
+    <para>The program segments must be loaded at these addresses; the
+    last step of the linker is to resolve most relocations (<xref
+    linkend="symbols_and_relocations"></xref>) and patch them with the
+    assumed absolute addresses &mdash; the data describing the
+    relocation is then discarded in the final binary and there is no
+    longer a way to find this information.
+    </para>
+
+    <para>In reality, executables generally have external dependencies
+      on <emphasis>shared libraries</emphasis>, or pieces of common
+      code abstracted and shared among the entire system &mdash;
+      almost all of the confusing parts of <xref
+      linkend="elf_executable"></xref> relate to the use of shared
+      libraries.  Libraries are discussed in <xref
+      linkend="libraries"></xref>, dynamic libraries in <xref
+      linkend="chapter08"></xref>.</para>
+
   </sect1>
 
   <sect1 id="libraries">
@@ -776,23 +824,23 @@
 
     <para>The most straight forward way of using a library function is
       to have the object files from the library linked directly into
-      your executable, just as with those you have compiled yourself.
-      When linked right in to your executable like this it is called a
+      your final executable, just as with those you have compiled
+      yourself.  When linked like this the library is called a
       <emphasis>static</emphasis> library, because the library will
       remain unchanged unless the program is recompiled.</para>
 
       <para>This is the most straight forward way of using a library
-      as the final result is a simple executable.</para>
+      as the final result is a simple executable with no
+      dependencies.</para>
 
       <sect3>
 	<title>Inside static libraries</title>
 
-	<para>As we mentioned, a static library is simply a group of
-	object files.  The object files are kept in an
-	<emphasis>archive</emphasis>, which gives Linux libraries
-	their <computeroutput>.a</computeroutput> extension.  You can
-	think of archives as similar to a <command>zip</command> file,
-	but without compression.</para>
+	<para>A static library is simply a group of object files.  The
+	object files are kept in an <emphasis>archive</emphasis>,
+	which leads to their usual <computeroutput>.a</computeroutput>
+	suffix extension.  You can think of archives as similar to a
+	<command>zip</command> file, but without compression.</para>
 
 	<para>Below we show the creation of basic static library and
 	introduce some common tools for working with libraries.</para>
@@ -1094,12 +1142,11 @@
       <title>Starting the program</title>
 
       <para>Once the kernel has loaded the interpreter it passes it to
-      the entry point as given in the interpreter file.  We will not
-      examine how the dynamic linker starts at this stage (XXX should
-      we).</para>
-
-      <para>The dynamic linker will jump to the entry point address as
-      given in the ELF binary.</para>
+      the entry point as given in the interpreter file (note will not
+      examine how the dynamic linker starts at this stage; see <xref
+      linkend="chapter08"></xref> for a full discussion of dyanmic
+      linking).  The dynamic linker will jump to the entry point
+      address as given in the ELF binary.</para>
 
       <example id="program-startup">
 	<title>Disassembley of program startup</title>
@@ -1131,9 +1178,10 @@
       large number of defines, as it needs to be portable across the
       very wide number of systems and architectures that glibc can run
       on.  It does a number of specific things related to setting up
-      the C library (XXX talk about TLS?).  The next point where the
-      library calls back into the program is to handle
-      <computeroutput>init</computeroutput> code.</para>
+      the C library which the average programmer does not need to
+      worry about.  The next point where the library calls back into
+      the program is to handle <computeroutput>init</computeroutput>
+      code.</para>
 
       <para><computeroutput>init</computeroutput> and
       <computeroutput>fini</computeroutput> are two special concepts

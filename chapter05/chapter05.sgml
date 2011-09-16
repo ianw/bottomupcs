@@ -121,7 +121,7 @@
 
     </sect2>
 
-    <sect2>
+    <sect2 id="address_space">
       <title>Using the address space</title>
 
       <para>As with most components of the operating system, virtual

@@ -1,0 +1,37 @@
+$ readelf --segments /bin/ls
+
+Elf file type is EXEC (Executable file)
+Entry point 0x4046d4
+There are 8 program headers, starting at offset 64
+
+Program Headers:
+  Type           Offset             VirtAddr           PhysAddr
+                 FileSiz            MemSiz              Flags  Align
+  PHDR           0x0000000000000040 0x0000000000400040 0x0000000000400040
+                 0x00000000000001c0 0x00000000000001c0  R E    8
+  INTERP         0x0000000000000200 0x0000000000400200 0x0000000000400200
+                 0x000000000000001c 0x000000000000001c  R      1
+      [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
+  LOAD           0x0000000000000000 0x0000000000400000 0x0000000000400000
+                 0x0000000000019ef4 0x0000000000019ef4  R E    200000
+  LOAD           0x000000000001a000 0x000000000061a000 0x000000000061a000
+                 0x000000000000077c 0x0000000000001500  RW     200000
+  DYNAMIC        0x000000000001a028 0x000000000061a028 0x000000000061a028
+                 0x00000000000001d0 0x00000000000001d0  RW     8
+  NOTE           0x000000000000021c 0x000000000040021c 0x000000000040021c
+                 0x0000000000000044 0x0000000000000044  R      4
+  GNU_EH_FRAME   0x0000000000017768 0x0000000000417768 0x0000000000417768
+                 0x00000000000006fc 0x00000000000006fc  R      4
+  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000
+                 0x0000000000000000 0x0000000000000000  RW     8
+
+ Section to Segment mapping:
+  Segment Sections...
+   00     
+   01     .interp 
+   02     .interp .note.ABI-tag .note.gnu.build-id .hash .gnu.hash .dynsym .dynstr .gnu.version .gnu.version_r .rela.dyn .rela.plt .init .plt .text .fini .rodata .eh_frame_hdr .eh_frame 
+   03     .ctors .dtors .jcr .dynamic .got .got.plt .data .bss 
+   04     .dynamic 
+   05     .note.ABI-tag .note.gnu.build-id 
+   06     .eh_frame_hdr 
+   07     
