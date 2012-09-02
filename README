@@ -12,6 +12,7 @@ make pdf (output in csbu.pdf)
 You will need a number of things for this to work out of the box.  If
 you have the Debian packages
 
+* GNU make
 * docbook
 * docbook-sgml
 * docbook-dsssl
