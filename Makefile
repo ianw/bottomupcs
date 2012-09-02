@@ -10,6 +10,8 @@ epss := $(patsubst %.xfig,%.eps,$(figures))
 pngs += $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.png))
 epss += $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.eps))
 
+PREFIX?=/usr/local
+
 #rules to convert xfigs to png/eps
 %.png : %.xfig
 	fig2dev -L png $< $@
@@ -22,7 +24,7 @@ epss += $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.eps))
 pdf: $(epss) csbu.pdf 
 
 csbu.pdf : csbu.sgml $(sources)
-	jw -f docbook -b dvi -l /usr/share/xml/declaration/xml.dcl $<
+	jw -f docbook -b dvi -l ${PREFIX}/share/xml/declaration/xml.dcl $<
 	dvipdf csbu.dvi $@
 
 #html depends on having png figures around.
@@ -30,10 +32,10 @@ html: csbu.sgml csbu.css $(sources) $(pngs)
 	mkdir -p ./html
 #copy all .c files into appropriate places
 	-for dir in $(sourcedirs); do \
-	cp -r --parents $$dir/code/* html; \
+	cp -r -p $$dir/code/* html; \
 	done
-	jw -o html -d csbu.dsl -f docbook -b html -l /usr/share/xml/declaration/xml.dcl csbu.sgml
-	cp --parents $(pngs) html
+	jw -o html -d csbu.dsl -f docbook -b html -l ${PREFIX}/share/xml/declaration/xml.dcl csbu.sgml
+	cp -p $(pngs) html
 	cp csbu.css draft.png html
 
 .PHONY: clean
