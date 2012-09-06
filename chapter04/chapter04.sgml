@@ -534,7 +534,7 @@
 
     <sect2>
       <title>How Linux actually handles fork and exec</title>
-      <sect3>
+      <sect3 id="linux_clone">
 	<title><computeroutput>clone</computeroutput></title>
 
 	<para>In the kernel, fork is actually implemented by a

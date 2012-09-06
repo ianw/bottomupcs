@@ -17,9 +17,8 @@
     </para>
 
     <para>Indeed, the ability to swap out memory to disk is an
-    important part of how virtual memory works, but as you will see it
-    is not the purpose of virtual memory, but rather a very useful
-    side effect!</para>
+    important capability, but as you will see it is not the purpose of
+    virtual memory, but rather a very useful side effect!</para>
 
   </sect1>
 
@@ -45,98 +44,100 @@
       <title>64 bit computing</title>
 
       <para>New processors are generally all 64-bit processors, which
-    as the name suggests has registers 64 bits wide.  As an exercise,
-    you should work out the address space available to these
-    processors (hint: it's big!).</para>
+        as the name suggests has registers 64 bits wide.  As an exercise,
+        you should work out the address space available to these
+        processors (hint: it's big!).</para>
 
       <para>64-bit computing does have some trade-offs against using
-      smaller bit-width processors.  Every program compiled in 64-bit
-      mode requires 8-byte pointers, which can increase code and data
-      size, and hence cache performance.  However, 64-bit processers
-      tend to have more registers, which means less need to save
-      temporary variables to memory when the compiler is under
-      register pressure.</para>
+        smaller bit-width processors.  Every program compiled in
+        64-bit mode requires 8-byte pointers, which can increase code
+        and data size, and hence impact both instruction and data
+        cache performance.  However, 64-bit processers tend to have
+        more registers, which means less need to save temporary
+        variables to memory when the compiler is under register
+        pressure.</para>
 
       <sect3>
 	<title>Canonical Addresses</title>
 
 	<para>While 64-bit processors have 64-bit wide registers,
-	systems generally do not implement all 64-bits for addressing
-	&mdash; it is not actually possible to do
-	<computeroutput>load</computeroutput> or
-	<computeroutput>store</computeroutput> to all 16 exabytes of
-	theoretical physical memory!</para>
+          systems generally do not implement all 64-bits for
+          addressing &mdash; it is not actually possible to do
+          <computeroutput>load</computeroutput> or
+          <computeroutput>store</computeroutput> to all 16 exabytes of
+          theoretical physical memory!</para>
 
 	<para>Thus most architectures define an
-	<emphasis>unimplemented</emphasis> region of the address space
-	which the processor will consider invalid for use.  x86-64 and
-	Itanium both define the most-significant valid bit of an
-	address, which must then be sign-extended (see <xref
-	linkend="sign_extension"></xref>) to create a valid address.
-	The result of this is that the total address space is
-	effectively divided into two parts, an upper and a lower
-	portion, with the addresses in-between considered invalid.
-	This is illustrated in <xref
-	linkend="canonical_address"></xref>.  Valid addresses are
-	termed <emphasis>canonical addresses</emphasis> (invalid
-	addresses being <emphasis>non</emphasis>-canonical).</para>
+          <emphasis>unimplemented</emphasis> region of the address
+          space which the processor will consider invalid for use.
+          x86-64 and Itanium both define the most-significant valid
+          bit of an address, which must then be sign-extended (see
+          <xref linkend="sign_extension"></xref>) to create a valid
+          address.  The result of this is that the total address space
+          is effectively divided into two parts, an upper and a lower
+          portion, with the addresses in-between considered invalid.
+          This is illustrated in <xref
+          linkend="canonical_address"></xref>.  Valid addresses are
+          termed <emphasis>canonical addresses</emphasis> (invalid
+          addresses being <emphasis>non</emphasis>-canonical).</para>
 
-      <figure id="canonical_address">
-	<title>Illustration of canonical addresses</title>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="chapter05/figures/canonical.eps" format="EPS" />
-	  </imageobject>
-	  <imageobject>
-	    <imagedata fileref="chapter05/figures/canonical.png" format="PNG" />
-	  </imageobject>
-	  <textobject>
-	    <phrase>By defining a most-significant bit that must be
-	    sign-extended to create a full address, the address-space
-	    is effectively partitioned into upper and lower portions,
-	    with intermediate addresses considered invalid by the
-	    processor.</phrase>
-	  </textobject>
-	</mediaobject>
-      </figure>
+        <figure id="canonical_address">
+          <title>Illustration of canonical addresses</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="chapter05/figures/canonical.eps" format="EPS" />
+            </imageobject>
+            <imageobject>
+              <imagedata fileref="chapter05/figures/canonical.png" format="PNG" />
+            </imageobject>
+            <textobject>
+              <phrase>By defining a most-significant bit that must be
+                sign-extended to create a full address, the address-space
+                is effectively partitioned into upper and lower portions,
+                with intermediate addresses considered invalid by the
+                processor.</phrase>
+            </textobject>
+          </mediaobject>
+        </figure>
 
 	<para>The exact most-significant bit value for the processor
-	can usually be found by querying the processor itself using
-	its informational instructions.  Although the exact value is
-	implementation dependent, a typical value would be 48;
-	providing 2<superscript>48</superscript> = 256 TiB of usable
-	address-space.
-	</para>
+          can usually be found by querying the processor itself using
+          its informational instructions.  Although the exact value is
+          implementation dependent, a typical value would be 48;
+          providing 2<superscript>48</superscript> = 256 TiB of usable
+          address-space.
+        </para>
 
 	<para>Reducing the possible address-space like this means that
-	significant savings can be made with all parts of the
-	addressing logic in the processor and related components, as
-	they know they will not need to deal with full 64-bit
-	addresses.  Since the implementation defines the upper-bits as
-	being signed-extended, this prevents portable operating
-	systems using these bits to store or flag additional
-	information and ensuring compatibility if the implementation
-	wishes to implement more address-space in the future.</para>
+          significant savings can be made with all parts of the
+          addressing logic in the processor and related components, as
+          they know they will not need to deal with full 64-bit
+          addresses.  Since the implementation defines the upper-bits as
+          being signed-extended, this prevents portable operating
+          systems using these bits to store or flag additional
+          information and ensuring compatibility if the implementation
+          wishes to implement more address-space in the future.</para>
       </sect3>
 
     </sect2>
 
     <sect2 id="address_space">
+
       <title>Using the address space</title>
 
       <para>As with most components of the operating system, virtual
-    memory acts as an abstraction between the address space and the
-    physical memory available in the system.  This means that when a
-    program uses an address that address does not refer to the bits in
-    an actual physical location in memory.</para>
+        memory acts as an abstraction between the address space and the
+        physical memory available in the system.  This means that when a
+        program uses an address that address does not refer to the bits in
+        an actual physical location in memory.</para>
 
-    <para>So to this end, we say that all addresses the program uses
-      are <emphasis>virtual</emphasis>.  The operating system keeps
-      track of virtual addresses and how they are allocated to
-      <emphasis>physical</emphasis> addresses.  When a program does a
-      load or store from an address, the processor and operating
-      system work together to convert this virtual address to the
-      actual address in the system memory chips.
+      <para>So to this end, we say that all addresses a program uses
+        are <emphasis>virtual</emphasis>.  The operating system keeps
+        track of virtual addresses and how they are allocated to
+        <emphasis>physical</emphasis> addresses.  When a program does
+        a load or store from an address, the processor and operating
+        system work together to convert this virtual address to the
+        actual address in the system memory chips.
       </para>
 
     </sect2>
@@ -144,36 +145,45 @@
   </sect1>
 
   <sect1 id="virtual_memory_pages">
+
     <title>Pages</title>
 
     <para>The total address-space is divided into individual
-    <emphasis>pages</emphasis>.  Pages can be many different sizes;
-    generally they are around 4KB, but this is not a hard and fast
-    rule and they can be much larger.  The page is the smallest unit
-    of memory that the operating system and hardware can deal
-    with.</para>
+      <emphasis>pages</emphasis>.  Pages can be many different sizes;
+      generally they are around 4 KiB, but this is not a hard and fast
+      rule and they can be much larger but generally not any smaller.
+      The page is the smallest unit of memory that the operating
+      system and hardware can deal with.</para>
 
     <para>Additionally, each page has a number of attributes set by
-    the operating system.  Generally, these include read, write and
-    execute permissions for the current page.  For example, the
-    operating system can generally mark the code pages of a process
-    with an executable flag and the processor can choose to not
-    execute any code from pages without this bit set.</para>
+      the operating system.  Generally, these include read, write and
+      execute permissions for the current page.  For example, the
+      operating system can generally mark the code pages of a process
+      with an executable flag and the processor can choose to not
+      execute any code from pages without this bit set.</para>
 
     <figure>
       <title>Virtual memory pages</title>
       <mediaobject>
 	<imageobject>
 	  <imagedata fileref="chapter05/figures/page.eps" format="EPS" />
-	</imageobject>
+        </imageobject>
 	<imageobject>
 	  <imagedata fileref="chapter05/figures/page.png" format="PNG" />
-	</imageobject>
+        </imageobject>
 	<textobject>
 	  <phrase>Pages</phrase>
 	</textobject>
       </mediaobject>
     </figure>
+
+    <para>Programmers may at this point be thinking that they can
+      easily allocate small amounts of memory, much smaller than 4
+      KiB, using <computeroutput>malloc</computeroutput> or similar
+      calls.  This <emphasis>heap</emphasis> memory is actually backed
+      by page-size allocations, which the
+      <computeroutput>malloc</computeroutput> implementation divides
+      up and manages for you in an efficient manner.</para>
 
   </sect1>
 
@@ -181,89 +191,117 @@
     <title>Physical Memory</title>
 
     <para>Just as the operating system divides the possible address
-    space up into pages, it divides the available physical memory up
-    into <emphasis>frames</emphasis>.</para>
+      space up into pages, it divides the available physical memory up
+      into <emphasis>frames</emphasis>.  A frame is just the
+      conventional name for a hunk of physical memory the same size as
+      the system page size.</para>
 
-    <para>A frame is just the conventional name for a hunk of physical
-    memory the same size as the system page size.</para>
+    <para>The operating system keeps a
+      <emphasis>frame-table</emphasis> which is a list of all possible
+      pages of physical memory and if they are free (available for
+      allocation) or not.  When memory is allocated to a process, it
+      is marked as used in the frame-table.  In this way, the
+      operating-system keeps track of all memory allocations.</para>
+
+    <para>How does the operating system know what memory is available?
+      This information about where memory is located, how much,
+      attributes and so forth is passed to the operating system by the
+      BIOS during initialisation.</para>
 
   </sect1>
 
   <sect1 id="page_tables">
     <title>Pages + Frames = Page Tables</title>
 
-    <para>The job of the operating system is to keep track of which
-    virtual-page points to which physical frame.  This information is
-    kept in a <emphasis>page-table</emphasis> which, in its simplest
-    form, could simply be a table where each row contains its
-    associated frame.  If you were to use this simple system, with a
-    32 bit address space and 4K pages there would be 1048576 possible
-    pages to keep track of in the page table
+    <para>It is the job of the operating system is to keep track of
+    which of virtual-page points to which physical frame.  This
+    information is kept in a <emphasis>page-table</emphasis> which, in
+    its simplest form, could simply be a table where each row contains
+    its associated frame &mdash; this is termed a <emphasis>linear
+    page-table</emphasis>.  If you were to use this simple system,
+    with a 32 bit address-space and 4 KiB pages there would be 1048576
+    possible pages to keep track of in the page table
     (2<superscript>32</superscript> &divide; 4096); hence the table
-    would be 1048576 entries long to ensure we can always find the
-    physical address of any virtual-page.</para>
+    would be 1048576 entries long to ensure we can always map a
+    virtual page to a physical page.</para>
 
     <para>Page tables can have many different structures and are
     highly optimised, as the process of finding a page in the page
     table can be a lengthly process.  We will examine page-tables in
     more depth later.</para>
 
+    <para>The page-table for a process is under the exclusive control
+    of the operating system.  When a process requests memory, the
+    operating system finds it a free page of physical memory and
+    records the virtual-to-physical translation in the processes
+    page-table.  Conversely, when the process gives up memory, the
+    virtual-to-physical record is removed and the underlying frame
+    becomes free for allocation to another process.</para>
+
   </sect1>
 
   <sect1 id="virtual_addresses">
+
     <title>Virtual Addresses</title>
 
     <para>When a program accesses memory, it does not know or care
     where the physical memory backing the address is stored.  It knows
-    it is up to the operating system to map the address to the right
-    place and provide it with the data it wants.</para>
-
-    <para>We call the address the userspace program is using to access
-    memory a <emphasis>virtual address</emphasis>.  A virtual address
-    consists of two parts; the page and an offset into that
+    it is up to the operating system and hardware to work together to
+    map locate the right physical address and thus provide access to
+    the data it wants.  Thus we term the address a program is using to
+    access memory a <emphasis>virtual address</emphasis>.  A virtual
+    address consists of two parts; the page and an offset into that
     page.</para>
 
     <sect2>
       <title>Page</title>
 
-      <para>The entire address space is divided up into pages, so each
-      possible address must reside within a page.  The page part of
-      the virtual address acts as an index into the page table.</para>
+      <para>Since the entire possible address space is divided up into
+      regular sized pages, every possible address resides within a
+      page.  The page component of the virtual address acts as an
+      index into the page table.  Since the page is the smallest unit
+      of memory allocation within the system there is a trade-off
+      between making pages very small, and thus having very many pages
+      for the operating-system to manage, and making pages larger but
+      potentially wasting memory</para>
     </sect2>
 
     <sect2>
       <title>Offset</title>
 
-      <para>A page has many bytes of memory inside it, so the last
-      bits of the virtual address are called the
+      <para>The last bits of the virtual address are called the
       <emphasis>offset</emphasis> which is the location difference
-      between the address you want and the start of the page.  You
-      require enough bits in the offset to be able to get to any byte
-      in the page.  For a 4K page you require (4K == (4 * 1024) ==
-      4096 == 2<superscript>12</superscript> ==) 12 bits.  Remember
-      that the smallest amount of memory that the operating system or
-      hardware deals with is a page, so each of these 4096 addresses
-      reside within a single page and are dealt with as "one".</para>
+      between the byte address you want and the start of the page.
+      You require enough bits in the offset to be able to get to any
+      byte in the page.  For a 4K page you require (4K == (4 * 1024)
+      == 4096 == 2<superscript>12</superscript> ==) 12 bits of offset.
+      Remember that the smallest amount of memory that the operating
+      system or hardware deals with is a page, so each of these 4096
+      bytes reside within a single page and are dealt with as
+      "one".</para>
 
     </sect2>
 
-    <sect2>
+    <sect2 id="virtual_address_translation">
       <title>Virtual Address Translation</title>
 
       <para>Virtual address translation refers to the process of
       finding out which physical page maps to which virtual
       page.</para>
 
-      <para>When the operating system needs to find the actual memory
-      behind a virtual address, it only deals with the page component
-      of the virtual address (since the smallest amount of memory it
-      will deal with is a page).  It takes the page number and looks
-      it up in the page table.  This gives a pointer to a physical
-      address, to which the offset from the virtual address is added,
-      giving the actual location in system memory.  If it doesn't
-      exist in the page table then the process is trying to access
-      memory that has not been allocated to it by the operating system
-      and the access will not be allowed.</para>
+      <para>When translating a virtual-address to a physical-address
+        we only deal with the <emphasis>page number </emphasis>.  The
+        essence of the procedure is to take the page number of the
+        given address and look it up in the
+        <emphasis>page-table</emphasis> to find a pointer to a
+        physical address, to which the offset from the virtual address
+        is added, giving the actual location in system memory.</para>
+
+      <para>Since the page-tables are under the control of the
+        operating system, if the virtual-address doesn't exist in the
+        page-table then the operating-system knows the process is
+        trying to access memory that has not been allocated to it and
+        the access will not be allowed.</para>
 
       <figure>
 	<title>Virtual Address Translation</title>
@@ -281,7 +319,7 @@
       </figure>
 
       <para>We can follow this through for our previous example of a
-      simple <emphasis>linear</emphasis> page table.  We calculated
+      simple <emphasis>linear</emphasis> page-table.  We calculated
       that a 32-bit address-space would require a table of 1048576
       entries when using 4KiB pages.  Thus to map a theoretical
       address of 0x80001234, the first step would be to remove the
@@ -292,131 +330,157 @@
       the linear page table would be the physical frame corresponding
       to this page.</para>
 
+      <para>You might see a problem with a linear page-table : since
+      every page must be accounted for, whether in use or not, a
+      physically linear page-table is completely impractical with a
+      64-bit address space.  Consider a 64-bit address space divided
+      into (generously large) 64 KiB pages creates
+      2<superscript>64</superscript>/2<superscript>16</superscript> =
+      2<superscript>52</superscript> pages to be managed; assuming
+      each page requires an 8-byte pointer to a physical location a
+      total of
+      2<superscript>52</superscript>/2<superscript>3</superscript> =
+      2<superscript>49</superscript> or 512 GiB of contiguous memory
+      is required just for the page table!</para>
+
     </sect2>
+
   </sect1>
 
   <sect1 id="virtual_address_and_page_tables">
+
     <title>Consequences of virtual addresses, pages and page tables</title>
 
-    <para>Virtual addressing, pages and page tables opens up a number
-    of interesting opportunities for the operating system.</para>
+    <para>Virtual addressing, pages and page-tables are the basis of
+    every modern operating system.  It under-pins most of the things
+    we use our systems for.</para>
 
     <sect2>
+
       <title>Individual address spaces</title>
 
-      <para>If the operating system gives each process its own page
-	table, then every process can pretend that it has access to
-	the entire address space available from the processor.  It
-	doesn't matter that two processes might use the same address,
-	since the page table will map it to a different place in
-	physical memory.  Every modern operating system provides each
-	process with its own address space like this.</para>
+      <para>By giving each process its own page table, every process
+        can pretend that it has access to the entire address space
+        available from the processor.  It doesn't matter that two
+        processes might use the same address, since different
+        page-tables for each process will map it to a different frame
+        of physical memory.  Every modern operating system provides
+        each process with its own address space like this.</para>
 
       <para>Over time, physical memory becomes
-      <emphasis>fragmented</emphasis>, meaning that there are "holes"
-      of free space in the physical memory.  Having to work around
-      these holes would be at best annoying and would become a serious
-      limit to programmers.  By using assigning a virtual address
-      space to each process the programmer can leave working around
-      fragmentation up to the operating system.</para>
+        <emphasis>fragmented</emphasis>, meaning that there are
+        "holes" of free space in the physical memory.  Having to work
+        around these holes would be at best annoying and would become
+        a serious limit to programmers.  For example, if you
+        <computeroutput>malloc</computeroutput> 8 KiB of memory;
+        requiring the backing of two 4 KiB frames, it would be a huge
+        inconvience if those frames had to be contiguous (i.e.,
+        physically next to each other).  Using virutal-addresses it
+        does not matter; as far as the process is concerned it has 8
+        KiB of contiguous memory, even if those pages are backed by
+        frames very far apart.  By assigning a virtual address space
+        to each process the programmer can leave working around
+        fragmentation up to the operating system.</para>
 
     </sect2>
 
-    <sect2>
+    <sect2 id="protection">
+
       <title>Protection</title>
 
       <para>We previously mentioned that the virtual mode of the 386
-      processor is called protected mode, and this name arises from
-      the protection that virtual memory can offer to processes
-      running on it.</para>
+        processor is called protected mode, and this name arises from
+        the protection that virtual memory can offer to processes
+        running on it.</para>
 
       <para>In a system without virtual memory, every process has
-      complete access to all of system memory.  This means that there
-      is nothing stopping one process from overwriting another
-      processes memory, causing it to crash (or perhaps worse, return
-      incorrect values, especially if that program is managing your
-      bank account!)</para>
+        complete access to all of system memory.  This means that
+        there is nothing stopping one process from overwriting another
+        processes memory, causing it to crash (or perhaps worse,
+        return incorrect values, especially if that program is
+        managing your bank account!)</para>
 
       <para>This level of protection is provided because the operating
-      system is now the layer of abstraction between the process and
-      memory access.  If a process gives a virtual address that is not
-      covered by its page table, then the operating system knows that
-      that process is doing something wrong and can inform the process
-      it has stepped out of its bounds.</para>
+        system is now the layer of abstraction between the process and
+        memory access.  If a process gives a virtual address that is
+        not covered by its page-table, then the operating system knows
+        that that process is doing something wrong and can inform the
+        process it has stepped out of its bounds.</para>
 
       <para>Since each page has extra attributes, a page can be set
       read only, write only or have any number of other interesting
-      attributes.  When the process tries to access the page, the
+      properties.  When the process tries to access the page, the
       operating system can check if it has sufficient permissions and
       stop it if it does not (writing to a read only page, for
       example).</para>
 
       <para>Systems that use virtual memory are inherently more stable
-      because, with a well "perfect" operating system, a process can
-      only crash its self and not the entire system (of course, humans
+      because, assuming the perfect operating system, a process can
+      only crash itself and not the entire system (of course, humans
       write operating systems and we inevitably overlook bugs that can
       still cause entire systems to crash).</para>
 
     </sect2>
 
     <sect2>
+
       <title>Swap</title>
 
       <para>We can also now see how the swap memory is implemented.
-      If instead of pointing to an area of system memory the page
-      pointer can be changed to point to a location on a
-      disk.</para>
+        If instead of pointing to an area of system memory the page
+        pointer can be changed to point to a location on a
+        disk.</para>
 
       <para>When this page is referenced, the operating system needs
-      to move it from the disk back into system memory (remember,
-      program code can only execute from system memory).  If system
-      memory is full, then <emphasis>another</emphasis> page needs to
-      be kicked out of system memory and put into the swap disk before
-      the required page can be put in memory.  If another process
-      wants that page that was just kicked out back again, the process
-      repeats.</para>
+        to move it from the disk back into system memory (remember,
+        program code can only execute from system memory).  If system
+        memory is full, then <emphasis>another</emphasis> page needs to
+        be kicked out of system memory and put into the swap disk before
+        the required page can be put in memory.  If another process
+        wants that page that was just kicked out back again, the process
+        repeats.</para>
 
       <para>This can be a major issue for swap memory.  Loading from
-      the hard disk is very slow (compared to operations done in
-      memory) and most people will be familiar with sitting in front of
-      the computer whilst the hard disk churns and churns whilst the
-      system remains unresponsive.</para>
+        the hard disk is very slow (compared to operations done in
+        memory) and most people will be familiar with sitting in front of
+        the computer whilst the hard disk churns and churns whilst the
+        system remains unresponsive.</para>
 
       <sect3>
 	<title>mmap</title>
 
-	<para>A different but related process is the memory map, or
-	<computeroutput>mmap</computeroutput> (from the system call
-	name).  If instead of the page table pointing to physical
-	memory or swap the page table points to a file, on disk, we
-	say the file is
-	<computeroutput>mmap</computeroutput>ed.</para>
+        <para>A different but related process is the memory map, or
+          <computeroutput>mmap</computeroutput> (from the system call
+          name).  If instead of the page table pointing to physical
+          memory or swap the page table points to a file, on disk, we
+          say the file is
+          <computeroutput>mmap</computeroutput>ed.</para>
 
-	<para>Normally, you need to
-	<computeroutput>open</computeroutput> a file on disk to obtain
-	a file descriptor, and then
-	<computeroutput>read</computeroutput> and
-	<computeroutput>write</computeroutput> it in a sequential
-	form.  When a file is mmaped it can be accessed just like
-	system RAM.  
-	</para>
+        <para>Normally, you need to
+          <computeroutput>open</computeroutput> a file on disk to
+          obtain a file descriptor, and then
+          <computeroutput>read</computeroutput> and
+          <computeroutput>write</computeroutput> it in a sequential
+          form.  When a file is mmaped it can be accessed just like
+          system RAM.
+        </para>
 
       </sect3>
 
     </sect2>
-  
+
     <sect2>
       <title>Sharing memory</title>
 
       <para>Usually, each process gets its own page table, so any
       address it uses is mapped to a unique frame in physical memory.
-      But what if the operating system points two page table entries
+      But what if the operating system points two page table-entries
       to the same frame?  This means that this frame will be shared;
       and any changes that one process makes will be visible to the
       other.</para>
 
-      <para>You can see now how threads are implemented.  Remember
-      from previously we said that the Linux
+      <para>You can see now how threads are implemented.  In <xref
+      linkend="linux_clone"></xref> we said that the Linux
       <computeroutput>clone()</computeroutput> function could share as
       much or as little of a new process with the old process as it
       required.  If a process calls
@@ -479,6 +543,7 @@
   </sect1>
 
   <sect1 id="virtual_memory_hardware">
+
     <title>Hardware Support</title>
 
     <para>So far, we have only mentioned that hardware works with the
@@ -487,8 +552,8 @@
 
     <para>Virtual memory is necessarily quite dependent on the
     hardware architecture, and each architecture has its own
-    subtleties.  However, there are are a few universal
-    elements to virtual memory in hardware.</para>
+    subtleties.  However, there are are a few universal elements to
+    virtual memory in hardware.</para>
 
     <sect2>
       <title>Physical v Virtual Mode</title>
@@ -576,16 +641,17 @@
 
     </sect2>
 
-    <sect2>
+    <sect2 id="the_tlb">
       <title>The TLB</title>
 
       <para>The <emphasis>Translation Lookaside Buffer</emphasis> (or
-      TLB for short) is a cache of virtual-page to physical-frame
-      translations inside the processor.  The operating system and
-      hardware work together to manage the TLB as the system
-      runs.</para>
+      TLB for short) is the main component of the processor
+      responsible for virtual-memory.  It is a cache of virtual-page
+      to physical-frame translations inside the processor.  The
+      operating system and hardware work together to manage the TLB as
+      the system runs.</para>
 
-      <sect3>
+      <sect3 id="page_faults">
 	<title>Page Faults</title>
 
 	<para>When a virtual address is requested of the hardware
@@ -603,13 +669,13 @@
 	must handle.</para>
 
 	<para>When the operating system gets a page fault, it needs to
-	go through the page table in memory to find the correct
-	translation and insert it into the TLB.</para>
+	go through it's page-table to find the correct translation and
+	insert it into the TLB.</para>
 
 	<para> In the case that the operating system can not find a
 	translation in the page table, or alternatively if the
 	operating system checks the permissions of the page in
-	question and the process is not authorised to view it, the
+	question and the process is not authorised to access it, the
 	operating system must kill the process.  If you have ever seen
 	a segmentation fault (or a segfault) this is the operating
 	system killing a process that has overstepped its
@@ -619,7 +685,7 @@
 	be full, then one translation needs to be removed before
 	another can be inserted.  It does not make sense to remove a
 	translation that is likely to be used in the future, as you
-	will incur the cost of finding the entry in the page tables
+	will incur the cost of finding the entry in the page-tables
 	all over again.  TLBs usually use something like a
 	<emphasis>Least Recently Used</emphasis> or LRU algorithm,
 	where the oldest translation that has not been used is ejected
@@ -638,7 +704,7 @@
 
 	  <para>The base of the page table will be kept in a register
 	  associated with each process.  This is usally called the
-	  page table base register or similar.  By taking the address
+	  page-table base-register or similar.  By taking the address
 	  in this register and adding the page number to it, the
 	  correct entry can be located.</para>
 
@@ -710,34 +776,83 @@
       by software.  It is up to the operating system to load the TLB
       with correct entries and remove old entries.</para>
 
-      <sect3>
+      <sect3 id="flushing_tlb">
 	<title>Flushing the TLB</title>
-	
+
 	<para>The process of removing entries from the TLB is called
       <emphasis>flushing</emphasis>.  Updating the TLB is a crucial
       part of maintaining separate address spaces for processes; since
       each process can be using the same virtual address not updating
-      the TLB would mean a process might end up overwriting another's
-      memory. </para>
+      the TLB would mean a process might end up overwriting another
+      processes memory (conversely, in the case of
+      <emphasis>threads</emphasis> sharing the address-space is what
+      you want, thus the TLB is <emphasis>not</emphasis> flushed when
+      switching between threads in the same process). </para>
 
-	<para> On some processors, every time there is a context
-      switch the entire TLB is flushed.  This can be quite expensive,
-      since this means the new process will have to go through the
-      whole process of taking a page fault, finding the page in the
-      page tables and inserting the translation.</para>
+	<para>On some processors, every time there is a context switch
+      the entire TLB is flushed.  This can be quite expensive, since
+      this means the new process will have to go through the whole
+      process of taking a page fault, finding the page in the page
+      tables and inserting the translation.</para>
 
-	<para>Other processors implement an extra <emphasis>address
-	space ID</emphasis> which is also inserted into the TLB
-	translation.  This means each address space (usually each
-	process, but remember threads want to share the same address
-	space) gets its own ID which is stored along with any
-	translations in the TLB.  This means that on a context switch
-	the TLB does <emphasis>not</emphasis> need to be flushed,
-	since the next process will have a different address space ID
-	and even if it asks for the same virtual address, the address
-	space ID will differ and so the translation to physical page
-	will be different.  This scheme reduces flushing and increases
-	overall system performance.</para>
+      <para>Other processors implement an extra <emphasis>address
+      space ID</emphasis> (ASID) which is added to each TLB
+      translation to make it unique.  This means each address space
+      (usually each process, but remember threads want to share the
+      same address space) gets its own ID which is stored along with
+      any translations in the TLB.  Thus on a context switch the TLB
+      does <emphasis>not</emphasis> need to be flushed, since the next
+      process will have a different address space ID and even if it
+      asks for the same virtual address, the address space ID will
+      differ and so the translation to physical page will be
+      different.  This scheme reduces flushing and increases overall
+      system performance, but requires more TLB hardware to hold the
+      ASID bits.</para>
+
+        <para>Generally, this is implemented by having an additional
+        register as part of the process state that includes the ASID.
+        When performing a virtual-to-physical translation, the TLB
+        consults this register and will only match those entries that
+        have the same ASID as the currently running process.  Of
+        course the width of this register determines the number of
+        ASID's available and thus has performance implications.  For
+        an example of ASID's in a processor architecture see <xref
+        linkend="itanium_address_spaces"></xref>.</para>
+      </sect3>
+
+      <sect3>
+        <title>Hardware v Software loaded TLB</title>
+
+        <para>While the control of what ends up in the TLB is the
+          domain of the operating system; it is not the whole story.
+          The process described in <xref linkend="page_faults"></xref>
+          describes a page-fault being raised to the operating system,
+          which traverses the page-table to find the
+          virtual-to-physical translation and installs it in the TLB.
+          This would be termed a <emphasis>software-loaded
+          TLB</emphasis> &mdash; but there is another alternative; the
+          <emphasis>hardware-loaded TLB</emphasis>.</para>
+
+        <para>In a hardware loaded TLB, the processor architecture
+          defines a particular layout of page-table information (<xref
+            linkend="page_tables"></xref> which must be followed for virtual
+          address translation to proceed.  In response to access to a
+          virtual-address that is not present in the TLB, the processor
+          will atomatically walk the page-tables to load the correct
+          translation entry.  Only if the translation entry does not exist
+          will the processor raise an exception to be handled by the
+          operating system.
+        </para>
+
+        <para>Implementing the page-table traversal in specialised
+          hardware gives speed advantages when finding translations,
+          but removes flexibility from operating-systems implementors
+          who might like to implement alternative schemes for
+          page-tables.</para>
+
+        <para>All architectures can be broadly categorised into these
+          two methodlogies.  Later, we will examine some common
+          architectures and their virtual-memory support.</para>
 
       </sect3>
 
@@ -751,7 +866,7 @@
     <para>Although the basic concepts of virtual memory remain
     constant, the specifics of implementations are highly dependent
     on the operating system and hardware.</para>
-    
+
     <sect2>
       <title>Address Space Layout</title>
 
@@ -789,7 +904,7 @@
 
     </sect2>
 
-    <sect2>
+    <sect2 id="three_level_page_table">
       <title>Three Level Page Table</title>
 
       <para>There are many different ways for an operating system to
@@ -817,7 +932,6 @@
       In the multilevel version each of the upper levels gives the
       address of the physical memory frame holding the next lower
       levels page table.</para>
-
 
       <figure>
 	<title>Linux Three Level Page Table</title>
@@ -869,8 +983,381 @@
 
   </sect1>
 
-</chapter>
+  <sect1 id="hardware_support_for_virtual_memory">
+    <title>Hardware support for virtual memory</title>
 
+    <para>As covered in <xref linkend="the_tlb"></xref>, the processor
+    hardware provides a lookup-table that links virtual addresses to
+    physical addresses.  Each processor architecture defines different
+    ways to manage the TLB with various advantages and
+    disadvantages.</para>
+
+    <para>The part of the processor that deals with virtual memory is
+      generally referred to as the <emphasis>Memory Managment
+        Unit</emphasis> or MMU<indexterm id="idx:mmu"></indexterm>
+    </para>
+
+    <sect2>
+      <title>x86-64</title>
+      <para>XXX</para>
+    </sect2>
+
+
+    <sect2>
+      <title>Itanium</title>
+
+      <para>The Itanium MMU provides many interesting features for the
+      operating system to work with virtual memory.</para>
+
+      <sect3 id="itanium_address_spaces">
+        <title>Address spaces</title>
+
+        <para><xref linkend="flushing_tlb"></xref> introduced the
+          concept of the <emphasis>address-space ID</emphasis> to
+          reduce the overheads of flushing the TLB when context
+          switching.  However, programmers often use
+          <emphasis>threads</emphasis> to allow execution contexts to
+          share an address space.  Each thread has the same ASID and
+          hence shares TLB entries, leading to increased performance.
+          However, a single ASID prevents the TLB from enforcing
+          protection; sharing becomes an "all or nothing" approach.
+          To share even a few bytes, threads must forgo all protection
+          from each other (see also <xref
+          linkend="protection"></xref>).</para>
+
+      <figure id="ia64_regions_keys">
+	<title>Illustration Itanium regions and protection keys</title>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="chapter05/figures/ia64-regions-keys.eps" format="EPS" />
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="chapter05/figures/ia64-regions-keys.png" format="PNG" />
+	  </imageobject>
+	  <textobject>
+	    <phrase>Itanium regions and protection keys.  In this
+    example the processes alias region 1.  Each process has a private
+    mapping and they share a key for another.</phrase>
+	  </textobject>
+	</mediaobject>
+      </figure>
+
+        <para>The Itanium MMU considers these problems and provides
+          the ability to share an address space (and hence translation
+          entries) at a much lower granularity whilst still
+          maintaining protection within the hardware.  The Itanium
+          divides the 64-bit address space up into 8
+          <emphasis>regions</emphasis>, as illustrated in <xref
+          linkend="ia64_regions_keys"></xref>.  Each process has eight
+          24-bit <emphasis>region registers</emphasis> as part of its
+          state, which each hold a <emphasis>region ID</emphasis>
+          (RID) for each of the eight regions of the process address
+          space.  TLB translations are tagged with the RID and thus
+          will only match if the process also holds this RID, as
+          illustrated in <xref
+          linkend="ia64_tlb_translation"></xref>.</para>
+
+      <figure id="ia64_tlb_translation">
+	<title>Illustration of Itanium TLB translation</title>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="chapter05/figures/ia64-tlb-translation.eps" format="EPS" />
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="chapter05/figures/ia64-tlb-translation.png" format="PNG" />
+	  </imageobject>
+	  <textobject>
+	    <phrase>Illustration of the Itanium translation process (Mosberger).</phrase>
+	  </textobject>
+	</mediaobject>
+      </figure>
+
+
+        <para>Further to this, the top three bits (the region bits)
+          are not considered in virtual address translation.
+          Therefore, if two processes share a RID (i.e., hold the same
+          value in one of their region registers) then they have an
+          aliased view of that region.  For example, if process-A
+          holds RID <computeroutput>0x100</computeroutput> in
+          region-register 3 and process-B holds the same RID
+          <computeroutput>0x100</computeroutput> in region-register 5
+          then process-A, region 3 is aliased to process-B, region 5.
+          This limited sharing means both processes receive the
+          benefits of shared TLB entries without having to grant
+          access to their entire address space.</para>
+
+        <sect4>
+          <title>Protection Keys</title>
+
+        <para>To allow for even finer grained sharing, each TLB entry
+        on the Itanium is also tagged with a <emphasis>protection
+        key</emphasis>.  Each process has an additional number of
+        <emphasis>protection key registers</emphasis> under
+        operating-system control.</para>
+
+        <para>When a series of pages is to be shared (e.g., code for a
+        shared system library), each page is tagged with a unique key
+        and the OS grants any processes allowed to access the pages
+        that key.  When a page is referenced the TLB will check the
+        key associated with the translation entry against the keys the
+        process holds in its protection key registers, allowing the
+        access if the key is present or otherwise raising a
+        <emphasis>protection</emphasis> fault to the operating system.</para>
+
+        <para>The key can also enforce permissions; for example, one
+         process may have a key which grants write permissions and
+         another may have a read-only key.  This allows for sharing of
+         translation entries in a much wider range of situations with
+         granularity right down to a single-page level, leading to
+         large potential improvements in TLB performance.</para>
+
+        </sect4>
+
+      </sect3>
+
+
+      <sect3>
+        <title>Itanium Hardware Page-Table Walker</title>
+
+        <para>
+        Switching context to the OS when resolving a TLB miss adds
+        significant overhead to the fault processing path.  To combat
+        this, Itanium allows the option of using built-in hardware to
+        read the page-table and automatically load virtual-to-physical
+        translations into the TLB.  The hardware page-table walker
+        (HPW) avoids the expensive transition to the OS, but requires
+        translations to be in a fixed format suitable for the hardware
+        to understand.</para>
+
+        <para>The Itanium HPW is referred to in Intel's documentation
+          as the <emphasis>virtually hashed page-table
+          walker</emphasis> or VHPT walker, for reasons which should
+          become clear.  Itanium gives developers the option of two
+          mutually exclusive HPW implementations; one based on a
+          virtual linear page-table and the other based on a hash
+          table.</para>
+
+        <para>It should be noted it is possible to operate with no
+        hardware page-table walker; in this case each TLB miss is
+        resolved by the OS and the processor becomes a software-loaded
+        architecture.  However, the performance impact of disabling
+        the HPW is so considerable it is very unlikely any benefit
+        could be gained from doing so</para>
+
+        <sect4 id="virtual_linear_pagetable">
+          <title>Virtual Linear Page-Table</title>
+
+          <para>The virtual linear page-table implementation is
+          referred to in documentation as the <emphasis>short format
+          virtually hashed page-table</emphasis> (SF-VHPT).  It is the
+          default HPW model used by Linux on Itanium.</para>
+
+
+          <para>The usual solution is a multi-level or hierarchical
+            page-table, where the bits comprising the virtual page
+            number are used as an index into intermediate levels of
+            the page-table (see <xref
+            linkend="three_level_page_table"></xref>).  Empty regions
+            of the virtual address space simply do not exist in the
+            hierarchical page-table.  Compared to a linear page-table,
+            for the (realistic) case of a tightly-clustered and
+            sparsely-filled address space, relatively little space is
+            wasted in overheads.  The major disadvantage is the
+            multiple memory references required for lookup.</para>
+
+          <figure id="hierarchical-pt">
+            <title>Illustration of a hierarchical page-table</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="chapter05/figures/hierarchial-pt.eps" format="EPS" />
+              </imageobject>
+              <imageobject>
+                <imagedata fileref="chapter05/figures/hierarchial-pt.png" format="PNG" />
+              </imageobject>
+              <textobject>
+                <phrase>The hierarchical page-table</phrase>
+              </textobject>
+            </mediaobject>
+          </figure>
+
+
+          <para>With a 64-bit address space, even a 512~GiB linear
+            table identified in <xref
+            linkend="virtual_address_translation"></xref> takes only
+            0.003% of the 16-exabytes available.  Thus a
+            <emphasis>virtual linear page-table</emphasis> (VLPT) can
+            be created in a contiguous area of
+            <emphasis>virtual</emphasis> address space.</para>
+
+          <para>Just as for a physically linear page-table, on a TLB
+            miss the hardware uses the virtual page number to offset
+            from the page-table base.  If this entry is valid, the
+            translation is read and inserted directly into the TLB.
+            However, with a VLPT the address of the translation entry
+            is itself a virtual address and thus there is the
+            possibility that the virtual page which it resides in is
+            not present in the TLB.  In this case a <emphasis>nested
+            fault</emphasis> is raised to the operating system.  The
+            software must then correct this fault by mapping the page
+            holding the translation entry into the VLPT.</para>
+
+      <figure id="ia64_short_format">
+	<title>Itanium short-format VHPT implementation</title>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="chapter05/figures/ia64-short-format.eps" format="EPS" />
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="chapter05/figures/ia64-short-format.png" format="PNG" />
+	  </imageobject>
+	  <textobject>
+	    <phrase>Operation of the Itanium short-format VHPT</phrase>
+	  </textobject>
+	</mediaobject>
+      </figure>
+
+
+          <para>This process can be made quite straight forward if the
+            operating system keeps a hierarchical page-table.  The
+            leaf page of a hierarchical page-table holds translation
+            entries for a virtually contiguous region of addresses and
+            can thus be mapped by the TLB to create the VLPT as
+            described in <xref
+            linkend="ia64_short_format"></xref>.</para>
+
+          <figure id="ia64_ptes">
+            <title>Itanium PTE entry formats</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="chapter05/figures/ia64-ptes.eps" format="EPS" />
+              </imageobject>
+              <imageobject>
+                <imagedata fileref="chapter05/figures/ia64-ptes.png" format="PNG" />
+              </imageobject>
+              <textobject>
+                <phrase>Itanium PTE entry formats</phrase>
+              </textobject>
+            </mediaobject>
+          </figure>
+
+
+          <para>The major advantage of a VLPT occurs when an
+            application makes repeated or contiguous accesses to
+            memory.  Consider that for a walk of virtually contiguous
+            memory, the first fault will map a page full of
+            translation entries into the virtual linear page-table.  A
+            subsequent access to the next virtual page will require
+            the next translation entry to be loaded into the TLB,
+            which is now available in the VLPT and thus loaded very
+            quickly and without invoking the operating system.
+            Overall, this will be an advantage if the cost of the
+            initial nested fault is amortised over subsequent HPW
+            hits.</para>
+
+          <para>Themajor drawback is that the VLPT now requires TLB
+            entries which causes an increase on TLB pressure.  Since
+            each address space requires its own page table the
+            overheads become greater as the system becomes more
+            active.  However, any increase in TLB capacity misses
+            should be more than regained in lower refill costs from
+            the efficient hardware walker.  Note that a pathological
+            case could skip over
+            <computeroutput>page_size</computeroutput> &divide;
+            <computeroutput>translation_size</computeroutput> entries,
+            causing repeated nested faults, but this is a very
+            unlikely access pattern.</para>
+
+          <para>The hardware walker expects translation entries in a
+            specific format as illustrated on the left of <xref
+            linkend="ia64_ptes"></xref>.  The VLPT requires
+            translations in the so-called 8-byte <emphasis>short
+            format</emphasis>.  If the operating system is to use its
+            page-table as backing for the VLPT (as in <xref
+            linkend="ia64_short_format"></xref>) it must use this
+            translation format.  The architecture describes a limited
+            number of bits in this format as ignored and thus
+            available for use by software, but significant
+            modification is not possible.</para>
+
+          <para>A linear page-table is premised on the idea of a fixed
+            page size.  Multiple page-size support is problematic
+            since it means the translation for a given virtual page is
+            no longer at a constant offset.  To combat this, each of
+            the 8-regions of the address space (<xref
+            linkend="ia64_regions_keys"></xref>) has a separate VLPT
+            which only maps addresses for that region.  A default
+            page-size can be given for each region (indeed, with Linux
+            HugeTLB, discussed below, one region is dedicated to
+            larger pages).  However, page sizes can not be mixed
+            within a region.</para>
+
+        </sect4>
+
+        <sect4>
+          <title>Virtual Hash Table</title>
+
+          <para>Using TLB entries in an effort to reduce TLB refill
+            costs, as done with the SF-VHPT, may or may not be an
+            effective tradeoff.  Itanium also implements a
+            <emphasis>hashed page-table</emphasis> with the potential
+            to lower TLB overheads.  In this scheme, the processor
+            <emphasis>hashes</emphasis> a virtual address to find an
+            offset into a contiguous table.</para>
+
+          <para>The previously described physically linear page-table
+            can be considered a hash page-table with a
+            <emphasis>perfect</emphasis> hash function which will
+            never produce a collision.  However, as explained, this
+            requires an impractical tradeoff of huge areas of
+            contiguous physical memory.  However, constraining the
+            memory requirements of the page table raises the
+            possibility of collisions when two virtual addresses hash
+            to the same offset.  Colliding translations require a
+            <emphasis>chain</emphasis> pointer to build a linked-list
+            of alternative possible entries.  To distinguish which
+            entry in the linked-list is the correct one requires a
+            <emphasis>tag</emphasis> derived from the incoming virtual
+            address.</para>
+
+          <para>The extra information required for each translation
+            entry gives rise to the moniker
+            <emphasis>long-format</emphasis>~VHPT (LF-VHPT).
+            Translation entries grow to 32-bytes as illustrated on the
+            right hand side of <xref
+            linkend="ia64_ptes"></xref>.</para>
+
+          <para>The main advantage of this approach is the global hash
+            table can be pinned with a single TLB entry.  Since all
+            processes share the table it should scale better than the
+            SF-VHPT, where each process requires increasing numbers of
+            TLB entries for VLPT pages.  However, the larger entries
+            are less cache friendly; consider we can fit four 8-byte
+            short-format entries for every 32-byte long-format entry.
+            The very large caches on the Itanium processor may help
+            mitigate this impact, however.</para>
+
+          <para>One advantage of the SF-VHPT is that the operating
+            system can keep translations in a hierarchical page-table
+            and, as long as the hardware translation format is
+            maintained, can map leaf pages directly to the VLPT.  With
+            the LF-VHPT the OS must either use the hash table as the
+            primary source of translation entries or otherwise keep
+            the hash table as a cache of its own translation
+            information.  Keeping the LF-VHPT hash table as a cache is
+            somewhat suboptimal because of increased overheads on time
+            critical fault paths, however advantages are gained from
+            the table requiring only a single TLB entry.</para>
+
+        </sect4>
+
+      </sect3>
+
+
+    </sect2>
+
+  </sect1>
+
+</chapter>
 <!--
 Local Variables:
 mode: sgml

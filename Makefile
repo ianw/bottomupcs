@@ -35,6 +35,7 @@ html: csbu.sgml csbu.css $(sources) $(pngs)
 	jw -o html -d csbu.dsl -f docbook -b html -l /usr/share/xml/declaration/xml.dcl csbu.sgml
 	cp --parents $(pngs) html
 	cp csbu.css draft.png html
+	cp google726839f49cefc875.html html
 
 .PHONY: clean
 clean:	

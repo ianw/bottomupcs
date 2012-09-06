@@ -40,6 +40,7 @@
 
     <glossdiv>
       <title>M</title>
+
       <glossentry id="mutuallyexclusive">
 	<glossterm>Mutually Exclusive</glossterm>
 	<glossdef>
@@ -50,6 +51,18 @@
 
 	</glossdef>
       </glossentry>
+
+      <glossentry id="mmu">
+	<glossterm>MMU</glossterm>
+	<glossdef>
+
+	  <para>The <emphasis>memory managment unit</emphasis>
+	  component of the hardware architecture.</para>
+
+	</glossdef>
+      </glossentry>
+
+
     </glossdiv>
     
 
