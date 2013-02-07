@@ -30,7 +30,7 @@
 
     <para>The screen and printer are both like a write-only file, but
     instead of being stored as bits on a disk the information is
-    displayer as dots on a screen or lines on a page. The keyboard is
+    displayed as dots on a screen or lines on a page. The keyboard is
     like a read only file with the data coming from keystrokes and the
     CDROM is similar but rather than randomly coming from the user the
     data is stored directly on the disk.</para>

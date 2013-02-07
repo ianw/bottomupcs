@@ -806,12 +806,12 @@
 	  </row>
 	  <row>
 	      <entry><computeroutput>D</computeroutput></entry>
-	      <entry><computeroutput>1100</computeroutput></entry>
+	      <entry><computeroutput>1101</computeroutput></entry>
 	      <entry><computeroutput>13</computeroutput></entry>
 	  </row>
 	  <row>
 	      <entry><computeroutput>E</computeroutput></entry>
-	      <entry><computeroutput>1101</computeroutput></entry>
+	      <entry><computeroutput>1110</computeroutput></entry>
 	      <entry><computeroutput>14</computeroutput></entry>
 	  </row>
 	  <row>
