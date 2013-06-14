@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: images.xml 1298724 2012-03-09 07:55:31Z cbowditch $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Apache&#8482; FOP Design: Images</title>
+    <version>$Revision: 1298724 $</version>
+  </header>
+  <body>
+
+  <section id="intro">
+    <title>Introduction</title>
+
+    <p>Images may only be needed to be loaded when the image is rendered to the
+output or to find the dimensions.<br/>
+An image url may be invalid, this can be costly to find out so we need to
+keep a list of invalid image urls.</p>
+<p>We have a number of different caching schemes that are possible.</p>
+<p>All images are referred to using the url given in the XSL:FO after
+removing "url('')" wrapping. This does
+not include any sort of resolving such as relative -&gt; absolute. The
+external graphic in the FO Tree and the image area in the Area Tree only
+have the url as a reference.
+The images are handled through a static interface in ImageFactory.</p>
+</section>
+
+<section>
+  <title>Threading</title>
+
+<p>In a single threaded case with one document the image should be released
+as soon as the renderer caches it. If there are multiple documents then
+the images could be held in a weak cache in case another document needs to
+load the same image.</p>
+
+<p>In a multi threaded case many threads could be attempting to get the same
+image. We need to make sure an image will only be loaded once at a
+particular time. Once a particular document is finished then we can move
+all the images to a common weak cache.</p>
+</section>
+
+<section>
+  <title>Caches</title>
+<section>
+  <title>LRU</title>
+<p>All images are in a common cache regardless of context. To limit the size
+of the cache the LRU image is removed to keep the amount of memory used
+low. Each image can supply the amount of data held in memory.</p>
+</section>
+
+<section>
+  <title>Context</title>
+<p>Images are cached according to the context, using the FOUserAgent as a key.
+Once the context is finished the images are added to a common weak hashmap
+so that other contexts can load these images or the data will be garbage
+collected if required.</p>
+<p>If images are to be used commonly then we cannot dispose of data in the
+FopImage when cached by the renderer. Also if different contexts have
+different base directories for resolving relative url's then the loading
+and caching must be separate. We can have a cache that shares images among
+all contexts or only loads an image for a context.</p>
+</section>
+
+<p>The cache uses an image loader so that it can synchronize the image
+loading on an image by image basis. Finding and adding an image loader to
+the cache is also synchronized to prevent thread problems.</p>
+</section>
+
+<section>
+  <title>Invalid Images</title>
+
+<p>
+If an image cannot be loaded for some reason, for example the url is
+invalid or the image data is corrupt or an unknown type. Then it should
+only attempt to load the image once. All other attempts to get the image
+should return null so that it can be easily handled.<br/>
+This will prevent any extra processing or waiting.</p>
+</section>
+
+<section>
+  <title>Reading</title>
+<p>Once a stream is opened for the image url then a set of image readers is
+used to determine what type of image it is. The reader can peek at the
+image header or if necessary load the image. The reader can also get the
+image size at this stage.
+The reader then can provide the mime type to create the image object to
+load the rest of the information.</p>
+</section>
+
+<section>
+  <title>Data</title>
+
+<p>The data usually need for an image is the size and either a bitmap or the
+original data. Images such as jpeg and eps can be embedded into the
+document with the original data. SVG images are converted into a DOM which
+needs to be rendered to the PDF. Other images such as gif, tiff etc. are
+converted into a bitmap.
+Data is loaded by the FopImage by calling load(type) where type is the type of data to load.</p>
+</section>
+
+
+<section>
+  <title>Rendering</title>
+
+<p>Different renderers need to have the information in different forms.</p>
+
+
+<section>
+  <title>PDF</title>
+<dl><dt>original data</dt>  <dd>JPG, EPS</dd>
+<dt>bitmap</dt>  <dd>gif, tiff, bmp, png</dd>
+<dt>other</dt>  <dd>SVG</dd></dl>
+</section>
+
+<section>
+  <title>PS</title>
+<dl><dt>bitmap</dt>  <dd>JPG, gif, tiff, bmp, png</dd>
+<dt>other</dt> <dd>SVG</dd></dl>
+</section>
+
+<section>
+  <title>awt</title>
+<dl><dt>bitmap</dt> <dd>JPG, gif, tiff, bmp, png</dd>
+<dt>other</dt>  <dd>SVG</dd></dl>
+</section>
+
+<p>The renderer uses the url to retrieve the image from the ImageFactory and
+then load the required data depending on the image mime type. If the
+renderer can insert the image into the document and use that data for all
+future references of the same image then it can cache the reference in the
+renderer and the image can be released from the image cache.</p>
+</section>
+
+    </body>
+</document>

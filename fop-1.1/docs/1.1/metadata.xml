@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id$ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "document-v13.dtd">
+<document xmlns:xi="http://www.w3.org/2001/XInclude">
+  <header>
+    <title>Apache&#8482; FOP: Metadata</title>
+  </header>
+  <body>
+    <section id="overview">
+      <title>Overview</title>
+      <p>
+        Document metadata is an important tool for categorizing and finding documents.
+        Various formats support different kinds of metadata representation and to
+        different levels. One of the more popular and flexible means of representing
+        document or object metadata is
+        <link href="http://www.adobe.com/products/xmp/">XMP (eXtensible Metadata Platform, specified by Adobe)</link>.
+        PDF 1.4 introduced the use of XMP. The XMP specification lists recommendation for
+        embedding XMP metdata in other document and image formats. Given its flexibility it makes
+        sense to make use this approach in the XSL-FO context. Unfortunately, unlike SVG which
+        also refers to XMP, XSL-FO doesn't recommend a preferred way of specifying document and
+        object metadata. Therefore, there's no portable way to represent metadata in XSL-FO
+        documents. Each implementation does it differently.
+      </p>
+    </section>
+    <section id="xmp-in-fo">
+      <title>Embedding XMP in an XSL-FO document</title>
+      <p>
+        As noted above, there's no officially recommended way to embed metadata in XSL-FO.
+        Apache&#8482; FOP supports embedding XMP in XSL-FO. Currently, only support for document-level
+        metadata is implemented. Object-level metadata will be implemented when there's
+        interest.
+      </p>
+      <p>
+        Document-level metadata can be specified in the <code>fo:declarations</code> element.
+        XMP specification recommends to use <code>x:xmpmeta</code>, <code>rdf:RDF</code>, and
+        <code>rdf:Description</code> elements as shown in example below. Both
+        <code>x:xmpmeta</code> and <code>rdf:RDF</code> elements are recognized as the top-level
+        element introducing an XMP fragment (as per the XMP specification).
+      </p>
+      <section id="xmp-example">
+        <title>Example</title>
+        <source xml:space="preserve"><![CDATA[[..]
+</fo:layout-master-set>
+<fo:declarations>
+  <x:xmpmeta xmlns:x="adobe:ns:meta/">
+    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+          xmlns:dc="http://purl.org/dc/elements/1.1/">
+        <!-- Dublin Core properties go here -->
+        <dc:title>Document title</dc:title>
+        <dc:creator>Document author</dc:creator>
+        <dc:description>Document subject</dc:description>
+      </rdf:Description>
+      <rdf:Description rdf:about=""
+          xmlns:xmp="http://ns.adobe.com/xap/1.0/">
+        <!-- XMP properties go here -->
+        <xmp:CreatorTool>Tool used to make the PDF</xmp:CreatorTool>
+      </rdf:Description>
+    </rdf:RDF>
+  </x:xmpmeta>
+</fo:declarations>
+<fo:page-sequence ...
+[..]]]></source>
+        <note>
+          <code>fo:declarations</code> <strong>must</strong> be declared after
+          <code>fo:layout-master-set</code> and before the first <code>page-sequence</code>.
+        </note>
+      </section>
+    </section>
+    <section id="xmp-impl-in-fop">
+      <title>Implementation in Apache FOP</title>
+      <p>
+        Currently, XMP support is only available for PDF output.
+      </p>
+      <p>
+        Originally, you could set some metadata information through FOP's FOUserAgent by
+        using its set*() methods (like setTitle(String) or setAuthor(String). These values are
+        directly used to set value in the PDF Info object. Since PDF 1.4, adding metadata as an
+        XMP document to a PDF is possible. That means that there are now two mechanisms in PDF
+        that hold metadata.
+      </p>
+      <p>
+        Apache FOP now synchronizes the Info and the Metadata object in PDF, i.e. when you
+        set the title and the author through the FOUserAgent, the two values will end up in
+        the (old) Info object and in the new Metadata object as XMP content. If instead of
+        FOUserAgent, you embed XMP metadata in the XSL-FO document (as shown above), the
+        XMP metadata will be used as-is in the PDF Metadata object and some values from the
+        XMP metadata will be copied to the Info object to maintain backwards-compatibility
+        for PDF readers that don't support XMP metadata.
+      </p>
+      <p>
+        The mapping between the Info and the Metadata object used by Apache FOP comes from
+        the <link href="http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=38920">PDF/A-1 specification</link>.
+        For convenience, here's the mapping table:
+      </p>
+      <table>
+        <tr>
+          <th colspan="2" rowspan="1">Document information dictionary</th>
+          <th colspan="3" rowspan="1">XMP</th>
+        </tr>
+        <tr>
+          <th colspan="1" rowspan="1">Entry</th>
+          <th colspan="1" rowspan="1">PDF type</th>
+          <th colspan="1" rowspan="1">Property</th>
+          <th colspan="1" rowspan="1">XMP type</th>
+          <th colspan="1" rowspan="1">Category</th>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">Title</td>
+          <td colspan="1" rowspan="1">text string</td>
+          <td colspan="1" rowspan="1">dc:title</td>
+          <td colspan="1" rowspan="1">Text</td>
+          <td colspan="1" rowspan="1">External</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">Author</td>
+          <td colspan="1" rowspan="1">text string</td>
+          <td colspan="1" rowspan="1">dc:creator</td>
+          <td colspan="1" rowspan="1">seq Text</td>
+          <td colspan="1" rowspan="1">External</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">Subject</td>
+          <td colspan="1" rowspan="1">text string</td>
+          <td colspan="1" rowspan="1">dc:description["x-default"]</td>
+          <td colspan="1" rowspan="1">Text</td>
+          <td colspan="1" rowspan="1">External</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">Keywords</td>
+          <td colspan="1" rowspan="1">text string</td>
+          <td colspan="1" rowspan="1">pdf:Keywords</td>
+          <td colspan="1" rowspan="1">Text</td>
+          <td colspan="1" rowspan="1">External</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">Creator</td>
+          <td colspan="1" rowspan="1">text string</td>
+          <td colspan="1" rowspan="1">xmp:CreatorTool</td>
+          <td colspan="1" rowspan="1">Text</td>
+          <td colspan="1" rowspan="1">External</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">Producer</td>
+          <td colspan="1" rowspan="1">text string</td>
+          <td colspan="1" rowspan="1">pdf:Producer</td>
+          <td colspan="1" rowspan="1">Text</td>
+          <td colspan="1" rowspan="1">Internal</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">CreationDate</td>
+          <td colspan="1" rowspan="1">date</td>
+          <td colspan="1" rowspan="1">xmp:CreationDate</td>
+          <td colspan="1" rowspan="1">Date</td>
+          <td colspan="1" rowspan="1">Internal</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">ModDate</td>
+          <td colspan="1" rowspan="1">date</td>
+          <td colspan="1" rowspan="1">xmp:ModifyDate</td>
+          <td colspan="1" rowspan="1">Date</td>
+          <td colspan="1" rowspan="1">Internal</td>
+        </tr>
+      </table>
+      <note>
+        "Internal" in the Category column means that the user should not set this value.
+        It is set by the application. 
+      </note>
+      <note>
+        The "Subject" used to be mapped to <code>dc:subject</code> in the initial publication of
+        PDF/A-1 (ISO 19005-1). In the
+        <link href="http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=45613">Technical Corrigendum 1</link>
+        this was changed to map to <code>dc:description["x-default"]</code>. 
+      </note>
+      <section id="namespaces">
+        <title>Namespaces</title>
+        <p>
+          Metadata is made of property sets where each property set uses a different namespace URI.
+        </p>
+        <p>
+          The following is a listing of namespaces that Apache FOP recognizes and acts upon,
+          mostly to synchronize the XMP metadata with the PDF Info dictionary: 
+        </p>
+        <table>
+          <tr>
+            <th colspan="1" rowspan="1">Set/Schema</th>
+            <th colspan="1" rowspan="1">Namespace Prefix</th>
+            <th colspan="1" rowspan="1">Namespace URI</th>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="1">Dublin Core</td>
+            <td colspan="1" rowspan="1">dc</td>
+            <td colspan="1" rowspan="1">http://purl.org/dc/elements/1.1/</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="1">XMP Basic</td>
+            <td colspan="1" rowspan="1">xmp</td>
+            <td colspan="1" rowspan="1">http://ns.adobe.com/xap/1.0/</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="1">Adobe PDF Schema</td>
+            <td colspan="1" rowspan="1">pdf</td>
+            <td colspan="1" rowspan="1">http://ns.adobe.com/pdf/1.3/</td>
+          </tr>
+        </table>
+        <p>
+          Please refer to the <link href="http://partners.adobe.com/public/developer/en/xmp/sdk/XMPspecification.pdf">XMP Specification</link>
+          for information on other metadata namespaces.
+        </p>
+        <p>
+          Property sets (Namespaces) not listed here are simply passed through to the final
+          document (if supported). That is useful if you want to specify a custom metadata
+          schema.
+        </p>
+      </section>
+    </section>
+    <section id="links">
+      <title>Links</title>
+      <ul>
+        <li><link href="http://www.adobe.com/products/xmp/">Adobe's Extensible Metadata Platform (XMP) website</link></li>
+        <li><link href="http://partners.adobe.com/public/developer/en/xmp/sdk/XMPspecification.pdf">Adobe XMP Specification</link></li>
+        <li><link href="http://partners.adobe.com/public/developer/en/xmp/sdk/XMPspecification.pdf">Adobe XMP Specification</link></li>
+        <li><link href="http://dublincore.org/">http://dublincore.org/</link></li>
+      </ul>
+    </section>
+  </body>
+</document>

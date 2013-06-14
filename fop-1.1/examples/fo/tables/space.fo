@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master master-name="first"
+          margin-right="1.5cm"
+          margin-left="1.5cm"
+          margin-bottom="2cm"
+          margin-top="1cm"
+          page-width="21cm"
+          page-height="29.7cm">
+      <fo:region-body margin-top="1cm"/>
+      <fo:region-before extent="1cm"/>
+      <fo:region-after extent="1.5cm"/>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+
+  <fo:page-sequence master-reference="first">
+    <fo:static-content flow-name="xsl-region-before">
+      <fo:block line-height="14pt" font-size="10pt"
+    text-align="end">table examples</fo:block>
+    </fo:static-content>
+    <fo:static-content flow-name="xsl-region-after">
+      <fo:block line-height="14pt" font-size="10pt"
+    text-align="end">Page <fo:page-number/></fo:block>
+    </fo:static-content>
+
+    <fo:flow flow-name="xsl-region-body">
+
+      <fo:block space-before.optimum="3pt" space-after.optimum="15pt">
+      Table 1: spaces around cells
+      </fo:block>
+
+      <fo:table border-style="solid" border-width="0.5pt" border-color="red" table-layout="fixed" width="100%">
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+
+    <fo:table-body>
+    <fo:table-row>
+      <fo:table-cell border-style="solid" border-width="0.5pt">
+        <fo:block text-align="center">
+        first
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell border-style="solid" border-width="0.5pt">
+        <fo:block text-align="center">
+        table
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell border-style="solid" border-width="0.5pt">
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell border-style="solid" border-width="0.5pt">
+        <fo:block text-align="center">
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell padding-left="5pt" border-style="solid" border-width="0.5pt">
+        <fo:block text-align="center">
+        left 5pt
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell border-style="solid" border-width="0.5pt">
+        <fo:block text-align="center">
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell space-before.optimum="5pt" border-style="solid" border-width="0.5pt">
+        <fo:block text-align="center">
+        before 5pt
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell padding-right="5pt" border-style="solid" border-width="0.5pt">
+        <fo:block text-align="center">
+        right 5pt
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell space-after.optimum="5pt" border-style="solid" border-width="0.5pt">
+        <fo:block text-align="center">
+        after 5pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell border-style="solid" border-width="0.5pt">
+        <fo:block text-align="center">
+        last
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell border-style="solid" border-width="0.5pt">
+        <fo:block text-align="center">
+        table
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell border-style="solid" border-width="0.5pt">
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before.optimum="3pt" space-after.optimum="15pt">
+      Table 2: spaces around rows
+      </fo:block>
+
+      <fo:table border-style="solid" border-width="0.5pt" border-color="red" table-layout="fixed" width="100%">
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+
+    <fo:table-body>
+    <fo:table-row border-style="solid" border-width="0.5pt" padding-left="5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        padding
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        left
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        5pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-style="solid" border-width="0.5pt" space-before.optimum="5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        space
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        before
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        5pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-style="solid" border-width="0.5pt" space-after.optimum="5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        space
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        after
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        5pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-style="solid" border-width="0.5pt" padding-right="5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        padding
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        right
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        5pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before.optimum="3pt" space-after.optimum="15pt">
+      Table 3: spaces around body
+      </fo:block>
+
+      <fo:table border-style="solid" border-width="0.5pt" border-color="red" table-layout="fixed" width="100%">
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+
+    <fo:table-body border-style="solid" border-width="0.5pt" padding-left="5pt">
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        padding
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        left
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        5pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+
+    <fo:table-body border-style="solid" border-width="0.5pt" space-before.optimum="5pt">
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        space
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        before
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        5pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+
+    <fo:table-body border-style="solid" border-width="0.5pt" space-after.optimum="5pt">
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        space
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        after
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        5pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+
+    <fo:table-body border-style="solid" border-width="0.5pt" padding-right="5pt">
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        padding
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        right
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        5pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before.optimum="3pt" space-after.optimum="15pt">
+      Table 4: spaces around table
+      </fo:block>
+
+    <fo:block border-style="solid" border-width="0.5pt">
+      <fo:table space-before.optimum="5pt" border-style="solid" border-width="0.5pt" border-color="red" table-layout="fixed" width="100%">
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+
+    <fo:table-body>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        table
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        space before
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        5pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+    </fo:block>
+
+    <fo:block border-style="solid" border-width="0.5pt">
+      <fo:table padding-left="5pt" border-style="solid" border-width="0.5pt" border-color="red" table-layout="fixed" width="100%">
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+
+    <fo:table-body>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        table
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        padding left
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        5pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+    </fo:block>
+
+    <fo:block border-style="solid" border-width="0.5pt">
+      <fo:table padding-right="5pt" border-style="solid" border-width="0.5pt" border-color="red" table-layout="fixed" width="100%">
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+
+    <fo:table-body>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        table
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        padding right
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        5pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+    </fo:block>
+
+    <fo:block border-style="solid" border-width="0.5pt">
+      <fo:table space-after.optimum="5pt" border-style="solid" border-width="0.5pt" border-color="red" table-layout="fixed" width="100%">
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+
+    <fo:table-body>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        table
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        space after
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        5pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+    </fo:block>
+
+      <fo:block space-before.optimum="3pt" space-after.optimum="15pt">
+      Table 5: combinations
+      </fo:block>
+
+    <fo:block border-style="solid" border-width="0.5pt">
+      <fo:table space-after.optimum="20pt" border-style="solid" border-width="0.5pt" border-color="red" table-layout="fixed" width="100%">
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+
+    <fo:table-body space-after.optimum="15pt" border-style="solid" border-width="0.5pt" border-color="green">
+    <fo:table-row space-after.optimum="10pt" border-style="solid" border-width="0.5pt" border-color="blue">
+      <fo:table-cell space-after.optimum="5pt" border-style="solid" border-width="0.5pt" border-color="yellow">
+        <fo:block text-align="center">
+        after 5pt
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        and row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        after 10pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        and
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        body
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        after 15pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+
+    <fo:table-body>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        and
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        table
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        after 20pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+    </fo:block>
+
+    <fo:block border-style="solid" border-width="0.5pt">
+      <fo:table space-after.optimum="5pt" border-style="solid" border-width="0.5pt" border-color="red" table-layout="fixed" width="100%">
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+
+    <fo:table-body space-after.optimum="10pt" border-style="solid" border-width="0.5pt" border-color="green">
+    <fo:table-row space-after.optimum="15pt" border-style="solid" border-width="0.5pt" border-color="blue">
+      <fo:table-cell space-after.optimum="20pt" border-style="solid" border-width="0.5pt" border-color="yellow">
+        <fo:block text-align="center">
+        after 20pt
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        and row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        after 15pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        and
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        body
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        after 10pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+
+    <fo:table-body>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        and
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        table
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        after 5pt
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+    </fo:block>
+
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

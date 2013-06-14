@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<rdf:RDF xml:lang="en"
+         xmlns="http://usefulinc.com/ns/doap#" 
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+         xmlns:asfext="http://projects.apache.org/ns/asfext#">
+  <Project rdf:about="http://xmlgraphics.apache.org/fop">
+    <created>2006-03-25</created>
+    <license rdf:resource="http://usefulinc.com/doap/licenses/asl20" />
+    <name>Apache FOP</name>
+    <homepage rdf:resource="http://xmlgraphics.apache.org/fop" />
+    <asfext:pmc rdf:resource="http://xmlgraphics.apache.org" />
+    <shortdesc>The Apache Foundation's XSL Formatting Objects (XSL-FO) implementation.</shortdesc>
+    <description>FOP (Formatting Objects Processor) is the world's first print formatter driven by XSL formatting objects (XSL-FO) and the world's first output independent formatter. It is a Java application that reads a formatting object (FO) tree and renders the resulting pages to a specified output. Output formats  currently supported include PDF, PCL, PS, SVG, XML (area tree representation), Print, AWT, MIF and TXT. The primary output target is PDF.</description>
+    <bug-database rdf:resource="http://issues.apache.org/bugzilla/buglist.cgi?product=Fop&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;order=bugs.bug_id" />
+    <mailing-list rdf:resource="http://xmlgraphics.apache.org/fop/maillist.html" />
+    <download-page rdf:resource="http://xmlgraphics.apache.org/fop/download.html" />
+    <programming-language>Java</programming-language>
+    <category rdf:resource="http://projects.apache.org/category/xml" />
+    <category rdf:resource="http://projects.apache.org/category/graphics" />
+    <asfext:implements>
+      <asfext:Standard>
+        <asfext:title>Extensible Stylesheet Language - Formatting Objects (XSL-FO 1.0)</asfext:title>
+        <asfext:body>W3C</asfext:body>
+        <asfext:id>XSL 1.0</asfext:id>
+        <asfext:url rdf:resource="http://www.w3.org/TR/xsl/"/>
+      </asfext:Standard>
+    </asfext:implements>
+    <asfext:implements>
+      <asfext:Standard>
+      <asfext:title>Extensible Stylesheet Language - Formatting Objects (XSL-FO 1.1)</asfext:title>
+      <asfext:body>W3C</asfext:body>
+      <asfext:id>XSL 1.1</asfext:id>
+      <asfext:url rdf:resource="http://www.w3.org/TR/xsl11/"/>
+      </asfext:Standard>
+    </asfext:implements>
+    <asfext:implements>
+      <asfext:Standard>
+      <asfext:title>Portable Document Format (PDF 1.4)</asfext:title>
+      <asfext:body>Adobe Systems Incorporated</asfext:body>
+      <asfext:id>PDF 1.4</asfext:id>
+      <asfext:url rdf:resource="http://partners.adobe.com/public/developer/pdf/index_reference.html"/>
+      </asfext:Standard>
+    </asfext:implements>
+    <asfext:implements>
+      <asfext:Standard>
+      <asfext:title>PostScript</asfext:title>
+      <asfext:body>Adobe Systems Incorporated</asfext:body>
+      <asfext:id>PS</asfext:id>
+      <asfext:url rdf:resource="http://partners.adobe.com/public/developer/ps/index_specs.html"/>
+      </asfext:Standard>
+    </asfext:implements>
+    <asfext:implements>
+      <asfext:Standard>
+      <asfext:title>Rich Text Format (RTF 1.6)</asfext:title>
+      <asfext:body>Microsoft</asfext:body>
+      <asfext:id>RTF 1.6</asfext:id>
+      <asfext:url rdf:resource="http://msdn.microsoft.com/library/en-us/dnrtfspec/html/rtfspec.asp"/>
+      </asfext:Standard>
+    </asfext:implements>
+    <release>
+      <Version>
+        <name>Current release (stable)</name>
+        <created>2012-10-20</created>
+        <revision>1.1</revision>
+      </Version>
+    </release>
+    <release>
+      <Version>
+        <name>Previous release (stable)</name>
+        <created>2010-07-21</created>
+        <revision>1.0</revision>
+      </Version>
+    </release>
+    <release>
+      <Version>
+        <name>Previous release (stable)</name>
+        <created>2008-08-05</created>
+        <revision>0.95</revision>
+      </Version>
+    </release>
+    <repository>
+      <SVNRepository>
+        <location rdf:resource="http://svn.apache.org/repos/asf/xmlgraphics/fop/trunk/"/>
+        <browse rdf:resource="http://svn.apache.org/viewvc/xmlgraphics/fop/trunk/"/>
+      </SVNRepository>
+    </repository>
+  </Project>
+</rdf:RDF>

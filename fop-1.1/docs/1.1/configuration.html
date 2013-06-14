@@ -1,0 +1,848 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.10-dev">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Apache&trade; FOP: Configuration</title>
+<link type="text/css" href="../skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="../skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="../skin/print.css" rel="stylesheet">
+<link type="text/css" href="../skin/profile.css" rel="stylesheet">
+<script src="../skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="../skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="../skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="../favicon.ico">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://xmlgraphics.apache.org/"><img class="logoImage" alt="Apache XML Graphics" src="../images/group-logo.gif" title="Apache XML Graphics is responsible for the creation and maintenance of software for managing the conversion of XML formats to graphical output, and the creation and maintenance of related software components, based on software licensed to the Foundation"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://xmlgraphics.apache.org/fop/"><img class="logoImage" alt="Apache FOP" src="../images/logo.jpg" title="Apache FOP (Formatting Objects Processor) is the world's first output independent formatter. Output formats currently supported include PDF, PCL, PS, SVG, XML (area tree representation), Print, AWT, MIF and TXT. The primary output target is PDF."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="xmlgraphics.apache.org" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="../index.html">Home</a>
+</li>
+<li>
+<a class="unselected" href="../1.0/index.html">Version 1.0</a>
+</li>
+<li class="current">
+<a class="selected" href="../1.1/index.html">Version 1.1</a>
+</li>
+<li>
+<a class="unselected" href="../trunk/index.html">FOP Trunk</a>
+</li>
+<li>
+<a class="unselected" href="../dev/index.html">Development</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">The Apache Software Foundation</a> &gt; <a href="http://xmlgraphics.apache.org/">Apache XML Graphics Project</a><script src="../skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_selected_1.1', '../skin/')" id="menu_selected_1.1Title" class="menutitle" style="background-image: url('../skin/images/chapter_open.gif');">Apache&trade; FOP 1.1</div>
+<div id="menu_selected_1.1" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="../1.1/index.html">About</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/releaseNotes_1.1.html">Release Notes</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/changes_1.1.html">Changes (1.1)</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/knownissues_overview.html">Known Issues</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/upgrading.html">Upgrading</a>
+</div>
+<div onclick="SwitchMenu('menu_selected_1.1.6', '../skin/')" id="menu_selected_1.1.6Title" class="menutitle" style="background-image: url('../skin/images/chapter_open.gif');">Using Apache&trade; FOP</div>
+<div id="menu_selected_1.1.6" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="../1.1/anttask.html">Ant Task</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/compiling.html">Build</a>
+</div>
+<div class="menupage">
+<div class="menupagetitle">Configure</div>
+</div>
+<div class="menuitem">
+<a href="../1.1/embedding.html">Embed</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/running.html">Run</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/servlets.html">Servlets</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.1.7', '../skin/')" id="menu_1.1.7Title" class="menutitle">Features</div>
+<div id="menu_1.1.7" class="menuitemgroup">
+<div class="menuitem">
+<a href="../1.1/accessibility.html">Accessibility</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/complexscripts.html">Complex Scripts</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/events.html">Events</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/extensions.html">Extensions</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/fonts.html">Fonts</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/graphics.html">Graphics</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/hyphenation.html">Hyphenation</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/intermediate.html">Intermediate Format</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/metadata.html">Metadata</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/output.html">Output Targets</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/pdfa.html">PDF/A</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/pdfx.html">PDF/X</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/pdfencryption.html">PDF Encryption</a>
+</div>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="../skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="raw XML" class="xmllink">
+<a class="dida" href="configuration.xml"><img alt="XML - icon" src="../skin/images/xmldoc.gif" class="skin"><br>
+        XML</a>
+</div>
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="configuration.pdf"><img alt="PDF -icon" src="../skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<div class="trail">Font size: 
+	          &nbsp;<input value="Reset" class="resetfont" title="Reset text" onclick="ndeSetTextSize('reset'); return false;" type="button">      
+	          &nbsp;<input value="-a" class="smallerfont" title="Shrink text" onclick="ndeSetTextSize('decr'); return false;" type="button">
+	          &nbsp;<input value="+a" class="biggerfont" title="Enlarge text" onclick="ndeSetTextSize('incr'); return false;" type="button">
+</div>
+<h1>Apache&trade; FOP: Configuration</h1>
+<div id="front-matter">
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#general">Configuration File Basics</a>
+<ul class="minitoc">
+<li>
+<a href="#general-available">Making Configuration Available to FOP</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#general-elements">Summary of the General Configuration Options</a>
+</li>
+<li>
+<a href="#image-loading">Image Loading Customization</a>
+</li>
+<li>
+<a href="#renderers">Renderer configuration</a>
+<ul class="minitoc">
+<li>
+<a href="#pdf-renderer">Special Settings for the PDF Renderer</a>
+</li>
+<li>
+<a href="#ps-renderer">Special Settings for the PostScript Renderer</a>
+</li>
+<li>
+<a href="#pcl-renderer">Special Settings for the PCL Renderer</a>
+</li>
+<li>
+<a href="#afp-renderer">Special Settings for the AFP Renderer</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#When+it+does+not+work">When it does not work</a>
+</li>
+</ul>
+</div>
+</div>
+  
+<a name="general"></a>
+<h2 class="underlined_10">Configuration File Basics</h2>
+<div class="section">
+<p>
+      The Apache&trade; FOP configuration file is an XML file containing a variety of settings that are useful
+      for controlling FOP's behavior, and for helping it find resources that you wish it to use.
+    </p>
+<p>
+      The easiest way to get started using a FOP configuration file is to copy the sample found 
+      at <span class="codefrag">{fop-dir}/conf/fop.xconf</span> to a location of your choice, and then to 
+      edit it according to your needs.
+      It contains templates for the various configuration options, most of which are commented 
+      out. Remove the comments and change the settings for entries that you wish to use.
+      Be sure to follow any instructions, including comments which specify the value range.
+      Also, since the configuration file is XML, be sure to keep it well-formed.
+    </p>
+<a name="general-available"></a>
+<h3 class="underlined_5">Making Configuration Available to FOP</h3>
+<p>After creating your configuration file, you must tell FOP how to find it:</p>
+<ul>
+        
+<li>
+          If running FOP from the command-line, see the "-c" command-line option in 
+          <a href="running.html">Running FOP</a>.
+        </li>
+        
+<li>
+          If running FOP as an embedded application, see 
+          <a href="embedding.html#config-external">Embedding, Using a Configuration File</a>.
+        </li>
+      
+</ul>
+<p>
+        See <a href="embedding.html#config-internal">Setting the Configuration Programmatically</a>
+        for instructions on how to do so in an embedded environment.
+      </p>
+</div>
+  
+<a name="general-elements"></a>
+<h2 class="underlined_10">Summary of the General Configuration Options</h2>
+<div class="section">
+<table class="ForrestTable" cellspacing="1" cellpadding="4">
+      
+<tr>
+        
+<th colspan="1" rowspan="1">Element</th>
+        <th colspan="1" rowspan="1">Data Type (for the value)</th>
+        <th colspan="1" rowspan="1">Description</th>
+        <th colspan="1" rowspan="1">Default Value</th>
+      
+</tr>
+      
+<tr>
+        
+<td colspan="1" rowspan="1">base</td>
+        <td colspan="1" rowspan="1">URL or directory</td>
+        <td colspan="1" rowspan="1">Specifies the base URL based on which relative URL will be resolved.</td>
+        <td colspan="1" rowspan="1">current directory</td>
+      
+</tr>
+      
+<tr>
+        
+<td colspan="1" rowspan="1">font-base</td>
+        <td colspan="1" rowspan="1">URL or directory</td>
+        <td colspan="1" rowspan="1">Specifies the base URL based on which relative font URLs will be resolved.
+        </td>
+        <td colspan="1" rowspan="1">base URL/directory (above)</td>
+      
+</tr>
+      
+<tr>
+        
+<td colspan="1" rowspan="1">hyphenation-base</td>
+        <td colspan="1" rowspan="1">URL or directory</td>
+        <td colspan="1" rowspan="1">Specifies the base URL based on which relative URLs to hyphenation pattern 
+        files will be resolved. If not specified, support for user-supplied hyphenation 
+        patterns remains disabled.
+        </td>
+        <td colspan="1" rowspan="1">disabled</td>
+      
+</tr>
+	  
+<tr>
+		
+<td colspan="4" rowspan="1">Relative URIs for the above three properties are evaluated relative to the base URI of the configuration file. If the configuration is provided programmatically, the base URI can be set with <span class="codefrag">FopFactory.setUserConfigBaseURI</span>; default is the current working directory.</td>
+	  
+</tr>
+	  
+<tr>
+		
+<td colspan="1" rowspan="1">hyphenation-pattern</td>
+		<td colspan="1" rowspan="1">String, attribute lang, attribute country (optional)</td>
+		<td colspan="1" rowspan="1">Register a file name for the hyphenation pattern for the mentioned language and country. Language ll and country CC must both consist of two letters.</td>
+		<td colspan="1" rowspan="1">ll_CC</td>
+	  
+</tr>
+      
+<tr>
+        
+<td colspan="1" rowspan="1">source-resolution</td>
+        <td colspan="1" rowspan="1">Integer, dpi</td>
+        <td colspan="1" rowspan="1">
+          Resolution in dpi (dots per inch) which is used internally to determine the pixel 
+          size for SVG images and bitmap images without resolution information.
+        </td>
+        <td colspan="1" rowspan="1">72 dpi</td>
+      
+</tr>
+      
+<tr>
+        
+<td colspan="1" rowspan="1">target-resolution</td>
+        <td colspan="1" rowspan="1">Integer, dpi</td>
+        <td colspan="1" rowspan="1">
+          Resolution in dpi (dots per inch) used to specify the output resolution for bitmap
+          images generated by bitmap renderers (such as the TIFF renderer) and by bitmaps
+          generated by Apache Batik for filter effects and such.
+        </td>
+        <td colspan="1" rowspan="1">72 dpi</td>
+      
+</tr>
+      
+<tr>
+        
+<td colspan="1" rowspan="1">strict-configuration</td>
+        <td colspan="1" rowspan="1">Boolean (true, false)</td>
+        <td colspan="1" rowspan="1">
+          Setting this option to 'true' will cause FOP to strictly verify the contents of the
+          FOP configuration file to ensure that defined resources (such as fonts and base
+          URLs/directories) are valid and available to FOP.  Any errors found will cause FOP to
+          immediately raise an exception.</td>
+        <td colspan="1" rowspan="1">false</td>
+      
+</tr>
+      
+<tr>
+        
+<td colspan="1" rowspan="1">strict-validation</td>
+        <td colspan="1" rowspan="1">Boolean (true, false)</td>
+        <td colspan="1" rowspan="1">
+          Setting this option to 'false' causes FOP to be more forgiving about XSL-FO validity, 
+          for example, you're allowed to specify a border on a region-body which is supported 
+          by some FO implementations but is non-standard. Note that such a border would 
+          currently have no effect in Apache FOP.</td>
+        <td colspan="1" rowspan="1">true</td>
+      
+</tr>
+      
+<tr>
+        
+<td colspan="1" rowspan="1">break-indent-inheritance</td>
+        <td colspan="1" rowspan="1">Boolean (true, false)</td>
+        <td colspan="1" rowspan="1">
+          Setting this option to 'true' causes FOP to use an alternative rule set to determine
+          text indents specified through margins, start-indent and end-indent. Many commercial
+          FO implementations have chosen to break the XSL specification in this aspect. This
+          option tries to mimic their behaviour. Please note that Apache FOP may still not
+          behave exactly like those implementations either because FOP has not fully matched
+          the desired behaviour and because the behaviour among the commercial implementations
+          varies. The default for this option (i.e. false) is to behave exactly like the 
+          specification describes.</td>
+        <td colspan="1" rowspan="1">false</td>
+      
+</tr>
+      
+<tr>
+        
+<td colspan="1" rowspan="1">complex-scripts</td>
+        <td colspan="1" rowspan="1">attribute disabled (optional)</td>
+        <td colspan="1" rowspan="1">
+          If present and if an attribute 'disabled' is specified with the value 'false', then
+          complex script features are disabled. The same result can be obtained on an FOP
+          per-invocation basis by specifying a '-nocs' command line option when invoking FOP.
+          When complex script features are disabled, all bidirectional processing and complex
+          character to glyph mapping processing is disabled; in addition, the loading of
+          GDEF, GSUB, and GPOS advanced typographic tables is disabled for OpenType and
+          TrueType fonts. Unless disabled by this mechanism or by use of the '-nocs' command
+          line option, complex script features will be enabled by default.
+        </td>
+        <td colspan="1" rowspan="1">n/a</td>
+      
+</tr>
+      
+<tr>
+        
+<td colspan="1" rowspan="1">default-page-settings</td>
+        <td colspan="1" rowspan="1">n/a</td>
+        <td colspan="1" rowspan="1">
+          Specifies the default width and height of a page if "auto" is specified 
+          for either or both values. Use "height" and "width" attributes on the 
+          default-page-settings element to specify the two values.</td>
+        <td colspan="1" rowspan="1">"height" 11 inches, "width" 8.26 inches</td>
+      
+</tr>
+      <!-- Disabled: no simultaneous Renderer and IF implementations at the moment
+      <tr>
+        <td>prefer-renderer</td>
+        <td>boolean (true, false)</td>
+        <td>
+          By default, FOP prefers the newer output implementations based on the
+          <code>IFDocumentHandler</code> interface. If no such implementation can be found for
+          a given MIME type, it looks for an implementation of the <code>Renderer</code> interface.
+          If necessary, you can invert the lookup order to prefer the Renderer variant over the
+          IFDocumentHandler variant by setting this value to true. 
+        </td>
+        <td>false</td>
+      </tr>
+      -->
+      
+<tr>
+        
+<td colspan="1" rowspan="1">use-cache</td>
+        <td colspan="1" rowspan="1">boolean (true, false)</td>
+        <td colspan="1" rowspan="1">All fonts information that has been gathered as a result of "directory"
+        or "auto-detect" font configurations will be cached for future rendering runs.
+        This setting should improve performance on systems where
+        fonts have been configured using the "directory" or "auto-detect" tag mechanisms.
+        By default this option is switched on.</td>
+        <td colspan="1" rowspan="1">true</td>
+      
+</tr>
+      
+<tr>
+        
+<td colspan="1" rowspan="1">cache-file</td>
+        <td colspan="1" rowspan="1">String</td>
+        <td colspan="1" rowspan="1">This option specifies the file/directory path of the fop cache file.
+        This file is currently only used to cache font triplet information for future reference.</td>
+        <td colspan="1" rowspan="1">${base}/conf/fop.cache</td>
+      
+</tr>
+      
+<tr>
+        
+<td colspan="1" rowspan="1">renderers</td>
+        <td colspan="1" rowspan="1">(see text below)</td>
+        <td colspan="1" rowspan="1">Contains the configuration for each renderer. See below.</td>
+        <td colspan="1" rowspan="1">N/A</td>
+      
+</tr>
+    
+</table>
+<p>
+      This is an excerpt from the example configuration file coming with FOP:
+    </p>
+<pre class="code">
+&lt;fop version="1.0"&gt;
+
+  &lt;!-- Strict user configuration --&gt;
+  &lt;strict-configuration&gt;true&lt;/strict-configuration&gt;
+
+  &lt;!-- Strict FO validation --&gt;
+  &lt;strict-validation&gt;true&lt;/strict-validation&gt;
+
+  &lt;!-- Base URL for resolving relative URLs --&gt;
+  &lt;base&gt;./&lt;/base&gt;
+
+  &lt;!-- Font Base URL for resolving relative font URLs --&gt;
+  &lt;font-base&gt;./&lt;/font-base&gt;
+
+  &lt;!-- Source resolution in dpi (dots/pixels per inch) for determining the size of pixels in SVG and bitmap images, default: 72dpi --&gt;
+  &lt;source-resolution&gt;72&lt;/source-resolution&gt;
+  &lt;!-- Target resolution in dpi (dots/pixels per inch) for specifying the target resolution for generated bitmaps, default: 72dpi --&gt;
+  &lt;target-resolution&gt;72&lt;/target-resolution&gt;
+
+  &lt;!-- default page-height and page-width, in case
+       value is specified as auto --&gt;
+  &lt;default-page-settings height="11in" width="8.26in"/&gt;
+
+  &lt;!-- Use file name nl_Bel instead of the default nl_BE --&gt;
+  &lt;hyphenation-pattern lang="nl" country="BE"&gt;nl_Bel&lt;/hyphenation-pattern&gt;
+  
+  &lt;!-- etc. etc..... --&gt;
+&lt;/fop&gt;</pre>
+</div>
+  
+<a name="image-loading"></a>
+<h2 class="underlined_10">Image Loading Customization</h2>
+<div class="section">
+<p>
+      Apache FOP uses the image loading framework from
+      <a href="http://xmlgraphics.apache.org/commons/">Apache XML Graphics Commons</a> to load
+      images using various plug-ins. Every image loader plug-in has a hard-coded usage penalty
+      that influences which solution is chosen if there are multiple possibilities to load an image.
+      Sometimes, though, these penalties need to be tweaked and this can be done in the FOP
+      configuration. An example:
+    </p>
+<pre class="code">&lt;fop version="1.0"&gt;
+  [..]
+  &lt;image-loading&gt;
+    &lt;penalty value="10000"
+      class="org.apache.xmlgraphics.image.loader.impl.ImageLoaderRawCCITTFax"/&gt;
+    &lt;penalty value="INFINITE"
+      class="org.apache.xmlgraphics.image.loader.impl.ImageLoaderInternalTIFF"/&gt;
+  &lt;/image-loading&gt;
+  &lt;renderers....
+&lt;/fop&gt;</pre>
+<p>
+      The first penalty element increases the penalty for the raw CCITT loader. This practically
+      forces the decoding of CCITT compressed TIFF images except if there are no TIFF codecs
+      available. 
+    </p>
+<p>
+      The second penalty element sets an "infinite" penalty for the TIFF loader using the internal
+      TIFF codec. This practically disables that plug-in as it will never be chosen as a possible
+      solution.
+    </p>
+<p>
+      Negative penalties are possible to promote a plug-in but a negative penalty sum will be
+      treated as zero penalty in most cases. For more details on the image loading framework,
+      please consult the documentation there.
+    </p>
+</div>
+  
+<a name="renderers"></a>
+<h2 class="underlined_10">Renderer configuration</h2>
+<div class="section">
+<p>
+      Each Renderer has its own configuration section which is identified by the
+      MIME type the Renderer is written for, ex. "application/pdf" for the PDF Renderer.
+    </p>
+<p>
+      The configuration for the PDF Renderer could look like this:
+    </p>
+<pre class="code">
+  &lt;renderers&gt;
+    &lt;renderer mime="application/pdf"&gt;
+      &lt;filterList&gt;
+        &lt;!-- provides compression using zlib flate (default is on) --&gt;
+        &lt;value&gt;flate&lt;/value&gt;
+      &lt;/filterList&gt;
+      &lt;fonts&gt;
+        &lt;font metrics-url="arial.xml" kerning="yes" embed-url="arial.ttf"&gt;
+          &lt;font-triplet name="Arial" style="normal" weight="normal"/&gt;
+          &lt;font-triplet name="ArialMT" style="normal" weight="normal"/&gt;
+        &lt;/font&gt;
+        &lt;font metrics-url="arialb.xml" kerning="yes" embed-url="arialb.ttf"&gt;
+          &lt;font-triplet name="Arial" style="normal" weight="bold"/&gt;
+          &lt;font-triplet name="ArialMT" style="normal" weight="bold"/&gt;
+        &lt;/font&gt;
+      &lt;/fonts&gt;
+    &lt;/renderer&gt;
+    
+    &lt;renderer mime="application/postscript"&gt;
+    &lt;!-- etc. etc..... --&gt;</pre>
+<p>
+      The details on the font configuration can be found on the separate <a href="fonts.html">Fonts</a> page.
+      Note especially the section entitled <a href="fonts.html#register">Register Fonts with FOP</a>.
+    </p>
+<a name="pdf-renderer"></a>
+<h3 class="underlined_5">Special Settings for the PDF Renderer</h3>
+<p>
+        The configuration element for the PDF renderer contains two elements. One is for the font configuration
+        (please follow the link above) and one is for the "filter list". The filter list controls how the
+        individual objects in a PDF file are encoded. By default, all objects get "flate" encoded (i.e. simply 
+        compressed with the same algorithm that is also used in ZIP files). Most users don't need to change that
+        setting. For debugging purposes, it may be desired not to compress the internal objects at all so the
+        generated PDF commands can be read. In that case, you can simply use the following filter list. The 
+        second filter list (type="image") ensures that all images still get compressed but also ASCII-85 encoded
+        so the produced PDF file is still easily readable in a text editor.
+      </p>
+<pre class="code">
+    &lt;renderer mime="application/pdf"&gt;
+      &lt;filterList&gt;
+        &lt;value&gt;null&lt;/value&gt;
+      &lt;/filterList&gt;
+      &lt;filterList type="image"&gt;
+        &lt;value&gt;flate&lt;/value&gt;
+        &lt;value&gt;ascii-85&lt;/value&gt;
+      &lt;/filterList&gt;
+      
+      &lt;fonts....
+    &lt;/renderer&gt;</pre>
+<p>
+        Another (optional) setting specific to the PDF Renderer is an output color profile, an ICC 
+        color profile which indicates the target color space the PDF file is generated for. This 
+        setting is mainly used in conjunction with the <a href="pdfx.html">PDF/X</a> feature. 
+        An example:
+      </p>
+<pre class="code">
+    &lt;renderer mime="application/pdf"&gt;
+      &lt;filterList...
+      
+      &lt;output-profile&gt;C:\FOP\Color\EuropeISOCoatedFOGRA27.icc&lt;/output-profile&gt;
+      
+      &lt;fonts....
+      &lt;/renderer&gt;</pre>
+<p>
+        Some people don't have high requirements on color fidelity but instead want the smallest
+        PDF file sizes possible. In this case it's possible to disable the default sRGB color space
+        which XSL-FO requires. This will cause RGB colors to be generated as device-specific RGB.
+        Please note that this option is unavailable (and will cause an error) if you enable
+        PDF/A or PDF/X functionality or if you specify an output profile. This setting will make the
+        PDF about 4KB smaller. To disable the sRGB color space add the following setting:
+      </p>
+<pre class="code">
+    &lt;renderer mime="application/pdf"&gt;
+      &lt;filterList...
+      
+      &lt;disable-srgb-colorspace&gt;true&lt;/disable-srgb-colorspace&gt;
+      
+      &lt;fonts....
+      &lt;/renderer&gt;</pre>
+<p>FOP supports encryption of PDF output, thanks to Patrick C. Lankswert.
+      This feature is commonly used to prevent unauthorized viewing, printing, editing, copying text
+      from the document and doing annotations. It is also possible to ask the user for a password in
+      order to view the contents. Note that there already exist third party applications which can
+      decrypt an encrypted PDF without effort and allow the aforementioned operations, therefore the
+      degree of protection is limited.  For further information about features and restrictions
+      regarding PDF encryption, look at the documentation coming with Adobe Acrobat or the technical
+      documentation on the Adobe web site.</p>
+<pre class="code">
+    &lt;renderer mime="application/pdf"&gt;
+      &lt;encryption-params&gt;
+         &lt;encryption-length&gt;128&lt;/encryption-length&gt;
+         &lt;user-password&gt;testuserpass&lt;/user-password&gt;
+         &lt;owner-password&gt;testownerpass&lt;/owner-password&gt;
+         &lt;noprint/&gt;
+         &lt;nocopy/&gt;
+         &lt;noedit/&gt;
+         &lt;noannotations/&gt;
+         &lt;nofillinforms/&gt;
+         &lt;noaccesscontent/&gt;
+         &lt;noassembledoc/&gt;
+         &lt;noprinthq/&gt;
+      &lt;/encryption-params&gt;
+    &lt;/renderer&gt;</pre>
+<p>
+       By default FOP produces PDF files of version 1.4, but this can be changed in order to benefit 
+       from features that appeared in newer versions of PDF. At the moment, only a few features from 
+       PDF 1.5 have been implemented, but the configuration element will accept any value between 
+       1.4 and 1.7. This is the value that will appear in the PDF header, although only features up 
+       to 1.5 will actually be used.
+      <pre class="code">
+      &lt;renderer mime="application/pdf"&gt;
+        &lt;version&gt;1.5&lt;/version&gt;
+        &lt;!-- Versions 1.4, 1.5, 1.6 and 1.7 are accepted, all other values are invalid --&gt;
+      &lt;/renderer&gt;</pre>
+     
+</p>
+<a name="ps-renderer"></a>
+<h3 class="underlined_5">Special Settings for the PostScript Renderer</h3>
+<p>
+        Besides the normal font configuration (the same "fonts" element as for the PDF renderer) the PostScript
+        renderer has an additional setting to force landscape pages to be rotated to fit on a page inserted into
+        the printer in portrait mode. Set the value to "true" to activate this feature. The default is "false".
+        Example:
+      </p>
+<pre class="code">
+    &lt;renderer mime="application/postscript"&gt;
+      &lt;auto-rotate-landscape&gt;true&lt;/auto-rotate-landscape&gt;
+      
+      &lt;fonts&gt;
+        &lt;font metrics-url="arial.xml" kerning="yes" embed-url="arial.ttf"&gt;
+          &lt;font-triplet name="Arial" style="normal" weight="normal"/&gt;
+          &lt;font-triplet name="ArialMT" style="normal" weight="normal"/&gt;
+        &lt;/font&gt;
+        &lt;font metrics-url="arialb.xml" kerning="yes" embed-url="arialb.ttf"&gt;
+          &lt;font-triplet name="Arial" style="normal" weight="bold"/&gt;
+          &lt;font-triplet name="ArialMT" style="normal" weight="bold"/&gt;
+        &lt;/font&gt;
+      &lt;/fonts&gt;
+    &lt;/renderer&gt;</pre>
+<a name="pcl-renderer"></a>
+<h3 class="underlined_5">Special Settings for the PCL Renderer</h3>
+<p>
+        Non-standard fonts for the PCL renderer are made available through the Java2D subsystem which means that
+        you don't have to do any custom font configuration in this case but you have to use the font names
+        offered by Java.
+      </p>
+<p>
+        Additionally, there are certain settings that control how the renderer handles various elements.
+      </p>
+<pre class="code">&lt;renderer mime="application/x-pcl"&gt;
+  &lt;rendering&gt;quality&lt;/rendering&gt;
+  &lt;text-rendering&gt;bitmap&lt;/text-rendering&gt;
+&lt;/renderer&gt;</pre>
+<p>
+        The default value for the "rendering" setting is "speed" which causes borders 
+        to be painted as plain rectangles. In this mode, no special borders (dotted, 
+        dashed etc.) are available. If you want support for all border modes, set the
+        value to "quality" as indicated above. This will cause the borders to be painted
+        as bitmaps.
+      </p>
+<p>
+        The default value for the "text-rendering" setting is "auto" which paints the
+        base fonts using PCL fonts. Non-base fonts are painted as bitmaps through Java2D.
+        If the mix of painting methods results in unwelcome output, you can set this
+        to "bitmap" which causes all text to be rendered as bitmaps.
+      </p>
+<a name="afp-renderer"></a>
+<h3 class="underlined_5">Special Settings for the AFP Renderer</h3>
+<p>
+      
+</p>
+<p>
+        Additionally, there are certain settings that control how the renderer handles various elements.
+      </p>
+<pre class="code">&lt;renderer mime="application/x-afp"&gt;
+  &lt;images mode="b+w" bits-per-pixel="8" native="true"/&gt;
+  &lt;renderer-resolution&gt;240&lt;/renderer-resolution&gt;
+  &lt;line-width-correction&gt;2.5&lt;/line-width-correction&gt;
+  
+  &lt;!-- a default external resource group file --&gt;
+  &lt;resource-group-file&gt;resources.afp&lt;/resource-group-file&gt;
+&lt;/renderer&gt;</pre>
+<p>
+        The default value for the images "mode" setting is "b+w" (black and white).  When the images "mode" setting is "b+w" a "bits-per-pixel" setting can be provided to aid the grayscale conversion process.  With this setting all images referenced in your source document are converted to an IOCA FS45 grayscale bitmap image form. 
+        When the setting is "color" all images are converted to an IOCA FS45 color bitmap image form.  When "native" setting is "true", all images encountered (TIFF, GIF, JPEG and Encapsulated Postscript etc.) will be embedded directly in the datastream in their native form using a MO:DCA Object Container.
+      </p>
+<p>
+        The default value for the "renderer-resolution" is 240 dpi. 
+      </p>
+<p>
+        The default line width is device dependent and may need to be fine tuned so that the output matches the expected result. The default correction value is 2.5.
+      </p>
+<p>
+        By default if there is no configuration definition for "resource-group-file", external resources will be placed in a file called resources.afp. 
+      </p>
+</div>
+
+        
+<a name="When+it+does+not+work"></a>
+<h2 class="underlined_10">When it does not work</h2>
+<div class="section">
+<p>FOP searches the configuration file for the information it
+expects, at the position it expects. When that information is not
+present, FOP will not complain, it will just continue. When there is
+other information in the file, FOP will not complain, it will just
+ignore it. That means that when your configuration information is in
+the file but in a different XML element, or in a different XML path,
+than FOP expects, it will be silently ignored.</p>
+<p>Check the following possibilities:</p>
+<ul>
+            
+<li>The format of the configuration file has changed
+considerably between FOP 0.20.5 and FOP 1.0 and its beta versions. Did
+you convert your file to the new format?</li>
+
+            
+<li>The FOP distribution contains a schema for configuration
+files, at src/foschema/fop-configuration.xsd. Did you validate your
+configuration file against it? Add the following schema location to
+the <span class="codefrag">schema</span> element:
+
+<pre class="code">&lt;fop
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation=
+"http://svn.apache.org/viewvc/xmlgraphics/fop/trunk/src/foschema/fop-configuration.xsd?view=co"&gt;
+</pre>
+
+and run the configuration file through a validating schema
+parser. Note that the schema cannot detect all errors, and that it is
+stricter about the order of some elements than FOP itself is.</li>
+
+            
+<li>Run FOP in debug mode (command line option
+<span class="codefrag">-d</span>). This makes FOP report which configuration
+information it finds. Check if FOP finds what you expect.</li>
+
+          
+</ul>
+</div>
+  
+<span class="version">$Revision$</span>
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         1999-2012 <a href="http://www.apache.org/licenses/">The Apache Software Foundation. Licensed under Apache License 2.0</a>
+<br>
+    Apache, Apache FOP, the Apache feather logo, and the Apache FOP
+    logos are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+  </div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

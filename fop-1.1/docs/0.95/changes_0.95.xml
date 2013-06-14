@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "document-v13.dtd">
+<document xmlns:i18n="http://apache.org/cocoon/i18n/2.1"><header><title>History of Changes 0.95</title></header><body><p><link href="changes_0.95.rss"><img alt="RSS" src="../images/rss.png"/></link></p><section id="introduction"><title>Introduction and explanation of symbols</title><p>Changes are sorted by "type" and then chronologically with the most recent at the top. These symbols denote the various action types:<icon alt="add" src="../images/add.jpg"/>=add, <icon alt="fix" src="../images/fix.jpg"/>=fix, <icon alt="remove" src="../images/remove.jpg"/>=remove, <icon alt="update" src="../images/update.jpg"/>=update</p></section><section id="version_0.95"><title>Version 0.95 (05 August 2008)</title><section id="API_0.95"><title>Changes to the End-User API</title><ul><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed the -imagein command-line option.
+       Committed by JM.</li></ul></section><section id="Code_0.95"><title>Changes to the Code Base</title><ul><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed potential multi-threading problem concerning the use of DecimalFormat.
+       Committed by JM. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=44887">44887</link>.</li></ul></section><section id="Fonts_0.95"><title>Changes to the Font Subsystem</title><ul><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed text extraction problem with ZapfDingbats and Symbol font in PDF output.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed NullPointerException when loading a TrueType font using XML font metric files.
+       Committed by JM.</li></ul></section><section id="Images_0.95"><title>Changes to the Image Support</title><ul><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed two bugs concerning resolution handling with SVG images and their
+        conversion to bitmaps for RTF output.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed a performance problem concerning image serialization.
+       Committed by JM.</li></ul></section><section id="Layout_0.95"><title>Changes to the Layout Engine</title><ul><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed NullPointerException when page-number-citations are used inside a marker.
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=45295">45295</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Regression bugfix: Multiple collapsible breaks don't cause empty pages anymore.
+       Committed by JM. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=44412">44412</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Various bugfixes for table layout.
+       Committed by VH. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=44621">44621</link>.</li></ul></section><section id="Renderers_0.95"><title>Changes to Renderers (Output Formats)</title><ul><li><icon alt="add" src="../images/add.jpg"/>
+        Added support for fo:leader for RTF output (no full support!). Fixes problems with empty leaders
+        being used to force empty lines among other issues.
+       Committed by JM. Thanks to Maximilian Aster. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=43825">43825</link>.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added support for page-number-citation for RTF output.
+       Committed by JM. Thanks to Maximilian Aster. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=43824">43824</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed a color selection problem which occurred after an image has been painted
+        through the Graphics2DAdapter in PDF output.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed page ordering problem with AWTRenderer.
+       Committed by JM. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=41306">41306</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed image scaling for RTF output.
+       Committed by JM. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=39980">39980</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed handling of proportional-column-width() and percentages for table column in RTF
+        output.
+       Committed by JM. Thanks to Maximilian Aster. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=43606">43606</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed resolution handling inside AWT preview dialog.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed positioning of absolutely positioned block-containers in multi-column documents.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed rendering of fixed block-containers in AFP output.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed regression causing bad positioning of block-containers if used as descendant
+        of a table-cell.
+       Committed by JM.</li></ul></section><section id="contributors_0.95"><title>Contributors to this release</title><p>We thank the following people for their contributions to this release.</p><p>This is a list of all people who participated as committers:<br/>Andreas Delmelle (AD), Jeremias Märki (JM), Vincent Hennebert (VH).</p><p>This is a list of other contributors:<br/>Maximilian Aster.</p></section></section></body></document>

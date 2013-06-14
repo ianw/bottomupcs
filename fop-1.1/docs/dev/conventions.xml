@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: conventions.xml 1298724 2012-03-09 07:55:31Z cbowditch $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Apache&#8482; FOP Development: Coding Conventions</title>
+    <version>$Revision: 1298724 $</version>
+  </header>
+  <body>
+    <p>Acknowledgement: Some content in this guide was adapted from other Apache&#8482; projects such as Avalon, Cactus, Turbine and Velocity.</p>
+    <section id="svn">
+      <title>Subversion Repository</title>
+      <p>Conventions in this section apply to Repository content, regardless of type:</p>
+      <ul>
+        <li>Files checked in must conform to the code conventions for that type of file (java files must conform to java requirements, xml to xml requirements, etc.). If a submitted patch does not conform, it is the responsibility of the committer to bring it into conformance before checking it in. Developers submitting patches are encouraged to follow the code conventions to reduce the work load on the committers.</li>
+        <li>To reduce the amount of spurious deltas, all text (non-binary) files checked into SVN must have Unix-style line endings (LF only). Many IDEs and editors (even on non-Unix platforms) have settings that can facilitate this convention.</li>
+        <li>In order to be able to discern commits from a committer from those where a committer applied a patch from a contributor, the commit message must contain a separate line following this pattern: <strong>"Submitted by: [contributor's name] &lt;[contributor's obfuscated e-mail address]&gt;"</strong>. This also helps doing audits on the repository.</li>
+      </ul>
+    </section>
+    <section id="java">
+      <title>Java</title>
+      <section id="java-style">
+        <title>Java Style</title>
+        <p>
+          In order to facilitate the human reading of FOP source code, 
+          reduce churning in code, and prevent disputes, the FOP developers 
+          have agreed on a set of coding conventions. The basis of these coding 
+          conventions is documented in the 
+          <link href="http://xml.apache.org/source.html">Apache XML Project Guidelines</link>, 
+          which requires that <strong>all Java Language source code in the repository 
+          must be written in conformance to Sun's</strong> 
+          <link href="http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html">Code Conventions for the Java Programming Language</link>.
+          In addition, the FOP developers have agreed to other conventions, 
+          which are summarized in the following table:</p>
+        <table>
+          <tr>
+            <th colspan="1" rowspan="1">Convention</th>
+            <th colspan="1" rowspan="1">Rationale</th>
+            <th colspan="1" rowspan="1">Enforced By</th>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="1">Every Java source file starts with the Apache licence header.</td>
+            <td colspan="1" rowspan="1">Required by Apache.</td>
+            <td colspan="1" rowspan="1">checkstyle</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="1">No tabs in content.</td>
+            <td colspan="1" rowspan="1">Programmers should not have to adjust the tab settings in their editor to be able to read the source code.</td>
+            <td colspan="1" rowspan="1">checkstyle</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="1">Indentation of 4 spaces per level.</td>
+            <td colspan="1" rowspan="1">Maximize readability.</td>
+            <td colspan="1" rowspan="1">Not enforced</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="1">Comments, identifiers, and project documentation must be in English.
+In general, other languages must not be used, except in translated documentation and language-specific i10n files.
+            </td>
+            <td colspan="1" rowspan="1">To avoid the need for everyone to learn all languages, English has become the standard language for many technology projects, and is the only human language that all FOP developers are expected to know.</td>
+            <td colspan="1" rowspan="1">Not enforced</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="1">American English spelling should be used. Alternative spelling and idioms are tolerated, but may be changed by anyone to American.</td>
+            <td colspan="1" rowspan="1">Some standard is useful, and American English is widely used and accepted for technology standards and projects.</td>
+            <td colspan="1" rowspan="1">Not enforced.</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="1">Fully qualify all import statements (no "import java.util.*")</td>
+            <td colspan="1" rowspan="1">Clarity</td>
+            <td colspan="1" rowspan="1">checkstyle</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="1">No underscores in variable names except for static finals.</td>
+            <td colspan="1" rowspan="1">Upper/lower case distinctions can be made in all other variable names, eliminating the need for artificial word boundaries.</td>
+            <td colspan="1" rowspan="1">checkstyle</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="1">Opening brace for a block should be on the same line as its control statement (if, while, etc.).</td>
+            <td colspan="1" rowspan="1">Standardization, general preference.</td>
+            <td colspan="1" rowspan="1">checkstyle</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="1">Write appropriate javadoc entries for all public and protected classes, methods, and variables.</td>
+            <td colspan="1" rowspan="1">Basic API documentation is needed.</td>
+            <td colspan="1" rowspan="1">checkstyle</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="1">By <link href="http://mail-archives.apache.org/mod_mbox/jakarta-jmeter-dev/200402.mbox/%3C4039F65E.7020406@atg.com%3E">ASF policy</link>, @author tags are officially discouraged.
+However it is permissible to indicate the original author(s) of an entire file or package in a comment provided it follows the copyright and license header.</td>
+            <td colspan="1" rowspan="1">Attribution of subsequent contributions are recorded by the SVN commit history logs, so should not be included.</td>
+            <td colspan="1" rowspan="1">checkstyle</td>
+          </tr>
+        </table>
+        <p>For developers that dislike these conventions, one workaround is to develop using their own style, then use a formatting tool like <link href="http://astyle.sourceforge.net/">astyle</link> (Artistic Style) before committing.</p>
+      </section>
+      <section id="java-checkstyle">
+        <title>Checkstyle</title>
+        <p>The java syntax checker "<jump href="http://checkstyle.sourceforge.net">Checkstyle</jump>" is used to enforce many of the FOP coding standards.
+The standards enforced through Checkstyle are documented in its configuration file (xml-fop/checkstyle.cfg).
+The conventions defined in the configuration file are an integral part of FOP's coding conventions, and should not be changed without common consent.
+In other words, the configuration file contains additional conventions that are not documented on this page, but are generally accepted as good style within the java community (i.e. they are the default behavior of checkstyle, which the FOP developers have decided to adopt <em>de facto</em>).
+Any apparent contradiction between the configuration file and this document should be raised on the fop-dev mailing list so that it can be clarified.</p>
+        <p>To use the "checkstyle" target in FOP's build process, download the source from the <jump href="http://checkstyle.sourceforge.net">Checkstyle web site</jump>, place checkstyle-all-*.jar in the lib directory and call "build checkstyle". Output (in the build directory) includes checkstyle_report.txt and checkstyle_report.xml. If you copy the file contrib/checkstyle-noframes.xsl from Checkstyle into FOP's root directory, you will also get an HTML report.</p>
+        <p>Checkstyle is probably most useful when integrated into your IDE. See the Checkstyle web site for more information about IDE plugins.</p>
+      </section>
+      <section id="java-best-practices">
+        <title>Java Best Practices</title>
+        <p>The following general principles are a distillation of best practice expectations on the FOP project.</p>
+        <ul>
+          <li>Apply common sense when coding. When coding keep in mind that others will read your code and have to understand it.</li>
+          <li>Readability comes before performance, at least initially.</li>
+          <li>If you can refactor some code to make it more understandable, please do so.</li>
+          <li>Properly document code, especially where it's important.</li>
+          <li>Use interfaces instead of implementations where possible.
+This favors a clearer design and makes switching between implementations easier (Examples: List instead of ArrayList/Vector, Map instead of HashMap/Hashtable).</li>
+
+
+          <li>Avoid using exceptions for flow control.</li>
+          <li>Try to catch exceptions as much as possible and rethrow higher level exceptions (meaning hiding the low level detailed and putting a message that is more related to the function of your code).</li> 
+          <li>It is important not to lose the stack trace which contains important information.
+Use chained exception for that. Avalon Framework provides <jump href="http://jakarta.apache.org/avalon/api/org/apache/avalon/framework/CascadingException.htm">CascadingException</jump> (and similar) for this.
+Exception class names and stack traces must be treated like gold.
+Do whatever is required so that this information is not lost.
+Printing error messages to System.err or System.out is useless in a server-side environment where this info is usually lost.</li>
+          <li>Always log the exception at the higher level (i.e. where it is handled and not rethrown).</li> 
+          <li>Try to avoid catching Throwable or Exception and catch specific exceptions instead.</li>
+        </ul>
+      </section>
+      <section id="java-resources">
+        <title>Resources</title>
+        <ul>
+          <li>[book on code style] Code Complete by Steve McConnell.</li>
+          <li>[code formatting software] <jump href="http://jrefactory.sourceforge.net">JRefactory</jump>.</li>
+        </ul>
+      </section>
+      <section id="java-links">
+        <title>Related Links</title>
+        <ul>
+          <li><jump href="http://xmlgraphics.apache.org/repo.html">Apache XML Graphics Code Repositories</jump></li>
+          <li><jump href="http://jakarta.apache.org/site/faqs.html#Coding%20Conventions%20and%20Standards">Jakarta Code Conventions and Standards</jump> (see Coding Conventions and Standards section)</li>
+        </ul>
+      </section>
+    </section>
+    <section id="xml">
+      <title>XML</title>
+      <table>
+        <tr>
+          <th colspan="1" rowspan="1">Convention</th>
+          <th colspan="1" rowspan="1">Rationale</th>
+          <th colspan="1" rowspan="1">Enforced By</th>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">XML files must always be well-formed. Validation is optional.</td>
+          <td colspan="1" rowspan="1">Document integrity</td>
+          <td colspan="1" rowspan="1">Not enforced</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">No tabs in content.</td>
+          <td colspan="1" rowspan="1">Users should not have to adjust tab settings in their editor to be able to read the content.</td>
+          <td colspan="1" rowspan="1">Not enforced</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">Indentation of 2 spaces per level</td>
+          <td colspan="1" rowspan="1">Maximize readability</td>
+          <td colspan="1" rowspan="1">Not enforced</td>
+        </tr>
+      </table>
+    </section>
+  </body>
+</document>

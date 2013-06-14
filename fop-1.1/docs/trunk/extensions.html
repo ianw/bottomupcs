@@ -1,0 +1,638 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.10-dev">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Standard Apache&trade; FOP Extensions</title>
+<link type="text/css" href="../skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="../skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="../skin/print.css" rel="stylesheet">
+<link type="text/css" href="../skin/profile.css" rel="stylesheet">
+<script src="../skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="../skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="../skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="../favicon.ico">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://xmlgraphics.apache.org/"><img class="logoImage" alt="Apache XML Graphics" src="../images/group-logo.gif" title="Apache XML Graphics is responsible for the creation and maintenance of software for managing the conversion of XML formats to graphical output, and the creation and maintenance of related software components, based on software licensed to the Foundation"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://xmlgraphics.apache.org/fop/"><img class="logoImage" alt="Apache FOP" src="../images/logo.jpg" title="Apache FOP (Formatting Objects Processor) is the world's first output independent formatter. Output formats currently supported include PDF, PCL, PS, SVG, XML (area tree representation), Print, AWT, MIF and TXT. The primary output target is PDF."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="xmlgraphics.apache.org" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="../index.html">Home</a>
+</li>
+<li>
+<a class="unselected" href="../1.0/index.html">Version 1.0</a>
+</li>
+<li>
+<a class="unselected" href="../1.1/index.html">Version 1.1</a>
+</li>
+<li class="current">
+<a class="selected" href="../trunk/index.html">FOP Trunk</a>
+</li>
+<li>
+<a class="unselected" href="../dev/index.html">Development</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">The Apache Software Foundation</a> &gt; <a href="http://xmlgraphics.apache.org/">Apache XML Graphics Project</a><script src="../skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_selected_1.1', '../skin/')" id="menu_selected_1.1Title" class="menutitle" style="background-image: url('../skin/images/chapter_open.gif');">Apache&trade; FOP Trunk (dev)</div>
+<div id="menu_selected_1.1" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="../trunk/index.html">About</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/upgrading.html">Upgrading</a>
+</div>
+<div onclick="SwitchMenu('menu_1.1.3', '../skin/')" id="menu_1.1.3Title" class="menutitle">Using Apache&trade; FOP</div>
+<div id="menu_1.1.3" class="menuitemgroup">
+<div class="menuitem">
+<a href="../trunk/anttask.html">Ant Task</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/compiling.html">Build</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/configuration.html">Configure</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/embedding.html">Embed</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/running.html">Run</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/servlets.html">Servlets</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_selected_1.1.4', '../skin/')" id="menu_selected_1.1.4Title" class="menutitle" style="background-image: url('../skin/images/chapter_open.gif');">Features</div>
+<div id="menu_selected_1.1.4" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="../trunk/accessibility.html">Accessibility</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/complexscripts.html">Complex Scripts</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/events.html">Events</a>
+</div>
+<div class="menupage">
+<div class="menupagetitle">Extensions</div>
+</div>
+<div class="menuitem">
+<a href="../trunk/fonts.html">Fonts</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/graphics.html">Graphics</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/hyphenation.html">Hyphenation</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/intermediate.html">Intermediate Format</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/metadata.html">Metadata</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/output.html">Output Targets</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/pdfa.html">PDF/A</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/pdfx.html">PDF/X</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/pdfencryption.html">PDF Encryption</a>
+</div>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="../skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="raw XML" class="xmllink">
+<a class="dida" href="extensions.xml"><img alt="XML - icon" src="../skin/images/xmldoc.gif" class="skin"><br>
+        XML</a>
+</div>
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="extensions.pdf"><img alt="PDF -icon" src="../skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<div class="trail">Font size: 
+	          &nbsp;<input value="Reset" class="resetfont" title="Reset text" onclick="ndeSetTextSize('reset'); return false;" type="button">      
+	          &nbsp;<input value="-a" class="smallerfont" title="Shrink text" onclick="ndeSetTextSize('decr'); return false;" type="button">
+	          &nbsp;<input value="+a" class="biggerfont" title="Enlarge text" onclick="ndeSetTextSize('incr'); return false;" type="button">
+</div>
+<h1>Standard Apache&trade; FOP Extensions</h1>
+<div id="front-matter">
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#svg">SVG</a>
+</li>
+<li>
+<a href="#fo-extensions">FO Extensions</a>
+<ul class="minitoc">
+<li>
+<a href="#fox-namespace">Namespace</a>
+</li>
+<li>
+<a href="#bookmarks">PDF Bookmarks</a>
+</li>
+<li>
+<a href="#named-destinations">Anchors or Named Destinations</a>
+</li>
+<li>
+<a href="#table-continue-label">Table Continuation Label</a>
+</li>
+<li>
+<a href="#widow-orphan-content-limit">fox:orphan-content-limit and fox:widow-content-limit</a>
+</li>
+<li>
+<a href="#external-document">fox:external-document</a>
+<ul class="minitoc">
+<li>
+<a href="#Specification">Specification</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#transform">Free-form Transformation for fo:block-container</a>
+</li>
+<li>
+<a href="#color-functions">Color functions</a>
+<ul class="minitoc">
+<li>
+<a href="#color-function-cmyk">cmyk()</a>
+</li>
+<li>
+<a href="#pseudo-color-profiles">#CMYK pseudo-profile</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#prepress">Prepress Support</a>
+<ul class="minitoc">
+<li>
+<a href="#scale">fox:scale</a>
+</li>
+<li>
+<a href="#bleed">fox:bleed</a>
+</li>
+<li>
+<a href="#cropOffset">fox:crop-offset</a>
+</li>
+<li>
+<a href="#cropBox">fox:crop-box</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+    
+<p>
+      By "extension", we mean any data that can be placed in the input XML document that
+      is not addressed by the XSL-FO standard.
+      By having a mechanism for supporting extensions, Apache&trade; FOP is able to add features that
+      are not covered in the specification.
+    </p>
+    
+<p>
+      The extensions documented here are included with FOP, and are automatically available
+      to you. If you wish to add an extension of your own to FOP, please see the
+      <a href="../dev/extensions.html">Developers' Extension Page</a>.
+    </p>
+    
+<div class="note">
+<div class="label">Note</div>
+<div class="content">All extensions require the correct use of an appropriate namespace in your input document.</div>
+</div>
+    
+<a name="svg"></a>
+<h2 class="underlined_10">SVG</h2>
+<div class="section">
+<p>
+        Please see the <a href="graphics.html#svg">SVG documentation</a> for more details.
+      </p>
+</div>
+    
+<a name="fo-extensions"></a>
+<h2 class="underlined_10">FO Extensions</h2>
+<div class="section">
+<a name="fox-namespace"></a>
+<h3 class="underlined_5">Namespace</h3>
+<p>
+          By convention, FO extensions in FOP use the "fox" namespace prefix.
+          To use any of the FO extensions, add a namespace entry for
+          <span class="codefrag">http://xmlgraphics.apache.org/fop/extensions</span> to the root element:
+        </p>
+<pre class="code">&lt;fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"
+               xmlns:fox="http://xmlgraphics.apache.org/fop/extensions"&gt;</pre>
+<a name="bookmarks"></a>
+<h3 class="underlined_5">PDF Bookmarks</h3>
+<p>
+          In old versions of Apache FOP there was a <span class="codefrag">fox:outline</span> element
+          which was used to create outlines in PDF files. The redesigned code makes use
+          of the <a class="external" href="http://www.w3.org/TR/xsl11/#fo_bookmark-tree">bookmark feature defined in the W3C XSL 1.1 standard</a>.
+        </p>
+<a name="named-destinations"></a>
+<h3 class="underlined_5">Anchors or Named Destinations</h3>
+<p>Use the fox:destination element to define "named destinations" inside a PDF document.
+These are useful as fragment identifiers, e.g. "http://server/document.pdf#anchor-name".
+fox:destination elements can be placed almost anywhere in the fo document, including a child of
+root, a block-level element, or an inline-level element.
+For the destination to actually work, it must correspond to an "id" attribute on some fo element
+within the document. In other words, the "id" attribute actually creates the "view" within the
+PDF document. The fox:destination simply gives that view an independent name.
+</p>
+<pre class="code">&lt;fox:destination internal-destination="table-of-contents"/&gt;
+...
+&lt;fo:block id="table-of-contents"&gt;Table of Contents&lt;/fo:block&gt;</pre>
+<div class="warning">
+<div class="label">Warning</div>
+<div class="content">It is possible that in some future release of FOP, <em>all </em>elements with
+"id" attributes will generate named-destinations, which will eliminate the need for
+fox:destination.</div>
+</div>
+<a name="table-continue-label"></a>
+<h3 class="underlined_5">Table Continuation Label</h3>
+<p>This extension element hasn't been reimplemented for the redesigned code, yet.</p>
+<a name="widow-orphan-content-limit"></a>
+<h3 class="underlined_5">fox:orphan-content-limit and fox:widow-content-limit</h3>
+<p>
+          The two proprietary extension properties, fox:orphan-content-limit and
+          fox:widow-content-limit, are used to improve the layout of list-blocks and tables.
+          If you have a table with many entries, you don't want a single row to be left over
+          on a page. You will want to make sure that at least two or three lines are kept
+          together. The properties take an absolute length which specifies the area at the
+          beginning (fox:widow-content-limit) or at the end (fox:orphan-content-limit) of a
+          table or list-block. The properties are inherited and only have an effect on fo:table
+          and fo:list-block. An example: fox:widow-content-limit="3 * 1.2em" would make sure
+          the you'll have at least three lines (assuming line-height="1.2") together on a table
+          or list-block.
+        </p>
+<a name="external-document"></a>
+<h3 class="underlined_5">fox:external-document</h3>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">
+          This feature is incomplete. Support for multi-page documents will be added shortly.
+          At the moment, only single-page images will work. And this will not work with RTF output.
+        </div>
+</div>
+<p>
+          This is a proprietary extension element which allows to add whole images as pages to
+          an FO document. For example, if you have a scanned document or a fax as multi-page TIFF
+          file, you can append or insert this document using the <span class="codefrag">fox:external-document</span>
+          element. Each page of the external document will create one full page in the target
+          format.
+        </p>
+<p>
+          The <span class="codefrag">fox:external-document</span> element is structurally a peer to
+          <span class="codefrag">fo:page-sequence</span>, so wherever you can put an <span class="codefrag">fo:page-sequence</span>
+          you could also place a <span class="codefrag">fox:external-document</span>.
+          Therefore, the specified contents for <span class="codefrag">fo:root</span> change to:
+        </p>
+<p>
+          
+<span class="codefrag">
+            (layout-master-set, declarations?, bookmark-tree?, (page-sequence|page-sequence-wrapper|fox:external-document|fox:destination)+)
+          </span>
+        
+</p>
+<a name="Specification"></a>
+<h4>Specification</h4>
+<p>
+            The <span class="codefrag">fox:external-document</span> extension formatting object is used to specify
+            how to create a (sub-)sequence of pages within a document. The content of these pages
+            comes from the individual subimages/pages of an image or paged document (for example:
+            multi-page TIFF in the form of faxes or scanned documents, or PDF files). The
+            formatting object creates the necessary areas to display one image per page.
+          </p>
+<p>
+            In terms of page numbers, the behaviour is the same as for
+            <span class="codefrag">fo:page-sequence</span>. The placement of the image inside the page is similar
+            to that of <span class="codefrag">fo:external-graphic</span> or <span class="codefrag">fo:instream-foreign-object</span>,
+            i.e. the viewport (and therefore the page size) is defined by either the intrinsic
+            size of the image or by the size properties that apply to this formatting object.
+          </p>
+<p>Content: EMPTY</p>
+<p>The following properties apply to this formatting object:</p>
+<ul>
+            
+<li>(Common Accessibility Properties) (not implemented, yet)</li>
+            
+<li>(Common Aural Properties) (not implemented, yet)</li>
+            
+<li>block-progression-dimension</li>
+            
+<li>content-height</li>
+            
+<li>content-type</li>
+            
+<li>content-width</li>
+            
+<li>display-align</li>
+            
+<li>height</li>
+            
+<li>id</li>
+            
+<li>inline-progression-dimension</li>
+            
+<li>overflow</li>
+            
+<li>pages: &lt;page-set&gt; (see below) (not implemented, yet)</li>
+            
+<li>reference-orientation</li>
+            
+<li>scaling</li>
+            
+<li>scaling-method</li>
+            
+<li>src</li>
+            
+<li>text-align</li>
+            
+<li>width</li>
+          
+</ul>
+<p>
+            Datatype "page-set": Value: auto | &lt;integer-range&gt;,
+            Default: "auto" which means all pages/subimages of the document.
+            &lt;integer-range&gt; allows values such as "7" or "1-3"
+          </p>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">
+            
+<span class="codefrag">fox:external-document</span> is not suitable for concatenating FO documents.
+            For this, XInclude is recommended.
+          </div>
+</div>
+<a name="transform"></a>
+<h3 class="underlined_5">Free-form Transformation for fo:block-container</h3>
+<p>
+          For <span class="codefrag">fo:block-container</span> elements whose <span class="codefrag">absolute-position</span> set to
+          "absolute" or "fixed" you can use the extension attribute <span class="codefrag">fox:transform</span>
+          to apply a free-form transformation to the whole block-container. The content of the
+          <span class="codefrag">fox:transform</span> attribute is the same as for
+          <a class="external" href="http://www.w3.org/TR/SVG/coords.html#TransformAttribute">SVG's transform attribute</a>.
+          The transformation specified here is performed in addition to other implicit
+          transformations of the block-container (resulting from top, left and other properties)
+          and after them.
+        </p>
+<p>
+          Examples: <span class="codefrag">fox:transform="rotate(45)"</span> would rotate the block-container
+          by 45 degrees clock-wise around its upper-left corner.
+          <span class="codefrag">fox:transform="translate(10000,0)"</span> would move the block-container to the
+          right by 10 points (=10000 millipoints, FOP uses millipoints internally!).
+        </p>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">
+          This extension attribute doesn't work for all output formats! It's currently only
+          supported for PDF, PS and Java2D-based renderers.
+        </div>
+</div>
+<a name="color-functions"></a>
+<h3 class="underlined_5">Color functions</h3>
+<p>
+          XSL-FO supports specifying color using the rgb(), rgb-icc() and system-color() functions.
+          Apache FOP provides additional color functions for special use cases. Please note that
+          using these functions compromises the interoperability of an FO document.
+        </p>
+<a name="color-function-cmyk"></a>
+<h4>cmyk()</h4>
+<p>
+<span class="codefrag">color cmyk(numeric, numeric, numeric, numeric)</span>
+</p>
+<p>
+            This function will construct a color in device-specific CMYK color space. The numbers
+            must be between 0.0 and 1.0. For output formats that don't support device-specific
+            color space the CMYK value is converted to an sRGB value.
+          </p>
+<a name="pseudo-color-profiles"></a>
+<h4>#CMYK pseudo-profile</h4>
+<p>
+<span class="codefrag">color rgb-icc(numeric, numeric, numeric, #CMYK, numeric, numeric, numeric, numeric)</span>
+</p>
+<p>
+            The <span class="codefrag">rgb-icc</span> function will respond to a pseudo-profile called "#CMYK"
+            which indicates a device-specific CMYK color space. The "#CMYK" profile is implicitely
+            available and doesn't have to be (and cannot be) defined through an
+            <span class="codefrag">fo:color-profile</span> element. It is provided for compatibility with certain
+            commercial XSL-FO implementations. Please note that this is not part of the official
+            specification but rather a convention. The following two color specifications are
+            equivalent:
+          </p>
+<ul>
+            
+<li>
+<span class="codefrag">cmyk(0%,0%,20%,40%)</span>
+</li>
+            
+<li>
+<span class="codefrag">rgb-icc(153, 153, 102, #CMYK, 0, 0, 0.2, 0.4)</span>
+</li>
+          
+</ul>
+<a name="prepress"></a>
+<h3 class="underlined_5">Prepress Support</h3>
+<p>
+          This section defines a number of extensions related to
+          <a class="external" href="http://en.wikipedia.org/wiki/Prepress">prepress</a> support.
+          <span class="codefrag">fox:scale</span> defines a general scale factor for the generated pages.
+          <span class="codefrag">fox:bleed</span> defines the
+          <a class="external" href="http://en.wikipedia.org/wiki/Bleed_%28printing%29">bleed area</a> for a page.
+          <span class="codefrag">fox:crop-offset</span> defines the outer edges of the area in which crop marks,
+          registration marks, color bars and page information are placed.
+          For details, please read on below.
+        </p>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">
+          Those extensions have been implemented in the PDF and Java2D renderers only.
+        </div>
+</div>
+<a name="scale"></a>
+<h4>fox:scale</h4>
+<p>Value: &lt;number&gt;{1,2}</p>
+<p>Initial: 1</p>
+<p>Applies to: fo:simple-page-master</p>
+<p>
+            This property specifies a scale factor along resp. the x and y axes. If only one number
+            is provided it is used for both the x and y scales. A scale factor smaller than 1
+            shrinks the page. A scale factor greater than 1 enlarges the page.
+          </p>
+<a name="bleed"></a>
+<h4>fox:bleed</h4>
+<p>
+              Value: &lt;length&gt;{1,4}
+          </p>
+<p>
+              Initial: 0pt
+          </p>
+<p>Applies to: fo:simple-page-master</p>
+<p>
+              If there is only one value, it applies to all sides. If there are two values, the top and bottom
+              bleed widths are set to the first value and the right and left bleed widths are set to the second.
+              If there are three values, the top is set to the first value, the left and right are set to the second,
+              and the bottom is set to the third. If there are four values, they apply to the top, right, bottom, and
+              left, respectively.
+              (Corresponds to <a class="external" href="http://www.w3.org/TR/xsl11/#padding">the definition of
+                padding</a>).
+          </p>
+<p>
+              This extension indirectly defines the BleedBox and is calculated by expanding the TrimBox by
+              the bleed widths. The lengths must be non-negative.
+          </p>
+<a name="cropOffset"></a>
+<h4>fox:crop-offset</h4>
+<p>
+            Value: &lt;length&gt;{1,4}
+          </p>
+<p>
+            Initial: bleed (see below)
+          </p>
+<p>Applies to: fo:simple-page-master</p>
+<p>
+            Same behaviour as with fox:bleed. The initial value is set to the same values as the
+            fox:bleed property.
+          </p>
+<p>
+            This extension indirectly defines the MediaBox and is calculated by expanding
+            the TrimBox by the crop offsets. The lengths must be non-negative.
+          </p>
+<a name="cropBox"></a>
+<h4>fox:crop-box</h4>
+<p>
+            Value: [trim-box | bleed-box | media-box]
+          </p>
+<p>
+            Initial: media-box
+          </p>
+<p>Applies to: fo:simple-page-master</p>
+<p>
+            The crop box controls how Acrobat displays the page (CropBox in PDF) or how the Java2DRenderer sizes
+            the output media. The PDF specification defines that the CropBox defaults to the MediaBox. This extension
+            follows that definition. To simplify usage and cover most use cases, the three supported enumeration
+            values "trim-box", "bleed-box" and "media-box" set the CropBox to one of those three other boxes.
+          </p>
+<p>
+            If requested in the future, we could offer to specify the CropBox in absolute coordinates rather
+            than just by referencing another box.
+          </p>
+</div>
+  
+<span class="version">
+          version 1298724</span>
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         1999-2012 <a href="http://www.apache.org/licenses/">The Apache Software Foundation. Licensed under Apache License 2.0</a>
+<br>
+    Apache, Apache FOP, the Apache feather logo, and the Apache FOP
+    logos are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+  </div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

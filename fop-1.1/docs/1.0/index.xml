@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: index.xml 1298724 2012-03-09 07:55:31Z cbowditch $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "document-v13.dtd">
+<document xmlns:xi="http://www.w3.org/2001/XInclude">
+  <header>
+    <title>Apache&#8482; FOP Version 1.0</title>
+    <version>$Revision: 1298724 $</version>
+  </header>
+  <body>
+    <section id="intro">
+      <title>Introduction</title>
+      <p>
+        The Apache&#8482; FOP team is proud to present to you this production
+        quality codebase. FOP 1.0 provides a good subset of the W3C
+        XSL-FO 1.0 and 1.1 Standards. Its stable, 1.0 designation
+        provides added recognition as the productive tool it has been
+        for years.
+	  </p>
+	  <p>
+		We remain committed to improving the tool, and we continue to
+		add new features. We welcome any feedback you might have and
+		even more, any other form of help to get the project forward.
+      </p>
+      <p>
+        This release contains many bug fixes and new features compared
+        to the previous version. To see what has changed since the last release, please visit the 
+        <link href="changes_1.0.html">Changes Page</link> and the
+        <link href="releaseNotes_1.0.html">Release Notes</link>.
+      </p>
+	  <p>
+		This release implements a good subset of the W3C XSL-FO 1.0
+		and 1.1 Standards. For a detailed overview of FOP's
+		compliance, visit the <link href="../compliance.html">compliance
+		page</link>.
+	  </p>
+    </section>
+    <section id="upgrading">
+      <title>Upgrading from an earlier version</title>
+      <p>
+        If you're upgrading to this version from an earlier version of FOP, please read the 
+        information contained on the <link href="upgrading.html">Upgrading page</link>!
+      </p>
+	</section>
+    <section id="download">
+      <title>Download</title>
+      <p>
+        To download this version, please visit the <link href="../download.html">download page</link>.
+      </p>
+    </section>
+  </body>
+</document>

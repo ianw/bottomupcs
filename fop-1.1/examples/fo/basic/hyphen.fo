@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- example for a simple fo file. At the beginning the page layout is set.
+  Below fo:root there is always
+- a single fo:layout-master-set which defines one or more page layouts
+- an optional fo:declarations
+- and a sequence of one or more fo:page-sequences containing the text and formatting instructions
+-->
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+  <fo:layout-master-set>
+  <!-- fo:layout-master-set defines in its children the page layout:
+       the pagination and layout specifications
+      - page-masters: have the role of describing the intended subdivisions
+                       of a page and the geometry of these subdivisions
+                      In this case there is only a simple-page-master which defines the
+                      layout for all pages of the text
+  -->
+    <!-- layout information -->
+    <fo:simple-page-master master-name="simple"
+                  page-height="29.7cm"
+                  page-width="21cm"
+                  margin-top="1cm"
+                  margin-bottom="2cm"
+                  margin-left="7cm"
+                  margin-right="3cm">
+      <fo:region-body margin-top="3cm"/>
+      <fo:region-before extent="3cm"/>
+      <fo:region-after extent="1.5cm"/>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+  <!-- end: defines page layout -->
+
+
+  <!-- start page-sequence
+       here comes the text (contained in flow objects)
+       the page-sequence can contain different fo:flows
+       the attribute value of master-name refers to the page layout
+       which is to be used to layout the text contained in this
+       page-sequence-->
+  <fo:page-sequence master-reference="simple">
+
+      <!-- start fo:flow
+           each flow is targeted
+           at one (and only one) of the following:
+           xsl-region-body (usually: normal text)
+           xsl-region-before (usually: header)
+           xsl-region-after  (usually: footer)
+           xsl-region-start  (usually: left margin)
+           xsl-region-end    (usually: right margin)
+           ['usually' applies here to languages with left-right and top-down
+            writing direction like English]
+           in this case there is only one target: xsl-region-body
+        -->
+    <fo:flow flow-name="xsl-region-body"
+                text-align="justify">
+
+      <!-- each paragraph is encapsulated in a block element
+           the attributes of the block define
+           font-family and size, line-heigth etc. -->
+
+      <!-- this defines a title -->
+      <fo:block font-size="18pt"
+            font-family="sans-serif"
+            line-height="24pt"
+            space-after.optimum="15pt"
+            background-color="blue"
+            color="white"
+            text-align="center"
+            padding-top="3pt">
+        Hyphenation tests
+      </fo:block>
+
+      <!-- this defines a title -->
+      <fo:block font-size="12pt"
+            font-family="sans-serif"
+            line-height="12pt"
+            background-color="blue"
+            color="white"
+            text-align="start">
+        US English
+      </fo:block>
+
+      <!-- Normal text -->
+      <fo:block font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                text-align="justify"
+                language="en"
+                country="US"
+                hyphenate="true"
+                hyphenation-push-character-count="2"
+                hyphenation-remain-character-count="2"                                >
+        This document has been reviewed by W3C Members and other interested parties and has been endorsed by the Director as a
+        W3C Recommendation. It is a stable document and may be used as reference material or cited as a normative reference from
+        another document. W3C's role in making the Recommendation is to draw attention to the specification and to promote its
+        widespread deployment. This enhances the functionality and interoperability of the Web.
+      </fo:block>
+
+      <!-- Normal text -->
+      <fo:block font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                text-align="justify"
+                language="en"
+                country="US"
+                hyphenate="true"
+                hyphenation-push-character-count="2"
+                hyphenation-remain-character-count="2"                     >
+        This document specifies a syntax created by subsetting an existing, widely used international text processing standard
+        (Standard Generalized Markup Language, ISO 8879:1986(E) as amended and corrected) for use on the World Wide Web. It
+        is a product of the W3C XML Activity, details of which can be found at the w3c website. A list of current W3C
+        Recommendations and other technical documents can be found there too.
+      </fo:block>
+
+
+      <!-- this defines a title -->
+      <fo:block font-size="12pt"
+            font-family="sans-serif"
+            line-height="12pt"
+            background-color="blue"
+            color="white"
+            text-align="start">
+        German
+      </fo:block>
+
+      <!-- this defines normal text -->
+      <fo:block font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                language="de"
+                hyphenate="true"
+                hyphenation-push-character-count="2"
+                hyphenation-remain-character-count="2"                >
+        1. Warum TEI?
+        Die Verwendungszeit elektronischer Editionen wird von mehreren
+        Faktoren verkürzt: der kurzen Lebensdauer der Programme, die zu
+        ihrer Darstellung verwendet werden, der etwas längeren der
+        Betriebssysteme, unter denen die Darstellungsprogramme laufen,
+        der logischen Einrichtung des Datenträgers, auf dem sich die
+        Edition befindet, und dessen physischer Dauer. Um die besonders
+        unangenehme Abhängigkeit elektronischer Texte von bestimmten
+        Programmen und Betriebssystemen zu vermeiden, haben
+        Wissenschaftler ein Textauszeichnungssystem für philologische
+        Belange entwickelt, das nach dem Entwicklerteam "Text Encoding
+        Initiative" (TEI) genannt wird (1).
+      </fo:block>
+
+      <fo:block font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                language="de"
+                hyphenate="true">
+        Das Auszeichnungssystem TEI ist eine Anwendung der Metasprache
+        zur Beschreibung programmunabhängiger Auszeichnungssysteme SGML
+        (Standard Generalized Markup Language), so wie auch HTML, mit
+        dem die meisten Texte des Internets zur Zeit ausgezeichnet
+        sind, eine Anwendung von SGML ist. Daten, die entsprechend den
+        TEI-Richtlinien ausgezeichnet worden sind, können also mit
+        jedem Programm, das SGML-Daten verarbeiten kann, dargestellt,
+        umgewandelt oder durchsucht werden. (2)
+      </fo:block>
+
+      <!-- this defines normal text -->
+      <fo:block font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                language="de"
+                hyphenate="true">
+
+        Verwendet wurde für die Auszeichnung 'teilite', das eine
+        Teilmenge des gesamten Auszeichnungssystems TEI bietet, aber
+        auf einige der komplexeren Merkmale verzichtet und deshalb auch
+        eine einfache Konvertierung der Daten zu neueren Metasprachen
+        für Auszeichnungssysteme wie XML, einer Teilmenge von SGML,
+        ermöglicht.
+        SGML-Programme mit der Leistungsfähigkeit von Folio Views sind
+        z.Zt. noch relativ teuer, daher wurde für die vorliegende
+        Edition der Weg gewählt, den Text doppelt auf die CD zu legen:
+        Einmal für die sofortige Nutzung mit einer komfortablen
+        Oberfläche und einmal ohne Software in einem Format, das seine
+        langfristige Verwendbarkeit garantiert.
+        Das Nachstehende soll einige Hinweise zur Einrichtung der TEI-
+        Dateien geben, um deren weitere Verwendung zu erleichtern.
+      </fo:block>
+
+
+
+      <!-- Finnish example sent in by Jarno  Elovirta -->
+      <fo:block font-size="12pt"
+            font-family="sans-serif"
+            line-height="12pt"
+            background-color="blue"
+            color="white"
+            text-align="start">
+        Finnish
+      </fo:block>
+
+        <fo:block language="fi"
+                  hyphenate="true">
+          <fo:block font-weight="bold">Internet - tuo kaiken pahan lähde?</fo:block>
+          <fo:block>Internet on saanut nauttia lähes täydellisestä sananvapaudesta koko
+          olemassaolonsa ajan. Parin viimeiksi kuluneen vuoden aikana on kuitenkin
+          julkisuudessa keskusteltu ahkerasti sen rajoittamisesta. Muutamat ilmaista
+          kotisivutilaa tarjoavat palvelut ovatkin jo kieltäneet esimerkiksi natsimia
+          kannattavien sivujen ylläpidon.</fo:block> <fo:block>Astetta pahempaan
+          suuntaan ollaan kuitenkin menossa. Nettihuutokaupoissa tarjotaan kaikkea
+          ihmiselimistä lähtien ja itsemurhiin etsitään avustajia itsemurhia suosivilta
+          nettisivustoilta. Etelä-Koreassa poliisi on pidättänyt 20-vuotiaan miehen,
+          jota epäillään ns. netti-itsemurhassa avustamisesta. Mies oli luvannut noin
+          4000 dollarin korvausta vastaan kuristaa 23-vuotiaan naisen kuoliaaksi. Nainen
+          tuli kuitenkin viime hetkellä toisiin ajatuksiin. Mies väittää kyseessä olleen
+          pelkän vitsin. Viime kuussa Etelä-Koreassa kaksi opiskelijaa myrkytti itsensä
+          netistä löytämiensä ohjeiden avulla.</fo:block> <fo:block>FBI puolestaan
+          tutkii tapausta, jossa äiti oli myynyt kaksostytöt adoptoitavaksi korkeinta
+          tarjousta vastaan nettihuutokaupalla. Tytöt myytiin ensin Kaliforniaan Allenin
+          pariskunnalle, josta äiti kuitenkin kävi ryöstämässä lapset, sillä
+          englantilainen Kilshawin pariskunta oli tarjonnut tytöistä tuplasumman.
+          Kilshawit kuljettivat lapset Englantiin ja nyt tyttöjen perässä ovat sekä
+          kahdet adoptiovanhemmat että iso liuta eri viranomaistahoja. Myös
+          Iso-Britannian pääministeri Tony Blair on pitänyt lehdistötilaisuuden
+          aiheeseen liittyen. Lue juttu.</fo:block> <fo:block>K2, 23:10. Lähde:
+          Newsbytes | 5 kommenttia</fo:block> <fo:block font-weight="bold">Mato ryömii
+          Linux-palvelimiin</fo:block> <fo:block>Internetissä leviää Ramen nimellä
+          tunnettu mato, joka ilmeisesti hyödyntää kahta tunnettua tietoturva-aukkoa Red
+          Hat Linuxin 6.2 ja 7.0 versioissa esiintyvissä wu-ftpd ja RPC.statd
+          -ohjelmissa. Jos mato pääsee sisään järjestelmään, se korvaa palvelimella
+          sijaitsevan HTML-pääsivun tekstillä, jossa kerrotaan hakkereiden pitävän
+          nuudeleista. Madon on todettu leviävän erittäin nopeasti, sillä jos kaistaa
+          riittää se pystyy skannaamaan jopa kaksi B-luokan verkkoa 15 minuutissa. Madon
+          ei ole todettu avaavan palvelimiin takaovia, joiden kautta madon kirjoittaja
+          pääsisi sisään järjestelmään. Lue juttu</fo:block> <fo:block>oma, 20:48.
+          Lähde: ZDNet | 6 kommenttia</fo:block> <fo:block font-weight="bold">Macromedia
+          ja Allaire yhdistyvät</fo:block> <fo:block>Macromedian ja Allairen
+          julkaisemissa lehdistötiedotteissa kerrotaan yhtiöiden
+          yhdistymissuunnitelmista. Macromedialle yrityskauppa maksaa noin 2,2 miljardia
+          markkaa. Uuden yhdistyneen yrityksen nimenä säilyy Macromedia ja sen johdossa
+          jatkaa Macromedian nykyinen toimitusjohtaja Rob Burgess. Yrityksen tuotteisiin
+          lukeutuvat mm. Macromedia Dreamweaver, Macromedia Flash, Allaire ColdFusion ja
+          Allaire JRun. Lue juttu.</fo:block>
+        </fo:block>
+
+      <!-- Italian example sent in by Stéphane Bline-->
+      <fo:block font-size="12pt"
+            font-family="sans-serif"
+            line-height="12pt"
+            background-color="blue"
+            color="white"
+            text-align="start">
+        Italian
+      </fo:block>
+
+        <fo:block language="it"
+                  hyphenate="true">
+        <fo:block
+        space-before.optimum="0.6em" space-before.minimum="0.4em"
+        space-before.maximum="0.8em">Un'applicazione di servizio consiste nell'utilizzo
+        di applicazioni nell'ambito aziendale, senza procedere ad installazioni locali.
+        L'applicazione ha la particolaritàdi essere ospitata "in-house" tramite
+        Intranet o presso un fornitore esterno di applicazioni di servizi (ASP, acronimo
+        di Application Service Provider) e di transitare grazie al protocollo di
+        Internet. Intermediario eventuale tra l'editore di software e il cliente che
+        desidera utilizzarli, il provider permette agli utenti di accedere ai vari
+        programmi, previo contratto d'abbonamento.</fo:block> <fo:block
+        space-before.optimum="0.6em" space-before.minimum="0.4em"
+        space-before.maximum="0.8em">L'utilizzazione in linea rende automatica la
+        manutenzione e l'aggiornamento delle applicazioni. A partire da una semplice
+        interfaccia Web installata su un thin client, l'utente può accedere via
+        Internet o Intranet all'insieme delle applicazioni attraverso il proprio account
+        personale e dedicarsi all'utilizzazione approfondita delle applicazioni
+        professionali.</fo:block> <fo:block font-weight="bold"
+        space-after.optimum="6pt">Esempio 1.1. Esempio di applicazione di
+        servizio</fo:block> <fo:block space-before.optimum="0.6em"
+        space-before.minimum="0.4em" space-before.maximum="0.8em">Si prenda il caso di
+        una societàA che desidera ottimizzare la comunicazione interna e la
+        condivisione delle informazioni. Un fornitore di applicazioni di servizio
+        potràrispondere rapidamente a questa aspettativa. Inoltre, potràproporre
+        servizi complementari che permettono di proteggere i dati di A. Dopo aver
+        studiato l'offerta, un responsabile della società firma con il fornitore B un
+        contratto d'abbonamento a un'applicazione di servizio perfettamente adattata. Le
+        società e B scambiano informazioni relative all'utilizzo online di questa
+        applicazione, come il costo del servizio, le modalitàdi pagamento e la gestione
+        degli account utente come i profili.</fo:block> </fo:block>
+
+
+      <!-- this defines a title -->
+      <fo:block font-size="12pt"
+            font-family="sans-serif"
+            line-height="12pt"
+            background-color="blue"
+            color="white"
+            text-align="start">
+        Danish
+      </fo:block>
+        <fo:block language="da"
+                  hyphenate="true">
+        Bekendtgørelsen har som udkast været
+        notificeret i overensstemmelse med Europa-parlamentets og Rådets direktiv
+        98/34/EF (Informationsproceduredirektivet), som senest ændret ved direktiv
+        98/48/EF. Bekendtgørelsen indeholder bestemmelser der gennemfører dele af
+        Rådets direktiv 89/677/EØF (EF-tidende L 398 s. 19).
+        </fo:block>
+
+        <fo:block language="da"
+                  hyphenate="true">
+        Bekendtgørelsens regler hindrer
+        ikke import, salg og anvendelse af produkter, der på tidspunktet for
+        bekendtgørelsens ikrafttræden er reguleret i medfør af anden lovgivning,
+        der implementerer EU-direktiver, samt anden lovgivning i øvrigt, herunder
+        bl.a. bekendtgørelse nr. 807 af 2. december 1986 om
+        begrænsning af motorbenzins indhold af blyforbindelser og benzen.
+        </fo:block>
+        <fo:block language="da"
+                  hyphenate="true">
+        Import og salg af produkter, der
+        indeholder kemiske forbindelser af bly, er forbudt fra 1. marts 2001.
+        Uanset forbudet i stk.
+        1 er import og salg af produkter, der indeholder kemiske forbindelser af
+        bly, fortsat tilladt for de produktkategorier, som er nævnt i bilag
+        1 til denne bekendtgørelse, indtil de i bilaget anførte
+        tidspunkter.
+        </fo:block>
+
+
+      <!-- this defines a title -->
+      <fo:block font-size="12pt"
+            font-family="sans-serif"
+            line-height="12pt"
+            background-color="blue"
+            color="white"
+            text-align="start">
+        Norwegian
+      </fo:block>
+
+      <!-- this defines normal text -->
+      <fo:block font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                language="no"
+                hyphenate="true">
+
+       <fo:block>
+Av forståelige grunner har året 1814 vært av de mest omdiskuterte i norsk historieforskning.
+Med denne bibliografien vil man for første gang få en samlet oversikt over den viktigste
+historiske litteraturen omkring dette året og dets mangslungne begivenheter. Likevel har det
+vært en tilnærmet umulig oppgave å få med absolutt alt som er skrevet om Riksforsamlingen og
+Grunnloven i monografier, erindringsverker, bygdebøker, brevsamlinger, tidsskrifter og
+aviser helt fra 1814 og til i dag. Bibliografien er et forsøk på å samle de viktigste
+arbeider om 1814 som kan være av interesse både for forskere og for et bredt
+historieinteressert publikum. I denne korte historiografien vil det bli gjort rede for
+hvordan dette spennende året er blitt forstått og fortolket av norske og nordiske
+historikere gjennom fem ulike tidsepoker.
+       </fo:block>
+  <fo:block>
+Litteraturen om 1814 kan klassifiseres på flere måter. Grovt sett går det et skille mellom
+tre genrer: historiske oversiktsverker, historiske spesialstudier, erindringer og dagbøker
+og kilde- og dokumentutgivelser. Av oversiktsverker peker de store Norgeshistoriene seg ut
+med sin relativt omfattende behandling av 1814: Nevnes kan
+<fo:inline font-style="italic">Norges historie fremstillet for
+det norske folk</fo:inline>, bd. VI.1 (1913),
+<fo:inline font-style="italic">Det norske folks liv og historie</fo:inline> bd. VII (1933),
+<fo:inline font-style="italic">Vårt folks historie</fo:inline> bd. 6 (1964),
+<fo:inline font-style="italic">Cappelens Norges historie</fo:inline> bd. 9 (1978) og
+<fo:inline font-style="italic">Aschehougs Norgeshistorie</fo:inline> bd. 7 (1996). Disse oversiktene er i vesentlig grad bygd på den omfattende
+spesiallitteraturen i bok- eller artikkelform som har et meget vidt spenn, fra biografier
+over lokale Eidsvollsmenn til krigshistoriske analyser av felttoget. Mye tidligere skjult
+kunnskap er dessuten blitt hentet ut fra dagbøkene til sentrale aktører. Endelig har den
+lange rekken av kildeutgivelser hatt stor betydning for forskningen omkring 1814 og bidratt
+til å endre forskningsbildet flere ganger.
+       </fo:block>
+  <fo:block font-weight="bold">
+1814-1864
+       </fo:block>
+  <fo:block>
+Det norske samfunnet etter 1814 ble rekonstruert på den nye Grunnlovens grunn, og vernet om
+den stod sentralt i den politiske kampen de neste 25 årene. Til tross for dette må man kunne
+si at dokumentasjonen av hva som egentlig hadde skjedd i 1814 i mange år forble temmelig
+beskjeden. Historiene levde, men da helst muntlig eller gjennom private brev og dagbøker.
+Dette var kanskje en uunngåelig konsekvens av omstendighetene. Landet var fattig på kultur,
+forleggere og historikere, og de politiske og økonomiske realiteter kalte mer på praktisk
+fornuft enn på idealistisk pasjon. Det forekom å være en lang vei fra den nasjonale raptus
+under de lyse vårukene på et grønnende Eidsvoll til den mer prosaiske og realpolitiske
+aksept av union og svenskekonge i et høstlig og tåketungt Christiania. Det var den nye
+Grunnloven av 4. november 1814 som gjaldt og regulerte det norske samfunnet, supplert av
+Riksakten av 1815.
+       </fo:block>
+  <fo:block>
+Riksforsamlingens forhandlinger i 1814 ble utgitt i 6 hefter allerede samme år av de valgte
+redaktører, professor Georg Sverdrup, professor Ludvig Stoud Platou og tollprokurør
+Christopher Omsen. At de ikke ble reprodusert i de følgende år, hadde sammenheng med den
+svenske holdningen. Forhandlingene på det ekstraordinære Storting ble utgitt både i 1815 og
+igjen i 1835, men Carl Johan oppfattet lenge interessen for Riksforsamlingen og 17. mai-
+Grunnloven som en indirekte underkjenning av unionsverket og kongens politiske autoritet.
+Etter påtrykk fra ham prøvde norske myndigheter å sette en stopper for offentlig feiring av
+17. mai helt frem til midten av 1830-årene.
+       </fo:block>
+  <fo:block>
+Rimeligvis ble da forholdet til Danmark snarere enn forholdet til Sverige ett av de første
+alvorlige stridsspørsmål i perioden. Presten og Eidsvollsmannen Nicolai Wergeland ble
+beryktet for den danskfiendtlige og unionsvennlige posisjon han inntok i boken
+<fo:inline font-style="italic">En sandfærdig Beretning om Danmarks politiske Forbrydelser imod Kongeriget Norge
+</fo:inline> (anonymt, 1816) som
+fulgte nasjonalhistorien helt opp til Kielfreden. Skriftet vakte debatt og kraftige
+reaksjoner ikke minst blant det gamle selvstendighetsparti. Blant annet publiserte Christian
+Magnus Falsen to motskrifter i 1817. Falsen prøvde også å popularisere Grunnlovens innhold
+for den mindre "oplyste" borgerklasse og allmue gjennom skriftet
+<fo:inline font-style="italic">Norges Grundlov gjennemgaaet i Spørgs-maal og Svar
+</fo:inline> (1818, forkortet versjon 1825). Men det må kunne påstås
+at den mer detaljerte historien om grunnlovsverkets tilblivelse og første fase lenge ble
+stående i noe av et halvmørke både for det alminnelige folk og for de nye generasjoner, og
+at dette skyldtes den politiske situasjonen. Det var Nicolai Wergeland som leverte selve
+pionerarbeidet blant de personlige kildesamlingene,
+<fo:inline font-style="italic">Fortrolige Breve til en Ven, Skrevne fra
+Eidsvold i Aaret 1814</fo:inline> (anonymt, 1830). Men det var først da det unionspolitiske klimaet
+mildnet etter 1837 at det ble åpnet for en grundigere historisk analyse av Grunnlovens
+forhistorie og tilblivelse.
+       </fo:block>
+      </fo:block>
+    </fo:flow> <!-- closes the flow element-->
+  </fo:page-sequence> <!-- closes the page-sequence -->
+</fo:root>

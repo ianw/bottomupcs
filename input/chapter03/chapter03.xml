@@ -1,0 +1,1164 @@
+<chapter id="chapter03">
+
+  <title>The Operating System</title>
+
+  <sect1 id="role_of_operating_system">
+    <title>The role of the operating system</title>
+
+    <para>The operating system underpins the entire operation of the
+    modern computer.</para>
+
+    <sect2>
+      <title>Abstraction of hardware</title>
+
+      <para>The fundamental operation of the operating system (OS) is
+      to abstract the hardware to the programmer and user.  The
+      operating system provides generic interfaces to services
+      provided by the underlying hardware.</para>
+
+      <para>In a world without operating systems, every programmer
+      would need to know the most intimate details of the underlying
+      hardware to get anything to run.  Worse still, their programs
+      would not run on other hardware, even if that hardware has only
+      slight differences.</para>
+
+    </sect2>
+
+    <sect2>
+      <title>Multitasking</title>
+
+      <para>We expect modern computers to do many different things at
+      once, and we need some way to arbitrate between all the
+      different programs running on the system.  It is the operating
+      systems job to allow this to happen seamlessly.</para>
+
+      <para>The operating system is responsible for <emphasis>resource
+      management</emphasis> within the system.  Many tasks will be
+      competing for the resources of the system as it runs, including
+      processor time, memory, disk and user input.  The job of the
+      operating system is to arbitrate these resources to the multiple
+      tasks and allow them access in an orderly fashion.  You have
+      probably experienced when this <emphasis>fails</emphasis> as it
+      usually ends up with your computer crashing (the famous "blue
+      screen of death" for example).</para>
+    </sect2>
+
+    <sect2>
+      <title>Standardised Interfaces</title>
+
+      <para>Programmers want to write programs that will run on as
+      many different hardware platforms as possible.  By having
+      operating system support for standardised interfaces,
+      programmers can get this functionality.</para>
+
+      <para>For example, if the function to open a file on one system
+      is <computeroutput>open()</computeroutput>, on another is
+      <computeroutput>open_file()</computeroutput> and on yet another
+      <computeroutput>openf()</computeroutput> programmers will have
+      the dual problem of having to remember what each system does and
+      their programs will not work on multiple systems.</para>
+
+      <para>The Portable Operating System Interface (POSIX)<footnote>
+	  <para>The X comes from <emphasis>Unix</emphasis>, from which
+	  the standard grew.  Today, POSIX is the same thing as the
+	  Single UNIX Specification Version 3 or ISO/IEC
+	  9945:2002. This is a free standard, available online.</para>
+
+	  <para>Once upon a time, the Single UNIX specification and
+	  the POSIX Standards were separate entities. The Single UNIX
+	  specification was released by a consortium called the "Open
+	  Group", and was freely available as per their
+	  requirements. The latest version is The Single Unix
+	  Specification Version 3.</para>
+
+	  <para>The IEEE POSIX standards were released as IEEE Std
+	  1003.[insert various years, revisions here], and were not
+	  freely available. The latest version is IEEE 1003.1-2001 and
+	  is equivalent to the Single Unix Specification Version 3.</para>
+
+	  <para>Thus finally the two separate standards were merged
+ into what is known as the Single UNIX Specification Version 3, which
+ is also standardised by the ISO under ISO/IEC 9945:2002. This
+ happened early in 2002.  So when people talk about POSIX, SUS3 or
+ ISO/IEC 9945:2002 they all mean the same thing!</para></footnote> is
+ a very important standard implemented by UNIX type operating systems.
+ Microsoft Windows has similar proprietary standards. </para>
+
+    </sect2>
+
+    <sect2>
+      <title>Security</title>
+
+      <para>On multi-user systems, security is very important.  As the
+      arbitrator of access to the system the operating system is
+      responsible for ensuring that only those with the correct
+      permissions can access resources.</para>
+
+      <para>For example if a file is owned by one user, another user
+      should not be allowed to open and read it.  However there also
+      need to be mechanisms to share that file safely between the
+      users should they want it.</para>
+
+      <para>Operating systems are large and complex programs, and
+      often security issues will be found.  Often a virus or worm will
+      take advantage of these bugs to access resources it should not
+      be allowed to, such as your files or network connection; to
+      fight them you must install <emphasis>patches</emphasis> or
+      updates provided by your operating system vendor.</para>
+
+    </sect2>
+
+    <sect2>
+      <title>Performance</title>
+
+      <para>As the operating system provides so many services to the
+      computer, it's performance is critical.  Many parts of the
+      operating system run extremely frequently, so even an overhead
+      of just a few processor cycles can add up to a big decrease in
+      overall system performance.</para>
+
+      <para>The operating system needs to exploit the features of the
+      underlying hardware to make sure it is getting the best possible
+      performance for the operations, and consequently systems
+      programmers need to understand the intimate details of the
+      architecture they are building for.</para>
+
+      <para>In many cases the systems programmers job is about
+      deciding on policies for the system.  Often the case that the
+      side effects of making one part of the operating system run
+      faster will make another part run slower or less efficiently.
+      Systems programmers need to understand all these trade offs when
+      they are building their operating system.</para>
+
+    </sect2>
+
+  </sect1>
+
+  <sect1 id="organisation_of_os">
+    <title>Operating System Organisation</title>
+
+    <para>The operating system is roughly organised as in the figure
+    below.</para>
+
+    <figure>
+      <title>The Operating System</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="chapter03/figures/kernel.eps" format="EPS" />
+	</imageobject>
+	<imageobject role="fo">
+	  <imagedata fileref="chapter03/figures/kernel.svg"
+	  format="SVG" scalefit="1" width="100%" contentdept="100%" />
+	</imageobject>
+	<imageobject>
+	  <imagedata fileref="chapter03/figures/kernel.png" format="PNG" />
+	</imageobject>
+	<caption>
+	  <para>The organisation of the kernel.  Processes the
+	  kernel is running live in <emphasis>userspace</emphasis>,
+	  and the kernel talks both directly to hardware and through
+	  <emphasis>drivers</emphasis>.
+	  </para>
+	</caption>
+      </mediaobject>
+    </figure>
+
+    <sect2>
+      <title>The Kernel</title>
+
+      <para>The kernel <emphasis>is</emphasis> the operating system.
+      As the figure illustrates, the kernel communicates to hardware
+      both directly and through <emphasis>drivers</emphasis>.</para>
+
+      <para>Just as the kernel abstracts the hardware to user
+      programs, drivers abstract hardware to the kernel.  For example
+      there are many different types of graphic card, each one with
+      slightly different features.  As long as the kernel exports an
+      API, people who have access to the specifications for the
+      hardware can write drivers to implement that API.  This way the
+      kernel can access many different types of hardware.</para>
+
+      <para>The kernel is generally what we called
+      <emphasis>privileged</emphasis>.  As you will learn, the
+      hardware has important roles to play in running multiple tasks
+      and keeping the system secure, but these rules do not apply to
+      the kernel.  We know that the kernel must handle programs that
+      crash (remember it is the operating systems job arbitrate
+      between multiple programs running on the same system, and there
+      is no guarantee that they will behave), but if any internal part
+      of the operating system crashes chances are the entire system
+      will become useless.  Similarly security issues can be exploited
+      by user processes to escalate themselves to the privilege level
+      of the kernel; at that point they can access any part of the
+      system completely unchecked.</para>
+
+      <sect3>
+	<title>Monolithic v Microkernels</title>
+
+	<para>One debate that is often comes up surrounding operating
+	systems is whether the kernel should be a
+	<emphasis>microkernel</emphasis> or
+	<emphasis>monolithic</emphasis>.</para>
+
+	<para>The monolithic approach is the most common, as taken by
+	most common Unixes (such as Linux).  In this model the core
+	privileged kernel is large, containing hardware drivers,
+	file system accesses controls, permissions checking and
+	services such as Network File System (NFS).</para>
+
+	<para>Since the kernel is always privileged, if any part of it
+	crashes the whole system has the potential to comes to a halt.
+	If one driver has a bug it can overwrite any memory in the
+	system with no problems, ultimately causing the system to
+	crash.</para>
+
+	<para>A microkernel architecture tries to minimise this
+	possibility by making the privileged part of the kernel as
+	small as possible.  This means that most of the system runs as
+	unprivileged programs, limiting the harm that any one crashing
+	component can influence.  For example, drivers for hardware
+	can run in separate processes, so if one goes astray it can
+	not overwrite any memory but that allocated to it.</para>
+
+	<para>Whilst this sounds like the most obvious idea, the
+	problem comes back two main issues</para>
+
+	<orderedlist>
+	  <listitem>
+	    <para>Performance is decreased.  Talking between many
+	    different components can decrease performance.</para>
+	  </listitem>
+	  <listitem>
+
+	    <para>It is slightly more difficult for the
+	    programmer.</para>
+
+	  </listitem>
+	</orderedlist>
+
+	<para>Both of these criticisms come because to keep separation
+	between components most microkernels are implemented with a
+	<emphasis>message passing</emphasis> based system, commonly
+	referred to as <emphasis>inter-process
+	communication</emphasis> or IPC.  Communicating between
+	individual components happens via discrete messages which must
+	be bundled up, sent to the other component, unbundled,
+	operated upon, re-bundled up and sent back, and then unbundled
+	again to get the result.</para>
+
+	<para>This is a lot of steps for what might be a fairly simple
+	request from a foreign component.  Obviously one request might
+	make the other component do more requests of even more
+	components, and the problem can multiply.  Slow message
+	passing implementations were largely responsible for the poor
+	performance of early microkernel systems, and the concepts of
+	passing messages are slightly harder for programmers to program
+	for.  The enhanced protection from having components run
+	separately was not sufficient to overcome these hurdles in
+	early microkernel systems, so they fell out of fashion.</para>
+
+	<para>In a monolithic kernel calls between components are
+	simple function calls, as all programmers are familiar
+	with.</para>
+
+	<para>There is no definitive answer as to which is the best
+	organisation, and it has started many arguments in both
+	academic and non-academic circles.  Hopefully as you learn
+	more about operating systems you will be able to make up your
+	own mind!</para>
+
+	<sect4>
+	  <title>Modules</title>
+
+	  <para>The Linux kernel implements a module system, where
+	  drivers can loaded into the running kernel "on the fly" as
+	  they are required.  This is good in that drivers, which make
+	  up a large part of operating system code, are not loaded for
+	  devices that are not present in the system.  Someone who
+	  wants to make the most generic kernel possible (i.e. runs on
+	  lots of different hardware, such as RedHat or Debian) can
+	  include most drivers as modules which are only loaded if the
+	  system it is running on has the hardware available.</para>
+
+	  <para>However, the modules are loaded directly in the
+	  privileged kernel and operate at the same privilege level as
+	  the rest of the kernel, so the system is still considered a
+	  monolithic kernel.</para>
+
+	</sect4>
+
+      </sect3>
+
+      <sect3>
+	<title>Virtualisation</title>
+
+	<para>Closely related to kernel is the concept of
+	virtualisation of hardware.  Modern computers are very
+	powerful, and often it is useful to not thing of them as one
+	whole system but split a single physical computer up into
+	separate "virtual" machines.  Each of these virtual machines
+	looks for all intents and purposes as a completely separate
+	machine, although physically they are all in the same box, in
+	the same place.</para>
+
+	<figure>
+	  <title>The Operating System</title>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="chapter03/figures/virtual.eps" format="EPS" />
+	    </imageobject>
+	    <imageobject role="fo">
+	      <imagedata fileref="chapter03/figures/virtual.svg"
+	      format="SVG" scalefit="1" width="100%"
+	      contentdept="100%" />
+	    </imageobject>
+	    <imageobject>
+	      <imagedata fileref="chapter03/figures/virtual.png" format="PNG" />
+	    </imageobject>
+	    <caption>
+	  <para>Some different virtualisation methods.</para>
+	    </caption>
+	  </mediaobject>
+	</figure>
+
+	<para>This can be organised in many different ways.  In the
+	simplest case, a small <emphasis>virtual machine monitor
+	</emphasis> can run directly on the hardware and provide an
+	interface to the guest operating systems running on top.  This
+	VMM is often often called a hypervisor (from the word
+	"supervisor")<footnote> <para>In fact, the hypervisor shares
+	much in common with a micro-kernel; both strive to be small
+	layers to present the hardware in a safe fashion to layers
+	above it.</para></footnote>.  In fact, the operating system on
+	top may have no idea that the hypervisor is even there at all,
+	as the hypervisor presents what appears to be a complete
+	system.  It intercepts operations between the guest operating
+	system and hardware and only presents a subset of the system
+	resources to each.</para>
+
+	<para>This is often used on large machines (with many CPUs and
+	much RAM) to implement <emphasis>partitioning</emphasis>.
+	This means the machine can be split up into smaller virtual
+	machines.  Often you can allocate more resources to running
+	systems on the fly, as requirements dictate.  The hypervisors
+	on many large IBM machines are actually quite complicated
+	affairs, with many millions of lines of code.  It provides a
+	multitude of system management services.</para>
+
+	<para>Another option is to have the operating system aware of
+	the underlying hypervisor, and request system resources
+	through it.  This is sometimes referred to as
+	<emphasis>paravirtualisation</emphasis> due to it's halfway
+	nature.  This is similar to the way early versions of the Xen
+	system works and is a compromise solution.  It hopefully
+	provides better performance since the operating system is
+	explicitly asking for system resources from the hypervisor
+	when required, rather than the hypervisor having to work
+	things out dynamically.</para>
+
+	<para>Finally, you may have a situation where an application
+	running on top of the existing operating system presents a
+	virtualised system (including CPU, memory, BIOS, disk, etc)
+	which a plain operating system can run on.  The application
+	converts the requests to hardware through to the underlying
+	hardware via the existing operating system.  This is similar
+	to how VMWare works.  This approach has many overheads, as the
+	application process has to emulate an entire system and
+	convert everything to requests from the underlying operating
+	system.  However, this lets you emulate an entirely different
+	architecture all together, as you can dynamically translate
+	the instructions from one processor type to another (as the
+	Rosetta system does with Apple software which moved from the
+	PowerPC processor to Intel based processors).</para>
+
+	<para>Performance is major concern when using any of these
+	virtualisation techniques, as what was once fast operations
+	directly on hardware need to make their way through layers of
+	abstraction.</para>
+
+	<para>Intel have discussed hardware support for virtualisation
+	soon to be coming in their latest processors.  These
+	extensions work by raising a special exception for operations
+	that might require the intervention of a virtual machine
+	monitor.  Thus the processor looks the same as a
+	non-virtualised processor to the application running on it,
+	but when that application makes requests for resources that
+	might be shared between other guest operating systems the
+	virtual machine monitor can be invoked.</para>
+
+	<para>This provides superior performance because the virtual
+	machine monitor does not need to monitor every operation to
+	see if it is safe, but can wait until the processor notifies
+	that something <emphasis>unsafe</emphasis> has
+	happened.</para>
+
+	<sect4>
+	  <title>Covert Channels</title>
+
+	  <para>This is a digression, but an interesting security flaw
+	  relating to virtualised machines.  If the partitioning of
+	  the system is not static, but rather
+	  <emphasis>dynamic</emphasis>, there is a potential security
+	  issue involved.</para>
+
+	  <para>In a dynamic system, resources are allocated to the
+	  operating systems running on top as required.  Thus if one
+	  is doing particularly CPU intensive operations whilst the
+	  other is waiting on data to come from disks, more of the CPU
+	  power will be given to the first task.  In a static system,
+	  each would get 50% an the unused portion would go to
+	  waste.</para>
+
+	  <para>Dynamic allocation actually opens up a communications
+	  channel between the two operating systems.  Anywhere that
+	  two states can be indicated is sufficient to communicate in
+	  binary.  Imagine both systems are extremely secure, and no
+	  information should be able to pass between one and the
+	  other, ever.  Two people with access could collude to pass
+	  information between themselves by writing two programs that
+	  try to take large amounts of resources at the same
+	  time.</para>
+
+	  <para>When one takes a large amount of memory there is less
+	  available for the other.  If both keep track of the maximum
+	  allocations, a bit of information can be transferred.  Say
+	  they make a pact to check every second if they can allocate
+	  this large amount of memory.  If the target can, that is
+	  considered binary 0, and if it can not (the other machine
+	  has all the memory), that is considered binary 1.  A data
+	  rate of one bit per second is not astounding, but
+	  information is flowing.</para>
+
+	  <para>This is called a <emphasis>covert channel</emphasis>,
+	  and whilst admittedly far fetched there have been examples
+	  of security breaches from such mechanisms.  It just goes to
+	  show that the life of a systems programmer is never simple!</para>
+
+	</sect4>
+
+      </sect3>
+
+    </sect2>
+
+    <sect2>
+      <title>Userspace</title>
+
+      <para>We call the theoretical place where programs run by the
+      user <emphasis>userspace</emphasis>.  Each program runs in
+      userspace, talking to the kernel through <emphasis>system
+      calls</emphasis> (discussed below).</para>
+
+      <para>As previously discussed, userspace is
+      <emphasis>unprivileged</emphasis>.  User programs can only do a
+      limited range of things, and should never be able to crash other
+      programs, even if they crash themselves.</para>
+
+    </sect2>
+
+  </sect1>
+
+
+  <sect1 id="system_calls">
+    <title>System Calls</title>
+
+    <sect2>
+      <title>Overview</title>
+
+      <para>System calls are how userspace programs interact with the
+    kernel.  The general principle behind how they work is described
+    below.</para>
+
+    <sect3>
+      <title>System call numbers</title>
+
+	<para>Each and every system call has a <emphasis>system call
+	number</emphasis> which is known by both the userspace and the
+	kernel.  For example, both know that system call number 10 is
+	<computeroutput>open()</computeroutput>, system call number 11
+	is <computeroutput>read()</computeroutput>, etc.</para>
+
+	<para>The <emphasis>Application Binary Interface</emphasis>
+	(ABI) is very similar to an API but rather than being for
+	software is for hardware.  The API will define which register
+	the system call number should be put in so the kernel can find
+	it when it is asked to do the system call.</para>
+
+    </sect3>
+
+    <sect3>
+      <title>Arguments</title>
+
+      <para>System calls are no good without arguments; for example
+      <computeroutput>open()</computeroutput> needs to tell the kernel
+      exactly <emphasis>what</emphasis> file to open.  Once again the
+      ABI will define which registers arguments should be put into for
+      the system call.</para>
+    </sect3>
+
+    <sect3>
+      <title>The trap</title>
+
+      <para>To actually perform the system call, there needs to be
+      some way to communicate to the kernel we wish to make a system
+      call.  All architectures define an instruction, usually called
+      <computeroutput>break</computeroutput> or something similar,
+      that signals to the hardware we wish to make a system
+      call.</para>
+
+      <para>Specifically, this instruction will tell the hardware to
+      modify the instruction pointer to point to the kernels system
+      call handler (when the operating system sets its self up it
+      tells the hardware where its system call handler lives).  So
+      once the userspace calls the break instruction, it has lost
+      control of the program and passed it over to the kernel.</para>
+
+      <para>The rest of the operation is fairly straight forward.  The
+      kernel looks in the predefined register for the system call
+      number, and looks it up in a table to see which function it
+      should call.  This function is called, does what it needs to do,
+      and places it's return value into <emphasis>another</emphasis>
+      register defined by the ABI as the return register.</para>
+
+      <para>The final step is for the kernel to make a jump
+      instruction back to the userspace program, so it can continue
+      off where it left from.  The userpsace program gets the data it
+      needs from the return register, and continues happily on it's
+      way!</para>
+
+      <para>Although the details of the process can get quite hairy,
+      this is basically all their is to a system call.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>libc</title>
+	
+	<para>Although you can do all of the above by hand for each
+	system call, system libraries usually do most of the work for
+	you.  The standard library that deals with system calls on
+	UNIX like systems is <computeroutput>libc</computeroutput>; we
+	will learn more about it's roles in future weeks.</para>
+	
+      </sect3>
+
+    </sect2>
+
+
+    <sect2>
+      <title>Analysing a system call</title>
+
+      <para>As the system libraries usually deal with making systems
+      call for you, we need to do some low level hacking to
+      illustrate exactly how the system calls work.</para>
+
+      <para>We will illustrate how probably the most simple system
+      call, <computeroutput>getpid()</computeroutput>, works.  This
+      call takes no arguments and returns the ID of the currently
+      running program (or process; we'll look more at the process in
+      later weeks).</para>
+
+      <example>
+	<title>getpid() example</title>
+	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="chapter03/code/getpid.c" format="linespecific" />
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+
+      <para>We start by writing a small C program which we can start
+      to illustrate the mechanism behind system calls.  The first
+      thing to note is that there is a
+      <computeroutput>syscall</computeroutput> argument provided by
+      the system libraries for directly making system calls.  This
+      provides an easy way for programmers to directly make systems
+      calls without having to know the exact assembly language
+      routines for making the call on their hardware.  So why do we
+      use <computeroutput>getpid()</computeroutput> at all?  Firstly,
+      it is much clearer to use a symbolic function name in your code.
+      However, more importantly,
+      <computeroutput>getpid()</computeroutput> may work in very
+      different ways on different systems.  For example, on Linux the
+      <computeroutput>getpid()</computeroutput> call can be cached, so
+      if it is run twice the system library will not take the penalty
+      of having to make an entire system call to find out the same
+      information again.</para>
+
+      <para>By convention under Linux, system calls numbers are
+      defined in the <computeroutput>asm/unistd.h</computeroutput>
+      file from the kernel source.  Being in the
+      <computeroutput>asm</computeroutput> subdirectory, this is
+      different for each architecture Linux runs on.  Again by
+      convention, system calls numbers are given a
+      <computeroutput>#define</computeroutput> name consisting of
+      <computeroutput>__NR_</computeroutput>.  Thus you can see our
+      code will be making the <computeroutput>getpid</computeroutput>
+      system call, storing the value in
+      <computeroutput>pid</computeroutput>.</para>
+
+      <para>We will have a look at how several architectures implement
+      this code under the hood.  We're going to look at real code, so
+      things can get quite hairy.  But stick with it -- this is
+      <emphasis>exactly</emphasis> how your system works!</para>
+
+      <sect3>
+	<title>PowerPC</title>
+
+	<para>PowerPC is a RISC architecture common in older Apple
+	computers, and the core of devices such as the latest
+	version of the Xbox.</para>
+
+	<example>
+	  <title>PowerPC system call example</title>
+	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="chapter03/code/unistd-powerpc.h" format="linespecific" />
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+	
+	<para>This code snippet from the kernel header file
+	<computeroutput>asm/unistd.h</computeroutput> shows how we can
+	implement system calls on PowerPC.  It looks very complicated,
+	but it can be broken down step by step.</para>
+
+	<para>Firstly, jump to the end of the example where the
+	<computeroutput>_syscallN</computeroutput> macros are defined.
+	You can see there are many macros, each one taking
+	progressively one more argument.  We'll concentrate on the
+	most simple version,
+	<computeroutput>_syscall0</computeroutput> to start with.  It
+	only takes two arguments, the return type of the system call
+	(e.g. a C <computeroutput>int</computeroutput> or
+	<computeroutput>char</computeroutput>, etc) and the name of
+	the system call.  For <computeroutput>getpid</computeroutput>
+	this would be done as
+	<computeroutput>_syscall0(int,getpid)</computeroutput>.</para>
+
+	<para>Easy so far!  We now have to start pulling apart
+	<computeroutput>__syscall_nr</computeroutput> macro.  This is
+	not dissimilar to where we were before, we take the number of
+	arguments as the first parameter, the type, name and then the
+	actual arguments.</para>
+
+	<para>The first step is declaring some names for registers.
+	What this essentially does is says
+	<computeroutput>__sc_0</computeroutput> refers to
+	<computeroutput>r0</computeroutput> (i.e. register 0).  The
+	compiler will usually use registers how it wants, so it is
+	important we give it constraints so that it doesn't decide to
+	go using register we need in some ad-hoc manner.</para>
+
+	<para>We then call
+	<computeroutput>sc_loadargs</computeroutput> with the
+	interesting <computeroutput>##</computeroutput> parameter.
+	That is just a <emphasis>paste</emphasis> command, which gets
+	replaced by the <computeroutput>nr</computeroutput> variable.
+	Thus for our example it expands to
+	<computeroutput>__sc_loadargs_0(name, args);</computeroutput>.
+	<computeroutput>__sc_loadargs</computeroutput> we can see
+	below sets <computeroutput>__sc_0</computeroutput> to be the
+	system call number; notice the paste operator again with the
+	<computeroutput>__NR_</computeroutput> prefix we talked about,
+	and the variable name that refers to a specific
+	register.</para>
+
+	<para>So, all this tricky looking code actually does is puts
+	the system call number in register 0!  Following the code
+	through, we can see that the other macros will place the
+	system call arguments into <computeroutput>r3</computeroutput>
+	through <computeroutput>r7</computeroutput> (you can only have
+	a maximum of 5 arguments to your system call).</para>
+
+	<para>Now we are ready to tackle the
+	<computeroutput>__asm__</computeroutput> section.  What we
+	have here is called <emphasis>inline assembly</emphasis>
+	because it is assembler code mixed right in with source code.
+	The exact syntax is a little to complicated to go into right
+	here, but we can point out the important parts.</para>
+
+	<para>Just ignore the
+	<computeroutput>__volatile__</computeroutput> bit for now; it
+	is telling the compiler that this code is unpredictable so it
+	shouldn't try and be clever with it.  Again we'll start at the
+	end and work backwards.  All the stuff after the colons is a
+	way of communicating to the compiler about what the inline
+	assembly is doing to the CPU registers.  The compiler needs to
+	know so that it doesn't try using any of these registers in
+	ways that might cause a crash.</para>
+
+	<para>But the interesting part is the two assembly statements
+	in the first argument.  The one that does all the work is the
+	<computeroutput>sc</computeroutput> call.  That's all you need
+	to do to make your system call!</para>
+
+	<para>So what happens when this call is made?  Well, the
+	processor is interrupted knows to transfer control to a
+	specific piece of code setup at system boot time to handle
+	interrupts.  There are many interrupts; system calls are just
+	one.  This code will then look in register 0 to find the
+	system call number; it then looks up a table and finds the
+	right function to jump to to handle that system call.  This
+	function receives it's arguments in registers 3 - 7.</para>
+
+	<para>So, what happens once the system call handler runs and
+	completes?  Control returns to the next instruction after the
+	<computeroutput>sc</computeroutput>, in this case a
+	<emphasis>memory fence</emphasis> instruction.  What this
+	essentially says is "make sure everything is committed to
+	memory"; remember how we talked about pipelines in the
+	superscalar architecture?  This instruction ensures that
+	everything we think has been written to memory actually has
+	been, and isn't making it's way through a pipeline
+	somewhere.</para>
+
+	<para>Well, we're almost done!  The only thing left is to
+	return the value from the system call.  We see that
+	<computeroutput>__sc_ret</computeroutput> is set from r3 and
+	<computeroutput>__sc_err</computeroutput> is set from r0.
+	This is interesting; what are these two values all
+	about?</para>
+
+	<para>One is the return value, and one is the error value.
+	Why do we need two variables?  System calls can fail, just as
+	any other function.  The problem is that a system call can
+	return any possible value; we can not say "a negative value
+	indicates failure" since a negative value might be perfectly
+	acceptable for some particular system call.</para>
+
+	<para>So our system call function, before returning, ensures
+	its result is in register r3 and any error code is in register
+	r0.  We check the error code to see if the top bit is set;
+	this would indicate a negative number.  If so, we set the
+	global <computeroutput>errno</computeroutput> value to it
+	(this is the standard variable for getting error information
+	on call failure) and set the return to be
+	<computeroutput>-1</computeroutput>.  Of course, if a valid
+	result is received we return it directly.</para>
+
+	<para>So our calling function should check the return value is
+	not <computeroutput>-1</computeroutput>; if it is it can check
+	errno to find the exact reason why the call failed.</para>
+
+	<para>And that is an entire system call on a PowerPC!</para>
+
+      </sect3>
+
+      <sect3>
+	<title>x86 system calls</title>
+
+	<para>Below we have the same interface as implemented for the
+	x86 processor.</para>
+
+	<example>
+	  <title>x86 system call example</title>
+	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="chapter03/code/unistd-x86.h" format="linespecific" />
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+	<para>The x86 architecture is very different from the PowerPC
+	that we looked at previously.  The x86 is classed as a CISC
+	processor as opposed to the RISC PowerPC, and has dramatically
+	less registers.</para>
+
+	<para>Start by looking at the most simple
+	<computeroutput>_syscall0</computeroutput> macro.  It simply
+	calls the <computeroutput>int</computeroutput> instruction
+	with a value of <computeroutput>0x80</computeroutput>.  This
+	instruction makes the CPU raise interrupt 0x80, which will
+	jump to code that handles system calls in the kernel.</para>
+
+	<para>We can start inspecting how to pass arguments with the
+	longer macros.  Notice how the PowerPC implementation cascaded
+	macros downwards, adding one argument per time.  This
+	implementation has slightly more copied code, but is a little
+	easier to follow.</para>
+
+	<para>x86 register names are based around letters, rather than
+	the numerical based register names of PowerPC.  We can see
+	from the zero argument macro that only the
+	<computeroutput>A</computeroutput> register gets loaded; from
+	this we can tell that the system call number is expected in
+	the <computeroutput>EAX</computeroutput> register.  As we
+	start loading registers in the other macros you can see the
+	short names of the registers in the arguments to the
+	<computeroutput>__asm__</computeroutput> call.</para>
+
+	<para>We see something a little more interesting in
+	<computeroutput>__syscall6</computeroutput>, the macro taking
+	6 arguments.  Notice the <computeroutput>push</computeroutput>
+	and <computeroutput>pop</computeroutput> instructions?  These
+	work with the stack on x86, "pushing" a value onto the top of
+	the stack in memory, and popping the value from the stack back
+	into memory.  Thus in the case of having six registers we need
+	to store the value of the <computeroutput>ebp</computeroutput>
+	register in memory, put our argument in in (the
+	<computeroutput>mov</computeroutput> instruction), make our
+	system call and then restore the original value into
+	<computeroutput>ebp</computeroutput>.  Here you can see the
+	disadvantage of not having enough registers; stores to memory
+	are expensive so the more you can avoid them, the
+	better.</para>
+
+	<para>Another thing you might notice there is nothing like the
+	<emphasis>memory fence</emphasis> instruction we saw
+	previously with the PowerPC.  This is because on x86 the
+	effect of all instructions will be guaranteed to be visible
+	when the complete.  This is easier for the compiler (and
+	programmer) to program for, but offers less
+	flexibility.</para>
+
+	<para>The only thing left to contrast is the return value.  On
+	the PowerPC we had two registers with return values from the
+	kernel, one with the value and one with an error code.
+	However on x86 we only have one return value that is passed
+	into <computeroutput>__syscall_return</computeroutput>.  That
+	macro casts the return value to <computeroutput>unsigned
+	long</computeroutput> and compares it to an (architecture and
+	kernel dependent) range of negative values that might
+	represent error codes (note that the
+	<computeroutput>errno</computeroutput> value is positive, so
+	the negative result from the kernel is negated).  However,
+	this means that system calls can not return small negative
+	values, since they are indistinguishable from error codes.
+	Some system calls that have this requirement, such as
+	<computeroutput>getpriority()</computeroutput>, add an offset
+	to their return value to force it to always be positive; it is
+	up to the userspace to realise this and subtract this constant
+	value to get back to the "real" value.</para>
+
+      </sect3>
+
+    </sect2>
+  </sect1>
+
+  <sect1 id="privileges">
+    <title>Privileges</title>
+
+    <sect2>
+      <title>Hardware</title>
+
+	<para>We mentioned how one of the major tasks of the operating
+      system is to implement security; that is to not allow one
+      application or user to interfere with any other that is running
+      in the system.  This means applications should not be able to
+      overwrite each others memory or files, and only access system
+      resources as dictated by system policy.</para>
+
+	<para>However, when an application is running it has exclusive
+      use of the processor.  We see how this works when we examine
+      processes in the next chapter.  Ensuring the application only
+      accesses memory it owns is implemented by the virtual memory
+      system, which we examine in the chapter after next.  The
+      essential point is that the hardware is responsible for
+      enforcing these rules.</para>
+      
+      <para>The system call interface we have examined is the
+	gateway to the application getting to system resources.  By
+	forcing the application to request resources through a system
+	call into the kernel, the kernel can enforce rules about what
+	sort of access can be provided.  For example, when an
+	application makes an <computeroutput>open()</computeroutput>
+	system call to open a file on disk, it will check the
+	permissions of the user against the file permissions and
+	allow or deny access.</para>
+  
+
+      <sect3>
+	<title>Privilege Levels</title>
+
+	<para>Hardware protection can usually be seen as a set of
+	concentric rings around a core set of operations.</para>
+
+	<figure>
+	  <title>Rings</title>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="chapter03/figures/priv.eps" format="EPS" />
+	    </imageobject>
+	    <imageobject role="fo">
+	      <imagedata fileref="chapter03/figures/priv.svg"
+	      format="SVG" scalefit="1" width="100%"
+	      contentdept="100%"/>
+	    </imageobject>
+	    <imageobject>
+	      <imagedata fileref="chapter03/figures/priv.png" format="PNG" />
+	    </imageobject>
+	    <caption>
+	      <para>Privilege levels on x86</para>
+	    </caption>
+	  </mediaobject>
+	</figure>
+
+	<para>In the inner most ring are the most protected
+	instructions; those that only the kernel should be allowed to
+	call.  For example, the <computeroutput>HLT</computeroutput>
+	instruction to halt the processor should not be allowed to be
+	run by a user application, since it would stop the entire
+	computer from working.  However, the kernel needs to be able
+	to call this instruction when the computer is legitimately
+	shut down.<footnote> <para>What happens when a "naughty"
+	application calls that instruction anyway?  The hardware will
+	usually raise an exception, which will involve jumping to a
+	specified handler in the operating system similar to the
+	system call handler.  The operating system will then probably
+	terminate the program, usually giving the user some error
+	about how the application has crashed.</para></footnote></para>
+
+	<para>Each inner ring can access any instructions protected by
+	a further out ring, but not any protected by a further in ring.
+	Not all architectures have multiple levels of rings as above,
+	but most will either provide for at least a "kernel" and
+	"user" level.</para>
+
+	<sect4 id="x86_protection">
+	  <title>386 protection model</title>
+
+	  <para>The 386 protection model has four rings, though most
+	  operating systems (such as Linux and Windows) only use two
+	  of the rings to maintain compatibility with other
+	  architectures that do now allow as many discrete protection
+	  levels.</para>
+
+	  <para>386 maintains privileges by making each piece of
+	  application code running in the system have a small
+	  descriptor, called a <emphasis>code descriptor</emphasis>,
+	  which describes, amongst other things, its privilege level.
+	  When running application code makes a jump into some other
+	  code outside the region described by its code descriptor,
+	  the privilege level of the target is checked.  If it is
+	  higher than the currently running code, the jump is
+	  disallowed by the hardware (and the application will crash).
+	  </para>
+
+	</sect4>
+
+	<sect4 id="raising_privilege">
+	  <title>Raising Privilege</title>
+
+	  <para>Applications may only raise their privilege level by
+	specific calls that allow it, such as the instruction to
+	implement a system call.  These are usually referred to as a
+	<emphasis>call gate</emphasis> because they function just as a
+	physical gate; a small entry through an otherwise impenetrable
+	wall.  When that instruction is called we have seen how the
+	hardware completely stops the running application and hands
+	control over to the kernel.  The kernel must act as a
+	gatekeeper; ensuring that nothing nasty is coming through the
+	gate.  This means it must check system call arguments
+	carefully to make sure it will not be fooled into doing
+	anything it shouldn't (if it can be, that is a security bug).
+	As the kernel runs in the innermost ring, it has permissions
+	to do any operation it wants; when it is finished it will
+	return control back to the application which will again be
+	running with it's lower privilege level.</para>
+
+	</sect4>
+
+	<sect4 id="fast_system_calls">
+	  <title>Fast System Calls</title>
+
+	  <para>One problem with traps as described above is that they
+	  are very expensive for the processor to implement.  There is
+	  a lot of state to be saved before context can switch.
+	  Modern processors have realised this overhead and strive to
+	  reduce it.</para>
+
+          <para>To understand the call-gate mechanism described above
+          requires investigation of the ingenious but complicated
+          segmentation scheme used by the processor.  The original
+          reason for segmentation was to be able to use more than the
+          16 bits available in a register for an address, as
+          illustrated in <xref
+          linkend="x86_segmentation"></xref>.</para>
+
+	  <figure id="x86_segmentation">
+	    <title>x86 Segmentation Adressing</title>
+	    <mediaobject>
+	      <imageobject>
+		<imagedata fileref="chapter03/figures/ia32-segmentation.eps" format="EPS" />
+	      </imageobject>
+	      <imageobject role="fo">
+		<imagedata
+		fileref="chapter03/figures/ia32-segmentation.svg"
+		format="SVG" scalefit="1" width="100%"
+		contentdept="100%"/>
+	      </imageobject>
+	      <imageobject>
+		<imagedata fileref="chapter03/figures/ia32-segmentation.png" format="PNG" />
+	      </imageobject>
+	      <caption>
+		<para>Segmentation expanding the address space of a
+		  processor by dividing it into chunks.  The processor
+		  keeps special segment registers, and addresses are
+		  specified by a segment register and offset
+		  combination.  The value of the segment register is
+		  added to the offset portion to find a final address.
+		</para>
+	      </caption>
+	    </mediaobject>
+	  </figure>
+
+	  <para>When x86 moved to 32 bit registers, the segmentation
+	    scheme remained but in a different format.  Rather than
+	    fixed segment sizes, segments are allowed to be any size.
+	    This means the processor needs to keep track of all these
+	    different segments and their sizes, which it does using
+	    <emphasis>descriptors</emphasis>.  The segment descriptors
+	    available to everyone are kept in the <emphasis>global
+	    descriptor table</emphasis> or GDT for short.  Each
+	    process has a number of registers which point to entries
+	    in the GDT; these are the segments the process can access
+	    (there are also <emphasis>local</emphasis> descriptor
+	    tables, and it all interacts with task state segments, but
+	    that's not important now).  The overall situation is
+	    illustrated in <xref
+	    linkend="x86_segments"></xref>.</para>
+
+	  <figure id="x86_segments">
+	    <title>x86 segments</title>
+	    <mediaobject>
+	      <imageobject>
+		<imagedata fileref="chapter03/figures/ia32-segments.eps" format="EPS" />
+	      </imageobject>
+	      <imageobject role="fo">
+		<imagedata
+		fileref="chapter03/figures/ia32-segments.svg"
+		format="SVG" scalefit="1" width="100%"
+		contentdept="100%"/>
+	      </imageobject>
+	      <imageobject>
+		<imagedata fileref="chapter03/figures/ia32-segments.png" format="PNG" />
+	      </imageobject>
+	      <caption>
+		<para>x86 segments in action.  Notice how a "far-call"
+		passes via a call-gate which redirects to a segment of
+		code running at a lower ring level.  The only way to
+		modify the code-segment selector, implicitly used for
+		all code addresses, is via the call mechanism.  Thus
+		the call-gate mechanism ensures that to choose a new
+		segment descriptor, and hence possibly change
+		protection levels, you must transition via a known
+		entry point.</para>
+	      </caption>
+	    </mediaobject>
+	  </figure>
+
+	  <para>Since the operating system assigns the segment
+	    registers as part of the process state, the processor
+	    hardware knows what segments of memory the currently
+	    running process can access and can enforce
+	    <emphasis>protection</emphasis> to ensure the process
+	    doesn't touch anything it is not supposed to.  If it does
+	    go out of bounds, you receive a <emphasis>segmentation
+	    fault</emphasis>, which most programmers are familiar
+	    with.</para>
+
+	  <para>The picture becomes more interesting when running code
+	    needs to make calls into code that resides in
+	    <emphasis>another</emphasis> segment.  As discussed in
+	    <xref linkend="x86_protection"></xref>, x86 does this with
+	    <emphasis>rings</emphasis>, where ring 0 is the highest
+	    permission, ring 3 is the lowest, and inner rings can
+	    access outer rings but not vice-versa.</para>
+
+	  <para>As discussed in <xref
+	    linkend="raising_privilege"></xref>, when ring 3 code
+	    wants to jump into ring 0 code, it is essentially
+	    modifying its code segment selector to point to a
+	    different segment.  To do this, it must use a special
+	    <emphasis>far-call</emphasis> instruction which hardware
+	    ensures passes through the call gate.  There is no other
+	    way for the running process to choose a new code-segment
+	    descriptor, and hence the processor will start executing
+	    code at the known offset within the ring 0 segment, which
+	    is responsible for maintaining integrity (e.g. not reading
+	    arbitrary and possibly malicious code and executing it.
+	    Of course nefarious attackers will always look for ways to
+	    make your code do what you did not intend it to!).</para>
+
+	  <para>This allows a whole hierarchy of segments and
+	    permissions between them.  You might have noticed a cross
+	    segment call sounds exactly like a system call.  If you've
+	    ever looked at Linux x86 assembly the standard way to make
+	    a system call is <computeroutput>int
+	    0x80</computeroutput>, which raises interrupt
+	    <computeroutput>0x80</computeroutput>.  An interrupt stops
+	    the processor and goes to an interrupt gate, which then
+	    works the same as a call gate -- it changes privilege
+	    level and bounces you off to some other area of code
+	    .</para>
+
+	  <para>The problem with this scheme is that it is
+	    <emphasis>slow</emphasis>.  It takes a lot of effort to do
+	    all this checking, and many registers need to be saved to
+	    get into the new code.  And on the way back out, it all
+	    needs to be restored again.</para>
+
+	  <para>On a modern x86 system segmentation and the four-level
+	    ring system is not used thanks to virtual memory,
+	    discussed fully in <xref linkend="chapter05"></xref>.  The
+	    only thing that really happens with segmentation switching
+	    is system calls, which essentially switch from mode 3
+	    (userspace) to mode 0 and jump to the system call handler
+	    code inside the kernel.  Thus the processor provides extra
+	    <emphasis>fast system call</emphasis> instructions called
+	    <computeroutput>sysenter</computeroutput> (and
+	    <computeroutput>sysexit</computeroutput> to get back)
+	    which speed up the whole process over a
+	    <computeroutput>int 0x80</computeroutput> call by removing
+	    the general nature of a far-call &mdash; that is the
+	    possibility of transitioning into any segment at any ring
+	    level &mdash; and restricting the call to only transition
+	    to ring 0 code at a specific segment and offset, as stored
+	    in registers.</para>
+
+	  <para>Because the general nature has been replaced with so
+	    much prior-known information, the whole process can be
+	    speed up, and hence we have a the aforementioned
+	    <emphasis>fast system call</emphasis>.  The other thing to
+	    note is that state is not preserved when the kernel gets
+	    control.  The kernel has to be careful to not to destroy
+	    state, but it also means it is free to only save as little
+	    state as is required to do the job, so can be much more
+	    efficient about it.  This is a very RISC philosophy, and
+	    illustrates how the line blurs between RISC and CISC
+	    processors.</para>
+
+	  <para>For more information on how this is implemented in the
+	    Linux kernel, see <xref
+	    linkend="kernel_library"></xref>.</para>
+
+	</sect4>
+
+      </sect3>
+
+    </sect2>
+
+    <sect2>
+      <title>Other ways of communicating with the kernel</title>
+
+
+      <sect3>
+	<title>ioctl</title>
+	<para>about ioctls</para>
+      </sect3>
+    </sect2>
+
+    <sect2>
+      <title>File Systems</title>
+      <para>about proc, sysfs, debugfs, etc</para>
+    </sect2>
+  </sect1>
+
+</chapter>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-parent-document: ("../csbu.sgml" "book" "chapter")
+End:
+-->

@@ -1,0 +1,670 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.10-dev">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Running Apache&trade; FOP</title>
+<link type="text/css" href="../skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="../skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="../skin/print.css" rel="stylesheet">
+<link type="text/css" href="../skin/profile.css" rel="stylesheet">
+<script src="../skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="../skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="../skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="../favicon.ico">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://xmlgraphics.apache.org/"><img class="logoImage" alt="Apache XML Graphics" src="../images/group-logo.gif" title="Apache XML Graphics is responsible for the creation and maintenance of software for managing the conversion of XML formats to graphical output, and the creation and maintenance of related software components, based on software licensed to the Foundation"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://xmlgraphics.apache.org/fop/"><img class="logoImage" alt="Apache FOP" src="../images/logo.jpg" title="Apache FOP (Formatting Objects Processor) is the world's first output independent formatter. Output formats currently supported include PDF, PCL, PS, SVG, XML (area tree representation), Print, AWT, MIF and TXT. The primary output target is PDF."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="xmlgraphics.apache.org" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="../index.html">Home</a>
+</li>
+<li>
+<a class="unselected" href="../1.0/index.html">Version 1.0</a>
+</li>
+<li class="current">
+<a class="selected" href="../1.1/index.html">Version 1.1</a>
+</li>
+<li>
+<a class="unselected" href="../trunk/index.html">FOP Trunk</a>
+</li>
+<li>
+<a class="unselected" href="../dev/index.html">Development</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">The Apache Software Foundation</a> &gt; <a href="http://xmlgraphics.apache.org/">Apache XML Graphics Project</a><script src="../skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_selected_1.1', '../skin/')" id="menu_selected_1.1Title" class="menutitle" style="background-image: url('../skin/images/chapter_open.gif');">Apache&trade; FOP 1.1</div>
+<div id="menu_selected_1.1" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="../1.1/index.html">About</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/releaseNotes_1.1.html">Release Notes</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/changes_1.1.html">Changes (1.1)</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/knownissues_overview.html">Known Issues</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/upgrading.html">Upgrading</a>
+</div>
+<div onclick="SwitchMenu('menu_selected_1.1.6', '../skin/')" id="menu_selected_1.1.6Title" class="menutitle" style="background-image: url('../skin/images/chapter_open.gif');">Using Apache&trade; FOP</div>
+<div id="menu_selected_1.1.6" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="../1.1/anttask.html">Ant Task</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/compiling.html">Build</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/configuration.html">Configure</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/embedding.html">Embed</a>
+</div>
+<div class="menupage">
+<div class="menupagetitle">Run</div>
+</div>
+<div class="menuitem">
+<a href="../1.1/servlets.html">Servlets</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.1.7', '../skin/')" id="menu_1.1.7Title" class="menutitle">Features</div>
+<div id="menu_1.1.7" class="menuitemgroup">
+<div class="menuitem">
+<a href="../1.1/accessibility.html">Accessibility</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/complexscripts.html">Complex Scripts</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/events.html">Events</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/extensions.html">Extensions</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/fonts.html">Fonts</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/graphics.html">Graphics</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/hyphenation.html">Hyphenation</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/intermediate.html">Intermediate Format</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/metadata.html">Metadata</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/output.html">Output Targets</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/pdfa.html">PDF/A</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/pdfx.html">PDF/X</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/pdfencryption.html">PDF Encryption</a>
+</div>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="../skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="raw XML" class="xmllink">
+<a class="dida" href="running.xml"><img alt="XML - icon" src="../skin/images/xmldoc.gif" class="skin"><br>
+        XML</a>
+</div>
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="running.pdf"><img alt="PDF -icon" src="../skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<div class="trail">Font size: 
+	          &nbsp;<input value="Reset" class="resetfont" title="Reset text" onclick="ndeSetTextSize('reset'); return false;" type="button">      
+	          &nbsp;<input value="-a" class="smallerfont" title="Shrink text" onclick="ndeSetTextSize('decr'); return false;" type="button">
+	          &nbsp;<input value="+a" class="biggerfont" title="Enlarge text" onclick="ndeSetTextSize('incr'); return false;" type="button">
+</div>
+<h1>Running Apache&trade; FOP</h1>
+<div id="front-matter">
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#require">System Requirements</a>
+</li>
+<li>
+<a href="#install">Installation</a>
+<ul class="minitoc">
+<li>
+<a href="#install-instruct">Instructions</a>
+</li>
+<li>
+<a href="#install-problems">Problems</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#standalone-start">Starting FOP as a Standalone Application</a>
+<ul class="minitoc">
+<li>
+<a href="#fop-script">Using the fop script or batch file</a>
+</li>
+<li>
+<a href="#your-own-script">Writing your own script</a>
+</li>
+<li>
+<a href="#jar-option">Running with java's -jar option</a>
+</li>
+<li>
+<a href="#dynamical-classpath">FOP's dynamical classpath construction</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#check-input">Using Xalan to Check XSL-FO Input</a>
+</li>
+<li>
+<a href="#memory">Memory Usage</a>
+</li>
+<li>
+<a href="#problems">Problems</a>
+</li>
+</ul>
+</div>
+</div>
+    
+<a name="require"></a>
+<h2 class="underlined_10">System Requirements</h2>
+<div class="section">
+<p>The following software must be installed:</p>
+<ul>
+        
+<li>
+          Java 1.4.x or later Runtime Environment.
+          <ul>
+            
+<li>
+              Many JREs &gt;=1.4 contain older JAXP implementations (which often contain bugs). It's
+              usually a good idea to replace them with a current implementation.
+            </li>
+          
+</ul>
+        
+</li>
+        
+<li>
+          Apache&trade; FOP. The <a href="../download.html">FOP distribution</a> includes all libraries that you will
+          need to run a basic FOP installation. These can be found in the [fop-root]/lib directory. These
+          libraries include the following:
+          <ul>
+            
+<li>
+<a target="_blank" class="fork" href="http://xmlgraphics.apache.org/commons/">Apache XML Graphics Commons</a>, an shared library for Batik and FOP.</li>
+            
+<li>
+<a target="_blank" class="fork" href="http://xmlgraphics.apache.org/batik/">Apache Batik</a>, an SVG library.</li>
+            
+<li>
+<a class="external" href="http://commons.apache.org/logging/">Apache Commons Logging</a>, a logger abstraction kit.</li>
+            
+<li>
+<a class="external" href="http://commons.apache.org/io/">Apache Commons IO</a>, a library with I/O utilities.</li>
+            
+<li>
+<a class="external" href="http://excalibur.apache.org/framework/">Apache Excalibur/Avalon Framework</a>, for XML configuration handling.</li>
+          
+</ul>
+        
+</li>
+      
+</ul>
+<p>The following software is optional, depending on your needs:</p>
+<ul>
+        
+<li>
+          Graphics libraries. Generally, FOP contains direct support for the most important
+          bitmap image formats (including PNG, JPEG and GIF). See
+          <a href="graphics.html">FOP: Graphics Formats</a> for details.
+        </li>
+        
+<li>
+          PDF encryption. See <a href="pdfencryption.html">FOP: PDF Encryption</a> for details.
+        </li>
+      
+</ul>
+<p>In addition, the following system requirements apply:</p>
+<ul>
+        
+<li>
+          If you will be using FOP to process SVG, you must do so in a graphical environment.
+          See <a href="graphics.html#batik">FOP: Graphics (Batik)</a> for details.
+        </li>
+      
+</ul>
+</div>
+    
+<a name="install"></a>
+<h2 class="underlined_10">Installation</h2>
+<div class="section">
+<a name="install-instruct"></a>
+<h3 class="underlined_5">Instructions</h3>
+<p>
+          Basic FOP installation consists of first unzipping the <span class="codefrag">.gz</span> file that is the
+          distribution medium, then unarchiving the resulting <span class="codefrag">.tar</span> file in a
+          directory/folder that is convenient on your system. Please consult your operating system
+          documentation or Zip application software documentation for instructions specific to your
+          site.
+        </p>
+<a name="install-problems"></a>
+<h3 class="underlined_5">Problems</h3>
+<p>
+          Some Mac OSX users have experienced filename truncation problems using Stuffit to unzip
+          and unarchive their distribution media. This is a legacy of older Mac operating systems,
+          which had a 31-character pathname limit. Several Mac OSX users have recommended that
+          Mac OSX users use the shell command <span class="codefrag">tar -xzf</span> instead.
+        </p>
+</div>
+    
+<a name="standalone-start"></a>
+<h2 class="underlined_10">Starting FOP as a Standalone Application</h2>
+<div class="section">
+<a name="fop-script"></a>
+<h3 class="underlined_5">Using the fop script or batch file</h3>
+<p>
+        The usual and recommended practice for starting FOP from the command line is to run the
+        batch file fop.bat (Windows) or the shell script fop (Unix/Linux).
+        These scripts require that the environment variable JAVA_HOME be
+        set to a path pointing to the appropriate Java installation on your system. Macintosh OSX
+        includes a Java environment as part of its distribution. We are told by Mac OSX users that
+        the path to use in this case is <span class="codefrag">/Library/Java/Home</span>. <strong>Caveat:</strong>
+        We suspect that, as Apple releases new Java environments and as FOP upgrades the minimum
+        Java requirements, the two will inevitably not match on some systems. Please see
+        <a class="external" href="http://developer.apple.com/java/faq">Java on Mac OSX FAQ</a> for information as
+        it becomes available.
+      </p>
+<pre class="code">
+USAGE
+Fop [options] [-fo|-xml] infile [-xsl file] [-awt|-pdf|-mif|-rtf|-tiff|-png|-pcl|-ps|-txt|-at [mime]|-print] &lt;outfile&gt;
+ [OPTIONS]
+  -version          print FOP version and exit
+  -d                debug mode
+  -x                dump configuration settings
+  -q                quiet mode
+  -c cfg.xml        use additional configuration file cfg.xml
+  -l lang           the language to use for user information
+  -nocs             disable complex script features
+  -r                relaxed/less strict validation (where available)
+  -dpi xxx          target resolution in dots per inch (dpi) where xxx is a number
+  -s                for area tree XML, down to block areas only
+  -v                run in verbose mode (currently simply print FOP version and continue)
+
+  -o [password]     PDF file will be encrypted with option owner password
+  -u [password]     PDF file will be encrypted with option user password
+  -noprint          PDF file will be encrypted without printing permission
+  -nocopy           PDF file will be encrypted without copy content permission
+  -noedit           PDF file will be encrypted without edit content permission
+  -noannotations    PDF file will be encrypted without edit annotation permission
+  -nofillinforms    PDF file will be encrypted without fill in forms permission
+  -noaccesscontent  PDF file will be encrypted without extract text and graphics permission
+  -noassembledoc    PDF file will be encrypted without assemble the document permission
+  -noprinthq        PDF file will be encrypted without print high quality permission
+  -a                enables accessibility features (Tagged PDF etc., default off)
+  -pdfprofile prof  PDF file will be generated with the specified profile
+                    (Examples for prof: PDF/A-1b or PDF/X-3:2003)
+
+  -conserve         enable memory-conservation policy (trades memory-consumption for disk I/O)
+                    (Note: currently only influences whether the area tree is serialized.)
+
+  -cache            specifies a file/directory path location
+  -flush            flushes the current font cache file
+
+ [INPUT]
+  infile            xsl:fo input file (the same as the next)
+                    (use '-' for infile to pipe input from stdin)
+  -fo  infile       xsl:fo input file
+  -xml infile       xml input file, must be used together with -xsl
+  -atin infile      area tree input file
+  -ifin infile      intermediate format input file
+  -imagein infile   image input file (piping through stdin not supported)
+  -xsl stylesheet   xslt stylesheet
+
+  -param name value &lt;value&gt; to use for parameter &lt;name&gt; in xslt stylesheet
+                    (repeat '-param name value' for each parameter)
+
+  -catalog          use catalog resolver for input XML and XSLT files
+ [OUTPUT]
+  outfile           input will be rendered as PDF into outfile
+                    (use '-' for outfile to pipe output to stdout)
+  -pdf outfile      input will be rendered as PDF (outfile req'd)
+  -pdfa1b outfile   input will be rendered as PDF/A-1b compliant PDF
+                    (outfile req'd, same as "-pdf outfile -pdfprofile PDF/A-1b")
+  -awt              input will be displayed on screen
+  -rtf outfile      input will be rendered as RTF (outfile req'd)
+  -pcl outfile      input will be rendered as PCL (outfile req'd)
+  -ps outfile       input will be rendered as PostScript (outfile req'd)
+  -afp outfile      input will be rendered as AFP (outfile req'd)
+  -tiff outfile     input will be rendered as TIFF (outfile req'd)
+  -png outfile      input will be rendered as PNG (outfile req'd)
+  -txt outfile      input will be rendered as plain text (outfile req'd)
+  -at [mime] out    representation of area tree as XML (outfile req'd)
+                    specify optional mime output to allow the AT to be converted
+                    to final format later
+  -if [mime] out    representation of document in intermediate format XML (outfile req'd)
+                    specify optional mime output to allow the IF to be converted
+                    to final format later
+  -print            input file will be rendered and sent to the printer
+                    see options with "-print help"
+  -out mime outfile input will be rendered using the given MIME type
+                    (outfile req'd) Example: "-out application/pdf D:\out.pdf"
+                    (Tip: "-out list" prints the list of supported MIME types)
+  -svg outfile      input will be rendered as an SVG slides file (outfile req'd)
+                    Experimental feature - requires additional fop-sandbox.jar.
+
+  -foout outfile    input will only be XSL transformed. The intermediate
+                    XSL-FO file is saved and no rendering is performed.
+                    (Only available if you use -xml and -xsl parameters)
+
+
+ [Examples]
+  fop foo.fo foo.pdf
+  fop -fo foo.fo -pdf foo.pdf (does the same as the previous line)
+  fop -xml foo.xml -xsl foo.xsl -pdf foo.pdf
+  fop -xml foo.xml -xsl foo.xsl -foout foo.fo
+  fop -xml - -xsl foo.xsl -pdf -
+  fop foo.fo -mif foo.mif
+  fop foo.fo -rtf foo.rtf
+  fop foo.fo -print
+  fop foo.fo -awt</pre>
+<p>
+        PDF encryption is only available if FOP was compiled with encryption support
+        <strong>and</strong> if compatible encryption support is available at run time.
+        Currently, only the JCE is supported. Check the <a href="pdfencryption.html">Details</a>.
+      </p>
+<a name="your-own-script"></a>
+<h3 class="underlined_5">Writing your own script</h3>
+<p>FOP's entry point for your own scripts is the class
+<span class="codefrag">org.apache.fop.cli.Main</span>. The general pattern for the
+        command line is: <span class="codefrag">java -classpath &lt;CLASSPATH&gt;
+        org.apache.fop.cli.Main &lt;arguments&gt;</span>. The arguments
+        consist of the options and infile and outfile specifications
+        as shown above for the standard scripts. You may wish to review
+        the standard scripts to make sure that
+        you get your environment properly configured.
+        </p>
+<a name="jar-option"></a>
+<h3 class="underlined_5">Running with java's -jar option</h3>
+<p>
+        As an alternative to the start scripts you can run <span class="codefrag">java
+        -jar path/to/build/fop.jar &lt;arguments&gt;</span>, relying on
+        FOP to build the classpath for running FOP dynamically, see <a href="#dynamical-classpath">below</a>. If you use hyphenation,
+        you must put <span class="codefrag">fop-hyph.jar</span> in the <span class="codefrag">lib</span>
+        directory.
+      </p>
+<p>You can also run <span class="codefrag">java -jar path/to/fop.jar
+      &lt;arguments&gt;</span>, relying on the <span class="codefrag">Class-Path</span>
+      entry in the manifest file. This works if you put
+      <span class="codefrag">fop.jar</span> and all jar files from the <span class="codefrag">lib</span>
+      directory in a single directory. If you use hyphenation, you
+      must also put <span class="codefrag">fop-hyph.jar</span> in that directory.</p>
+<p>In both cases the arguments consist of the options and
+        infile and outfile specifications as shown above for the
+        standard scripts.</p>
+<a name="dynamical-classpath"></a>
+<h3 class="underlined_5">FOP's dynamical classpath construction</h3>
+<p>If FOP is started without a proper classpath, it tries to
+          add its dependencies dynamically. If the system property
+          <span class="codefrag">fop.home</span> contains the name of a directory, then
+          FOP uses that directory as the base directory for its
+          search. Otherwise the current working directory is the base
+          directory. If the base directory is called <span class="codefrag">build</span>,
+          then its parent directory becomes the base directory.</p>
+<p>FOP expects to find <span class="codefrag">fop.jar</span> in the
+          <span class="codefrag">build</span> subdirectory of the base directory, and
+          adds it to the classpath. Subsequently FOP adds all
+          <span class="codefrag">jar</span> files in the lib directory to the
+          classpath. The lib directory is either the <span class="codefrag">lib</span>
+          subdirectory of the base directory, or, if that does not
+          exist, the base directory itself.</p>
+<p>If the system property <span class="codefrag">fop.optional.lib</span>
+          contains the name of a directory, then all <span class="codefrag">jar</span>
+          files in that directory are also added to the classpath. See
+          the methods <span class="codefrag">getJARList</span> and
+          <span class="codefrag">checkDependencies</span> in
+          <span class="codefrag">org.apache.fop.cli.Main</span>.</p>
+</div>
+    
+<a name="check-input"></a>
+<h2 class="underlined_10">Using Xalan to Check XSL-FO Input</h2>
+<div class="section">
+<p>
+        FOP sessions that use -xml and -xsl input instead of -fo input are actually
+        controlling two distinct conversions: Tranforming XML to XSL-FO, then formatting
+        the XSL-FO to PDF (or another FOP output format).
+        Although FOP controls both of these processes, the first is included merely as
+        a convenience and for performance reasons.
+        Only the second is part of FOP's core processing.
+        If a user has a problem running FOP, it is important to determine which of these
+        two processes is causing the problem.
+        If the problem is in the first process, the user's stylesheet is likely the cause.
+        The FOP development team does not have resources to help with stylesheet issues,
+        although we have included links to some useful
+        <a href="../resources.html#specs">Specifications</a> and
+        <a href="../resources.html#articles">Books/Articles</a>.
+        If the problem is in the second process, FOP may have a bug or an unimplemented
+        feature that does require attention from the FOP development team.
+      </p>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">The user is always responsible to provide correct XSL-FO code to FOP.</div>
+</div>
+<p>
+        In the case of using -xml and -xsl input, although the user is responsible for
+        the XSL-FO code that is FOP's input, it is not visible to the user. To make the
+        intermediate FO file visible, the FOP distribution includes the "-foout" option
+        which causes FOP to run only the first (transformation) step, and write the
+        results to a file. (See also the Xalan command-line below)
+      </p>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">
+        When asking for help on the FOP mailing lists, <em>never</em> attach XML and
+        XSL to illustrate the issue. Always run the XSLT step (-foout) and send the
+        resulting XSL-FO file instead. Of course, be sure that the XSL-FO file is
+        correct before sending it.
+      </div>
+</div>
+<p>
+        The -foout option works the same way as if you would call the
+        <a class="external" href="http://xml.apache.org/xalan-j/commandline.html">Xalan command-line</a>:
+      </p>
+<p>
+        
+<span class="codefrag">java org.apache.xalan.xslt.Process -IN xmlfile -XSL file -OUT outfile</span>
+      
+</p>
+<p>
+        Note that there are some subtle differences between the FOP and Xalan command-lines.
+      </p>
+</div>
+    
+<a name="memory"></a>
+<h2 class="underlined_10">Memory Usage</h2>
+<div class="section">
+<p>
+        FOP can consume quite a bit of memory, even though this has been continually improved.
+        This is partly inherent to the formatting process and partly caused by implementation choices.
+        All FO processors currently on the market have memory problems with certain layouts.
+      </p>
+<p>
+        If you are running out of memory when using FOP, here are some ideas that may help:
+      </p>
+<ul>
+        
+<li>
+          Increase memory available to the JVM. See
+          <a class="external" href="http://java.sun.com/j2se/1.4/docs/tooldocs/solaris/java.html">the -Xmx option</a>
+          for more information.
+          <div class="warning">
+<div class="label">Warning</div>
+<div class="content">
+            It is usually unwise to increase the memory allocated to the JVM beyond the amount of
+            physical RAM, as this will generally cause significantly slower performance.
+          </div>
+</div>
+        
+</li>
+        
+<li>
+          Avoid forward references.
+          Forward references are references to some later part of a document.
+          Examples include page number citations which refer to pages which follow the citation,
+          tables of contents at the beginning of a document, and page numbering schemes that
+          include the total number of pages in the document
+          (<a href="../faq.html#pagenum">"page N of TOTAL"</a>).
+          Forward references cause all subsequent pages to be held in memory until the reference
+          can be resolved, i.e. until the page with the referenced element is encountered.
+          Forward references may be required by the task, but if you are getting a memory
+          overflow, at least consider the possibility of eliminating them.
+          A table of contents could be replaced by PDF bookmarks instead or moved to the end of
+          the document (reshuffle the paper could after printing).
+        </li>
+        
+<li>
+          Avoid large images, especially if they are scaled down.
+          If they need to be scaled, scale them in another application upstream from FOP.
+          For many image formats, memory consumption is driven mainly by the size of the image
+          file itself, not its dimensions (width*height), so increasing the compression rate
+          may help.
+        </li>
+        
+<li>
+          Use multiple page sequences.
+          FOP starts rendering after the end of a page sequence is encountered.
+          While the actual rendering is done page-by-page, some additional memory is
+          freed after the page sequence has been rendered.
+          This can be substantial if the page sequence contains lots of FO elements.
+        </li>
+      
+</ul>
+</div>
+    
+<a name="problems"></a>
+<h2 class="underlined_10">Problems</h2>
+<div class="section">
+<p>If you have problems running FOP, please see the <a href="../gethelp.html">"How to get Help" page</a>.</p>
+</div>
+  
+<span class="version">$Revision$</span>
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         1999-2012 <a href="http://www.apache.org/licenses/">The Apache Software Foundation. Licensed under Apache License 2.0</a>
+<br>
+    Apache, Apache FOP, the Apache feather logo, and the Apache FOP
+    logos are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+  </div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

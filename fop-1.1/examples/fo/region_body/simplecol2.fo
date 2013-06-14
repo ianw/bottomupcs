@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" >
+
+  <!-- defines page layout -->
+  <fo:layout-master-set >
+
+    <!-- layout for the first page -->
+    <fo:simple-page-master master-name="only"
+        page-height="11in"
+        page-width="8.5in"
+        margin-top="1in"
+        margin-bottom="1in"
+        margin-left="0.75in"
+        margin-right="0.75in">
+        <fo:region-body
+            margin-top="1in" margin-bottom="1in"
+            column-count="2" column-gap="0.25in"/>
+        <fo:region-before extent="1in" />
+        <fo:region-after extent="1in" />
+    </fo:simple-page-master>
+
+  </fo:layout-master-set>
+
+  <!-- actual layout -->
+  <fo:page-sequence master-reference="only" >
+    <fo:static-content flow-name="xsl-region-before" >
+      <fo:block  font-size="16pt"
+                font-family="sans-serif"
+                line-height="normal"
+                text-align="start"
+        color="blue">Columns in FOP</fo:block>
+  </fo:static-content>
+
+    <fo:static-content flow-name="xsl-region-after" >
+      <fo:block  font-size="10pt"
+                font-family="sans-serif"
+                line-height="12pt"
+        space-before.optimum="6pt"
+                text-align="end"
+        color="blue">Page #</fo:block>
+  </fo:static-content>
+
+    <fo:flow flow-name="xsl-region-body" >
+      <!-- Block 0 -->
+      <fo:block  font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                text-align="start"
+        background-color="yellow"
+        span="none">
+    <fo:inline color="green" >Block 0:</fo:inline>
+        The Extensible Markup Language (XML) is a subset of SGML that is completely described in this document. Its goal is to
+        enable generic SGML to be served, received, and processed on the Web in the way that is now possible with HTML. XML
+        has been designed for ease of implementation and for interoperability with both SGML and HTML. For further information
+        read normal.pdf. XML has associated with it a great number of other standards, most of them under W3C (World-Wide
+    Web Consortium) auspices. Among these are XML Namespaces, XML Pointer, XPath, XSLT, XHTML, SVG, RELAX, SOAP, and any
+    number of others. This file has been prepared using formatting objects, an XML vocabulary described in the XSL
+    specification of October 18, 2000. Formatting objects are used to specify pagination and composition, and are
+    intended for high-quality, precision layout-driven formatting.
+      </fo:block>
+
+      <!-- Block 1 -->
+      <fo:block  font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                text-align="start"
+        background-color="yellow"
+        span="none">
+    <fo:inline color="green" >Block 1:</fo:inline>
+        The Extensible Markup Language (XML) is a subset of SGML that is completely described in this document. Its goal is to
+        enable generic SGML to be served, received, and processed on the Web in the way that is now possible with HTML. XML
+        has been designed for ease of implementation and for interoperability with both SGML and HTML. For further information
+        read normal.pdf. XML has associated with it a great number of other standards, most of them under W3C (World-Wide
+    Web Consortium) auspices. Among these are XML Namespaces, XML Pointer, XPath, XSLT, XHTML, SVG, RELAX, SOAP, and any
+    number of others. This file has been prepared using formatting objects, an XML vocabulary described in the XSL
+    specification of October 18, 2000. Formatting objects are used to specify pagination and composition, and are
+    intended for high-quality, precision layout-driven formatting.
+      </fo:block>
+
+      <!-- Block 2 -->
+      <fo:block  font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                text-align="start"
+        background-color="yellow"
+        span="none">
+    <fo:inline color="green" >Block 2:</fo:inline>
+        The Extensible Markup Language (XML) is a subset of SGML that is completely described in this document. Its goal is to
+        enable generic SGML to be served, received, and processed on the Web in the way that is now possible with HTML. XML
+        has been designed for ease of implementation and for interoperability with both SGML and HTML. For further information
+        read normal.pdf.
+      </fo:block>
+
+      <!-- Block 3 -->
+      <fo:block  font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                text-align="start"
+        background-color="yellow"
+        span="none">
+    <fo:inline color="green" >Block 3:</fo:inline>
+        The Extensible Markup Language (XML) is a subset of SGML that is completely described in this document. Its goal is to
+        enable generic SGML to be served, received, and processed on the Web in the way that is now possible with HTML. XML
+        has been designed for ease of implementation and for interoperability with both SGML and HTML. For further information
+        read normal.pdf.
+      </fo:block>
+
+      <!-- Block 4 -->
+      <fo:block  font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                text-align="start"
+        background-color="yellow"
+        span="all">
+    <fo:inline color="red" >Block 4:</fo:inline>
+        The Extensible Markup Language (XML) is a subset of SGML that is completely described in this document. Its goal is to
+        enable generic SGML to be served, received, and processed on the Web in the way that is now possible with HTML. XML
+        has been designed for ease of implementation and for interoperability with both SGML and HTML. For further information
+        read normal.pdf.
+      </fo:block>
+
+      <!-- Block 5 -->
+          <fo:block  font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                text-align="start"
+        background-color="yellow"
+        span="none">
+    <fo:inline color="green" >Block 5:</fo:inline>
+        The Extensible Markup Language (XML) is a subset of SGML that is completely described in this document. Its goal is to
+        enable generic SGML to be served, received, and processed on the Web in the way that is now possible with HTML. XML
+        has been designed for ease of implementation and for interoperability with both SGML and HTML. For further information
+        read normal.pdf.
+      </fo:block>
+
+      <!-- Block 6 -->
+      <fo:block  font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                text-align="start"
+        background-color="yellow"
+        span="none">
+    <fo:inline color="green" >Block 6:</fo:inline>
+        The Extensible Markup Language (XML) is a subset of SGML that is completely described in this document. Its goal is to
+        enable generic SGML to be served, received, and processed on the Web in the way that is now possible with HTML. XML
+        has been designed for ease of implementation and for interoperability with both SGML and HTML. For further information
+        read normal.pdf. XML has associated with it a great number of other standards, most of them under W3C (World-Wide
+    Web Consortium) auspices. Among these are XML Namespaces, XML Pointer, XPath, XSLT, XHTML, SVG, RELAX, SOAP, and any
+    number of others. This file has been prepared using formatting objects, an XML vocabulary described in the XSL
+    specification of October 18, 2000. Formatting objects are used to specify pagination and composition, and are
+    intended for high-quality, precision layout-driven formatting.
+      </fo:block>
+
+      <!-- Block 7 -->
+      <fo:block  font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                text-align="start"
+        background-color="yellow"
+        span="all">
+    <fo:inline color="red" >Block 7:</fo:inline>
+        The Extensible Markup Language (XML) is a subset of SGML that is completely described in this document. Its goal is to
+        enable generic SGML to be served, received, and processed on the Web in the way that is now possible with HTML. XML
+        has been designed for ease of implementation and for interoperability with both SGML and HTML. For further information
+        read normal.pdf. XML has associated with it a great number of other standards, most of them under W3C (World-Wide
+    Web Consortium) auspices. Among these are XML Namespaces, XML Pointer, XPath, XSLT, XHTML, SVG, RELAX, SOAP, and any
+    number of others. This file has been prepared using formatting objects, an XML vocabulary described in the XSL
+    specification of October 18, 2000. Formatting objects are used to specify pagination and composition, and are
+    intended for high-quality, precision layout-driven formatting.
+      </fo:block>
+
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

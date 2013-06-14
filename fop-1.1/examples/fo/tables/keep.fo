@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master   master-name="first"
+          margin-right="1.5cm"
+          margin-left="1.5cm"
+          margin-bottom="2cm"
+          margin-top="1cm"
+          page-width="21cm"
+          page-height="17cm">
+      <fo:region-body margin-top="1cm"/>
+      <fo:region-before extent="1cm"/>
+      <fo:region-after extent="1.5cm"/>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+
+  <fo:page-sequence master-reference="first">
+    <fo:static-content flow-name="xsl-region-before">
+      <fo:block line-height="14pt" font-size="10pt"
+    text-align="end">table examples</fo:block>
+    </fo:static-content>
+    <fo:static-content flow-name="xsl-region-after">
+      <fo:block line-height="14pt" font-size="10pt"
+    text-align="end">Page <fo:page-number/></fo:block>
+    </fo:static-content>
+
+    <fo:flow flow-name="xsl-region-body">
+
+      <fo:block space-before.optimum="3pt" space-after.optimum="15pt">
+      Tests for keeps on table rows and the occurance of page breaks.
+      </fo:block>
+
+      <fo:block space-before.optimum="280pt" space-after.optimum="15pt">
+      Table 1: basic keep with next
+      </fo:block>
+
+      <fo:table border-width="0.5pt" border-color="red" table-layout="fixed" width="100%">
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+
+    <fo:table-body>
+    <fo:table-row border-width="0.5pt" keep-with-next="always">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        first row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        keep with
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        next
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        second row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        normal
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before.optimum="280pt" space-after.optimum="15pt">
+      Table 1: basic keep with previous
+      </fo:block>
+
+      <fo:table border-width="0.5pt" border-color="red" table-layout="fixed" width="100%">
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+
+    <fo:table-body>
+    <fo:table-row border-width="0.5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        first row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        normal
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt" keep-with-previous="always">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        second row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        keep with
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        previous
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before.optimum="270pt" space-after.optimum="15pt">
+      Table 1: basic keep with next and keep with previous
+      </fo:block>
+
+      <fo:table border-width="0.5pt" border-color="red" table-layout="fixed" width="100%">
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+
+    <fo:table-body>
+    <fo:table-row border-width="0.5pt" keep-with-next="always">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        first row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        keep with
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        next
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        second row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        normal
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt" keep-with-previous="always">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        third row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        keep with
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        previous
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before.optimum="200pt" space-after.optimum="15pt">
+      Table 1: basic multiple keep with next after normal row
+      </fo:block>
+
+      <fo:table border-width="0.5pt" border-color="red" table-layout="fixed" width="100%">
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+
+    <fo:table-body>
+    <fo:table-row border-width="0.5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        normal
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt" keep-with-next="always">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        keep with
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        next
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt" keep-with-next="always">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        keep with
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        next
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt" keep-with-next="always">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        keep with
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        next
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt" keep-with-next="always">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        keep with
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        next
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        normal
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        normal
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before.optimum="160pt" space-after.optimum="15pt">
+      Table 1: basic multiple keep (next and previous) after normal row
+      </fo:block>
+
+      <fo:table border-width="0.5pt" border-color="red" table-layout="fixed" width="100%">
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="6cm"/>
+
+    <fo:table-body>
+    <fo:table-row border-width="0.5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        normal
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt" keep-with-next="always">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        keep with
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        next
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt" keep-with-next="always">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        keep with
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        next
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        normal
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt" keep-with-next="always" keep-with-previous="always">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        keep with
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        next and previous
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        normal
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        normal
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before.optimum="160pt" space-after.optimum="15pt">
+      Table 1: basic multiple keep with next after normal row with normal row in middle
+      </fo:block>
+
+      <fo:table border-width="0.5pt" border-color="red" table-layout="fixed" width="100%">
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="3cm"/>
+  <fo:table-column column-width="6cm"/>
+
+    <fo:table-body>
+    <fo:table-row border-width="0.5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        normal
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt" keep-with-next="always">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        keep with
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        next
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt" keep-with-next="always">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        keep with
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        next
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        normal
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt" keep-with-next="always">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        keep with
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        next
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        normal
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row border-width="0.5pt">
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        normal
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center">
+        row
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

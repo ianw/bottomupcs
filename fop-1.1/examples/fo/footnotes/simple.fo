@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+<fo:layout-master-set>
+    <fo:simple-page-master master-name="one"
+            margin-right="0.5cm"
+            margin-left="1.5cm"
+            margin-bottom="2cm"
+            margin-top="0cm"
+            page-width="21cm"
+            page-height="20cm">
+        <fo:region-body margin-bottom="2cm" margin-top="2cm"/>
+        <fo:region-before extent="0.5cm"/>
+        <fo:region-after extent="0.5cm"/>
+    </fo:simple-page-master>
+</fo:layout-master-set>
+
+<fo:page-sequence master-reference="one">
+<fo:flow flow-name="xsl-region-body">
+
+<fo:block space-after.optimum="10pt" font-weight="bold" font-size="16pt" text-align="center">
+  Footnotes
+</fo:block>
+
+<fo:block color="red">
+  The <fo:footnote>
+  <fo:inline font-weight="bold">footnote<fo:inline font-size="6pt" vertical-align="super">1</fo:inline></fo:inline>
+  <fo:footnote-body>
+      <fo:block color="maroon">
+          1. A footnote is text placed at the bottom of the current or the next page.
+      </fo:block>
+  </fo:footnote-body>
+  </fo:footnote>
+   at the bottom of the page.
+</fo:block>
+<fo:block color="green">
+  The <fo:footnote>
+  <fo:inline font-weight="bold">second footnote<fo:inline font-size="6pt" vertical-align="super">2</fo:inline></fo:inline>
+  <fo:footnote-body>
+      <fo:block color="darkgreen">
+          2. Another footnote with a bit more text.
+      </fo:block>
+  </fo:footnote-body>
+  </fo:footnote>
+   at the bottom of the page after the other footnote.
+</fo:block>
+<fo:block space-before.optimum="200pt" color="grey">
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+This text is used to show the body region area.
+</fo:block>
+
+<fo:block break-before="page">
+  This is for testing if a footnote cannot fit with the footnote
+  reference text.
+</fo:block>
+<fo:block color="grey" space-before.optimum="300pt">
+Some filler text with no other purpose.
+Some filler text with no other purpose.
+Some filler text with no other purpose.
+Some filler text with no other purpose.
+Some filler text with no other purpose.
+Some filler text with no other purpose.
+Some filler text with no other purpose.
+Some filler text with no other purpose.
+</fo:block>
+<fo:block color="blue">
+  This <fo:footnote>
+  <fo:inline font-weight="bold">footnote</fo:inline>
+  <fo:footnote-body>
+      <fo:block color="darkblue">
+          A footnote with too much text to fit on the same page as the reference. Also the
+          reference is in the same place as the conditional footnote reference text.
+      </fo:block>
+  </fo:footnote-body>
+  </fo:footnote>
+   is at the bottom of the page where the conditional footnote reference area is.
+
+</fo:block>
+
+<fo:block break-before="page">
+  This page also has a footnote and should have the footnote from the last page.
+</fo:block>
+<fo:block color="grey" space-before.optimum="150pt">
+More boring filler text.
+More boring filler text.
+More boring filler text.
+</fo:block>
+<fo:block color="fuchsia">
+  This <fo:footnote>
+  <fo:inline font-weight="bold">footnote</fo:inline>
+  <fo:footnote-body>
+      <fo:block color="purple">
+          Another footnote.
+      </fo:block>
+  </fo:footnote-body>
+  </fo:footnote>
+   is at the bottom of the page after the footnote from the previous page.
+
+</fo:block>
+
+
+</fo:flow>
+</fo:page-sequence>
+</fo:root>

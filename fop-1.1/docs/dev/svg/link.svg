@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- $Id: link.svg 426576 2006-07-28 15:44:37Z jeremias $ -->
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<g>
+
+<a xlink:href="#svgView(viewBox(110,110,80,80))">
+<rect x="10" y="10" width="80" height="80" style="fill:darkred;stroke:black;stroke-width:3"/>
+<text x="15" y="60" style="font-size:18;fill:green">GREEN</text>
+</a>
+
+<a xlink:href="http://xml.apache.org/fop/">
+<rect x="110" y="10" width="80" height="80" style="fill:lightblue;stroke:black;stroke-width:3"/>
+<text x="130" y="60" style="font-size:18;fill:blue">FOP</text>
+</a>
+
+<a xlink:href="images.svg#svgView(viewBox(0,0,200,200))">
+<rect x="10" y="110" width="80" height="80" style="fill:yellow;stroke:black;stroke-width:3"/>
+<text x="20" y="150" style="font-size:14;fill:purple">Another</text>
+<text x="35" y="165" style="font-size:14;fill:purple">file</text>
+</a>
+
+<a xlink:href="#svgView(viewBox(10,10,80,80))">
+<rect x="110" y="110" width="80" height="80" style="fill:darkgreen;stroke:black;stroke-width:3"/>
+<text x="130" y="160" style="font-size:18;fill:red">RED</text>
+</a>
+
+</g>
+
+</svg>
+

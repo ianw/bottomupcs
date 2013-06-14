@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: examples.xml 1357883 2012-07-05 20:29:53Z gadams $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Apache&#8482; FOP Examples</title>
+    <version>$Revision: 1357883 $</version>
+  </header>
+  <body>
+    <section>
+      <title>Example Documents Using Apache&#8482; FOP</title>
+      <p>
+        These examples have been rendered using Apache&#8482; FOP:
+      </p>
+    <table>
+      <caption>Generated examples</caption>
+      <tr>
+        <th colspan="1" rowspan="1">Description</th>
+        <th colspan="1" rowspan="1">XSL-FO file</th>
+        <th colspan="1" rowspan="1">PDF result</th>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1">default font characters</td>
+        <td colspan="1" rowspan="1"><link href="fo/fonts.fo">fonts.fo</link></td>
+        <td colspan="1" rowspan="1"><link href="fo/fonts.pdf">fonts.pdf</link></td>
+      </tr>
+    </table>
+    <p>Other basic examples on the use of XSL-FO can be found in the FOP distribution in
+       the subdirectory examples/fo. You can start transformation of all fo files into pdf
+       files by running ant in this directory (only source distribution). The resulting test
+       files can be found in examples/fo/tests
+    </p>
+    <p>At the moment the following files are part of the distribution:</p>
+    <ul>
+      <li>simple.fo - a very simple file which gives use a first impression of the structure of an XSL-FO file
+      </li>
+      <li>normal.fo - a simple file showing the use of a 2 level of headings, normal text and a header.
+      </li>
+      <li>table.fo - some table examples
+      </li>
+      <li>list.fo - a short tutorial how to use list fo's and properties
+      </li>
+      <li>images.fo - shows how to embed GIF and JPEG images into the XSL-FO file using external-graphic.
+      </li>
+      <li>border.fo - a not so simple example how to use borders in tables
+      </li>
+      <li>extensive.fo - a longer test file containing a lot of different flow objects and properties.
+          A good candidate to test your bugfix or new FOP code.
+      </li>
+      <li>leader.fo - shows different uses of fo:leader, p.e. as rule or in a table of content
+      </li>
+      <li>normalex.fo - shows the use of computed property values
+      </li>
+      <li>inhprop.fo - shows the use of inherited property values
+      </li>
+      <li>instream.fo - shows the use of fo:instream-foreign-object together with SVG
+      </li>
+      <li>textdeko.fo - shows the use of the property text-decoration
+      </li>
+      <li>readme.fo - uses an old version of FOP documentation for a longer example
+      </li>
+    </ul>
+      <p>Also, in the directory examples/fo/pagination you will find a suite of examples showing the use
+          of XSL-FO pagination.
+      </p>
+      <p>
+Developers will find the first steps to a test suite for all implemented
+formatting objects and properties in test/xml in the source distribution.
+      </p>
+    </section>
+          <section>
+            <title>Images Examples</title>
+            <p>
+Embedding images in FO:
+            </p>
+  <table>
+    <caption>Images in FO</caption>
+    <tr>
+      <th colspan="1" rowspan="1">description</th>
+      <th colspan="1" rowspan="1">fo file</th>
+      <th colspan="1" rowspan="1">pdf result</th>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="1">align in larger viewport</td>
+      <td colspan="1" rowspan="1"><link href="fo/align.fo">align.fo</link></td>
+      <td colspan="1" rowspan="1"><link href="fo/align.pdf">align.pdf</link></td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="1">align in smaller viewport</td>
+      <td colspan="1" rowspan="1"><link href="fo/align2.fo">align2.fo</link></td>
+      <td colspan="1" rowspan="1"><link href="fo/align2.pdf">align2.pdf</link></td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="1">scaling image</td>
+      <td colspan="1" rowspan="1"><link href="fo/size.fo">size.fo</link></td>
+      <td colspan="1" rowspan="1"><link href="fo/size.pdf">size.pdf</link></td>
+    </tr>
+  </table>
+      <p>Look also into the directory examples/fo/svg. There you find some very extensive SVG examples.
+      </p>
+          </section>
+          <section>
+            <title>Instream Foreign Object Examples</title>
+            <p>
+Instream Foreign Object images in FO, there are more on the
+<link href="dev/svg.html">SVG Page</link>:
+            </p>
+  <table>
+    <caption>Embedding instream-foreign-object</caption>
+    <tr>
+      <th colspan="1" rowspan="1">description</th>
+      <th colspan="1" rowspan="1">fo file</th>
+      <th colspan="1" rowspan="1">pdf result</th>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="1">embedding svg in viewport</td>
+      <td colspan="1" rowspan="1"><link href="fo/embed.fo">embed.fo</link></td>
+      <td colspan="1" rowspan="1"><link href="fo/embed.pdf">embed.pdf</link></td>
+    </tr>
+  </table>
+  </section>
+  </body>
+</document>

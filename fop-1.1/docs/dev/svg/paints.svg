@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- $Id: paints.svg 426576 2006-07-28 15:44:37Z jeremias $ -->
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<g>
+
+<text x="20" y="20" style="font-size:18">Paints - Patterns &amp; Gradients</text>
+
+<text x="10" y="35" style="font-size:12">Gradient</text>
+
+<defs>
+        <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" style="stop-color:crimson" />
+                <stop offset="1" style="stop-color:gold" />
+        </linearGradient>
+        <linearGradient id="grad2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" style="stop-color:crimson" />
+                <stop offset="0.4" style="stop-color:purple" />
+                <stop offset="1" style="stop-color:gold" />
+        </linearGradient>
+        <linearGradient id="grad3" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" style="stop-color:crimson" />
+                <stop offset="0.7" style="stop-color:blue" />
+                <stop offset="1" style="stop-color:gold" />
+        </linearGradient>
+        <radialGradient id="rad"
+            fx="20%" fy="30%" rx="10%" ry="30%" r="40%">
+            <stop offset="0" stop-color="gold" />
+            <stop offset="1" stop-color="green" stop-opacity="0.4"/>
+        </radialGradient>
+</defs>
+    <rect x="15" y="40" width="100" height="75" style="fill:url(#grad1)" />
+    <rect x="15" y="117.5" width="100" height="75" style="fill:url(#grad2)" />
+    <rect x="15" y="195" width="100" height="75" style="fill:url(#grad3)" />
+    <rect x="15" y="275" width="100" height="75" style="fill:url(#rad)" />
+
+<text x="120" y="35" style="font-size:12">Pattern</text>
+
+<defs>
+        <pattern id="pat1" x="0" y="0" width=".75" height="50%">
+            <circle cx="10" cy="10" r="10" style="fill:red" />
+            <rect x="10" y="10" width="15" height="15" style="fill:green"/>
+        </pattern>
+        <pattern id="pat2" x="0" y="0" width=".2" height="50%">
+            <circle cx="10" cy="10" r="10" style="fill:red" />
+            <rect x="10" y="10" width="15" height="15" style="fill:green"/>
+        </pattern>
+        <pattern id="pat3" x="0" y="0" width=".3" height="50%" patternTransform="matrix(1, 0.3, -0.5, 1, 5, 10)">
+            <circle cx="10" cy="10" r="10" style="fill:red" />
+            <rect x="10" y="10" width="15" height="15" style="fill:green"/>
+            <text x="5" y="10" style="font-size:10">Patt</text>
+        </pattern>
+        <pattern id="see" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse">
+            <circle cx="10" cy="10" r="10" style="fill:red" />
+            <rect x="10" y="10" width="15" height="15" style="fill:green;fill-opacity:0.5"/>
+        </pattern>
+</defs>
+    <rect x="125" y="40" width="100" height="75" style="fill:url(#pat1)" />
+    <rect x="125" y="117.5" width="100" height="75" style="fill:url(#pat2)" />
+    <rect x="125" y="195" width="100" height="75" style="fill:url(#pat3)" />
+    <rect x="125" y="275" width="100" height="75" style="fill:url(#see)" />
+
+<defs>
+        <pattern id="patgrad1" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="10" cy="10" r="10" style="fill:url(#grad1)" />
+        </pattern>
+        <pattern id="patpat2" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="10" cy="10" r="10" style="fill:url(#pat2)" />
+        </pattern>
+        <pattern id="patimage3" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <image x="0" y="0" width="10" height="10" xlink:href="logo.jpg"/>
+        </pattern>
+</defs>
+
+<text x="230" y="35" style="font-size:12">Pattern in Pattern</text>
+
+    <rect x="235" y="40" width="100" height="75" style="fill:url(#patgrad1)" />
+    <rect x="235" y="117.5" width="100" height="75" style="fill:url(#patpat2)" />
+    <rect x="235" y="195" width="100" height="75" style="fill:url(#patimage3)" />
+
+</g>
+
+</svg>
+

@@ -1,0 +1,379 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.10-dev">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Upgrading from an Earlier Version of Apache&trade; FOP</title>
+<link type="text/css" href="../skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="../skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="../skin/print.css" rel="stylesheet">
+<link type="text/css" href="../skin/profile.css" rel="stylesheet">
+<script src="../skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="../skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="../skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="../favicon.ico">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://xmlgraphics.apache.org/"><img class="logoImage" alt="Apache XML Graphics" src="../images/group-logo.gif" title="Apache XML Graphics is responsible for the creation and maintenance of software for managing the conversion of XML formats to graphical output, and the creation and maintenance of related software components, based on software licensed to the Foundation"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://xmlgraphics.apache.org/fop/"><img class="logoImage" alt="Apache FOP" src="../images/logo.jpg" title="Apache FOP (Formatting Objects Processor) is the world's first output independent formatter. Output formats currently supported include PDF, PCL, PS, SVG, XML (area tree representation), Print, AWT, MIF and TXT. The primary output target is PDF."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="xmlgraphics.apache.org" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="../index.html">Home</a>
+</li>
+<li class="current">
+<a class="selected" href="../1.0/index.html">Version 1.0</a>
+</li>
+<li>
+<a class="unselected" href="../1.1/index.html">Version 1.1</a>
+</li>
+<li>
+<a class="unselected" href="../trunk/index.html">FOP Trunk</a>
+</li>
+<li>
+<a class="unselected" href="../dev/index.html">Development</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">The Apache Software Foundation</a> &gt; <a href="http://xmlgraphics.apache.org/">Apache XML Graphics Project</a><script src="../skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_selected_1.1', '../skin/')" id="menu_selected_1.1Title" class="menutitle" style="background-image: url('../skin/images/chapter_open.gif');">Apache&trade; FOP 1.0</div>
+<div id="menu_selected_1.1" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="../1.0/index.html">About</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/releaseNotes_1.0.html">Release Notes</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/changes_1.0.html">Changes (1.0)</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/knownissues_overview.html">Known Issues</a>
+</div>
+<div class="menupage">
+<div class="menupagetitle">Upgrading</div>
+</div>
+<div onclick="SwitchMenu('menu_1.1.6', '../skin/')" id="menu_1.1.6Title" class="menutitle">Using Apache&trade; FOP</div>
+<div id="menu_1.1.6" class="menuitemgroup">
+<div class="menuitem">
+<a href="../1.0/anttask.html">Ant Task</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/compiling.html">Build</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/configuration.html">Configure</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/embedding.html">Embed</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/running.html">Run</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/servlets.html">Servlets</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.1.7', '../skin/')" id="menu_1.1.7Title" class="menutitle">Features</div>
+<div id="menu_1.1.7" class="menuitemgroup">
+<div class="menuitem">
+<a href="../1.0/accessibility.html">Accessibility</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/events.html">Events</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/extensions.html">Extensions</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/fonts.html">Fonts</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/output.html">Output Targets</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/graphics.html">Graphics</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/hyphenation.html">Hyphenation</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/intermediate.html">Intermediate Format</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/metadata.html">Metadata</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/pdfa.html">PDF/A</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/pdfx.html">PDF/X</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/pdfencryption.html">PDF Encryption</a>
+</div>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="../skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="raw XML" class="xmllink">
+<a class="dida" href="upgrading.xml"><img alt="XML - icon" src="../skin/images/xmldoc.gif" class="skin"><br>
+        XML</a>
+</div>
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="upgrading.pdf"><img alt="PDF -icon" src="../skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<div class="trail">Font size: 
+	          &nbsp;<input value="Reset" class="resetfont" title="Reset text" onclick="ndeSetTextSize('reset'); return false;" type="button">      
+	          &nbsp;<input value="-a" class="smallerfont" title="Shrink text" onclick="ndeSetTextSize('decr'); return false;" type="button">
+	          &nbsp;<input value="+a" class="biggerfont" title="Enlarge text" onclick="ndeSetTextSize('incr'); return false;" type="button">
+</div>
+<h1>Upgrading from an Earlier Version of Apache&trade; FOP</h1>
+<div id="front-matter">
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#important">Important!</a>
+</li>
+<li>
+<a href="#issues">What you need to know when you upgrade!</a>
+</li>
+</ul>
+</div>
+</div>
+    
+<a name="important"></a>
+<h2 class="underlined_10">Important!</h2>
+<div class="section">
+<p>
+        If you're planning to upgrade to the latest Apache&trade; FOP version there are a few very important
+        things to consider:
+      </p>
+<ul>
+        
+<li>
+          More than half of the codebase has been rewritten over the
+          last three years. With version 0.93 the code has reached
+          <strong>production level</strong>, and continues to improve with
+          version 0.94.
+        </li>
+        
+<li>
+          The API of FOP has changed considerably and is not
+          backwards-compatible with versions 0.20.5 and
+          0.91beta. Version 0.92 introduced the <strong>new stable
+          API</strong>.
+        </li>
+        
+<li>
+          Since version 0.92 some deprecated methods which were part
+          of the old API have been removed. If you upgrade from 0.91
+          beta, you will need to adjust your Java code. Similarly if
+          you upgrade from 0.92 and use deprecated methods.
+        </li>
+        
+<li>
+          If you are using a configuration file for version 0.20.5, you have to rebuild it in the new format. The format
+          of the configuration files has changed since version 0.20.5. See conf/fop.xconf for
+          an example configuration file. A XML Schema file can be found under
+          src/foschema/fop-configuration.xsd.
+        </li>
+        
+<li>
+          Beginning with version 0.94 you can skip the generation of
+          font metric files and remove the "font-metrics" attribute
+          in the font configuration. In the unlikely case that due to
+          a bug you still need to use font metrics files you will need
+          to regenerate the font metrics file if yours are from a FOP
+          version before 0.93.
+        </li>
+        
+<li>
+          
+<p>
+            The new code is much more strict about the interpretation of the XSL-FO 1.1 specification.
+            Things that worked fine in version 0.20.5 might start to produce warnings or even errors
+            now. FOP 0.20.5 contains many bugs which have been corrected in the new code.
+          </p>
+          
+<div class="note">
+<div class="label">An example</div>
+<div class="content">
+            While FOP 0.20.5 allowed you to have empty <span class="codefrag">fo:table-cell</span> elements, the new code
+            will complain about that (unless relaxed validation is enabled) because the specification
+            demands at least one block-level element (<span class="codefrag">(%block;)+</span>, see
+            <a class="external" href="http://www.w3.org/TR/xsl/#fo_table-cell">XSL-FO 1.1, 6.7.10</a>)
+            inside an <span class="codefrag">fo:table-cell</span> element.
+          </div>
+</div>
+        
+</li>
+        
+<li>
+          Extensions and Renderers written for version 0.20.5 will not work with the new code! The new FOP
+          extension for <a class="external" href="http://barcode4j.sourceforge.net">Barcode4J</a> is available since
+          January 2007.
+        </li>
+        
+<li>
+          The SVG Renderer and the MIF Handler have not been resurrected, yet! They are currently non-functional
+          and hope for someone to step up and reimplement them.
+        </li>
+      
+</ul>
+</div>
+    
+<a name="issues"></a>
+<h2 class="underlined_10">What you need to know when you upgrade!</h2>
+<div class="section">
+<p>
+        When you use your existing FO files or XML/XSL files which work fine with FOP version
+        0.20.5 against this FOP version some things may not work as expected. The following
+        list will hopefully help you to identify and correct those problems.
+      </p>
+<ul>
+        
+<li>
+          Check the <a href="../compliance.html">Compliance page</a> for the feature causing
+          trouble. It may contain the necessary information to understand and resolve the problem.
+        </li>
+        
+<li>
+          Not all 0.20.5 output formats are supported. PDF and Postscript should be fully supported.
+          See <a href="output.html">Output Targets</a> for a more complete description.
+        </li>
+        
+<li>
+          As stated above empty table cells <span class="codefrag">&lt;fo:table-cell&gt;&lt;/fo:table-cell&gt;</span>
+          are not allowed by the specification. The same applies to empty <span class="codefrag">static-content</span>
+          and <span class="codefrag">block-container</span> elements, for example.
+        </li>
+        
+<li>
+          0.20.5 is not XSL-FO compliant with respect to sizing images (<span class="codefrag">external-graphic</span>)
+          or <span class="codefrag">instream-foreign-object</span>
+          objects. If images or SVGs are sized differently in your outputs with the new FOP version
+          check <a class="external" href="http://issues.apache.org/bugzilla/show_bug.cgi?id=37136">Bug 37136</a>
+          as it contains some hints on what to do. The file
+          <a class="external" href="http://svn.apache.org/viewcvs.cgi/xmlgraphics/fop/trunk/examples/fo/basic/images.fo?view=markup">
+          <span class="codefrag">"examples/fo/basic/images.fo"</span></a> has
+          a number of good examples that show the new, more correct behaviour.
+        </li>
+        
+<li>
+          The <span class="codefrag">fox:outline</span> extension is not implemented in this version anymore.
+          It has been superseded by the new bookmark elements from XSL-FO 1.1.
+        </li>
+      
+</ul>
+</div>
+  
+<span class="version">
+          version 1298724</span>
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         1999-2012 <a href="http://www.apache.org/licenses/">The Apache Software Foundation. Licensed under Apache License 2.0</a>
+<br>
+    Apache, Apache FOP, the Apache feather logo, and the Apache FOP
+    logos are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+  </div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

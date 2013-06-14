@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: tools.xml 1298724 2012-03-09 07:55:31Z cbowditch $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Apache&#8482; FOP Development: Developer Tools</title>
+    <version>$Revision: 1298724 $</version>
+  </header>
+  <body>
+    <p>
+      This page documents items that may be helpful to other developers, 
+      especially to those who are new to Apache&#8482; FOP. Exhaustive treatment of these
+      topics is better suited to other fora, but the information presented 
+      here is intended to deal with FOP-specific issues related to these 
+      tools, especially "gotchas", and to help developers get jump-started.
+    </p>
+    <section id="checklist">
+      <title>Developer Checklist</title>
+      <p>
+        Here is a (probably not comprehensive) list of tools you will need 
+        to be a successful FOP developer:
+      </p>
+      <ul>
+        <li>A java IDE (see <link href="#ide">IDE</link>).</li>
+        <li>A Subversion client (see <link href="#svn">Subversion</link>).</li>
+        <li>Ant (see <link href="../trunk/compiling.html">Building FOP</link>).</li>
+        <li>checkstyle (see <link href="conventions.html#java-checkstyle">Checkstyle</link> on the conventions page).</li>
+        <li>JUnit (see <link href="testing.html#basic">Basic Testing</link>).</li>
+      </ul>
+    </section>
+    <section id="general">
+      <title>General Developer Information</title>
+      <p>
+        See <link href="http://www.apache.org/dev/contributors.html">the Apache Contributors Tech Guide</link>
+        for useful information and links for Apache developers, including help 
+        with tools and procedures.
+      </p>
+    </section>
+    <section id="svn">
+      <title>Subversion (SVN)</title>
+      <section id="svn_general">
+        <title>General</title>
+        <p>
+          Visit <link href="http://xmlgraphics.apache.org/repo.html">Apache XML Graphics Code Repositories</link>
+          for useful information.
+        </p>
+        <p>
+          You will need a SVN client to be able to gain access to the FOP repository. 
+          For general SVN information, visit 
+          <link href="http://subversion.tigris.org">Subversion Home</link>.
+          A comprehensive list of clients for all operating systems and many IDEs 
+          can be found at 
+          <link href="http://subversion.tigris.org/project_links.html">the Subversion Links page</link>.
+          For Microsoft Windows we recommend <link href="http://tortoisesvn.tigris.org">TortoiseSVN</link>.
+          The command-line client that comes with Subversion is also very easy to use.
+        </p>
+      </section>
+      <section id="svn_download">
+        <title>Step-by-step instruction for downloading FOP using the SVN command-line client</title>
+        <p>
+          On the command-line (Windows or Unix), simply run:
+        </p>
+        <source xml:space="preserve"><![CDATA[
+svn co http://svn.apache.org/repos/asf/xmlgraphics/fop/trunk/ fop-trunk
+        ]]></source>
+        <p>
+          This will download the FOP trunk into the directory "fop-trunk".
+        </p>
+      </section>
+      <section id="tortoisesvn_download">
+        <title>Step-by-step instructions for downloading FOP using TortoiseSVN (on Windows)</title>
+        <ul>
+          <li>Create a new, empty directory in a place of your choice.</li>
+          <li>Right-click the new directory and select "SVN Checkout..." from the context menu.</li>
+          <li>Enter <code>http://svn.apache.org/repos/asf/xmlgraphics/fop/trunk/</code> as the URL of the repository.</li>
+          <li>Click "OK" and the download should begin.</li>
+        </ul>
+      </section>
+      <section id="patches">
+        <title>Creating Patches</title>
+        <ul>
+          <li>
+            <code>cd</code> to a directory that contains all of the changes 
+            that you wish to include in the patch. To comprehend the entire 
+            distribution, <code>cd</code> to the top directory where you 
+            checked out the sources.
+          </li>
+          <li>
+            Run: <code>svn up</code> to make sure the diff is created against the latest sources.
+          </li>
+          <li>
+            Run: <code>svn diff &gt;mypatch.diff</code>
+            <br/>This will write the patch to the file "mypatch.diff".
+          </li>
+          <li>If you are running TortoiseSVN, you can select "Create Patch..." in the TortoiseSVN context menu.</li>
+        </ul>
+      </section>
+      <section id="svn-doc">
+        <title>Documentation</title>
+        <ul>
+          <li>[online resource] <jump href="http://subversion.tigris.org">The Subversion Home Page</jump>.</li>
+          <li>[electronic manual] <jump href="http://svnbook.red-bean.com">Version Control with Subversion</jump> (official Subversion manual).
+Note that this manual applies to the command-line version of SVN.</li>
+          <li>[online resource] <jump href="http://subversion.tigris.org/project_links.html">Comprehensive list of links to documentation and Subversion clients and plugins.</jump></li>
+        </ul>
+      </section>
+    </section>
+    <section id="ide">
+      <title>Integrated Development Environments (IDEs)</title>
+      <p>An IDE is not required, but will generally be found to be helpful, especially for serious debugging and refactoring.</p>
+      <p>Borland's JBuilder 7/8 does not support Ant builds unless you have the Enterprise Edition (which is quite expensive). This causes problems with any code that is generated by the Ant build. First, you must run the Ant build before you can use the IDE. Second, when you are editing in the IDE, you must be editing the generated files, which means that you must make any changes to the source files in another editor. This is less serious for development on the trunk, but in the maintenance branch, all source files were "generated".</p>
+      <p>Sun ONE Studio Four does support Ant, but seems to use a built-in version, and as of this writing chokes on the FOP build file, saying that it is not valid. There is awkward because there is no official DTD for Ant, and it may be merely an Ant version issue.</p>
+      <p>Additional notes on setting up FOP within an IDE (ex. Eclipse) in the <fork href="http://wiki.apache.org/xmlgraphics-fop/FOPIDESetupGuide">Wiki</fork>.</p>
+    </section>
+  </body>
+</document>

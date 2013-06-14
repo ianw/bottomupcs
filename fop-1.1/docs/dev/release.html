@@ -1,0 +1,494 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.10-dev">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Apache&trade; FOP Development: Release Mechanics</title>
+<link type="text/css" href="../skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="../skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="../skin/print.css" rel="stylesheet">
+<link type="text/css" href="../skin/profile.css" rel="stylesheet">
+<script src="../skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="../skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="../skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="../favicon.ico">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://xmlgraphics.apache.org/"><img class="logoImage" alt="Apache XML Graphics" src="../images/group-logo.gif" title="Apache XML Graphics is responsible for the creation and maintenance of software for managing the conversion of XML formats to graphical output, and the creation and maintenance of related software components, based on software licensed to the Foundation"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://xmlgraphics.apache.org/fop/"><img class="logoImage" alt="Apache FOP" src="../images/logo.jpg" title="Apache FOP (Formatting Objects Processor) is the world's first output independent formatter. Output formats currently supported include PDF, PCL, PS, SVG, XML (area tree representation), Print, AWT, MIF and TXT. The primary output target is PDF."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="xmlgraphics.apache.org" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="../index.html">Home</a>
+</li>
+<li>
+<a class="unselected" href="../1.0/index.html">Version 1.0</a>
+</li>
+<li>
+<a class="unselected" href="../1.1/index.html">Version 1.1</a>
+</li>
+<li>
+<a class="unselected" href="../trunk/index.html">FOP Trunk</a>
+</li>
+<li class="current">
+<a class="selected" href="../dev/index.html">Development</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">The Apache Software Foundation</a> &gt; <a href="http://xmlgraphics.apache.org/">Apache XML Graphics Project</a><script src="../skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_1.1', '../skin/')" id="menu_1.1Title" class="menutitle">About</div>
+<div id="menu_1.1" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/index.html">Basics</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2', '../skin/')" id="menu_1.2Title" class="menutitle">Design</div>
+<div id="menu_1.2" class="menuitemgroup">
+<div onclick="SwitchMenu('menu_1.2.1', '../skin/')" id="menu_1.2.1Title" class="menutitle">About</div>
+<div id="menu_1.2.1" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/design/index.html">Introduction</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2.2', '../skin/')" id="menu_1.2.2Title" class="menutitle">Core Process</div>
+<div id="menu_1.2.2" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/design/startup.html">Startup</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/parsing.html">XML Parsing</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/fotree.html">FO Tree</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/properties.html">Properties</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/layout.html">Layout</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/breakpos.html">Break Possibility</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/areas.html">Area Tree</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/renderers.html">Renderers</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2.3', '../skin/')" id="menu_1.2.3Title" class="menutitle">Miscellaneous</div>
+<div id="menu_1.2.3" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/design/images.html">Images</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/pdf-library.html">PDF Library</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/svg.html">SVG</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/embedding.html">Embedding</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/extending.html">Extending</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/optimise.html">Optimisations</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/useragent.html">User Agent</a>
+</div>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/xmlgraphics-fop/FOPProjectPages">Unresolved (Wiki)</a>
+</div>
+<div class="menuitem">
+<a href="../dev/svg.html">SVG</a>
+</div>
+<div class="menuitem">
+<a href="../dev/extensions.html">Extensions</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.3', '../skin/')" id="menu_1.3Title" class="menutitle">Develop</div>
+<div id="menu_1.3" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/implement.html">Walk-Thru</a>
+</div>
+<div class="menuitem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;email1=&amp;emailtype1=substring&amp;emailassigned_to1=1&amp;email2=&amp;emailtype2=substring&amp;emailreporter2=1&amp;bugidtype=include&amp;bug_id=&amp;changedin=&amp;votes=&amp;chfieldfrom=&amp;chfieldto=Now&amp;chfieldvalue=&amp;product=Fop&amp;short_desc=%5BPATCH%5D&amp;short_desc_type=allwordssubstr&amp;long_desc=&amp;long_desc_type=allwordssubstr&amp;bug_file_loc=&amp;bug_file_loc_type=allwordssubstr&amp;keywords=&amp;keywords_type=anywords&amp;field0-0-0=noop&amp;type0-0-0=noop&amp;value0-0-0=&amp;namedcmd=Fop+all&amp;newqueryname=fop+patch+queue&amp;tofooter=1&amp;order=Reuse+same+sort+as+last+time">Patch Queue</a>
+</div>
+<div class="menuitem">
+<a href="../dev/conventions.html">Conventions</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.4', '../skin/')" id="menu_1.4Title" class="menutitle">Test</div>
+<div id="menu_1.4" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/testing.html">Testing</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_selected_1.5', '../skin/')" id="menu_selected_1.5Title" class="menutitle" style="background-image: url('../skin/images/chapter_open.gif');">Deploy</div>
+<div id="menu_selected_1.5" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="../dev/doc.html">Doc Mgmt</a>
+</div>
+<div class="menupage">
+<div class="menupagetitle">Release</div>
+</div>
+<div class="menuitem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;email1=&amp;emailtype1=substring&amp;emailassigned_to1=1&amp;email2=&amp;emailtype2=substring&amp;emailreporter2=1&amp;bugidtype=include&amp;bug_id=&amp;changedin=&amp;votes=&amp;chfieldfrom=&amp;chfieldto=Now&amp;chfieldvalue=&amp;product=Fop&amp;short_desc=&amp;short_desc_type=allwordssubstr&amp;long_desc=&amp;long_desc_type=allwordssubstr&amp;bug_file_loc=&amp;bug_file_loc_type=allwordssubstr&amp;keywords=&amp;keywords_type=anywords&amp;field0-0-0=noop&amp;type0-0-0=noop&amp;value0-0-0=&amp;order=bug_severity%2Cpriority%20DESC">Bugs</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.6', '../skin/')" id="menu_1.6Title" class="menutitle">Resources</div>
+<div id="menu_1.6" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/faq.html">FAQs</a>
+</div>
+<div class="menuitem">
+<a href="../dev/tools.html">Tools</a>
+</div>
+<div class="menuitem">
+<a href="http://svn.apache.org/viewvc/xmlgraphics/fop">ViewVC</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.7', '../skin/')" id="menu_1.7Title" class="menutitle">SubPackages</div>
+<div id="menu_1.7" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/rtflib.html">RTFlib</a>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="../skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="raw XML" class="xmllink">
+<a class="dida" href="release.xml"><img alt="XML - icon" src="../skin/images/xmldoc.gif" class="skin"><br>
+        XML</a>
+</div>
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="release.pdf"><img alt="PDF -icon" src="../skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<div class="trail">Font size: 
+	          &nbsp;<input value="Reset" class="resetfont" title="Reset text" onclick="ndeSetTextSize('reset'); return false;" type="button">      
+	          &nbsp;<input value="-a" class="smallerfont" title="Shrink text" onclick="ndeSetTextSize('decr'); return false;" type="button">
+	          &nbsp;<input value="+a" class="biggerfont" title="Enlarge text" onclick="ndeSetTextSize('incr'); return false;" type="button">
+</div>
+<h1>Apache&trade; FOP Development: Release Mechanics</h1>
+<div id="front-matter">
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#intro">Introduction</a>
+</li>
+<li>
+<a href="#checklist">Checklist</a>
+</li>
+<li>
+<a href="#other-checklists">Resources</a>
+</li>
+<li>
+<a href="#announcements">Announcing the release</a>
+</li>
+</ul>
+</div>
+</div>
+    
+<a name="intro"></a>
+<h2 class="underlined_10">Introduction</h2>
+<div class="section">
+<p>This page documents the process of creating a Apache&trade; FOP release. FOP releases are coordinated by some designated member of the team.
+         The purpose of documenting it here is to facilitate consistency, ensure that the process is captured, and to allow others to comment on the process.</p>
+<p>The checklist below is based on a combination of input from from Christian Geisert and Simon Pepping.</p>
+</div>
+    
+<a name="checklist"></a>
+<h2 class="underlined_10">Checklist</h2>
+<div class="section">
+<ul>
+        
+<li>Determine which open bugs must be solved before a release can take place (release critical bugs).
+            Make this bug depend on each release critical bug and write a short argument why the bug is release critical.</li>
+        
+<li>Determine whether this is a Release Candidate or a Release.</li>
+        
+<li>Determine whether further testing is required.</li>
+        
+<li>Commit any outstanding changes</li>
+        
+<li>Create a branch called <span class="codefrag">branches/fop-v_vv</span>
+</li>
+        
+<li>Edit release notes (<span class="codefrag">README</span> and <span class="codefrag">status.xml</span> in the root).</li>
+        
+<li>Add the release to <span class="codefrag">news-data.xml</span>;
+	    remove links to release notes of older versions from this file.</li>
+	
+<li>Update the FAQ (<span class="codefrag">faq.xml</span>) to the new release, e.g., update the answer for "When is the next release planned?".</li>
+	
+<li>Check and update the copyright year in NOTICE and build.xml.</li>
+        
+<li>Update the file <span class="codefrag">doap.rdf</span>, and the files
+		<span class="codefrag">index.xml</span>, <span class="codefrag">site.xml</span>,
+		<span class="codefrag">download.xml</span>, <span class="codefrag">fo.xml</span>,
+		<span class="codefrag">maillist.xml</span>, and <span class="codefrag">quickstartguide.xml</span>
+		in directory <span class="codefrag">xdocs</span> for the new version.</li>
+        
+<li>Update the version numbers in the release column on the
+        compliance page (<span class="codefrag">compliance.xml</span>); update the compliance in the release column
+        to the current state (development column).</li>
+        
+<li>Update version number in <span class="codefrag">build.xml</span> (not to be merged back
+        into trunk).</li>
+        
+<li>Copy trunk documentation directory to a new directory with the new version number, and update the <span class="codefrag">.htaccess</span> file for
+            redirections.</li>
+        
+<li>Copy <span class="codefrag">test/fotree/disabled-testcases.xml</span> and <span class="codefrag">test/layoutengine/disabled-testcases.xml</span> to the
+            new version directory <span class="codefrag">&lt;version&gt;/fotree/disabled-testcases.xml</span> and <span class="codefrag">&lt;version&gt;/layoutengine/disabled-testcases.xml</span>.
+            Copy <span class="codefrag">known-issues.xml</span> to the new version directory. Copy <span class="codefrag">knownissues-overview.xml</span> from the
+            current to the new version directory, and update the <span class="codefrag">xi:include</span> links in it.</li>
+        
+<li>Update the tab names and directories in <span class="codefrag">tabs.xml</span>
+</li>
+        
+<li>Delete the previous version directory.</li>
+	
+<li>Update <span class="codefrag">index.xml</span> in the new version directory.</li>
+	
+<li>Update <span class="codefrag">compiling.xml</span> in the new version directory: change the introduction for trunk to that for a release.</li>
+        
+<li>Build the dist files (<span class="codefrag">build[.sh] dist</span>) and upload them to your web directory on <span class="codefrag">people.apache.org</span>
+</li>
+        
+<li>Ask on <span class="codefrag">fop-dev</span> ML to check the branch and the generated dist files for errors.</li>
+        
+<li>Tag the source tree with the release ID. For example, if the release is 1.0:
+          <span class="codefrag">svn copy https://svn.apache.org/repos/asf/xmlgraphics/fop/branches/fop-1_0 https://svn.apache.org/repos/asf/xmlgraphics/fop/tags/fop-1_0</span>
+</li>
+        
+<li>Make a fresh checkout with the just created tag: <span class="codefrag">svn co https://svn.apache.org/repos/asf/xmlgraphics/fop/tags/fop-1_0</span>
+</li>
+        
+<li>Copy the hyphenation patterns jar file <span class="codefrag">fop-hyph.jar</span> to <span class="codefrag">lib</span> (e.g. from <span class="codefrag">http://sourceforge.net/projects/offo</span>
+</li>
+        
+<li>Alternatively, create a <span class="codefrag">build-local.properties</span> file that points to the above libraries.</li>
+        
+<li>Run <span class="codefrag">build[.sh] dist</span>. Do this using Sun JDK 1.5 or later. A Forrest installation is needed.</li>
+        
+<li>Create signatures. Don't forget to upload your KEY: <span class="codefrag">gpg -a -b --force-v3-sigs fop-1.0-src.tar.gz</span> etc.</li>
+        
+<li>Upload the dist and signature files to your web directory on people.apache.org (An account on minotaur is needed):
+          <span class="codefrag">scp fop-1.0*.tar.gz* chrisg@people.apache.org:public_html/</span>
+</li>
+        
+<li>Check permissions: <span class="codefrag">chmod 664 ... ; chgrp xmlgraphics ...</span>
+</li>
+        
+<li>Add MD5 sums: <span class="codefrag">md5 fop-1.0-src.tar.gz &gt; fop-1.0-src.tar.gz.md5</span> etc.</li>
+        
+<li>Make a test download.</li>
+        
+<li>Start a vote for the release on <span class="codefrag">general@xmlgraphics.apache.org</span>. The message should point
+            to the release files and list the MD5 sums (<span class="codefrag">cat *.md5</span>). The vote should remain open for 72hrs.</li>
+        
+<li>When the release is accepted, copy the release files, their md5 sum files and the signature files to
+        <span class="codefrag">/www/www.apache.org/dist/xmlgraphics/fop/</span> in the subdirectories <span class="codefrag">source</span> and
+        <span class="codefrag">binaries</span>. Create links to all files in the <span class="codefrag">fop</span> directory. Remove the links to the files of
+            the previous version.</li>
+        
+<li>Update <span class="codefrag">HEADER.html</span> and <span class="codefrag">README.html</span> in <span class="codefrag">people.apache.org:/www/www.apache.org/dist/xmlgraphics/fop/</span>.</li>
+        
+<li>Wait 24 hours (for the mirrors to catch up).</li>
+        
+<li>Merge the changes of the subversion release branch back into trunk (not the version number in the build file) and
+            delete the branch.</li>
+        
+<li>Deploy the updated documentation to the FOP website.</li>
+        
+<li>Post announcements on <span class="codefrag">fop-dev</span> and <span class="codefrag">fop-user</span> and other related mailing lists.</li>
+        
+<li>Ask an FOP bugzilla admin to add a bugzilla entry for the new release id, or create an issue at <span class="codefrag">https://issues.apache.org/jira/browse/INFRA</span>.</li>
+        
+<li>Deploy the maven bundle.</li>
+      
+</ul>
+</div>
+    
+<a name="other-checklists"></a>
+<h2 class="underlined_10">Resources</h2>
+<div class="section">
+<p>The following is a sample of some other project release checklists, which might be consulted for ideas:</p>
+<ul>
+        
+<li>
+<a class="external" href="http://svn.apache.org/repos/asf/xmlgraphics/batik/trunk/MAINTAIN">Apache Batik</a>
+</li>
+        
+<li>
+<a class="external" href="http://svn.apache.org/repos/asf/ant/core/trunk/ReleaseInstructions">Apache Ant</a>
+</li>
+        
+<li>
+<a class="external" href="http://jakarta.apache.org/cactus/participating/release_checklist.html">Apache Cactus</a>
+</li>
+      
+</ul>
+<p></p>
+<p>Following are links with information about mirroring:</p>
+<ul>
+        
+<li>
+<a class="external" href="http://www.apache.org/dev/mirrors.html">Apache Mirroring</a>
+</li>
+        
+<li>Stefan Bodewig's <a class="external" href="http://people.apache.org/~bodewig/mirror.html">Making your Downloads Mirrorable</a>
+</li>
+      
+</ul>
+</div>
+    
+<a name="announcements"></a>
+<h2 class="underlined_10">Announcing the release</h2>
+<div class="section">
+<p>Here's a suggested list of places where to announce new FOP releases:</p>
+<ul>
+        
+<li>fop-dev@xmlgraphics.apache.org</li>
+        
+<li>fop-users@xmlgraphics.apache.org</li>
+        
+<li>general@xmlgraphics.apache.org</li>
+        
+<li>general@xml.apache.org</li>
+        
+<li>announce@apache.org (from your apache.org address)</li>
+        
+<li>xsl-list@lists.mulberrytech.com (subscriber-only)</li>
+        
+<li>xsl-fo@yahoogroups.com (subscriber-only)</li>
+        
+<li>www-xsl-fo@w3.org</li>
+        
+<li>docbook-apps@lists.oasis-open.org (subscriber-only)</li>
+        
+<li>dita-users@yahoogroups.com (subscriber-only) (http://dita-ot.sourceforge.net/)</li>
+        
+<li>http://xslfo-zone.com/news/index.jsp</li>
+        
+<li>http://www.w3.org/Style/XSL/</li>
+        
+<li>http://freshmeat.net/projects/fop/</li>
+      
+</ul>
+</div>
+  
+<span class="version">
+          version 1310603</span>
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         1999-2012 <a href="http://www.apache.org/licenses/">The Apache Software Foundation. Licensed under Apache License 2.0</a>
+<br>
+    Apache, Apache FOP, the Apache feather logo, and the Apache FOP
+    logos are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+  </div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

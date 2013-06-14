@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master
+  margin-right="1.5cm"
+  margin-left="1.5cm"
+  margin-bottom="2cm"
+  margin-top="1cm"
+  page-width="21cm"
+  page-height="29.7cm"
+  master-name="first">
+      <fo:region-body margin-top="1cm"/>
+      <fo:region-before extent="1cm"/>
+      <fo:region-after extent="1.5cm"/>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+
+  <fo:page-sequence master-reference="first">
+    <fo:static-content flow-name="xsl-region-before">
+      <fo:block line-height="14pt" font-size="10pt"
+    text-align="end">Plan Extension</fo:block>
+    </fo:static-content>
+    <fo:static-content flow-name="xsl-region-after">
+      <fo:block line-height="14pt" font-size="10pt"
+    text-align="end">Page <fo:page-number/></fo:block>
+    </fo:static-content>
+
+    <fo:flow flow-name="xsl-region-body">
+
+      <fo:block space-before.optimum="3pt" space-after.optimum="15pt">
+      The Plan Extension
+      </fo:block>
+
+      <fo:block space-before.optimum="3pt" space-after.optimum="15pt">
+The plan extension is an addition to FOP that can be used to produce a
+simple plan diagram with tasks etc.
+      </fo:block>
+
+      <fo:block space-before.optimum="3pt" space-after.optimum="15pt">
+      Options
+      </fo:block>
+
+      <fo:block space-before.optimum="3pt" space-after.optimum="15pt">
+There a few basic options to specify the width, height and type of graph.
+The start and end date to display is optional.
+The locale specific information can also be specified.
+All other options are set in the style attribute.
+      </fo:block>
+
+      <fo:block space-before.optimum="3pt" space-after.optimum="15pt">
+      Types of Graphs
+      </fo:block>
+
+      <fo:block space-before.optimum="3pt" space-after.optimum="15pt">
+      Sample Action Plan
+      </fo:block>
+
+      <fo:block space-before.optimum="3pt" space-after.optimum="15pt">
+<fo:block space-after.optimum="5pt">
+<fo:instream-foreign-object>
+<plan xmlns="http://xmlgraphics.apache.org/fop/plan" width="500" height="200" start="20020612" end="20020702">
+<title>Example Plan</title>
+<events>
+
+<group name="Task Group">
+<action type="grouping" id="gr1">
+<label>First Task</label>
+<owner>Team</owner>
+<startdate>20020618</startdate>
+<enddate>20020630</enddate>
+</action>
+<action type="task" belongs="gr1">
+<label>Another Task</label>
+<owner>Team</owner>
+<startdate>20020620</startdate>
+<enddate>20020627</enddate>
+</action>
+<action type="milestone" depends="gr1">
+<label>Milestone</label>
+<owner>Team</owner>
+<startdate>20020628</startdate>
+</action>
+<action type="grouping">
+<label>Task</label>
+<owner>Team</owner>
+<startdate>20020620</startdate>
+<enddate>20020630</enddate>
+</action>
+<action type="task">
+<label>Difficult Task</label>
+<owner>individual</owner>
+<startdate>20020620</startdate>
+<enddate>20020630</enddate>
+</action>
+</group>
+
+</events>
+</plan>
+</fo:instream-foreign-object>
+</fo:block>
+
+      </fo:block>
+
+      <fo:block>
+A plan as an external graphic.
+      </fo:block>
+
+      <fo:block>
+<fo:external-graphic src="june.xml"/>
+      </fo:block>
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>
+

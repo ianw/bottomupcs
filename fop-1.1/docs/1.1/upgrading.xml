@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id$ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "document-v13.dtd">
+<document xmlns:xi="http://www.w3.org/2001/XInclude">
+  <header>
+    <title>Upgrading from an Earlier Version of Apache&#8482; FOP</title>
+    <version>$Revision$</version>
+  </header>
+  <body>
+    <section id="fop-1.0">
+      <title>Upgrading from Version 1.0</title>
+      <p>
+        You should encounter very few issues in upgrading from FOP 1.0, except as noted in the following:
+      </p>
+      <ul>
+        <li>
+          The intermediate format (IF) output format has underwent minor modification as follows:
+          <ul>
+            <li>
+              In order to track changes to the IF format, a <code>version</code> attribute has been added to the root
+              <code>document</code> element. Since no version information was provided previously, the initial
+              value of this attribute is <code>2.0</code>. Future backward compatible changes will update the minor
+              version number, while future non-backward compatible changes will update the major version number.
+            </li>
+            <li>
+              On the <code>text</code> element, a new alternate representation is used for adjustments to glyph positions as expressed by a <code>dp</code>
+              attribute instead of the <code>dx</code> attribute. For further information, see
+              <link href="http://mail-archives.apache.org/mod_mbox/xmlgraphics-fop-dev/201202.mbox/%3cCACQ=j+evStXx=7hW=CHVNKCrZHUso9FHZCSk_5EoENOHcGpGOg@mail.gmail.com%3e">complex
+              script patch - intermediate format changes</link>.
+            </li>
+            <li>
+              On the <code>border-rect</code> element, the attributes {<code>before</code>, <code>after</code>, <code>start</code>, <code>end</code>}
+              have been renamed to {<code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code>}, respectively.
+              For further information, see
+              <link href="http://mail-archives.apache.org/mod_mbox/xmlgraphics-fop-dev/201202.mbox/%3cCACQ=j+evStXx=7hW=CHVNKCrZHUso9FHZCSk_5EoENOHcGpGOg@mail.gmail.com%3e">complex
+              script patch - intermediate format changes</link>.
+            </li>
+          </ul>
+        </li>
+        <li>
+          The <code>IFPainter</code> interface (of package <code>org.apache.fop.render.intermediate</code>), specifically the
+          <code>drawText</code> and <code>drawBorderRect</code> method signatures, have been modified to express the semantics of the above changes to the IF output format.
+        </li>
+        <li>
+          The area tree (AT) output format has underwent minor modification as follows:
+          <ul>
+            <li>
+              In order to track changes to the AT format, a <code>version</code> attribute has been added to the root
+              <code>areaTree</code> element. Since no version information was provided previously, the initial
+              value of this attribute is <code>2.0</code>. Future backward compatible changes will update the minor
+              version number, while future non-backward compatible changes will update the major version number.
+            </li>
+            <li>
+              An optional <code>level</code> attribute has been added to a number of element types to express resolved bidirectional level.
+            </li>
+            <li>
+              An optional <code>reversed</code> attribute has been added to the <code>word</code> element type to express that the glyphs that
+              correspond to the character content of the element should be reversed (in order) in the inline progression dimension when rendering.
+            </li>
+          </ul>
+        </li>
+        <li>
+          Because complex script features are now enabled by default, it is possible that different font specific data will be used for
+          kerning than was previously used. This may be the case if a font supports a traditional TrueType <code>kern</code> table and
+          also supports the advanced typographic <code>kern</code> feature with a <code>GPOS</code> table. In FOP 1.0, the former is used for kerning,
+          while in FOP 1.1 with complex script features enabled, the latter is used. If it is desired to explicitly use the <code>kern</code> table (rather
+          than the <code>GPOS</code> table) in such a case, then the <code>-nocs</code> command line option may be used when invoking FOP
+          in order to disable complex script features.
+        </li>
+      </ul>
+    </section>
+    <section id="pre-1.0">
+      <title>Upgrading from Pre-1.0 Versions</title>
+      <p>
+        If you're planning to upgrade to the latest Apache&#8482; FOP version from a pre-1.0 version,
+        there are a few very important things to consider:
+      </p>
+      <ul>
+        <li>
+          The API of FOP has changed considerably and is not
+          backwards-compatible with versions 0.20.5 and
+          0.91beta. Version 0.92 introduced the <strong>new stable
+          API</strong>.
+        </li>
+        <li>
+          Since version 0.92 some deprecated methods which were part
+          of the old API have been removed. If you upgrade from 0.91
+          beta, you will need to adjust your Java code. Similarly if
+          you upgrade from 0.92 and use deprecated methods.
+        </li>
+        <li>
+          If you are using a configuration file for version 0.20.5, you have to rebuild it in the new format. The format
+          of the configuration files has changed since version 0.20.5. See conf/fop.xconf for
+          an example configuration file. A XML Schema file can be found under
+          src/foschema/fop-configuration.xsd.
+        </li>
+        <li>
+          Beginning with version 0.94 you can skip the generation of
+          font metric files and remove the "font-metrics" attribute
+          in the font configuration. In the unlikely case that due to
+          a bug you still need to use font metrics files you will need
+          to regenerate the font metrics file if yours are from a FOP
+          version before 0.93.
+        </li>
+        <li>
+          <p>
+            The new code is much more strict about the interpretation of the XSL-FO specification.
+            Things that worked fine in version 0.20.5 might start to produce warnings or even errors
+            now. FOP 0.20.5 contains many bugs which have been corrected in the new code.
+          </p>
+          <note label="An example">
+            While FOP 0.20.5 allowed you to have empty <code>fo:table-cell</code> elements, the new code
+            will complain about that (unless relaxed validation is enabled) because the specification
+            demands at least one block-level element (<code>(%block;)+</code>, see
+            <link href="http://www.w3.org/TR/xsl/#fo_table-cell">XSL-FO 1.1, 6.7.10</link>)
+            inside an <code>fo:table-cell</code> element.
+          </note>
+        </li>
+        <li>
+          Extensions and Renderers written for version 0.20.5 will not work with the new code! The new FOP
+          extension for <link href="http://barcode4j.sourceforge.net">Barcode4J</link> is available since
+          January 2007.
+        </li>
+        <li>
+          The SVG Renderer and the MIF Handler have not yet been resurrected! They are currently non-functional
+          and hope for someone to step up and reimplement them.
+        </li>
+      </ul>
+      <p>
+        When you use your existing FO files or XML/XSL files which work fine with FOP version
+        0.20.5 against this FOP version some things may not work as expected. The following
+        list will hopefully help you to identify and correct those problems.
+      </p>
+      <ul>
+        <li>
+          Check the <link href="../compliance.html">Compliance page</link> for the feature causing
+          trouble. It may contain the necessary information to understand and resolve the problem.
+        </li>
+        <li>
+          Not all 0.20.5 output formats are supported. PDF and Postscript should be fully supported.
+          See <link href="output.html">Output Targets</link> for a more complete description.
+        </li>
+        <li>
+          As stated above, empty table cells <code>&lt;fo:table-cell&gt;&lt;/fo:table-cell&gt;</code>
+          are not allowed by the specification. The same applies to empty <code>fo:static-content</code>
+          and <code>fo:block-container</code> elements, for example.
+        </li>
+        <li>
+          Version 0.20.5 is not XSL-FO compliant with respect to sizing images (<code>external-graphic</code>)
+          or <code>instream-foreign-object</code>
+          objects. If images or SVGs are sized differently in your outputs with the new FOP version
+          check <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=37136">Bug 37136</link>
+          as it contains some hints on what to do. The file
+          <link href="http://svn.apache.org/viewcvs.cgi/xmlgraphics/fop/trunk/examples/fo/basic/images.fo?view=markup">
+          <code>"examples/fo/basic/images.fo"</code></link> has
+          a number of good examples that show the correct behaviour.
+        </li>
+        <li>
+          The <code>fox:outline</code> extension is not implemented in the current version:
+          it has been superseded by the new bookmark elements from XSL-FO 1.1.
+        </li>
+      </ul>
+    </section>
+  </body>
+</document>

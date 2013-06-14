@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "document-v13.dtd">
+<document xmlns:i18n="http://apache.org/cocoon/i18n/2.1"><header><title>History of Changes 1.0</title></header><body><p><link href="changes_1.0.rss"><img alt="RSS" src="../images/rss.png"/></link></p><section id="introduction"><title>Introduction and explanation of symbols</title><p>Changes are sorted by "type" and then chronologically with the most recent at the top. These symbols denote the various action types:<icon alt="add" src="../images/add.jpg"/>=add, <icon alt="fix" src="../images/fix.jpg"/>=fix, <icon alt="remove" src="../images/remove.jpg"/>=remove, <icon alt="update" src="../images/update.jpg"/>=update</p></section><section id="version_1.0"><title>Version 1.0 (21 July 2010)</title><section id="API_1.0"><title>Changes to the End-User API</title><ul><li><icon alt="add" src="../images/add.jpg"/>Added a command-line option '-catalog' to use a catalog resolver for the XML and XSLT files Committed by SP.</li></ul></section><section id="Code_1.0"><title>Changes to the Code Base</title><ul><li><icon alt="add" src="../images/add.jpg"/>
+        Added support for xmlfile and xsltfile parameters in FOP's Ant Task.
+       Committed by AC.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added the possibility to use CachedRenderPagesModel, to conserve memory in case
+        of large documents with a lot of cross-references (area tree will be serialized to
+        disk to avoid keeping it entirely in memory).
+       Committed by AD. Thanks to Dario Laera. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=46828">46828</link>.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added an event handling framework which allows to get better feedback from within FOP
+        with the ability to customize problem management.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: when #CMYK pseudo-profile was used in the rgb-icc() function, always the fallback 
+        RGB colors were used instead.
+       Committed by VH. Thanks to Venkat Reddy. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=48167">48167</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        White-space handling in markers with inline-content throws a NullPointerException
+        in some cases.
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=47710">47710</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: previously retrieved markers were not cleared if the new marker was empty.
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=46960">46960</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Changed meaning of &#8216;-v&#8217; option to &#8216;verbose&#8217;, which will print FOP&#8217;s version and proceed.
+        Added a &#8216;-version&#8217; option to simply print the version then exit, following Java practices.
+       Committed by VH.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        MinOptMaxUtil.toMinOptMax was converting LengthRangeProperty objects into illegal MinOptMax
+        objects (in some cases opt could be inferior to min).
+       Committed by VH. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=46638">46638</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed a memory-leak in Marker.MarkerAttribute, where an instance was used both as key and value in
+        a WeakHashMap, effectively neutralizing the benefit of using WeakReferences. Solved by extending
+        PropertyCache to work for MarkerAttributes as well.
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=46319">46319</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed some multi-threading issues in FontCache.java:
+        <ul>
+        <li>remove the unused private readObject()</li>
+        <li>make the changeLock member final (initialization-safety + impossible to reassign)</li>
+        <li>perform the HashMap check for a failed font inside the synchronized block to avoid a race condition</li>
+        </ul>
+       Committed by AD. Thanks to rogov.AT.devexperts.com. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=46211">46211</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Improved the behaviour of the command line interface.
+       Committed by VH. Thanks to Tow Browder. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=45971">45971</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Make fop.bat and fop.cmd use the %FOP_OPTS% environment variable.
+       Committed by AD. Thanks to Carsten Siedentop. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=45842">45842</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Quick-fix to avoid a possible NullPointerException when using
+        empty inlines and hyphenation.
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=45667">45667</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed memory leak in property cache (not cleaning stale PropertyCache$CacheEntry instances).
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed a slight error when resolving non-file URLs: avoid
+        altering the original 'href' if the protocol is other than 'file:'
+       Committed by AD. Thanks to Thomas Stieler. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=45490">45490</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Corrected white-space-treatment for situations where an inline-node is the first/last
+        child node of an fo:block, without preceding/following text.
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=45097">45097</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed a logic error in Hyphenator.java:
+        If the source had an associated InputStream, an UnsupportedOperationException was
+        triggered.
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=44203">44203</link>.</li><li><icon alt="update" src="../images/update.jpg"/>
+        Changed FONode.addCharacters() parameter to closer match the signature of
+        the standard SAX characters() event (reduces confusion and computations).
+        <em>!! Implementors of extensions that subclass FONode directly, and
+        offer an implementation for addCharacters() should take care to make
+        similar modifications in their code !!</em>
+       Committed by AD.</li></ul></section><section id="Extensions_1.0"><title>Changes to the Bundled Extensions</title><ul><li><icon alt="add" src="../images/add.jpg"/>
+        Added support for the #CMYK pseudo-profile supported by some commercial XSL implementations
+        on the rgb-icc() function.
+       Committed by JM.</li></ul></section><section id="Fonts_1.0"><title>Changes to the Font Subsystem</title><ul><li><icon alt="add" src="../images/add.jpg"/>
+        Added support for TrueType fonts with symbol character maps (like "Wingdings" and "Symbol").
+        Character for these fonts are usually found in the 0xF020 to 0xF0FF range
+        (a Unicode private use area). 
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added support for specifying referenced fonts per renderer in addition to the general
+        match list.
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added a command-line tool to list all configured fonts
+        (org.apache.fop.tools.fontlist.FontListMain).
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        AFP Fonts: Added support for full URI resolution on configured AFP fonts.
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        FOP now creates ToUnicode CMaps for single-byte fonts that don't use built-in
+        encodings to help PDF text extractors interpreting characters.
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added support for forcing single-byte encodings for TrueType fonts without
+        creating an XML font metric file (see "encoding-mode" attribute on "font" element)
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        For auto-detected fonts it is now possible to specify that a font needs to be referenced
+        rather than embedded (for the output formats that support this distinction).
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Add support for font substitution.
+       Committed by AC.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added support for auto-configuring TrueType Collections. XML font metrics files for
+        *.ttc fonts are not required anymore.
+       Committed by JM. Thanks to Jason Harrop. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=44737">44737</link>.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added support for addressing all glyphs available in a Type 1 font, not just the ones
+        in the font's primary encoding.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: Font selection fallbacks did not work in some cases (ex. bold+italic to normal)
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed generation of CIDSet object in PDF output.
+       Committed by JM. Thanks to Nicolas Peninguy. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=47711">47711</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: support PFM Files with no extent table.
+       Committed by CB.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: for the last character of a Type1 font, always a width of 0 was returned.
+       Committed by VH. Thanks to Maxim Wirt. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=47232">47232</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Use temporary directory for the font cache if the user home directory is not
+        write-accessible.
+       Committed by JM. Thanks to Alok Singh. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=46686">46686</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        More robust AFP font parsing, although it is still in need of some rework in the future.
+       Committed by AC.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fix for PFMReader after bug #43089 changed the behavior of PFMFile. Fixes baseline
+        problems when Type 1 fonts are used in conjunction with XML font metric files.
+       Committed by JM. Thanks to J. Frantzius. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=45734">45734</link>.</li></ul></section><section id="Images_1.0"><title>Changes to the Image Support</title><ul><li><icon alt="add" src="../images/add.jpg"/>
+        Added customization ability for the image loading framework from FOP's configuration file.
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added support for SVG 1.2 functionality inside fo:instream-foreign-object.
+       Committed by JM. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=41657">41657</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: use the effective color profile supplied by the ImageEncodingHelper, instead of the
+        original one.
+       Committed by JM.</li></ul></section><section id="Layout_1.0"><title>Changes to the Layout Engine</title><ul><li><icon alt="add" src="../images/add.jpg"/>Implement internal character classes if the hyphenation pattern file does not contain them Committed by SP.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added limited support for pages of different inline-progression-dimensions within a 
+        page-sequence.
+       Committed by VH.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added basic implementation for column-keeps.
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=46905">46905</link>.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added extension to disable column balancing before blocks spanning the whole page, in
+        multiple-column documents.
+       Committed by VH. Thanks to Georg Datterl. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=46315">46315</link>.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added missing generation of areas for empty grid units in tables with collapsing border
+        model.
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Allowing non-zero borders and padding on page regions when
+        relaxed validation is turned on.
+       Committed by LF.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Implemented word-by-ford font-selection strategy on text.
+       Committed by MB.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Support character-by-character font-selection strategy on fo:character element.
+       Committed by MB.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added minimal support for integer keep values on the various keep properties on block-level
+        FOs. For now, all integer values are treated the same (i.e. without strength distinction).
+        Using integers allows to avoid overflows that can happen when "always" is used extensively.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: having a special page-master for the last page caused loss of content when normal 
+        blocks were mixed with blocks spanning all columns.
+       Committed by VH. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=46486">46486</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: value of conditional space not always taken into account in the calculation of a 
+        table&#8217;s height.
+       Committed by VH. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=48082">48082</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed handling of percentage values for provisional-label-separation.
+       Committed by VH.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed handling of percentage values for provisional-distance-between-starts.
+       Committed by VH. Thanks to Jonathan Levinson. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=47835">47835</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: The cells of a table inside a marker were duplicated at every marker retrieval.
+       Committed by VH. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=47101">47101</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: footnotes occurring within the forced height of a table row did not appear on the
+        output
+       Committed by VH.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed a bug when combining a forced break with a "last" page-master. The restart
+        of the algorithm would start at the index of the penalty corresponding to the last
+        page-break. This has been changed to the index of the first element after the last
+        page-break.
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=46489">46489</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed BPD trait and border painting for leaders with leader-pattern="space"
+        (and similar cases).
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed fo:instream-foreign-object inside fo:marker.
+       Committed by JM. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=45306">45306</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed a bug when combining break-before with a span change.
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=46240">46240</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed a problem where the BPD or a block area could be wrong if there is a nested,
+        absolutely positioned area (for example a block-container).
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugzilla 40798: A conditional-page-master-reference with page-position="last" qualifies
+        for a first page, if it is also the last. Additionally: also added support for
+        page-position="only".
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=40798">40798</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed the source for a division by zero when the content of an fo:leader with
+        leader-pattern="use-content" collapses to zero width during layout.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed ID resolution for nested bookmarks with duplicated IDs.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Added LayoutManagerMapping.registerMaker() to make registration of custom
+        layout managers easier.
+       Committed by JM. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=45470">45470</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed absolute positioning of block-containers when specified
+        using right and bottom instead of left and top.
+       Committed by LF.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed an inconsistency in footnote handling that led to unnecessary
+        empty areas in pages whose last normal line contains footnotes
+        when the page bpd is not the same for all pages.
+       Committed by LF.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Added support for page-number-citation and page-number-citation-last
+        of fo:inline. Corrected behavior for page-number-citation-last
+        of fo:block: forward references now properly resolved.
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=44794">44794</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Added support for the "id" attribute on fo:wrappers when used
+        as a child of the fo:flow.
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=42423">42423</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed a ClassCastException when using an fo:wrapper as a child
+        of an fo:block-container.
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=41500">41500</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed a regression introduced by the fix for
+        <link href="https://issues.apache.org/bugzilla/show_bug.cgi?id=44286">Bugzilla 44286</link>.
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=42703">42703</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Activated min-height/max-height and min-width/max-width properties.
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=43591">43591</link>.</li></ul></section><section id="Renderers_1.0"><title>Changes to Renderers (Output Formats)</title><ul><li><icon alt="add" src="../images/add.jpg"/>
+        AFP Output: Added enhanced dithering functionality for images that are converted to
+        bi-level images.
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Initial support for CID-keyed double-byte fonts (Type 0) in AFP output.
+       Committed by JM. Thanks to Peter Hancock. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=48567">48567</link>.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added possibility to customize PDF tagging via the &#8216;role&#8217; property.
+       Committed by VH.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added basic accessibility and Tagged PDF support. 
+       Committed by JM,VH. Thanks to Jost Klopfstein. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=46705">46705</link>.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added support for encoding CMYK bitmap images (IOCA FS45) and TIFF images as embedded objects.
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added support for positioning Page Overlays in AFP Output
+       Committed by CB.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added support for creating thumbnails or preview bitmaps of fixed size for PNG and TIFF
+        output.
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        AFP Output: Added support for IMM Extension on fo:simple-page-master.
+       Committed by CB.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added an initial set of extensions for prepress support (fox:bleed, fox:crop-offset,
+        fox:crop-box and fox:scale). This is currently supported only by PDF and Java2D renderers.
+       Committed by JM. Thanks to Peter Coppens. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=47311">47311</link>.</li><li><icon alt="add" src="../images/add.jpg"/>
+        PCL Output: Added support for specifying the output bin.
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        AFP Output: Added support for embedding external AFP form maps (form defs) using the
+        afp:include-form-map extension.
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        AFP Output: Added support for AFP font embedding. Note: this changes the default behaviour.
+        Like with PDF and PS, all fonts are embedded by default unless matched in the
+        "referenced-fonts" section in the configuration.
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        AFP Renderer Raster Fonts:
+        <ul>
+          <li>added support for fractional font-sizes in the configuration.</li>
+          <li>selection of the smaller font-size, in case two possible fallbacks have the
+              same difference to a requested size.</li>
+        </ul>
+       Committed by AD.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added setting to enable dithered painting of filled rectangles in AFP and PCL.
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added a custom text painter for rendering SVG text using text operators when rendering
+        to PostScript or EPS. Text is no longer painted as shapes, thus creating much smaller files.
+       Committed by JM. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=47000">47000</link>.</li><li><icon alt="add" src="../images/add.jpg"/>
+        AFP Output: Tag Logical Element (TLE) is now also allowed on fo:page-sequence
+        (page group level).
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        AFP Output: Added support for Invoke Medium Map (IMM).
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Introduced a new, additional intermediate format optimized for performance. Please see
+        the intermediate format documentation for details.
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        AFP Output: Added a configuration option to override the resource level defaults in the
+        code.
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        AFP Output: Bilevel images in resource groups as generated as hard page segments
+        (instead of image objects) for better interoperability with older IPDS environments
+        and for better printing performance.
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        AFP Output: An AFPGraphics2D implementation which provides the ability to use Batik to drive the production of AFP Graphics (GOCA) output from SVG.
+       Committed by AC.</li><li><icon alt="add" src="../images/add.jpg"/>
+        AFP Output: Resource group leveling, external streaming, and de-duplication of images and graphics using IncludeObject and ResourceGroup.
+       Committed by AC.</li><li><icon alt="add" src="../images/add.jpg"/>
+        AFP Output: Native image embedding support (e.g. JPEG, GIF, TIFF) using ObjectContainer and a MOD:CA Registry implementation.
+       Committed by AC.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added PDF /Launch action: references to URIs using the file:// protocol will now generate
+        a /Launch action as opposed to a more general /URI (which doesn't yield the expected result
+        for this protocol).
+       Committed by AD. Thanks to Alexander Stamenov. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=45113">45113</link>.</li><li><icon alt="add" src="../images/add.jpg"/>
+        PDF Output: Added support for handling 16-bit alpha channel. They are currently
+        converted to 8 bits.
+       Committed by JM. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=45795">45795</link>.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added PDF encryption parameter support in configuration.
+       Committed by AC.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added a PCL-specific extension attribute on simple-page-master for controlling
+        the simplex/duplex mode.
+       Committed by JM. Thanks to Martin Edge. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=45115">45115</link>.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Add partial support for the "show-destination" property on fo:basic-link
+        (PDF output only; see limitations on the compliance page)
+       Committed by AD. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=44634">44634</link>.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added support for rendering pages using JPS (Java Printing System). See new example:
+        examples/embedding/java/ExamplesFO2JPSPrint.java
+       Committed by JM.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Restored ability to specify from/to and odd/even pages as well as the number of copies
+        for printing from the command-line.
+       Committed by JM. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=41687">41687</link>.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added ability to pass a preconfigured PrinterJob instance to the PrintRenderer via
+        the rendering options map.
+       Committed by JM. Thanks to Antti Karanta. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=44678">44678</link>.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added a public accessor for reference to the current page to PDFGraphics2D.
+       Committed by JM. Thanks to Yegor Kozlov. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=44743">44743</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        AFP Output: Fixed positioning of Java2D-based images (when GOCA is enabled).
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        AFP Output: Fix for bitmap images inside an SVG or G2D graphic (printer errors) and
+        positioning fix for bitmaps from G2D graphics.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fix for AWT viewer to correctly track page numbers in continuous display mode.
+       Committed by JM. Thanks to Richard Wheeldon. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=42306">42306</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix for formatting of floating point numbers which could lead to invalid PDFs.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Added a save/restoreGraphicsState pair for the initial coordinate system in PDF output
+        for easier post-processing.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix for color model in IOCA IDE structure parameter for 4- and 8-bit grayscale images.
+       Committed by JM. Thanks to Peter Hancock. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=48696">48696</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: AFP Renderer: Respect image color settings for svg 
+       Committed by CB. Thanks to Peter Hancock. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=48237">48237</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: AFP Renderer: Page Overlays not generated when using Intermediate Format
+       Committed by CB. Thanks to Venkat Reddy. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=48376">48376</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: AFP Renderer: Underline is incorrectly placed when reference-orientation != 0
+       Committed by CB. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=48456">48456</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: AFP Renderer: Page Segments not positioned correctly when reference-orientation != 0
+       Committed by CB. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=48453">48453</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: AFP Renderer: AttributeQualifier Triplet occurs before TLE Value.
+       Committed by CB. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=48290">48290</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix in AFP output: fixed flags in GOCA GBAR order.
+       Committed by JM. Thanks to D.W. Harks. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=48048">48048</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix in AFP output: rounding error when computing the CMYK components of a color.
+       Committed by VH. Thanks to Harald G. Henne. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=48185">48185</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        BugFix: Maintain valid AFP by providing TLE truncation on Attribute Value Triplet values that are greater than 250 chars in length.
+       Committed by AC. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=47941">47941</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Dithered Background Shading can produce illegal AFP if objects are very small
+       Committed by CB. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=47694">47694</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: Error while writing TLE's attribute qualifier in the output.
+       Committed by AD. Thanks to Bharat Attaluri. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=47508">47508</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: support justified text in AFP Renderer (already working in AFP Painter)
+       Committed by CB.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Bugfix: reset graphic state when a page is finished in PostScript.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed a bug that left the PrintRenderer unconfigured even if a configuration was
+        specified for "application/X-fop-print".
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed the handling of CMYK colors in PDFGraphics2D.
+       Committed by JM. Thanks to Yegor Kozlov. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=46882">46882</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        AFP Fonts: Fixed interpretation of metric for fonts with fixed metrics and made sure
+        all repeating groups in FNP (Font Position) are processed.
+       Committed by JM. Thanks to Emil Maskovsky. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=45342">45342</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed black backgrounds occurring for transparent images in PCL output.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed bug that caused AFP Renderer Extensions to be ignored.
+       Committed by CB. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=46369">46369</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed a multi-threading issue when rendering SVG.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        PDF Output: Made sure the XMP Metadata stream is never compressed.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fix for table handling in RTF output, so the output works with OpenOffice and AbiWord, too.
+       Committed by JM. Thanks to Pavel Kysilka. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=45616">45616</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed text stroking in SVG when the stroke-width is zero.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed border trait parsing for the area tree XML when CMYK or ICC colors were used.
+       Committed by JM.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed generation of "fonttbl" for RTF output to fix loading problem with AbiWord.
+       Committed by JM. Thanks to Pavel Kysilka. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=45606">45606</link>.</li><li><icon alt="fix" src="../images/fix.jpg"/>
+        PCL Renderer: Improved page format selection so it doesn't interfere with
+        duplex printing.
+       Committed by JM. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=43650">43650</link>.</li><li><icon alt="update" src="../images/update.jpg"/>
+        PDFGraphics2D.writeClip doesn't generate a clip command anymore when the clip path
+        is empty.
+       Committed by JM. Thanks to Francois Fernandes. See Issue <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=47031">47031</link>.</li><li><icon alt="update" src="../images/update.jpg"/>
+        When a JPEG image is embedded, an optionally embedded color profile is filtered out
+        as it's already embedded separately in the PDF file.
+       Committed by JM.</li></ul></section><section id="contributors_1.0"><title>Contributors to this release</title><p>We thank the following people for their contributions to this release.</p><p>This is a list of all people who participated as committers:<br/>Adrian Cumiskey (AC), Andreas Delmelle (AD), Chris Bowditch (CB), Jeremias Märki (JM),  (JM,VH), Luca Furini (LF), Max Berger (MB), Simon Pepping (SP), Vincent Hennebert (VH).</p><p>This is a list of other contributors:<br/>Alexander Stamenov, Alok Singh, Antti Karanta, Bharat Attaluri, Carsten Siedentop, D.W. Harks, Dario Laera, Emil Maskovsky, Francois Fernandes, Georg Datterl, Harald G. Henne, J. Frantzius, Jason Harrop, Jonathan Levinson, Jost Klopfstein, Martin Edge, Maxim Wirt, Nicolas Peninguy, Pavel Kysilka, Peter Coppens, Peter Hancock, Richard Wheeldon, rogov.AT.devexperts.com, Thomas Stieler, Tow Browder, Venkat Reddy, Yegor Kozlov.</p></section></section></body></document>

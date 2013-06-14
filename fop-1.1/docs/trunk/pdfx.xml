@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Copyright 2006 The Apache Software Foundation
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: pdfx.xml 1298724 2012-03-09 07:55:31Z cbowditch $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "document-v13.dtd">
+<document xmlns:xi="http://www.w3.org/2001/XInclude">
+  <header>
+    <title>Apache&#8482; FOP: PDF/X (ISO 15930)</title>
+    <version>$Revision: 1298724 $</version>
+    <authors>
+      <person name="Jeremias Märki" email="jeremias@apache.org"/>
+    </authors>
+  </header>
+  <body>
+    <section id="overview">
+      <title>Overview</title>
+      <warning>
+        Support for PDF/X is available beginning with version 0.93. This feature is new and
+        may not be 100% complete, yet. Feedback is welcome.
+      </warning>
+      <p>
+        PDF/X is a standard which faciliates prepress digital data exchange using PDF.
+        Currently, only PDF/X-3:2003 is implemented out of the many different flavours of PDF/X
+        profiles. PDF/X-3:2003 is documented in 
+        <link href="http://www.iso.org/iso/en/CatalogueDetailPage.CatalogueDetail?CSNUMBER=39940&amp;ICS1=37&amp;ICS2=100&amp;ICS3=99">ISO 15930-6:2003(E)</link>. 
+        More info on PDF/X can be found on the  
+        <link href="http://www.pdfx.info/">PDF/X info site</link>.
+      </p>
+    </section>
+    <section id="status">
+      <title>Implementation Status</title>
+      <p>
+        <strong>PDF/X-3:2003</strong> is implemented to the degree that FOP supports 
+        the creation of the elements described in ISO 15930-6. 
+      </p>
+      <p>
+        An important restriction of the current implementation is that all normal 
+        RGB colors specified in XSL-FO and SVG are left unchanged in the sRGB color
+        space (XSL-FO and SVG both use sRGB as their default color space).
+        There's no conversion to a CMYK color space. Although sRGB is a
+        calibrated color space, its color space has a different size than a CMYK
+        color space which makes the conversion a lossy conversion and can lead to
+        unwanted results. Although the use of the calibrated sRGB has been promoted
+        for years, print shops usually prefer to convert an sRGB PDF to CMYK prior
+        to production. Until there's full CMYK support in FOP you will have to
+        work closely with your print service provider to make sure you get the 
+        intended result.
+      </p>
+      <p>
+        Tests have been performed against Adobe Acrobat 7.0.7 (Preflight function).
+        Note that there are bugs in Adobe Acrobat which cause false alarms if both
+        PDF/A-1b and PDF/X-3:2003 are activated at the same time.
+      </p>
+    </section>
+    <section id="command-line">
+      <title>Usage (command line)</title>
+      <p>
+        To activate PDF/X-3:2003 from the command-line, specify "-pdfprofile PDF/X-3:2003" 
+        as a parameter. If there is a violation of one of the validation rules for 
+        PDF/X, an error message is presented and the processing stops.
+      </p>
+    </section>
+    <section id="embedded">
+      <title>Usage (embedded)</title>
+      <p>
+        When FOP is embedded in another Java application you can set a special option
+        on the renderer options in the user agent to activate the PDF/A-1b profile.
+        Here's an example:
+      </p>
+      <source xml:space="preserve"><![CDATA[
+FOUserAgent userAgent = fopFactory.newFOUserAgent();
+userAgent.getRendererOptions().put("pdf-x-mode", "PDF/X-3:2003");
+Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, userAgent);
+[..]]]></source>
+      <p>
+        If one of the validation rules of PDF/X is violated, an PDFConformanceException
+        (descendant of RuntimeException) is thrown.
+      </p>
+    </section>
+    <section id="rules">
+      <title>PDF/X in Action</title>
+      <p>
+        There are a number of things that must be looked after if you activate a PDF/X
+        profile. If you receive a PDFConformanceException, have a look at the following
+        list (not necessarily comprehensive):
+      </p>
+      <ul>
+        <li>
+          Make sure all (!) fonts are embedded. If you use base 14 fonts (like Helvetica)
+          you need to obtain a license for them and embed them like any other font.
+        </li>
+        <li>
+          Don't use PDF encryption. PDF/X doesn't allow it.
+        </li>
+        <li>
+          Don't use CMYK images without an ICC color profile. PDF/X doesn't allow mixing
+          color spaces and FOP currently only properly supports the sRGB color space. However,
+          you will need to specify an 
+          <link href="configuration.html#pdf-renderer">output device profile</link>
+          (usually a CMYK profile) in the configuration. sRGB won't work here since it's a 
+          display device profile, not an output device profile.
+        </li>
+        <li>
+          Don't use non-RGB colors in SVG images. Same issue as with CMYK images.
+        </li>
+        <li>
+          Don't use EPS graphics with fo:external-graphic. Embedding EPS graphics in PDF
+          is deprecated since PDF 1.4 and prohibited by PDF/X-3:2003.
+        </li>
+        <li>
+          PDF is forced to version 1.4 if PDF/X-3:2003 is activated.
+        </li>
+      </ul>
+    </section>
+    <section id="profile-compatibility">
+      <title>PDF profile compatibility</title>
+      <p>
+        The PDF profiles "PDF/X-3:2003" and "PDF/A-1b" are compatible and can both be 
+        activated at the same time.
+      </p>
+    </section>
+  </body>
+</document>

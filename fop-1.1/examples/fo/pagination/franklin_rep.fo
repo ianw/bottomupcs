@@ -1,0 +1,1029 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+  <!-- defines page layout -->
+  <fo:layout-master-set>
+
+    <!-- layout for the first page -->
+    <fo:simple-page-master master-name="singleSPM"
+            page-height="21.7cm"
+            page-width="16cm"
+            margin-top="1cm"
+            margin-bottom="1cm"
+            margin-left="2.5cm"
+            margin-right="2.5cm">
+        <fo:region-body margin-top="2cm" margin-bottom="2cm"/>
+        <fo:region-before extent="2cm"/>
+        <fo:region-after extent="2cm"/>
+    </fo:simple-page-master>
+
+    <fo:page-sequence-master master-name="repeating_pm">
+      <!-- note for an fo:repeatable-page-master-reference, "no-limit"
+           is the default value for the maximum-repeats property 
+       -->
+      <fo:repeatable-page-master-reference master-reference="singleSPM"
+        maximum-repeats="15"/>
+      <!-- this page-master-reference used after maximum-repeats 
+      above exhausted -->
+      <fo:single-page-master-reference master-reference="singleSPM"/>
+    </fo:page-sequence-master>
+  </fo:layout-master-set>
+  <!-- end: defines page layout -->
+
+  <!-- actual layout -->
+  <fo:page-sequence master-reference="repeating_pm" initial-page-number="1">
+
+    <!-- header -->
+  <fo:static-content flow-name="xsl-region-before">
+    <fo:block text-align="start" font-size="10pt"
+            font-family="sans-serif"
+      line-height="10pt" >
+      John Franklin - Journey to the Shores of the Polar Sea
+    </fo:block>
+    </fo:static-content>
+
+    <fo:static-content flow-name="xsl-region-after">
+      <fo:block text-align="end"
+            font-size="10pt"
+            font-family="sans-serif"
+            line-height="14pt" >
+        p. <fo:page-number/>
+      </fo:block>
+    </fo:static-content>
+
+    <fo:flow flow-name="xsl-region-body">
+
+      <!-- defines local TOC -->
+      <fo:block font-size="10pt"
+            font-family="serif"
+            line-height="12pt"
+            space-before.optimum="10pt"
+            space-after.optimum="10pt"
+            text-align="start"
+            padding-top="6pt">
+Journey across the barren Grounds - Difficulty and delay in crossing Copper-Mine River -
+Melancholy and fatal Results thereof - Extreme Misery of the whole Party - Murder of
+Mr. Hood - Death of several of the Canadians - Desolate State of Fort Enterprise -
+Distress suffered at that Place - Dr. Richardson's Narrative - Mr. Back's Narrative -
+Conclusion.
+      </fo:block>
+
+      <fo:block font-size="8pt"
+                font-family="serif"
+                font-style="italic"
+                line-height="10pt"
+                space-before.optimum="3pt"
+                space-after.optimum="3pt"
+                text-align="start">1821. August 17.
+      </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+MY original intention, whenever the season should
+compel us to relinquish the survey, had been to return by the way
+of the Copper-Mine River, and in pursuance of my arrangement
+with the Hook to travel to Slave Lake through the line of woods
+extending thither by the Great Bear and Marten Lakes, but our
+scanty stock of provision and the length of the voyage rendered it
+necessary to make for a nearer place. We had already found that
+the country, between Cape Barrow and the Copper-Mine River,
+would not supply our wants, and this it seemed probable would now
+be still more the case ; besides, at this advanced season, we expected
+the frequent recurrence of gales, which would cause great detention,
+if not danger in proceeding along that very rocky part of the coast.
+I determined, therefore, to make at once for Arctic Sound, where
+we had found the animals more numerous than at any other place ;
+and entering Hood's River, to advance up that stream as far as it
+was navigable, and then to construct small canoes out of the
+materials of the larger ones, which could be carried in crossing the
+barren grounds to Fort Enterprise.
+        </fo:block>
+
+    <fo:block font-size="8pt"
+            font-family="serif"
+            font-style="italic"
+            line-height="10pt"
+            space-before.optimum="3pt"
+      space-after.optimum="3pt"
+            text-align="start">August 19.
+      </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+We were almost beaten out of our comfortless abodes
+by rain during the night, and this morning the gale continued
+without diminution. The thermometer fell to 33 deg. Two men were
+sent with Junius to search for the deer which Augustus had killed.
+Junius returned in the evening bringing part of the meat, but owing
+to the thickness of the weather, his companions parted from him
+and did not make their appearance. Divine service was read. On
+the 20th we were presented with the most chilling prospect, the
+small pools of water being frozen over, the ground being covered
+with snow, and the thermometer at the freezing point at mid-day.
+Flights of geese were passing to the southward. The wind however
+was more moderate, having changed to the eastward. Considerable
+anxiety prevailing respecting Belanger and Michel, the two men
+who strayed from Junius yesterday, the rest were sent out to look
+for them. The search was successful, and they all returned in the
+evening. The stragglers were much fatigued, and had suffered
+severely from the cold, one of them having his thighs frozen, and
+what under our present circumstances was most grievous, they had
+thrown away all the meat. The wind during the night returned to
+the north-west quarter, blew more violently than ever, and raised a
+very turbulent sea. The next day did not improve our condition,
+the snow remained on the ground, and the small pools were frozen.
+Our hunters were sent out, but they returned after a fatiguing
+day's march without having seen any animals. We made a scanty
+meal off a handful of pemmican, after which only half a bag
+remained.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+The wind abated after midnight, and the surf diminished rapidly,
+which caused us to be on the alert at a very early hour on the 22d,
+but we had to wait until six A.M. for the return of Augustus who
+had continued out all night on an unsuccessful pursuit of deer.
+It appears that he had walked a few miles farther along the coast,
+than the party had done on the 18th, and from a sketch he drew on
+the sand, we were confirmed in our former opinion that the shore
+inclined more to the eastward beyond Point Turnagain. He also
+drew a river of considerable size, that discharges its waters into
+Walker's Bay; on the banks of which stream he saw a piece of
+wood, such as the Esquimaux use in producing fire, and other marks
+so fresh that he supposed they had recently visited the spot. We
+therefore left several iron materials for them. Our men, cheered by
+the prospect of returning, embarked with the utmost alacrity; and,
+paddling with unusual vigour, carried us across Riley's and Walker's
+Bays, a distance of twenty miles before noon, when we landed on
+Slate-Clay Point, as the wind had freshened too much to permit us
+to continue the voyage. The whole party went to hunt, but returned
+without success in the evening, drenched with the heavy rain which
+commenced soon after they had set out. Several deer were seen,
+but could not be approached in this naked country; and as our
+stock of pemmican did not admit of serving out two meals, we went
+dinnerless to bed.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+Soon after our departure to-day, a sealed tin-case, sufficiently
+buoyant to float, was thrown overboard, containing a short account of
+our proceedings, and the position of the most conspicuous points.
+The wind blew off the land, the water was smooth, and as the sea
+is in this part more free from islands than in any other, there was
+every probability of its being driven off the shore into the current ;
+which, as I have before mentioned, we suppose, from the circumstance
+of Mackenzie's River being the only known stream that
+brings down the wood we have found along the shores, to set to the
+eastward.
+        </fo:block>
+
+    <fo:block font-size="8pt"
+            font-family="serif"
+            font-style="italic"
+            line-height="10pt"
+            space-before.optimum="3pt"
+      space-after.optimum="3pt"
+            text-align="start">August 23.
+      </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+A severe frost caused us to pass a comfortless night.
+At two P.M. we set sail, and the men voluntarily launched out to
+make a traverse of fifteen miles across Melville Sound, before a
+strong wind and heavy sea. The privation of food, under which
+our voyagers were then labouring, absorbed every other terror;
+otherwise the most powerful persuasion could not have induced
+them to attempt such a traverse. It was with the utmost difficulty
+that the canoes were kept from turning their broadsides to the
+waves, though we sometimes steered with all the paddles. One of
+them narrowly escaped being overset by this accident, happening
+in mid-channel, where the waves were so high that the mast-head
+of our canoe was often hid from the other, though it was sailing
+within hail. The annexed plate, from Mr. Back's sketch, will convey
+to the reader an accurate idea of the peril of our situation.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+The traverse, however, was made;we were then near a high
+rocky lee shore, on which a heavy surf was beating. The wind
+being on the beam, the canoes drifted fast to leeward; and, on
+rounding a point, the recoil of the sea from the rocks was so great
+that they were with difficulty kept from foundering. We looked in
+vain for a sheltered bay to land in ; but, at length, being unable to
+weather another point, we were obliged to put ashore on the open
+beach, which, fortunately, was sandy at this spot. The debarkation
+was effected in the manner represented in the plate; and, fortunately,
+without further injury than the splitting of the head of
+the second canoe, which was easily repaired.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+Our encampment being near to the place where we killed the deer
+on the 11th, almost the whole party went out to hunt, but they
+returned in the evening without having seen any game. The
+berries, however, were ripe and plentiful, and, with the addition
+of some country tea, furnished a supper. There were some showers
+in the afternoon,and the weather was cold, the thermometer
+being 42 deg, but the evening and night were calm and fine. It may be
+remarked that the mosquitoes disappeared when the late gales
+commenced.
+        </fo:block>
+
+    <fo:block font-size="8pt"
+            font-family="serif"
+            font-style="italic"
+            line-height="10pt"
+            space-before.optimum="3pt"
+            space-after.optimum="3pt"
+            text-align="start">August 25.
+      </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+Embarking at three A. M., we stretched across
+the eastern entrance of Bathurst's Inlet, and arrived at an island,
+which I have named after Colonel Barry, of Newton Barry. Some
+deer being seen on the beach, the hunters went in pursuit of
+them, and succeeded in killing three females, which enabled us to
+save our last remaining meal of pemmican. They saw also some
+fresh tracks of musk oxen on the banks of a small stream, which
+flowed into a lake in the centre of the island. These animals must
+have crossed a channel, at least, three miles wide, to reach the nearest
+of these islands. Some specimens of variegated pebbles and jasper
+were found here imbedded in the amygdaloidal rock.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+Re-embarking at two P.M., and continuing through what was
+supposed to be a channel between two islands, we found our passage
+barred by a gravelly isthmus of only ten yards in width ; the canoes
+and cargoes were carried across it, and we passed into Bathurst's Inlet
+through another similar channel, bounded on both sides by steep
+rocky hills. The wind then changing from S.E. to N.W. brought
+heavy rain, and we encamped at seven P.M., having advanced
+eighteen miles.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+Starting this morning with a fresh breeze in our favour,
+we soon reached that part of Barry's Island where the canoes were
+detained on the 2d and 3rd of this month, and contrary to what we
+then experienced, the deer were now plentiful. The hunters killed
+two, and we were relieved from all apprehension of an immediate
+want of food. One would suppose the deer were about to retire to
+the main shore from their assembling at this time in such numbers
+on the islands nearest to the coast. Those we saw were generally
+females with their young, and all of them very lean.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+The wind continued in the same direction until we had rounded
+Point Wollaston, and then changed to a quarter, which enabled us
+to steer for Hood's River, which we ascended as high as the first
+rapid and encamped. Here terminated our voyage on the Arctic
+sea, during which we had gone over six hundred and fifty geographical
+miles. Our Canadian voyagers could not restrain their expressions
+of joy at having turned their backs on the sea, and
+they passed the evening talking over their past adventures with
+much humour and no little exaggeration. The consideration that
+the most painful, and certainly the most hazardous, part of the
+journey was yet to come, did not depress their spirits at all. It is
+due to their character to mention that they displayed much courage
+in encountering the dangers of the sea, magnified to them by their
+novelty.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+The shores between Cape Barrow and Cape Flinders, including
+the extensive branches of Arctic and Melville Sounds, and Bathurst's
+Inlet, may be comprehended in one great gulf, which I have distinguished
+by the appellation of George IV.'s Coronation Gulf, in
+honour of His Most Gracious Majesty, the latter name being added
+to mark the time of its discovery. The Archipelago of islands which
+fringe the coast from Copper-Mine River to Point Turnagain, I have
+named in honour of His Royal Highness the Duke of York.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+It may be deserving of notice that the extremes in temperature
+of the sea water during our voyage were 53 deg and 35 deg, but its general
+temperature was between 43 deg and 48 deg. Throughout our return from
+Point Turnagain we observed that the sea had risen several feet
+above marks left at our former encampments. This may, perhaps,
+be attributed to the north-west gales.
+        </fo:block>
+
+    <fo:block font-size="8pt"
+            font-family="serif"
+            font-style="italic"
+            line-height="10pt"
+            space-before.optimum="3pt"
+            space-after.optimum="3pt"
+            text-align="start">August 26.
+      </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+Previous to our departure this morning, an assortment
+of iron materials, beads, looking-glasses, and other articles
+were put up in a conspicuous situation for the Esquimaux, and the
+English Union was planted on the loftiest sand-hill, where it might
+be seen by any ships passing in the offing. Here also, was deposited
+in a tin bow a letter containing an outline of our proceedings, the
+latitude and longitude of the principal places, and the course we
+intended to pursue towards Slave Lake.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+Embarking at eight A.M. we proceeded up the river, which is full
+of sandy shoals, but sufficiently deep for canoes in the channels. It is
+from one hundred to two hundred yards wide, and is bounded by high
+and steep banks of clay. We encamped at a cascade of eighteen or
+twenty feet high, which is produced by a ridge of rock crossing the
+river, and the nets were set. A mile below this cascade Hood's
+River is joined by a stream half its own size, which I have called
+James' Branch. Bear and deer tracks had been numerous on the
+banks of the river when we were here before, but not a single recent
+one was to be seen at this time. Credit, however, killed a small
+deer at some distance inland, which, with the addition of berries,
+furnished a delightful repast this evening. The weather was remarkably
+fine, and the temperature so mild, that the mosquitoes again
+made their appearance, but not in any great numbers. Our distance
+made to-day was not more than six miles.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+The next morning the net furnished us with ten white fish
+and trout. Having made a further deposit of iron work for the
+Esquimaux we pursued our voyage up the river, but the shoals and
+rapids in this part were so frequent, that we walked along the banks
+the whole day, and the crews laboured hard in carrying the canoes
+thus lightened over the shoals or dragging them up the rapids, yet
+our journey in a direct line was only about seven miles. In the
+evening we encamped at the lower end of a narrow chasm through
+which the river flows for upwards of a mile. The walls of this
+chasm are upwards of two hundred feet high, quite perpendicular,
+and in some places only a few yards apart. The river precipitates
+itself into it over a rock, forming two magnificent and picturesque
+falls close to each other. The upper fall is about sixty feet high, and
+the lower one at least one hundred, but perhaps considerably more,
+for the narrowness of the chasm into which it fell prevented us from
+seeing its bottom, and we could merely discern the top of the spray
+far beneath our feet. The lower fall is divided into two, by an
+insulated column of rock which rises about forty feet above it. The
+whole descent of the river at this place probably exceeds two
+hundred and fifty feet. The rock is very fine felspathose sandstone.
+It has a smooth surface and a light red colour. I have named these
+magnificent cascades Wilberforce Falls, as a tribute of my respect
+for that distinguished philanthropist and Christian. Messrs. Back and
+Hood took beautiful sketches of this majestic scene, which are
+combined in the annexed plate.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+The river being surveyed from the summit of a hill, above these
+falls, appeared so rapid and shallow, that it seemed useless to
+attempt proceeding any farther in the large canoes. I therefore
+determined on constructing out of their materials two smaller ones
+of sufficient size to contain three persons, for the purpose of crossing
+any river that might obstruct our progress. This operation was
+accordingly commenced, and by the 31st both the canoes being
+finished, we prepared for our departure on the following day.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+The leather which had been preserved for making shoes was
+equally divided among the men, two pairs of flannel socks were given
+to each person, and such articles of warm clothing as remained, were
+issued to those who most required them. They were also furnished
+with one of the officers' tents. This being done, I communicated to
+the men my intention of proceeding in as direct a course as possible
+to the part of Point Lake, opposite to our spring encampment
+which was only distant one hundred and forty-nine miles in a
+straight line. They received the communication cheerfully, considered
+the journey to be short, and left me, in high spirits, to
+arrange their own packages. The stores, books, &amp;c., which were not
+absolutely necessary to be carried, were then put up in boxes to be
+left en cache here, in order that the men's burdens might be as light
+as possible.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+The next morning was warm, and very fine. Every one was on
+the alert at an early hour, being anxious to commence the journey.
+Our luggage consisted of ammunition, nets, hatchets, ice chisels,
+astronomical instruments, clothing, blankets, three kettles, and
+the two canoes, which were each carried by one man. The
+officers carried such a portion of their own things as their strength
+would permit;the weight carried by each man was about ninety
+pounds, and with this we advanced at the rate of about a mile an
+hour, including rests. In the evening the hunters killed a lean cow,
+out of a large drove of musk-oxen; but the men were too much
+laden to carry more than a small portion of its flesh. The alluvial
+soil, which towards the mouth of the river spreads into plains,
+covered with grass and willows, was now giving place to a more
+barren and hilly country; so that we could but just collect sufficient
+brush wood to cook our suppers. The part of the river we skirted
+to-day was shallow, and flowed over a bed of sand ; its width about
+one hundred and twenty yards. About midnight our tent was blown
+down by a squall, and we were completely drenched with rain before
+it could be re-pitched.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+In the morning of the 1st of September a fall of snow took
+place; the canoes became a cause of delay, by the difficulty of
+carrying them in a high wind, and they sustained much damage
+from the falls of those who had charge of them. The face of the
+country was broken by hills of moderate elevation, but the ground
+was plentifully strewed with small stones, which, to men bearing
+heavy burthens, and whose feet were protected only by soft moose
+skin shoes, occasioned great pain. At the end of eleven miles we
+encamped, and sent for a musk-ox and a deer, which St. Germain
+and Augustus had killed. The day was extremely cold, the ther-mometer
+varying between 34 deg and 36 deg. In the afternoon a heavy
+fall of snow took place, on the wind changing from north-west to
+south-west. We found no wood at the encampment, but made a
+fire of moss to cook the supper, and crept under our blankets for
+warmth. At sun-rise the thermometer was at 31 deg, and the wind
+fresh from north-west; but the weather became mild in the course
+of the forenoon, and the snow disappeared from the gravel. The
+afternoon was remarkably fine, and the thermometer rose to 50 deg.
+One of the hunters killed a musk-ox. The hills in this part are
+lower and more round-backed than those we passed yesterday, and
+exhibited but little naked rock; they were covered with lichens.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+Having ascertained from the summit of the highest hill near the
+tents, that the river continued to preserve a west course; and fear-ing
+that by pursuing it further we might lose much time, and un-necessarily
+walk over a great deal of ground, I determined on
+quitting its banks the next day, and making as directly as we could for
+Point Lake. We accordingly followed the river on the 3d, only to
+the place where the musk-ox had been killed last evening, and after
+the meat was procured, crossed the river in our two canoes lashed
+together. We now emerged from the valley of the river, and entered
+a level, but very barren, country, varied only by small lakes and
+marshes, the ground being covered with small stones. Many old tracks
+of rein-deer were seen in the clayey soil, and some more recent
+ones of the musk-ox. We encamped on the borders of Wright's
+River, which flows to the eastward; the direct distance walked to-day
+being ten miles and three-quarters. The next morning was
+very fine, and,as the day advanced, the weather became quite
+warm. We set out at six A. M., and, having forded the river,
+walked over a perfectly level country, interspersed with small lakes,
+which communicated with each other, by streams running in various
+directions. No berry-bearing plants were found in this part, the
+surface of the earth being thinly covered in the moister places with
+a few grasses, and on the drier spots with lichens.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+Having walked twelve miles and a half, we encamped at seven P.M.,
+and distributed our last piece of pemmican, and a little arrow-root
+for supper, which afforded but a scanty meal. This evening was
+warm, but dark clouds overspread the sky. Our men now began to
+find their burdens very oppressive, and were much fatigued by this
+day's march, but did not complain. One of them was lame from an
+inflammation in the knee. Heavy rain commenced at midnight, and
+continued without intermission until five in the morning, when it
+was succeeded by snow on the wind changing to north-west, which
+soon increased to a violent gale. As we had nothing to eat, and
+were destitute of the means of making a fire, we remained in our
+beds all the day ; but the covering of our blankets was insufficient to
+prevent us from feeling the severity of the frost, and suffering in-convenience
+from the drifting of the snow into our tents. There
+was no abatement of the storm next day ; our tents were completely
+frozen, and the snow had drifted around them to a depth of three
+feet, and even in the inside there was a covering of several inches on
+our blankets. Our suffering from cold, in a comfortless canvass tent
+in such weather, with the temperature at 20 deg, and without fire,
+will easily be imagined;it was, however, less than that which we
+felt from hunger.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+The morning of the 7th cleared up a little, but the wind was still
+strong, and the weather extremely cold. From the unusual con-tinuance
+of the storm, we feared the winter had set in with all its
+rigour, and that by longer delay we should only be exposed to an
+accumulation of difficulties; we therefore prepared for our journey,
+although we were in a very unfit condition for starting, being weak
+from fasting, and our garments stiffened by the frost. We had no
+means of making a fire to thaw them, the moss, at all times difficult
+to kindle, being now covered with ice and snow. A considerable
+time was consumed in packing up the frozen tents and bed clothes,
+the wind blowing so strong that no one could keep his hands long
+out of his mittens.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+Just as we were about to commence our march, I was seized with
+a fainting fit, in consequence of exhaustion and sudden exposure to
+the wind; but after eating a morsel of portable soup, I recovered, so
+far as to be able to move on. I was unwilling at first to take this
+morsel of soup, which was diminishing the small and only remaining
+meal for the party; but several of the men urged me to it, with
+much kindness. The ground was covered a foot deep with snow,
+the margin of the lakes was incrusted with ice, and the swamps over
+which we had to pass were entirely frozen; but the ice not being
+sufficiently strong to bear us, we frequently plunged knee-deep in
+water. Those who carried the canoes were repeatedly blown down
+by the violence of the wind, and they often fell, from making an
+insecure step on a slippery stone; on one of these occasions, the
+largest canoe was so much broken as to be rendered utterly unser-viceable.
+This was felt as a serious disaster, as the remaining canoe
+having through mistake been made too small, it was doubtful
+whether it would be sufficient to carry us across a river. Indeed
+we had found it necessary in crossing Hood's River, to lash the two
+canoes together. As there was some suspicion that Benoit, who
+carried the canoe, had broken it intentionally, he having on a former
+occasion been overheard by some of the men to say, that he would
+do so when he got it in charge, we closely examined him on the
+point; he roundly denied having used the expressions attributed to
+him, and insisted that it was broken by his falling accidentally; and
+as he brought men to attest the latter fact, who saw him tumble, we
+did not press the matter further. I may here remark that our
+people had murmured a good deal at having to carry two canoes,
+though they were informed of the necessity of taking both, in case
+it should be deemed advisable to divide the party; which it had
+been thought probable we should be obliged to do, if animals proved
+scarce, in order to give the whole the better chance of procuring
+subsistence, and also for the purpose of sending forward some of the
+best walkers to search for Indians, and to get them to meet us with
+supplies of provision. The power of doing this was now at an end.
+As the accident could not be remedied we turned it to the best
+account by making a fire of the bark and timbers of the broken
+vessel, and cooked the remainder of our portable soup and arrow-root.
+This was a scanty meal after three days' fasting, but it served
+to allay the pangs of hunger, and enabled us to proceed at a quicker
+pace than before. The depth of the snow caused us to march in
+Indian file, that is in each other's steps; the voyagers taking it in
+turn to lead the party. A distant object was pointed out to this
+man in the direction we wished to take, and Mr. Hood followed
+immediately behind him, to renew the bearings, and keep him from
+deviating more than could be helped from the mark. It may be
+here observed, that we proceeded in this manner throughout our
+route across the barren grounds.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+In the afternoon we got into a more hilly country, where the
+ground was strewed with large stones. The surface of these was
+covered with lichens of the genus gyrophora, which the Canadians
+term tripe de roche. A considerable quantity was gathered, and
+with half a partridge each, (which were shot in the course of the
+day,) furnished us with a slender supper, which we cooked with a
+few willows, dug up from beneath the snow. We passed a comfortless
+night in our damp clothes, but took the precaution of sleeping upon
+our socks and shoes to prevent them from freezing. This plan was
+afterwards adopted throughout the journey.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+At half past five in the morning we proceeded; and after walking
+about two miles, came to Cracroft's River, flowing to the westward,
+with a very rapid current over a rocky channel. We had much diffi-culty
+in crossing this, the canoe being useless, not only from the bot-tom
+of the channel being obstructed by large stones, but also from its
+requiring gumming, an operation which, owing to the want of wood
+and the frost, we were unable to perform. However, after following
+the course of the river some way, we effected a passage by means of a
+range of large rocks that crossed a rapid. As the current was strong,
+and many of the rocks were covered with water to the depth of two
+or three feet, the men were exposed to much danger in carrying their
+heavy burthens across, and several of them actually slipped into the
+stream, but were immediately rescued by the others. Junius went
+farther up the river in search of a better crossing place, and did not
+rejoin us to-day. As several of the party were drenched from head to
+foot, and we were all wet to the middle, our clothes became stiff with
+the frost, and we walked with much pain for the remainder of the day.
+The march was continued to a late hour, being anxious to rejoin the
+hunters who had gone before, but we were obliged to encamp at the
+end of ten miles and a quarter, without seeing them. Our only
+meal to-day consisted of a partridge each, (which the hunters shot,)
+mixed with tripe de roche. This repast although scanty for men,
+with appetites such as our daily fatigue created, proved a cheerful
+one, and was received with thankfulness. Most of the men had to
+sleep in the open air, in consequence of the absence of Credit, who
+carried their tent; but we fortunately found an unusual quantity of
+roots to make a fire, which prevented their suffering much from the
+cold, though the thermometer was at 17 deg.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+We started at six on the 9th, and at the end of two miles re-gained
+our hunters, who were halting on the borders of a lake amidst
+a clump of stunted willows. This lake stretched to the westward as
+far as we could see, and its waters were discharged by a rapid stream
+one hundred and fifty yards wide. Being entirely ignorant where
+we might be led by pursuing the course of the lake, and dreading
+the idea of going a mile unnecessarily out of the way, we deter-mined
+on crossing the river if possible; and the canoe was gummed
+for the purpose, the willows furnishing us with fire. But we had to
+await the return of Junius before we could make the traverse. In
+the mean time we gathered a little tripe de roche, and breakfasted
+upon it and a few partridges that were killed in the morning.
+St. Germain and Adam were sent upon some recent tracks of deer.
+Junius arrived in the afternoon, and informed us that he had seen
+a large herd of musk-oxen on the banks of Cracroft's River, and had
+wounded one of them, but it had escaped. He brought about four
+pounds of meat, the remains of a deer that had been devoured by
+the wolves. The poor fellow was much fatigued, having walked
+throughout the night, but as the weather was particularly favourable
+for our crossing the river, we could not allow him to rest. After he
+had taken some refreshment we proceeded to the river. The canoe
+being put into the water was found extremely ticklish, but it was
+managed with much dexterity by St. Germain, Adam, and Peltier,
+who ferried over one passenger at a time, causing him to lie flat in its
+bottom, by no means a pleasant position, owing to its leakiness, but
+there was no alternative. The transport of the whole party was
+effected by five o'clock, and we walked about two miles further, and
+encamped, having come five miles and three quarters on a south-west
+course. Two young alpine hares were shot by St. Germain, which,
+with the small piece of meat brought in by Junius, furnished the
+supper of the whole party. There was no tripe de roche here. The
+country had now become decidedly hilly, and was covered with snow.
+The lake preserved its western direction, as far as I could see from
+the summit of the highest mountain near the encampment. We
+subsequently learned from the Copper Indians, that the part at
+which we had crossed the river was the Congecatha-wha-chaga of
+Hearne, of which I had little idea at the time, not only from the
+difference of latitude, but also from its being so much farther east of
+the mouth of the Copper-Mine River, than his track is laid down.
+He only making one degree and three quarters difference of lon-gitude,
+and we, upwards of four. Had I been aware of the fact,
+several days harassing march, and a disastrous accident would have
+been prevented by keeping on the western side of the lake, instead
+of crossing the river. We were informed also, that this river is
+the Anatessy or River of Strangers, and is supposed to fall into
+Bathurst's Inlet; but although the Indians have visited its mouth,
+their description was not sufficient to identify it with any of the
+rivers whose mouths we had seen. It probably falls in that part of
+the coast which was hid from our view by Goulburn's or Elliot's
+Islands.
+        </fo:block>
+
+    <fo:block font-size="8pt"
+            font-family="serif"
+            font-style="italic"
+            line-height="10pt"
+            space-before.optimum="3pt"
+            space-after.optimum="3pt"
+            text-align="start">September 10.
+      </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+We had a cold north wind, and the atmosphere
+was foggy. The thermometer 18 deg at five A.M. In the course of
+our march this morning, we passed many small lakes; and the
+ground becoming higher and more hilly as we receded from the
+river, was covered to a much greater depth with snow. This ren-dered
+walking not only extremely laborious, but also hazardous in
+the highest degree;for the sides of the hills, as is usual throughout
+the barren grounds, abounding in accumulations of large angular
+stones, it often happened that the men fell into the interstices
+with their loads on their backs, being deceived by the smooth
+appearance of the drifted snow. If any one had broken a limb
+here, his fate would have been melancholy indeed; we could neither
+have remained with him, nor carried him on. We halted at ten to
+gather tripe de roche,but it was so frozen, that we were quite
+benumbed with cold before a sufficiency could be collected even for
+a scanty meal. On proceeding our men were somewhat cheered, by
+observing on the sandy summit of a hill, from whence the snow had
+been blown, the summer track of a man; and afterwards by seeing
+several deer tracks on the snow. About noon the weather cleared
+up a little, and, to our great joy, we saw a herd of musk-oxen
+grazing in a valley below us. The party instantly halted, and the
+best hunters were sent out; they approached the animals with the
+utmost caution, no less than two hours being consumed before they
+got within gun-shot. In the mean time we beheld their proceed-ings
+with extreme anxiety, and many secret prayers were, doubtless,
+offered up for their success. At length they opened their fire, and
+we had the satisfaction of seeing one of the largest cows fall; another
+was wounded, but escaped. This success infused spirit into our
+starving party. To skin and cut up the animal was the work of a
+few minutes. The contents of its stomach were devoured upon
+the spot, and the raw intestines, which were next attacked, were
+pronounced by the most delicate amongst us to be excellent. A few
+willows, whose tops were seen peeping through the snow in the bottom
+of the valley, were quickly grubbed, the tents pitched, and supper
+cooked, and devoured with avidity. This was the sixth day since we
+had had a good meal. The tripe de roche, even where we got
+enough, only serving to allay the pangs of hunger for a short time.
+After supper, two of the hunters went in pursuit of the herd, but
+could not get near them.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+We were detained all the next day by a strong southerly wind,
+and were much incommoded in the tents by the drift snow. The
+temperature was 20 deg. The average for the last ten days about
+24.5 deg. We restricted ourselves to one meal to-day as we were at
+rest, and there was only meat remaining sufficient for the next day.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+The gale had not diminished on the 12th, and, as we were
+fearful of its continuance for some time, we determined on going
+forward; our only doubt regarded the preservation of the canoe,
+but the men promised to pay particular attention to it, and the
+most careful persons were appointed to take it in charge. The snow
+was two feet deep, and the ground much broken, which rendered
+the march extremely painful. The whole party complained more of
+faintness and weakness than they had ever done before; their
+strength seemed to have been impaired by the recent supply of
+animal food. In the afternoon the wind abated, and the snow ceased;
+cheered with the change we proceeded forward at a quicker pace,
+and encamped at six P. M., having come eleven miles. Our supper
+consumed the last of our meat.
+        </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+We set out on the 13th, in thick hazy weather, and, after an hour's
+march, had the extreme mortification to find ourselves on the
+borders of a large lake, which we subsequently learned from the
+Indians was named Contwoy-to, or Rum Lake; neither of its extre-
+mities could be seen, and as the portion which lay to the east
+seemed the widest, we coasted along to the westward portion in
+search of a crossing-place. This lake being bounded by steep and
+lofty hills, our march was very fatiguing. Those sides which were
+exposed to the sun, were free from snow, and we found upon them
+some excellent berries. We encamped at six P. M., having come
+only six miles and a half. Credit was then missing, and he did not
+return during the night. We supped off a single partridge and
+some tripe de roche;this unpalatable weed was now quite nau-seous
+to the whole party, and in several it produced bowel com-plaints.
+Mr. Hood was the greatest sufferer from this cause. This
+evening we were extremely distressed, at discovering that our im-provident
+companions,since we left Hood's River, had thrown
+away three of the fishing-nets, and burnt the floats ; they knew we
+had brought them to procure subsistence for the party, when the
+animals should fail, and we could scarcely believe the fact of their
+having wilfully deprived themselves of this resource, especially
+when we considered that most of them had passed the greater part of
+their servitude in situations where the nets alone had supplied them
+with food. Being thus deprived of our principal resource, that of
+fishing, and the men evidently getting weaker every day, it became
+necessary to lighten their burthens of every thing except ammunition,
+clothing, and the instruments that were required to find our
+way. I, therefore, issued directions to deposit at this encampment
+the dipping needle, azimuth compass, magnet, a large thermometer,
+and a few books we had carried, having torn out of these such parts
+as we should require to work the observations for latitude and
+longitude. I also promised,as an excitement to the efforts in
+hunting, my gun to St. Germain, and an ample compensation to
+Adam, or any of the other men who should kill any animals.
+Mr. Hood, on this occasion, lent his gun to Michel, the Iroquois,
+who was very eager in the chase, and often successful.
+        </fo:block>
+
+    <fo:block font-size="8pt"
+            font-family="serif"
+            font-style="italic"
+            line-height="10pt"
+            space-before.optimum="3pt"
+            space-after.optimum="3pt"
+            text-align="start">September 14.
+      </fo:block>
+
+    <!-- Normal text -->
+    <fo:block font-size="11pt"
+            font-family="serif"
+            line-height="12pt"
+            space-after.optimum="0pt"
+            text-align="start">
+This morning the officers being assembled round
+a small fire, Perrault presented each of us with a small piece of meat
+which he had saved from his allowance. It was received with great
+thankfulness, and such an act of self-denial and kindness, being
+totally unexpected in a Canadian voyager, filled our eyes with tears.
+In directing our course to a river issuing from the lake, we met
+Credit, who communicated the joyful intelligence of his having
+killed two deer in the morning. We instantly halted, and having
+shared the deer that was nearest to us, prepared breakfast. After
+which, the other deer was sent for, and we went down to the river,
+which was about three hundred yards wide, and flowed with
+great velocity through a broken rocky channel. Having searched
+for a part where the current was most smooth, the canoe was
+placed in the water at the head of a rapid, and St. Germain, Solomon
+Belanger, and I, embarked in order to cross. We went from the
+shore very well, but in mid-channel the canoe became difficult to
+manage under our burden as the breeze was fresh. The current
+drove us to the edge of the rapid, when Belanger unfortunately
+applied his paddle to avert the apparent danger of being forced
+down it, and lost his balance. The canoe was overset in con-sequence
+in the middle of the rapid. We fortunately kept hold of
+it, until we touched a rock where the water did not reach higher
+than our waists; here we kept our footing, notwithstanding the
+strength of the current, until the water was emptied out of the
+canoe. Belanger then held the canoe steady whilst St. Germain
+placed me in it, and afterwards embarked himself in a very dexterous
+manner. It was impossible, however, to embark Belanger,
+as the canoe would have been hurried down the rapid, the moment
+he should have raised his foot from the rock on which he stood.
+We were, therefore, compelled to leave him in his perilous situation.
+We had not gone twenty yards before the canoe, striking on a
+sunken rock, went down. The place being shallow, we were again
+enabled to empty it, and the third attempt brought us to the shore.
+In the mean time Belanger was suffering extremely, immersed to
+his middle in the centre of a rapid, the temperature of which was
+very little above the freezing point, and the upper part of his body
+covered with wet clothes, exposed in a temperature not much above
+zero, to a strong breeze. He called piteously for relief, and
+St. Germain on his return endeavoured to embark him, but in vain.
+The canoe was hurried down the rapid, and when he landed he was
+rendered by the cold incapable of further exertion, and Adam at-tempted
+to embark Belanger, but found it impossible. An attempt
+was next made to carry out to him a line, made of the slings of the
+men's loads. This also failed, the current acting so strongly upon
+it, as to prevent the canoe from steering, and it was finally broken
+and carried down the stream. At length, when Belanger's strength
+seemed almost exhausted, the canoe reached him with a small cord
+belonging to one of the nets, and he was dragged perfectly senseless
+through the rapid. By the direction of Dr. Richardson, he was
+instantly stripped, and being rolled up in blankets, two men un-dressed
+themselves and went to bed with him; but it was some
+hours before he recovered his warmth and sensations. As soon as
+Belanger was placed in his bed, the officers immediately sent over
+my blankets, and a person to make a fire. Augustus brought the
+canoe over, and in returning he was obliged to descend both the
+rapids, before he could get across the stream; which hazardous
+service he performed with the greatest coolness and judgment. It
+is impossible to describe my sensations as I witnessed the various
+unsuccessful attempts to relieve Belanger. The distance prevented
+my seeing distinctly what was going on, and I continued pacing up
+and down upon the rock on which I landed, regardless of the
+coldness of my drenched and stiffening garments. The canoe, in
+every attempt to reach him, was hurried down the rapid, and was
+lost to the view amongst the rocky islets, with a rapidity that
+seemed to threaten certain destruction; once, indeed, I fancied that
+I saw it overwhelmed in the waves. Such an event would have
+been fatal to the whole party. Separated as I was from my com-panions,
+without gun, ammunition, hatchet, or the means of making
+a fire, and in wet clothes, my doom would have been speedily sealed.
+My companions too, driven to the necessity of coasting the lake,
+must have sunk under the fatigue of rounding its innumerable arms
+and bays, which, as we have learned from the Indians, are very
+extensive. By the goodness of Providence, however, we were spared
+at that time, and some of us have been permitted to offer up our
+thanksgivings, in a civilized land, for the signal deliverances we then
+and afterwards experienced.
+        </fo:block>
+
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

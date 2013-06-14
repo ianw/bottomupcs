@@ -1,0 +1,17 @@
+FOP Embedding Examples Readme
+
+This directory contains several examples on using FOP in Java.
+
+To compile the examples you can call "ant" from the directory where
+build.xml is found. (Apache Ant must be installed!)
+You can also directly run the individual examples with these scripts.
+Just call
+
+ant -projecthelp
+
+for a listing of all available examples.
+
+
+
+Please go to the page indicated below to find more information:
+http://xmlgraphics.apache.org/fop/embedding.html

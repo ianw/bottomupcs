@@ -1,0 +1,557 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.10-dev">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Apache&trade; FOP: Metadata</title>
+<link type="text/css" href="../skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="../skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="../skin/print.css" rel="stylesheet">
+<link type="text/css" href="../skin/profile.css" rel="stylesheet">
+<script src="../skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="../skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="../skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="../favicon.ico">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://xmlgraphics.apache.org/"><img class="logoImage" alt="Apache XML Graphics" src="../images/group-logo.gif" title="Apache XML Graphics is responsible for the creation and maintenance of software for managing the conversion of XML formats to graphical output, and the creation and maintenance of related software components, based on software licensed to the Foundation"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://xmlgraphics.apache.org/fop/"><img class="logoImage" alt="Apache FOP" src="../images/logo.jpg" title="Apache FOP (Formatting Objects Processor) is the world's first output independent formatter. Output formats currently supported include PDF, PCL, PS, SVG, XML (area tree representation), Print, AWT, MIF and TXT. The primary output target is PDF."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="xmlgraphics.apache.org" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="../index.html">Home</a>
+</li>
+<li class="current">
+<a class="selected" href="../1.0/index.html">Version 1.0</a>
+</li>
+<li>
+<a class="unselected" href="../1.1/index.html">Version 1.1</a>
+</li>
+<li>
+<a class="unselected" href="../trunk/index.html">FOP Trunk</a>
+</li>
+<li>
+<a class="unselected" href="../dev/index.html">Development</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">The Apache Software Foundation</a> &gt; <a href="http://xmlgraphics.apache.org/">Apache XML Graphics Project</a><script src="../skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_selected_1.1', '../skin/')" id="menu_selected_1.1Title" class="menutitle" style="background-image: url('../skin/images/chapter_open.gif');">Apache&trade; FOP 1.0</div>
+<div id="menu_selected_1.1" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="../1.0/index.html">About</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/releaseNotes_1.0.html">Release Notes</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/changes_1.0.html">Changes (1.0)</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/knownissues_overview.html">Known Issues</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/upgrading.html">Upgrading</a>
+</div>
+<div onclick="SwitchMenu('menu_1.1.6', '../skin/')" id="menu_1.1.6Title" class="menutitle">Using Apache&trade; FOP</div>
+<div id="menu_1.1.6" class="menuitemgroup">
+<div class="menuitem">
+<a href="../1.0/anttask.html">Ant Task</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/compiling.html">Build</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/configuration.html">Configure</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/embedding.html">Embed</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/running.html">Run</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/servlets.html">Servlets</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_selected_1.1.7', '../skin/')" id="menu_selected_1.1.7Title" class="menutitle" style="background-image: url('../skin/images/chapter_open.gif');">Features</div>
+<div id="menu_selected_1.1.7" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="../1.0/accessibility.html">Accessibility</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/events.html">Events</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/extensions.html">Extensions</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/fonts.html">Fonts</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/output.html">Output Targets</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/graphics.html">Graphics</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/hyphenation.html">Hyphenation</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/intermediate.html">Intermediate Format</a>
+</div>
+<div class="menupage">
+<div class="menupagetitle">Metadata</div>
+</div>
+<div class="menuitem">
+<a href="../1.0/pdfa.html">PDF/A</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/pdfx.html">PDF/X</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/pdfencryption.html">PDF Encryption</a>
+</div>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="../skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="raw XML" class="xmllink">
+<a class="dida" href="metadata.xml"><img alt="XML - icon" src="../skin/images/xmldoc.gif" class="skin"><br>
+        XML</a>
+</div>
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="metadata.pdf"><img alt="PDF -icon" src="../skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<div class="trail">Font size: 
+	          &nbsp;<input value="Reset" class="resetfont" title="Reset text" onclick="ndeSetTextSize('reset'); return false;" type="button">      
+	          &nbsp;<input value="-a" class="smallerfont" title="Shrink text" onclick="ndeSetTextSize('decr'); return false;" type="button">
+	          &nbsp;<input value="+a" class="biggerfont" title="Enlarge text" onclick="ndeSetTextSize('incr'); return false;" type="button">
+</div>
+<h1>Apache&trade; FOP: Metadata</h1>
+<div id="front-matter">
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#overview">Overview</a>
+</li>
+<li>
+<a href="#xmp-in-fo">Embedding XMP in an XSL-FO document</a>
+<ul class="minitoc">
+<li>
+<a href="#xmp-example">Example</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#xmp-impl-in-fop">Implementation in Apache FOP</a>
+<ul class="minitoc">
+<li>
+<a href="#namespaces">Namespaces</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#links">Links</a>
+</li>
+</ul>
+</div>
+</div>
+    
+<a name="overview"></a>
+<h2 class="underlined_10">Overview</h2>
+<div class="section">
+<p>
+        Document metadata is an important tool for categorizing and finding documents.
+        Various formats support different kinds of metadata representation and to
+        different levels. One of the more popular and flexible means of representing
+        document or object metadata is
+        <a class="external" href="http://www.adobe.com/products/xmp/">XMP (eXtensible Metadata Platform, specified by Adobe)</a>.
+        PDF 1.4 introduced the use of XMP. The XMP specification lists recommendation for
+        embedding XMP metdata in other document and image formats. Given its flexibility it makes
+        sense to make use this approach in the XSL-FO context. Unfortunately, unlike SVG which
+        also refers to XMP, XSL-FO doesn't recommend a preferred way of specifying document and
+        object metadata. Therefore, there's no portable way to represent metadata in XSL-FO
+        documents. Each implementation does it differently.
+      </p>
+</div>
+    
+<a name="xmp-in-fo"></a>
+<h2 class="underlined_10">Embedding XMP in an XSL-FO document</h2>
+<div class="section">
+<p>
+        As noted above, there's no officially recommended way to embed metadata in XSL-FO.
+        Apache FOP supports embedding XMP in XSL-FO. Currently, only support for document-level
+        metadata is implemented. Object-level metadata will be implemented when there's
+        interest.
+      </p>
+<p>
+        Document-level metadata can be specified in the <span class="codefrag">fo:declarations</span> element.
+        XMP specification recommends to use <span class="codefrag">x:xmpmeta</span>, <span class="codefrag">rdf:RDF</span>, and
+        <span class="codefrag">rdf:Description</span> elements as shown in example below. Both
+        <span class="codefrag">x:xmpmeta</span> and <span class="codefrag">rdf:RDF</span> elements are recognized as the top-level
+        element introducing an XMP fragment (as per the XMP specification).
+      </p>
+<a name="xmp-example"></a>
+<h3 class="underlined_5">Example</h3>
+<pre class="code">[..]
+&lt;/fo:layout-master-set&gt;
+&lt;fo:declarations&gt;
+  &lt;x:xmpmeta xmlns:x="adobe:ns:meta/"&gt;
+    &lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"&gt;
+      &lt;rdf:Description rdf:about=""
+          xmlns:dc="http://purl.org/dc/elements/1.1/"&gt;
+        &lt;!-- Dublin Core properties go here --&gt;
+        &lt;dc:title&gt;Document title&lt;/dc:title&gt;
+        &lt;dc:creator&gt;Document author&lt;/dc:creator&gt;
+        &lt;dc:description&gt;Document subject&lt;/dc:description&gt;
+      &lt;/rdf:Description&gt;
+      &lt;rdf:Description rdf:about=""
+          xmlns:xmp="http://ns.adobe.com/xap/1.0/"&gt;
+        &lt;!-- XMP properties go here --&gt;
+        &lt;xmp:CreatorTool&gt;Tool used to make the PDF&lt;/xmp:CreatorTool&gt;
+      &lt;/rdf:Description&gt;
+    &lt;/rdf:RDF&gt;
+  &lt;/x:xmpmeta&gt;
+&lt;/fo:declarations&gt;
+&lt;fo:page-sequence ...
+[..]</pre>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">
+          
+<span class="codefrag">fo:declarations</span> <strong>must</strong> be declared after
+          <span class="codefrag">fo:layout-master-set</span> and before the first <span class="codefrag">page-sequence</span>.
+        </div>
+</div>
+</div>
+    
+<a name="xmp-impl-in-fop"></a>
+<h2 class="underlined_10">Implementation in Apache FOP</h2>
+<div class="section">
+<p>
+        Currently, XMP support is only available for PDF output.
+      </p>
+<p>
+        Originally, you could set some metadata information through FOP's FOUserAgent by
+        using its set*() methods (like setTitle(String) or setAuthor(String). These values are
+        directly used to set value in the PDF Info object. Since PDF 1.4, adding metadata as an
+        XMP document to a PDF is possible. That means that there are now two mechanisms in PDF
+        that hold metadata.
+      </p>
+<p>
+        Apache FOP now synchronizes the Info and the Metadata object in PDF, i.e. when you
+        set the title and the author through the FOUserAgent, the two values will end up in
+        the (old) Info object and in the new Metadata object as XMP content. If instead of
+        FOUserAgent, you embed XMP metadata in the XSL-FO document (as shown above), the
+        XMP metadata will be used as-is in the PDF Metadata object and some values from the
+        XMP metadata will be copied to the Info object to maintain backwards-compatibility
+        for PDF readers that don't support XMP metadata.
+      </p>
+<p>
+        The mapping between the Info and the Metadata object used by Apache FOP comes from
+        the <a class="external" href="http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=38920">PDF/A-1 specification</a>.
+        For convenience, here's the mapping table:
+      </p>
+<table class="ForrestTable" cellspacing="1" cellpadding="4">
+        
+<tr>
+          
+<th colspan="2" rowspan="1">Document information dictionary</th>
+          <th colspan="3" rowspan="1">XMP</th>
+        
+</tr>
+        
+<tr>
+          
+<th colspan="1" rowspan="1">Entry</th>
+          <th colspan="1" rowspan="1">PDF type</th>
+          <th colspan="1" rowspan="1">Property</th>
+          <th colspan="1" rowspan="1">XMP type</th>
+          <th colspan="1" rowspan="1">Category</th>
+        
+</tr>
+        
+<tr>
+          
+<td colspan="1" rowspan="1">Title</td>
+          <td colspan="1" rowspan="1">text string</td>
+          <td colspan="1" rowspan="1">dc:title</td>
+          <td colspan="1" rowspan="1">Text</td>
+          <td colspan="1" rowspan="1">External</td>
+        
+</tr>
+        
+<tr>
+          
+<td colspan="1" rowspan="1">Author</td>
+          <td colspan="1" rowspan="1">text string</td>
+          <td colspan="1" rowspan="1">dc:creator</td>
+          <td colspan="1" rowspan="1">seq Text</td>
+          <td colspan="1" rowspan="1">External</td>
+        
+</tr>
+        
+<tr>
+          
+<td colspan="1" rowspan="1">Subject</td>
+          <td colspan="1" rowspan="1">text string</td>
+          <td colspan="1" rowspan="1">dc:description["x-default"]</td>
+          <td colspan="1" rowspan="1">Text</td>
+          <td colspan="1" rowspan="1">External</td>
+        
+</tr>
+        
+<tr>
+          
+<td colspan="1" rowspan="1">Keywords</td>
+          <td colspan="1" rowspan="1">text string</td>
+          <td colspan="1" rowspan="1">pdf:Keywords</td>
+          <td colspan="1" rowspan="1">Text</td>
+          <td colspan="1" rowspan="1">External</td>
+        
+</tr>
+        
+<tr>
+          
+<td colspan="1" rowspan="1">Creator</td>
+          <td colspan="1" rowspan="1">text string</td>
+          <td colspan="1" rowspan="1">xmp:CreatorTool</td>
+          <td colspan="1" rowspan="1">Text</td>
+          <td colspan="1" rowspan="1">External</td>
+        
+</tr>
+        
+<tr>
+          
+<td colspan="1" rowspan="1">Producer</td>
+          <td colspan="1" rowspan="1">text string</td>
+          <td colspan="1" rowspan="1">pdf:Producer</td>
+          <td colspan="1" rowspan="1">Text</td>
+          <td colspan="1" rowspan="1">Internal</td>
+        
+</tr>
+        
+<tr>
+          
+<td colspan="1" rowspan="1">CreationDate</td>
+          <td colspan="1" rowspan="1">date</td>
+          <td colspan="1" rowspan="1">xmp:CreationDate</td>
+          <td colspan="1" rowspan="1">Date</td>
+          <td colspan="1" rowspan="1">Internal</td>
+        
+</tr>
+        
+<tr>
+          
+<td colspan="1" rowspan="1">ModDate</td>
+          <td colspan="1" rowspan="1">date</td>
+          <td colspan="1" rowspan="1">xmp:ModifyDate</td>
+          <td colspan="1" rowspan="1">Date</td>
+          <td colspan="1" rowspan="1">Internal</td>
+        
+</tr>
+      
+</table>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">
+        "Internal" in the Category column means that the user should not set this value.
+        It is set by the application. 
+      </div>
+</div>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">
+        The "Subject" used to be mapped to <span class="codefrag">dc:subject</span> in the initial publication of
+        PDF/A-1 (ISO 19005-1). In the
+        <a class="external" href="http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=45613">Technical Corrigendum 1</a>
+        this was changed to map to <span class="codefrag">dc:description["x-default"]</span>. 
+      </div>
+</div>
+<a name="namespaces"></a>
+<h3 class="underlined_5">Namespaces</h3>
+<p>
+          Metadata is made of property sets where each property set uses a different namespace URI.
+        </p>
+<p>
+          The following is a listing of namespaces that Apache FOP recognizes and acts upon,
+          mostly to synchronize the XMP metadata with the PDF Info dictionary: 
+        </p>
+<table class="ForrestTable" cellspacing="1" cellpadding="4">
+          
+<tr>
+            
+<th colspan="1" rowspan="1">Set/Schema</th>
+            <th colspan="1" rowspan="1">Namespace Prefix</th>
+            <th colspan="1" rowspan="1">Namespace URI</th>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">Dublin Core</td>
+            <td colspan="1" rowspan="1">dc</td>
+            <td colspan="1" rowspan="1">http://purl.org/dc/elements/1.1/</td>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">XMP Basic</td>
+            <td colspan="1" rowspan="1">xmp</td>
+            <td colspan="1" rowspan="1">http://ns.adobe.com/xap/1.0/</td>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">Adobe PDF Schema</td>
+            <td colspan="1" rowspan="1">pdf</td>
+            <td colspan="1" rowspan="1">http://ns.adobe.com/pdf/1.3/</td>
+          
+</tr>
+        
+</table>
+<p>
+          Please refer to the <a class="external" href="http://partners.adobe.com/public/developer/en/xmp/sdk/XMPspecification.pdf">XMP Specification</a>
+          for information on other metadata namespaces.
+        </p>
+<p>
+          Property sets (Namespaces) not listed here are simply passed through to the final
+          document (if supported). That is useful if you want to specify a custom metadata
+          schema.
+        </p>
+</div>
+    
+<a name="links"></a>
+<h2 class="underlined_10">Links</h2>
+<div class="section">
+<ul>
+        
+<li>
+<a class="external" href="http://www.adobe.com/products/xmp/">Adobe's Extensible Metadata Platform (XMP) website</a>
+</li>
+        
+<li>
+<a class="external" href="http://partners.adobe.com/public/developer/en/xmp/sdk/XMPspecification.pdf">Adobe XMP Specification</a>
+</li>
+        
+<li>
+<a class="external" href="http://partners.adobe.com/public/developer/en/xmp/sdk/XMPspecification.pdf">Adobe XMP Specification</a>
+</li>
+        
+<li>
+<a class="external" href="http://dublincore.org/">http://dublincore.org/</a>
+</li>
+      
+</ul>
+</div>
+  
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         1999-2012 <a href="http://www.apache.org/licenses/">The Apache Software Foundation. Licensed under Apache License 2.0</a>
+<br>
+    Apache, Apache FOP, the Apache feather logo, and the Apache FOP
+    logos are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+  </div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

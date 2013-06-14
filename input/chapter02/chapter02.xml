@@ -1,0 +1,1829 @@
+<chapter id="chapter02">
+
+  <title>Computer Architecture</title>
+
+  <sect1 id="the_cpu">
+    <title>The CPU</title>
+
+    <figure>
+      <title>The CPU</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="chapter02/figures/computer.eps" format="EPS" />
+	</imageobject>
+	<imageobject role="fo">
+	  <imagedata fileref="chapter02/figures/computer.svg"
+	  format="SVG" scalefit="1" width="100%" contentdept="100%"/>
+	</imageobject>
+	<imageobject>
+	  <imagedata fileref="chapter02/figures/computer.png" format="PNG" />
+	</imageobject>
+	  <caption>The CPU performs instructions on values held in
+	      registers.  This example shows firstly setting the value
+	      of R1 to 100, loading the value from memory location
+	      0x100 into R2, adding the two values together and
+	      placing the result in R3 and finally storing the new
+	      value (110) to R4 (for further use). </caption>
+      </mediaobject>
+
+    </figure>
+
+    <para>To greatly simplify, a computer consists of a central
+    processing unit (CPU) attached to memory.  The figure above
+    illustrates the general principle behind all computer
+    operations.</para>
+
+    <para>The CPU executes instructions read from memory.  There are
+    two categories of instructions</para>
+
+    <orderedlist>
+      <listitem>
+	<para>Those that <emphasis>load</emphasis> values from memory
+	into registers and <emphasis>store</emphasis> values from
+	registers to memory.</para>
+      </listitem>
+      <listitem>
+	<para>Those that operate on values stored in registers.  For
+	example adding, subtracting multiplying or dividing the values
+	in two registers, performing bitwise operations (and, or, xor,
+	etc) or performing other mathematical operations (square root,
+	sin, cos, tan, etc). </para>
+      </listitem>
+    </orderedlist>
+
+    <para>So in the example we are simply adding 100 to a value stored
+    in memory, and storing this new result back into memory.</para>
+
+    <sect2>
+      <title>Branching</title>
+
+      <para>Apart from loading or storing, the other important
+	operation of a CPU is <emphasis>branching</emphasis>.
+	Internally, the CPU keeps a record of the next instruction to
+	be executed in the <emphasis>instruction pointer</emphasis>.
+	Usually, the instruction pointer is incremented to point to
+	the next instruction sequentially; the branch instruction will
+	usually check if a specific register is zero or if a flag is
+	set and, if so, will modify the pointer to a different
+	address.  Thus the next instruction to execute will be from a
+	different part of program; this is how loops and decision
+	statements work.</para>
+
+      <para>For example, a statement like <computeroutput>if
+      (x==0)</computeroutput> might be implemented by finding the
+      <computeroutput>or</computeroutput> of two registers, one
+      holding <computeroutput>x</computeroutput> and the other zero;
+      if the result is zero the comparison is true (i.e. all bits of
+      <computeroutput>x</computeroutput> were zero) and the body of
+      the statement should be taken, otherwise branch past the body
+      code.</para>
+
+    </sect2>
+
+    <sect2>
+      <title>Cycles</title>
+
+      <para>We are all familiar with the speed of the computer, given
+	in Megahertz or Gigahertz (millions or thousands of millions
+	cycles per second).  This is called the <emphasis>clock
+	speed</emphasis> since it is the speed that an internal clock
+	within the computer pulses.</para>
+
+      <para>The pulses are used within the processor to keep it
+      internally synchronised.  On each tick or pulse another
+      operation can be started; think of the clock like the person
+      beating the drum to keep the rower's oars in sync. </para>
+
+    </sect2>
+
+    <sect2>
+      <title>Fetch, Decode, Execute, Store</title>
+
+      <para>Executing a single instruction consists of a particular
+	cycle of events; fetching, decoding, executing and
+	storing.</para>
+
+      <para>For example, to do the
+	<computeroutput>add</computeroutput> instruction above the CPU
+	must</para>
+
+      <orderedlist>
+	<listitem>
+	  <para>Fetch : get the instruction from memory into the
+	  processor.</para>
+	</listitem>
+	<listitem>
+	  <para>Decode : internally decode what it has to do (in this
+	    case add).</para>
+	</listitem>
+	<listitem>
+	  <para>Execute : take the values from the registers, actually
+	  add them together</para>
+	</listitem>
+	<listitem>
+	  <para>Store : store the result back into another register.
+	  You might also see the term <emphasis>retiring</emphasis>
+	  the instruction.</para>
+	</listitem>
+      </orderedlist>
+
+      <sect3>
+	<title>Looking inside a CPU</title>
+
+      <para>Internally the CPU has many different sub components that
+	perform each of the above steps, and generally they can all
+	happen independently of each other.  This is analogous to a
+	physical production line, where there are many stations where
+	each step has a particular task to perform.  Once done it can
+	pass the results to the next station and take a new input to
+	work on.</para>
+
+	<figure id="inside_the_cpu">
+	  <title>Inside the CPU</title>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="chapter02/figures/block.eps" format="EPS" />
+	    </imageobject>
+	    <imageobject role="fo">
+	      <imagedata fileref="chapter02/figures/block.svg"
+	      format="SVG" scalefit="1" width="100%"
+	      contentdept="100%"/>
+	    </imageobject>
+	    <imageobject>
+	      <imagedata fileref="chapter02/figures/block.png" format="PNG" />
+	    </imageobject>
+	      <caption>The CPU is made up of many different
+	      sub-components, each doing a dedicated task.</caption>
+	  </mediaobject>
+	</figure>
+
+	<para><xref linkend="inside_the_cpu"></xref> shows a very
+	      simple block diagram illustrating some of the main parts
+	      of a modern CPU.</para>
+
+	<para>You can see the instructions come in and are decoded by
+	the processor.  The CPU has two main types of registers, those
+	for <emphasis>integer</emphasis> calculations and those for
+	<emphasis>floating point</emphasis> calculations.  Floating
+	point is a way of representing numbers with a decimal place in
+	binary form, and is handled differently within the CPU.
+	<emphasis>MMX</emphasis> (multimedia extension) and
+	<emphasis>SSE</emphasis> (Streaming Single Instruction
+	Multiple Data) or <emphasis>Altivec</emphasis> registers are
+	similar to floating point registers.</para>
+
+	<para>A <emphasis>register file</emphasis> is the collective
+	name for the registers inside the CPU.  Below that we have the
+	parts of the CPU which really do all the work.</para>
+
+	<para>We said that processors are either loading or storing a
+	value into a register or from a register into memory, or doing
+	some operation on values in registers.</para>
+
+	<para>The <emphasis>Arithmetic Logic Unit</emphasis> (ALU) is
+	the heart of the CPU operation.  It takes values in registers
+	and performs any of the multitude of operations the CPU is
+	capable of.  All modern processors have a number of ALUs so
+	each can be working independently.  In fact, processors such
+	as the Pentium have both <emphasis>fast</emphasis> and
+	<emphasis>slow</emphasis> ALUs; the fast ones are smaller (so
+	you can fit more on the CPU) but can do only the most common
+	operations, slow ALUs can do all operations but are
+	bigger.</para>
+
+	<para>The <emphasis>Address Generation Unit</emphasis> (AGU)
+	handles talking to cache and main memory to get values into
+	the registers for the ALU to operate on and get values out of
+	registers back into main memory.</para>
+
+	<para>Floating point registers have the same concepts, but use
+	slightly different terminology for their components.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Pipelining</title>
+
+	<para>As we can see above, whilst the ALU is adding registers
+	together is completely separate to the AGU writing values back
+	to memory, so there is no reason why the CPU can not be doing
+	both at once.  We also have multiple ALUs in the system, each
+	which can be working on separate instructions.  Finally the
+	CPU could be doing some floating point operations with its
+	floating point logic whilst integer instructions are in flight
+	too.  This process is called
+	<emphasis>pipelining</emphasis><footnote><para>In fact, any
+	modern processor has many more than four stages it can
+	pipeline, above we have only shown a very simplified view.
+	The more stages that can be executed at the same time, the
+	deeper the pipeline.</para></footnote>, and a processor that
+	can do this is referred to as a <emphasis>superscalar
+	architecture</emphasis>.  All modern processors are
+	superscalar.</para>
+
+	<para>Another analogy might be to think of the pipeline like a
+      hose that is being filled with marbles, except our marbles are
+      instructions for the CPU.  Ideally you will be putting your
+      marbles in one end, one after the other (one per clock pulse),
+      filling up the pipe.  Once full, for each marble (instruction)
+      you push in all the others will move to the next position and
+      one will fall out the end (the result).</para>
+
+	<para>Branch instruction play havoc with this model however,
+	since they may or may not cause execution to start from a
+	different place.  If you are pipelining, you will have to
+	basically guess which way the branch will go, so you know
+	which instructions to bring into the pipeline.  If the CPU has
+	predicted correctly, everything goes
+	fine!<footnote><para>Processors such as the Pentium use a
+	<emphasis>trace cache</emphasis> to keep a track of which way
+	branches are going.  Much of the time it can predict which way
+	a branch will go by remembering its previous result.  For
+	example, in a loop that happens 100 times, if you remember the
+	last result of the branch you will be right 99 times, since
+	only the last time will you actually continue with the
+	program.</para></footnote> Conversely, if the processor has
+	predicted incorrectly it has wasted a lot of time and has to
+	clear the pipeline and start again.</para>
+
+	<para>This process is usually referred to as a
+      <emphasis>pipeline flush</emphasis> and is analogous to having
+      to stop and empty out all your marbles from your hose!</para>
+
+	<sect4>
+	  <title>Branch Prediction</title>
+
+	  <para>pipeline flush, predict taken, predict not taken,
+	  branch delay slots</para>
+
+	</sect4>
+      </sect3>
+
+
+
+      <sect3>
+	<title>Reordering</title>
+
+	<para>This bit is crap</para>
+
+	<para>In fact, if the CPU is the hose, it is free to reorder
+	the marbles within the hose, as long as they pop out the end
+	in the same order you put them in.  We call this
+	<emphasis>program order</emphasis> since this is the order
+	that instructions are given in the computer program.</para>
+
+	<figure id="reorder_buffer">
+	  <title>Reorder buffer example</title>
+	  <mediaobject>
+	    <textobject>
+	      <programlisting>
+1: r3 = r1 * r2
+2: r4 = r2 + r3
+3: r7 = r5 * r6
+4: r8 = r1 + r7</programlisting>
+
+	    </textobject>
+	  </mediaobject>
+	</figure>
+
+	<para>Consider an instruction stream such as that shown in
+	<xref linkend="reorder_buffer"></xref>
+	  Instruction 2 needs to wait for instruction 1 to
+	complete fully before it can start.  This means that the
+	pipeline has to <emphasis>stall</emphasis> as it waits for the
+	value to be calculated.  Similarly instructions 3 and 4 have a
+	dependency on <emphasis>r7</emphasis>.  However, instructions
+	2 and 3 have no <emphasis>dependency</emphasis> on each other
+	at all; this means they operate on completely separate
+	registers.  If we swap instructions 2 and 3 we can get a much
+	better ordering for the pipeline since the processor can be
+	doing useful work rather than waiting for the pipeline to
+	complete to get the result of a previous instruction.</para>
+
+	<para>However, when writing very low level code some
+	instructions may require some security about how operations
+	are ordered.  We call this requirement <emphasis>memory
+	semantics</emphasis>.  If you require
+	<emphasis>acquire</emphasis> semantics this means that for
+	this instruction you must ensure that the results of all
+	previous instructions have been completed.  If you require
+	<emphasis>release</emphasis> semantics you are saying that all
+	instructions after this one must see the current result.
+	Another even stricter semantic is a <emphasis>memory
+	barrier</emphasis> or <emphasis>memory fence</emphasis> which
+	requires that operations have been committed to memory before
+	continuing.</para>
+
+	<para>On some architectures these semantics are guaranteed for
+	you by the processor, whilst on others you must specify them
+	explicitly.  Most programmers do not need to worry directly
+	about them, although you may see the terms.</para>
+
+      </sect3>
+
+    </sect2>
+
+    <sect2>
+      <title>CISC v RISC</title>
+
+      <para>A common way to divide computer architectures is into
+      <emphasis>Complex Instruction Set Computer</emphasis> (CISC) and
+      <emphasis>Reduced Instruction Set Computer</emphasis>
+      (RISC).</para>
+
+      <para>Note in the first example, we have explicitly loaded
+      values into registers, performed an addition and stored the
+      result value held in another register back to memory.  This is
+      an example of a RISC approach to computing -- only performing
+      operations on values in registers and explicitly loading and
+      storing values to and from memory.</para>
+
+      <para>A CISC approach may only a single instruction taking
+      values from memory, performing the addition internally and
+      writing the result back.  This means the instruction may take
+      many cycles, but ultimately both approaches achieve the same
+      goal.</para>
+
+      <para>All modern architectures would be considered RISC
+      architectures<footnote><para>Even the most common architecture,
+      the Intel Pentium, whilst having an instruction set that is
+      categorised as CISC, internally breaks down instructions to RISC
+      style sub-instructions inside the chip before
+      executing.</para></footnote>.</para>
+
+      <para>There are a number of reasons for this</para>
+
+      <itemizedlist>
+	<listitem>
+	  <para>Whilst RISC makes assembly programming becomes more
+	  complex, since virtually all programmers use high level
+	  languages and leave the hard work of producing assembly
+	  code to the compiler, so the other advantages outweigh this
+	  disadvantage.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Because the instructions in a RISC processor are much
+	  more simple, there is more space inside the chip for
+	  registers.  As we know from the memory hierarchy, registers
+	  are the fastest type of memory and ultimately all
+	  instructions must be performed on values held in registers,
+	  so all other things being equal more registers leads to
+	  higher performance.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Since all instructions execute in the same time,
+	  pipelining is possible.  We know pipelining requires streams
+	  of instructions being constantly fed into the processor, so
+	  if some instructions take a very long time and others do
+	  not, the pipeline becomes far to complex to be
+	  effective.</para>
+	</listitem>
+      </itemizedlist>
+
+      <sect3>
+	<title>EPIC</title>
+
+	<para>The Itanium processor, which is used in many example
+	through this book, is an example of a modified architecture
+	called Explicitly Parallel Instruction Computing.</para>
+
+	<para>We have discussed how superscaler processors have
+	pipelines that have many instructions in flight at the same
+	time in different parts of the processor.  Obviously for this
+	to work as well as possible instructions should be given the
+	processor in an order that can make best use of the
+	available elements of the CPU.</para>
+
+	<para>Traditionally organising the incoming instruction stream
+	has been the job of the hardware.  Instructions are issued by
+	the program in a sequential manner; the processor must look
+	ahead and try to make decisions about how to organise the
+	incoming instructions.</para>
+
+	<para>The theory behind EPIC is that there is more information
+	available at higher levels which can make these decisions
+	better than the processor.  Analysing a stream of assembly
+	language instructions, as current processors do, looses a lot
+	of information that the programmer may have provided in the
+	original source code.  Think of it as the difference between
+	studying a Shakespeare play and reading the Cliff's Notes
+	version of the same.  Both give you the same result, but the
+	original has all sorts of extra information that sets the
+	scene and gives you insight into the characters.</para>
+
+	<para>Thus the logic of ordering instructions can be moved
+	from the processor to the compiler.  This means that compiler
+	writers need to be smarter to try and find the best ordering
+	of code for the processor.  The processor is also
+	significantly simplified, since a lot of its work has been
+	moved to the compiler.<footnote> <para>Another term often used
+	around EPIC is Very Long Instruction World (VLIW), which is
+	where each instruction to the processor is extended to tell
+	the processor about where it should execute the instruction in
+	it's internal units.  The problem with this approach is that
+	code is then completely dependent on the model of processor is
+	has been compiled for.  Companies are always making revisions
+	to hardware, and making customers recompile their application
+	every single time, and maintain a range of different binaries
+	was impractical.</para> <para>EPIC solves this in the usual
+	computer science manner by adding a layer of abstraction.
+	Rather than explicitly specifying the exact part of the
+	processor the instructions should execute on, EPIC creates a
+	simplified view with a few core units like memory, integer and
+	floating point.</para></footnote></para>
+
+      </sect3>
+
+    </sect2>
+
+  </sect1>
+
+  <sect1 id="memory">
+    <title>Memory</title>
+
+    <sect2>
+      <title>Memory Hierarchy</title>
+
+      <para>The CPU can only directly fetch instructions and data
+	from cache memory, located directly on the processor chip.
+	Cache memory must be loaded in from the main system memory
+	(the Random Access Memory, or RAM).  RAM however, only retains
+	it's contents when the power is on, so needs to be stored on
+	more permanent storage.</para>
+
+      <para>We call these layers of memory the <emphasis>memory
+      hierarchy</emphasis></para>
+
+      <table>
+	<title>Memory Hierarchy</title>
+	<tgroup cols="3">
+	  <thead>
+	    <row>
+	      <entry>Speed</entry>
+	      <entry>Memory</entry>
+	      <entry>Description</entry>
+	    </row>
+	  </thead>
+	  <tbody>
+	    <row>
+	      <entry>Fastest</entry>
+	      <entry>Cache</entry>
+	      <entry>Cache memory is memory actually embedded inside
+		the CPU.  Cache memory is very fast, typically taking
+		only once cycle to access, but since it is embedded
+		directly into the CPU there is a limit to how big it
+		can be.  In fact, there are several sub-levels of
+		cache memory (termed L1, L2, L3) all with slightly
+		increasing speeds.</entry>
+	    </row>
+
+	    <row>
+	      <entry></entry> 
+	      <entry>RAM</entry> 
+	      <entry>All instructions and storage addresses for the
+		processor must come from RAM.  Although RAM is very
+		fast, there is still some significant time taken for
+		the CPU to access it (this is termed
+		<emphasis>latency</emphasis>). RAM is stored in
+		separate, dedicated chips attached to the motherboard,
+		meaning it is much larger than cache memory.
+		</entry>
+	    </row>
+
+	      <row>
+		<entry>Slowest</entry>
+		<entry>Disk</entry>
+		<entry>We are all familiar with software arriving on a
+		floppy disk or CDROM, and saving our files to the hard
+		disk.  We are also familiar with the long time a
+		program can take to load from the hard disk -- having
+		physical mechanisms such as spinning disks and moving
+		heads means disks are the slowest form of storage.
+		But they are also by far the largest form of
+		storage.</entry>
+	      </row>
+	    </tbody>
+	  </tgroup>
+	</table>
+
+	<para>The important point to know about the memory hierarchy
+	is the trade offs between speed an size -- the faster the
+	memory the smaller it is.  Of course, if you can find a way to
+	change this equation, you'll end up a billionaire!</para>
+
+        <para>The reason caches are effective is becuase computer code
+        generally exhibits two forms of locality<indexterm id="locality">
+	  <primary>locality</primary>
+	</indexterm>
+	<orderedlist>
+	  <listitem>
+	    <para><emphasis>Spatial</emphasis> locality suggests that
+	    data within blocks is likely to be accessed together.</para>
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>Temporal</emphasis> locality suggests that
+	    data that was used recently will likely be used again
+	    shortly.</para>
+	  </listitem>
+	</orderedlist>
+	This means that benefits are gained by implementing as much
+	quickly accessible memory (temporal) storing small blocks of
+	relevant information (spatial) as practically possible.
+        </para>
+    </sect2>
+
+      <sect2 id="cache_in_depth">
+	<title>Cache in depth</title>
+
+	<para>Cache is one of the most important elements of the CPU
+	  architecture.  To write efficient code developers need to
+	  have an understanding of how the cache in their systems
+	  works.</para>
+
+	<para>The cache is a very fast copy of the slower main system
+	memory.  Cache is much smaller than main memories because it
+	is included inside the processor chip alongside the registers
+	and processor logic.  This is prime real estate in computing
+	terms, and there are both economic and physical limits to it's
+	maximum size.  As manufacturers find more and more ways to
+	cram more and more transistors onto a chip cache sizes grow
+	considerably, but even the largest caches are tens of
+	megabytes, rather than the gigabytes of main memory or
+	terrabytes of hard disk otherwise common.</para>
+
+	<para>The cache is made up of small chunks of mirrored main
+	memory.  The size of these chunks is called the <emphasis>line
+	size</emphasis>, and is typically something like 32 or 64
+	bytes.  When talking about cache, it is very common to talk
+	about the line size, or a cache line, which refers to one
+	chunk of mirrored main memory.  The cache can only load and
+	store memory in sizes a multiple of a cache line.</para>
+
+	<para>Caches have their own hierarchy, commonly termed L1, L2
+	and L3.  L1 cache is the fastest and smallest; L2 is bigger
+	and slower, and L3 more so.</para>
+
+	<para>L1 caches are generally further split into instruction
+	  caches and data, known as the "Harvard Architecture" after
+	  the relay based Harvard Mark-1 computer which introduced it.
+	  Split caches help to reduce pipeline bottlenecks as earlier
+	  pipeline stages tend to reference the instruction cache and
+	  later stages the data cache.  Apart from reducing contention
+	  for a shared resource, providing separate caches for
+	  instructions also allows for alternate implementations which
+	  may take advantage of the nature of instruction streaming;
+	  they are read-only so do not need expensive on-chip features
+	  such as multi-porting, nor need to handle handle sub-block
+	  reads because the instruction stream generally uses more
+	  regular sized accesses.</para>
+
+	<figure id="cache_associativity">
+	  <title>Cache Associativity</title>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="chapter02/figures/sets.eps" format="EPS" />
+	    </imageobject>
+	    <imageobject role="fo">
+	      <imagedata fileref="chapter02/figures/sets.svg"
+	      format="SVG" scalefit="1" width="100%"
+	      contentdept="100%"/>
+	    </imageobject>
+	    <imageobject>
+	      <imagedata fileref="chapter02/figures/sets.png" format="PNG" />
+	    </imageobject>
+	     <caption>
+	      A given cache line may find a valid home in one
+	      of the shaded entries.
+	    </caption>
+	  </mediaobject>
+	</figure>
+
+	<para>During normal operation the processor is constantly
+	      asking the cache to check if a particular address is
+	      stored in the cache, so the cache needs some way to very
+	      quickly find if it has a valid line present or not. If a
+	      given address can be cached anywhere within the cache,
+	      every cache line needs to be searched every time a
+	      reference is made to determine a hit or a miss. To keep
+	      searching fast this is done in parallel in the cache
+	      hardware, but searching every entry is generally far too
+	      expensive to implement for a reasonable sized cache.
+	      Thus the cache can be made simpler by enforcing limits
+	      on where a particular address must live.  This is a
+	      trade-off; the cache is obviously much, much smaller
+	      than the system memory, so some addresses must
+	      <emphasis>alias</emphasis> others. If two addresses
+	      which alias each other are being constantly updated they
+	      are said to <emphasis>fight</emphasis> over the cache
+	      line.  Thus we can categorise caches into three general
+	      types, illustrated in <xref
+	      linkend="cache_associativity"></xref>.
+
+	  <itemizedlist>
+	    <listitem>
+	      <para>
+		<emphasis>Direct mapped</emphasis> caches will allow a
+	      cache line to exist only in a singe entry in the
+	      cache. This is the simplest to implement in hardware,
+	      but as illustrated in <xref
+	      linkend="cache_associativity"></xref> there is no
+	      potential to avoid aliasing because the two shaded
+	      addresses must share the same cache line.
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para>
+	      <emphasis>Fully Associative</emphasis> caches will allow
+	      a cache line to exist in any entry of the cache. This
+	      avoids the problem with aliasing, since any entry is
+	      available for use. But it is very expensive to implement
+	      in hardware because every possible location must be
+	      looked up simultaneously to determine if a value is in
+	      the cache.
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para>
+	      <emphasis>Set Associative</emphasis> caches are a hybrid
+	      of direct and fully associative caches, and allow a
+	      particular cache value to exist in some subset of the
+	      lines within the cache. The cache is divided into even
+	      compartments called <emphasis>ways</emphasis>, and a
+	      particular address could be located in any way. Thus an
+	      <emphasis>n</emphasis>-way set associative cache will
+	      allow a cache line to exist in any entry of a set sized
+	      total blocks mod n &mdash; <xref
+	      linkend="cache_associativity"></xref> shows a sample
+	      8-element, 4-way set associative cache; in this case the
+	      two addresses have four possible locations, meaning only
+	      half the cache must be searched upon lookup.  The more
+	      ways, the more possible locations and the less aliasing,
+	      leading to overall better performance.
+	      </para>
+	    </listitem>
+	  </itemizedlist>
+	</para>
+
+	<para>Once the cache is full the processor needs to get rid of
+	a line to make room for a new line.  There are many algorithms
+	by which the processor can choose which line to evict; for
+	example <emphasis>least recently used</emphasis> (LRU) is an
+	algorithm where the oldest unused line is discarded to make
+	room for the new line.</para>
+
+	<para>When data is only read from the cache there is no need
+	to ensure consistency with main memory.  However, when the
+	processor starts writing to cache lines it needs to make some
+	decisions about how to update the underlying main memory.  A
+	<emphasis>write-through</emphasis> cache will write the
+	changes directly into the main system memory as the processor
+	updates the cache.  This is slower since the process of
+	writing to the main memory is, as we have seen, slower.
+	Alternatively a <emphasis>write-back</emphasis> cache delays
+	writing the changes to RAM until absolutely necessary.  The
+	obvious advantage is that less main memory access is
+	required when cache entries are written.  Cache lines that
+	have been written but not committed to memory are referred to
+	as <emphasis>dirty</emphasis>.  The disadvantage is that when
+	a cache entry is evicted, it may require two memory accesses
+	(one to write dirty data main memory, and another to load the
+	new data).</para>
+
+      <para>If an entry exists in both a higher-level and lower-level
+	cache at the same time, we say the higher-level cache is
+	<emphasis>inclusive</emphasis>. Alternatively, if the
+	higher-level cache having a line removes the possibility of a
+	lower level cache having that line, we say it is
+	<emphasis>exclusive</emphasis>.  This choice is discussed
+	further in <xref
+	linkend="cache_exclusivity_in_smp"></xref>.
+      </para>
+
+      <sect3>
+	<title>Cache Addressing</title>
+
+	<para>So far we have not discussed how a cache decides if a
+	  given address resides in the cache or not.  Clearly, caches
+	  must keep a directory of what data currently resides in the
+	  cache lines. The cache directory and data may co-located on
+	  the processor, but may also be separate &mdash; such as in
+	  the case of the POWER5 processor which has an on-core L3
+	  directory, but actually accessing the data requires
+	  traversing the L3 bus to access off-core memory. An
+	  arrangement like this can facilitate quicker hit/miss
+	  processing without the other costs of keeping the entire
+	  cache on-core.
+	</para>
+
+	<figure id="cache_tags">
+	  <title>Cache tags</title>
+	  <mediaobject>
+	  <imageobject>
+	    <imagedata fileref="chapter02/figures/tags.eps" format="EPS" />
+	  </imageobject>
+	  <imageobject role="fo">
+	    <imagedata fileref="chapter02/figures/tags.svg"
+	    format="SVG" scalefit="1" width="100%"
+	    contentdept="100%"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="chapter02/figures/tags.png" format="PNG" />
+	  </imageobject>
+	  <caption><para>Tags need to be checked in parallel to keep
+latency times low; more tag bits (i.e. less set associativity)
+requires more complex hardware to achieve this. Alternatively more set
+associativity means less tags, but the processor now needs hardware to
+multiplex the output of the many sets, which can also add latency.
+</para></caption>
+	</mediaobject>
+	</figure>
+
+	<para>To quickly decide if an address lies within the cache it
+	  is separated into three parts; the <emphasis>tag</emphasis>
+	  and the <emphasis>index</emphasis> and the
+	  <emphasis>offset</emphasis>.</para>
+
+	<para>The offset bits depend on the line size of the cache.
+	  For example, a 32-byte line size would use the last 5-bits
+	  (i.e. 2<superscript>5</superscript>) of the address as the
+	  offset into the line.</para>
+
+	<para>The <emphasis>index</emphasis> is the particular cache
+	line that an entry may reside in.  As an example, let us
+	consider a cache with 256 entries.  If this is a direct-mapped
+	cache, we know the data may reside in only one possible line,
+	so the next 8-bits (2<superscript>8</superscript>) after the
+	offset describe the line to check - between 0 and 255.</para>
+
+	<para>Now, consider the same 256 element cache, but divided
+	into two ways.  This means there are two groups of 128 lines,
+	and the given address may reside in either of these groups.
+	Consequently only 7-bits are required as an index to offset
+	into the 128-entry ways.  For a given cache size, as we
+	increase the number of ways, we decrease the number of bits
+	required as an index since each way gets smaller.</para>
+
+	<para>The cache directory still needs to check if the
+	particular address stored in the cache is the one it is
+	interested in.  Thus the remaining bits of the address are the
+	<emphasis>tag</emphasis> bits which the cache directory checks
+	against the incoming address tag bits to determine if there is
+	a cache hit or not.  This relationship is illustrated in <xref
+	linkend="cache_tags"></xref>.</para>
+
+	<para>When there are multiple ways, this check must happen in
+	parallel within each way, which then passes its result into a
+	multiplexor which outputs a final <emphasis>hit</emphasis> or
+	<emphasis>miss</emphasis> result.  As describe above, the more
+	associative a cache is, the less bits are required for index
+	and the more as tag bits &mdash; to the extreme of a
+	fully-associative cache where no bits are used as index bits.
+	The parallel matching of tags bits is the expensive component
+	of cache design and generally the limiting factor on how many
+	lines (i.e, how big) a cache may grow.</para>
+
+      </sect3>
+
+      </sect2>
+
+    </sect1>
+
+  <sect1 id="peripherals">
+    <title>Peripherals and busses</title>
+
+    <para>Peripherals are any of the many external devices that
+      connect to your computer.  Obviously, the processor must have
+      some way of talking to the peripherals to make them
+      useful.</para>
+    
+    <para>The communication channel between the processor and the
+      peripherals is called a <emphasis>bus</emphasis>.</para>
+    
+    <sect2>
+      <title>Peripheral Bus concepts</title>
+
+      <para>A device requires both input and output to be useful.
+      There are a number of common concepts required for useful
+      communication with peripherals.</para>
+
+      <sect3>
+	<title>Interrupts</title>
+
+	<para>An interrupt allows the device to literally interrupt
+	  the processor to flag some information.  For example, when a
+	  key is pressed, an interrupt is generated to deliver the
+	  key-press event to the operating system.  Each device is
+	  assigned an interrupt by some combination of the operating
+	  system and BIOS.</para>
+
+	<para>Devices are generally connected to an
+	<emphasis>programmable interrupt controller</emphasis> (PIC),
+	a separate chip that is part of the motherboard which buffers
+	and communicates interrupt information to the main processor.
+	Each device has a physical <emphasis>interrupt line</emphasis>
+	between it an one of the PIC's provided by the system.  When
+	the device wants to interrupt, it will modify the voltage on
+	this line.</para>
+
+	<para>A very broad description of the PIC's role is that it
+	receives this interrupt and converts it to a message for
+	consumption by the main processor.  While the exact procedure
+	varies by architecture, the general principle is that the
+	operating system has configured an <emphasis>interrupt
+	descriptor table</emphasis> which pairs each of the possible
+	interrupts with a code address to jump to when the interrupt
+	is received.  This is illustrated in <xref
+	linkend="interrupt_handling"></xref>.</para>
+
+	<para>Writing this <emphasis>interrupt handler</emphasis> is
+	the job of the device driver author in conjunction with the
+	operating system.</para>
+
+	<figure id="interrupt_handling">
+	  <title>Overview of handling an interrupt</title>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="chapter02/figures/interrupt.eps" format="EPS" />
+	    </imageobject>
+	    <imageobject role="fo">
+	      <imagedata fileref="chapter02/figures/interrupt.svg"
+	      format="SVG" scalefit="1" width="100%"
+	      contentdept="100%"/>
+	    </imageobject>
+	    <imageobject>
+	      <imagedata fileref="chapter02/figures/interrupt.png" format="PNG" />
+	    </imageobject>
+	    <caption>A generic overview of handling an interrupt.  The
+	    device raises the interrupt to the interrupt controller,
+	    which passes the information onto the processor.  The
+	    processor looks at its descriptor table, filled out by the
+	    operating system, to find the code to handle the
+	    fault.</caption>
+	  </mediaobject>
+	</figure>
+
+	<para>Most drivers will spilt up handling of interrupts into
+	<emphasis>bottom</emphasis> and <emphasis>top</emphasis>
+	halves.  The bottom half will acknowledge the interrupt, queue
+	actions for processing and return the processor to what it was
+	doing quickly.  The top half will then run later when the CPU
+	is free and do the more intensive processing.  This is to stop
+	an interrupt hogging the entire CPU.</para>
+
+	<sect4>
+	  <title>Saving state</title>
+
+	  <para>Since an interrupt can happen at any time, it is
+	  important that you can return to the running operation when
+	  finished handling the interrupt.  It is generally the job of
+	  the operating system to ensure that upon entry to the
+	  interrupt handler, it saves any <emphasis>state</emphasis>;
+	  i.e. registers, and restores them when returning from the
+	  interrupt handler.  In this way, apart from some lost time,
+	  the interrupt is completely transparent to whatever happens
+	  to be running at the time.</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Interrupts v traps and exceptions</title>
+
+	  <para>While an interrupt is generally associated with an
+	  external event from a physical device, the same mechanism is
+	  useful for handling internal system operations.  For
+	  example, if the processor detects conditions such as an
+	  access to invalid memory, an attempt to divide-by-zero or an
+	  invalid instruction, it can internally raise an
+	  <emphasis>exception</emphasis> to be handled by the
+	  operating system.  It is also the mechanism used to trap
+	  into the operating system for <emphasis>system
+	  calls</emphasis>, as discussed in <xref
+	  linkend="system_calls"></xref> and to implement virtual
+	  memory, as discussed in <xref linkend="chapter05"></xref>.
+	  Although generated internally rather than from an external
+	  source, the principles of asynchronously interrupting the
+	  running code remains the same.</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Types of interrupts</title>
+
+	  <para>There are two main ways of signalling interrupts on a
+	    line &mdash; <emphasis>level</emphasis> and
+	    <emphasis>edge</emphasis> triggered.</para>
+
+	  <para>Level-triggered interrupts define voltage of the
+	  interrupt line being held high to indicate an interrupt is
+	  pending.  Edge-triggered interrupts detect
+	  <emphasis>transitions</emphasis> on the bus; that is when
+	  the line voltage goes from low to high.  With an
+	  edge-triggered interrupt, a square-wave pulse is detected by
+	  the PIC as signalling and interrupt has been raised.</para>
+
+	  <para>The difference is pronounced when devices share an
+	  interrupt line.  In a level-triggered system, the interrupt
+	  line will be high until all devices that have raised an
+	  interrupt have been processed and un-asserted their
+	  interrupt.</para>
+
+	  <para>In an edge-triggered system, a pulse on the line will
+	  indicate to the PIC that an interrupt has occurred, which it
+	  will signal to the operating system for handling.  However,
+	  if further pulses come in on the already asserted line from
+	  another device.</para>
+
+	  <para>The issue with level-triggered interrupts is that it
+	  may require some considerable amount of time to handle an
+	  interrupt for a device.  During this time, the interrupt
+	  line remains high and it is not possible to determine if any
+	  other device has raised an interrupt on the line.  This
+	  means there can be considerable unpredictable latency in
+	  servicing interrupts.</para>
+
+	  <para>With edge-triggered interrupts, a long-running
+	  interrupt can be noticed and queued, but other devices
+	  sharing the line can still transition (and hence raise
+	  interrupts) while this happens.  However, this introduces
+	  new problems; if two devices interrupt at the same time it
+	  may be possible to miss one of the interrupts, or
+	  environmental or other interference may create a
+	  <emphasis>spurious</emphasis> interrupt which should be
+	  ignored.</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Non-maskable interrupts</title>
+
+	  <para>It is important for the system to be able to
+	  <emphasis>mask</emphasis> or prevent interrupts at certain
+	  times.  Generally, it is possible to put interrupts on hold,
+	  but a particular class of interrupts, called
+	  <emphasis>non-maskable interrupts</emphasis> (NMI), are the
+	  exception to this rule.  The typical example is the
+	  <emphasis>reset</emphasis> interrupt.</para>
+
+	  <para>NMIs can be useful for implementing things such as a
+	  system watchdog, where a NMI is raised periodically and sets
+	  some flag that must be acknowledged by the operating system.
+	  If the acknowledgement is not seen before the next periodic
+	  NMI, then system can be considered to be not making forward
+	  progress.  Another common usage is for profiling a system.
+	  A periodic NMI can be raised and used to evaluate what code
+	  the processor is currently running; over time this builds a
+	  profile of what code is being run and create a very useful
+	  insight into system performance.</para>
+
+	</sect4>
+
+      </sect3>
+
+      <sect3>
+	<title>IO Space</title>
+
+	<para>Obviously the processor will need to communicate with
+	the peripheral device, and it does this via IO operations.
+	The most common form of IO is so called <emphasis>memory
+	mapped IO</emphasis> where registers on the device are
+	<emphasis>mapped</emphasis> into memory.</para>
+
+	<para>This means that to communicate with the device, you need
+	simply read or write to a specific address in memory.  TODO:
+	expand</para>
+
+      </sect3>
+
+    </sect2>
+
+    <sect2>
+      <title>DMA</title>
+
+      <para>Since the speed of devices is far below the speed of processors,
+    there needs to be some way to avoid making the CPU wait around
+    for data from devices.</para>
+
+      <para>Direct Memory Access (DMA) is a method of transferring
+	data directly between an peripheral and system RAM.</para>
+
+      <para>The driver can setup a device to do a DMA transfer by
+	giving it the area of RAM to put it's data into.  It can then
+	start the DMA transfer and allow the CPU to continue with
+	other tasks.</para>
+
+      <para>Once the device is finished, it will raise an interrupt
+	and signal to the driver the transfer is complete.  From this
+	time the data from the device (say a file from a disk, or
+	frames from a video capture card) is in memory and ready to be
+	used.</para>
+
+    </sect2>
+
+
+    <sect2>
+      <title>Other Busses</title>
+
+      <para>Other buses connect between the PCI bus and external
+	devices.</para>
+
+      <sect3>
+	<title>USB</title>
+
+	<para>From an operating system point of view, a USB device is
+	a group of end-points grouped together into an interface. An
+	end-point can be either <emphasis>in</emphasis> or
+	<emphasis>out</emphasis> and hence transfers data in one
+	direction only. End-points can have a number of different
+	types:</para>
+
+	<itemizedlist>
+
+	  <listitem>
+	    <para><emphasis>Control</emphasis> end-points are for
+	    configuring the device, etc.</para>
+	  </listitem>
+
+	  <listitem>
+	    <para><emphasis>Interrupt</emphasis> end-points are for
+	    transferring small amounts of data. They have higher
+	    priority than ...</para>
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>Bulk</emphasis> end-points, which transfer
+	    large amounts of data but do not get guaranteed time
+	    constraints.</para>
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>Isochronous</emphasis> transfers are
+	    high-priority real-time transfers, but if they are missed
+	    they are not re-tried. This is for streaming data like
+	    video or audio where there is no point sending data again.</para>
+	  </listitem>
+	</itemizedlist>
+
+	<para>There can be many interfaces (made of multiple
+	end-points) and interfaces are grouped into
+	<emphasis>configurations</emphasis>.  However Most devices
+	only have a single configuration.</para>
+
+      <figure id="uhci">
+      <title>Overview of a UHCI controller operation</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="chapter02/images/uhci.eps" format="EPS" />
+	</imageobject>
+	<imageobject role="fo">
+	  <imagedata fileref="chapter02/images/uhci.svg" format="SVG"
+	  scalefit="1" width="100%" contentdept="100%"/>
+	</imageobject>
+	<imageobject>
+	  <imagedata fileref="chapter02/images/uhci.png" format="PNG" />
+	</imageobject>
+	    <caption><para>An overview of a UCHI controller, taken
+  from <ulink
+  url="http://download.intel.com/technology/usb/UHCI11D.pdf">Intel
+  documentation</ulink>.</para></caption>
+	  </mediaobject>
+	</figure>
+
+	<para><xref linkend="uhci"></xref> shows an overview of a
+	universal host controller interface, or UHCI.  It provides an
+	overview of how USB data is moved out of the system by a
+	combination of hardware and software.  Essentially, the
+	software sets up a template of data in a specified format for
+	the host controller to read and send across the USB
+	bus.</para>
+
+	<para>Starting at the top-left of the overview, the controller
+	has a <emphasis>frame</emphasis> register with a counter which
+	is incremented periodically &mdash; every millisecond.  This
+	value is used to index into a <emphasis>frame list</emphasis>
+	created by software.  Each entry in this table points to a
+	queue of <emphasis>transfer descriptors</emphasis>.  Software
+	sets up this data in memory, and it is read by the host
+	controller which is a separate chip the drives the USB bus.
+	Software needs to schedule the work queues so that 90% of a
+	frame time is given to isochronous data, and 10% left for
+	interrupt, control and bulk data..</para>
+
+	<para>As you can see from the diagram, the way the data is
+	linked means that transfer descriptors for isochronous data
+	are associated with only one particular frame pointer &mdash;
+	in other words only one particular time period &mdash; and
+	after that will be discarded.  However, the interrupt, control
+	and bulk data are all <emphasis>queued</emphasis> after the
+	isochronous data and thus if not transmitted in one frame
+	(time period) will be done in the next.</para>
+
+	<para>The USB layer communicates through USB <emphasis>request
+	blocks</emphasis>, or URBs. A URB contains information about
+	what end-point this request relates to, data, any related
+	information or attributes and a call-back function to be
+	called when the URB is complete. USB drivers submit URBs in a
+	fixed format to the USB core, which manages them in
+	co-ordination with the USB host controller as above. Your data
+	gets sent off to the USB device by the USB core, and when its
+	done your call-back is triggered.</para>
+
+      </sect3>
+
+  </sect2>
+  </sect1>
+
+  <sect1 id="small_to_big_systems">
+    <title>Small to big systems</title>
+
+    <para>As Moore's law has predicted, computing power has been
+    growing at a furious pace and shows no signs of slowing down.  It
+    is relatively uncommon for any high end servers to contain only a
+    single CPU.  This is achieved in a number of different
+    fashions.</para>
+
+    <sect2 id="symmetric_multi_processing">
+      <title>Symmetric Multi-Processing</title>
+
+      <para>Symmetric Multi-Processing, commonly shortened to
+      <emphasis>SMP</emphasis>, is currently the most common
+      configuration for including multiple CPUs in a single
+      system.</para>
+
+      <para>The symmetric term refers to the fact that all the CPUs in
+      the system are the same (e.g. architecture, clock speed).  In a
+      SMP system there are multiple processors that share other all
+      other system resources (memory, disk, etc).</para>
+
+      <sect3>
+	<title>Cache Coherency</title>
+
+	<para>For the most part, the CPUs in the system work
+      independently; each has its own set of registers, program
+      counter, etc.  Despite running separately, there is one
+      component that requires strict synchronisation.</para>
+
+      <para>This is the CPU cache; remember the cache is a small area
+      of quickly access able memory that mirrors values stored in main
+      system memory.  If one CPU modifies data in main memory and
+      another CPU has an old copy of that memory in its cache the
+      system will obviously not be in a consistent state.  Note that
+      the problem only occurs when processors are writing to memory,
+      since if a value is only read the data will be
+      consistent.</para>
+
+	<para>To co-ordinate keeping the cache coherent on all
+	processors an SMP system uses <emphasis>snooping</emphasis>.
+	Snooping is where a processor listens on a bus which all
+	processors are connected to for cache events, and updates its
+	cache accordingly.</para>
+
+	<para>One protocol for doing this is the
+	<emphasis>MOESI</emphasis> protocol; standing for Modified,
+	Owner, Exclusive, Shared, Invalid.  Each of these is a state
+	that a cache line can be in on a processor in the system.
+	There are other protocols for doing as much, however they all
+	share similar concepts.  Below we examine MOESI so you have an
+	idea of what the process entails.</para>
+
+	<para>When a processor requires reading a cache line from main
+	memory, it firstly has to snoop all other processors in the
+	system to see if they currently know anything about that area
+	of memory (e.g. have it cached).  If it does not exist in any
+	other process, then the processor can load the memory into
+	cache and mark it as <emphasis>exclusive</emphasis>.  When it
+	writes to the cache, it then changes state to be
+	<emphasis>modified</emphasis>.  Here the specific details of
+	the cache come into play; some caches will immediately write
+	back the modified cache to system memory (known as a
+	<emphasis>write-through</emphasis> cache, because writes go
+	through to main memory).  Others will not, and leave the
+	modified value only in the cache until it is evicted, when the
+	cache becomes full for example.</para>
+
+	<para>The other case is where the processor snoops and finds
+	that the value is in another processors cache.  If this value
+	has already been marked as <emphasis>modified</emphasis>, it
+	will copy the data into its own cache and mark it as
+	<emphasis>shared</emphasis>.  It will send a message for the
+	other processor (that we got the data from) to mark its cache
+	line as <emphasis>owner</emphasis>.  Now imagine that a third
+	processor in the system wants to use that memory too.  It will
+	snoop and find both a <emphasis>shared</emphasis> and a
+	<emphasis>owner</emphasis> copy; it will thus take its value
+	from the <emphasis>owner</emphasis> value.  While all the
+	other processors are only reading the value, the cache line
+	stays <emphasis>shared</emphasis> in the system.  However,
+	when one processor needs to update the value it sends an
+	<emphasis>invalidate</emphasis> message through the system.
+	Any processors with that cache line must then mark it as
+	invalid, because it not longer reflects the "true" value.
+	When the processor sends the invalidate message, it marks the
+	cache line as <emphasis>modified</emphasis> in its cache and
+	all others will mark as <emphasis>invalid</emphasis> (note
+	that if the cache line is <emphasis>exclusive</emphasis> the
+	processor knows that no other processor is depending on it so
+	can avoid sending an invalidate message).</para>
+
+	<para>From this point the process starts all over.  Thus
+	whichever processor has the <emphasis>modified</emphasis>
+	value has the responsibility of writing the true value back to
+	RAM when it is evicted from the cache.  By thinking through
+	the protocol you can see that this ensures consistency of
+	cache lines between processors.</para>
+
+	<para>There are several issues with this system as the number
+	of processors starts to increase.  With only a few processors,
+	the overhead of checking if another processor has the cache
+	line (a read snoop) or invalidating the data in every other
+	processor (invalidate snoop) is manageable; but as the number
+	of processors increase so does the bus traffic.  This is why
+	SMP systems usually only scale up to around 8
+	processors.</para>
+
+	<para>Having the processors all on the same bus starts to
+	present physical problems as well.  Physical properties of
+	wires only allow them to be laid out at certain distances
+	from each other and to only have certain lengths.  With
+	processors that run at many gigahertz the speed of light
+	starts to become a real consideration in how long it takes
+	messages to move around a system.</para>
+
+	<para>Note that system software usually has no part in this
+	process, although programmers should be aware of what the
+	hardware is doing underneath in response to the programs they
+	design to maximise performance.</para>
+
+	<sect4 id="cache_exclusivity_in_smp">
+	  <title>Cache exclusivity in SMP systems</title>
+
+	  <para>In <xref linkend="cache_in_depth"></xref> we described
+	    <emphasis>inclusive</emphasis> v
+	    <emphasis>exclusive</emphasis> caches.  In general, L1
+	    caches are usually inclusive &mdash; that is all data in
+	    the L1 cache also resides in the L2 cache. In a
+	    multiprocessor system, an inclusive L1 cache means that
+	    only the L2 cache need snoop memory traffic to maintain
+	    coherency, since any changes in L2 will be guaranteed to
+	    be reflected by L1. This reduces the complexity of the L1
+	    and de-couples it from the snooping process allowing it to
+	    be faster.</para>
+
+	    <para>Again, in general, most all modern high-end
+	    (e.g. not targeted at embedded) processors have a
+	    write-through policy for the L1 cache, and a write-back
+	    policy for the lower level caches. There are several
+	    reasons for this.  Since in this class of processors L2
+	    caches are almost exclusively on-chip and generally quite
+	    fast the penalties from having L1 write-through are not
+	    the major consideration. Further, since L1 sizes are
+	    small, pools of written data unlikely to be read in the
+	    future could cause pollution of the limited L1 resource.
+	    Additionally, a write-through L1 does not have to be
+	    concerned if it has outstanding dirty data, hence can pass
+	    the extra coherency logic to the L2 (which, as we
+	    mentioned, already has a larger part to play in cache
+	    coherency).</para>
+	</sect4>
+
+      </sect3>
+
+      <sect3>
+	<title>Hyperthreading</title>
+
+	<para>Much of the time of a modern processor is spent waiting
+	for much slower devices in the memory hierarchy to deliver
+	data for processing.</para>
+
+	<para>Thus strategies to keep the pipeline of the processor
+	full are paramount.  One strategy is to include enough
+	registers and state logic such that two instruction streams
+	can be processed at the same time.  This makes one CPU look
+	for all intents and purposes like two CPUs.</para>
+
+	<para>While each CPU has its own registers, they still have to
+	share the core logic, cache and input and output bandwidth
+	from the CPU to memory.  So while two instruction streams can
+	keep the core logic of the processor busier, the performance
+	increase will not be as great has having two physically
+	separate CPUs.  Typically the performance improvement is below
+	20% (XXX check), however it can be drastically better or worse
+	depending on the workloads.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Multi Core</title>
+
+	<para>With increased ability to fit more and more transistors
+	on a chip, it became possible to put two or more processors in
+	the same physical package.  Most common is dual-core, where
+	two processor cores are in the same chip.  These cores, unlike
+	hyperthreading, are full processors and so appear as two
+	physically separate processors a la a SMP system.</para>
+
+	<para>While generally the processors have their own L1 cache,
+	they do have to share the bus connecting to main memory and
+	other devices.  Thus performance is not as great as a full SMP
+	system, but considerably better than a hyperthreading system
+	(in fact, each core can still implement hyperthreading for an
+	additional enhancement).</para>
+
+	<para>Multi core processors also have some advantages not
+	performance related.  As we mentioned, external physical
+	busses between processors have physical limits; by containing
+	the processors on the same piece of silicon extremely close to
+	each other some of these problems can be worked around.  The
+	power requirements for multi core processors are much less
+	than for two separate processors. This means that there is
+	less heat needing to be dissipated which can be a big
+	advantage in data centre applications where computers are
+	packed together and cooling considerations can be
+	considerable.  By having the cores in the same physical
+	package it makes muti-processing practical in applications
+	where it otherwise would not be, such as laptops.  It is also
+	considerably cheaper to only have to produce one chip rather
+	than two.</para>
+
+      </sect3>
+    </sect2>
+
+      <sect2>
+	<title>Clusters</title>
+
+	<para>Many applications require systems much larger than the
+	number of processors a SMP system can scale to.  One way of
+	scaling up the system further is a
+	<emphasis>cluster</emphasis>.</para>
+
+	<para>A cluster is simply a number of individual computers
+	which have some ability to talk to each other.  At the
+	hardware level the systems have no knowledge of each other;
+	the task of stitching the individual computers together is left
+	up to software.</para>
+
+	<para>Software such as MPI allow programmers to write their
+	software and then "farm out" parts of the program to other
+	computers in the system.  For example, image a loop that
+	executes several thousand times performing independent action
+	(that is no iteration of the loop affects any other
+	iteration).  With four computers in a cluster, the software
+	could make each computer do 250 loops each.</para>
+
+	<para>The interconnect between the computers varies, and may
+	be as slow as an internet link or as fast as dedicated,
+	special busses (Infiniband).  Whatever the interconnect,
+	however, it is still going to be further down the memory
+	hierarchy and much, much slower than RAM.  Thus a cluster will
+	not perform well in a situation when each CPU requires access
+	to data that may be stored in the RAM of another computer;
+	since each time this happens the software will need to request
+	a copy of the data from the other computer, copy across the
+	slow link and into local RAM before the processor can get any
+	work done.</para>
+
+	<para>However, many applications <emphasis>do not</emphasis>
+	require this constant copying around between computers.  One
+	large scale example is SETI@Home, where data collected from a
+	radio antenna is analysed for signs of Alien life.  Each
+	computer can be distributed a few minutes of data to analyse,
+	and only needs report back a summary of what it found.
+	SETI@Home is effectively a very large, dedicated
+	cluster.</para>
+
+	<para>Another application is rendering of images, especially
+	for special effects in films.  Each computer can be handed a
+	single frame of the movie which contains the wire-frame models,
+	textures and light sources which needs to be combined
+	(rendered) into the amazing special effects we now take for
+	grained.  Since each frame is static, once the computer has
+	the initial input it does not need any more communication
+	until the final frame is ready to be sent back and combined
+	into the move.  For example the block-buster Lord of the Rings
+	had their special effects rendered on a huge cluster running
+	Linux.</para>
+
+      </sect2>
+
+      <sect2>
+	<title>Non-Uniform Memory Access</title>
+
+	<para>Non-Uniform Memory Access, more commonly abbreviated to
+	NUMA, is almost the opposite of a cluster system mentioned
+	above.  As in a cluster system it is made up of individual
+	nodes linked together, however the linkage between nodes is
+	highly specialised (and expensive!).  As opposed to a cluster
+	system where the hardware has no knowledge of the linkage
+	between nodes, in a NUMA system the
+	<emphasis>software</emphasis> has no (well, less) knowledge
+	about the layout of the system and the hardware does all the
+	work to link the nodes together.</para>
+
+      <para>The term <emphasis>non uniform memory access</emphasis>
+      comes from the fact that RAM may not be local to the CPU and so
+      data may need to be accessed from a node some distance away.
+      This obviously takes longer, and is in contrast to a single
+      processor or SMP system where RAM is directly attached and
+      always takes a constant (uniform) time to access.</para>
+
+      <sect3>
+	<title>NUMA Machine Layout</title>
+
+      <para>With so many nodes talking to each other in a system,
+      minimising the distance between each node is of paramount
+      importance.  Obviously it is best if every single node has a
+      direct link to every other node as this minimises the distance
+      any one node needs to go to find data.  This is not a practical
+      situation when the number of nodes starts growing into the
+      hundreds and thousands as it does with large supercomputers; if
+      you remember your high school maths the problem is basically a
+      combination taken two at a time (each node talking to another),
+      and will grow
+      <computeroutput>n!/2*(n-2)!</computeroutput>.</para>
+
+      <para>To combat this exponential growth alternative layouts are
+      used to trade off the distance between nodes with the
+      interconnects required.  One such layout common in modern NUMA
+      architectures is the hypercube.</para>
+
+      <para>A hypercube has a strict mathematical definition (way
+      beyond this discussion) but as a cube is a 3 dimensional
+      counterpart of a square, so a hypercube is a 4 dimensional
+      counterpart of a cube.</para>
+
+      <figure>
+      <title>A Hypercube</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="chapter02/figures/hypercube.eps" format="EPS" />
+	</imageobject>
+	<imageobject role="fo">
+	  <imagedata fileref="chapter02/figures/hypercube.svg"
+	  format="SVG" scalefit="1" width="100%" contentdept="100%"/>
+	</imageobject>
+	<imageobject>
+	  <imagedata fileref="chapter02/figures/hypercube.png" format="PNG" />
+	</imageobject>
+	  <caption>An example of a hypercube.  Hypercubes provide a
+	  good trade off between distance between nodes and number of
+	  interconnections required.</caption>
+      </mediaobject>
+
+    </figure>
+
+      <para>Above we can see the outer cube contains four 8 nodes.
+      The maximum number of paths required for any node to talk to
+      another node is 3.  When another cube is placed inside this
+      cube, we now have double the number of processors but the
+      maximum path cost has only increased to 4.  This means as the
+      number of processors grow by 2<superscript>n</superscript> the
+      maximum path cost grows only linearly.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Cache Coherency</title>
+
+      <para>Cache coherency can still be maintained in a NUMA system
+      (this is referred to as a cache-coherent NUMA system, or
+      ccNUMA).  As we mentioned, the broadcast based scheme used to
+      keep the processor caches coherent in an SMP system does not
+      scale to hundreds or even thousands of processors in a large
+      NUMA system.  One common scheme for cache coherency in a NUMA
+      system is referred to as a <emphasis>directory based
+      model</emphasis>.  In this model processors in the system
+      communicate to special cache directory hardware.  The directory
+      hardware maintains a consistent picture to each processor; this
+      abstraction hides the working of the NUMA system from the
+      processor.</para>
+
+	<para>The Censier and Feautrier directory based scheme
+	maintains a central directory where each memory block has a
+	flag bit known as the <emphasis>valid bit</emphasis> for each
+	processor and a single <emphasis>dirty</emphasis> bit.  When a
+	processor reads the memory into its cache, the directory sets
+	the valid bit for that processor.</para>
+
+	<para>When a processor wishes to write to the cache line the
+	directory needs to set the dirty bit for the memory block.
+	This involves sending an invalidate message to those
+	processors who are using the cache line (and only those
+	processors whose flag are set; avoiding broadcast
+	traffic).</para>
+
+	<para>After this should any other processor try to read the
+	memory block the directory will find the dirty bit set.  The
+	directory will need to get the updated cache line from the
+	processor with the valid bit currently set, write the dirty
+	data back to main memory and then provide that data back to
+	the requesting processor, setting the valid bit for the
+	requesting processor in the process.  Note that this is
+	transparent to the requesting processor and the directory may
+	need to get that data from somewhere very close or somewhere
+	very far away.
+	</para>
+
+	<para>Obviously having thousands of processors communicating
+	to a single directory does also not scale well.  Extensions to
+	the scheme involve having a hierarchy of directories that
+	communicate between each other using a separate protocol.  The
+	directories can use a more general purpose communications
+	network to talk between each other, rather than a CPU bus,
+	allowing scaling to much larger systems.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>NUMA Applications</title>
+
+      <para>NUMA systems are best suited to the types of problems that
+      require much interaction between processor and memory.  For
+      example, in weather simulations a common idiom is to divide the
+      environment up into small "boxes" which respond in different
+      ways (oceans and land reflect or store different amounts of
+      heat, for example).  As simulations are run, small variations
+      will be fed in to see what the overall result is.  As each box
+      influences the surrounding boxes (e.g. a bit more sun means a
+      particular box puts out more heat, affecting the boxes next to
+      it) there will be much communication (contrast that with the
+      individual image frames for a rendering process, each of which
+      does not influence the other).  A similar process might happen
+      if you were modelling a car crash, where each small box of the
+      simulated car folds in some way and absorbs some amount of
+      energy.</para>
+
+      <para>Although the software has no directly knowledge that the
+      underlying system is a NUMA system, programmers need to be
+      careful when programming for the system to get maximum
+      performance.  Obviously keeping memory close to the processor
+      that is going to use it will result in the best performance.
+      Programmers need to use techniques such as
+      <emphasis>profiling</emphasis> to analyse the code paths taken
+      and what consequences their code is causing for the system to
+      extract best performance.</para>
+
+      </sect3>
+
+      </sect2>
+
+
+    <sect2>
+      <title>Memory ordering, locking and atomic operations</title>
+
+      <para>The multi-level cache, superscalar multi-processor
+      architecture brings with it some insteresting issues relating to
+      how a programmer sees the processor running code.</para>
+
+      <para>Imagine program code is running on two processors
+      simultaneously, both processors sharing effectively one large
+      area of memory.  If one processor issues a store instruction, to
+      put a register value into memory, when can it be sure that the
+      other processor does a load of that memory it will see the
+      correct value?</para>
+
+      <para>In the simplest situation the system could guarantee that
+      if a program executes a store instruction, any subsequent load
+      instructions will see this value.  This is referred to as
+      <emphasis>strict memory ordering</emphasis>, since the rules
+      allow no room for movement.  You should be starting to realise
+      why this sort of thing is a serious impediment to performance of
+      the system.</para>
+
+      <para>Much of the time, the memory ordering is not required to
+      be so strict.  The programmer can identify points where they
+      need to be sure that all outstanding operations are seen
+      globally, but in between these points there may be many
+      instructions where the semantics are not important.</para>
+
+      <para>Take, for example, the following situation.</para>
+
+      <example>
+	<title>Memory Ordering</title>
+	  <programlisting lang="C"><inlinemediaobject>
+	      <imageobject>
+		<imagedata fileref="chapter02/code/memorder.c"
+		format="linespecific" />
+	      </imageobject>
+	    </inlinemediaobject></programlisting>
+	</example>
+
+      <para>In this example, we have two stores that can be done in
+      any particular order, as it suits the processor.  However, in
+      the final case, the pointer must only be updated once the two
+      previous stores are known to have been done.  Otherwise another
+      processor might look at the value of
+      <computeroutput>p</computeroutput>, follow the pointer to the
+      memory, load it, and get some completely incorrect value!</para>
+
+      <para>To indicate this, loads and stores have to have
+      <emphasis>semantics</emphasis> that describe what behaviour they
+      must have.  Memory semantics are described in terms of
+      <emphasis>fences</emphasis> that dictate how loads and stores
+      may be reordered around the load or store.</para>
+
+      <para>By default, a load or store can be re-ordered
+      anywhere.</para>
+
+      <para><emphasis>Acquire</emphasis> semantics is like a fence
+      that only allows load and stores to move downwards through it.
+      That is, when this load or store is complete you can be
+      gaurnteed that any later load or stores will see the value
+      (since they can not be moved above it).</para>
+
+      <para><emphasis>Release</emphasis> semantics is the opposite,
+      that is a fence that allows any load or stores to be done before
+      it (move upwards), but nothing before it to move downwards past
+      it.  Thus, when load or store with release semantics is
+      processed, you can be store that any earlier load or stores will
+      have been complete.</para>
+
+    <figure>
+	<title>Acquire and Release semantics</title>
+	<mediaobject>
+	<imageobject>
+	  <imagedata fileref="chapter02/figures/memorder.eps" format="EPS" />
+	</imageobject>
+	<imageobject role="fo">
+	  <imagedata fileref="chapter02/figures/memorder.svg"
+	  format="SVG" scalefit="1" width="100%" contentdept="100%"/>
+	</imageobject>
+	<imageobject>
+	  <imagedata fileref="chapter02/figures/memorder.png" format="PNG" />
+	</imageobject>
+	  <caption>An illustration of valid reorderings around
+	  operations with acquire and release semantics. </caption>
+      </mediaobject>
+    </figure>
+
+      <para>A <emphasis>full memory fence</emphasis> is a combination
+      of both; where no loads or stores can be reordered in any
+      direction around the current load or store.</para>
+
+      <para>The strictest memory model would use a full memory fence
+      for every operation.  The weakest model would leave every load
+      and store as a normal re-orderable instruction.</para>
+
+      <sect3>
+	<title>Processors and memory models</title>
+
+	<para>Different processors implement different memory
+	models.</para>
+
+	<para> The x86 (and AMD64) processor has a quite strict memory
+	model; all stores have release semantics (that is, the result
+	of a store is guaranteed to be seen by any later load or
+	store) but all loads have normal semantics.  lock prefix gives
+	memory fence.</para>
+
+	<para>Itanium allows all load and stores to be normal, unless
+	explicitly told. XXX</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Locking</title>
+
+	<para>Knowing the memory ordering requirements of each
+	architecture is no practical for all programmers, and would
+	make programs difficult to port and debug across different
+	processor types.</para>
+
+	<para>Programmers use a higher level of abstraction called
+	<emphasis>locking</emphasis> to allow simultaneous
+	operation of programs when there are multiple CPUs.</para>
+
+	<para>When a program acquires a lock over a piece of code, no
+	other processor can obtain the lock until it is released.
+	Before any critical pieces of code, the processor must attempt
+	to take the lock; if it can not have it, it does not
+	continue.</para>
+
+	<para>You can see how this is tied into the naming of the
+	memory ordering semantics in the previous section.  We want to
+	ensure that before we <emphasis>acquire</emphasis> a lock, no
+	operations that should be protected by the lock are re-ordered
+	before it.  This is how acquire semantics works.</para>
+
+	<para>Conversly, when we <emphasis>release</emphasis> the
+	lock, we must be sure that every operation we have done whilst
+	we held the lock is complete (remember the example of updating
+	the pointer previously?).  This is release semantics.</para>
+
+	<para>There are many software libraries available that allow
+	programmers to not have to worry about the details of memory
+	semantics and simply use the higher level of abstraction of
+	<computeroutput>lock()</computeroutput> and
+	<computeroutput>unlock()</computeroutput>.</para>
+
+	<sect4>
+	  <title>Locking difficulties</title>
+
+	  <para>Locking schemes make programming more complicated, as
+	  it is possible to <emphasis>deadlock</emphasis> programs.
+	  Imagine if one processor is currently holding a lock over
+	  some data, and is currently waiting for a lock for some
+	  other piece of data.  If that other processor is waiting for
+	  the lock the first processor holds before unlocking the
+	  second lock, we have a deadlock situation.  Each processor
+	  is waiting for the other and neither can continue without
+	  the others lock.</para>
+
+	  <para>Often this situation arises because of a subtle
+	  <emphasis>race condition</emphasis>; one of the hardest bugs
+	  to track down.  If two processors are relying on operations
+	  happening in a specific order in time, there is always the
+	  possiblity of a race condition occuring.  A gamma ray from
+	  an exploding star in a different galaxy might hit one of the
+	  processors, making it skip a beat, throwing the ordering of
+	  operations out.  What will often happen is a deadlock
+	  situation like above.  It is for this reason that program
+	  ordering needs to be ensured by semantics, and not by
+	  relying on one time specific behaviours. (XXX not sure how i
+	  can better word that).</para>
+
+	  <para>A similar situation is the oppostie of deadlock,
+	  called <emphasis>livelock</emphasis>.  One strategy to avoid
+	  deadlock might be to have a "polite" lock; one that you give
+	  up to anyone who asks.  This politeness might cause two
+	  threads to be constantly giving each other the lock, without
+	  either ever taking the lock long enough to get the critical
+	  work done and be finished with the lock (a similar situation
+	  in real life might be two people who meet at a door at the
+	  same time, both saying "no, you first, I insist".  Neither
+	  ends up going through the door!).
+	  </para>
+
+	</sect4>
+
+
+	<sect4>
+	  <title>Locking strategies</title>
+
+	  <para>Underneath, there are many different strategies for
+	  implementing the behaviour of locks.</para>
+
+	  <para>A simple lock that simply has two states - locked or
+	  unlocked, is refered to as a <emphasis>mutex</emphasis>
+	  (short for mutual exclusion; that is if one person has it
+	  the other can not have it).</para>
+
+	  <para>There are, however, a number of ways to implement a
+	  mutex lock.  In the simplest case, we have what its commonly
+	  called a <emphasis>spinlock</emphasis>.  With this type of
+	  lock, the processor sits in a tight loop waiting to take the
+	  lock; equivalent to it saying "can I have it now" constanly
+	  much as a young child might ask of a parent.</para>
+
+	  <para>The problem with this strategy is that it essentially
+	  wastes time.  Whilst the processor is sitting constanly
+	  asking for the lock, it is not doing any useful work.  For
+	  locks that are likely to be only held locked for a very
+	  short amount of time this may be appropriate, but in many
+	  cases the amount of time the lock is held might be
+	  considerably longer.</para>
+
+	  <para>Thus another strategy is to <emphasis>sleep</emphasis>
+	  on a lock.  In this case, if the processor can not have the
+	  lock it will start doing some other work, waiting for
+	  notification that the lock is available for use (we see in
+	  future chapters how the operating system can switch
+	  processes and give the processsor more work to do).</para>
+
+	  <para>A mutex is however just a special case of a
+	  <emphasis>semaphore</emphasis>, famously invented by the
+	  Dutch computer scientist Dijkstra.  In a case where there
+	  are multiple resources available, a semaphore can be set to
+	  count accesses to the resources.  In the case where the
+	  number of resources is one, you have a mutex.  The operation
+	  of semaphores can be detailed in any agorithms book.</para>
+
+	  <para>These locking schemes still have some problems
+	  however.  In many cases, most people only want to read data
+	  which is updated only rarely.  Having all the processors
+	  wanting to only read data require taking a lock can lead to
+	  <emphasis>lock contention</emphasis> where less work gets
+	  done because everyone is waiting to obtain the same lock for
+	  some data.  </para>
+
+	</sect4>
+
+      </sect3>
+
+      <sect3>
+	<title>Atomic Operations</title>
+
+	<para>Explain what it is.</para>
+
+      </sect3>
+    </sect2>
+
+
+  </sect1>
+
+</chapter>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-parent-document: ("../csbu.sgml" "book" "chapter")
+End:
+-->

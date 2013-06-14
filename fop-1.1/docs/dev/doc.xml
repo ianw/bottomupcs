@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: doc.xml 1298724 2012-03-09 07:55:31Z cbowditch $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Apache&#8482; FOP Development: Managing Documentation</title>
+    <version>$Revision: 1298724 $</version>
+  </header>
+  <body>
+    <section id="general">
+      <title>General Information</title>
+      <p>All raw documentation content is managed in the Apache&#8482; FOP SVN repository.
+Updates should be committed to the repository, then the repository files are used to generate usable output.
+The remaining discussions on this page assume that the SVN repository is the starting place for processing.
+The path to the documentation is src/documentation/content/xdocs.</p>
+      <note>All documentation is maintained on the trunk.</note>
+      <p>Basic documents are stored in XML files, and use DTDs provided by Apache Forrest.</p>
+    </section>
+    <section id="design">
+      <title>Design Principles</title>
+      <p>These principles are not written in stone, but reflect the current philosophy, and are documented here primarily to help achieve consistency. These principles should be changed if better or more practical ones are found, but they should probably be discussed and changed by common consent.</p>
+      <section id="where">
+        <title>Where</title>
+        <ul>
+          <li>To the extent possible, keep user content separate from developer content, primarily so the user doesn't have to filter out technical information.</li>
+          <li>To the extent possible, try to document a topic exactly once, in the place the user is most likely to look for it, then link to that from other locations as appropriate. This is somewhat contrary to the principle above, which should be applied as a higher priority.</li>
+        </ul>
+      </section>
+      <section id="design-when">
+        <title>When</title>
+        <p>The documentation and the product are in a constant state of change, and there is some difficulty in deciding what product state the website content should reflect. The current thinking is that the website should reflect the current state of the repository code branch from which releases are made. Features or other documentation that applies to unreleased code should be marked in such a way within the content that the user can determine whether and how it applies to the version they are using. For example, "Feature xyz is first available in Release n.nn.n".</p>
+        <p>Other approaches were considered, but all seemed to have significantly higher costs both to the users and the developers. From the user's standpoint, the choice is either that they potentially have to look multiple places to get the information they need (which was rejected), or they have to filter out an occasional feature that is in code available subsequent to their release (which was accepted).</p>
+      </section>
+    </section>
+    <section id="web">
+      <title>Website</title>
+      <section id="web-background">
+        <title>Background</title>
+        <p>The FOP web site and documentation are generated using <link href="http://forrest.apache.org">Apache Forrest</link>.</p>
+        <p>The following table summarizes the flow of data to the FOP website in chronological order:</p>
+        <table>
+          <tr>
+            <th colspan="1" rowspan="1">Process</th>
+            <th colspan="1" rowspan="1">Output</th>
+            <th colspan="1" rowspan="1">State</th>
+            <th colspan="1" rowspan="1">View(s)</th>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="1">Developer commits code to FOP repository.</td>
+            <td colspan="1" rowspan="1">FOP repository (SVN)</td>
+            <td colspan="1" rowspan="1">Raw XML and other content</td>
+            <td colspan="1" rowspan="1"><link href="http://svn.apache.org/viewvc/xmlgraphics/fop/trunk/src/documentation/content/xdocs/">in SVN</link></td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="1">Developer builds and uploads documentation using ForrestBot.</td>
+            <td colspan="1" rowspan="1">/www/xmlgraphics.apache.org/fop on people.apache.org</td>
+            <td colspan="1" rowspan="1">sync-ready</td>
+            <td colspan="1" rowspan="1">n/a</td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="1">Cron job runs rsync to synchronize the website with the real web server (runs every few hours).</td>
+            <td colspan="1" rowspan="1">Infrastructure knows. :-)</td>
+            <td colspan="1" rowspan="1">web-ready</td>
+            <td colspan="1" rowspan="1"><link href="http://xmlgraphics.apache.org/fop">FOP Web Site</link></td>
+          </tr>
+        </table>
+        <note>Server-side ForrestBot is currently not available for website publishing. We use it locally and with manual invocation.</note>
+      </section>
+      <section id="web-forrestbot-publish">
+        <title>ForrestBot "publish" Step-by-Step</title>
+        <p>
+          We're using ForrestBot for build and deploy the FOP website. ForrestBot comes with Apache Forrest 0.8.
+          The root directory of your FOP checkout contains the file "publish.xml" which is an Ant build file
+          that manages the build and the deployment of the FOP website. Please look into this file for
+          further instructions to set up ForrestBot on your machine. Basically, we're simply running ForrestBot
+          manually by typing "ant -f publish.xml" once we're happy with our changes to the site.
+          Step-by-step instructions for the deployment process again:
+        </p>
+        <note>
+          Please make sure you use Forrest from the Trunk (revision 632959 or later) for the time being. You will need
+          to download it directly from SVN:
+          <link href="http://svn.apache.org/repos/asf/forrest/trunk">http://svn.apache.org/repos/asf/forrest/trunk</link>
+        </note>
+        <ul>
+          <li>Modify the sources of the website and check locally with Forrest (run "forrest run" or just "forrest").</li>
+          <li>
+            Once you're satisfied, run "ant -f publish.xml" to do a clean build of the website. If the build
+            runs without problems, the website will be uploaded as a whole using SVN to the
+            <link href="https://svn.apache.org/repos/asf/xmlgraphics/site/deploy/fop/">website staging directory in SVN</link>.
+          </li>
+          <li>
+            Then log into people.apache.org using SSH, go to the /www/xmlgraphics.apache.org
+            directory and run "svn up".
+          </li>
+          <li>
+            Wait for the next rsync cycle and check your changes in the live site.
+            (Sorry, no manual rsync available ATM)
+          </li>
+        </ul>
+        <p>
+          The reason for putting the generated website in the SVN repository: The infrastructure
+          people want to be able to restore the websites themselves in case of a crash.
+        </p>
+      </section>
+      <section id="web-local-forrest">
+        <title>Using a Local Forrest</title>
+        <p>To use a local Forrest (during website development, not for deployment):</p>
+        <ul>
+          <li><link href="http://forrest.apache.org/mirrors.cgi#closest">download</link> latest the Forrest release (currently Forrest 0.8)</li>
+          <li>set environment variable FORREST_HOME=~/apache-forrest-0.8 where ~ is the directory where Forrest is installed
+              (see <link href="http://forrest.apache.org/docs/your-project.html">http://forrest.apache.org/docs/your-project.html</link> for details)</li>
+          <li>set environment variable PATH=$PATH:$FORREST_HOME/bin</li>
+          <li>cd to your local FOP checkout</li>
+          <li>update your local FOP checkout (svn update)</li>
+          <li>run forrest(.bat), which will build the web-site documents in xml-fop/build/site.</li>
+        </ul>
+        <note>
+          You can use "forrest run" to start a local web server. That improves development speed as you
+          can simply refresh in the browser after a change.
+        </note>
+      </section>
+      <section id="distribution">
+        <title>Updating Distribution Files</title>
+        <p>
+          The Apache distribution system mirrors distributions around the world. Since it uses
+          <link href="http://httpd.apache.org/">Apache httpd</link> Module
+          <link href="http://httpd.apache.org/docs/2.2/mod/mod_autoindex.html#headername">mod_autoindex</link>
+          you also need to manually update the HEADER.html &amp; READER.html files on
+          <code>people.apache.org</code> in
+          <code>/www/www.apache.org/dist/xmlgraphics/fop/</code>.
+        </p>
+        <p>
+          Please be careful when doing stuff like that.
+        </p>
+      </section>
+      <section id="delete">
+        <title>Deleting Documentation Files</title>
+        <p>
+          ForrestBot simply uploads the whole generated site. It doesn't delete obsolete files. You
+          can do that manually in the /www/xmlgraphics.apache.org/fop folder on cvs.apache.org. Be careful
+          when doing stuff like that.
+        </p>
+        <note>
+          Please make sure you always have <strong>group rw permissions on all files</strong> under the /www directory!
+        </note>
+      </section>
+
+    </section>
+  </body>
+</document>

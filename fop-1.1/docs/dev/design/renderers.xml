@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: renderers.xml 1298724 2012-03-09 07:55:31Z cbowditch $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Apache&#8482; FOP Design: Renderers</title>
+    <version>$Revision: 1298724 $</version>
+    <authors>
+      <person name="Keiron Liddle" email="keiron@aftexsw.com"/>
+    </authors>
+  </header>
+  <body>
+    <section id="intro">
+      <title>Introduction</title>
+      <p>A renderer is primarily designed to convert a given area tree into the output
+document format. It should be able to produce pages and fill the pages
+with the text and graphical content. Usually the output is sent to
+an output stream.</p>
+      <p>Some output formats may support extra information that is not available
+from the area tree or depends on the destination of the document.</p>
+      <p>Each renderer is given an area tree to render to its output format.
+The area tree is simply a representation of the pages and the placement
+of text and graphical objects on those pages.</p>
+      <p>The renderer will be given each page as it is ready and an output stream
+to write the data out.
+All pages are supplied in the order they appear in the document.
+In order to save memory it is
+possble to render the pages out of order. Any page that is not ready to
+be rendered is setup by the renderer first so that it can reserve a space
+or reference for when the page is ready to be rendered.The renderer is responsible for managing the
+output format and associated data and flow.</p>
+    </section>
+    <section id="issues">
+      <title>Design Issues</title>
+      <section id="issue-renderers-responsible">
+        <title>Renderers are Responsible</title>
+        <p>Each renderer is totally responsible for its output format.</p>
+      </section>
+      <section id="issue-output-stream">
+        <title>Send Output to a Stream</title>
+      </section>
+    </section>
+    <section id="fonts">
+      <title>Fonts</title>
+      <p>Because font metrics (and therefore layout) are obtained in two different ways depending on the renderer, the renderer actually sets up the fonts being used. The font metrics are used
+during the layout process to determine the size of characters.</p>
+    </section>
+    <section id="context">
+      <title>Render Context</title>
+      <p>The render context is used by handlers.
+It contains information about the current state of the renderer, such as the page, the position, and any other miscellanous objects that are required to draw into the page.</p>
+    </section>
+    <section>
+      <title>XML Handling</title>
+      <p>A document may contain information in the form of XML for an image or instream foreign object.
+This XML is handled through the user agent.
+A standard extension for PDF is the SVG handler.</p>
+      <p>If there is XML in the SVG namespace it is given to the handler which renders the SVG into the pdf document at the given location.
+This separation means that other XML handlers can easily be added.</p>
+    </section>
+    <section>
+      <title>Extensions</title>
+      <p>Document level extensions are handled with an extension handler.
+This handles the information from the AreaTree and adds renders it to the document.
+An example is the pdf bookmarks. This information first needs to have all references resolved.
+Then the extension handler is ready to put the information into the pdf document.</p>
+    </section>
+    <section id="implement">
+      <title>Renderer Implementations</title>
+      <table>
+        <tr>
+          <th colspan="1" rowspan="1">Name</th>
+          <th colspan="1" rowspan="1">Type</th>
+          <th colspan="1" rowspan="1">Font Source</th>
+          <th colspan="1" rowspan="1">Font Embedding?</th>
+          <th colspan="1" rowspan="1">Out of Order Rendering?</th>
+          <th colspan="1" rowspan="1">Notes</th>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">PDF</td>
+          <td colspan="1" rowspan="1">Paginated</td>
+          <td colspan="1" rowspan="1">FOP</td>
+          <td colspan="1" rowspan="1">Yes</td>
+          <td colspan="1" rowspan="1">Yes</td>
+          <td colspan="1" rowspan="1">Uses the PDFDocument classes to create a PDF document. Most of the work is to insert text or create lines. SVG is handled by the XML handler that uses the PDFGraphics2D and batik to
+draw the svg into the pdf page.</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">PostScript</td>
+          <td colspan="1" rowspan="1">Paginated</td>
+          <td colspan="1" rowspan="1">FOP</td>
+          <td colspan="1" rowspan="1">Not implemented</td>
+          <td colspan="1" rowspan="1">?</td>
+          <td colspan="1" rowspan="1">Similar to PDF.</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">PCL</td>
+          <td colspan="1" rowspan="1">Paginated</td>
+          <td colspan="1" rowspan="1">FOP</td>
+          <td colspan="1" rowspan="1">?</td>
+          <td colspan="1" rowspan="1">?</td>
+          <td colspan="1" rowspan="1">Similar to PDF.</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">SVG</td>
+          <td colspan="1" rowspan="1">Paginated</td>
+          <td colspan="1" rowspan="1">?</td>
+          <td colspan="1" rowspan="1">?</td>
+          <td colspan="1" rowspan="1">?</td>
+          <td colspan="1" rowspan="1">Creates a single svg document that contains all the pages rendered
+with page sequences horizontally and pages vertically. Adds
+links between the pages so that it can be viewed by clicking on the page
+to go to the next page.</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">TXT</td>
+          <td colspan="1" rowspan="1">Paginated</td>
+          <td colspan="1" rowspan="1">N/A</td>
+          <td colspan="1" rowspan="1">N/A</td>
+          <td colspan="1" rowspan="1">No</td>
+          <td colspan="1" rowspan="1">Outputs to a text document.</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">AWT</td>
+          <td colspan="1" rowspan="1">Paginated</td>
+          <td colspan="1" rowspan="1">AWT</td>
+          <td colspan="1" rowspan="1">N/A</td>
+          <td colspan="1" rowspan="1">?</td>
+          <td colspan="1" rowspan="1">This draws the pages into an AWT graphic.</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">XML</td>
+          <td colspan="1" rowspan="1">Paginated</td>
+          <td colspan="1" rowspan="1">FOP</td>
+          <td colspan="1" rowspan="1">No</td>
+          <td colspan="1" rowspan="1">No</td>
+          <td colspan="1" rowspan="1">Creates an XML file that represents the AreaTree.</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">Print</td>
+          <td colspan="1" rowspan="1">Paginated</td>
+          <td colspan="1" rowspan="1">AWT</td>
+          <td colspan="1" rowspan="1">?</td>
+          <td colspan="1" rowspan="1">No</td>
+          <td colspan="1" rowspan="1">Prints the document using the java printing facitlities. The AWT
+rendering is used to draw the pages onto the printjob.</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">RTF</td>
+          <td colspan="1" rowspan="1">Structural</td>
+          <td colspan="1" rowspan="1">N/A</td>
+          <td colspan="1" rowspan="1">N/A</td>
+          <td colspan="1" rowspan="1">No</td>
+          <td colspan="1" rowspan="1">Structural format uses a different rendering mechanism.</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">MIF</td>
+          <td colspan="1" rowspan="1">Structural</td>
+          <td colspan="1" rowspan="1">N/A</td>
+          <td colspan="1" rowspan="1">N/A</td>
+          <td colspan="1" rowspan="1">No</td>
+          <td colspan="1" rowspan="1">Structural format uses a different rendering mechanism.</td>
+        </tr>
+      </table>
+    </section>
+    <section id="add">
+      <title>Adding a Renderer</title>
+      <p>You can add other renderers by implementing the Renderer interface.
+However, the AbstractRenderer does most of what is needed, including iterating through the tree parts, so it is probably better to extend this.
+This means that you only need to implement the basic functionality such as text, images, and lines.
+AbstractRenderer's methods can easily be overridden to handle things in a different way or do some extra processing.</p>
+      <p>The relevent AreaTree structures that will need to be rendered are:</p>
+      <ul>
+        <li>Page</li>
+        <li>Viewport</li>
+        <li>Region</li>
+        <li>Span</li>
+        <li>Block</li>
+        <li>Line</li>
+        <li>Inline</li>
+      </ul>
+      <p>A renderer implementation does the following:</p>
+      <ul>
+        <li>render each individual page</li>
+        <li>clip and align child areas to a viewport</li>
+        <li>handle all types of inline area, text, image etc.</li>
+        <li>draw various lines and rectangles</li>
+      </ul>
+    </section>
+    <section id="multiple">
+      <title>Multiple Renderers</title>
+      <p>The layout of the document depends mainly on the font being used.
+If two renderers have the same font metrics then it is possible to use the same Area Tree to render both. This can be handled by the AreaTree Handler.</p>
+    </section>
+    <section id="status">
+      <title>Status</title>
+      <section id="status-todo">
+        <title>To Do</title>
+      </section>
+      <section id="status-wip">
+        <title>Work In Progress</title>
+      </section>
+      <section id="status-complete">
+        <title>Completed</title>
+        <ul>
+          <li>new renderer model</li>
+          <li>new interface for structured documents, rtf and mif</li>
+          <li>added handlers for xml in renderer</li>
+        </ul>
+      </section>
+    </section>
+  </body>
+</document>

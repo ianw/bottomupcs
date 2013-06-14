@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: pdfa.xml 1298724 2012-03-09 07:55:31Z cbowditch $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "document-v13.dtd">
+<document xmlns:xi="http://www.w3.org/2001/XInclude">
+  <header>
+    <title>Apache&#8482; FOP: PDF/A (ISO 19005)</title>
+    <version>$Revision: 1298724 $</version>
+    <authors>
+      <person name="Jeremias Märki" email="jeremias@apache.org"/>
+    </authors>
+  </header>
+  <body>
+    <section id="overview">
+      <title>Overview</title>
+      <p>
+        PDF/A is a standard which turns PDF into an "electronic document file 
+        format for long-term preservation". PDF/A-1 is the first part of the 
+        standard and is documented in 
+        <link href="http://www.iso.org/iso/en/CatalogueDetailPage.CatalogueDetail?CSNUMBER=38920&amp;ICS1=37&amp;ICS2=100&amp;ICS3=99">ISO 19005-1:2005(E)</link>. 
+        Work on PDF/A-2 is in progress at 
+        <link href="http://www.aiim.org/standards.asp?ID=25013">AIIM</link>.
+      </p>
+      <p>
+        Design documentation on PDF/A can be found on FOP's Wiki on the
+        <link href="http://wiki.apache.org/xmlgraphics-fop/PDFA1ConformanceNotes">PDFA1ConformanceNotes</link> page.
+      </p>
+    </section>
+    <section id="status">
+      <title>Implementation Status</title>
+      <p>
+        <strong>PDF/A-1b</strong> is implemented to the degree that FOP supports 
+        the creation of the elements described in ISO 19005-1. 
+      </p>
+      <p>
+        Tests have been performed against jHove and Adobe Acrobat 7.0.7 (Preflight function).
+        FOP does not validate completely against Apago's PDF Appraiser. Reasons unknown due to
+        lack of a full license to get a detailed error protocol.
+      </p>
+      <p>
+        <strong>PDF/A-1a</strong> is based on PDF-A-1b and adds accessibility features
+        (such as Tagged PDF). This format is available within the limitation described on
+        the <link href="accessibility.html">Accessibility page</link>.
+      </p>
+    </section>
+    <section id="command-line">
+      <title>Usage (command line)</title>
+      <p>
+        To activate PDF/A-1b from the command-line, specify "-pdfprofile PDF/A-1b" 
+        as a parameter. If there is a violation of one of the validation rules for 
+        PDF/A, an error message is presented and the processing stops.
+      </p>
+      <p>
+        PDF/A-1a is enabled by specifying "-pdfprofile PDF/A-1a".
+      </p>
+    </section>
+    <section id="embedded">
+      <title>Usage (embedded)</title>
+      <p>
+        When FOP is embedded in another Java application you can set a special option
+        on the renderer options in the user agent to activate the PDF/A-1b profile.
+        Here's an example:
+      </p>
+      <source xml:space="preserve"><![CDATA[
+userAgent.getRendererOptions().put("pdf-a-mode", "PDF/A-1b");
+Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, userAgent);
+[..]]]></source>
+      <p>
+        If one of the validation rules of PDF/A is violated, an PDFConformanceException
+        (descendant of RuntimeException) is thrown.
+      </p>
+      <p>
+        For PDF/A-1a, just use the string "PDF/A-1a" instead of "PDF/A-1b".
+      </p>
+    </section>
+    <section id="rules">
+      <title>PDF/A in Action</title>
+      <p>
+        There are a number of things that must be looked after if you activate a PDF/A
+        profile. If you receive a PDFConformanceException, have a look at the following
+        list (not necessarily comprehensive):
+      </p>
+      <ul>
+        <li>
+          Make sure all (!) fonts are embedded. If you use base 14 fonts (like Helvetica)
+          you need to obtain a license for them and embed them like any other font.
+        </li>
+        <li>
+          Don't use PDF encryption. PDF/A doesn't allow it.
+        </li>
+        <li>
+          Don't use CMYK images without an ICC color profile. PDF/A doesn't allow mixing
+          color spaces and FOP currently only properly supports the sRGB color space. Please
+          note that FOP embeds a standard sRGB ICC profile (sRGB IEC61966-2.1) as the 
+          primary output intent for the PDF if no other output intent has been specified
+          in the configuration.
+        </li>
+        <li>
+          Don't use non-RGB colors in SVG images. Same issue as with CMYK images.
+        </li>
+        <li>
+          Don't use EPS graphics with fo:external-graphic. Embedding EPS graphics in PDF
+          is deprecated since PDF 1.4 and prohibited by PDF/A.
+        </li>
+        <li>
+          PDF is forced to version 1.4 if PDF/A-1 is activated.
+        </li>
+        <li>
+          No filter must be specified explicitely for metadata objects. Metadata must be
+          embedded in clear text so non-PDF-aware applications can extract the XMP metadata.
+        </li>
+      </ul>
+      <note>
+        There are additional requirements if you want to enabled PDF/A-1a (Tagged PDF). This is
+        particularly the specification of the natural language and alternative descriptions for
+        images. Please refer to the <link href="accessibility.html">Accessibility page</link> for details.
+      </note> 
+    </section>
+    <section id="profile-compatibility">
+      <title>PDF profile compatibility</title>
+      <p>
+        The PDF profiles "PDF/X-3:2003" and "PDF/A-1b" (or "PDF/A-1a") are compatible and can
+        both be activated at the same time.
+      </p>
+    </section>
+    <section id="interoperability">
+      <title>Interoperability</title>
+      <p>
+        There has been some confusion about the namespace for the PDF/A indicator in the XMP
+        metadata. At least three variants have been seen in the wild:
+      </p>
+      <table>
+        <tr>
+          <td colspan="1" rowspan="1">http://www.aiim.org/pdfa/ns/id.html</td>
+          <td colspan="1" rowspan="1"><strong>obsolete</strong>, from an early draft of ISO-19005-1, used by Adobe Acrobat 7.x</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">http://www.aiim.org/pdfa/ns/id</td>
+          <td colspan="1" rowspan="1"><strong>obsolete</strong>, found in the original ISO 19005-1:2005 document</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">http://www.aiim.org/pdfa/ns/id/</td>
+          <td colspan="1" rowspan="1"><strong>correct</strong>, found in the technical corrigendum 1 of ISO 19005-1:2005</td>
+        </tr>
+      </table>
+      <p>
+        If you get an error validating a PDF/A file in Adobe Acrobat 7.x it doesn't mean that
+        FOP did something wrong. It's Acrobat that is at fault. This is fixed in Adobe Acrobat 8.x
+        which uses the correct namespace as described in the technical corrigendum 1.
+      </p>
+    </section>
+  </body>
+</document>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: index.xml 1298724 2012-03-09 07:55:31Z cbowditch $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "document-v13.dtd">
+<document xmlns:xi="http://www.w3.org/2001/XInclude">
+  <header>
+    <title>Apache&#8482; FOP Trunk (Development code)</title>
+    <version>$Revision: 1298724 $</version>
+  </header>
+  <body>
+    <section id="intro">
+      <title>Introduction</title>
+      <p>
+        Apache&#8482; <strong>FOP Trunk</strong> is the name for the current
+        development code as found in the <link href="ext:svn-repo/trunk">Subversion repository</link>. This
+        section of the FOP web site provides the documentation for
+        this version.
+      </p>
+      <p>
+        The Apache FOP team is proud to present to you this production quality codebase. It has taken
+        over three years to get this far and over two years without a new release from the FOP
+        project. We're still in the process of adding new features. We welcome any feedback you
+        might have and even more, any other form of help to get the project forward.
+      </p>
+    </section>
+    <section id="upgrading">
+      <title>Upgrading from an earlier version</title>
+      <p>
+        If you're upgrading to this version from an earlier version of FOP, please read the 
+        information contained on the <link href="upgrading.html">Upgrading page</link>!
+      </p>
+    </section>
+  </body>
+</document>

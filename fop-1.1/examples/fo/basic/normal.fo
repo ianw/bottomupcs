@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!-- example for a simple fo file. At the beginning the page layout is set.
+Below fo:root there is always
+- a single fo:layout-master-set which defines one or more page layouts
+- an optional fo:declarations,
+- and a sequence of one or more fo:page-sequences containing the text and formatting instructions -->
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+  <fo:layout-master-set>
+
+    <!-- layout for the first page -->
+    <fo:simple-page-master master-name="first"
+          page-height="21cm"
+          page-width="29.7cm"
+          margin-top="1cm"
+          margin-bottom="2cm"
+          margin-left="2.5cm"
+          margin-right="2.5cm">
+      <fo:region-body margin-top="3cm"/>
+      <fo:region-before extent="3cm"/>
+      <fo:region-after extent="1.5cm"/>
+    </fo:simple-page-master>
+
+    <!-- layout for the other pages -->
+    <fo:simple-page-master master-name="rest"
+                  page-height="29.7cm"
+                  page-width="21cm"
+                  margin-top="1cm"
+                  margin-bottom="2cm"
+                  margin-left="2.5cm"
+                  margin-right="2.5cm">
+      <fo:region-body margin-top="2.5cm"/>
+      <fo:region-before extent="2.5cm"/>
+      <fo:region-after extent="1.5cm"/>
+    </fo:simple-page-master>
+
+<fo:page-sequence-master master-name="basicPSM" >
+  <fo:repeatable-page-master-alternatives>
+    <fo:conditional-page-master-reference master-reference="first"
+      page-position="first" />
+    <fo:conditional-page-master-reference master-reference="rest"
+      page-position="rest" />
+    <!-- recommended fallback procedure -->
+    <fo:conditional-page-master-reference master-reference="rest" />
+  </fo:repeatable-page-master-alternatives>
+</fo:page-sequence-master>
+
+  </fo:layout-master-set>
+  <!-- end: defines page layout -->
+
+  <!-- actual layout -->
+  <fo:page-sequence master-reference="basicPSM">
+
+    <!-- header -->
+    <fo:static-content flow-name="xsl-region-before">
+      <fo:block text-align="end"
+            font-size="10pt"
+            font-family="serif"
+            line-height="14pt" >
+        XML Recommendation - p. <fo:page-number/>
+      </fo:block>
+    </fo:static-content>
+
+    <fo:flow flow-name="xsl-region-body">
+
+      <!-- defines text title level 1-->
+      <fo:block font-size="18pt"
+            font-family="sans-serif"
+            line-height="24pt"
+            space-after.optimum="15pt"
+            background-color="blue"
+            color="white"
+            text-align="center"
+            padding-top="3pt"
+            font-variant="small-caps">
+        Extensible Markup Language (XML) 1.0
+      </fo:block>
+
+      <!-- defines text title level 2-->
+      <fo:block font-size="16pt"
+            font-family="sans-serif"
+            line-height="20pt"
+            space-before.optimum="10pt"
+            space-after.optimum="10pt"
+            text-align="start"
+            padding-top="3pt">
+        Abstract
+      </fo:block>
+
+      <!-- Normal text -->
+      <fo:block font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                text-align="start">
+        The <fo:inline font-variant="small-caps">Extensible Markup Language (XML)</fo:inline> is a subset of SGML that is completely described in this document. Its goal is to
+        enable generic SGML to be served, received, and processed on the Web in the way that is now possible with HTML. XML
+        has been designed for ease of implementation and for interoperability with both SGML and HTML.
+      </fo:block>
+
+      <!-- defines text title level 2-->
+      <fo:block font-size="16pt"
+            font-family="sans-serif"
+            line-height="20pt"
+            space-before.optimum="10pt"
+            space-after.optimum="10pt"
+            text-align="start"
+            padding-top="3pt">
+        Status of this document
+      </fo:block>
+
+      <!-- Normal text -->
+      <fo:block font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                text-align="start">
+        This document has been reviewed by W3C Members and other interested parties and has been endorsed by the Director as a
+        W3C Recommendation. It is a stable document and may be used as reference material or cited as a normative reference from
+        another document. W3C's role in making the Recommendation is to draw attention to the specification and to promote its
+        widespread deployment. This enhances the functionality and interoperability of the Web.
+      </fo:block>
+
+      <!-- Normal text -->
+      <fo:block font-size="12pt"
+                font-family="sans-serif"
+                line-height="15pt"
+                space-after.optimum="3pt"
+                text-align="start">
+        This document specifies a syntax created by subsetting an existing, widely used international text processing standard
+        (Standard Generalized Markup Language, ISO 8879:1986(E) as amended and corrected) for use on the World Wide Web. It
+        is a product of the W3C XML Activity, details of which can be found at http://www.w3.org/XML. A list of current W3C
+        Recommendations and other technical documents can be found at http://www.w3.org/TR.
+      </fo:block>
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

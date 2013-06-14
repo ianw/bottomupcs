@@ -1,0 +1,621 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.10-dev">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Apache&trade; FOP Design: Layout Managers</title>
+<link type="text/css" href="../../skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="../../skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="../../skin/print.css" rel="stylesheet">
+<link type="text/css" href="../../skin/profile.css" rel="stylesheet">
+<script src="../../skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="../../skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="../../skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="../../favicon.ico">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://xmlgraphics.apache.org/"><img class="logoImage" alt="Apache XML Graphics" src="../../images/group-logo.gif" title="Apache XML Graphics is responsible for the creation and maintenance of software for managing the conversion of XML formats to graphical output, and the creation and maintenance of related software components, based on software licensed to the Foundation"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://xmlgraphics.apache.org/fop/"><img class="logoImage" alt="Apache FOP" src="../../images/logo.jpg" title="Apache FOP (Formatting Objects Processor) is the world's first output independent formatter. Output formats currently supported include PDF, PCL, PS, SVG, XML (area tree representation), Print, AWT, MIF and TXT. The primary output target is PDF."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="xmlgraphics.apache.org" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="../../index.html">Home</a>
+</li>
+<li>
+<a class="unselected" href="../../1.0/index.html">Version 1.0</a>
+</li>
+<li>
+<a class="unselected" href="../../1.1/index.html">Version 1.1</a>
+</li>
+<li>
+<a class="unselected" href="../../trunk/index.html">FOP Trunk</a>
+</li>
+<li class="current">
+<a class="selected" href="../../dev/index.html">Development</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">The Apache Software Foundation</a> &gt; <a href="http://xmlgraphics.apache.org/">Apache XML Graphics Project</a><script src="../../skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_1.1', '../../skin/')" id="menu_1.1Title" class="menutitle">About</div>
+<div id="menu_1.1" class="menuitemgroup">
+<div class="menuitem">
+<a href="../../dev/index.html">Basics</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_selected_1.2', '../../skin/')" id="menu_selected_1.2Title" class="menutitle" style="background-image: url('../../skin/images/chapter_open.gif');">Design</div>
+<div id="menu_selected_1.2" class="selectedmenuitemgroup" style="display: block;">
+<div onclick="SwitchMenu('menu_1.2.1', '../../skin/')" id="menu_1.2.1Title" class="menutitle">About</div>
+<div id="menu_1.2.1" class="menuitemgroup">
+<div class="menuitem">
+<a href="../../dev/design/index.html">Introduction</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_selected_1.2.2', '../../skin/')" id="menu_selected_1.2.2Title" class="menutitle" style="background-image: url('../../skin/images/chapter_open.gif');">Core Process</div>
+<div id="menu_selected_1.2.2" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="../../dev/design/startup.html">Startup</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/parsing.html">XML Parsing</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/fotree.html">FO Tree</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/properties.html">Properties</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/layout.html">Layout</a>
+</div>
+<div class="menupage">
+<div class="menupagetitle">Break Possibility</div>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/areas.html">Area Tree</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/renderers.html">Renderers</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2.3', '../../skin/')" id="menu_1.2.3Title" class="menutitle">Miscellaneous</div>
+<div id="menu_1.2.3" class="menuitemgroup">
+<div class="menuitem">
+<a href="../../dev/design/images.html">Images</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/pdf-library.html">PDF Library</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/svg.html">SVG</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/embedding.html">Embedding</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/extending.html">Extending</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/optimise.html">Optimisations</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/useragent.html">User Agent</a>
+</div>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/xmlgraphics-fop/FOPProjectPages">Unresolved (Wiki)</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/svg.html">SVG</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/extensions.html">Extensions</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.3', '../../skin/')" id="menu_1.3Title" class="menutitle">Develop</div>
+<div id="menu_1.3" class="menuitemgroup">
+<div class="menuitem">
+<a href="../../dev/implement.html">Walk-Thru</a>
+</div>
+<div class="menuitem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;email1=&amp;emailtype1=substring&amp;emailassigned_to1=1&amp;email2=&amp;emailtype2=substring&amp;emailreporter2=1&amp;bugidtype=include&amp;bug_id=&amp;changedin=&amp;votes=&amp;chfieldfrom=&amp;chfieldto=Now&amp;chfieldvalue=&amp;product=Fop&amp;short_desc=%5BPATCH%5D&amp;short_desc_type=allwordssubstr&amp;long_desc=&amp;long_desc_type=allwordssubstr&amp;bug_file_loc=&amp;bug_file_loc_type=allwordssubstr&amp;keywords=&amp;keywords_type=anywords&amp;field0-0-0=noop&amp;type0-0-0=noop&amp;value0-0-0=&amp;namedcmd=Fop+all&amp;newqueryname=fop+patch+queue&amp;tofooter=1&amp;order=Reuse+same+sort+as+last+time">Patch Queue</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/conventions.html">Conventions</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.4', '../../skin/')" id="menu_1.4Title" class="menutitle">Test</div>
+<div id="menu_1.4" class="menuitemgroup">
+<div class="menuitem">
+<a href="../../dev/testing.html">Testing</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.5', '../../skin/')" id="menu_1.5Title" class="menutitle">Deploy</div>
+<div id="menu_1.5" class="menuitemgroup">
+<div class="menuitem">
+<a href="../../dev/doc.html">Doc Mgmt</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/release.html">Release</a>
+</div>
+<div class="menuitem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;email1=&amp;emailtype1=substring&amp;emailassigned_to1=1&amp;email2=&amp;emailtype2=substring&amp;emailreporter2=1&amp;bugidtype=include&amp;bug_id=&amp;changedin=&amp;votes=&amp;chfieldfrom=&amp;chfieldto=Now&amp;chfieldvalue=&amp;product=Fop&amp;short_desc=&amp;short_desc_type=allwordssubstr&amp;long_desc=&amp;long_desc_type=allwordssubstr&amp;bug_file_loc=&amp;bug_file_loc_type=allwordssubstr&amp;keywords=&amp;keywords_type=anywords&amp;field0-0-0=noop&amp;type0-0-0=noop&amp;value0-0-0=&amp;order=bug_severity%2Cpriority%20DESC">Bugs</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.6', '../../skin/')" id="menu_1.6Title" class="menutitle">Resources</div>
+<div id="menu_1.6" class="menuitemgroup">
+<div class="menuitem">
+<a href="../../dev/faq.html">FAQs</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/tools.html">Tools</a>
+</div>
+<div class="menuitem">
+<a href="http://svn.apache.org/viewvc/xmlgraphics/fop">ViewVC</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.7', '../../skin/')" id="menu_1.7Title" class="menutitle">SubPackages</div>
+<div id="menu_1.7" class="menuitemgroup">
+<div class="menuitem">
+<a href="../../dev/rtflib.html">RTFlib</a>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="../../skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="raw XML" class="xmllink">
+<a class="dida" href="breakpos.xml"><img alt="XML - icon" src="../../skin/images/xmldoc.gif" class="skin"><br>
+        XML</a>
+</div>
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="breakpos.pdf"><img alt="PDF -icon" src="../../skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<div class="trail">Font size: 
+	          &nbsp;<input value="Reset" class="resetfont" title="Reset text" onclick="ndeSetTextSize('reset'); return false;" type="button">      
+	          &nbsp;<input value="-a" class="smallerfont" title="Shrink text" onclick="ndeSetTextSize('decr'); return false;" type="button">
+	          &nbsp;<input value="+a" class="biggerfont" title="Enlarge text" onclick="ndeSetTextSize('incr'); return false;" type="button">
+</div>
+<h1>Apache&trade; FOP Design: Layout Managers</h1>
+<h3>Break Possibility Proposal</h3>
+<div id="front-matter">
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#intro">Introduction</a>
+</li>
+<li>
+<a href="#Anatomy+of+a+Break+Possibility">Anatomy of a Break Possibility</a>
+</li>
+<li>
+<a href="#Turning+Break+Possibilities+into+Areas">Turning Break Possibilities into Areas</a>
+</li>
+<li>
+<a href="#A+walk-through">A walk-through</a>
+</li>
+<li>
+<a href="#Some+issues">Some issues</a>
+<ul class="minitoc">
+<li>
+<a href="#Where+Line+Layout+Managers+are+created">Where Line Layout Managers are created</a>
+</li>
+<li>
+<a href="#getRefIPD">Getting the reference IPD</a>
+</li>
+<li>
+<a href="#Hyphenation">Hyphenation</a>
+</li>
+<li>
+<a href="#Optimizing">Optimizing</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<a name="intro"></a>
+<h2 class="underlined_10">Introduction</h2>
+<div class="section">
+<p>
+As explained in <a href="layout.html">Layout</a>,
+the hierarchy of Layout Managers is responsible for building and placing
+areas. Each Layout Manager is responsible for creating and filling
+areas of a particular type, either inline or block. This document
+explains one potential algorithm for this process. It is based on the
+the generation of <em>break possibilities</em> (BP for short). The
+Layout Managers (LM for short), will generate one or more BP and
+choose the best one. The BP is then used to generate the corresponding
+areas.
+</p>
+</div>
+
+<a name="Anatomy+of+a+Break+Possibility"></a>
+<h2 class="underlined_10">Anatomy of a Break Possibility</h2>
+<div class="section">
+<p>A break possibility is represented by the BreakPoss class. A
+BreakPoss contains size information in the stacking direction and in
+the
+non-stacking direction (at least for inline areas, it must have both). Flags
+indicating various conditions (ISFIRST, ISLAST, CAN_BREAK_AFTER,
+FORCE_BREAK_AFTER, ANCHORS etc). A BreakPoss contains a reference to
+the top-level LayoutManager which generated it.
+</p>
+<p>A BreakPoss contains an object implementing
+the BreakPoss.Position interface. This object is specific to the layout
+manager which created the BreakPoss. It should indicate where the
+break occurs and allow the LM to
+create an area corresponding to the BP. A higher level LM Position
+must somehow reference or wrap the Position returned by its child LM in its
+BreakPoss object. The layout manager  modifies the flags and dimension
+information in the BP to reflect its own requirements. For example an
+inline FO layout manager might add space-start, space-end, border and
+padding values to the stacking or non-stacking dimensions. It might also
+modify the flags based its on keep properties.</p>
+</div>
+
+<a name="Turning+Break+Possibilities+into+Areas"></a>
+<h2 class="underlined_10">Turning Break Possibilities into Areas</h2>
+<div class="section">
+<p>Once break possibilities have been generated, the galley-level
+layout manager selects the best one
+and passes it back to the LayoutManager which generated it to create
+the area. A LayoutManager is responsible for
+storing enough information in its Position objects to be able to
+create the corresponding areas.</p>
+</div>
+
+<a name="A+walk-through"></a>
+<h2 class="underlined_10">A walk-through</h2>
+<div class="section">
+<p>Layout Managers are created from the top down. First the
+page sequence creates a PageLM and a FlowLM. The PageLM will manage
+finding the right page model (with help from the PageSequenceMaster)
+and managing the balancing act between before-floats, footnotes and
+the normal text flow. The FlowLM will
+manage the normal content in the main flow. We can think of it as a
+<em>galley</em> manager.
+</p>
+<p>In general, each LM asks its child LMs to return sucessive
+break possibilities. It passes some
+information to the child in a flags object and it gets back
+a break possibility which contains the size in
+the stacking direction as well as information about such things as
+anchors, break conditions and span conditions which can change the
+reference area environment. This process continues down to the lowest
+level of the layout manager hierarchy which corresponds to atomic
+inline-level FOs such as characters or graphics.
+</p>
+<p>
+Each layout manager will repeatedly call getNextBreakPoss on its current
+child LM until the child returns a BP with the ISLAST
+flag set. Then the layout manager moves on to its next child LM (ie,
+it asks the next child FO to generate a layout manager.) Galley level
+layout managers which are Line and Flow will return to their parent
+layout managers either when they have finished their content or when
+they encounter a a BP which will fill one of their areas.
+</p>
+<p>The break possibilities are generated from the bottom up.
+All inline content must first be broken into
+lines which are then stacked into block areas. This is done by the
+LineLayoutManager, which creates line areas.
+The LineLM asks its child LM to generate a break possibility, which
+represents a place where the line can end. This
+initially means each potential line-end (primarily spaces or forced
+linefeeds and a few other potential line-end characters such as hard
+hyphens.) The text LM returns an object which stores the size in the
+stacking direction as a MinOptMax triplet
+and a <em>cost</em>, which is based on how well this break
+would satisfy the constraints. The Text LM keeps track of its position in
+the text content and returns the total size of the text area it would
+create if it were to break at a given point. The returned BP
+object also contains information about whether the break is forced
+(linefeed) or whether this is the last area which can be generated by
+the LM (ISLAST flag). If a textFO ends on a non-break character, the
+ISLAST flag is set, but the CAN_BREAK_AFTER flag isn't, since we don't
+know if there is any following text in another inline object for
+example.
+</p>
+<p>Variable size content is taken into account from
+the bottom up. Each LM returns a range of sizes in the stacking
+direction, based on property values. For text, this comes from
+variable word-space values or letter-space values. For other inline
+objects, it may include variable space-start and space-end values
+(after calculation of the entire sequence of space specifiers at a
+particular break possibility.)</p>
+<p>The main constraint for laying out
+lines is the available inline-progression-dimension (IPD) for the line
+area to be created. This
+depends on the IPD of the reference area ancestor, on the indents of the
+containing fo:block, and on any side-floats which may be intruding on
+this line.</p>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">See below <a href="#getRefIPD">Getting the Reference
+IPD</a>
+for discussion of how the reference area IPD is
+transmitted to the Line LM.</div>
+</div>
+<p>For now, let's assume that only the LineLM knows about the IPD
+available to it. Therefore only it can make a decision about which BP
+is the best one; the lower level inline layout managers can only
+return potential break points.</p>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">There are certainly optimizations to this model which can be
+examined later.</div>
+</div>
+<p>So the Line LM will ask its child LM(s) for break possibilities until
+it gets back a BP whose stacking dimension <em>could</em> fill the
+line. This means that the BP.stackdim.max &gt;= LineIPD.min. It can look
+for further BP, perhaps one whose stackdim.opt is closer to the
+LineIPD.opt. If it isn't happy with the choice of break possibilities,
+it can go past the end of the line to the next one, and then try to
+find a hyphenation point between the last one which fits and the first
+one which doesn't. If no possibility is found whose min/max values
+enclose the available IPD, some constraint will be violated (and
+reported in the log.) The actual strategy is up to the Line LM and
+should be able to be easily replaced without changing the architecture
+(Strategy pattern).
+</p>
+<p>The definition of a good break possibility depends on the
+properties at the block and inline level which govern things such as
+wrapping behavior and justification mode. For example, if lines are
+not to be wrapped, only an explicit linefeed can serve as a BP. If
+lines are wrapped but not justified then there is no requirement to
+completely fill the IPD on each line, but a sophisticated layout
+manager will try to achieve "aesthetic rag".
+</p>
+<p>Note that no areas have actually been created yet. Once the LineLM
+has found a potential break point for the inline content, it can
+calculate the total size of the line area which would be created. The
+size in the IPD is determined by the Line LM based on the chosen BP.
+The size of the line area in the the block-progression-dimension
+depends on the size of the text (or other inline content). These
+values are set by the inline-level LM
+in their returned BP (in terms of ascender and descender heights with
+respect to the baseline). The LineLM adds spacing implied by the
+current line-stacking strategy and line-height property values. It
+stores a reference to the chosen inline BP and "wraps" that in its own
+Position object which it stores in the BP it returns to its parent LM
+(the block layout manager).
+</p>
+<p>The block LM now has a potential break position after its
+first line. It assigns that possibility a cost, based on widow, orphan
+and keep properties. It can also calculate the total size of the block
+area it would create, were it to end the area after this line. It does
+this by adding any padding and border (taking into account
+conditionality). It also calculates space-before and space-after
+values, or contributes to building up a sequence of such values.
+With this information, the block LM creates a new BP (or
+updates the existing one). It stores a Position object in this
+BP which wraps the returned BP from its child Line LM.
+It returns the new BP to its parent and so on, back up to the
+FlowLM.</p>
+<p>Obviously there is more complicated logic involved when dealing
+with lists and tables. These cases need to be walked through in detail.</p>
+<p>The FlowLM sees if the returned stacking dimension will still
+fit in its available block-progression-dimension (BPD). It repeatedly calls
+getNextBreakPoss on its
+child LMs until it reaches the maximum BPD for the flow reference area
+or until there is no more content to lay out. If one child LM is
+finished, it moves on to the next until the last child LM has returned
+a BP with the ISLAST flag set. If any child LM returns a
+BP with a FORCE_BREAK_BEFORE or SPAN flag set, the FlowLM will
+force layout of any pending break possibilities and return to its
+parent (the PageLM) in order to handle the break or span condition.</p>
+<p>If the returned BP has any new before-float or footnote anchors in
+it (ANCHOR flag in the
+BP), the FlowLM will also return to the PageLM. The PageLM must then
+try to find space to place the floats, possibly asking the FlowLM for
+help if the body contains multiple columns.</p>
+</div>
+
+<a name="Some+issues"></a>
+<h2 class="underlined_10">Some issues</h2>
+<div class="section">
+<p>Following are a few remarks on specific issues.</p>
+<a name="Where+Line+Layout+Managers+are+created"></a>
+<h3 class="underlined_5">Where Line Layout Managers are created</h3>
+<p>If the first child FO in a block FO is an inline-level FO
+such as text, the block LM creates an intermediate level LineLM
+to layout the
+sequence of inline content into Lines. Note that the whole sequence of
+inline FOs is managed by a single instance of LineLM. The LineLM
+becomes the parent to the various inline-level LM created by each
+individual inline FO.
+Since an fo:block can have both block and inline content, its LM
+may create a sequence of intermixed BlockLM and LineLM.</p>
+<a name="getRefIPD"></a>
+<h3 class="underlined_5">Getting the reference IPD</h3>
+<p>When the layout process starts, with the FlowLM asking its first
+child LM for a break possibility, the IPD isn't known, since we don't
+know whether
+the first FO might be spanning, or on which page it might start. (Of
+course, if all page masters in the sequence have the same region-body IPD
+and all have only a single column, the IPD will never change
+and could already be calculated before starting layout.)
+The FlowLM gets its
+first child LM and calls its getNextBreakPoss method. That is a child LM for
+some block-level FO. For now, suppose it's an fo:block. The BlockLM
+will create its first child LM, which may be another block-level LM in
+the case of nested blocks or a LineLM as explained above. (Question:
+do we need a START flag for layout status?)
+</p>
+<p>We keep calling getNextBreakPoss on lower level layout managers until we
+get down to the inline level or to a level which cannot have break-before
+properties, such as a list-item-label. At that point, we assume we are
+going to have to layout some actual content. But we can't do that yet
+since we don't know the inline-progression-dimension. So we return a
+BP object which has 0 size in the stacking dimension, but which
+has flags set to signal to
+higher-level layout managers what needs to be done. If it has a break-before
+property or a span property, it stores these in the BP. If
+no reference IPD is yet defined, it sets a flag to get that. It then
+returns to its parent. The parent LM will inspect the BP object
+returned. In general, it "wraps" it with information about its own
+needs. If the returned BP is not actually returning any potential
+areas, the LM can still add information about its own break or span
+requirements. This return path continues back up to the PageLM. It
+will then check break and span requirements and create a new page
+if necessary using the appropriate page-master. At that point, the
+reference IPD for the main
+flow is known and is set in the flags object used for
+the next getNextBreakPoss call to the lower level LM.
+</p>
+<p>Using this information, the BlockLM parent can now calculate
+the available IPD for its LineLM child, based on its indents.
+(If there are any
+side-floats information about the intrusion must be passed down by the
+FlowLM to lower level managers.) The LineLM can now generate a series
+of BreakPoss objects, which it passes back to its parent LM.
+</p>
+<a name="Hyphenation"></a>
+<h3 class="underlined_5">Hyphenation</h3>
+<p>
+The LineLM is responsible for initiating hyphenation if it is allowed
+by the properties and if no satisfactory BP can be found without
+hyphenating. The hyphenation manager is passed two break
+possibilities, one whose IPD is less than the desired line area IPD
+and one whose IPD is greater. These break possibilities might have
+been generated by different inline-level layout managers (text + a
+wrapper with a color change for example), though
+frequently they represent two positions in a single text run.
+If hyphenation is successful, a new BP is
+returned. The LineLM may look for several intermediate BP
+based on the "cost" of the returned possibilities. If no intermediate
+BP is found, the line will be "short", the white-space stretch will be
+exceeded, or perhaps the content will be overflowed or clipped,
+depending on various property settings.</p>
+<a name="Optimizing"></a>
+<h3 class="underlined_5">Optimizing</h3>
+<p>It obviously seems inefficient to go down to the lowest level
+LM and back up to the FlowLM for every possible line-break
+decision. It seems like it would be possible to optimize by letting
+the lower level layout managers run until they had exceeded the
+current limit in
+the stacking direction. They would then return control to the "galley"
+level (LineLM or FlowLM) which would fine-tune the break decision by
+asking the lower level LM to find a previous BP which would fit. At
+the inline level, this means hyphenation as described above.</p>
+<p>Another interesting question is at what point pending break
+possibilities can be turned into areas.The idea is to wait until we
+are sure we won't have to redo the breaking. This depends on the
+sophistication of the layout strategy. For example, if a
+linebreak can be considered final if the line is full and there are no
+anchors on the line, we could create the LineArea at that point. But
+if we are willing to change a previous line-end decision to get a
+better overall composition of a whole group of lines (to prevent multiple
+hyphens for example), we might wait until the LineLM had finished
+laying out all its material and then make all the Lines at once.</p>
+</div>
+    
+<p align="right">
+<font size="-2">by&nbsp;Karen Lease</font>
+</p>
+<span class="version">
+          version 1298724</span>
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         1999-2012 <a href="http://www.apache.org/licenses/">The Apache Software Foundation. Licensed under Apache License 2.0</a>
+<br>
+    Apache, Apache FOP, the Apache feather logo, and the Apache FOP
+    logos are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+  </div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

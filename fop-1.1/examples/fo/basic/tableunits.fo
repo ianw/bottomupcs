@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+
+  <!-- defines the layout master -->
+  <fo:layout-master-set>
+    <fo:simple-page-master master-name="first"
+                           page-height="29.7cm"
+                           page-width="21cm"
+                           margin-top="1cm"
+                           margin-bottom="2cm"
+                           margin-left="2.5cm"
+                           margin-right="2.5cm">
+      <fo:region-body margin-top="3cm" margin-bottom="1.5cm"/>
+      <fo:region-before extent="3cm"/>
+      <fo:region-after extent="1.5cm"/>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+
+  <!-- starts actual layout -->
+  <fo:page-sequence master-reference="first">
+
+    <fo:flow flow-name="xsl-region-body">
+
+      <fo:block space-after="1cm" text-align="start" padding="0.4in" border="thick solid red">Table unit tests</fo:block>
+
+      <fo:table border-collapse="separate" table-layout="fixed" width="6in">
+        <fo:table-column column-width="(4.5in - 2cm) div 3 +1in" background-color="yellow"/>
+        <fo:table-column column-width="(4.5in - 2cm) div 3 + 0.5in" background-color="blue"/>
+        <fo:table-column column-width="(4.5in - 2cm) div 3 + 2.0cm" background-color="green"/>
+        <fo:table-body>
+          <fo:table-row>
+            <fo:table-cell display-align="before"><fo:block>fixed width columns</fo:block></fo:table-cell>
+            <fo:table-cell display-align="center"><fo:block>Centered</fo:block></fo:table-cell>
+            <fo:table-cell display-align="after"><fo:block>Bottom aligned</fo:block></fo:table-cell>
+          </fo:table-row>
+        </fo:table-body>
+      </fo:table>
+
+      <fo:table border-collapse="separate" table-layout="fixed" width="6in">
+        <fo:table-column column-width="1in + proportional-column-width(1)" background-color="yellow"/>
+        <fo:table-column column-width="2 * (proportional-column-width(1) + .5in) div 2" background-color="blue"/>
+        <fo:table-column column-width="proportional-column-width(1) + 2.0cm" background-color="green"/>
+        <fo:table-body>
+          <fo:table-row>
+            <fo:table-cell display-align="before"><fo:block>Some text to make this cell
+            deeper than the others to check out the alignment properties.</fo:block></fo:table-cell>
+            <fo:table-cell display-align="center"><fo:block>Centered</fo:block></fo:table-cell>
+            <fo:table-cell display-align="after"><fo:block>Bottom aligned</fo:block></fo:table-cell>
+          </fo:table-row>
+          <fo:table-row>
+            <fo:table-cell  background-color="blue"><fo:block>default alignment
+            </fo:block></fo:table-cell>
+            <fo:table-cell height="3cm" background-color="green" display-align="center"><fo:block>Centered with height=3cm</fo:block></fo:table-cell>
+            <fo:table-cell  background-color="yellow" display-align="after"><fo:block>Bottom aligned</fo:block></fo:table-cell>
+          </fo:table-row>
+          <fo:table-row height="3cm">
+            <fo:table-cell><fo:block>default alignment but with a height
+            of 3cm on the row </fo:block></fo:table-cell>
+            <fo:table-cell display-align="center"><fo:block>Centered</fo:block></fo:table-cell>
+            <fo:table-cell display-align="after"><fo:block>Bottom aligned</fo:block></fo:table-cell>
+          </fo:table-row>
+        </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before="12pt" space-after="6pt">The next table has width=100% on the table no column widths specified on the table-column element.</fo:block>
+      <!-- table start -->
+      <fo:table border-collapse="separate" table-layout="fixed" width="100%">
+        <fo:table-column column-width="proportional-column-width(1)" background-color="yellow"/>
+        <fo:table-column column-width="proportional-column-width(1)" background-color="blue"/>
+        <fo:table-column column-width="proportional-column-width(1)" background-color="green"/>
+        <fo:table-body>
+          <fo:table-row>
+            <fo:table-cell display-align="before"><fo:block>Some text to make this cell
+            deeper than the others to check out the alignment properties.</fo:block></fo:table-cell>
+            <fo:table-cell display-align="center"><fo:block>Centered</fo:block></fo:table-cell>
+            <fo:table-cell display-align="after"><fo:block>Bottom aligned</fo:block></fo:table-cell>
+          </fo:table-row>
+        </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before="12pt" space-after="6pt">The next table has fixed column widths=13cm, ipd.optimum=12cm and ipd.max = 100%.</fo:block>
+      <!-- table start -->
+      <fo:table border-collapse="separate" 
+                table-layout="fixed" width="100%"
+                inline-progression-dimension="12cm"
+                inline-progression-dimension.maximum="100%"
+                >
+        <fo:table-column column-width="8cm" background-color="yellow"/>
+        <fo:table-column column-width="proportional-column-width(2)" background-color="blue"/>
+        <fo:table-column column-width="5cm" background-color="green"/>
+        <fo:table-body>
+          <fo:table-row>
+            <fo:table-cell display-align="before"><fo:block>Some text to make this cell
+            deeper than the others to check out the alignment properties.</fo:block></fo:table-cell>
+            <fo:table-cell display-align="center"><fo:block>Centered</fo:block></fo:table-cell>
+            <fo:table-cell display-align="after"><fo:block>Bottom aligned</fo:block></fo:table-cell>
+          </fo:table-row>
+        </fo:table-body>
+        </fo:table>
+
+        <fo:block space-before="12pt" space-after="6pt">The next table has fixed column widths=16.5cm, ipd.optimum=14cm and ipd.max = 100% (16cm).</fo:block>
+      <!-- table start -->
+      <fo:table border-collapse="separate" table-layout="fixed"
+                inline-progression-dimension="14cm"
+                inline-progression-dimension.maximum="100%">
+        <fo:table-column column-width="8.5cm" background-color="yellow"/>
+        <fo:table-column column-width="proportional-column-width(2)" background-color="blue"/>
+        <fo:table-column column-width="8cm" background-color="green"/>
+        <fo:table-body>
+          <fo:table-row>
+            <fo:table-cell display-align="before"><fo:block>Some text to make this cell
+            deeper than the others to check out the alignment properties.</fo:block></fo:table-cell>
+            <fo:table-cell display-align="center"><fo:block>Centered</fo:block></fo:table-cell>
+            <fo:table-cell display-align="after"><fo:block>Bottom aligned</fo:block></fo:table-cell>
+          </fo:table-row>
+        </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before="12pt" space-after="6pt">The next table has width="70% + 1cm" and fixed lengths and the first table-column has column-width="from-parent('width') div 3".</fo:block>
+      <!-- table start -->
+      <fo:table border-collapse="separate" table-layout="fixed" width="70% + 1cm">
+        <fo:table-column column-width="from-parent('width') div 3" background-color="yellow"/>
+        <fo:table-column column-width="proportional-column-width(1)" background-color="blue"/>
+        <fo:table-column column-width="proportional-column-width(1)" background-color="green"/>
+        <fo:table-body>
+          <fo:table-row>
+            <fo:table-cell display-align="before"><fo:block>Some text to make this cell
+            deeper than the others to check out the alignment properties.</fo:block></fo:table-cell>
+            <fo:table-cell display-align="center"><fo:block>Centered</fo:block></fo:table-cell>
+            <fo:table-cell display-align="after"><fo:block>Bottom aligned</fo:block></fo:table-cell>
+          </fo:table-row>
+        </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before="12pt" space-after="6pt">
+        The next table specifies inline-progression-dimension="15cm" instead of width. The
+        middle column has a fixed width; the other two have default width.
+      </fo:block>
+      <!-- table start -->
+      <fo:table border-collapse="separate"
+                table-layout="fixed" width="100%"
+                inline-progression-dimension="15cm">
+        <fo:table-column column-width="proportional-column-width(1)" background-color="yellow"/>
+        <fo:table-column column-width="3cm" background-color="blue"/>
+        <fo:table-column column-width="proportional-column-width(1)" background-color="green"/>
+        <fo:table-body>
+          <fo:table-row>
+            <fo:table-cell display-align="before"><fo:block>Some text to make this cell
+            deeper than the others to check out the alignment properties.</fo:block></fo:table-cell>
+            <fo:table-cell display-align="center"><fo:block>Centered</fo:block></fo:table-cell>
+            <fo:table-cell display-align="after"><fo:block>Bottom aligned</fo:block></fo:table-cell>
+          </fo:table-row>
+        </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before="12pt" space-after="6pt">
+        The next table specifies neither width nor inline-progression-dimension.
+      </fo:block>
+      <!-- table start -->
+      <fo:table table-layout="fixed" width="100%" border-collapse="separate">
+        <fo:table-column column-width="proportional-column-width(1)" background-color="yellow"/>
+        <fo:table-column column-width="3cm" background-color="blue"/>
+        <fo:table-column column-width="proportional-column-width(1)" background-color="green"/>
+        <fo:table-body>
+          <fo:table-row>
+            <fo:table-cell display-align="before"><fo:block>Some text to make this cell
+            deeper than the others to check out the alignment properties.</fo:block></fo:table-cell>
+            <fo:table-cell display-align="center"><fo:block>Centered</fo:block></fo:table-cell>
+            <fo:table-cell display-align="after"><fo:block>Bottom aligned</fo:block></fo:table-cell>
+          </fo:table-row>
+        </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before="12pt" space-after="6pt">
+        The next table specifies inline-progression-dimension.minimum="10cm" and
+        specifies a column width of 5cm on the middle column only.
+      </fo:block>
+      <!-- table start -->
+      <fo:table table-layout="fixed" width="100%" border-collapse="separate"
+                inline-progression-dimension.minimum="10cm">
+        <fo:table-column column-width="proportional-column-width(1)" background-color="yellow"/>
+        <fo:table-column column-width="5cm" background-color="blue"/>
+        <fo:table-column column-width="proportional-column-width(1)" background-color="green"/>
+        <fo:table-body>
+          <fo:table-row>
+            <fo:table-cell display-align="before"><fo:block>Some text to make this cell
+            deeper than the others to check out the alignment properties.</fo:block></fo:table-cell>
+            <fo:table-cell display-align="center"><fo:block>Centered</fo:block></fo:table-cell>
+            <fo:table-cell display-align="after"><fo:block>Bottom aligned</fo:block></fo:table-cell>
+          </fo:table-row>
+        </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before="12pt" space-after="6pt">
+        The next table specifies inline-progression-dimension.minimum=&quot;10cm&quot;,
+        inline-progression-dimension.maximum=&quot;17cm and
+        specifies a column width of 5cm on the middle column only.
+      </fo:block>
+      <!-- table start -->
+      <fo:table table-layout="fixed" width="100%" border-collapse="separate"
+                inline-progression-dimension.minimum="10cm"
+                inline-progression-dimension.maximum="17cm">
+        <fo:table-column column-width="proportional-column-width(1)" background-color="yellow"/>
+        <fo:table-column column-width="5cm" background-color="blue"/>
+        <fo:table-column column-width="proportional-column-width(1)" background-color="green"/>
+        <fo:table-body>
+          <fo:table-row>
+            <fo:table-cell display-align="before"><fo:block>Some text to make this cell
+            deeper than the others to check out the alignment properties.</fo:block></fo:table-cell>
+            <fo:table-cell display-align="center"><fo:block>Centered</fo:block></fo:table-cell>
+            <fo:table-cell display-align="after"><fo:block>Bottom aligned</fo:block></fo:table-cell>
+          </fo:table-row>
+        </fo:table-body>
+      </fo:table>
+
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

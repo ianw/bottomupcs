@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fo:root [
+<!ENTITY nbsp "&#160;">
+]>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+ <fo:layout-master-set>
+   <fo:simple-page-master master-name="A4"
+            page-width="21cm" 
+            page-height="29.7cm" >
+       <fo:region-body 
+            margin-bottom="1.5cm" 
+            margin-right="2cm" 
+            margin-left="2cm" 
+            margin-top="1.5cm"/>
+   </fo:simple-page-master>
+ </fo:layout-master-set>
+
+<fo:bookmark-tree>
+  <fo:bookmark internal-destination="sec0">
+    <fo:bookmark-title>Adding Fonts to FOP</fo:bookmark-title>
+  </fo:bookmark>
+
+  <fo:bookmark internal-destination="sec1">
+    <fo:bookmark-title>Adding additional Type 1 fonts</fo:bookmark-title>
+
+    <fo:bookmark internal-destination="sec1-1">
+      <fo:bookmark-title>Generating a font metrics file</fo:bookmark-title>
+    </fo:bookmark>
+    <fo:bookmark internal-destination="sec1-2">
+      <fo:bookmark-title>Register the fonts within FOP</fo:bookmark-title>
+    </fo:bookmark>
+  </fo:bookmark>
+
+  <fo:bookmark internal-destination="sec2">
+    <fo:bookmark-title>Adding additional TrueType fonts</fo:bookmark-title>
+
+    <fo:bookmark internal-destination="sec2-1">
+      <fo:bookmark-title>Generating a font metrics file</fo:bookmark-title>
+    </fo:bookmark>
+    <fo:bookmark internal-destination="sec2-2">
+      <fo:bookmark-title>TrueType collections</fo:bookmark-title>
+    </fo:bookmark>
+    <fo:bookmark internal-destination="sec2-3">
+      <fo:bookmark-title>Register the fonts within FOP</fo:bookmark-title>
+    </fo:bookmark>
+
+  </fo:bookmark>
+
+ <fo:bookmark internal-destination="sec3">
+    <fo:bookmark-title>Embedding fonts in the PDF</fo:bookmark-title>
+  </fo:bookmark>
+
+ <fo:bookmark internal-destination="sec4">
+    <fo:bookmark-title>Example embedding MSGothic</fo:bookmark-title>
+
+   <fo:bookmark internal-destination="sec4-1">
+      <fo:bookmark-title>Setup CLASSPATH</fo:bookmark-title>
+   </fo:bookmark>
+
+   <fo:bookmark internal-destination="sec4-2">
+      <fo:bookmark-title>Create the metrics file</fo:bookmark-title>
+   </fo:bookmark>
+
+   <fo:bookmark internal-destination="sec4-3">
+      <fo:bookmark-title>Edit msgothic.xml</fo:bookmark-title>
+   </fo:bookmark>
+
+   <fo:bookmark internal-destination="sec4-4">
+      <fo:bookmark-title>Register the font with FOP</fo:bookmark-title>
+   </fo:bookmark>
+ </fo:bookmark>
+
+ <fo:bookmark internal-destination="sec5">
+    <fo:bookmark-title>Japanese Examples</fo:bookmark-title>
+ </fo:bookmark>
+</fo:bookmark-tree>
+
+ <fo:page-sequence master-reference="A4">
+
+  <fo:flow flow-name="xsl-region-body">
+   <fo:wrapper  font-family="Times" font-size="12pt" text-align="justify">
+   <fo:block id="sec0"
+             text-align="center"
+             font-family="Helvetica"
+             font-weight="bold"
+             font-size="18pt"
+             color="#0050B2" space-after.optimum="6pt">
+       Adding Fonts to FOP
+   </fo:block>
+
+   <fo:block space-after.optimum="6pt">
+     When building PDF files, FOP normally supports only the base 14 font
+     package defined in the Adobe PDF specification. That includes the
+     following fonts: Helvetica, Times, Courier, Symbol and ZapfDingbats.
+   </fo:block>
+
+   <fo:block space-after.optimum="6pt">
+     Font support in FOP can be extended by the addition of font metric
+     files (written in XML) created from Adobe Type 1 fonts and Truetype
+     fonts. No other font types (Type 3, etc.) are supported at this time.
+   </fo:block>
+
+   <fo:block id="sec1"
+             font-family="Helvetica"
+             font-weight="bold"
+             font-size="14pt"
+             color="#0050B2"
+             space-after.optimum="6pt"
+             space-before.optimum="12pt">
+     Adding additional Type 1 fonts
+   </fo:block>
+
+   <fo:block space-after.optimum="6pt" >
+     As mentioned above you need an XML file containing font metrics to
+     be able to use an additional font. FOP contains a tool that can generate
+     such a font metrics file from a PFM file, which normally comes with the
+     font file.
+   </fo:block>
+
+   <fo:block id="sec1-1"
+             font-family="Helvetica"
+             font-weight="bold"
+             space-after.optimum="6pt"
+             space-before.optimum="12pt" >
+     Generating a font metrics file
+   </fo:block>
+
+   <fo:block space-after.optimum="6pt" >
+      Run the class <fo:inline font-family="Courier">org.apache.fop.fonts.apps.PFMReader</fo:inline>
+       to generate the XML file.
+      <fo:block font-family="Courier" font-size="10pt"
+                space-before.optimum="6pt" space-after.optimum="6pt" margin-left="6pt" text-align="start">
+        java org.apache.fop.fonts.apps.PFMReader pfm-file xml-file
+      </fo:block>
+   </fo:block>
+
+   <fo:block space-after.optimum="6pt" margin-left="6pt">
+     Note: The tool will construct some values (FontBBox, StemV and ItalicAngle) based
+     on assumptions and calculations which are only an approximation to the real values.
+     FontBBox and Italic Angle can be found in the human-readable part of the PFB file.
+     The PFMReader tool does not yet interpret PFB files, so if you want to be correct,
+     you may have to adjust the values in the XML file manually. The constructed values
+     however appear to have no visible influence.
+   </fo:block>
+
+
+   <fo:block id="sec1-2"
+             font-family="Helvetica"
+             font-weight="bold"
+             space-after.optimum="6pt"
+             space-before.optimum="12pt" >
+      Register the fonts within FOP
+   </fo:block>
+
+   <fo:block space-after.optimum="6pt">
+     Edit conf/userconfig.xml and add entries for the font if the fonts section, ie:
+     <fo:block font-family="Courier" font-size="10pt"
+      space-before.optimum="6pt"
+      white-space-collapse="false" margin-left="6pt" text-align="start">
+<![CDATA[
+<font metrics-file="cyberbit.xml" kerning="yes" embed-file="C:\WINNT\Fonts\Cyberbit.ttf">
+  <font-triplet name="Cyberbit" style="normal" weight="normal">
+</font>]]></fo:block>
+   </fo:block>
+
+
+   <fo:block id="sec2"
+             font-family="Helvetica"
+             font-weight="bold"
+             font-size="14pt"
+             color="#0050B2"
+             space-after.optimum="6pt"
+             space-before.optimum="12pt">
+     Adding additional TrueType fonts
+   </fo:block>
+
+   <fo:block space-after.optimum="6pt">
+     Adding Truetype fonts is almost identical to the process of adding type 1 fonts.
+     The main difference is in the first step.
+   </fo:block>
+
+   <fo:block id="sec2-1"
+             font-family="Helvetica"
+             font-weight="bold"
+             space-after.optimum="6pt"
+             space-before.optimum="12pt" >
+     Generating a font metrics file
+   </fo:block>
+
+   <fo:block space-after.optimum="6pt">
+     As mentioned above you need an XML file containing font metrics to be able to use
+     an additional font. FOP contains a tool that can generate such a font metrics file
+     from your truetype font file.
+   </fo:block>
+
+   <fo:block space-after.optimum="6pt">
+     Create metrics for the fontfile. We'll use MS Gothic as an example:
+
+      <fo:block  font-family="Courier" font-size="10pt"
+                space-before.optimum="6pt" space-after.optimum="6pt" margin-left="6pt" text-align="start">
+        java org.apache.fop.fonts.apps.TTFReader C:\WINNT\Fonts\msgothic.ttf msgothic.xml
+      </fo:block>
+   </fo:block>
+
+   <fo:block id="sec2-2"
+             font-family="Helvetica"
+             font-weight="bold"
+             space-after.optimum="6pt"
+             space-before.optimum="12pt" >
+     TrueType collections
+   </fo:block>
+
+   <fo:block space-after.optimum="6pt">
+     TrueType collections (.ttc files) contains more than one font. To create metrics
+     for a ttc file you must specify the font in the collection with the -ttcname
+     option to TTFReader.
+   </fo:block>
+
+   <fo:block space-after.optimum="6pt">
+     To get a list of the fonts in a collection, just start the TTFReader as if it
+     were a normal truetype file (without the -ttcname option). It will then display
+     all the font names and exit with an Exception.
+   </fo:block>
+
+   <fo:block space-after.optimum="6pt">
+     Example on generating metrics for a .ttc file:
+      <fo:block font-family="Courier" font-size="10pt"
+                space-before.optimum="6pt" space-after.optimum="6pt" margin-left="6pt" text-align="start">
+        java org.apache.fop.fonts.apps.TTFReader -ttcname "MS Mincho" msmincho.ttc msminch.xml
+      </fo:block>
+   </fo:block>
+
+   <fo:block id="sec2-3"
+             font-family="Helvetica"
+             font-weight="bold"
+             space-after.optimum="6pt"
+             space-before.optimum="12pt" >
+     Register the fonts within FOP
+   </fo:block>
+
+   <fo:block space-after.optimum="6pt">
+     Same as for <fo:basic-link internal-destination="sec1-2" color="blue">
+     <fo:inline text-decoration="underline">Type&nbsp;1&nbsp;fonts</fo:inline></fo:basic-link>.
+   </fo:block>
+
+
+   <fo:block id="sec3"
+             font-family="Helvetica"
+             font-weight="bold"
+             font-size="14pt"
+             color="#0050B2"
+             space-after.optimum="6pt"
+             space-before.optimum="12pt">
+     Embedding fonts
+   </fo:block>
+
+   <fo:block space-after.optimum="6pt">
+     Font embedding is enabled in the userconfig.xml file. Start Fop with -c userconfig.xml
+   </fo:block>
+
+
+   <fo:block id="sec4"
+             font-family="Helvetica"
+             font-weight="bold"
+             font-size="14pt"
+             color="#0050B2"
+             space-after.optimum="6pt"
+             space-before.optimum="12pt">
+     Example embedding MSGothic
+   </fo:block>
+
+  <fo:block space-after.optimum="6pt">
+    This example will use the Microsoft Gothic TrueType font. This is the font used to render this examples
+    given in the last section of this file. If you don't have it installed,
+    you can download an installer at <fo:basic-link color="blue"
+      external-destination="ftp://ftp.cc.monash.edu.au/pub/nihongo/ie3lpkja.exe">
+      <fo:inline text-decoration="underline">ftp://ftp.cc.monash.edu.au/pub/nihongo/ie3lpkja.exe</fo:inline>
+    </fo:basic-link>.
+  </fo:block>
+
+   <fo:block id="sec4-1"
+             font-family="Helvetica"
+             font-weight="bold"
+             space-after.optimum="6pt"
+             space-before.optimum="12pt">
+    Setup your classpath to run FOP:
+   </fo:block>
+     <fo:block font-family="Courier" font-size="10pt"
+      space-before.optimum="6pt"
+      white-space-collapse="false" margin-left="6pt" text-align="start">
+C:\Fop-0.18.1> set CLASSPATH=fop.jar;lib\xerces-1.2.3.jar;lib\xalan-2.0.0.jar;lib\batik.jar
+     </fo:block>
+
+
+   <fo:block id="sec4-2"
+             font-family="Helvetica"
+             font-weight="bold"
+             space-after.optimum="6pt"
+             space-before.optimum="12pt">
+    Create the metrics file:
+</fo:block>
+
+     <fo:block font-family="Courier" font-size="10pt"
+      space-before.optimum="6pt"
+      white-space-collapse="false" margin-left="6pt" text-align="start">
+C:\Fop-0.18.1> java org.apache.fop.fonts.apps.TTFReader c:\WINNT\Fonts\msgothic.ttf msgothic.xml
+TTF Reader v1.1.1
+
+Reading /home/camk/cjkv/msgothic.ttf...
+
+Number of glyphs in font: 13104
+Postscript format 3
+Creating xml font file...
+
+Creating CID encoded metrics
+Writing xml font file msgothic.xml...
+
+This font contains no embedding license restrictions
+
+     </fo:block>
+
+
+   <fo:block id="sec4-3"
+             font-family="Helvetica"
+             font-weight="bold"
+             space-after.optimum="6pt"
+             space-before.optimum="12pt">
+    Edit the msgothic.xml file and set the <fo:inline font-family="Courier">font-name</fo:inline>
+    to "MSGothic".
+  </fo:block>
+
+   <fo:block id="sec4-4"
+             font-family="Helvetica"
+             font-weight="bold"
+             space-after.optimum="6pt"
+             space-before.optimum="12pt">
+      Edit conf/userconfig.xml and add the following to the &lt;fonts&gt; section:
+   </fo:block>
+
+   <fo:block font-family="Courier" font-size="10pt"
+      space-before.optimum="6pt"
+      white-space-collapse="false" margin-left="6pt" text-align="start">
+<![CDATA[
+<font metrics-file="msgothic.xml" kerning="yes"
+     embed-file="C:\WINNT\Fonts\msgothic.ttf">
+  <font-triplet name="MSGothic" style="normal" weight="normal"/>
+</font>
+]]>
+    </fo:block>
+
+  <fo:block space-after.optimum="6pt">
+    Now you can use MSGothic in your .fo files by setting font-family="MSGothic". You'll need to
+    start FOP specifying the config file as in this example:
+     <fo:block font-family="Courier" font-size="10pt"
+      space-before.optimum="6pt"
+      white-space-collapse="false" margin-left="6pt" text-align="start"
+>java -jar fop.jar -c conf/userconfig.xml -fo myfo.fo -pdf mypdf.pdf</fo:block>
+   </fo:block>
+
+   <fo:block id="sec5"
+             font-family="Helvetica"
+             font-weight="bold"
+             font-size="14pt"
+             color="#0050B2"
+             space-after.optimum="6pt"
+             space-before.optimum="12pt">
+      Examples from <fo:basic-link color="blue" external-destination="http://www.csse.monash.edu.au/~jwb/j_jmdict.html">
+       <fo:inline text-decoration="underline">JMDict</fo:inline></fo:basic-link> Japanese glossary:
+   </fo:block>
+
+</fo:wrapper>
+   <fo:table table-layout="fixed" width="100%">
+      <fo:table-column column-width="50mm"/>
+      <fo:table-column column-width="50mm"/>
+      <fo:table-column column-width="50mm"/>
+      <fo:table-header>
+        <fo:table-row>
+          <fo:table-cell ><fo:block font-weight="bold" font-family="Helvetica">Japanese (kanji or kanadzukai)</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block font-weight="bold" font-family="Helvetica">English</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block font-weight="bold" font-family="Helvetica">German</fo:block></fo:table-cell>
+        </fo:table-row>
+      </fo:table-header>
+      <fo:table-body>
+        <fo:table-row>
+          <fo:table-cell ><fo:block font-family="MSGothic">うん</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>"yeah" or "uh huh"</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block></fo:block></fo:table-cell>
+        </fo:table-row>
+
+        <fo:table-row>
+          <fo:table-cell ><fo:block font-family="MSGothic">アウタースペース</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>outer space</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block></fo:block></fo:table-cell>
+        </fo:table-row>
+
+        <fo:table-row>
+          <fo:table-cell ><fo:block font-family="MSGothic">スペースクラフト</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>spacecraft</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block></fo:block></fo:table-cell>
+        </fo:table-row>
+
+        <fo:table-row>
+          <fo:table-cell ><fo:block font-family="MSGothic">スペースシャトル</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>space shuttle</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block></fo:block></fo:table-cell>
+        </fo:table-row>
+
+        <fo:table-row>
+          <fo:table-cell ><fo:block font-family="MSGothic">著わす</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>"to write", "to publish"</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>veröffentlichen</fo:block></fo:table-cell>
+        </fo:table-row>
+
+        <fo:table-row>
+          <fo:table-cell ><fo:block font-family="MSGothic">電子出版</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>electronic publishing</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block></fo:block></fo:table-cell>
+        </fo:table-row>
+        <fo:table-row>
+          <fo:table-cell ><fo:block font-family="MSGothic">五輪</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>the Olympics</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>Olympische Spiele</fo:block></fo:table-cell>
+        </fo:table-row>
+
+        <fo:table-row>
+          <fo:table-cell ><fo:block font-family="MSGothic">空港</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>airport</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>Flughafen</fo:block></fo:table-cell>
+        </fo:table-row>
+        <fo:table-row>
+          <fo:table-cell ><fo:block font-family="MSGothic">チューリッヒ</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>Zurich</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>Z&#252;rich</fo:block></fo:table-cell>
+        </fo:table-row>
+
+        <fo:table-row>
+          <fo:table-cell ><fo:block font-family="MSGothic">コロラド</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>Colorado</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block></fo:block></fo:table-cell>
+        </fo:table-row>
+
+        <fo:table-row>
+          <fo:table-cell ><fo:block font-family="MSGothic">コロラドスプリングス</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>Colorado Springs</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block></fo:block></fo:table-cell>
+        </fo:table-row>
+
+
+      </fo:table-body>
+    </fo:table>
+
+</fo:flow>
+
+</fo:page-sequence>
+</fo:root>

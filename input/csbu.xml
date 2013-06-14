@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE book [
+
+<!-- Computer Science from the Bottom Up
+
+    Copyright (c)  2004,2005,2006,2007,2008,2009,2010,2011,2012,2013  Ian Wienand
+
+-->
+
+<!ENTITY intro SYSTEM "intro.xml">
+<!ENTITY chapter00 SYSTEM "chapter00/chapter00.xml">
+<!ENTITY chapter01 SYSTEM "chapter01/chapter01.xml">
+<!ENTITY chapter02 SYSTEM "chapter02/chapter02.xml">
+<!ENTITY chapter03 SYSTEM "chapter03/chapter03.xml">
+<!ENTITY chapter04 SYSTEM "chapter04/chapter04.xml">
+<!ENTITY chapter05 SYSTEM "chapter05/chapter05.xml">
+<!ENTITY chapter06 SYSTEM "chapter06/chapter06.xml">
+<!ENTITY chapter07 SYSTEM "chapter07/chapter07.xml">
+<!ENTITY chapter08 SYSTEM "chapter08/chapter08.xml">
+<!ENTITY chapter09 SYSTEM "chapter09/chapter09.xml">
+
+<!ENTITY glossary SYSTEM "glossary.xml">
+
+<!-- mdash isn't XML  -->
+<!ENTITY mdash "&#8212;">
+<!ENTITY times "&#215;">
+<!ENTITY plus "&#215;">
+<!ENTITY equals "&#215;">
+<!ENTITY divide "&#215;">
+<!ENTITY uarr "&#215;"> 
+
+<!ENTITY csbu "Computer Science from the Bottom Up">
+
+]>
+
+<book xmlns="http://docbook.org/ns/docbook" version="5.0">
+
+<title>&csbu;</title>
+
+ <bookinfo>
+  <author>
+   <firstname>Ian</firstname>
+   <surname>Wienand</surname>
+   <affiliation>
+    <address><email>ian@wienand.org</email></address>
+   </affiliation>
+  </author>
+
+  <copyright>
+   <year>2004</year>
+   <year>2005</year>
+   <year>2006</year>
+   <year>2007</year>
+   <year>2008</year>
+   <year>2009</year>
+   <year>2010</year>
+   <year>2011</year>
+   <year>2012</year>
+   <year>2013</year>
+   <holder role="mailto:ian@wienand.org">Ian Wienand</holder>
+  </copyright>
+
+  <abstract>
+   <para>&csbu; &mdash; A free, online book designed to teach computer
+   science from the bottom end up.  Topics covered include binary and
+   binary logic, operating systems internals, toolchain fundamentals
+   and system library fundamentals.</para>
+  </abstract>
+
+  <legalnotice id="legal">
+ 
+  <para>This work is licensed under the Creative Commons
+  Attribution-ShareAlike License. To view a copy of this license,
+  visit <ulink
+  url="http://creativecommons.org/licenses/by-sa/3.0/">http://creativecommons.org/licenses/by-sa/3.0/</ulink>
+  or send a letter to Creative Commons, 559 Nathan Abbott Way,
+  Stanford, California 94305, USA.
+</para>
+
+  </legalnotice>
+
+ </bookinfo>
+
+ &intro;
+ &chapter00;
+ &chapter01;
+ &chapter02;
+ &chapter03;
+ &chapter04;
+ &chapter05;
+ &chapter06;
+ &chapter07;
+ &chapter08;
+ &chapter09;
+ &glossary;
+  
+</book>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id$ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "document-v13.dtd">
+<document xmlns:xi="http://www.w3.org/2001/XInclude">
+  <header>
+    <title>Apache&#8482; FOP: Known Issues</title>
+    <version>$Revision$</version>
+  </header>
+<body>
+<section>
+  <title>Known issues</title>
+  <p>
+    This page lists currently known issues in the current release.
+  </p>
+  <note>
+    <p>
+      For additional information on known issues in Apache&#8482; FOP, please have a look at the following pages, too:
+    </p>
+    <ul>
+      <li><link href="../bugs.html">the bug list in Bugzilla</link></li>
+      <li><link href="http://wiki.apache.org/xmlgraphics-fop/FOPProjectTasks">the task list in the Wiki</link></li>
+    </ul>
+  </note>
+  <p>
+    Apache&#8482; FOP has an extensive automated testing infrastructure. Parts of this infrastructure are several
+    sets of test cases. When a test case is listed in disabled-testcases.xml it is disabled in the JUnit 
+    tests during the normal build process. This indicates a problem in the current codebase. When a bug is 
+    fixed or a missing feature is added the entry for the relevant test case(s) are removed.
+  </p>
+  <section>
+    <title>FO Tree</title>
+    <p>
+      This section lists disabled test cases in the test suite for the FO tree tests, at the time
+      of the release.
+    </p>
+    <p><strong>demo-test-failure.fo</strong> (demo test failure):<br/><em>TODO: Add missing description in disabled-testcases.xml!</em></p><p/><p><strong>from-table-column_marker.fo</strong> (Markers and core function evaluation):<br/>The code currently evaluates this function according to the column in which the 
+    marker appears in the source document, rather than the column it is retrieved in.</p><p/>
+  </section>
+  <section>
+    <title>Layout Engine</title>
+    <p>
+      This section lists disabled test cases in the test suite for the layout engine tests, at the
+      time of the release.
+    </p>
+    <p><strong>block-container_space-before_space-after_3.xml</strong> (Auto-height block-containers produce fences):<br/>Block-containers with no height currently don't
+    create a fence for spaces as they should (they behave like a
+    normal block).</p><p/><p><strong>block_font-stretch.xml</strong> (font-stretch NYI):<br/>Font-stretch is not implemented, yet.</p><p/><p><strong>block_linefeed-treatment.xml</strong> (linefeed-treatment):<br/>Preserved linefeeds in a fo:character are not handled
+    correctly.</p><p/><p><strong>block_white-space-treatment_3.xml</strong> (white-space-treatment):<br/>White space handling incorrectly stops at fo:inline
+      boundaries when it comes to formatter generated line breaks.</p><p/><p><strong>block_space-before_space-after_8.xml</strong> (Empty blocks produce fences):<br/>An empty block currently produces a fence for
+    stacking constraints which it shouldn't.</p><p/><p><strong>block_white-space_nbsp_2.xml</strong> (block white-space nbsp 2):<br/>The nbsp given as an fo:character is not adjustable and therefore
+    the justification does not work in this case.</p><p/><p><strong>block_word-spacing.xml</strong> (block word-spacing):<br/>Word-spacing may not work as expected.</p><p/><p><strong>block_word-spacing_text-align_justify.xml</strong> (block word-spacing text-align justify):<br/>Word-spacing may not work as expected.</p><p/><p><strong>external-graphic_oversized.xml</strong> (external-graphic don't shrink):<br/>Images currently don't shrink so they fit on a page
+    when they are too big and shrinking is allowed to
+    happen (min/opt/max).</p><p/><p><strong>external-graphic_src_uri.xml</strong> (Test case with HTTP URL):<br/>Doesn't work behind a proxy which requires
+    authorization.</p><p/><p><strong>footnote_space-resolution.xml</strong> (Space Resolution in foot note area):<br/>Space resolution does not work between footnote
+    regions.</p><p/><p><strong>inline_block_nested_3.xml</strong> (NPE for table inside an inline):<br/>Placing a table as a child of an fo:inline produces a 
+    NullPointerException.</p><p/><p><strong>inline-container_block_nested.xml</strong> (inline-container is not implemented, yet.):<br/>inline-container is not implemented, yet. Content of an 
+    inline-container will get swallowed. The test case contains no checks.</p><p/><p><strong>inline-container_border_padding.xml</strong> (inline-container is not implemented, yet.):<br/>inline-container is not implemented, yet. Content of an 
+    inline-container will get swallowed.</p><p/><p><strong>inline_letter-spacing.xml</strong> (inline letter-spacing):<br/>Letter-spacing may not work as
+    expected within fo:inline.</p><p/><p><strong>inline_word-spacing.xml</strong> (inline word-spacing):<br/>Word-spacing may not work as expected within
+    fo:inline.</p><p/><p><strong>inline_word-spacing_text-align_justify.xml</strong> (inline word-spacing text-align justify):<br/><em>TODO: Add missing description in disabled-testcases.xml!</em></p><p/><p><strong>leader-alignment.xml</strong> (leader-alignment NYI):<br/>Leader-alignment is not yet
+    implemented.</p><p/><p><strong>leader_leader-pattern_use-content_bug.xml</strong> (leader-pattern="use-content": Problem with line height):<br/>Line height is not correctly calculated for
+    use-content leaders whose height is larger than the rest of the
+    line.<br/>
+    See also: <link href="http://www.nabble.com/leaders-with-leader-pattern%3D%22use-content%22-t546244.html">http://www.nabble.com/leaders-with-leader-pattern%3D%22use-content%22-t546244.html</link></p><p/><p><strong>page-breaking_4.xml</strong> (Page breaking doesn't deal with IPD changes):<br/>Page breaking currently doesn't support changing available IPD 
+    between pages of a single page-sequence. Element list generation has to be reset to
+    redetermine line breaks in this case.</p><p/><p><strong>page-breaking_6.xml</strong> (Overflow handing is incomplete):<br/>Line breaking is not 100% correct when there's too little space. 
+    Overflows are not detected and warned.</p><p/><p><strong>page-height_indefinite_simple.xml</strong> (Indefinite page height handling is imcomplete):<br/>A RuntimeException is thrown for a page of indefinite height. Lots of warnings.</p><p/><p><strong>page-number-citation_background-image.xml</strong> (page-number-citation: Problem with background-image):<br/>Background-images on page-number-citations are not
+    placed correctly.</p><p/><p><strong>page-number-citation_complex_1.xml</strong> (IDs are not working on all FO elements):<br/>The "id" attributes are not properly handled for all block-level FO elements.</p><p/><p><strong>page-number-citation_complex_2.xml</strong> (IDs are not working on all FO elements):<br/>The "id" attributes are not properly handled for all inline-level FO elements.</p><p/><p><strong>region-body_column-count_footnote.xml</strong> (Footnotes in multi-column documents):<br/>Footnotes may overlap with text of the region-body in
+    multi-column documents.</p><p/><p><strong>region-body_column-count_balance_4col.xml</strong> (Column Balancing problems):<br/>Situation in a 4-column document where the column balancing doesn't work and even causes some
+    content to disappear.</p><p/><p><strong>region-body_column-count_bug36356.xml</strong> (Column Balancing problems):<br/>Column balancing doesn't work as expected.</p><p/><p><strong>table-cell_empty_area_with_marker.xml</strong> (table-cell empty area with marker.xml):<br/>A table-cell producing an empty area does currently not add any markers to a page. 
+      See TODO entry in AreaAdditionUtil.</p><p/><p><strong>table_border-width_conditionality.xml</strong> (Border conditionality on table):<br/>The code should be ok, but the test case uses shorthands and therefore
+    is probably not expressing the indended outcome according to the spec. The test
+    case should be revisited.</p><p/><p><strong>block_shy_linebreaking_hyph.xml</strong> (Soft hyphen with normal hyphenation enabled):<br/>A soft hyphen should be a preferred as break compared to a
+    normal hyphenation point but is not.</p><p/><p><strong>keep_within-page_multi-column_overflow.xml</strong> (Page-keep not respected in multi-column layout):<br/>The block should cause overflow in the
+    last column on the page, rather than be broken.</p><p/><p><strong>block-container_reference-orientation_bug36391.xml</strong> (Block Container Reference Orientation Bug):<br/>An assert is failing</p><p/><p><strong>simple-page-master_writing-mode_rl_region-body_writing-mode-lr.xml</strong> (Writing mode problems):<br/>Test erroneously depends upon incorrect implementation of writing-mode trait
+    derivation on fo:region-*.</p><p/>
+  </section>
+  <section>
+    <title>Other known issues</title>
+    <p>This section lists some other issues that post-date the release of FOP 1.0. For known issues that pre-date FOP 1.0, see
+      <link href="http://issues.apache.org/bugzilla/buglist.cgi?chfieldto=2010-07-20&amp;chfield=%5BBug%20creation%5D&amp;query_format=advanced&amp;chfieldfrom=2001-01-01&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;bug_status=NEEDINFO&amp;product=Fop">older bugs that remain open</link>.
+      For all open issues that post-date FOP 1.0, see
+      <link href="http://issues.apache.org/bugzilla/buglist.cgi?chfieldto=Now&amp;chfield=%5BBug%20creation%5D&amp;query_format=advanced&amp;chfieldfrom=2010-07-20&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;bug_status=NEEDINFO&amp;product=Fop">newer bugs that remain open</link>.
+    </p>
+    <!-- See <root>/known-issues.xml for the source document of this section! -->
+    <ul><li>
+    Support for Unicode characters outside of the Base Multilingual Plane (BMP), i.e., characters
+    whose code points are greater than 65535, is not yet implemented.
+    See <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=51843">bug 51843</link>.
+  </li><li>
+    The writing-mode property does not produce the expected behavior when specified on
+    <code>fo:simple-page-master</code>  or <code>fo:region-*</code> elements.
+    See <link href="http://issues.apache.org/bugzilla/show_bug.cgi?id=53276">bug 53276</link>.
+  </li><li>
+    Support for Devanagari and other Indic scripts is not yet complete.
+  </li><li>
+    Use of Unicode U+200C ZERO WIDTH NON-JOINER (ZWNJ) or U+200D ZERO WIDTH JOINER (ZWJ)
+    does not prevent or force contextual substitution, respectively, when used with Arabic script.
+  </li><li>
+    Use of Unicode U+200C ZERO WIDTH NON-JOINER (ZWNJ) or U+200D ZERO WIDTH JOINER (ZWJ)
+    does not affect conjunct formation or other special behavior prescribed when used with Indic scripts.
+  </li><li>
+    Support for automatic line breaking at orthographic syllable segment boundaries in Indic
+    or Southeast Asian scripts is not yet available. In the mean time, use U+200B ZERO WIDTH SPACE (ZWSP).
+  </li><li>
+    Complex script content is presently supported only with AT, IF, and PDF output formats.
+  </li><li>
+    When complex script text encounters an  <code>fo:inline</code> or <code>fo:character</code> boundary,
+    contextual substitution and ligature formation will not occur across the boundary. This prevents,
+    for example, applying a different color to an Arabic Letter within an Arabic word, unless that letter
+    is a non-joining letter (on both sides).
+  </li></ul>
+  </section>
+</section>
+</body>
+</document>

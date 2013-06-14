@@ -1,0 +1,11 @@
+   =========================================================================
+   ==  NOTICE file corresponding to the section 4 d of                    ==
+   ==  the Apache License, Version 2.0,                                   ==
+   =========================================================================
+
+   This product is developed by the Apache Avalon Project.
+   http://avalon.apache.org
+
+   The names "Avalon" and "Merlin" must not be used to endorse or promote 
+   products derived from this software without prior written permission. 
+   For written permission, please contact pmc@avalon.apache.org.

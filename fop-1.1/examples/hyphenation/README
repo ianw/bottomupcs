@@ -1,0 +1,12 @@
+FOP Hyphenation Readme
+
+The hyphenation analysis is an addition to FOP that can be used to
+render a hyphenation tree in various ways, among which a complete tree
+representation.
+
+Building: ant compile
+
+Running: ./analyse or analyse.cmd
+
+You can specify an object file in a jar file as follows:
+/path/to/fop-hyph.jar:hyph/xx.hyp.

@@ -1,0 +1,966 @@
+<chapter id="chapter06">
+  
+  <title>The Toolchain</title>
+
+  <sect1 id="compiled_v_interpreted">
+    <title>Compiled v Interpreted Programs</title>
+
+    <sect2>
+      <title>Compiled Programs</title>
+
+      <para>So far we have discussed how a program is loaded into
+    virtual memory, started as a process kept track of by the
+    operating system and interacts with via system calls.</para>
+      
+      <para>A program that can be loaded directly into memory needs to
+    be in a straight <emphasis>binary</emphasis> format.  The process
+    of converting source code, written in a language such as C, to a
+    binary file ready to be executed is called
+    <emphasis>compiling</emphasis>.  Not surprisingly, the process is
+    done by a <emphasis>compiler</emphasis>; the most widespread
+    example being <productname>gcc</productname>.
+    </para>
+
+    </sect2>
+
+    <sect2>
+      <title>Interpreted programs</title>
+
+      <para>Compiled programs have some disadvantages for modern
+      software development.  Every time a developer makes a change,
+      the compiler must be invoked to recreate the executable file.
+      It is a logical extension to design a compiled program that can
+      read <emphasis>another</emphasis> program listing and execute
+      the code line by line.
+      </para>
+
+      <para>We call this type of compiled program a
+      <emphasis>interpreter</emphasis> because it interprets each line
+      of the input file and executes it as code.  This way the program
+      does does not need to be compiled, and any changes will be seen
+      the next time the interpreter runs the code.</para>
+
+      <para>For their convenience, interpreted programs usually run
+      slower than a compiled counterpart.  The overhead in the program
+      reading and interpreting the code each time is only encountered
+      once for a compiled program, whilst an interpreted program
+      encounters it each time it is run.</para>
+
+      <para>But interpreted languages have many positive aspects.
+      Many interpreted languages actually run in a
+      <computeroutput>virtual machine</computeroutput> that is
+      abstracted from the underlying hardware.  Python and Perl 6 are
+      languages that implement a virtual machine that interpreted code
+      runs on.</para>
+
+      <sect3>
+	<title>Virtual Machines</title>
+	
+	<para>A compiled program is completely dependent on the
+	hardware of the machine it is compiled for, since it must be
+	able to simply be copied to memory an executed.  A virtual
+	machine is an abstraction of hardware into software.</para>
+
+	<para>For example, Java is a hybrid language that is partly
+      compiled and partly interpreted.  Java code is complied into a
+      program that runs inside a <emphasis>Java Virtual
+      Machine</emphasis> or more commonly referred to as a JVM.  This
+      means that a compiled program can run on any hardware that has a
+      JVM written for it; so called <emphasis>write one, run
+      anywhere</emphasis>.</para>
+
+      </sect3>
+
+
+    </sect2>
+
+  </sect1>
+
+  <sect1 id="building_an_executable">
+    <title>Building an executable</title>
+
+    <para>When we talk about the compiler, there are actually three
+    separate steps involved in creating the executable file.</para>
+
+    <orderedlist>
+      <listitem>
+	<para>Compiling</para>
+      </listitem>
+      <listitem>
+	<para>Assembling</para>
+      </listitem>
+      <listitem>
+	<para>Linking</para>
+      </listitem>
+    </orderedlist>
+
+    <para>The components involved in this process are collectively
+    called the <emphasis>toolchain</emphasis> because the tools
+    <emphasis>chain</emphasis> the output of one to the input of the
+    other to create the final output.</para>
+
+    <para>Each link in the chain takes the source code progressively
+    closer to being binary code suitable for execution.</para>
+
+  </sect1>
+
+  <sect1 id="compiling">
+    <title>Compiling</title>
+
+    <sect2>
+      <title>The process of compiling</title>
+
+    <para>The first step of compiling a source file to an executable
+    file is converting the code from the high level, human
+    understandable language to <emphasis>assembly code</emphasis>.  We
+    know from previous chapters than assembly code works directly with
+    the instructions and registers provided by the processor.</para>
+
+    <para>The compiler is the most complex step of process for a
+    number of reasons.  Firstly, humans are very unpredictable and
+    have their source code in many different forms.  The compiler is
+    only interested the actual code, however humans need things like
+    comments and whitespace (spaces, tabs, indents, etc) to understand
+    code.  The process that the compiler takes to convert the
+    human-written source code to its internal representation is called
+    <emphasis>parsing</emphasis>.</para>
+
+      <sect3>
+	<title>C code</title>
+
+	<para>With C code, there is actually a step
+	<emphasis>before</emphasis> parsing the source code called the
+	<emphasis>pre-processor</emphasis>.  The pre-processor is at
+	its core a text replacement program.  For example, any
+	variable declared as <computeroutput>#define variable
+	text</computeroutput> will have
+	<computeroutput>variable</computeroutput> replaced with
+	<computeroutput>text</computeroutput>.  This preprocessed code
+	is then passed into the compiler.</para>
+
+      </sect3>
+
+    </sect2>
+
+    <sect2>
+      <title>Syntax</title>
+      
+      <para>Any computing language has a particular
+      <emphasis>syntax</emphasis> that describes the rules of the
+      language.  Both you and the compiler know the syntax rules, and
+      all going well you will understand each other.  Humans, being as
+      they are, often forget the rules or break them, leading the
+      compiler to be unable to understand your intentions.  For
+      example, if you were to leave the closing bracket off a
+      <computeroutput>if</computeroutput> condition, the compiler does
+      not know where the actual conditional is.</para>
+
+      <para>Syntax is most often described in <emphasis>Backus-Naur
+      Form</emphasis> (BNF)<footnote><para>In fact the most common
+      form is Extended Backus-Naur Form, or EBNF, as it allows some
+      extra rules which are more suitable for modern
+      languages.</para></footnote> which is a language with which you
+      can describe languages!</para>
+
+    </sect2>
+    <sect2>
+      <title>Assembly Generation</title>
+
+      <para>The job of the compiler is to translate the higher level
+      language into assembely code suitable for the target being
+      compiled for.  Obviously each different architecture has a
+      different instruction set, different numbers of registers and
+      different rules for correct operation.</para>
+
+      <sect3>
+	<title>Alignment</title>
+	
+	<figure>
+	  <title>Alignment</title>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="chapter06/figures/alignment.eps" format="EPS" />
+	    </imageobject>
+	    <imageobject role="fo">
+	      <imagedata fileref="chapter06/figures/alignment.svg"
+	      format="SVG" scalefit="1" width="100%"
+	      contentdept="100%"/>
+	    </imageobject>
+	    <imageobject>
+	      <imagedata fileref="chapter06/figures/alignment.png" format="PNG" />
+	    </imageobject>
+	    <textobject>
+	      
+	      <phrase>CPU's can generally only load values into
+		registers from memory on specific alignments.
+		Unaligned loads lead to, at best, performance
+		degredation.</phrase>
+	      
+	    </textobject>
+	  </mediaobject>
+	</figure>
+	
+	<para>Alignment of variables in memory is an important
+	consideration for the compiler. Systems programmers need to be
+	aware of alignment constratins to help the compiler create the
+	most efficient code it can.</para>
+
+	<para>CPUs can generally not load a value into a register from
+	an aribtrary memory location.  It requires that variables be
+	<emphasis>aligned</emphasis> on certain boundaries.  In the
+	example above, we can see how a 32 bit (4 byte) value is
+	loaded into a register on a machine that requires 4 byte
+	alignment of variables.</para>
+
+	<para>The first variable can be directly loaded into a
+	register, as it falls between 4 byte boundaries.  The second
+	variable, however, spans the 4 byte boundary.  This means that
+	at minimum two loads will be required to get the variable into
+	a single register; firstly the lower half and then the upper
+	half.</para>
+
+	<para>Some architectures, such as x86, can handle unaligned
+	loads in hardware and the only symptoms will be lower
+	performance as the hardware does the extra work to get the
+	value into the register.  Others architectures can not have
+	alignment rules violated and will raise an exception which is
+	generally caught by the operating system which then has to
+	manually load the register in parts, causing even more
+	overheads.</para>
+
+	<sect4>
+	  <title>Structure Padding</title>
+
+	  <para>Programmers need to consider alignment especially when
+	creating <computeroutput>struct</computeroutput>s.  Whilst the
+	compiler knows the alignment rules for the architecture it is
+	building for, at times programmers can cause suboptimal
+	behaviour.</para>
+
+	  <para>The C99 standard only says that structures will be
+	  ordered in memory in the same order as they are specified in
+	  the declaration, and that in an array of structures all
+	  elements will be the same size.</para>
+
+	  <example id="struct-padding">
+	    <title>Struct padding example</title>
+	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+		<imageobject>
+		  <imagedata fileref="chapter06/code/struct-padding.txt" format="linespecific" />
+		</imageobject>
+	      </inlinemediaobject></programlisting>
+	  </example>
+
+	  <para>In the example above, we contrive a structure that has
+	  two bytes (<computeroutput>chars</computeroutput> followed
+	  by a 4 byte integer.  The compiler pads the structure as
+	  below.</para>
+
+	  <figure>
+	    <title>Alignment</title>
+	    <mediaobject>
+	      <imageobject>
+		<imagedata fileref="chapter06/figures/padding.eps" format="EPS" />
+	      </imageobject>
+	      <imageobject role="fo">
+		<imagedata fileref="chapter06/figures/padding.svg"
+		format="SVG" scalefit="1" width="100%"
+		contentdept="100%"/>
+	      </imageobject>
+	      <imageobject>
+		<imagedata fileref="chapter06/figures/padding.png" format="PNG" />
+	      </imageobject>
+	      <textobject>
+		<phrase>The compiler pads the structure to align the
+		integer on a 4 byte boundary.</phrase>
+	      </textobject>
+	    </mediaobject>
+	  </figure>
+
+	  <para>In the other example we direct the compiler
+	  <emphasis>not</emphasis> to pad structures and
+	  correspondingly we can see that the integer starts directly
+	  after the two <computeroutput>chars</computeroutput>.</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Cache line alignment</title>
+
+	  <para>We talked previously about aliasing in the cache, and
+	  how several addresses may map to the same cache line.
+	  Programmers need to be sure that when they write their
+	  programs they do not cause
+	  <emphasis>bouncing</emphasis> of cache lines.</para>
+
+	  <para>This situation occurs when a program constantly
+	  accesses two areas of memory that map to the same cache
+	  line.  This effectively wastes the cache line, as it gets
+	  loaded in, used for a short time and then must be kicked out
+	  and the other cache line loaded into the same place in the
+	  cache.</para>
+
+	  <para>Obviously if this situation repeats the performance
+	  will be significantly reduced.  The situation would be
+	  releaved if the confilicting data were organised in slightly
+	  different ways to avoid the cache line conflict.</para>
+
+	  <para>One possible way to detect this sort of situation is
+	  <emphasis>profiling</emphasis>.  When you profile your code
+	  you "watch" it to analyse what code paths are taken and how
+	  long they take to execute.  With <emphasis>profile guided
+	  optimisation</emphasis> (PGO) the compiler can put special
+	  extra bits of code in the first binary it builds, which runs
+	  and makes a record of the branches taken, etc.  You can then
+	  recompile the binary with the extra information to possibly
+	  create a better performing binary.  Otherwise the programmer
+	  can look at the output of the profile and possibly detect
+	  situations such as cache line bouncing. (XXX somewhere
+	  else?)
+	  </para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Space - Speed Trade off</title>
+
+	  <para>What the compiler has done above is traded off using
+	  some extra memory to gain a speed improvement in running our
+	  code.  The compiler knows the rules of the architecture and
+	  can make decisions about the best way to align data,
+	  possibly by trading off small amounts of wasted memory for
+	  increased (or perhaps even just correct) performance.</para>
+
+	  <para>Consequently as a programmer you should never make
+	  assumptions about the way variables and data will be layed
+	  out by the compiler.  To do so is not portable, as a
+	  different architecture may have different rules and the
+	  compiler may make different decisions based on expicit
+	  commands or optimisation levels.</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>Making Assumptions</title>
+
+	  <para>Thus, as a C programmer you need to be familiar with
+	  what you can assume about what the compiler will do and what
+	  may be variable.  What exactly you can assume and can not
+	  assume is detailed in the C99 standard; if you are
+	  programming in C it is certainly worth the investment in
+	  becoming familiar with the rules to avoid writing
+	  non-portable or buggy code.</para>
+
+	  <example id="stack-padding">
+	    <title>Stack alignment example</title>
+	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+		<imageobject>
+		  <imagedata fileref="chapter06/code/stack-align.txt" format="linespecific" />
+		</imageobject>
+	      </inlinemediaobject></programlisting>
+	  </example>
+
+	  <para>In the example above, taken from an Itanium machine,
+	  we can see that the padding and aligment of the stack has
+	  changed considerably between <application>gcc</application>
+	  versions.  This type of thing is to be expected and must be
+	  considered by the programmer.</para>
+
+	  <para>Generally you should ensure that you do not make
+	  assumptions about the size of types or alignment
+	  rules.</para>
+
+	</sect4>
+
+	<sect4>
+	  <title>C Idioms with alignment</title>
+
+	  <para>There are a few common sequences of code that deal
+	  with alignment; generally most programs will consider it in
+	  some ways.  You may see these "code idioms" in many places
+	  outside the kernel when dealing with programs that deal with
+	  chunks of data in some form or another, so it is worth
+	  investigating.</para>
+
+	  <para>We can take some examples from the Linux kernel, which
+	  often has to deal with alignment of pages of memory within
+	  the system.</para>
+
+	  <example id="page-alignment">
+	    <title>Page alignment manipulations</title>
+	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+		<imageobject>
+		  <imagedata fileref="chapter06/code/page.txt" format="linespecific" />
+		</imageobject>
+	      </inlinemediaobject></programlisting>
+	  </example>
+
+	  <para>Above we can see that there are a number of different
+	  options for page sizes within the kernel, ranging from 4KB
+	  through 64KB.</para>
+
+	  <para>The <computeroutput>PAGE_SIZE</computeroutput> macro
+	  is fairly self explanatory, giving the current page size
+	  selected within the system by shifting a value of 1 by the
+	  shift number given (remember, this is the equivalent of
+	  saying
+	  <computeroutput>2<superscript>n</superscript></computeroutput>
+	  where <computeroutput>n</computeroutput> is the
+	  <computeroutput>PAGE_SHIFT</computeroutput>).</para>
+
+	  <para>Next we have a definition for
+	  <computeroutput>PAGE_MASK</computeroutput>.  The
+	  <computeroutput>PAGE_MASK</computeroutput> allows us to find
+	  just those bits that are within the current page, that is
+	  the <computeroutput>offset</computeroutput> of an address
+	  within its page.</para>
+
+	  <para>XXX continue short discussion</para>
+	</sect4>
+
+      </sect3>
+
+    </sect2>
+
+    <sect2>
+      <title>Optimisation</title> 
+
+      <para>Once the compiler has an internal representation of the
+      code, the <emphasis>really</emphasis> interesting part of the
+      compiler starts.  The compiler wants to find the most optimised
+      assembly language output for the given input code.  This is a
+      large and varied problem and requires knowledge of everything
+      from efficient algorithms based in computer science to deep
+      knowledge about the particular processor the code is to be run
+      on.</para>
+
+      <para>There are some common optimisations the compiler can look
+      at when generating output.  There are many, many more strategies
+      for generating the best code, and it is always an active
+      research area.</para>
+
+      <sect3>
+	<title>General Optimising</title>
+
+	<para>The compiler can often see that a particular piece of
+	code can not be used and so leave it out optimise a particular
+	language construct into something smaller with the same
+	outcome.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Unrolling loops</title>
+
+	<para>If code contains a loop, such as a
+	<computeroutput>for</computeroutput> or
+	<computeroutput>while</computeroutput> loop and the compiler
+	has some idea how many times it will execute, it may be more
+	efficient to <emphasis>unroll</emphasis> the loop so that it
+	executes sequentially.  This means that instead of doing the
+	inside of the loop and then branching back to the start to do
+	repeat the process, the inner loop code is duplicated to be
+	executed again.</para>
+
+	<para>Whilst this increases the size of the code, it may allow
+	the processor to work through the instructions more
+	efficiently as branches can cause inefficiencies in the
+	pipeline of instructions coming into the processor.</para>
+
+      </sect3>
+
+      <sect3>
+	<title>Inlining functions</title>
+
+	<para>Similar to unrolling loops, it is possible to put embed
+	called functions within the callee.  The programmer can
+	specify that the compiler should try to do this by specifying
+	the function as <computeroutput>inline</computeroutput> in the
+	function definition.  Once again, you may trade code size for
+	sequentiality in the code by doing this.</para>
+      </sect3>
+
+      <sect3>
+	<title>Branch Prediction</title>
+
+	<para>Any time the computer comes across an
+	<computeroutput>if</computeroutput> statement there are two
+	possible outcomes; true or false.  The processor wants to keep
+	its incoming pipes as full as possible, so it can not wait for
+	the outcome of the test before putting code into the
+	pipeline.</para>
+
+	<para>Thus the compiler can make a prediction about what way
+	the test is likely to go.  There are some simple rules the
+	compiler can use to guess things like this, for example
+	<computeroutput>if (val == -1)</computeroutput> is probably
+	<emphasis>not</emphasis> likely to be true, since -1 usually
+	indicates an error code and hopefully that will not be
+	triggered too often.</para>
+
+	<para>Some compilers can actually compile the program, have
+	the user run it and take note of which way the branches go
+	under real conditions.  It can then re-compile it based on
+	what it has seen.</para>
+
+      </sect3>
+    </sect2>
+
+
+  </sect1>
+
+  <sect1 id="assembler">
+    <title>Assembler</title>
+
+    <para>The assembly code outputted by the compiler is still in a
+    human readable form, should you know the specifics of the assembly
+    code for the processor.  Developers will often take a peek at the
+    assembly output to manually check that the code is the most
+    optimised or to discover any bugs in the compiler (this is more
+    common than one might think, especially when the compiler is
+    being very aggressive with optimisations).</para>
+
+    <para>The assembler is a more mechanical process of converting the
+    assembly code into a binary form.  Essentially, the assembler
+    keeps a large table of each possible instruction and its binary
+    counterpart (called an <emphasis>op code</emphasis> for operation
+    code).  It combines these opcodes with the registers specified in
+    the assembly to produce a binary output file.</para>
+
+    <para>This code is called <emphasis>object code</emphasis> and, at
+    this stage, is not executable.  Object code is simply a binary
+    representation of specific input source code file.  Good
+    programming practice dictates that a programmer should not "put
+    all the eggs in one basket" by placing all your source code in one
+    file.</para>
+
+  </sect1>
+
+  <sect1 id="linker">
+    <title>Linker</title>
+
+    <para>Often in a large program, you will separate out code into
+      multiple files to keep related functions together.  Each of
+      these files can be compiled into object code: but your final
+      goal is to create a single executable! There needs to be some
+      way combining each of these object files into a single
+      executable.  We call this linking.</para>
+
+    <para>Note that even if your program does fit in one file it still
+    needs to be linked against certain system libraries to operate
+    correctly.  For example, the
+    <computeroutput>printf</computeroutput> call is kept in a library
+    which must be combined with your executable to work.  So although
+    you do not explicilty have to worry about linking in this case,
+    there is most certainly still a linking process happening to
+    create your executable.</para>
+
+    <para>In the following sections we explain some terms essential to
+    understanding linking.</para>
+
+    <sect2>
+      <title>Symbols</title>
+
+      <sect3>
+      <title>Symbols</title>
+
+      <para>Variables and functions all have names in source code
+      which we refer to them by.  One way of thinking of a statement
+      declaring a variable <computeroutput>int a</computeroutput> is
+      that you are telling the compiler "set aside some memory of
+      <computeroutput>sizeof(int)</computeroutput> and from now on
+      when I use <computeroutput>a</computeroutput> it will refer to
+      this allocated memory.  Similarly a function says "store this
+      code in memory, and when I call
+      <computeroutput>function()</computeroutput> jump to and execute
+      this code".
+      </para>
+
+      <para>In this case, we call <computeroutput>a</computeroutput>
+      and <computeroutput>function</computeroutput>
+      <emphasis>symbols</emphasis> since they are a symbolic
+      representation of an area of memory.</para>
+
+      <para>Symbols help humans to understand programming.  You could
+      say that the primary job of the compilation process is to remove
+      symbols -- the processor doesn't know what
+      <computeroutput>a</computeroutput> represents, all it knows is
+      that it has some data at a particular memory address.  The
+      compilation process needs to convert <computeroutput>a +=
+      2</computeroutput> to something like "increment the value in
+      memory at <computeroutput>0xABCDE</computeroutput> by 2.</para>
+    </sect3>
+
+      <sect3>
+	<title>Symbol Visibility</title>
+
+	<para>In some C programs, you may have seen the terms
+      <computeroutput>static</computeroutput> and
+      <computeroutput>extern</computeroutput> used with variables.
+      These modifiers can effect what we call the visibility of
+      symbols.</para>
+
+	<para>Imagine you have split up your program in two files, but
+      some functions need to share a variable.  You only want one
+      <emphasis>definition</emphasis> (i.e. memory location) of the
+      shared variable (otherwise it wouldn't be shared!), but both
+      files need to reference it.</para>
+	
+	<para>To enable this, we declare the variable in one file, and
+      then in the other file declare a variable of the same name but
+      with the prefix <computeroutput>extern</computeroutput>.
+      <computeroutput>extern</computeroutput> stands for
+      <emphasis>external</emphasis> and to a human means that this
+      variable is declared somewhere else.</para>
+	
+	<para>What <computeroutput>extern</computeroutput> says to a
+      compiler is that it should not allocate any space in memory for
+      this variable, and leave this symbol in the object code where it
+      will be fixed up later.  The compiler can not possibly know
+      where the symbol is actually defined but the
+      <emphasis>linker</emphasis>does, since it is it's job to look at
+      all object files together and combine them into a single
+      executable.  So the linker will see the symbol left over in the
+      second file, and say "I've seen that symbol before in file 1,
+      and I know that it refers to memory location
+      <computeroutput>0x12345</computeroutput>".  Thus it can modify
+      the symbol value to be the memory value of the variable in the
+      first file.</para>
+	
+	<para><computeroutput>static</computeroutput> is almost the
+      opposite of <computeroutput>extern</computeroutput>.  It places
+      restrictions on the visiblity of the symbol it modifies.  If you
+      declare a variable with <computeroutput>static</computeroutput>
+      that says to the compiler "don't leave any symbols for this in
+      the object code".  This means that when the linker is linking
+      together object files it will never see that symbol (and so
+      can't make that "I've seen this before!" connection).
+      <computeroutput>static</computeroutput> is good for separation
+      and reducing conflicts -- by declaring a variable
+      <computeroutput>static</computeroutput> you can reuse the
+      variable name in other files and not end up with symbol clashes.
+      We say we are <emphasis>restricting the visiblity</emphasis> of
+      the symbol, because we are not allowing the linker to see it.
+      Contrast this with a more visible symbol (one not declared with
+      <computeroutput>static</computeroutput>) which can be seen by
+      the linker.</para>
+
+      </sect3>
+
+    </sect2>
+
+    <sect2>
+      <title>The linking process</title>
+
+      <para>Thus the linking process is really two steps; combining
+      all object files into one exectuable file and then going through
+      each object file to <emphasis>resolve</emphasis> any symbols.
+      This usually requires two passes; one to read all the symbol
+      definitions and take note of unresolved symbols and a second to
+      fix up all those unresolved symbols to the right place.</para>
+
+      <para>The final executable should end up with no unresolved
+      symbols; the linker will fail with an error if there are
+      any.<footnote> <para>We call this <emphasis>static
+      linking</emphasis>.  Dynamic linking is a similar concept done
+      at executable runtime, and is described a little later
+      on.</para></footnote></para>
+
+    </sect2>
+
+  </sect1>
+
+  <sect1 id="compilation_example">
+    <title>A practical example</title>
+
+    <para>We can walk through the steps taken to build a simple
+    application step by step.</para>
+
+    <para>Note that when you type <computeroutput>gcc</computeroutput>
+    that actually runs a driver program that hides most of the steps
+    from you.  Under normal circumstances this is exactly what you
+    want, because the exact commands and options to get a real life
+    working executable on a real system can be quite complicated and
+    architecture specific.</para>
+    
+    <para>We will show the compliation process with the two following
+    examples.  Both are C source files, one defined the
+    <computeroutput>main()</computeroutput> function for the inital
+    program entry point, and another declares a helper type function.
+    There is one global variable too, just for illustration.</para>
+
+    <example id="c-hello">
+      <title>Hello World</title>
+      <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="chapter06/code/hello.c" format="linespecific" />
+	  </imageobject>
+	</inlinemediaobject></programlisting>
+    </example>    
+
+    <example>
+      <title>Function Example</title>
+      <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="chapter06/code/function.c" format="linespecific" />
+	  </imageobject>
+	</inlinemediaobject></programlisting>
+    </example>
+
+    <sect2>
+      <title>Compiling</title>
+
+      <para>All compilers have an option to only execute the first
+      step of compilation.  Usually this is something like
+      <computeroutput>-S</computeroutput> and the output will
+      generally be put into a file with the same name as the input
+      file but with a <computeroutput>.s</computeroutput>
+      extension.</para>
+
+      <para>Thus we can show the first step with <computeroutput>gcc
+      -S</computeroutput> as illustrated in the example below.</para>
+
+      <example>
+	<title>Compilation Example</title>
+	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="chapter06/code/compiled.txt" format="linespecific" />
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+
+      <para>The assembly is a little to complex to fully describe, but
+      you should be able to see where i is defined as a
+      <computeroutput>data4</computeroutput> (i.e. 4 bytes or 32 bits,
+      the size of an <computeroutput>int</computeroutput>), where
+      <computeroutput>function</computeroutput> is defined
+      (<computeroutput>function:</computeroutput>) and a call to
+      <computeroutput>printf()</computeroutput>.</para>
+
+      <para>We now have two assembly files ready to be assembled into
+      machine code!</para>
+
+    </sect2>
+
+    <sect2>
+      <title>Assembly</title>
+
+      <para>Assembly is a fairly straight forward process.  The
+      assembler is usually called <computeroutput>as</computeroutput>
+      and takes arguments in a similar fasion to
+      <computeroutput>gcc</computeroutput></para>
+
+      <example>
+	<title>Assembly Example</title>
+	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="chapter06/code/assembly.txt" format="linespecific" />
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+
+      <para>After assembling we have <emphasis>object</emphasis> code,
+      which is ready to be linked together into the final executable.
+      You can usually skip having to use the assembler by hand by
+      calling the compiler with <computeroutput>-c</computeroutput>,
+      which will directly convert the input file to object code,
+      putting it in a file with the same prefix but
+      <computeroutput>.o</computeroutput> as an extension.</para>
+
+      <para>We can't inspect the object code directly, as it is in a
+      binary format (in future weeks we will learn about this binary
+      format).  However we can use some tools to inspect the object
+      files, for example <computeroutput>readelf
+      --symbols</computeroutput> will show us symbols in the object
+      file.</para>
+
+      <example>
+	<title>Readelf Example</title>
+	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="chapter06/code/readelf.txt" format="linespecific" />
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+
+      <para>Although the output is quite complicated (again!) you
+      should be able to understand much of it.  For example</para>
+
+      <itemizedlist>
+	<listitem>
+	  <para>In the output of
+	  <computeroutput>hello.o</computeroutput> have a look at the
+	  symbol with name <computeroutput>i</computeroutput>.  Notice
+	  how it says it is <computeroutput>LOCAL</computeroutput>?
+	  That is because we declared it
+	  <computeroutput>static</computeroutput> and as such it has
+	  been flagged as being local to this object file.</para>
+	</listitem>
+
+	<listitem>
+	  <para>In the same output, notice that the
+	  <computeroutput>global</computeroutput> variable is defined
+	  as a <computeroutput>GLOBAL</computeroutput>, meaning that
+	  it is visible outside this file.  Similarly the
+	  <computeroutput>main()</computeroutput> function is
+	  externally visable.
+	  </para>
+	</listitem>
+
+	<listitem>
+	  <para>Notice that the
+	  <computeroutput>function</computeroutput> symbol (for the
+	  call to <computeroutput>function()</computeroutput> is left
+	  has <computeroutput>UND</computeroutput> or
+	  <emphasis>undefined</emphasis>.  This means that it has been
+	  left for the linker to find the address of the
+	  function.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Have a look at the symbols in the
+	  <computeroutput>function.c</computeroutput> file and how
+	  they fit into the output.</para>
+	</listitem>
+
+      </itemizedlist>
+
+    </sect2>
+
+    <sect2>
+      <title>Linking</title>
+
+      <para>Actually invoking the linker, called
+      <computeroutput>ld</computeroutput>, is a very complicated
+      process on a real system (are you sick of hearing this yet?).
+      This is why we leave the linking process up to
+      <computeroutput>gcc</computeroutput>.</para>
+
+      <para>But of course we can spy on what
+      <computeroutput>gcc</computeroutput> is doing under the hood
+      with the <computeroutput>-v</computeroutput> (verbose)
+      flag.</para>
+
+
+      <example>
+	<title>Linking Example</title>
+	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="chapter06/code/linking.txt" format="linespecific" />
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+
+      <para>The first thing you notice is that a program called
+      <application>collect2</application> is being called.  This is a
+      simple wrapper around <application>ld</application> that
+      is used internally by <application>gcc</application>.</para>
+
+	<para>The next thing you notice is object files starting with
+      <computeroutput>crt</computeroutput> being specified to the
+      linker.  These functions are provided by gcc and the system
+      libraries and contain code required to start the program.  In
+      actuality, the <computeroutput>main()</computeroutput> function
+      is not the first one called when a program runs, but a function
+      called <computeroutput>_start</computeroutput> which is in the
+      <computeroutput>crt</computeroutput> object files.  This
+      function does some generic setup which application programmers
+      do not need to worry about.</para>
+
+	<para>The path heirarchy is quite complicated, but in
+	  essence we can see that the final step is to link in some
+	  extra object files, namely </para>
+	
+	  <itemizedlist>
+	    <listitem>
+	      <para><computeroutput>crt1.o</computeroutput> : provided
+	      by the system libraries (libc) this object file contains
+	      the <computeroutput>_start</computeroutput> function
+	      which is actually the first thing called within the program.</para>
+	      <para><computeroutput>crti.o</computeroutput> : provided
+	      by the system libraries</para>
+	      <para><computeroutput>crtbegin.o</computeroutput></para>
+	      <para><computeroutput>crtsaveres.o</computeroutput></para>
+	      <para><computeroutput>crtend.o</computeroutput></para>
+	      <para><computeroutput>crtn.o</computeroutput></para>
+	    </listitem>
+	  </itemizedlist>
+
+	<para>We discuss how these are used to start the program a
+	little later.</para>
+
+      <para>Next you can see that we link in our two object files,
+      <computeroutput>hello.o</computeroutput> and
+      <computeroutput>function.o</computeroutput>.  After that we
+      specify some extra libraries with
+      <computeroutput>-l</computeroutput> flags.  These libraries are
+      system specific and required for every program.  The major one
+      is <computeroutput>-lc</computeroutput> which brings in the C
+      library, which has all common functions like
+      <computeroutput>printf()</computeroutput>.</para>
+
+      <para>After that we again link in some more system object files
+      which do some cleanup after programs exit.</para>
+
+      <para>Although the details are complicated, the concept is
+      straight forward.  All the object files will be linked together
+      into a single executable file, ready to run!</para>
+
+    </sect2>
+
+    <sect2>
+      <title>The Executable</title>
+
+      <para>We will go into more details about the executable in the
+      short future, but we can do some inspection in a similar fashion
+      to the object files to see what has happened.</para>
+
+      <example>
+	<title>Executable Example</title>
+	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
+	    <imageobject>
+	      <imagedata fileref="chapter06/code/executable.txt" format="linespecific" />
+	    </imageobject>
+	  </inlinemediaobject></programlisting>
+      </example>
+
+      <para>Some things to note</para>
+
+      <itemizedlist>
+	<listitem>
+	  <para>Note I built the executable the "easy" way!</para>
+	</listitem>
+
+	<listitem>
+	  <para>See there are two symbol tables; the
+	  <computeroutput>dynsym</computeroutput> and
+	  <computeroutput>symtab</computeroutput> ones.  We explain
+	  how the <computeroutput>dynsym</computeroutput> symbols work
+	  soon, but notice that some of them are
+	  <emphasis>versioned</emphasis> with an
+	  <computeroutput>@</computeroutput> symbol.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Note the many symbols that have been included from the
+	  extra object files.  Many of them start with
+	  <computeroutput>__</computeroutput> to avoid clashing with
+	  any names the programmer might choose.  Read through and
+	  pick out the symbols we mentioned before from the object
+	  files and see if they have changed in any way.</para>
+	</listitem>
+
+      </itemizedlist>
+
+    </sect2>
+
+  </sect1>
+
+</chapter>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-parent-document: ("../csbu.sgml" "book" "chapter")
+End:
+-->

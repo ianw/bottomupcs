@@ -1,0 +1,723 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.10-dev">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Release Notes for Apache FOP 0.95</title>
+<link type="text/css" href="../skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="../skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="../skin/print.css" rel="stylesheet">
+<link type="text/css" href="../skin/profile.css" rel="stylesheet">
+<script src="../skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="../skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="../skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="../favicon.ico">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://xmlgraphics.apache.org/"><img class="logoImage" alt="Apache XML Graphics" src="../images/group-logo.gif" title="Apache XML Graphics is responsible for the creation and maintenance of software for managing the conversion of XML formats to graphical output, and the creation and maintenance of related software components, based on software licensed to the Foundation"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://xmlgraphics.apache.org/fop/"><img class="logoImage" alt="Apache FOP" src="../images/logo.jpg" title="Apache FOP (Formatting Objects Processor) is the world's first output independent formatter. Output formats currently supported include PDF, PCL, PS, SVG, XML (area tree representation), Print, AWT, MIF and TXT. The primary output target is PDF."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="xmlgraphics.apache.org" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li class="current">
+<a class="selected" href="../index.html">Home</a>
+</li>
+<li>
+<a class="unselected" href="../1.0/index.html">Version 1.0</a>
+</li>
+<li>
+<a class="unselected" href="../1.1/index.html">Version 1.1</a>
+</li>
+<li>
+<a class="unselected" href="../trunk/index.html">FOP Trunk</a>
+</li>
+<li>
+<a class="unselected" href="../dev/index.html">Development</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">The Apache Software Foundation</a> &gt; <a href="http://xmlgraphics.apache.org/">Apache XML Graphics Project</a><script src="../skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_1.1', '../skin/')" id="menu_1.1Title" class="menutitle">About</div>
+<div id="menu_1.1" class="menuitemgroup">
+<div class="menuitem">
+<a href="../index.html">Introduction</a>
+</div>
+<div class="menuitem">
+<a href="../download.html">Download</a>
+</div>
+<div class="menuitem">
+<a href="../quickstartguide.html">Quick Start Guide</a>
+</div>
+<div class="menuitem">
+<a href="../compliance.html" title="FOP Compliance">Compliance</a>
+</div>
+<div class="menuitem">
+<a href="../gethelp.html">Getting Help</a>
+</div>
+<div class="menuitem">
+<a href="../faq.html">FAQs</a>
+</div>
+<div class="menuitem">
+<a href="../maillist.html">Mailing Lists</a>
+</div>
+<div class="menuitem">
+<a href="../license.html">License</a>
+</div>
+<div class="menuitem">
+<a href="http://www.apache.org/foundation/sponsorship.html">ASF Sponsorship Program</a>
+</div>
+<div class="menuitem">
+<a href="http://www.apache.org/foundation/thanks.html">ASF Thanks</a>
+</div>
+<div class="menuitem">
+<a href="http://www.apache.org/security/">Security</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2', '../skin/')" id="menu_1.2Title" class="menutitle">Resources</div>
+<div id="menu_1.2" class="menuitemgroup">
+<div class="menuitem">
+<a href="../fo.html">XSL-FO</a>
+</div>
+<div class="menuitem">
+<a href="../examples.html">Examples</a>
+</div>
+<div class="menuitem">
+<a href="../bugs.html">Bugs</a>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/xmlgraphics-fop/FrontPage">Wiki</a>
+</div>
+<div class="menuitem">
+<a href="../resources.html">Other</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.3', '../skin/')" id="menu_1.3Title" class="menutitle">Project</div>
+<div id="menu_1.3" class="menuitemgroup">
+<div class="menuitem">
+<a href="../news.html">News</a>
+</div>
+<div class="menuitem">
+<a href="../team.html">Who We Are</a>
+</div>
+<div class="menuitem">
+<a href="../status.html">Status</a>
+</div>
+<div class="menuitem">
+<a href="../knownissues.html">Known Issues</a>
+</div>
+<div class="menuitem">
+<a href="../changes.html">Changes</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.4', '../skin/')" id="menu_1.4Title" class="menutitle">Apache&trade; FOP 1.0</div>
+<div id="menu_1.4" class="menuitemgroup">
+<div class="menuitem">
+<a href="../1.0/index.html">About</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/releaseNotes_1.0.html">Release Notes</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/changes_1.0.html">Changes (1.0)</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/knownissues_overview.html">Known Issues</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/upgrading.html">Upgrading</a>
+</div>
+<div onclick="SwitchMenu('menu_1.4.6', '../skin/')" id="menu_1.4.6Title" class="menutitle">Using Apache&trade; FOP</div>
+<div id="menu_1.4.6" class="menuitemgroup">
+<div class="menuitem">
+<a href="../1.0/anttask.html">Ant Task</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/compiling.html">Build</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/configuration.html">Configure</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/embedding.html">Embed</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/running.html">Run</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/servlets.html">Servlets</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.4.7', '../skin/')" id="menu_1.4.7Title" class="menutitle">Features</div>
+<div id="menu_1.4.7" class="menuitemgroup">
+<div class="menuitem">
+<a href="../1.0/accessibility.html">Accessibility</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/events.html">Events</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/extensions.html">Extensions</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/fonts.html">Fonts</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/output.html">Output Targets</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/graphics.html">Graphics</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/hyphenation.html">Hyphenation</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/intermediate.html">Intermediate Format</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/metadata.html">Metadata</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/pdfa.html">PDF/A</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/pdfx.html">PDF/X</a>
+</div>
+<div class="menuitem">
+<a href="../1.0/pdfencryption.html">PDF Encryption</a>
+</div>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.5', '../skin/')" id="menu_1.5Title" class="menutitle">Apache&trade; FOP 1.1</div>
+<div id="menu_1.5" class="menuitemgroup">
+<div class="menuitem">
+<a href="../1.1/index.html">About</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/releaseNotes_1.1.html">Release Notes</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/changes_1.1.html">Changes (1.1)</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/knownissues_overview.html">Known Issues</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/upgrading.html">Upgrading</a>
+</div>
+<div onclick="SwitchMenu('menu_1.5.6', '../skin/')" id="menu_1.5.6Title" class="menutitle">Using Apache&trade; FOP</div>
+<div id="menu_1.5.6" class="menuitemgroup">
+<div class="menuitem">
+<a href="../1.1/anttask.html">Ant Task</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/compiling.html">Build</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/configuration.html">Configure</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/embedding.html">Embed</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/running.html">Run</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/servlets.html">Servlets</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.5.7', '../skin/')" id="menu_1.5.7Title" class="menutitle">Features</div>
+<div id="menu_1.5.7" class="menuitemgroup">
+<div class="menuitem">
+<a href="../1.1/accessibility.html">Accessibility</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/complexscripts.html">Complex Scripts</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/events.html">Events</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/extensions.html">Extensions</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/fonts.html">Fonts</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/graphics.html">Graphics</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/hyphenation.html">Hyphenation</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/intermediate.html">Intermediate Format</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/metadata.html">Metadata</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/output.html">Output Targets</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/pdfa.html">PDF/A</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/pdfx.html">PDF/X</a>
+</div>
+<div class="menuitem">
+<a href="../1.1/pdfencryption.html">PDF Encryption</a>
+</div>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.6', '../skin/')" id="menu_1.6Title" class="menutitle">Apache&trade; FOP Trunk (dev)</div>
+<div id="menu_1.6" class="menuitemgroup">
+<div class="menuitem">
+<a href="../trunk/index.html">About</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/upgrading.html">Upgrading</a>
+</div>
+<div onclick="SwitchMenu('menu_1.6.3', '../skin/')" id="menu_1.6.3Title" class="menutitle">Using Apache&trade; FOP</div>
+<div id="menu_1.6.3" class="menuitemgroup">
+<div class="menuitem">
+<a href="../trunk/anttask.html">Ant Task</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/compiling.html">Build</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/configuration.html">Configure</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/embedding.html">Embed</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/running.html">Run</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/servlets.html">Servlets</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.6.4', '../skin/')" id="menu_1.6.4Title" class="menutitle">Features</div>
+<div id="menu_1.6.4" class="menuitemgroup">
+<div class="menuitem">
+<a href="../trunk/accessibility.html">Accessibility</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/complexscripts.html">Complex Scripts</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/events.html">Events</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/extensions.html">Extensions</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/fonts.html">Fonts</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/graphics.html">Graphics</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/hyphenation.html">Hyphenation</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/intermediate.html">Intermediate Format</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/metadata.html">Metadata</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/output.html">Output Targets</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/pdfa.html">PDF/A</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/pdfx.html">PDF/X</a>
+</div>
+<div class="menuitem">
+<a href="../trunk/pdfencryption.html">PDF Encryption</a>
+</div>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.7', '../skin/')" id="menu_1.7Title" class="menutitle">About</div>
+<div id="menu_1.7" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/index.html">Basics</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.8', '../skin/')" id="menu_1.8Title" class="menutitle">Design</div>
+<div id="menu_1.8" class="menuitemgroup">
+<div onclick="SwitchMenu('menu_1.8.1', '../skin/')" id="menu_1.8.1Title" class="menutitle">About</div>
+<div id="menu_1.8.1" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/design/index.html">Introduction</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.8.2', '../skin/')" id="menu_1.8.2Title" class="menutitle">Core Process</div>
+<div id="menu_1.8.2" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/design/startup.html">Startup</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/parsing.html">XML Parsing</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/fotree.html">FO Tree</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/properties.html">Properties</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/layout.html">Layout</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/breakpos.html">Break Possibility</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/areas.html">Area Tree</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/renderers.html">Renderers</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.8.3', '../skin/')" id="menu_1.8.3Title" class="menutitle">Miscellaneous</div>
+<div id="menu_1.8.3" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/design/images.html">Images</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/pdf-library.html">PDF Library</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/svg.html">SVG</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/embedding.html">Embedding</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/extending.html">Extending</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/optimise.html">Optimisations</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/useragent.html">User Agent</a>
+</div>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/xmlgraphics-fop/FOPProjectPages">Unresolved (Wiki)</a>
+</div>
+<div class="menuitem">
+<a href="../dev/svg.html">SVG</a>
+</div>
+<div class="menuitem">
+<a href="../dev/extensions.html">Extensions</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.9', '../skin/')" id="menu_1.9Title" class="menutitle">Develop</div>
+<div id="menu_1.9" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/implement.html">Walk-Thru</a>
+</div>
+<div class="menuitem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;email1=&amp;emailtype1=substring&amp;emailassigned_to1=1&amp;email2=&amp;emailtype2=substring&amp;emailreporter2=1&amp;bugidtype=include&amp;bug_id=&amp;changedin=&amp;votes=&amp;chfieldfrom=&amp;chfieldto=Now&amp;chfieldvalue=&amp;product=Fop&amp;short_desc=%5BPATCH%5D&amp;short_desc_type=allwordssubstr&amp;long_desc=&amp;long_desc_type=allwordssubstr&amp;bug_file_loc=&amp;bug_file_loc_type=allwordssubstr&amp;keywords=&amp;keywords_type=anywords&amp;field0-0-0=noop&amp;type0-0-0=noop&amp;value0-0-0=&amp;namedcmd=Fop+all&amp;newqueryname=fop+patch+queue&amp;tofooter=1&amp;order=Reuse+same+sort+as+last+time">Patch Queue</a>
+</div>
+<div class="menuitem">
+<a href="../dev/conventions.html">Conventions</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.10', '../skin/')" id="menu_1.10Title" class="menutitle">Test</div>
+<div id="menu_1.10" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/testing.html">Testing</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.11', '../skin/')" id="menu_1.11Title" class="menutitle">Deploy</div>
+<div id="menu_1.11" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/doc.html">Doc Mgmt</a>
+</div>
+<div class="menuitem">
+<a href="../dev/release.html">Release</a>
+</div>
+<div class="menuitem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;email1=&amp;emailtype1=substring&amp;emailassigned_to1=1&amp;email2=&amp;emailtype2=substring&amp;emailreporter2=1&amp;bugidtype=include&amp;bug_id=&amp;changedin=&amp;votes=&amp;chfieldfrom=&amp;chfieldto=Now&amp;chfieldvalue=&amp;product=Fop&amp;short_desc=&amp;short_desc_type=allwordssubstr&amp;long_desc=&amp;long_desc_type=allwordssubstr&amp;bug_file_loc=&amp;bug_file_loc_type=allwordssubstr&amp;keywords=&amp;keywords_type=anywords&amp;field0-0-0=noop&amp;type0-0-0=noop&amp;value0-0-0=&amp;order=bug_severity%2Cpriority%20DESC">Bugs</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.12', '../skin/')" id="menu_1.12Title" class="menutitle">Resources</div>
+<div id="menu_1.12" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/faq.html">FAQs</a>
+</div>
+<div class="menuitem">
+<a href="../dev/tools.html">Tools</a>
+</div>
+<div class="menuitem">
+<a href="http://svn.apache.org/viewvc/xmlgraphics/fop">ViewVC</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.13', '../skin/')" id="menu_1.13Title" class="menutitle">SubPackages</div>
+<div id="menu_1.13" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/rtflib.html">RTFlib</a>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="../skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="raw XML" class="xmllink">
+<a class="dida" href="releaseNotes_0.95.xml"><img alt="XML - icon" src="../skin/images/xmldoc.gif" class="skin"><br>
+        XML</a>
+</div>
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="releaseNotes_0.95.pdf"><img alt="PDF -icon" src="../skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<div class="trail">Font size: 
+	          &nbsp;<input value="Reset" class="resetfont" title="Reset text" onclick="ndeSetTextSize('reset'); return false;" type="button">      
+	          &nbsp;<input value="-a" class="smallerfont" title="Shrink text" onclick="ndeSetTextSize('decr'); return false;" type="button">
+	          &nbsp;<input value="+a" class="biggerfont" title="Enlarge text" onclick="ndeSetTextSize('incr'); return false;" type="button">
+</div>
+<h1>Release Notes for Apache FOP 0.95</h1>
+<div id="front-matter">
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#version_0.95">Major Changes in Version 0.95</a>
+<ul class="minitoc">
+<li>
+<a href="#Changes+to+the+Code+Base">Changes to the Code Base</a>
+</li>
+<li>
+<a href="#Changes+to+the+Layout+Engine">Changes to the Layout Engine</a>
+</li>
+<li>
+<a href="#Changes+to+Renderers+%28Output+Formats%29">Changes to Renderers (Output Formats)</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<notes>
+        
+<a name="Notes"></a>
+<h2 class="underlined_10">Notes</h2>
+<div class="section">
+<p>
+            Besides the important changes listed below, the most important areas with
+            improvements in this release are:
+          </p>
+<ul>
+            
+<li>
+              Many bugfixes in tables, plus some new features (full support for keeps and
+              breaks, border conditionality, background on columns and header/footer/body)
+            </li>
+            
+<li>
+              Improvements and bugfixes for font handling and font
+              auto-detection/-registration.
+            </li>
+            
+<li>
+              Performance improvements and memory optimizations for the property handling
+              in the FO tree.
+            </li>
+          
+</ul>
+<p>
+            Please note that with this release, we've dropped support for Java 1.3.
+            FOP will, from now on, <strong>require at least Java 1.4</strong>.
+          </p>
+<p>
+            There have been a few changes in tables that make FOP both more strict and more
+            compliant to the Recommendation:
+            <ul>
+              
+<li>XSL-FO 1.1 explicitly states that a row-spanning fo:table-cell element is not
+                allowed to span further than its enclosing fo:table-header/footer/body element
+                (see bottom of <a class="external" href="http://www.w3.org/TR/xsl11/#fo_table">section
+                  6.7.3</a>). From now on FOP will give a validation error if a document
+                contains such an erroneous cell.
+              </li>
+              
+<li>
+                
+<p>If an fo:table element contains explicit fo:table-column children, then those
+                  elements set the total number of columns in the table. This means that a
+                  validation error will now occur if a row contains more cells than available
+                  columns. This change allows to improve performance, since the rendering of the
+                  table may start as soon as the table-column elements have been parsed.</p>
+                
+<p>If more flexibility is needed, then the fo:table-column elements may be just
+                  omitted. The final number of columns will then be set by the row that has the
+                  most cells.</p>
+              
+</li>
+            
+</ul>
+          
+</p>
+<p>
+            The image libraries Jimi and JAI are no longer needed (and used) for image loading.
+            Instead we rely completely on the Image I/O API that has been introduced with
+            Java 1.4. If you still need support for bitmap image formats that do not work
+            out-of-the-box, we recommend adding
+            <a class="external" href="http://jai-imageio.dev.java.net/">JAI Image I/O Tools</a>
+            (an Image I/O compatible image codec package) to the classpath. JAI is still required
+            for building the FOP distribution but it is optional for normal builds and at run-time.
+          </p>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">
+            This final 0.95 release also includes all of the
+            <a href="changes_0.95beta.html">changes made for Apache FOP 0.95beta</a>.
+          </div>
+</div>
+</div>
+      
+</notes>
+<a name="version_0.95"></a>
+<h2 class="underlined_10">Major Changes in Version 0.95</h2>
+<div class="section">
+<div class="note">
+<div class="label">Note</div>
+<div class="content">This is not a complete list of changes, just some of the more important ones.
+     A full list of changes in this release <a href="changes_0.95.html">is available</a>.
+      </div>
+</div>
+<a name="Changes+to+the+Code+Base"></a>
+<h3 class="underlined_5">Changes to the Code Base</h3>
+<ul>
+<li>
+<img class="icon" alt="fix" src="../images/fix.jpg">
+        Fixed potential multi-threading problem concerning the use of DecimalFormat.
+       Committed by JM. See Issue <a class="external" href="http://issues.apache.org/bugzilla/show_bug.cgi?id=44887">44887</a>.</li>
+</ul>
+<a name="Changes+to+the+Layout+Engine"></a>
+<h3 class="underlined_5">Changes to the Layout Engine</h3>
+<ul>
+<li>
+<img class="icon" alt="fix" src="../images/fix.jpg">
+        Various bugfixes for table layout.
+       Committed by VH. See Issue <a class="external" href="http://issues.apache.org/bugzilla/show_bug.cgi?id=44621">44621</a>.</li>
+</ul>
+<a name="Changes+to+Renderers+%28Output+Formats%29"></a>
+<h3 class="underlined_5">Changes to Renderers (Output Formats)</h3>
+<ul>
+<li>
+<img class="icon" alt="fix" src="../images/fix.jpg">
+        Fixed positioning of absolutely positioned block-containers in multi-column documents.
+       Committed by JM.</li>
+<li>
+<img class="icon" alt="fix" src="../images/fix.jpg">
+        Fixed rendering of fixed block-containers in AFP output.
+       Committed by JM.</li>
+</ul>
+</div>
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         1999-2012 <a href="http://www.apache.org/licenses/">The Apache Software Foundation. Licensed under Apache License 2.0</a>
+<br>
+    Apache, Apache FOP, the Apache feather logo, and the Apache FOP
+    logos are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+  </div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

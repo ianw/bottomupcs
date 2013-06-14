@@ -1,0 +1,1258 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+   <fo:layout-master-set>
+      <fo:simple-page-master master-name="first"
+            page-width="21cm"
+            page-height="29.7cm" 
+            margin-top="5mm">
+         <fo:region-body margin-bottom="4.5in" margin-right="5mm" margin-left="5mm" margin-top="5mm"/>
+         <fo:region-after extent="4in"/>
+      </fo:simple-page-master>
+      <fo:simple-page-master master-name="rest"
+            page-width="21cm"
+            page-height="29.7cm"
+            margin-right="5mm"
+            margin-left="5mm"
+            margin-top="5mm"
+            margin-bottom="5mm">
+         <fo:region-body/>
+      </fo:simple-page-master>
+      <fo:page-sequence-master master-name="A4">
+         <fo:repeatable-page-master-alternatives>
+            <fo:conditional-page-master-reference master-reference="first" page-position="first"/>
+            <fo:conditional-page-master-reference master-reference="rest" page-position="rest"/>
+            <fo:conditional-page-master-reference master-reference="rest"/>
+         </fo:repeatable-page-master-alternatives>
+      </fo:page-sequence-master>
+   </fo:layout-master-set>
+
+   <fo:page-sequence master-reference="A4">
+      <fo:static-content flow-name="xsl-region-after">
+        <fo:block-container absolute-position="absolute" width="100%" height="100%" border-top-color="silver" border-top-style="dotted" border-top-width="0.13mm">
+          <fo:block/>
+        </fo:block-container>
+         <fo:table space-before.optimum="1in div 12" margin-left="2in div 12" margin-top="1in div 10" font-family="sans-serif" font-size="7pt" color="green" table-layout="fixed" width="100%">
+            <fo:table-column column-width="8in div 10 - 2in div 12"/>
+            <fo:table-column border-right-style="solid" border-right-width="0.5mm" column-width="36in div 10"/>
+            <fo:table-column column-width="5in div 10"/>
+            <fo:table-column column-width="13in div 10"/>
+            <fo:table-column column-width="18in div 10"/>
+            <fo:table-body>
+               <fo:table-row height="8in div 12 - 1in div 10">
+                  <fo:table-cell border-right-style="solid" border-right-width="0.5mm" border-bottom-style="solid" border-bottom-width="0.5mm" padding-right="0.5mm" padding-top="2mm" text-align="end">
+                     <fo:block>Saajan</fo:block>
+                     <fo:block>tilinumero</fo:block>
+                     <fo:block>Mottagarens</fo:block>
+                     <fo:block>kontonummer</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-bottom-style="solid" border-bottom-width="0.5mm" display-align="center" font-size="10pt" color="black" border-bottom-color="green" padding-left="1mm">
+                     <fo:block>Merita 101710-122</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell number-columns-spanned="3" padding-right="0.5cm" padding-left="1mm" padding-top="1mm">
+                     <fo:block font-size="10pt" font-weight="bold" font-variant="small-caps">TILISIIRTO GIRERING</fo:block>
+                     <fo:block font-size="6pt" space-after.optimum="0.25em">Maksu välitetään saajalle vain Suomessa Kotimaan maksujenvälityksen yleisten ehtojen mukaisesti ja vain maksajan ilmoittaman tilinumeron perusteella.</fo:block>
+                     <fo:block font-size="6pt">Betalningen förmedlas endast till mottagare i Finland enligt Allmänna villkor för inrikes betalningsförmedling och endast till det kontonummer betalaren angivit.</fo:block>
+                  </fo:table-cell>
+               </fo:table-row>
+               <fo:table-row height="7in div 12">
+                  <fo:table-cell border-right-style="solid" border-right-width="0.5mm" border-bottom-style="solid" border-bottom-width="0.5mm" padding-right="0.5mm" padding-top="5mm" text-align="end">
+                     <fo:block>Saaja</fo:block>
+                     <fo:block>Mottagaren</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-bottom-style="solid" border-bottom-width="0.5mm" font-size="10pt" color="black" border-bottom-color="green" display-align="center" padding-left="1mm">
+                     <fo:block>MTG Internet Retailing AB</fo:block>
+                     <fo:block>CDON</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-bottom-style="solid" border-bottom-width="0.5mm" number-columns-spanned="3" number-rows-spanned="2" border-bottom-color="green" color="black" padding-top="1mm" padding-left="1mm">
+                     <fo:block>Markka</fo:block>
+                     <fo:block space-after.optimum="1em">[105] 11 01 71 00 00 00 12 20 54 88 31 50 00 00 86 85 16 25 96 19 89 70 60 61 60 00 09 [77] [stop]</fo:block>
+                     <fo:block>Euro</fo:block>
+                     <fo:block>[105] 21 01 71 00 00 00 12 20 54 88 31 50 00 00 86 85 16 25 96 19 89 70 60 61 60 00 06 [06] [stop]</fo:block>
+                  </fo:table-cell>
+               </fo:table-row>
+               <fo:table-row height="1in">
+                  <fo:table-cell padding-right="2mm" padding-top="4mm" text-align="end">
+                     <fo:block>Maksaja</fo:block>
+                     <fo:block>Betalare</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell font-size="10pt" color="black" padding-top="1mm" padding-left="1mm">
+                     <fo:block>SUOMEN PANKKIYHDISTYS</fo:block>
+                     <fo:block>Anneli Tossava</fo:block>
+                     <fo:block space-before.optimum="1em">PL 1009</fo:block>
+                     <fo:block>00101 HELSINKI</fo:block>
+                  </fo:table-cell>
+               </fo:table-row>
+               <fo:table-row height="4in div 12">
+                  <fo:table-cell border-bottom-style="solid" border-bottom-width="0.13mm" padding-right="2mm" padding-top="1mm" padding-bottom="2in div 12" text-align="end" display-align="after">
+                     <fo:block>Allekirjoitus</fo:block>
+                     <fo:block>Underskrift</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-bottom-style="solid" border-bottom-width="0.13mm" padding-top="4.5mm" padding-bottom="2in div 12" display-align="after">
+                     <fo:block>
+                        <fo:leader leader-length.minimum="100%" leader-length.optimum="100%" leader-pattern="rule" rule-thickness="0.13mm"/>
+                     </fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-right-style="solid" border-right-width="0.5mm" border-bottom-style="solid" border-bottom-width="0.5mm" padding-left="1mm" padding-top="1.5mm">
+                     <fo:block>Viitenro</fo:block>
+                     <fo:block>Ref.nr</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-bottom-style="solid" border-bottom-width="0.5mm" number-columns-spanned="2" padding-left="6mm" padding-top="4mm" font-size="10pt">
+                     <fo:block color="black">86851 62596 19897 </fo:block>
+                  </fo:table-cell>
+               </fo:table-row>
+               <fo:table-row height="4in div 12">
+                  <fo:table-cell border-right-style="solid" border-right-width="0.13mm" border-bottom-style="solid" border-bottom-width="0.13mm" padding-right="0.5mm" padding-top="2mm" text-align="end">
+                     <fo:block>Tililtä nro</fo:block>
+                     <fo:block>Från konto nr</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-bottom-style="solid" border-bottom-width="0.13mm" padding-top="6mm" display-align="after">
+                     <fo:table height="3mm" table-layout="fixed" width="100%">
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-body>
+                           <fo:table-row height="3mm">
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell padding-left="1.7mm" padding-right="1.7mm" display-align="before">
+                                 <fo:block border-top-style="solid" border-top-width="0.5mm"/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                           </fo:table-row>
+                        </fo:table-body>
+                     </fo:table>
+                  </fo:table-cell>
+                  <fo:table-cell border-right-style="solid" border-right-width="0.5mm" border-bottom-style="solid" border-bottom-width="0.5mm" padding-left="1mm" padding-top="2mm">
+                     <fo:block>Eräpäivä</fo:block>
+                     <fo:block>Förf.dag</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-right-style="solid" border-right-width="0.5mm" border-bottom-style="solid" border-bottom-width="0.5mm" padding-left="6mm" padding-top="4mm" font-size="10pt">
+                     <fo:block color="black">16.6.2006</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-bottom-style="solid" border-bottom-width="0.5mm" padding-left="2mm" padding-top="4mm" font-size="10pt">
+                     <fo:table table-layout="fixed" width="100%">
+                        <fo:table-column column-width="0.5cm"/>
+                        <fo:table-column column-width="2cm"/>
+                        <fo:table-body>
+                           <fo:table-row>
+                              <fo:table-cell font-weight="bold">
+                                 <fo:block font-size="10pt" font-weight="bold">mk</fo:block>
+                              </fo:table-cell>
+                              <fo:table-cell color="black">
+                                 <fo:block text-align="end">548,83</fo:block>
+                              </fo:table-cell>
+                           </fo:table-row>
+                        </fo:table-body>
+                     </fo:table>
+                  </fo:table-cell>
+               </fo:table-row>
+               <fo:table-row height="13in div 12 - 5mm">
+                  <fo:table-cell number-columns-spanned="4" padding-left="40mm" display-align="after">
+                     <fo:block>
+                        <fo:table height="5in div 12" margin-left="2.5mm" margin-right="2.5mm" table-layout="fixed" width="100%"><!--105-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.5mm"/><!--11-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/><!--01-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/><!--71-->
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="1mm"/><!--00-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/><!--00-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/><!--00-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/><!--12-->
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.5mm"/><!--20-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.25mm"/><!--54-->
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.75mm"/><!--88-->
+                           <fo:table-column column-width="1mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/><!--31-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/><!--50-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.25mm"/><!--00-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/><!--00-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/><!--86-->
+                           <fo:table-column column-width="1mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/><!--85-->
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="1mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/><!--16-->
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/><!--25-->
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/><!--96-->
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="1mm"/>
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/><!--19-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.5mm"/><!--89-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="1mm"/>
+                           <fo:table-column column-width="0.25mm"/><!--70-->
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="1mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/><!--60-->
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="1mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/><!--61-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="1mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/><!--60-->
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="1mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/><!--00-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/><!--09-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.75mm"/><!--77-->
+                           <fo:table-column column-width="1mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/><!--106-->
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.75mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.25mm"/>
+                           <fo:table-column column-width="0.5mm"/>
+                           <fo:table-body>
+                              <fo:table-row height="5in div 12">
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="black">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                                 <fo:table-cell background-color="white">
+                                    <fo:block/>
+                                 </fo:table-cell>
+                              </fo:table-row>
+                           </fo:table-body>
+                        </fo:table>
+                     </fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell display-align="after">
+                     <fo:block text-align="end" font-size="8pt" font-weight="bold" font-variant="small-caps">
+                        <fo:block>PANKKI</fo:block>
+                        <fo:block>BANKKEN</fo:block>
+                     </fo:block>
+                  </fo:table-cell>
+               </fo:table-row>
+            </fo:table-body>
+         </fo:table>
+         <fo:block-container height="15mm" width="7mm" top="3mm" left="8in - 5mm" position="absolute">
+            <fo:block>
+               <fo:external-graphic src="file:mk1logo.tif"/>
+            </fo:block>
+         </fo:block-container>
+      </fo:static-content>
+      <fo:flow flow-name="xsl-region-body">
+         <fo:block>TIFF logo and XSL FO table bar code</fo:block>
+      </fo:flow>
+   </fo:page-sequence>
+   <fo:page-sequence master-reference="A4">
+      <fo:static-content flow-name="xsl-region-after">
+         <fo:table space-before.optimum="1in div 12" margin-left="2in div 12" margin-top="1in div 10" font-family="sans-serif" font-size="7pt" color="green" table-layout="fixed" width="100%">
+            <fo:table-column column-width="8in div 10 - 2in div 12"/>
+            <fo:table-column border-right-style="solid" border-right-width="0.5mm" column-width="36in div 10"/>
+            <fo:table-column column-width="5in div 10"/>
+            <fo:table-column column-width="13in div 10"/>
+            <fo:table-column column-width="18in div 10"/>
+            <fo:table-body>
+               <fo:table-row height="8in div 12 - 1in div 10">
+                  <fo:table-cell border-right-style="solid" border-right-width="0.5mm" border-bottom-style="solid" border-bottom-width="0.5mm" padding-right="0.5mm" padding-top="2mm" text-align="end">
+                     <fo:block>Saajan</fo:block>
+                     <fo:block>tilinumero</fo:block>
+                     <fo:block>Mottagarens</fo:block>
+                     <fo:block>kontonummer</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-bottom-style="solid" border-bottom-width="0.5mm" display-align="center" font-size="10pt" color="black" border-bottom-color="green" padding-left="1mm">
+                     <fo:block>Merita 101710-122</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell number-columns-spanned="3" padding-right="0.5cm" padding-left="1mm" padding-top="1mm">
+                     <fo:block font-size="10pt" font-weight="bold" font-variant="small-caps">TILISIIRTO GIRERING</fo:block>
+                     <fo:block font-size="6pt" space-after.optimum="0.25em">Maksu välitetään saajalle vain Suomessa Kotimaan maksujenvälityksen yleisten ehtojen mukaisesti ja vain maksajan ilmoittaman tilinumeron perusteella.</fo:block>
+                     <fo:block font-size="6pt">Betalningen förmedlas endast till mottagare i Finland enligt Allmänna villkor för inrikes betalningsförmedling och endast till det kontonummer betalaren angivit.</fo:block>
+                  </fo:table-cell>
+               </fo:table-row>
+               <fo:table-row height="7in div 12">
+                  <fo:table-cell border-right-style="solid" border-right-width="0.5mm" border-bottom-style="solid" border-bottom-width="0.5mm" padding-right="0.5mm" padding-top="5mm" text-align="end">
+                     <fo:block>Saaja</fo:block>
+                     <fo:block>Mottagaren</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-bottom-style="solid" border-bottom-width="0.5mm" font-size="10pt" color="black" border-bottom-color="green" display-align="center" padding-left="1mm">
+                     <fo:block>MTG Internet Retailing AB</fo:block>
+                     <fo:block>CDON</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-bottom-style="solid" border-bottom-width="0.5mm" number-columns-spanned="3" number-rows-spanned="2" border-bottom-color="green" color="black" padding-top="1mm" padding-left="1mm">
+                     <fo:block>Markka</fo:block>
+                     <fo:block space-after.optimum="1em">[105] 11 01 71 00 00 00 12 20 54 88 31 50 00 00 86 85 16 25 96 19 89 70 60 61 60 00 09 [77] [stop]</fo:block>
+                     <fo:block>Euro</fo:block>
+                     <fo:block>[105] 21 01 71 00 00 00 12 20 54 88 31 50 00 00 86 85 16 25 96 19 89 70 60 61 60 00 06 [06] [stop]</fo:block>
+                  </fo:table-cell>
+               </fo:table-row>
+               <fo:table-row height="1in">
+                  <fo:table-cell padding-right="2mm" padding-top="4mm" text-align="end">
+                     <fo:block>Maksaja</fo:block>
+                     <fo:block>Betalare</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell font-size="10pt" color="black" padding-top="1mm" padding-left="1mm">
+                     <fo:block>SUOMEN PANKKIYHDISTYS</fo:block>
+                     <fo:block>Anneli Tossava</fo:block>
+                     <fo:block space-before.optimum="1em">PL 1009</fo:block>
+                     <fo:block>00101 HELSINKI</fo:block>
+                  </fo:table-cell>
+               </fo:table-row>
+               <fo:table-row height="4in div 12">
+                  <fo:table-cell border-bottom-style="solid" border-bottom-width="0.13mm" padding-right="2mm" padding-top="1mm" padding-bottom="2in div 12" text-align="end" display-align="after">
+                     <fo:block>Allekirjoitus</fo:block>
+                     <fo:block>Underskrift</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-bottom-style="solid" border-bottom-width="0.13mm" padding-top="4.5mm" padding-bottom="2in div 12" display-align="after">
+                     <fo:block>
+                        <fo:leader leader-length.minimum="100%" leader-length.optimum="100%" leader-pattern="rule" rule-thickness="0.13mm"/>
+                     </fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-right-style="solid" border-right-width="0.5mm" border-bottom-style="solid" border-bottom-width="0.5mm" padding-left="1mm" padding-top="1.5mm">
+                     <fo:block>Viitenro</fo:block>
+                     <fo:block>Ref.nr</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-bottom-style="solid" border-bottom-width="0.5mm" number-columns-spanned="2" padding-left="6mm" padding-top="4mm" font-size="10pt">
+                     <fo:block color="black">86851 62596 19897 </fo:block>
+                  </fo:table-cell>
+               </fo:table-row>
+               <fo:table-row height="4in div 12">
+                  <fo:table-cell border-right-style="solid" border-right-width="0.13mm" border-bottom-style="solid" border-bottom-width="0.13mm" padding-right="0.5mm" padding-top="2mm" text-align="end">
+                     <fo:block>Tililtä nro</fo:block>
+                     <fo:block>Från konto nr</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-bottom-style="solid" border-bottom-width="0.13mm" padding-top="6mm" display-align="after">
+                     <fo:table height="3mm" table-layout="fixed" width="100%">
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-column border-right-style="solid" border-right-width="0.13mm" column-width="0.2in"/>
+                        <fo:table-body>
+                           <fo:table-row height="3mm">
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell padding-left="1.7mm" padding-right="1.7mm" display-align="before">
+                                 <fo:block border-top-style="solid" border-top-width="0.5mm"/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                              <fo:table-cell>
+                                 <fo:block/>
+                              </fo:table-cell>
+                           </fo:table-row>
+                        </fo:table-body>
+                     </fo:table>
+                  </fo:table-cell>
+                  <fo:table-cell border-right-style="solid" border-right-width="0.5mm" border-bottom-style="solid" border-bottom-width="0.5mm" padding-left="1mm" padding-top="2mm">
+                     <fo:block>Eräpäivä</fo:block>
+                     <fo:block>Förf.dag</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-right-style="solid" border-right-width="0.5mm" border-bottom-style="solid" border-bottom-width="0.5mm" padding-left="6mm" padding-top="4mm" font-size="10pt">
+                     <fo:block color="black">16.6.2006</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell border-bottom-style="solid" border-bottom-width="0.5mm" padding-left="2mm" padding-top="4mm" font-size="10pt">
+                     <fo:table table-layout="fixed" width="100%">
+                        <fo:table-column column-width="0.5cm"/>
+                        <fo:table-column column-width="2cm"/>
+                        <fo:table-body>
+                           <fo:table-row>
+                              <fo:table-cell font-weight="bold">
+                                 <fo:block font-size="10pt" font-weight="bold">mk</fo:block>
+                              </fo:table-cell>
+                              <fo:table-cell color="black">
+                                 <fo:block text-align="end">548,83</fo:block>
+                              </fo:table-cell>
+                           </fo:table-row>
+                        </fo:table-body>
+                     </fo:table>
+                  </fo:table-cell>
+               </fo:table-row>
+               <fo:table-row height="13in div 12 - 5mm">
+                  <fo:table-cell number-columns-spanned="4" padding-left="40mm" display-align="after">
+                     <fo:block>
+                        <fo:instream-foreign-object>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="87.75mm" height="0.4166666666666667in">
+                             <g style="fill: black; stroke: none;"><!--START-->
+                                <rect x="2.5mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="3.25mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="4mm" y="0" height="10mm" width="0.75mm"/><!--11-->
+                                <rect x="5.25mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="6.5mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="7.25mm" y="0" height="10mm" width="0.25mm"/><!--01-->
+                                <rect x="8mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="9mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="9.75mm" y="0" height="10mm" width="0.5mm"/><!--71-->
+                                <rect x="10.75mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="11.5mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="12.25mm" y="0" height="10mm" width="0.25mm"/><!--00-->
+                                <rect x="13.5mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="14.25mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="15.25mm" y="0" height="10mm" width="0.5mm"/><!--00-->
+                                <rect x="16.25mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="17mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="18mm" y="0" height="10mm" width="0.5mm"/><!--00-->
+                                <rect x="19mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="19.75mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="20.75mm" y="0" height="10mm" width="0.5mm"/><!--12-->
+                                <rect x="21.75mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="22.25mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="23.25mm" y="0" height="10mm" width="0.75mm"/><!--20-->
+                                <rect x="24.5mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="25.5mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="26.25mm" y="0" height="10mm" width="0.75mm"/><!--54-->
+                                <rect x="27.25mm" y="0" height="10mm" width="0.75mm"/>
+                                <rect x="28.25mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="28.75mm" y="0" height="10mm" width="0.5mm"/><!--88-->
+                                <rect x="30mm" y="0" height="10mm" width="1mm"/>
+                                <rect x="31.5mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="32.25mm" y="0" height="10mm" width="0.25mm"/><!--31-->
+                                <rect x="32.75mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="33.5mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="34.75mm" y="0" height="10mm" width="0.5mm"/><!--50-->
+                                <rect x="35.5mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="36.75mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="37.25mm" y="0" height="10mm" width="0.75mm"/><!--00-->
+                                <rect x="38.25mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="39mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="40mm" y="0" height="10mm" width="0.5mm"/><!--00-->
+                                <rect x="41mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="41.75mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="42.75mm" y="0" height="10mm" width="0.5mm"/><!--86-->
+                                <rect x="43.75mm" y="0" height="10mm" width="1mm"/>
+                                <rect x="45mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="45.75mm" y="0" height="10mm" width="0.25mm"/><!--85-->
+                                <rect x="46.5mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="47.25mm" y="0" height="10mm" width="1mm"/>
+                                <rect x="48.75mm" y="0" height="10mm" width="0.25mm"/><!--16-->
+                                <rect x="49.25mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="50mm" y="0" height="10mm" width="0.75mm"/>
+                                <rect x="51mm" y="0" height="10mm" width="0.5mm"/><!--25-->
+                                <rect x="52mm" y="0" height="10mm" width="0.75mm"/>
+                                <rect x="53.25mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="53.75mm" y="0" height="10mm" width="0.5mm"/><!--96-->
+                                <rect x="54.75mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="55.25mm" y="0" height="10mm" width="1mm"/>
+                                <rect x="57mm" y="0" height="10mm" width="0.25mm"/><!--19-->
+                                <rect x="57.5mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="58.5mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="59mm" y="0" height="10mm" width="0.75mm"/><!--89-->
+                                <rect x="60.25mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="61mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="61.75mm" y="0" height="10mm" width="1mm"/><!--70-->
+                                <rect x="63mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="63.5mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="65mm" y="0" height="10mm" width="0.25mm"/><!--60-->
+                                <rect x="65.75mm" y="0" height="10mm" width="0.75mm"/>
+                                <rect x="66.75mm" y="0" height="10mm" width="1mm"/>
+                                <rect x="68mm" y="0" height="10mm" width="0.25mm"/><!--61-->
+                                <rect x="68.5mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="69.5mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="70.75mm" y="0" height="10mm" width="0.25mm"/><!--60-->
+                                <rect x="71.25mm" y="0" height="10mm" width="0.75mm"/>
+                                <rect x="72.25mm" y="0" height="10mm" width="1mm"/>
+                                <rect x="73.5mm" y="0" height="10mm" width="0.25mm"/><!--00-->
+                                <rect x="74mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="74.75mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="75.75mm" y="0" height="10mm" width="0.5mm"/><!--09-->
+                                <rect x="76.75mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="77.75mm" y="0" height="10mm" width="0.25mm"/>
+                                <rect x="78.5mm" y="0" height="10mm" width="0.25mm"/><!--77-->
+                                <rect x="79.5mm" y="0" height="10mm" width="1mm"/>
+                                <rect x="80.75mm" y="0" height="10mm" width="0.75mm"/>
+                                <rect x="81.75mm" y="0" height="10mm" width="0.25mm"/><!--STOP-->
+                                <rect x="82.25mm" y="0" height="10mm" width="0.5mm"/>
+                                <rect x="83.5mm" y="0" height="10mm" width="0.75mm"/>
+                                <rect x="84.5mm" y="0" height="10mm" width="0.25mm"/>
+                             </g>
+                          </svg>
+                        </fo:instream-foreign-object>
+                     </fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell display-align="after">
+                     <fo:block text-align="end" font-size="8pt" font-weight="bold" font-variant="small-caps">
+                        <fo:block>PANKKI</fo:block>
+                        <fo:block>BANKKEN</fo:block>
+                     </fo:block>
+                  </fo:table-cell>
+               </fo:table-row>
+            </fo:table-body>
+         </fo:table>
+         <fo:block-container height="15mm" width="7mm" top="3mm" left="8in - 5mm" position="absolute">
+            <fo:block>
+               <fo:instream-foreign-object>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="7mm" height="15mm" viewBox="0 0 19.781 41.952">
+                     <g style="fill: #000000;">
+                        <path d="M9.925,33.731h-1.4v-6h-0.02l-1.34,6h-1.47l-1.31-6h-0.02v6h-1.4v-7.18h2.19l1.3,5.66h0.02l1.28-5.66h2.17v7.18z"/>
+                        <path d="M12.975,33.731h-1.5v-7.18h1.5v2.92l2.74-2.92h1.94l-2.93,2.94l3.1,4.24h-1.93l-2.22-3.15l-0.7,0.72v2.43z"/>
+                        <path d="M7.785,36.082h0.2c1.35,0,1.71-0.7,1.74-1.23h1.15v7.1h-1.4v-4.89h-1.69v-0.98z"/>
+                        <path d="M9.042,24.944L0,24.938V2.198l4.542-2.188l4.511,2.267L9.042,24.944z"/>
+                        <path d="M19.77,24.935l-9.042-0.006V2.188L15.27,0l4.511,2.267L19.77,24.935z"/>
+                        <path style="fill: #FFFFFF;" d="M18.149,13.747c0,4.775-3.681,8.646-8.22,8.646c-4.54,0-8.221-3.871-8.221-8.646c0-4.774,3.681-8.646,8.221-8.646c4.54,0,8.22,3.871,8.22,8.646z"/>
+                     </g>
+                     <g style="fill:none; stroke: #000000; stroke-miterlimit: 4;">
+                        <path d="M13.047,10.062c0,1.957-1.396,3.543-3.118,3.543s-3.118-1.586-3.118-3.543s1.396-3.543,3.118-3.543s3.118,1.586,3.118,3.543z"/>
+                        <path d="M13.047,17.715c0,1.957-1.396,3.543-3.119,3.543c-1.722,0-3.118-1.586-3.118-3.543c0-1.957,1.396-3.543,3.118-3.543c1.723,0,3.119,1.586,3.119,3.543z"/>
+                        <path d="M16.449,11.905c0,1.878-1.396,3.401-3.119,3.401c-1.722,0-3.118-1.523-3.118-3.401c0-1.879,1.396-3.402,3.118-3.402c1.723,0,3.119,1.523,3.119,3.402z"/>
+                        <path d="M16.449,15.873c0,1.878-1.396,3.401-3.119,3.401c-1.722,0-3.118-1.523-3.118-3.401c0-1.879,1.396-3.402,3.118-3.402c1.723,0,3.119,1.523,3.119,3.402z"/>
+                        <path d="M9.646,11.905c0,1.878-1.396,3.401-3.119,3.401c-1.722,0-3.118-1.523-3.118-3.401c0-1.879,1.396-3.402,3.118-3.402c1.723,0,3.119,1.523,3.119,3.402z"/>
+                        <path d="M9.646,15.873c0,1.878-1.396,3.401-3.119,3.401c-1.722,0-3.118-1.523-3.118-3.401c0-1.879,1.396-3.402,3.118-3.402c1.723,0,3.119,1.523,3.119,3.402z"/>
+                     </g>
+                  </svg>
+               </fo:instream-foreign-object>
+            </fo:block>
+         </fo:block-container>
+      </fo:static-content>
+      <fo:flow flow-name="xsl-region-body">
+         <fo:block>SVG logo and bar code</fo:block>
+      </fo:flow>
+   </fo:page-sequence>
+</fo:root>

@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- =========================================================================== -->
+<project default="newPDF" basedir=".">
+  <!-- =================================================================== -->
+  <!-- Initialization target                                               -->
+  <!-- =================================================================== -->
+  <target name="init">
+    <tstamp/>
+    <mkdir dir="tests"/>
+    <property name="referenceDir" value="reference"/>
+    <property name="testDir" value="tests"/>
+    <property name="foDir" value="fo"/>
+		<path id="run-classpath">
+  	  <fileset dir="../../lib">
+    	  <include name="*.jar"/>
+	    </fileset>
+      <pathelement location="../../build/fop.jar"/>
+	  </path>
+    <taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop" classpathref="run-classpath"/>
+    <taskdef name="compare" classname="org.apache.fop.tools.anttasks.FileCompare" classpathref="run-classpath"/>
+  </target>
+  <!-- =================================================================== -->
+  <!-- Help on usage                                                       -->
+  <!-- =================================================================== -->
+  <target name="usage">
+    <echo message="Use '-projecthelp' instead"/>
+  </target>
+  <!-- =================================================================== -->
+  <!-- Produces new test files (function)                                  -->
+  <!-- =================================================================== -->
+  <target name="newTestFiles">
+    <fop format="${mimetype}" outdir="${outDir}" messagelevel="${msglevel}" relativebase="true" throwexceptions="false">
+      <fileset dir="basic">
+        <include name="**/*.fo"/>
+      </fileset>
+      <fileset dir="footnotes">
+        <include name="**/*.fo"/>
+      </fileset>
+      <fileset dir="pagination">
+        <include name="**/*.fo"/>
+      </fileset>
+      <fileset dir="keeps_and_breaks">
+        <include name="**/*.fo"/>
+      </fileset>
+      <fileset dir="markers">
+        <include name="**/*.fo"/>
+      </fileset>
+      <fileset dir="region_body">
+        <include name="**/*.fo"/>
+      </fileset>
+      <fileset dir="tables">
+        <include name="**/*.fo"/>
+      </fileset>
+      <fileset dir="svg">
+        <include name="**/*.fo"/>
+      </fileset>
+      <fileset dir="advanced">
+        <include name="**/giro.fo"/>
+      </fileset>
+    </fop>
+  </target>
+  <!-- =================================================================== -->
+  <!-- Produces new test PDF files                                         -->
+  <!-- =================================================================== -->
+  <target name="newPDF" depends="init" description="Creates a new set of PDF test files">
+    <antcall target="newTestFiles">
+      <param name="mimetype" value="application/pdf"/>
+      <param name="msglevel" value="warn"/>
+      <param name="outDir" value="${testDir}"/>
+    </antcall>
+  </target>
+  <!-- =================================================================== -->
+  <!-- Produces new test RTF files                                         -->
+  <!-- =================================================================== -->
+  <target name="newRTF" depends="init" description="Creates a new set of RTF test files">
+    <antcall target="newTestFiles">
+      <param name="mimetype" value="application/rtf"/>
+      <param name="msglevel" value="warn"/>
+      <param name="outDir" value="${testDir}"/>
+    </antcall>
+  </target>
+  <!-- =================================================================== -->
+  <!-- Produces new test PS files                                          -->
+  <!-- =================================================================== -->
+  <target name="newPS" depends="init" description="Creates a new set of PostScript test files">
+    <antcall target="newTestFiles">
+      <param name="mimetype" value="application/postscript"/>
+      <param name="msglevel" value="warn"/>
+      <param name="outDir" value="${testDir}"/>
+    </antcall>
+  </target>
+  <!-- =================================================================== -->
+  <!-- Produces new test AFP files                                         -->
+  <!-- =================================================================== -->
+  <target name="newAFP" depends="init" description="Creates a new set of AFP test files">
+    <antcall target="newTestFiles">
+      <param name="mimetype" value="application/x-afp"/>
+      <param name="msglevel" value="warn"/>
+      <param name="outDir" value="${testDir}"/>
+    </antcall>
+  </target>
+  <!-- =================================================================== -->
+  <!-- Produces new test areatree files                                    -->
+  <!-- =================================================================== -->
+  <target name="newAT" depends="init" description="Creates a new set of AreaTree XML test files">
+    <antcall target="newTestFiles">
+      <param name="mimetype" value="text/xml"/>
+      <param name="msglevel" value="warn"/>
+      <param name="outDir" value="${testDir}"/>
+    </antcall>
+  </target>
+  <!-- =================================================================== -->
+  <!-- Compares new test pdf files to reference pdf files                  -->
+  <!-- N.B. All comparisons fail due to differences in /CreationDate       -->
+  <!-- =================================================================== -->
+  <target name="comparePDF" depends="newPDF">
+    <compare referenceDirectory="${referenceDir}" testDirectory="${testDir}" filenames="normal.pdf,table.pdf,list.pdf,link.pdf,border.pdf,images.pdf,extensive.pdf,readme.pdf,fonts.pdf,bordershorthand.pdf,character.pdf,corresprop.pdf,hyphen.pdf,inhprop.pdf,instream.pdf,leader.pdf,newlinktest.pdf,normalex.pdf,pdfoutline.pdf,simple.pdf,textdeko.pdf,tableunits.pdf"/>
+  </target>
+  <!-- =================================================================== -->
+  <!-- Produces new reference pdf files                                    -->
+  <!-- =================================================================== -->
+  <target name="referencePDF" depends="init">
+    <antcall target="newTestFiles">
+      <param name="mimetype" value="application/pdf"/>
+      <param name="msglevel" value="warn"/>
+      <param name="outDir" value="${referenceDir}"/>
+    </antcall>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Starts the test                                                     -->
+  <!-- N.B. All tests fail due to differences in /CreationDate             -->
+  <!-- =================================================================== -->
+  <target name="runtest" depends="comparePDF">
+    <echo message="Running Fop tests"/>
+  </target>
+  <!-- =================================================================== -->
+  <!-- Clean targets                                                       -->
+  <!-- =================================================================== -->
+  <target name="clean" depends="init">
+    <delete dir="${testDir}"/>
+  </target>
+  <target name="cleantest" depends="init">
+    <delete dir="${referenceDir}"/>
+  </target>
+
+</project>
+<!-- End of file -->

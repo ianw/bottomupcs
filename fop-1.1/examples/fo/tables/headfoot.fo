@@ -1,0 +1,1431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master master-name="first"
+          margin-right="1.5cm"
+          margin-left="1.5cm"
+          margin-bottom="2cm"
+          margin-top="1cm"
+          page-width="21cm"
+          page-height="29.7cm">
+      <fo:region-body margin-top="7cm"/>
+      <fo:region-before extent="7cm"/>
+      <fo:region-after extent="1.5cm"/>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+
+  <fo:page-sequence master-reference="first">
+    <fo:static-content flow-name="xsl-region-before">
+      <fo:block line-height="14pt" font-size="10pt"
+    text-align="end">table examples</fo:block>
+    </fo:static-content>
+    <fo:static-content flow-name="xsl-region-after">
+      <fo:block line-height="14pt" font-size="10pt"
+    text-align="end">Page <fo:page-number/></fo:block>
+    </fo:static-content>
+
+    <fo:flow flow-name="xsl-region-body">
+
+      <fo:block space-before.optimum="15cm">
+      Table 1: with header
+      </fo:block>
+
+      <fo:table table-layout="fixed" width="100%">
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+
+  <fo:table-header>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-header>
+
+  <fo:table-body>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before.optimum="15cm">
+      Table 2: with footer
+      </fo:block>
+
+      <fo:table table-layout="fixed" width="100%">
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+
+  <fo:table-footer>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-footer>
+
+  <fo:table-body>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before.optimum="15cm">
+      Table 3: with header and footer and keeps
+      </fo:block>
+
+      <fo:table table-layout="fixed" width="100%">
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+
+  <fo:table-header>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-header>
+
+  <fo:table-footer>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-footer>
+
+  <fo:table-body>
+    <fo:table-row keep-with-next="always">
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        Row 1:
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        keep
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        together
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        with
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        row 2:
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        always
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        Row 2:
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        is always
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        kept
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        together
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        with
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        row 1
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle"
+      line-height="16cm">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle"
+      line-height="16cm">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle"
+      line-height="16cm">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle"
+      line-height="16cm">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle"
+      line-height="16cm">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle"
+      line-height="16cm">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before.optimum="2cm">
+      Table 4: cells spanning columns
+      </fo:block>
+
+      <fo:table table-layout="fixed" width="100%">
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-body>
+    <fo:table-row>
+      <fo:table-cell
+    border-width="0.5pt"
+    border-style="solid"
+    border-color="black"
+      text-align="center" vertical-align="middle"
+      number-columns-spanned="1" background-color="#FF6AC0">
+        <fo:block> 1 to 1</fo:block>
+      </fo:table-cell>
+      <fo:table-cell
+    border-width="0.5pt"
+    border-style="solid"
+    border-color="black"
+      text-align="center" vertical-align="middle"
+      number-columns-spanned="5" background-color="#9BF2E9">
+        <fo:block> 2 to 6</fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell
+    border-width="0.5pt"
+    border-style="solid"
+    border-color="black"
+      text-align="center" vertical-align="middle"
+      number-columns-spanned="2" background-color="#FF6AC0">
+        <fo:block> 1 to 2</fo:block>
+      </fo:table-cell>
+      <fo:table-cell
+    border-width="0.5pt"
+    border-style="solid"
+    border-color="black"
+      text-align="center" vertical-align="middle"
+      number-columns-spanned="4" background-color="#9BF2E9">
+        <fo:block> 3 to 6</fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+
+
+      <fo:block space-before.optimum="2cm">
+      Table 5: cells spanning rows
+      </fo:block>
+
+      <fo:table table-layout="fixed" width="100%">
+  <fo:table-column column-width="48pt"/>
+  <fo:table-column column-width="48pt"/>
+  <fo:table-column column-width="48pt"/>
+  <fo:table-column column-width="48pt"/>
+  <fo:table-column column-width="48pt"/>
+  <fo:table-column column-width="48pt"/>
+  <fo:table-body>
+    <fo:table-row>
+      <fo:table-cell><fo:block>1</fo:block></fo:table-cell>
+      <fo:table-cell number-rows-spanned="1"
+    border-width="0.5pt"
+    border-style="solid"
+    border-color="black"
+    text-align="center" vertical-align="middle"
+    background-color="#FF6AC0">
+        <fo:block> 1 - 1</fo:block>
+      </fo:table-cell>
+      <fo:table-cell number-rows-spanned="2"
+    border-width="0.5pt"
+    border-style="solid"
+    border-color="black"
+    text-align="center" vertical-align="middle"
+    background-color="#FF6AC0">
+        <fo:block> 1 - 2</fo:block>
+      </fo:table-cell>
+      <fo:table-cell number-rows-spanned="3"
+    border-width="0.5pt"
+    border-style="solid"
+    border-color="black"
+    text-align="center" vertical-align="middle"
+    background-color="#FF6AC0"><fo:block> 1 - 3</fo:block>
+      </fo:table-cell>
+
+      <fo:table-cell number-rows-spanned="4"
+    border-width="0.5pt"
+    border-style="solid"
+    border-color="black"
+    text-align="center" vertical-align="middle"
+    background-color="#FF6AC0"><fo:block> 1 - 4</fo:block>
+      </fo:table-cell>
+
+      <fo:table-cell number-rows-spanned="5"
+    border-width="0.5pt"
+    border-style="solid"
+    border-color="black"
+    text-align="center" vertical-align="middle"
+    background-color="#FF6AC0"><fo:block> 1 - 5</fo:block>
+            </fo:table-cell>
+    </fo:table-row>
+
+
+    <fo:table-row>
+      <fo:table-cell><fo:block>2</fo:block></fo:table-cell>
+      <fo:table-cell number-rows-spanned="5"
+    border-width="0.5pt"
+    border-style="solid"
+    border-color="black"
+    text-align="center" vertical-align="middle"
+    background-color="#9BF2E9"><fo:block> 2 - 6</fo:block>
+            </fo:table-cell>
+    </fo:table-row>
+
+    <fo:table-row>
+      <fo:table-cell><fo:block>3</fo:block></fo:table-cell>
+      <fo:table-cell number-rows-spanned="4"
+    border-width="0.5pt"
+    border-style="solid"
+    border-color="black"
+    text-align="center" vertical-align="middle"
+    background-color="#9BF2E9"><fo:block> 3 - 6</fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+
+    <fo:table-row>
+      <fo:table-cell><fo:block>4</fo:block></fo:table-cell>
+      <fo:table-cell number-rows-spanned="3"
+    border-width="0.5pt"
+    border-style="solid"
+    border-color="black"
+    text-align="center" vertical-align="middle"
+    background-color="#9BF2E9"><fo:block> 4 - 6</fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+
+    <fo:table-row>
+      <fo:table-cell><fo:block>5</fo:block></fo:table-cell>
+      <fo:table-cell number-rows-spanned="2"
+    border-width="0.5pt"
+    border-style="solid"
+    border-color="black"
+    text-align="center" vertical-align="middle"
+    background-color="#9BF2E9"><fo:block> 5 - 6</fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+
+    <fo:table-row>
+      <fo:table-cell><fo:block>6</fo:block></fo:table-cell>
+      <fo:table-cell number-rows-spanned="1"
+    border-width="0.5pt"
+    border-style="solid"
+    border-color="black"
+    text-align="center" vertical-align="middle"
+    background-color="#9BF2E9"><fo:block> 6 - 6</fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+
+  </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before.optimum="2cm">
+      Table 6: table with header and multiple body's
+      </fo:block>
+
+      <fo:table table-layout="fixed" width="100%">
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+
+  <fo:table-header>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-header>
+
+  <fo:table-body space-after.optimum="10pt">
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+
+  <fo:table-body>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+
+      <fo:block space-before.optimum="2cm">
+      Table 6: table with footer and multiple body's
+      </fo:block>
+
+      <fo:table table-layout="fixed" width="100%">
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+  <fo:table-column column-width="2cm"/>
+
+  <fo:table-footer>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block font-weight="bold" text-align="center" vertical-align="middle"
+      border-width="1pt" border-color="black" background-color="#F7F24D">
+        Col.6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-footer>
+
+  <fo:table-body space-after.optimum="10pt">
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+
+  <fo:table-body>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        1
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        2
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        3
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        4
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block border-right-width="0.5pt" text-align="center" vertical-align="middle">
+        5
+        </fo:block>
+      </fo:table-cell>
+      <fo:table-cell>
+        <fo:block text-align="center" vertical-align="middle">
+        6
+        </fo:block>
+      </fo:table-cell>
+    </fo:table-row>
+  </fo:table-body>
+      </fo:table>
+
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

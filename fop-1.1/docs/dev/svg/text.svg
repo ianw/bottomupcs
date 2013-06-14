@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- $Id: text.svg 426576 2006-07-28 15:44:37Z jeremias $ -->
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<g>
+
+<text x="15" y="20" style="font-size:18">Various Text Elements</text>
+
+<text x="15" y="40" style="font-size:12;font-family:Helvetica">Normal Text in Helvetica,</text>
+<text x="152" y="40" style="font-size:12;font-family:Symbol">Symbol,</text>
+<text x="199" y="40" style="font-size:12;font-family:blah">Unknown,</text>
+<text x="257" y="40" style="font-size:12;font-family:Courier">Courier,</text>
+<text x="318" y="40" style="font-size:12;font-family:Arial">Arial</text>
+
+<g transform="translate(15,55) scale(0.25)">
+<text x="0" y="0" style="font-size:40">Large Text (scaled)</text>
+</g>
+<text x="120" y="55" style="font-size:10">Normal Text (unscaled)</text>
+
+<text x="15" y="70" style="font-size:12.5">fractional Text</text>
+
+<text x="15" y="85" style="font-size:12;fill:red">Coloured Text</text>
+<text x="15" y="100" style="font-size:12;fill:none;stroke:red;stroke-width:0.4">Stroked Text</text>
+<text x="15" y="115" style="font-size:12;fill:blue;stroke:red;stroke-width:0.4">Stroked/Filled Text</text>
+<text x="15" y="130" style="font-size:12" text-decoration="overline">Overline Text</text>
+<text x="15" y="145" style="font-size:12" text-decoration="underline">Underline Text</text>
+<text x="15" y="160" style="font-size:12" text-decoration="line-through">Strikethrough Text</text>
+
+<text x="15" y="185" style="font-size:12">Text <tspan fill="blue" dy="-10">with</tspan> <tspan fill="green" dy="20">tspan</tspan></text>
+
+ <defs>
+ <path id="Path2" style="fill:none; stroke:blue;" transform="scale(0.15,0.15)"
+  d="M 100 200 C 200 100 300 0 400 100 C 500 200 600 300 700 200 C 800 100 900 100 900 100"/>
+ <path id="Path1" style="fill:none; stroke:blue;" transform="scale(0.30,0.50)"
+      d="M 100 100 C100 0 400 00 400 100"/>
+
+</defs>
+
+<text transform="translate(20, 220)" font-size="15">
+<textPath xlink:href="#Path2"><tspan baseline-shift="super" fill="green">super</tspan> and <tspan baseline-shift="sub" fill="red">sub</tspan>scripts</textPath>
+</text>
+
+<g transform="translate(150, 200)" style="font-weight:bold" id="fopdiamond">
+ <text transform="matrix(-0.34202 -0.93969 0.93969 -0.34202 47 45)">FOP</text>
+ <text transform="matrix(0.34202 0.93969 -0.93969 0.34202 44 7)">FOP</text>
+ <text transform="matrix(-0.34202 0.93969 -0.93969 -0.34202 52 23)">FOP</text>
+ <text transform="matrix(0.34202 -0.93969 0.93969 0.34202 38 28)">FOP</text>
+</g>
+
+<g>
+  <filter id="blur" filterUnits="objectBoundingBox" primitiveUnits="objectBoundingBox" x="-20%" y="-20%" width="120%" height="120%" >
+  <feGaussianBlur stdDeviation="2 2" x="-10%" y="-10%" width="120%" height="120%" />
+  </filter>
+
+<text x="15" y="290" style="font-size:16;filter:url(#blur)">Filtered Text</text>
+</g>
+
+<g>
+  <font horiz-adv-x="150" id="Batik">
+     <font-face
+          font-family="FOPFont"
+          units-per-em="240"
+          ascent="190"
+          descent="50"
+          alphabetic="0"/>
+
+ <missing-glyph horiz-adv-x="150" d="M20 0 V240 H100 V0 z"/>
+
+ <glyph unicode=" " glyph-name=" " horiz-adv-x="100"/>
+
+ <glyph unicode="F" glyph-name="F" horiz-adv-x="190">
+<g transform="scale(1.5, -1.5) translate(0, -130)">
+<g style="stroke:black;stroke-width:8">
+<line x1="5" y1="20" x2="125" y2="20"/>
+<line x1="5" y1="40" x2="40" y2="40"/>
+<line x1="5" y1="60" x2="100" y2="60"/>
+<line x1="5" y1="85" x2="40" y2="85"/>
+<line x1="5" y1="110" x2="40" y2="110"/>
+</g>
+</g>
+  </glyph>
+
+ <glyph unicode="O" glyph-name="o" horiz-adv-x="185">
+<g transform="scale(1.5, -1.5) translate(0, -130)">
+<g style="stroke:black;stroke-width:8">
+<line x1="50" y1="30" x2="80" y2="30"/>
+<line x1="30" y1="45" x2="100" y2="45"/>
+<line x1="20" y1="60" x2="110" y2="60"/>
+<line x1="30" y1="80" x2="100" y2="80"/>
+<line x1="50" y1="100" x2="80" y2="100"/>
+</g>
+</g>
+  </glyph>
+
+ <glyph unicode="P" glyph-name="p" horiz-adv-x="210">
+<g transform="scale(1.5, -1.5) translate(0, -130)">
+<g style="stroke:black;stroke-width:8">
+<line x1="5" y1="20" x2="110" y2="20"/>
+<line x1="5" y1="40" x2="40" y2="40"/>
+<line x1="90" y1="40" x2="120" y2="40"/>
+<line x1="5" y1="60" x2="105" y2="60"/>
+<line x1="5" y1="85" x2="40" y2="85"/>
+<line x1="5" y1="110" x2="40" y2="110"/>
+</g>
+</g>
+  </glyph>
+
+    <hkern g1="F"  g2="O"  k="5"/>
+    <hkern g1="O"  g2="P"  k="4"/>
+  </font>
+
+  <text x="15" y="310" font-family="FOPFont" font-size="12">FOP in FOPfont</text>
+</g>
+
+  <text x="130" y="80" writing-mode="tb" font-size="12">vertical</text>
+  <text x="140" y="80" writing-mode="tb" glyph-orientation-vertical="0deg" font-size="12">vertical</text>
+  <text x="150" y="80" glyph-orientation-horizontal="90deg" font-size="12">orientated text</text>
+
+  <text x="150" y="95" font-stretch="narrower" font-size="12">stretched font</text>
+
+  <text x="150" y="110" letter-spacing="5" font-size="12">spaced letters</text>
+
+  <text x="150" y="125" word-spacing="3pt" font-size="12">spaced words</text>
+
+
+
+  <!-- empty element -->
+  <text/>
+</g>
+
+</svg>
+

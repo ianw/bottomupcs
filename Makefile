@@ -1,14 +1,22 @@
-sourcedirs=chapter00 chapter01 chapter02 chapter03 chapter04 chapter05 chapter06 chapter07 chapter08 chapter09
-figuredirs=chapter00/figures chapter01/figures chapter02/figures chapter03/figures chapter04/figures chapter05/figures chapter06/figures chapter07/figures chapter08/figures
-imagedirs=chapter02/images
+sourcedirs=input/chapter00 input/chapter01 input/chapter02 input/chapter03 input/chapter04 input/chapter05 input/chapter06 input/chapter07 input/chapter08 input/chapter09
+figuredirs=input/chapter00/figures input/chapter01/figures input/chapter02/figures input/chapter03/figures input/chapter04/figures input/chapter05/figures input/chapter06/figures input/chapter07/figures input/chapter08/figures
+imagedirs=input/chapter02/images
 
-sources := $(foreach dir,$(sourcedirs),$(wildcard $(dir)/*.sgml))
+sources := $(foreach dir,$(sourcedirs),$(wildcard $(dir)/*.xml))
 figures := $(foreach dir,$(figuredirs),$(wildcard $(dir)/*.xfig))
 pngs := $(patsubst %.xfig,%.png,$(figures))
 epss := $(patsubst %.xfig,%.eps,$(figures))
+svgs := $(patsubst %.xfig,%.svg,$(figures))
 
 pngs += $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.png))
 epss += $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.eps))
+
+html.output=html.output
+html.css=css/csbu.css
+
+saxon.classpath="saxon65/saxon.jar:docbook-xsl/extensions/saxon65.jar"
+pdf.output=pdf.output
+fop=fop-1.1/fop
 
 #rules to convert xfigs to png/eps
 %.png : %.xfig
@@ -17,26 +25,46 @@ epss += $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.eps))
 %.eps : %.xfig
 	fig2dev -L eps $< $@
 
-#pdf depends on having eps figures around.
-.PHONY: pdf 
-pdf: $(epss) csbu.pdf 
+%.svg : %.xfig
+	fig2dev -L svg $< $@
 
-csbu.pdf : csbu.sgml $(sources)
-	jw -f docbook -b dvi -l /usr/share/xml/declaration/xml.dcl $<
-	dvipdf csbu.dvi $@
+#pdf depends on having eps figures around.
+.PHONY: pdf
+pdf: $(svgs) $(pdf.output)/csbu.pdf
+
+$(pdf.output)/csbu.pdf : $(pdf.output)/csbu.fo
+	$(fop) $< $@
+
+$(pdf.output)/csbu.fo: input/csbu.xml $(sources)
+	mkdir -p ./pdf.output
+	#a bit hacky; copy all svg to be alongside .fo for fop to find
+	# as image references are like "chapterXX/foo.svg"
+	cd input ; cp -r --parents $(svgs:input/%=%) ../$(pdf.output)
+	java -classpath $(saxon.classpath) \
+		com.icl.saxon.StyleSheet \
+		-o $(pdf.output)/csbu.fo \
+		input/csbu.xml docbook-xsl/fo/docbook.xsl \
+                use.extensions=1 \
+		textinsert.extension=1
 
 #html depends on having png figures around.
-html: csbu.sgml csbu.css $(sources) $(pngs)
-	mkdir -p ./html
+html: input/csbu.xml $(html.css) $(sources) $(pngs)
+	mkdir -p ./html.output
 #copy all .c files into appropriate places
 	-for dir in $(sourcedirs); do \
-	cp -r --parents $$dir/code/* html; \
+	cp -r --parents $$dir/code/* $(html.output); \
 	done
-	jw -o html -d csbu.dsl -f docbook -b html -l /usr/share/xml/declaration/xml.dcl csbu.sgml
-	cp --parents $(pngs) html
-	cp csbu.css draft.png html
-	cp google726839f49cefc875.html html
+	java -jar ./lib/saxon.jar \
+		input/csbu.xml docbook-xsl/xhtml5/chunkfast.xsl \
+		base.dir=$(html.output) \
+		use.id.as.filename=1 \
+		make.clean.html=1 \
+		chunk.first.selection=1 \
+		html.ext=".html"
+	cp --parents $(pngs) $(html.output)
+	cp $(html.css) draft.png $(html.output)
+	cp google726839f49cefc875.html $(html.output)
 
 .PHONY: clean
-clean:	
-	rm -rf html csbu.pdf csbu.dvi $(pngs) $(epss)
+clean:
+	rm -rf $(html.output) $(pdf.output) $(pngs) $(epss) $(svgs)

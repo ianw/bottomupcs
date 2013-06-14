@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: gethelp.xml 1298724 2012-03-09 07:55:31Z cbowditch $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Apache&#8482; FOP: Getting Help</title>
+    <subtitle>Checklist for Finding Appropriate Resources</subtitle>
+    <version>$Revision: 1298724 $</version>
+  </header>
+  <body>
+    <p>The Apache&#8482; FOP developer community is eager to help you maximize the usefulness of FOP.
+However, to make wise use of its limited resources, support must be primarily self-service.
+Go through the following checklist sequentially to determine what kind of help you need,
+and where to get it:</p>
+    <section id="underlying">
+      <title>Understand Underlying Technologies</title>
+      <p>If you have a questions about XML, XSLT, or XSL-FO that are not directly related to FOP, please consult resources that are appropriate for those questions.
+FOP is an implementation of these technologies, and when you use FOP, there is a presumption that you have a working understanding of them.
+We have included several useful links on our <link href="resources.html">Resources</link> page that may help you get started.
+        </p>
+    </section>
+    <section id="limitations">
+      <title>Understand FOP's Limitations</title>
+      <p>FOP is a work in progress, and has some limitations.</p>
+      <p>FOP does not yet fully comply with the W3C XSL-FO standard.
+The developers track which standard requirements have been implemented, and have documented these capabilities on the <link href="compliance.html">Compliance</link> page.
+FOP has other limitations regarding specific output formats, graphic formats, etc.
+These limitations are noted in appropriate places in the documentation.
+If these documents appear to be in error, continue down this checklist so that either the document or the software can be corrected.
+Otherwise, please do not submit mailing list questions or bug reports regarding features documented in the standard, or documented as limitations in other parts of the documentation.</p>
+      <p>Please especially do not submit questions asking when a particular feature will be implemented.
+There are too many unknowns to make even a reasonable estimate.
+Every time a developer stops to answer such a question, the answer will inevitably be "I don't know", but the time taken to respond is time spent away from development.
+The only sure way to get a feature implemented is to <link href="#how-to-help">pitch in and help</link>.</p>
+    </section>
+    <section id="doc">
+      <title>Read the Documentation</title>
+      <p>Review the documentation pages on this site.
+There is information about how to run FOP, how to embed it, how to add custom fonts etc.</p>
+    </section>
+    <section id="faq">
+      <title>Check the FAQs</title>
+      <p>Consult the <link href="faq.html">Frequently Asked Questions (FAQ)</link> to see if your question has already been answered.</p>
+    </section>
+    <section id="user-archive">
+      <title>Review FOP User Mailing List Archive</title>
+      <p>It is possible that your question has already been answered but has not yet found its way into the FAQ.
+Links to the FOP User mailing list archives are on the <link href="maillist.html#fop-user">Mailing List</link> page.
+        </p>
+    </section>
+    <section id="existing-issue">
+      <title>Look for an Existing Issue Report</title>
+      <p>See <link href="bugs.html#issues_existing">Reported Issues</link> for instructions on how to use the list of open issues. Review these open issues to see if any match your concerns.
+If so, please do not post a mailing list question or report another issue, as these will only slow the development team down.</p>
+    </section>
+    <section id="user-mailing-list">
+      <title>Submit Question to FOP User Mailing List</title>
+      <p>See <link href="maillist.html#fop-user">FOP User Mailing List</link> for details.</p>
+      <note label="Important">Please don't write to any developer directly. Only if you submit questions to the <link href="maillist.html#fop-user">FOP User Mailing List</link> will other FOP users be able to profit from answers given to your question. Another point is that a developer may have gone inactive or is on holidays in which case you may not get an answer in time.</note>
+    </section>
+    <section id="enter-issue">
+      <title>Enter an Issue Report</title>
+      <p>If, and only if, you have followed all of the above steps, and believe that there is a bug or needed feature that you would like to report, please enter an issue in Bugzilla. Never use Bugzilla to post questions, only to enter issues that have already been asked on the user mailing list.</p>
+      <p>See <link href="bugs.html#issues_new">Reporting New Issues</link> for detailed instructions on how to enter an issue.
+      </p>
+    </section>
+    <section id="how-to-help">
+      <title>Find Out How <em>You</em> Can Help</title>
+    </section>
+    <p>As stated above, the FOP development team is a limited resource. Most make their livings doing things other than writing and supporting FOP. Perhaps you need a feature from the XSL-FO standard to be implemented right away, or a bug fixed, or a new output format, or .... If so, there are several ways that you can help:</p>
+    <ul>
+      <li>Become a <link href="dev/index.html">FOP developer</link>.</li>
+      <li>Fund a developer (or part of one). There is usually at least one FOP developer who would be glad to devote more time to FOP development if funding were in place.</li>
+      <li>Help out on the user mailing list. Users giving good answers to other users allows developers to focus more on development and less on support.</li>
+    </ul>
+  </body>
+</document>

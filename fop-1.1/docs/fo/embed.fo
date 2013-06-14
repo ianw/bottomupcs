@@ -1,0 +1,924 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: embed.fo 1357883 2012-07-05 20:29:53Z gadams $ --><!DOCTYPE root>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" font-family="Times Roman" font-size="12pt">
+
+<fo:layout-master-set>
+  <fo:simple-page-master margin-right="1.5cm" margin-left="1.5cm" margin-bottom="2cm" margin-top="1cm" page-width="21cm" page-height="29.7cm" master-name="left">
+    <fo:region-body margin-top="1cm"/>
+    <fo:region-before extent="1cm"/>
+    <fo:region-after extent="1.5cm"/>
+  </fo:simple-page-master>
+</fo:layout-master-set>
+
+<fo:page-sequence id="N2528" master-reference="left">
+
+<fo:static-content flow-name="xsl-region-after">
+  <fo:block text-align-last="center" font-size="10pt">
+    <fo:page-number/>
+  </fo:block>
+</fo:static-content>
+
+<fo:flow flow-name="xsl-region-body">
+<fo:block font-size="18pt" font-weight="bold" text-align="center">Embedding SVG in Viewport</fo:block>
+<fo:block>
+  <fo:block font-size="16pt" font-weight="bold" space-before.minimum="1em" space-before.optimum="1.5em" space-before.maximum="2em">Align in Larger Viewport</fo:block>
+
+  <fo:block>
+Default align:
+(<fo:instream-foreign-object width="100pt" height="100pt" content-width="50pt" content-height="50pt">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), start
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="100pt" height="100pt" content-width="50pt" content-height="50pt" text-align="start">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), center
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="100pt" height="100pt" content-width="50pt" content-height="50pt" text-align="center">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), end
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="100pt" height="100pt" content-width="50pt" content-height="50pt" text-align="end">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), before
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="100pt" height="100pt" content-width="50pt" content-height="50pt" display-align="before">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), center
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="100pt" height="100pt" content-width="50pt" content-height="50pt" display-align="center">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), after
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="100pt" height="100pt" content-width="50pt" content-height="50pt" display-align="after">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), start-before
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="100pt" height="100pt" content-width="50pt" content-height="50pt" text-align="start" display-align="before">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), start-center
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="100pt" height="100pt" content-width="50pt" content-height="50pt" text-align="start" display-align="center">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), start-after
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="100pt" height="100pt" content-width="50pt" content-height="50pt" text-align="start" display-align="after">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), center-before
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="100pt" height="100pt" content-width="50pt" content-height="50pt" text-align="center" display-align="before">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), center-center
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="100pt" height="100pt" content-width="50pt" content-height="50pt" text-align="center" display-align="center">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), center-after
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="100pt" height="100pt" content-width="50pt" content-height="50pt" text-align="center" display-align="after">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), end-before
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="100pt" height="100pt" content-width="50pt" content-height="50pt" text-align="end" display-align="before">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), end-center
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="100pt" height="100pt" content-width="50pt" content-height="50pt" text-align="end" display-align="center">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), end-after
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="100pt" height="100pt" content-width="50pt" content-height="50pt" text-align="end" display-align="after">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>).
+  </fo:block>
+
+  <fo:block xmlns="http://www.w3.org/2000/svg" font-size="16pt" font-weight="bold" space-before.minimum="1em" space-before.optimum="1.5em" space-before.maximum="2em">Align in Smaller Viewport</fo:block>
+  <fo:block>
+Default align:
+(<fo:instream-foreign-object width="50pt" height="50pt" overflow="hidden">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), start
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="50pt" height="50pt" overflow="hidden" text-align="start">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), center
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="50pt" height="50pt" overflow="hidden" text-align="center">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), end
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="50pt" height="50pt" overflow="hidden" text-align="end">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), before
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="50pt" height="50pt" overflow="hidden" display-align="before">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), center
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="50pt" height="50pt" overflow="hidden" display-align="center">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), after
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="50pt" height="50pt" overflow="hidden" display-align="after">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), start-before
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="50pt" height="50pt" overflow="hidden" text-align="start" display-align="before">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), start-center
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="50pt" height="50pt" overflow="hidden" text-align="start" display-align="center">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), start-after
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="50pt" height="50pt" overflow="hidden" text-align="start" display-align="after">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), center-before
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="50pt" height="50pt" overflow="hidden" text-align="center" display-align="before">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), center-center
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="50pt" height="50pt" overflow="hidden" text-align="center" display-align="center">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), center-after
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="50pt" height="50pt" overflow="hidden" text-align="center" display-align="after">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), end-before
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="50pt" height="50pt" overflow="hidden" text-align="end" display-align="before">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), end-center
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="50pt" height="50pt" overflow="hidden" text-align="end" display-align="center">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), end-after
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" width="50pt" height="50pt" overflow="hidden" text-align="end" display-align="after">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>).
+  </fo:block>
+
+  <fo:block xmlns="http://www.w3.org/2000/svg" font-size="16pt" font-weight="bold" space-before.minimum="1em" space-before.optimum="1.5em" space-before.maximum="2em">Scaling</fo:block>
+  <fo:block>
+Non-uniform
+(<fo:instream-foreign-object content-width="100pt" content-height="50pt" scaling="non-uniform" overflow="hidden" text-align="start">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), non-uniform
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" content-width="50pt" content-height="100pt" scaling="non-uniform" overflow="hidden" text-align="start">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), uniform
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" content-width="100pt" content-height="75pt" scaling="uniform" overflow="hidden" text-align="start">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>), uniform
+(<fo:instream-foreign-object xmlns="http://www.w3.org/2000/svg" content-width="75pt" content-height="100pt" scaling="uniform" overflow="hidden" text-align="start">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fo:instream-foreign-object>).
+  </fo:block>
+
+  <fo:block xmlns="http://www.w3.org/2000/svg" font-size="16pt" font-weight="bold" space-before.minimum="1em" space-before.optimum="1.5em" space-before.maximum="2em"/>
+  This section is only required to show that the layout still works.
+</fo:block>
+</fo:flow>
+</fo:page-sequence>
+
+</fo:root>

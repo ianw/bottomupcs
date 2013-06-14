@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!-- example for a simple fo file. At the beginning the page layout is set.
+Below fo:root there is always
+- a single fo:layout-master-set which defines one or more page layouts
+- an optional fo:declarations,
+- and a sequence of one or more fo:page-sequences containing the text and formatting instructions -->
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+  <fo:layout-master-set>
+
+    <!-- layout for the first page -->
+    <fo:simple-page-master master-name="first"
+                  page-height="29.7cm"
+                  page-width="21cm"
+                  margin-top="1cm"
+                  margin-bottom="2cm"
+                  margin-left="2.0cm + 0.5cm"
+                  margin-right="(5cm * 1cm) div 2cm">
+      <fo:region-body margin-top="3cm"/>
+      <fo:region-before extent="3cm"/>
+      <fo:region-after extent="1.5cm"/>
+    </fo:simple-page-master>
+
+    <!-- layout for the other pages -->
+    <fo:simple-page-master master-name="rest"
+                  page-height="abs(-30cm + .3cm)"
+                  page-width="(10cm * 2) + 1cm"
+                  margin-top="round(.5) * 1cm"
+                  margin-bottom="round(2.4) * 1cm"
+                  margin-left="2.5 * 1cm"
+                  margin-right="5.5cm - 3cm">
+      <fo:region-body margin-top="2.5cm"/>
+      <fo:region-before extent="2.5cm"/>
+      <fo:region-after extent="1.5cm"/>
+    </fo:simple-page-master>
+
+    <fo:page-sequence-master master-name="basicPSM" >
+      <fo:repeatable-page-master-alternatives>
+        <fo:conditional-page-master-reference master-reference="first"
+          page-position="first" />
+        <fo:conditional-page-master-reference master-reference="rest"
+          page-position="rest" />
+        <!-- recommended fallback procedure -->
+        <fo:conditional-page-master-reference master-reference="rest" />
+      </fo:repeatable-page-master-alternatives>
+    </fo:page-sequence-master>
+
+  </fo:layout-master-set>
+  <!-- end: defines page layout -->
+
+  <!-- actual layout -->
+  <fo:page-sequence master-reference="basicPSM">
+
+    <!-- header -->
+    <fo:static-content flow-name="xsl-region-before">
+      <fo:block text-align="end"
+            font-size="10pt"
+            font-family="serif"
+            line-height="1em + 4pt"
+  >
+        Border and Padding Shorthand Tests - p. <fo:page-number/>
+      </fo:block>
+    </fo:static-content>
+
+    <fo:flow flow-name="xsl-region-body">
+
+      <!-- defines text title level 1-->
+      <fo:block font-size="min(18pt,20pt)"
+            font-family="sans-serif"
+            line-height="max(24pt,18pt)"
+            space-after.optimum="5 mod 3 * 7.5pt"
+            background-color="rgb(128,128,128)"
+            color="rgb(255,255,255)"
+            text-align="center"
+            padding-top="3pt">
+  Border and Padding Shorthand Tests
+      </fo:block>
+
+      <!-- Normal text -->
+      <fo:block font-size="12pt"
+                font-family="sans-serif"
+                line-height="1.25em"
+                space-after="12pt"
+                text-align="start"
+                background-color="rgb(150,150,150)"
+                start-indent="3mm" end-indent="3mm"
+                padding-left="3mm" padding-right="3mm"
+                padding-top="4mm" padding-bottom="4mm"
+    border-style="dashed"
+                border-left-width="1pt" border-right-width="1pt"
+                border-top-width="2pt" border-bottom-width="2pt"
+                border-top-color="rgb(100,100,100)" border-bottom-color="rgb(200,200,200)">
+In this example, padding and border properties are specified using absolute  properties:
+padding-left, padding-right, padding-top, and padding-bottom, etc.
+According to the specification, a request for the absolute (top, bottom, left, right) versions of these properties should use the relative ones if they are specified.
+</fo:block>
+      <fo:block font-size="12pt"
+                font-family="sans-serif"
+                line-height="1.25em"
+                space-after="12pt"
+                text-align="start"
+                background-color="rgb(150,150,150)"
+                start-indent="3mm" end-indent="3mm"
+                padding="3mm + 1mm 3mm"
+    border-top="rgb(100,100,100) 1pt + 1pt dashed"
+    border-bottom="2pt rgb(200,200,200) solid"
+    border-left="solid 1pt" border-right="solid 1pt">
+In this example, padding and border properties are specified using shorthand properties:
+padding, border-width, border-color.
+According to the specification, a request for the absolute (top, bottom, left, right) versions of these properties should use the relative ones if they are specified.
+</fo:block>
+
+      <!-- Normal text -->
+      <fo:block font-size="12pt"
+                font-family="sans-serif"
+                line-height="1.25em"
+                space-after="3pt"
+                text-align="start"
+                background-color="rgb(150,150,150)"
+                start-indent="3mm" end-indent="3mm"
+                padding-before="4mm" padding-after="4mm"
+                padding-start.length="3mm" padding-end.length="3mm"
+    border-style="solid"
+                border-start-width="1pt" border-end-width="1pt"
+                border-before-width="2pt" border-after-width="2pt"
+                border-before-color="rgb(100,100,100)"
+    border-after-color="rgb(200,200,200)">
+In this example, padding and border properties are specified using writing-mode relative properties:
+padding-before, padding-after, padding-start, and padding-end, etc.
+According to the specification, a request for the absolute (top, bottom, left, right) versions of these properties should use the relative ones if they are specified.
+</fo:block>
+
+      <!-- Normal text -->
+      <fo:block font-size="12pt"
+                font-family="sans-serif"
+                line-height="1.25em"
+                space-after="3pt"
+                text-align="start"
+                background-color="rgb(200,200,200)"
+                start-indent="3mm" end-indent="3mm"
+    padding = "3mm"
+                padding-before="4mm" padding-after="4mm"
+    border-width = "2pt" border-style="solid"
+    border-color="black"
+                border-start-width="1pt" border-end-width="1pt"
+                border-before-width="2pt" border-after-width="2pt"
+                border-before-color="rgb(200,200,200)"
+    border-after-color="rgb(100,100,100)">
+In this example, padding and border properties are specified using
+shorthand and writing-mode relative properties:
+padding-before, padding-after, padding-start, and padding-end, etc.
+According to the specification, a request for the absolute (top, bottom, left, right) versions of these properties should use the relative ones if they are specified.
+</fo:block>
+
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

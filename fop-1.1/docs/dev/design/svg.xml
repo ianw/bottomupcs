@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: svg.xml 1298724 2012-03-09 07:55:31Z cbowditch $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Apache&#8482; FOP Design: SVG</title>
+    <version>$Revision: 1298724 $</version>
+  </header>
+  <body>
+<section id="intro">
+  <title>Introduction</title>
+    <p>SVG is rendered through Apache&#8482; Batik.</p><p>The XML from the XSL:FO document
+      is converted into an SVG DOM with batik. This DOM is then set as the Document
+      on the Foreign Object area in the Area Tree.</p><p>This DOM is then available to
+      be rendered by the renderer.</p><p>SVG is rendered in the renderers via an
+      XMLHandler in the FOUserAgent. This XML handler is used to render the SVG. The
+      SVG is rendered by using batik. Batik converts the SVG DOM into an internal
+      structure that can be drawn into a Graphics2D. So for PDF we use a
+      PDFGraphics2D to draw into.</p><p>This creates the necessary PDF information to
+      create the SVG image in the PDF document.</p><p>Most of the work is done in the
+      PDFGraphics2D class. There are also a few bridges that are plugged into batik
+      to provide different behaviour for some SVG elements.</p>
+</section>
+<section>
+  <title>Text Drawing</title>
+<p>Normally batik converts text into a set of curved
+       shapes. </p><p>This is handled as any other shapes when rendering to the output. This
+       is not always desirable as the shapes have very fine curves. This can cause the
+       output to look a bit bad in PDF and PS (it can be drawn properly but is not by
+       default). These curves also require much more data than the original
+       text.</p><p>To handle this there is a PDFTextElementBridge that is set when
+       using the bridge in batik. If the text is simple enough for the text to be
+       drawn in the PDF as with all other text then this sets the TextPainter to use
+       the PDFTextPainter. This inserts the text directly into the PDF using the       drawString method on the PDFGraphics2D.</p><p>Text is considered simple if the
+       font is available, the font size is useable and there are no tspans or other
+       complications. This can make the resulting PDF significantly
+       smaller.</p>
+</section>
+<section>
+  <title>PDF Links</title>
+<p>To support links in PDF another batik
+       element bridge is used. The PDFAElementBridge creates a PDFANode which inserts
+       a link into the PDF document via the PDFGraphics2D.</p><p>Since links are       positioned on the page without any transforms then we need to transform the
+       coordinates of the link area so that they match the current position of the a
+       element area. This transform may also need to account for the svg being
+       positioned on the page.</p>
+</section>
+<section>
+  <title>Images</title>
+<p>Images are normally drawn
+       into the PDFGraphics2D. This then creates a bitmap of the image data that can
+       be inserted into the PDF document. </p><p>As PDF can support jpeg images then another
+       element bridge is used so that the jpeg can be directly inserted into the       PDF.</p>
+</section>
+<section>
+  <title>PDF Transcoder</title>
+<p>Batik provides a mechanism to
+       convert SVG into various formats. Through FOP we can convert an SVG document
+       into a single paged PDF document. The page contains the SVG drawn as best as
+       possible on the page. There is a PDFDocumentGraphics2D that creates a
+       standalone PDF document with a single page. This is then drawn into by batik in
+       the same way as with the PDFGraphics2D.</p>
+</section>
+<section>
+   <title>Other Outputs</title>
+<p>When rendering to AWT the SVG is simply drawn onto the
+       awt canvas using batik.</p><p>The PS Renderer uses a similar technique as the
+       PDF Renderer.</p><p>The SVG Renderer simply embeds the SVG inside an svg
+       element.</p>
+</section>
+
+    </body>
+</document>

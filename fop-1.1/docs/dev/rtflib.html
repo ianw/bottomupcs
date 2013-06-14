@@ -1,0 +1,765 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.10-dev">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Apache&trade; FOP Development: RTFLib (jfor)</title>
+<link type="text/css" href="../skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="../skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="../skin/print.css" rel="stylesheet">
+<link type="text/css" href="../skin/profile.css" rel="stylesheet">
+<script src="../skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="../skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="../skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="../favicon.ico">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://xmlgraphics.apache.org/"><img class="logoImage" alt="Apache XML Graphics" src="../images/group-logo.gif" title="Apache XML Graphics is responsible for the creation and maintenance of software for managing the conversion of XML formats to graphical output, and the creation and maintenance of related software components, based on software licensed to the Foundation"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://xmlgraphics.apache.org/fop/"><img class="logoImage" alt="Apache FOP" src="../images/logo.jpg" title="Apache FOP (Formatting Objects Processor) is the world's first output independent formatter. Output formats currently supported include PDF, PCL, PS, SVG, XML (area tree representation), Print, AWT, MIF and TXT. The primary output target is PDF."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="xmlgraphics.apache.org" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="../index.html">Home</a>
+</li>
+<li>
+<a class="unselected" href="../1.0/index.html">Version 1.0</a>
+</li>
+<li>
+<a class="unselected" href="../1.1/index.html">Version 1.1</a>
+</li>
+<li>
+<a class="unselected" href="../trunk/index.html">FOP Trunk</a>
+</li>
+<li class="current">
+<a class="selected" href="../dev/index.html">Development</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">The Apache Software Foundation</a> &gt; <a href="http://xmlgraphics.apache.org/">Apache XML Graphics Project</a><script src="../skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_1.1', '../skin/')" id="menu_1.1Title" class="menutitle">About</div>
+<div id="menu_1.1" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/index.html">Basics</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2', '../skin/')" id="menu_1.2Title" class="menutitle">Design</div>
+<div id="menu_1.2" class="menuitemgroup">
+<div onclick="SwitchMenu('menu_1.2.1', '../skin/')" id="menu_1.2.1Title" class="menutitle">About</div>
+<div id="menu_1.2.1" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/design/index.html">Introduction</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2.2', '../skin/')" id="menu_1.2.2Title" class="menutitle">Core Process</div>
+<div id="menu_1.2.2" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/design/startup.html">Startup</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/parsing.html">XML Parsing</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/fotree.html">FO Tree</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/properties.html">Properties</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/layout.html">Layout</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/breakpos.html">Break Possibility</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/areas.html">Area Tree</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/renderers.html">Renderers</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2.3', '../skin/')" id="menu_1.2.3Title" class="menutitle">Miscellaneous</div>
+<div id="menu_1.2.3" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/design/images.html">Images</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/pdf-library.html">PDF Library</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/svg.html">SVG</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/embedding.html">Embedding</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/extending.html">Extending</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/optimise.html">Optimisations</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/useragent.html">User Agent</a>
+</div>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/xmlgraphics-fop/FOPProjectPages">Unresolved (Wiki)</a>
+</div>
+<div class="menuitem">
+<a href="../dev/svg.html">SVG</a>
+</div>
+<div class="menuitem">
+<a href="../dev/extensions.html">Extensions</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.3', '../skin/')" id="menu_1.3Title" class="menutitle">Develop</div>
+<div id="menu_1.3" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/implement.html">Walk-Thru</a>
+</div>
+<div class="menuitem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;email1=&amp;emailtype1=substring&amp;emailassigned_to1=1&amp;email2=&amp;emailtype2=substring&amp;emailreporter2=1&amp;bugidtype=include&amp;bug_id=&amp;changedin=&amp;votes=&amp;chfieldfrom=&amp;chfieldto=Now&amp;chfieldvalue=&amp;product=Fop&amp;short_desc=%5BPATCH%5D&amp;short_desc_type=allwordssubstr&amp;long_desc=&amp;long_desc_type=allwordssubstr&amp;bug_file_loc=&amp;bug_file_loc_type=allwordssubstr&amp;keywords=&amp;keywords_type=anywords&amp;field0-0-0=noop&amp;type0-0-0=noop&amp;value0-0-0=&amp;namedcmd=Fop+all&amp;newqueryname=fop+patch+queue&amp;tofooter=1&amp;order=Reuse+same+sort+as+last+time">Patch Queue</a>
+</div>
+<div class="menuitem">
+<a href="../dev/conventions.html">Conventions</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.4', '../skin/')" id="menu_1.4Title" class="menutitle">Test</div>
+<div id="menu_1.4" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/testing.html">Testing</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.5', '../skin/')" id="menu_1.5Title" class="menutitle">Deploy</div>
+<div id="menu_1.5" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/doc.html">Doc Mgmt</a>
+</div>
+<div class="menuitem">
+<a href="../dev/release.html">Release</a>
+</div>
+<div class="menuitem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;email1=&amp;emailtype1=substring&amp;emailassigned_to1=1&amp;email2=&amp;emailtype2=substring&amp;emailreporter2=1&amp;bugidtype=include&amp;bug_id=&amp;changedin=&amp;votes=&amp;chfieldfrom=&amp;chfieldto=Now&amp;chfieldvalue=&amp;product=Fop&amp;short_desc=&amp;short_desc_type=allwordssubstr&amp;long_desc=&amp;long_desc_type=allwordssubstr&amp;bug_file_loc=&amp;bug_file_loc_type=allwordssubstr&amp;keywords=&amp;keywords_type=anywords&amp;field0-0-0=noop&amp;type0-0-0=noop&amp;value0-0-0=&amp;order=bug_severity%2Cpriority%20DESC">Bugs</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.6', '../skin/')" id="menu_1.6Title" class="menutitle">Resources</div>
+<div id="menu_1.6" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/faq.html">FAQs</a>
+</div>
+<div class="menuitem">
+<a href="../dev/tools.html">Tools</a>
+</div>
+<div class="menuitem">
+<a href="http://svn.apache.org/viewvc/xmlgraphics/fop">ViewVC</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_selected_1.7', '../skin/')" id="menu_selected_1.7Title" class="menutitle" style="background-image: url('../skin/images/chapter_open.gif');">SubPackages</div>
+<div id="menu_selected_1.7" class="selectedmenuitemgroup" style="display: block;">
+<div class="menupage">
+<div class="menupagetitle">RTFlib</div>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="../skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="raw XML" class="xmllink">
+<a class="dida" href="rtflib.xml"><img alt="XML - icon" src="../skin/images/xmldoc.gif" class="skin"><br>
+        XML</a>
+</div>
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="rtflib.pdf"><img alt="PDF -icon" src="../skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<div class="trail">Font size: 
+	          &nbsp;<input value="Reset" class="resetfont" title="Reset text" onclick="ndeSetTextSize('reset'); return false;" type="button">      
+	          &nbsp;<input value="-a" class="smallerfont" title="Shrink text" onclick="ndeSetTextSize('decr'); return false;" type="button">
+	          &nbsp;<input value="+a" class="biggerfont" title="Enlarge text" onclick="ndeSetTextSize('incr'); return false;" type="button">
+</div>
+<h1>Apache&trade; FOP Development: RTFLib (jfor)</h1>
+<div id="front-matter">
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#general">General Information</a>
+<ul class="minitoc">
+<li>
+<a href="#intro">Introduction</a>
+</li>
+<li>
+<a href="#history">History</a>
+</li>
+<li>
+<a href="#status">Status</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#userdoc">User Documentation</a>
+<ul class="minitoc">
+<li>
+<a href="#userdoc-overview">Overview</a>
+</li>
+<li>
+<a href="#userdoc-structure">Document Structure</a>
+</li>
+<li>
+<a href="#userdoc-attributes">Attributes</a>
+<ul class="minitoc">
+<li>
+<a href="#userdoc-attr-ig">Information Group</a>
+</li>
+<li>
+<a href="#userdoc-attr-df">Document Formatting</a>
+</li>
+<li>
+<a href="#userdoc-attr-sf">Section Formatting</a>
+</li>
+<li>
+<a href="#userdoc-attr-pf">Paragraph Formatting</a>
+</li>
+<li>
+<a href="#userdoc-attr-cf">Character Formatting</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+    
+<a name="general"></a>
+<h2 class="underlined_10">General Information</h2>
+<div class="section">
+<a name="intro"></a>
+<h3 class="underlined_5">Introduction</h3>
+<p>The RTFLib package is an open-source, <em>independent</em> package suitable for writing RTF files in a java environment.
+By <em>independent</em> we mean:</p>
+<ul>
+          
+<li>Although it is used by Apache&trade; FOP to generate FOP's RTF output, it is not dependent on FOP for any of its functionality.</li>
+          
+<li>It does not require FOP as a front-end, nor does it even require XSL-FO for input.
+It essentially exposes an API of relatively high-level RTF construction routines to a host program.
+This means it can be used anywhere RTF output is required and java is available.</li>
+        
+</ul>
+<p>The FOP development team intends to keep the RTFLib package independent so that it can be used for other purposes.</p>
+<a name="history"></a>
+<h3 class="underlined_5">History</h3>
+<p>RTFLib was originally developed by <a href="mailto:bdelacretaz.at.apache.org">Bertrand Delacr&eacute;taz</a> and the <a class="external" href="http://www.jfor.org">jfor</a> team. jfor was written under an Apache-style license, and the jfor team contributed the code to the Apache Software Foundation in June, 2003. RTFLib is a subset of the original jfor project, which also includes an XSL-FO parsing mechanism for a complete XSL-FO to RTF solution.</p>
+<a name="status"></a>
+<h3 class="underlined_5">Status</h3>
+<p>Although FOP's implementation of the RTFLib package is very incomplete, the RTFLib package itself is relatively mature. RTFLib is only available in the trunk <a href="index.html#lines">line of FOP development</a>.</p>
+<div class="warning">
+<div class="label">Warning</div>
+<div class="content">This documentation is a work in progress. If you see errors or omissions, please report them to the <a href="index.html#mail-fop-dev">fop-dev mailing list</a>.</div>
+</div>
+</div>
+    
+<a name="userdoc"></a>
+<h2 class="underlined_10">User Documentation</h2>
+<div class="section">
+<a name="userdoc-overview"></a>
+<h3 class="underlined_5">Overview</h3>
+<p>Perhaps the easiest way to see how to use RTFLib is by looking at an example. A set of test documents is part of the package, and can be <a class="external" href="http://cvs.apache.org/viewcvs.cgi/xml-fop/src/java/org/apache/fop/rtf/rtflib/testdocs/">viewed online</a>.
+A quick look at the Abstract <a class="external" href="http://cvs.apache.org/viewcvs.cgi/xml-fop/src/java/org/apache/fop/rtf/rtflib/testdocs/TestDocument.java?rev=HEAD&amp;content-type=text/vnd.viewcvs-markup">TestDocument</a> class, and one of the Concrete subclasses, <a class="external" href="http://cvs.apache.org/viewcvs.cgi/xml-fop/src/java/org/apache/fop/rtf/rtflib/testdocs/SimpleDocument.java?rev=HEAD&amp;content-type=text/vnd.viewcvs-markup">SimpleDocument</a> will provide the basics of how to use the package.</p>
+<p>There are two basic concepts you will need to understand in order to use RTFLib:</p>
+<ul>
+          
+<li>Documents are created by filling bigger containers with successively smaller containers, and eventually with content.</li>
+          
+<li>Attributes may be set for each container or content as it is created</li>
+        
+</ul>
+<p>RTFLib handles the process of converting to and writing the RTF content as the document is created. All you need to do is flush the document at the end to make sure that the last pieces get written.</p>
+<a name="userdoc-structure"></a>
+<h3 class="underlined_5">Document Structure</h3>
+<div class="warning">
+<div class="label">Warning</div>
+<div class="content">This section is very incomplete.</div>
+</div>
+<p>The documentation in this section is intended to provide a high-level view of the process of building an RTF document. For more detailed API documentation of the various methods, be sure to consult the Javadocs for RTFLib.</p>
+<p>The following table summarizes the various containers that can be created:</p>
+<table class="ForrestTable" cellspacing="1" cellpadding="4">
+          
+<tr>
+            
+<th colspan="1" rowspan="1">Name</th>
+            <th colspan="1" rowspan="1">Class.Method where created</th>
+            <th colspan="1" rowspan="1">Attribute Set(s)</th>
+            <th colspan="1" rowspan="1">Valid children</th>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">Document Area</td>
+            <td colspan="1" rowspan="1">RtfFile.startDocumentArea()</td>
+            <td colspan="1" rowspan="1">Information Group, Document Formatting</td>
+            <td colspan="1" rowspan="1">Section</td>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">Section</td>
+            <td colspan="1" rowspan="1">RtfDocumentArea.newSection()</td>
+            <td colspan="1" rowspan="1">Section Formatting</td>
+            <td colspan="1" rowspan="1">Paragraph, ParagraphKeepTogether, Image, List, Before (Page Heading), After (Page Footer), JforCmd</td>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">Paragraph</td>
+            <td colspan="1" rowspan="1">RtfSection.newParagraph()</td>
+            <td colspan="1" rowspan="1">Paragraph Formatting, Character Formatting</td>
+            <td colspan="1" rowspan="1">Text</td>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">ParagraphKeepTogether</td>
+            <td colspan="1" rowspan="1">RtfSection.newParagraphKeepTogether</td>
+            <td colspan="1" rowspan="1">.</td>
+            <td colspan="1" rowspan="1">.</td>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">Image</td>
+            <td colspan="1" rowspan="1">RtfSection.newImage</td>
+            <td colspan="1" rowspan="1">.</td>
+            <td colspan="1" rowspan="1">.</td>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">Table</td>
+            <td colspan="1" rowspan="1">RtfSection.newTable</td>
+            <td colspan="1" rowspan="1">.</td>
+            <td colspan="1" rowspan="1">.</td>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">List</td>
+            <td colspan="1" rowspan="1">RtfSection.newList</td>
+            <td colspan="1" rowspan="1">.</td>
+            <td colspan="1" rowspan="1">.</td>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">Before (Page Heading)</td>
+            <td colspan="1" rowspan="1">RtfSection.newBefore</td>
+            <td colspan="1" rowspan="1">.</td>
+            <td colspan="1" rowspan="1">.</td>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">After (Page Footer)</td>
+            <td colspan="1" rowspan="1">RtfSection.newAfter</td>
+            <td colspan="1" rowspan="1">.</td>
+            <td colspan="1" rowspan="1">.</td>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">JforCmd</td>
+            <td colspan="1" rowspan="1">RtfSection.newJforCmd</td>
+            <td colspan="1" rowspan="1">.</td>
+            <td colspan="1" rowspan="1">.</td>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">Text</td>
+            <td colspan="1" rowspan="1">RtfParagraph.newText()</td>
+            <td colspan="1" rowspan="1">Character Formatting</td>
+            <td colspan="1" rowspan="1">N/A</td>
+          
+</tr>
+        
+</table>
+<a name="userdoc-attributes"></a>
+<h3 class="underlined_5">Attributes</h3>
+<div class="warning">
+<div class="label">Warning</div>
+<div class="content">This section is very incomplete.</div>
+</div>
+<p>Attributes can be set for each container and piece of content in the document. The general approach is to build an RtfAttributes object containing the various attributes, then pass that RtfAttributes object to the method that creates the new container or content. See the Javadoc API documentation for RtfAttributes for details on the syntax for creating an RtfAttributes object. The following information lists the various attributes that can be set for each type of container.</p>
+<a name="userdoc-attr-ig"></a>
+<h4>Information Group</h4>
+<p>These attributes are set when creating a Document.</p>
+<a name="userdoc-attr-df"></a>
+<h4>Document Formatting</h4>
+<p>These attributes are set when creating a Document.</p>
+<a name="userdoc-attr-sf"></a>
+<h4>Section Formatting</h4>
+<p>These attributes are set when creating a Section.</p>
+<a name="userdoc-attr-pf"></a>
+<h4>Paragraph Formatting</h4>
+<p>These attributes are set when creating a Paragraph.</p>
+<table class="ForrestTable" cellspacing="1" cellpadding="4">
+            
+<tr>
+              
+<th colspan="1" rowspan="1">Description</th>
+              <th colspan="1" rowspan="1">Attribute Name</th>
+              <th colspan="1" rowspan="1">Attribute Value</th>
+              <th colspan="1" rowspan="1">RTF Control Word</th>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="4" rowspan="1">.</td>
+            
+</tr>
+            
+<tr>
+              
+<th colspan="1" rowspan="1">Alignment</th>
+              <th colspan="3" rowspan="1">.</th>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Align Left</td>
+              <td colspan="1" rowspan="1">RtfText.ALIGN_LEFT</td>
+              <td colspan="1" rowspan="1">N/A (boolean)</td>
+              <td colspan="1" rowspan="1">\ql</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Align Right</td>
+              <td colspan="1" rowspan="1">RtfText.ALIGN_RIGHT</td>
+              <td colspan="1" rowspan="1">N/A (boolean)</td>
+              <td colspan="1" rowspan="1">\qr</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Align Centered</td>
+              <td colspan="1" rowspan="1">RtfText.ALIGN_CENTER</td>
+              <td colspan="1" rowspan="1">N/A (boolean)</td>
+              <td colspan="1" rowspan="1">\qc</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Align Justified</td>
+              <td colspan="1" rowspan="1">RtfText.ALIGN_JUSTIFIED</td>
+              <td colspan="1" rowspan="1">N/A (boolean)</td>
+              <td colspan="1" rowspan="1">\qj</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Align Distributed</td>
+              <td colspan="1" rowspan="1">RtfText.ALIGN_DISTRIBUTED</td>
+              <td colspan="1" rowspan="1">N/A (boolean)</td>
+              <td colspan="1" rowspan="1">\qd</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Kashida justification</td>
+              <td colspan="1" rowspan="1">not implemented</td>
+              <td colspan="1" rowspan="1">0-20 (integer)</td>
+              <td colspan="1" rowspan="1">\qkN</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Thai Distributed justification</td>
+              <td colspan="1" rowspan="1">not implemented</td>
+              <td colspan="1" rowspan="1">N/A (boolean)</td>
+              <td colspan="1" rowspan="1">\qt</td>
+            
+</tr>
+            
+<tr>
+              
+<th colspan="1" rowspan="1">Indentation</th>
+              <th colspan="3" rowspan="1">.</th>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Left indent body</td>
+              <td colspan="1" rowspan="1">RtfText.LEFT_INDENT_BODY</td>
+              <td colspan="1" rowspan="1">(int) "hundredths of a character unit" (?)</td>
+              <td colspan="1" rowspan="1">\li</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Left indent first</td>
+              <td colspan="1" rowspan="1">RtfText.LEFT_INDENT_FIRST</td>
+              <td colspan="1" rowspan="1">(int) "hundredths of a character unit" (?)</td>
+              <td colspan="1" rowspan="1">\fi</td>
+            
+</tr>
+            
+<tr>
+              
+<th colspan="1" rowspan="1">Borders</th>
+              <th colspan="3" rowspan="1">.</th>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Bottom single border</td>
+              <td colspan="1" rowspan="1">RtfText.BDR_BOTTOM_SINGLE</td>
+              <td colspan="1" rowspan="1">Boolean?</td>
+              <td colspan="1" rowspan="1">brdrb\\brsp40\\brdrs</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Bottom double border</td>
+              <td colspan="1" rowspan="1">RtfText.BDR_BOTTOM_DOUBLE</td>
+              <td colspan="1" rowspan="1">Boolean?</td>
+              <td colspan="1" rowspan="1">brdrb\\brsp40\\brdrdb</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Bottom embossed border</td>
+              <td colspan="1" rowspan="1">RtfText.BDR_BOTTOM_EMBOSS</td>
+              <td colspan="1" rowspan="1">Boolean?</td>
+              <td colspan="1" rowspan="1">brdrb\\brsp40\\brdremboss</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">bottom dotted border</td>
+              <td colspan="1" rowspan="1">RtfText.BDR_BOTTOM_DOTTED</td>
+              <td colspan="1" rowspan="1">Boolean?</td>
+              <td colspan="1" rowspan="1">brdrb\\brsp40\\brdrdot</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">bottom dashed border</td>
+              <td colspan="1" rowspan="1">RtfText.BDR_BOTTOM_DASH</td>
+              <td colspan="1" rowspan="1">Boolean?</td>
+              <td colspan="1" rowspan="1">brdrb\\brsp40\\brdrdash</td>
+            
+</tr>
+          
+</table>
+<a name="userdoc-attr-cf"></a>
+<h4>Character Formatting</h4>
+<p>These attributes are set when creating a Paragraph, or Text.</p>
+<table class="ForrestTable" cellspacing="1" cellpadding="4">
+            
+<tr>
+              
+<th colspan="1" rowspan="1">Description</th>
+              <th colspan="1" rowspan="1">Attribute Name</th>
+              <th colspan="1" rowspan="1">Attribute Value</th>
+              <th colspan="1" rowspan="1">RTF Control Word</th>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Bold</td>
+              <td colspan="1" rowspan="1">RtfText.ATTR_BOLD</td>
+              <td colspan="1" rowspan="1">N/A (boolean)</td>
+              <td colspan="1" rowspan="1">\b</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Italic</td>
+              <td colspan="1" rowspan="1">RtfText.ATTR_ITALIC</td>
+              <td colspan="1" rowspan="1">N/A (boolean)</td>
+              <td colspan="1" rowspan="1">\i</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Underline</td>
+              <td colspan="1" rowspan="1">RtfText.ATTR_UNDERLINE</td>
+              <td colspan="1" rowspan="1">N/A (boolean), or (int) 0 to turn underlining off</td>
+              <td colspan="1" rowspan="1">\ul</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Font Size</td>
+              <td colspan="1" rowspan="1">RtfText.ATTR_FONT_SIZE</td>
+              <td colspan="1" rowspan="1">(int) font size in half-points</td>
+              <td colspan="1" rowspan="1">\fs</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Font Family</td>
+              <td colspan="1" rowspan="1">RtfText.ATTR_FONT_FAMILY</td>
+              <td colspan="1" rowspan="1">(int) entry in document font-table</td>
+              <td colspan="1" rowspan="1">\f</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Font Color</td>
+              <td colspan="1" rowspan="1">RtfText.ATTR_FONT_COLOR</td>
+              <td colspan="1" rowspan="1">(int) entry in document color-table</td>
+              <td colspan="1" rowspan="1">\cf</td>
+            
+</tr>
+            
+<tr>
+              
+<td colspan="1" rowspan="1">Background Color</td>
+              <td colspan="1" rowspan="1">RtfText.ATTR_BACKGROUND_COLOR</td>
+              <td colspan="1" rowspan="1">(int) entry in document color-table</td>
+              <td colspan="1" rowspan="1">\chcbpat</td>
+            
+</tr>
+          
+</table>
+</div>
+  
+<span class="version">
+          version 1298724</span>
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         1999-2012 <a href="http://www.apache.org/licenses/">The Apache Software Foundation. Licensed under Apache License 2.0</a>
+<br>
+    Apache, Apache FOP, the Apache feather logo, and the Apache FOP
+    logos are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+  </div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

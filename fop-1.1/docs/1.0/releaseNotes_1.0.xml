@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "document-v13.dtd">
+<document xmlns:i18n="http://apache.org/cocoon/i18n/2.1"><header><title>Release Notes for Apache FOP 1.0</title></header><body><section id="version_1.0"><title>Major Changes in Version 1.0</title><note>This is not a complete list of changes, just some of the more important ones.
+     A full list of changes in this release <a href="changes_1.0.html">is available</a>.
+      </note><section><title>Changes to the Code Base</title><ul><li><icon alt="fix" src="../images/fix.jpg"/>
+        Fixed memory leak in property cache (not cleaning stale PropertyCache$CacheEntry instances).
+       Committed by JM.</li><li><icon alt="update" src="../images/update.jpg"/>
+        Changed FONode.addCharacters() parameter to closer match the signature of
+        the standard SAX characters() event (reduces confusion and computations).
+        <em>!! Implementors of extensions that subclass FONode directly, and
+        offer an implementation for addCharacters() should take care to make
+        similar modifications in their code !!</em>
+       Committed by AD.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added an event handling framework which allows to get better feedback from within FOP
+        with the ability to customize problem management.
+       Committed by JM.</li></ul></section><section><title>Changes to the Font Subsystem</title><ul><li><icon alt="add" src="../images/add.jpg"/>
+        Add support for font substitution.
+       Committed by AC.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added support for addressing all glyphs available in a Type 1 font, not just the ones
+        in the font's primary encoding.
+       Committed by JM.</li></ul></section><section><title>Changes to the Layout Engine</title><ul><li><icon alt="add" src="../images/add.jpg"/>
+        Added limited support for pages of different inline-progression-dimensions within a 
+        page-sequence.
+       Committed by VH.</li><li><icon alt="add" src="../images/add.jpg"/>
+        Added minimal support for integer keep values on the various keep properties on block-level
+        FOs. For now, all integer values are treated the same (i.e. without strength distinction).
+        Using integers allows to avoid overflows that can happen when "always" is used extensively.
+       Committed by JM.</li></ul></section><section><title>Changes to Renderers (Output Formats)</title><ul><li><icon alt="add" src="../images/add.jpg"/>
+        AFP Output: An AFPGraphics2D implementation which provides the ability to use Batik to drive the production of AFP Graphics (GOCA) output from SVG.
+       Committed by AC.</li><li><icon alt="add" src="../images/add.jpg"/>
+        AFP Output: Resource group leveling, external streaming, and de-duplication of images and graphics using IncludeObject and ResourceGroup.
+       Committed by AC.</li><li><icon alt="add" src="../images/add.jpg"/>
+        AFP Output: Native image embedding support (e.g. JPEG, GIF, TIFF) using ObjectContainer and a MOD:CA Registry implementation.
+       Committed by AC.</li></ul></section></section></body></document>

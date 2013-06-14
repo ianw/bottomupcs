@@ -1,0 +1,508 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.10-dev">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Apache&trade; FOP Development: Managing Documentation</title>
+<link type="text/css" href="../skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="../skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="../skin/print.css" rel="stylesheet">
+<link type="text/css" href="../skin/profile.css" rel="stylesheet">
+<script src="../skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="../skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="../skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="../favicon.ico">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://xmlgraphics.apache.org/"><img class="logoImage" alt="Apache XML Graphics" src="../images/group-logo.gif" title="Apache XML Graphics is responsible for the creation and maintenance of software for managing the conversion of XML formats to graphical output, and the creation and maintenance of related software components, based on software licensed to the Foundation"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://xmlgraphics.apache.org/fop/"><img class="logoImage" alt="Apache FOP" src="../images/logo.jpg" title="Apache FOP (Formatting Objects Processor) is the world's first output independent formatter. Output formats currently supported include PDF, PCL, PS, SVG, XML (area tree representation), Print, AWT, MIF and TXT. The primary output target is PDF."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="xmlgraphics.apache.org" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="../index.html">Home</a>
+</li>
+<li>
+<a class="unselected" href="../1.0/index.html">Version 1.0</a>
+</li>
+<li>
+<a class="unselected" href="../1.1/index.html">Version 1.1</a>
+</li>
+<li>
+<a class="unselected" href="../trunk/index.html">FOP Trunk</a>
+</li>
+<li class="current">
+<a class="selected" href="../dev/index.html">Development</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">The Apache Software Foundation</a> &gt; <a href="http://xmlgraphics.apache.org/">Apache XML Graphics Project</a><script src="../skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_1.1', '../skin/')" id="menu_1.1Title" class="menutitle">About</div>
+<div id="menu_1.1" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/index.html">Basics</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2', '../skin/')" id="menu_1.2Title" class="menutitle">Design</div>
+<div id="menu_1.2" class="menuitemgroup">
+<div onclick="SwitchMenu('menu_1.2.1', '../skin/')" id="menu_1.2.1Title" class="menutitle">About</div>
+<div id="menu_1.2.1" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/design/index.html">Introduction</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2.2', '../skin/')" id="menu_1.2.2Title" class="menutitle">Core Process</div>
+<div id="menu_1.2.2" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/design/startup.html">Startup</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/parsing.html">XML Parsing</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/fotree.html">FO Tree</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/properties.html">Properties</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/layout.html">Layout</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/breakpos.html">Break Possibility</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/areas.html">Area Tree</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/renderers.html">Renderers</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2.3', '../skin/')" id="menu_1.2.3Title" class="menutitle">Miscellaneous</div>
+<div id="menu_1.2.3" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/design/images.html">Images</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/pdf-library.html">PDF Library</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/svg.html">SVG</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/embedding.html">Embedding</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/extending.html">Extending</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/optimise.html">Optimisations</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/useragent.html">User Agent</a>
+</div>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/xmlgraphics-fop/FOPProjectPages">Unresolved (Wiki)</a>
+</div>
+<div class="menuitem">
+<a href="../dev/svg.html">SVG</a>
+</div>
+<div class="menuitem">
+<a href="../dev/extensions.html">Extensions</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.3', '../skin/')" id="menu_1.3Title" class="menutitle">Develop</div>
+<div id="menu_1.3" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/implement.html">Walk-Thru</a>
+</div>
+<div class="menuitem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;email1=&amp;emailtype1=substring&amp;emailassigned_to1=1&amp;email2=&amp;emailtype2=substring&amp;emailreporter2=1&amp;bugidtype=include&amp;bug_id=&amp;changedin=&amp;votes=&amp;chfieldfrom=&amp;chfieldto=Now&amp;chfieldvalue=&amp;product=Fop&amp;short_desc=%5BPATCH%5D&amp;short_desc_type=allwordssubstr&amp;long_desc=&amp;long_desc_type=allwordssubstr&amp;bug_file_loc=&amp;bug_file_loc_type=allwordssubstr&amp;keywords=&amp;keywords_type=anywords&amp;field0-0-0=noop&amp;type0-0-0=noop&amp;value0-0-0=&amp;namedcmd=Fop+all&amp;newqueryname=fop+patch+queue&amp;tofooter=1&amp;order=Reuse+same+sort+as+last+time">Patch Queue</a>
+</div>
+<div class="menuitem">
+<a href="../dev/conventions.html">Conventions</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.4', '../skin/')" id="menu_1.4Title" class="menutitle">Test</div>
+<div id="menu_1.4" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/testing.html">Testing</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_selected_1.5', '../skin/')" id="menu_selected_1.5Title" class="menutitle" style="background-image: url('../skin/images/chapter_open.gif');">Deploy</div>
+<div id="menu_selected_1.5" class="selectedmenuitemgroup" style="display: block;">
+<div class="menupage">
+<div class="menupagetitle">Doc Mgmt</div>
+</div>
+<div class="menuitem">
+<a href="../dev/release.html">Release</a>
+</div>
+<div class="menuitem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;email1=&amp;emailtype1=substring&amp;emailassigned_to1=1&amp;email2=&amp;emailtype2=substring&amp;emailreporter2=1&amp;bugidtype=include&amp;bug_id=&amp;changedin=&amp;votes=&amp;chfieldfrom=&amp;chfieldto=Now&amp;chfieldvalue=&amp;product=Fop&amp;short_desc=&amp;short_desc_type=allwordssubstr&amp;long_desc=&amp;long_desc_type=allwordssubstr&amp;bug_file_loc=&amp;bug_file_loc_type=allwordssubstr&amp;keywords=&amp;keywords_type=anywords&amp;field0-0-0=noop&amp;type0-0-0=noop&amp;value0-0-0=&amp;order=bug_severity%2Cpriority%20DESC">Bugs</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.6', '../skin/')" id="menu_1.6Title" class="menutitle">Resources</div>
+<div id="menu_1.6" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/faq.html">FAQs</a>
+</div>
+<div class="menuitem">
+<a href="../dev/tools.html">Tools</a>
+</div>
+<div class="menuitem">
+<a href="http://svn.apache.org/viewvc/xmlgraphics/fop">ViewVC</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.7', '../skin/')" id="menu_1.7Title" class="menutitle">SubPackages</div>
+<div id="menu_1.7" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/rtflib.html">RTFlib</a>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="../skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="raw XML" class="xmllink">
+<a class="dida" href="doc.xml"><img alt="XML - icon" src="../skin/images/xmldoc.gif" class="skin"><br>
+        XML</a>
+</div>
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="doc.pdf"><img alt="PDF -icon" src="../skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<div class="trail">Font size: 
+	          &nbsp;<input value="Reset" class="resetfont" title="Reset text" onclick="ndeSetTextSize('reset'); return false;" type="button">      
+	          &nbsp;<input value="-a" class="smallerfont" title="Shrink text" onclick="ndeSetTextSize('decr'); return false;" type="button">
+	          &nbsp;<input value="+a" class="biggerfont" title="Enlarge text" onclick="ndeSetTextSize('incr'); return false;" type="button">
+</div>
+<h1>Apache&trade; FOP Development: Managing Documentation</h1>
+<div id="front-matter">
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#general">General Information</a>
+</li>
+<li>
+<a href="#design">Design Principles</a>
+<ul class="minitoc">
+<li>
+<a href="#where">Where</a>
+</li>
+<li>
+<a href="#design-when">When</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#web">Website</a>
+<ul class="minitoc">
+<li>
+<a href="#web-background">Background</a>
+</li>
+<li>
+<a href="#web-forrestbot-publish">ForrestBot "publish" Step-by-Step</a>
+</li>
+<li>
+<a href="#web-local-forrest">Using a Local Forrest</a>
+</li>
+<li>
+<a href="#distribution">Updating Distribution Files</a>
+</li>
+<li>
+<a href="#delete">Deleting Documentation Files</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+    
+<a name="general"></a>
+<h2 class="underlined_10">General Information</h2>
+<div class="section">
+<p>All raw documentation content is managed in the Apache&trade; FOP SVN repository.
+Updates should be committed to the repository, then the repository files are used to generate usable output.
+The remaining discussions on this page assume that the SVN repository is the starting place for processing.
+The path to the documentation is src/documentation/content/xdocs.</p>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">All documentation is maintained on the trunk.</div>
+</div>
+<p>Basic documents are stored in XML files, and use DTDs provided by Apache Forrest.</p>
+</div>
+    
+<a name="design"></a>
+<h2 class="underlined_10">Design Principles</h2>
+<div class="section">
+<p>These principles are not written in stone, but reflect the current philosophy, and are documented here primarily to help achieve consistency. These principles should be changed if better or more practical ones are found, but they should probably be discussed and changed by common consent.</p>
+<a name="where"></a>
+<h3 class="underlined_5">Where</h3>
+<ul>
+          
+<li>To the extent possible, keep user content separate from developer content, primarily so the user doesn't have to filter out technical information.</li>
+          
+<li>To the extent possible, try to document a topic exactly once, in the place the user is most likely to look for it, then link to that from other locations as appropriate. This is somewhat contrary to the principle above, which should be applied as a higher priority.</li>
+        
+</ul>
+<a name="design-when"></a>
+<h3 class="underlined_5">When</h3>
+<p>The documentation and the product are in a constant state of change, and there is some difficulty in deciding what product state the website content should reflect. The current thinking is that the website should reflect the current state of the repository code branch from which releases are made. Features or other documentation that applies to unreleased code should be marked in such a way within the content that the user can determine whether and how it applies to the version they are using. For example, "Feature xyz is first available in Release n.nn.n".</p>
+<p>Other approaches were considered, but all seemed to have significantly higher costs both to the users and the developers. From the user's standpoint, the choice is either that they potentially have to look multiple places to get the information they need (which was rejected), or they have to filter out an occasional feature that is in code available subsequent to their release (which was accepted).</p>
+</div>
+    
+<a name="web"></a>
+<h2 class="underlined_10">Website</h2>
+<div class="section">
+<a name="web-background"></a>
+<h3 class="underlined_5">Background</h3>
+<p>The FOP web site and documentation are generated using <a class="external" href="http://forrest.apache.org">Apache Forrest</a>.</p>
+<p>The following table summarizes the flow of data to the FOP website in chronological order:</p>
+<table class="ForrestTable" cellspacing="1" cellpadding="4">
+          
+<tr>
+            
+<th colspan="1" rowspan="1">Process</th>
+            <th colspan="1" rowspan="1">Output</th>
+            <th colspan="1" rowspan="1">State</th>
+            <th colspan="1" rowspan="1">View(s)</th>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">Developer commits code to FOP repository.</td>
+            <td colspan="1" rowspan="1">FOP repository (SVN)</td>
+            <td colspan="1" rowspan="1">Raw XML and other content</td>
+            <td colspan="1" rowspan="1"><a class="external" href="http://svn.apache.org/viewvc/xmlgraphics/fop/trunk/src/documentation/content/xdocs/">in SVN</a></td>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">Developer builds and uploads documentation using ForrestBot.</td>
+            <td colspan="1" rowspan="1">/www/xmlgraphics.apache.org/fop on people.apache.org</td>
+            <td colspan="1" rowspan="1">sync-ready</td>
+            <td colspan="1" rowspan="1">n/a</td>
+          
+</tr>
+          
+<tr>
+            
+<td colspan="1" rowspan="1">Cron job runs rsync to synchronize the website with the real web server (runs every few hours).</td>
+            <td colspan="1" rowspan="1">Infrastructure knows. :-)</td>
+            <td colspan="1" rowspan="1">web-ready</td>
+            <td colspan="1" rowspan="1"><a href="http://xmlgraphics.apache.org/fop">FOP Web Site</a></td>
+          
+</tr>
+        
+</table>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">Server-side ForrestBot is currently not available for website publishing. We use it locally and with manual invocation.</div>
+</div>
+<a name="web-forrestbot-publish"></a>
+<h3 class="underlined_5">ForrestBot "publish" Step-by-Step</h3>
+<p>
+          We're using ForrestBot for build and deploy the FOP website. ForrestBot comes with Apache Forrest 0.8.
+          The root directory of your FOP checkout contains the file "publish.xml" which is an Ant build file
+          that manages the build and the deployment of the FOP website. Please look into this file for
+          further instructions to set up ForrestBot on your machine. Basically, we're simply running ForrestBot
+          manually by typing "ant -f publish.xml" once we're happy with our changes to the site.
+          Step-by-step instructions for the deployment process again:
+        </p>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">
+          Please make sure you use Forrest from the Trunk (revision 632959 or later) for the time being. You will need
+          to download it directly from SVN:
+          <a class="external" href="http://svn.apache.org/repos/asf/forrest/trunk">http://svn.apache.org/repos/asf/forrest/trunk</a>
+        
+</div>
+</div>
+<ul>
+          
+<li>Modify the sources of the website and check locally with Forrest (run "forrest run" or just "forrest").</li>
+          
+<li>
+            Once you're satisfied, run "ant -f publish.xml" to do a clean build of the website. If the build
+            runs without problems, the website will be uploaded as a whole using SVN to the
+            <a class="external" href="https://svn.apache.org/repos/asf/xmlgraphics/site/deploy/fop/">website staging directory in SVN</a>.
+          </li>
+          
+<li>
+            Then log into people.apache.org using SSH, go to the /www/xmlgraphics.apache.org
+            directory and run "svn up".
+          </li>
+          
+<li>
+            Wait for the next rsync cycle and check your changes in the live site.
+            (Sorry, no manual rsync available ATM)
+          </li>
+        
+</ul>
+<p>
+          The reason for putting the generated website in the SVN repository: The infrastructure
+          people want to be able to restore the websites themselves in case of a crash.
+        </p>
+<a name="web-local-forrest"></a>
+<h3 class="underlined_5">Using a Local Forrest</h3>
+<p>To use a local Forrest (during website development, not for deployment):</p>
+<ul>
+          
+<li>
+<a class="external" href="http://forrest.apache.org/mirrors.cgi#closest">download</a> latest the Forrest release (currently Forrest 0.8)</li>
+          
+<li>set environment variable FORREST_HOME=~/apache-forrest-0.8 where ~ is the directory where Forrest is installed
+              (see <a class="external" href="http://forrest.apache.org/docs/your-project.html">http://forrest.apache.org/docs/your-project.html</a> for details)</li>
+          
+<li>set environment variable PATH=$PATH:$FORREST_HOME/bin</li>
+          
+<li>cd to your local FOP checkout</li>
+          
+<li>update your local FOP checkout (svn update)</li>
+          
+<li>run forrest(.bat), which will build the web-site documents in xml-fop/build/site.</li>
+        
+</ul>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">
+          You can use "forrest run" to start a local web server. That improves development speed as you
+          can simply refresh in the browser after a change.
+        </div>
+</div>
+<a name="distribution"></a>
+<h3 class="underlined_5">Updating Distribution Files</h3>
+<p>
+          The Apache distribution system mirrors distributions around the world. Since it uses
+          <a class="external" href="http://httpd.apache.org/">Apache httpd</a> Module
+          <a class="external" href="http://httpd.apache.org/docs/2.2/mod/mod_autoindex.html#headername">mod_autoindex</a>
+          you also need to manually update the HEADER.html &amp; READER.html files on
+          <span class="codefrag">people.apache.org</span> in
+          <span class="codefrag">/www/www.apache.org/dist/xmlgraphics/fop/</span>.
+        </p>
+<p>
+          Please be careful when doing stuff like that.
+        </p>
+<a name="delete"></a>
+<h3 class="underlined_5">Deleting Documentation Files</h3>
+<p>
+          ForrestBot simply uploads the whole generated site. It doesn't delete obsolete files. You
+          can do that manually in the /www/xmlgraphics.apache.org/fop folder on cvs.apache.org. Be careful
+          when doing stuff like that.
+        </p>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">
+          Please make sure you always have <strong>group rw permissions on all files</strong> under the /www directory!
+        </div>
+</div>
+</div>
+  
+<span class="version">
+          version 1298724</span>
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         1999-2012 <a href="http://www.apache.org/licenses/">The Apache Software Foundation. Licensed under Apache License 2.0</a>
+<br>
+    Apache, Apache FOP, the Apache feather logo, and the Apache FOP
+    logos are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+  </div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

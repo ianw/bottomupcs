@@ -1,0 +1,2905 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE rss PUBLIC "-//Netscape Communications//DTD RSS 0.91//EN" "http://my.netscape.com/publish/formats/rss-0.91.dtd">
+<rss version="0.91"><channel><title>fop-project (1.1) Changes</title><link>http://xmlgraphics.apache.org/fop/</link><description>fop-project
+              (
+              1.1
+              ) Changes
+            </description><language>en-us</language>
+      <item><title>fop-project Test fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Test fix
+        by
+        GA
+        :
+        
+        Fix errors and warnings in example files. Add build.xml for documentation examples.
+      </description></item>
+      <item><title>fop-project Code fix
+          (bug 53458)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 53458)
+        
+        :
+        
+        Fix incorrect language and country code key generation in hyphenation tree cache.
+       Thanks to Dieter von Holten.</description></item>
+      <item><title>fop-project Images fix
+          (bug 53431)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Images fix
+        by
+        GA
+          (fixes bug 53431)
+        
+        :
+        
+        Fix incorrect SVG line dash pattern with PDF output format.
+       Thanks to Luis Bernardo.</description></item>
+      <item><title>fop-project Images update
+          (bug 40676)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Images update
+        by
+        GA
+          (fixes bug 40676)
+        
+        :
+        
+        Fix interoperability issue with Adobe reader regarding use of multiple filters.
+       Thanks to Luis Bernardo.</description></item>
+      <item><title>fop-project Code fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+        :
+        
+        Eliminate javadocs warnings.
+      </description></item>
+      <item><title>fop-project Renderers add
+          (bug 52338)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        VH
+          (fixes bug 52338)
+        
+        :
+        
+        Added possibility to embed TrueType fonts in PostScript.
+      </description></item>
+      <item><title>fop-project Images update
+          (bug 40676)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Images update
+        by
+        GA
+          (fixes bug 40676)
+        
+        :
+        
+        Update site documentation about PNG image loading configuration and support.
+       Thanks to Luis Bernardo.</description></item>
+      <item><title>fop-project Images update
+          (bug 40676)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Images update
+        by
+        GA
+          (fixes bug 40676)
+        
+        :
+        
+        Fix newly introduced findbugs warnings.
+       Thanks to Luis Bernardo.</description></item>
+      <item><title>fop-project Images fix
+          (bug 40676)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Images fix
+        by
+        GA
+          (fixes bug 40676)
+        
+        :
+        
+        Support use of ImageLoaderRawPNG decoder in order to prevent re-encoding of PNG images (and unnecssary output file bloat).
+       Thanks to Luis Bernardo, Matthias Reischenbacher.</description></item>
+      <item><title>fop-project Code fix
+          (bug 53412)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 53412)
+        
+        :
+        
+        Eliminate incorrect use of object identity which produces excessive property cache collisions.
+       Thanks to Alexios Giotis.</description></item>
+      <item><title>fop-project Code fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+        :
+        
+        Eliminate javadocs warnings.
+      </description></item>
+      <item><title>fop-project Code update
+          (bug 53055)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code update
+        by
+        GA
+          (fixes bug 53055)
+        
+        :
+        
+        Update xmlgraphics common jar to reflect recent fixes in XGC.
+      </description></item>
+      <item><title>fop-project Code update
+          (bug 43940)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code update
+        by
+        GA
+          (fixes bug 43940)
+        
+        :
+        
+        Fix handling of NaN, {+,-}Infinity, and other edge cases. Submitted by Julien Aymé.
+       Thanks to Julien Aymé.</description></item>
+      <item><title>fop-project Renderers fix
+          (bug 53304,53306)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        GA
+          (fixes bug 53304,53306)
+        
+        :
+        
+        Add version attribute to AT and IF intermediate formats. Also eliminate redundant use of reversed attribute in AT format.
+      </description></item>
+      <item><title>fop-project Renderers fix
+          (bug 53295)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        GA
+          (fixes bug 53295)
+        
+        :
+        
+        Add extension to place code just before PostScript %PageTrailer.
+       Thanks to Luis Bernardo.</description></item>
+      <item><title>fop-project Renderers fix
+          (bug 53294)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        GA
+          (fixes bug 53294)
+        
+        :
+        
+        Fix invalid PostScript file being created when font-size is 0.
+       Thanks to Robert Meyer.</description></item>
+      <item><title>fop-project Docs update</title><link>http://xmlgraphics.apache.org/fop/</link><description>Docs update
+        by
+        GA
+        :
+        
+        Update FAQ and New Bug documentation.
+      </description></item>
+      <item><title>fop-project Code add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        VH
+        :
+        
+        Added support for the role property on fo:page-sequence, fo:flow and fo:static-content. This 
+        allows to change the mapping of those FOs to PDF structure types when enabling 
+        accessibility.
+      </description></item>
+      <item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        VH
+        :
+        
+        Stop outputting the Type entry for structure elements in order to create a smaller PDF 
+        ouptut when accessibility is enabled.
+       Thanks to Martin Koegler.</description></item>
+      <item><title>fop-project Config fix
+          (bug 52144)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Config fix
+        by
+        GA
+          (fixes bug 52144)
+        
+        :
+        
+        Fix crash on use of version switch (-v).
+       Thanks to Luis Bernardo.</description></item>
+      <item><title>fop-project Renderers fix
+          (bug 53242)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        GA
+          (fixes bug 53242)
+        
+        :
+        
+        Support fractional line widths in AFP renderer, fixing problem with SVG line drawing.
+       Thanks to Luis Bernardo.</description></item>
+      <item><title>fop-project Config fix
+          (bug 53248)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Config fix
+        by
+        GA
+          (fixes bug 53248)
+        
+        :
+        
+        Fix exception thrown from use of -print option in CLI.
+       Thanks to Luis Bernardo.</description></item>
+      <item><title>fop-project Docs fix
+          (bug 53247)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Docs fix
+        by
+        GA
+          (fixes bug 53247)
+        
+        :
+        
+        Fix renderer mime type for PCL output; should be application/x-pcl.
+      </description></item>
+      <item><title>fop-project Renderers fix
+          (bug 40699)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        GA
+          (fixes bug 40699)
+        
+        :
+        
+        Fix for invalid PDF for certain numerical values in SVG lineargradient.
+       Thanks to Luis Bernardo.</description></item>
+      <item><title>fop-project Layout fix
+          (bug 53185)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        GA
+          (fixes bug 53185)
+        
+        :
+        
+        Unify date formatting between FOP and XGC as well as tidying the date format code.
+       Thanks to Robert Meyer.</description></item>
+      <item><title>fop-project Layout fix
+          (bug 45715)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        GA
+          (fixes bug 45715)
+        
+        :
+        
+        Fix for break before (break-before) not respected on blocks nested in inlines.
+       Thanks to Luis Bernardo.</description></item>
+      <item><title>fop-project Renderers fix
+          (bug 48723)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        GA
+          (fixes bug 48723)
+        
+        :
+        
+        Fix for XGC when rendering PostScript using SVG being drawn upside down when using a custom affine transform.
+       Thanks to Robert Meyer.</description></item>
+      
+      <item><title>fop-project Code fix
+          (bug 43940)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 43940)
+        
+        :
+        
+        Use new double format utility to improve thread safety and performance.
+       Thanks to Ognjen Blagojevic.</description></item>
+      <item><title>fop-project Fonts fix
+          (bug 53148)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        GA
+          (fixes bug 53148)
+        
+        :
+        
+        Fix performance regression in JDK 1.6 Update 19 due to use of Java Beans API. Fix checkstyle errors.
+       Thanks to Tassos Charoulis.</description></item>
+      <item><title>fop-project Renderers fix
+          (bug 51484)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        GA
+          (fixes bug 51484)
+        
+        :
+        
+        Don't write final /sect suffix in RTF if section is last section.
+       Thanks to Benjamin Riefenstahl.</description></item>
+      <item><title>fop-project Fonts fix
+          (bug 53143)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        GA
+          (fixes bug 53143)
+        
+        :
+        
+        Ensure fonts are not loaded twice (redundantly).
+      </description></item>
+      <item><title>fop-project Test update
+          (bug 50196)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Test update
+        by
+        GA
+          (fixes bug 50196)
+        
+        :
+        
+        Add test for basic-link with padding.
+       Thanks to Matthias Reischenbacher.</description></item>
+      <item><title>fop-project Code update</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code update
+        by
+        GA
+        :
+        
+        Improve property function argument parsing, specifically, better separate required, optional, and variable arguments and the handling of optional argument defaults.
+        Regularize property function class names.
+      </description></item>
+      <item><title>fop-project Layout fix
+          (bug 51043)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        GA
+          (fixes bug 51043)
+        
+        :
+        
+        Don't restart layout unless abs(ipd difference) &gt; 1 in order to prevent rounding issues from triggering false restart.
+       Thanks to Pascal Sancho.</description></item>
+      <item><title>fop-project Fonts update</title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts update
+        by
+        GA
+        :
+        
+        Removing experimental feature that violates XSL-FO and Unicode semantics by misinterpreting Basic Latin code points. Users must use private use codepoints to access font specific
+        character mappings that have no assigned Unicode code point. See bug 50492.
+      </description></item>
+      <item><title>fop-project Layout fix
+          (bug 53103)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        GA
+          (fixes bug 53103)
+        
+        :
+        
+        Ensure that table cell spanning works in right-to-left writing mode.
+       Thanks to Matthias Reischenbacher.</description></item>
+      <item><title>fop-project Layout fix
+          (bug 53086)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        GA
+          (fixes bug 53086)
+        
+        :
+        
+        Ensure that table footer and header are included in bididirectional resolution.
+      </description></item>
+      <item><title>fop-project Layout fix
+          (bug 53097)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        GA
+          (fixes bug 53097)
+        
+        :
+        
+        Ensure writing-mode specified on fo:table is used to determine writing mode of table and its descendants.
+      </description></item>
+      <item><title>fop-project Code fix
+          (bug 53094)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 53094)
+        
+        :
+        
+        Convert block container overflow exception to event model, improving overflow property behavior.
+       Thanks to Luis Bernardo.</description></item>
+      <item><title>fop-project Code update
+          (bug 51617)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code update
+        by
+        GA
+          (fixes bug 51617)
+        
+        :
+        
+        Add run target for embedded examples. Add increased JVM memory heap flag for example8 in case font cache is rebuilt.
+      </description></item>
+      <item><title>fop-project Code fix
+          (bug 53083)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 53083)
+        
+        :
+        
+        Update to use of checkstyle-5.5 as default configuration. Remove checkstyle-4.0 configuration. Also, import environment build properties before local properties, so that latter can refer to former.
+      </description></item>
+      <item><title>fop-project Code fix
+          (bug 52572)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 52572)
+        
+        :
+        
+        Prevent NPE on use of unsupported collapse-with-precedence; fall back to collapse. Fix checkstyle errors from prior commit.
+       Thanks to Pascal Sancho.</description></item>
+      <item><title>fop-project Layout fix
+          (bug 52514)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        GA
+          (fixes bug 52514)
+        
+        :
+        
+        Ensure square image is appropriately scaled.
+       Thanks to Luis Bernardo.</description></item>
+      <item><title>fop-project Code fix
+          (bug 50062)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 50062)
+        
+        :
+        
+        Invoke JVM in headless mode from FOP command scripts and JS shell to prevent stealing focus from GUI applications.
+      </description></item>
+      <item><title>fop-project Renderers fix
+          (bug 52114)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        GA
+          (fixes bug 52114)
+        
+        :
+        
+        Take leading derived space before/after into account when computing rows for TXT renderer.
+      </description></item>
+      <item><title>fop-project Code add
+          (bug 49893)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        PH
+          (fixes bug 49893)
+        
+        :
+        
+        A global setting to wrap F11 images in page segments.
+      </description></item>
+      <item><title>fop-project Code fix
+          (bug 52763)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 52763)
+        
+        :
+        
+        Support list-block in marker, thus preventing NPE.
+      </description></item>
+      <item><title>fop-project Code fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+        :
+        
+        Must use unqualified (local name) when reporting invalid child error.
+      </description></item>
+      <item><title>fop-project Code fix
+          (bug 53065)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 53065)
+        
+        :
+        
+        Restore lookup on Event message lookup field part. Add locale field to Event to
+        enable locale dependent deferred bundle load during lookup field part substitution.
+      </description></item>
+      <item><title>fop-project Code fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        MH
+        :
+        
+        Bug in AFP font metrics that performed integer arithmetic when it should have been
+	double arithemetic.
+      </description></item>
+      <item><title>fop-project Code fix
+          (bug 49754)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 49754)
+        
+        :
+        
+        Bring clone() in line with the recommendations in Object.clone().
+       Thanks to Simon Pepping.</description></item>
+      <item><title>fop-project Code fix
+          (bug 52966)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 52966)
+        
+        :
+        
+        How to use native text with EPSDocumentGraphics2D.
+       Thanks to Luis Bernardo.</description></item>
+      <item><title>fop-project Code fix
+          (bug 51599)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 51599)
+        
+        :
+        
+        Allow https scheme URI for PDF external action target.
+       Thanks to Paul Huemer.</description></item>
+      <item><title>fop-project Code fix
+          (bug 50901)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 50901)
+        
+        :
+        
+        RTF percentage table column width not calculated from table.
+       Thanks to Carsten Pfeiffer.</description></item>
+      <item><title>fop-project Code fix
+          (bug 51009)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 51009)
+        
+        :
+        
+        RTF generates unexpected lines for blocks in tables. Also fix three findbugs issues.
+       Thanks to Max Aster.</description></item>
+      <item><title>fop-project Code fix
+          (bug 51007)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 51007)
+        
+        :
+        
+        RTF tables do not support percent column-widths.
+       Thanks to Max Aster.</description></item>
+      <item><title>fop-project Code fix
+          (bug 50435)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 50435)
+        
+        :
+        
+        Access denied (java.util.PropertyPermission org.apache.fop.fo.properties.use-cache read).
+       Thanks to Armin Haaf.</description></item>
+      <item><title>fop-project Code fix
+          (bug 49763)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 49763)
+        
+        :
+        
+        Incorrect message when encountering a block in an inline in a footnote.
+       Thanks to Adrian Buza.</description></item>
+      <item><title>fop-project Code fix
+          (bug 47380)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 47380)
+        
+        :
+        
+        Specified rule-thickness applies only when leader-pattern is rule, otherwise should use default thickness.
+       Thanks to Georg Datterl.</description></item>
+      <item><title>fop-project Code fix
+          (bug 49302)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 49302)
+        
+        :
+        
+        Eliminate duplicate code.
+       Thanks to Julien Aymé.</description></item>
+      <item><title>fop-project Code fix
+          (bug 49350)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 49350)
+        
+        :
+        
+        Correct coding error in AFPResourceLevel#equals.
+       Thanks to Julien Aymé.</description></item>
+      <item><title>fop-project Code fix
+          (bug 51836)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 51836)
+        
+        :
+        
+        Throw IFException instead of NPE if navigation target (page reference) doesn't exist.
+       Thanks to Melanie Drake.</description></item>
+      <item><title>fop-project Code fix
+          (bug 51808)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 51808)
+        
+        :
+        
+        Fixed memory waste in traits map.
+       Thanks to Sergey Vladimirov.</description></item>
+      <item><title>fop-project Code fix
+          (bug 51807)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 51807)
+        
+        :
+        
+        Fixed small memory waste in rowCells array construction.
+       Thanks to Sergey Vladimirov.</description></item>
+      <item><title>fop-project Code fix
+          (bug 53005)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 53005)
+        
+        :
+        
+        Fixed incorrect rejection of fo:wrapper inside fo:inline inside fo:footnote-body.
+       Thanks to Alberto Simões.</description></item>
+      
+      <item><title>fop-project Code add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        VH
+        :
+        
+        Added support for PDF Object Streams. When accessibility is enabled and PDF version 1.5 
+        selected, the structure tree will be stored in object streams in order to reduce the size of 
+        the final PDF.
+       Thanks to Peter Hancock.</description></item>
+      <item><title>fop-project Code fix
+          (bug 46962)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        VH
+          (fixes bug 46962)
+        
+        :
+        
+        Fixed deadlock in PropertyCache.
+       Thanks to Alexios Giotis.</description></item>
+      <item><title>fop-project Config add
+          (bug 51385)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Config add
+        by
+        VH
+          (fixes bug 51385)
+        
+        :
+        
+        Added configuration option to set the version of the output PDF document.
+       Thanks to Mehdi Houshmand.</description></item>
+      <item><title>fop-project Code fix
+          (bug 52849)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        MH
+          (fixes bug 52849)
+        
+        :
+        
+        Fixed bug that caused a configured and installed SVG font to be stroked,
+        also added an event indicating when fonts are stroked.
+       Thanks to Luis Bernardo.</description></item>
+      <item><title>fop-project Code fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        PH
+        :
+        
+        Fix of a bug introduced when merging ImproveAccessibility.
+      </description></item>
+      <item><title>fop-project Code add
+          (bug 50391)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        PH
+          (fixes bug 50391)
+        
+        :
+        
+          Improved support for empty flow-name mapping.
+      </description></item>
+      <item><title>fop-project Layout add
+          (bug 32789, 49008, 49687)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout add
+        by
+        GA
+          (fixes bug 32789, 49008, 49687)
+        
+        :
+        
+        Add support for complex scripts, including: full bidi support, support for advanced
+        typographic tables, advanced support for number conversion.
+      </description></item>
+      <item><title>fop-project Fonts add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts add
+        by
+        GA
+        :
+        
+        Add support for OpenType advanced typographic tables (GDEF, GSUB, GPOS).
+      </description></item>
+      <item><title>fop-project Code fix
+          (bug 52655)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        VH
+          (fixes bug 52655)
+        
+        :
+        
+        Fixed rendering of special glyphs when using single-byte encoding mode.
+       Thanks to Luis Bernardo.</description></item>
+      
+      <item><title>fop-project Code add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        PH
+        :
+        
+        Improvements of the Accessibility features.
+       Thanks to Vincent Hennebert.</description></item>
+      <item><title>fop-project Code add
+          (bug 52416)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        CB
+          (fixes bug 52416)
+        
+        :
+        
+        Suppress unnecessary "font not found warnings" when generating AFP with raster fonts 
+       Thanks to Luis Bernardo.</description></item>
+      <item><title>fop-project Code add
+          (bug 51209)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        CB
+          (fixes bug 51209)
+        
+        :
+        
+        SVG text in AFP creates miscoded GOCA text
+       Thanks to Luis Bernardo.</description></item>
+      <item><title>fop-project Code add
+          (bug 50391)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        CB
+          (fixes bug 50391)
+        
+        :
+        
+        Add support for different flow-name of fo:region-body in FOP
+       Thanks to Peter Hancock.</description></item>
+      <item><title>fop-project Code add
+          (bug 51664)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        CB
+          (fixes bug 51664)
+        
+        :
+        
+        Tagged PDF performance improvement plus tests
+       Thanks to Mehdi Houshmand.</description></item>	
+      <item><title>fop-project Code add
+          (bug 52197)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        MH
+          (fixes bug 52197)
+        
+        :
+        
+        Improved AdobeStandardEncoding support in AFM files for type1 fonts
+      </description></item>
+      <item><title>fop-project Code add
+          (bug 52151)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        VH
+          (fixes bug 52151)
+        
+        :
+        
+        Added ant script to get JaCoCo code coverage.
+       Thanks to Mehdi Houshmand.</description></item>
+      <item><title>fop-project Code add
+          (bug 52136)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        VH
+          (fixes bug 52136)
+        
+        :
+        
+        Added to build file JUnit target that uses a regex to run all of the test cases. This 
+        reduces the risk that some of them are omitted when building FOP.
+       Thanks to Mehdi Houshmand.</description></item>
+      <item><title>fop-project Code add
+          (bug 52089)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        PH
+          (fixes bug 52089)
+        
+        :
+        
+        Allow JPEG images to be embedded in an AFP document as is, without being decoded and 
+        encoded.
+       Thanks to Mehdi Houshmand.</description></item>
+      <item><title>fop-project Code add
+          (bug 52010)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        PH
+          (fixes bug 52010)
+        
+        :
+        
+        Simplification of the build: Reduced code duplication and layout engine tests.
+       Thanks to Mehdi Houshmand.</description></item>
+      <item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+        :
+        
+        Various bugfixes to make PDFDocumentGraphics2D operational again.
+      </description></item>
+      <item><title>fop-project Code add
+          (bug 51962)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        PH
+          (fixes bug 51962)
+        
+        :
+        
+        Fix for when the last simple-page-master referenced in a page-sequence-master is not
+        chosen when force-page-count=odd.
+       Thanks to Mehdi Houshmand.</description></item>
+      <item><title>fop-project Code add
+          (bug 51928)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        VH
+          (fixes bug 51928)
+        
+        :
+        
+        Upgraded all tests to JUnit 4.
+       Thanks to Mehdi Houshmand.</description></item>
+      <item><title>fop-project Fonts fix
+          (bug 48696)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        PH
+          (fixes bug 48696)
+        
+        :
+        
+        Bugfix for color model in IOCA IDE structure parameter for 4- and 8-bit grayscale images.
+        Revision 4.
+      </description></item>
+      <item><title>fop-project Fonts fix
+          (bug 51760)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        PH
+          (fixes bug 51760)
+        
+        :
+        
+        Changes the way PostScript handles Graphics2D images such that if the language is set to
+        level 3, the image is stored as an embedded file which has no length limit.  Previously it
+        was stored as an array which has a implementation limit of 65535 elements.
+       Thanks to Mehdi Houshmand.</description></item>
+      <item><title>fop-project Fonts fix
+          (bug 51759)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        PH
+          (fixes bug 51759)
+        
+        :
+        
+        PDFFactory responsible for asdigning name to a subset font.
+       Thanks to Mehdi Houshmand.</description></item>
+      <item><title>fop-project Fonts fix
+          (bug 51530)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        PH
+          (fixes bug 51530)
+        
+        :
+        
+        Improved support for EBCDIC encoded double byte fonts fo AFP.
+       Thanks to Mehdi Houshmand.</description></item>
+      <item><title>fop-project Fonts fix
+          (bug 51205)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        PH
+          (fixes bug 51205)
+        
+        :
+        
+        Corrected typographical errors in AFPBase12FontCollection.
+       Thanks to Mehdi Houshmand.</description></item>
+      <item><title>fop-project Renderers fix
+          (bug 48062)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        PH
+          (fixes bug 48062)
+        
+        :
+        
+        Improved fix of a bug relating to PCL painter thread safetly.  Previous fix in rev 895012
+        worked by synchronizing methods of a static instance of Java2DFontMetrics.  This fix uses a
+        unique instance for per thread.
+      </description></item>
+      <item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        PH
+        :
+        
+        Fixed a bug in AFP where an ArrayOutofBoundsException is throwqn when embedding a Page 
+        Segment.
+      </description></item>
+      <item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        VH
+        :
+        
+        Added support for 128bit encryption in PDF output.
+       Thanks to Michael Rubin.</description></item>
+      <item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        PH
+        :
+        
+        Fixed a bug in AFP where the object area axes of an Include Object was incorrectly set when 
+        rotated by 180. </description></item>
+      <item><title>fop-project Fonts fix
+          (bug 51596)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        JM
+          (fixes bug 51596)
+        
+        :
+        
+        Fixed a bug in TTF subsetting where a composite glyph could get
+        remapped more than once resulting in garbled character.
+       Thanks to Mehdi Houshmand.</description></item>
+      <item><title>fop-project Fonts fix
+          (bug 50605)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        JM
+          (fixes bug 50605)
+        
+        :
+        
+        Fixed a number of bugs concerning Type 1 and other single-byte fonts
+        (glyph width mismatches and overlapping characters).
+      </description></item>
+      <item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+        :
+        
+        Fixed a multi-threading bug for SVG images included through svg:image inside SVG documents.
+      </description></item>
+      <item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        PH
+        :
+        
+        Added an IFDocumentHandler filter for triggering rendering events.  Created an Event that
+        captures an end page event with the page number.
+      </description></item>
+      <item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        VH
+        :
+        
+        Fix for alternative text not working in tagged PDF for TIFF images.
+      </description></item>
+      <item><title>fop-project Renderers fix
+          (bug 50909)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        PH
+          (fixes bug 50909)
+        
+        :
+        
+        Fixed io exception in MODCAParser caused by the improper use of mark() and reset() on the
+        MODCA data input stream.  Added unit test. </description></item>
+      <item><title>fop-project Fonts fix
+          (bug 51144)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        JM
+          (fixes bug 51144)
+        
+        :
+        
+        Removed invalid entries in ToUnicode table of CID subset fonts. 
+       Thanks to Mehdi Houshmand.</description></item>
+      <item><title>fop-project Renderers fix
+          (bug 50899)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+          (fixes bug 50899)
+        
+        :
+        
+        Fixed mapping of font weights between CSS values and TextAttribute.WEIGHT_*. 
+       Thanks to Glenn Adams.</description></item>
+      <item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+        :
+        
+        AFP GOCA: fonts were not embedded from within AFPGraphics2D.
+      </description></item>
+      <item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+        :
+        
+        AFP GOCA: Changed the way FOP fonts are selected based on Batik's GVT fonts to match
+        the behaviour of PDF/PS output.
+      </description></item>
+      <item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+        :
+        
+        Added option to place AFP NOPs right before the end of a named page group (page-sequence),
+        rather than after the start.
+      </description></item>
+      <item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+        :
+        
+        Added option for PostScript output to optimize for file size rather than quality.
+      </description></item>
+      <item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+        :
+        
+        AFP GOCA: Added option to disable GOCA and to control text painting inside GOCA graphics.
+      </description></item>
+      <item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+        :
+        
+        AFP GOCA: Work-around for InfoPrint's AFP implementation which seems to lose
+        the character set state over Graphics Data (GAD) boundaries.
+      </description></item>
+      <item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+        :
+        
+        Bugfix for AFP GOCA segments: they were not properly marked as appended which could
+        lead to graphics state changes in some implementations.
+      </description></item>
+      <item><title>fop-project Renderers fix
+          (bug 51010)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        CB
+          (fixes bug 51010)
+        
+        :
+        
+        Bugzilla 51010: Bookmarks create useless lines in RTF 
+       Thanks to Max Aster.</description></item>	
+      <item><title>fop-project Renderers fix
+          (bug 51008)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        CB
+          (fixes bug 51008)
+        
+        :
+        
+        Bugzilla 51008: page-number-citation-last does not work in RTF
+       Thanks to Max Aster.</description></item>	
+      <item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        VH
+        :
+        
+        Added id element to intermediate format to track the origin of content.
+      </description></item>
+      <item><title>fop-project Renderers fix
+          (bug 50987)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        AD
+          (fixes bug 50987)
+        
+        :
+        
+        Bugzilla 50988: Fixed a NullPointerException in case a white-space fo:character was removed
+        due to white-space handling.
+       Thanks to Matthias Reischenbacher.</description></item>
+      <item><title>fop-project Renderers fix
+          (bug 50987)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        AD
+          (fixes bug 50987)
+        
+        :
+        
+        Bugzilla 50987: Fixed an issue in PDF output where a link was added to the parent tree 
+        instead of the related structure element.
+       Thanks to Martin Koegler.</description></item>
+      <item><title>fop-project Renderers fix
+          (bug 50986)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        AD
+          (fixes bug 50986)
+        
+        :
+        
+        Bugzilla 50986: Fixed an issue where invalid PDF page content was generated due to 
+        incorrect ET/EMC sequences.
+       Thanks to Martin Koegler.</description></item>
+      <item><title>fop-project Code fix
+          (bug 50593)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        AD
+          (fixes bug 50593)
+        
+        :
+        
+        Fixed regression introduced by Bugzilla 50593: bookmarks pointing to a non-existing
+        internal destination should just trigger a warning.
+      </description></item>
+      <item><title>fop-project Layout fix
+          (bug 50965)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        AD
+          (fixes bug 50965)
+        
+        :
+        
+        Bugzilla 50965: Fixed a regression in BlockContainerLayoutManager where margins were
+        no longer reset after forced breaks.
+       Thanks to Martin Koegler.</description></item>
+      <item><title>fop-project Layout fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        VH
+        :
+        
+        Implemented non-standard behavior for basic-link areas, such that they take into account the 
+        heights of their descendants areas.
+      </description></item>
+      <item><title>fop-project Layout fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        VH
+        :
+        
+        Fix for keep-together does not apply to fo:table-cell.
+      </description></item>
+      <item><title>fop-project Layout fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        VH
+        :
+        
+        Fix for keep-together on a table containing row-spanning cells that was not honored.
+      </description></item>
+      <item><title>fop-project Layout fix
+          (bug 50196)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        VH
+          (fixes bug 50196)
+        
+        :
+        
+        Fix forpadding-start ignored when table-header/footer is repeated.
+       Thanks to Matthias Reischenbacher.</description></item>
+      <item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+        :
+        
+        Increased maximum possible PDF size from 2GB to around 9GB (hard maximum imposed by the PDF specification).
+      </description></item>
+      <item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+        :
+        
+        Added support for CIE Lab colors (from XSL-FO 2.0 WD).
+      </description></item>
+      <item><title>fop-project Renderers add
+          (bug 49403)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+          (fixes bug 49403)
+        
+        :
+        
+        Initial work on spot colors (aka named colors) for PDF output.
+       Thanks to Patrick Jaromin.</description></item>
+      <item><title>fop-project Renderers fix
+          (bug 50705)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+          (fixes bug 50705)
+        
+        :
+        
+        Fix to preserve the order of AFP TLEs and NOPs as given in the XSL-FO document.
+       Thanks to Mehdi Houshmand.</description></item>
+      <item><title>fop-project Fonts add
+          (bug 50699)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts add
+        by
+        JM
+          (fixes bug 50699)
+        
+        :
+        
+        Added support for lookup of alternative glyphs when additional single-byte encodings are
+        used, ex. replacing "Omegagreek" by "Omega" and vice versa.
+       Thanks to Alexandros Papadakis.</description></item>
+      <item><title>fop-project Code add
+          (bug 48334)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        AD
+          (fixes bug 48334)
+        
+        :
+        
+        Added support for resolution of relative URIs against a specified xml:base during
+        property refinement.
+      </description></item>
+      <item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+        :
+        
+        Allow afp:no-operation to also appear under fo:page-sequence and fo:declarations.
+      </description></item>
+      <item><title>fop-project Code fix
+          (bug 50635)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        AD
+          (fixes bug 50635)
+        
+        :
+        
+        Fix for issue in RenderPagesModel.checkPreparedPages() where the same page-sequence
+        is potentially started multiple times.
+       Thanks to Martin Koegler.</description></item>
+      <item><title>fop-project Code fix
+          (bug 50636)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        AD
+          (fixes bug 50636)
+        
+        :
+        
+        Fix for performance issue when adding pages, if the total number of pages
+        is significantly large.
+       Thanks to Martin Koegler.</description></item>
+      <item><title>fop-project Code fix
+          (bug 50626)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        AD
+          (fixes bug 50626)
+        
+        :
+        
+        Fix for performance issue when adding nodes, if the number of children
+        is significantly large.
+       Thanks to Martin Koegler.</description></item>
+      <item><title>fop-project Config fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Config fix
+        by
+        SP
+        :
+        
+	Fix for relative URIs in the configuration file (base, font-base, hyphenation-base) are evaluated relative to the base URI of the configuration file.
+      </description></item>
+      <item><title>fop-project Layout fix
+          (bug 49848)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        AD
+          (fixes bug 49848)
+        
+        :
+        
+        Fix for correct behavior of keep-together.within-line in case there are nested inlines
+      </description></item>
+      <item><title>fop-project Code fix
+          (bug 50471)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        AD
+          (fixes bug 50471)
+        
+        :
+        
+        Fix for avoid ArrayIndexOutOfBoundsException for codepoints without a linebreak class
+      </description></item>
+      <item><title>fop-project Layout fix
+          (bug 48380)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        AD
+          (fixes bug 48380)
+        
+        :
+        
+        Fix for avoid ClassCastException when using fox:widow-content-limit
+      </description></item>
+      <item><title>fop-project Layout fix
+          (bug 50089)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        VH
+          (fixes bug 50089)
+        
+        :
+        
+        Fix for content after forced break in block-container is not rendered.
+      </description></item>
+      <item><title>fop-project Layout fix
+          (bug 42034)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        JM
+          (fixes bug 42034)
+        
+        :
+        
+        Fixed adjustment of inline parent area for justified text containing a forward page reference.
+      </description></item>
+      <item><title>fop-project Layout fix
+          (bug 38264)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        AD
+          (fixes bug 38264)
+        
+        :
+        
+        Fixed behavior when combining hyphenation with preserved linefeeds or whitespace.
+      </description></item>
+      <item><title>fop-project Code fix
+          (bug 49695)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        VH
+          (fixes bug 49695)
+        
+        :
+        
+        Replaced magic numbers with constants from UnitConv and GraphicsConstants.
+       Thanks to Joshua Marquart.</description></item>
+      <item><title>fop-project Renderers add
+          (bug 42600)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+          (fixes bug 42600)
+        
+        :
+        
+        Added some support for break-before/-after for RTF output.
+       Thanks to Max Aster.</description></item>
+      <item><title>fop-project Renderers add
+          (bug 49379)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+          (fixes bug 49379)
+        
+        :
+        
+        Added ability to embed an external AFP page segment resource file (AFP output only).
+       Thanks to Peter Hancock.</description></item>
+      <item><title>fop-project Renderers fix
+          (bug 46360)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+          (fixes bug 46360)
+        
+        :
+        
+        Fixed a multi-threading issue when rendering SVG.
+       Thanks to Alexios Giotis.</description></item>
+      <item><title>fop-project Layout fix
+          (bug 49885)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        JM
+          (fixes bug 49885)
+        
+        :
+        
+        Fixed retrieval of available BPD for cases spanning columns and multiple pages with differing page masters.
+      </description></item>
+      <item><title>fop-project Renderers remove</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers remove
+        by
+        VH
+        :
+        
+        Removed old Renderer implementations for those output formats that have a version based on 
+        the new DocumentHandler architecture available (AFP, PCL, PDF, PS).
+      </description></item>
+      <item><title>fop-project Fonts fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        AC
+        :
+        
+        Reinstated support for being able to specify a font cache filepath in the fop user configuration.
+      </description></item>
+      <item><title>fop-project Fonts add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts add
+        by
+        AC
+        :
+        
+        Added convenience support for the flushing of the Fop font cache file from the command line.
+      </description></item>
+      <item><title>fop-project Renderers add
+          (bug 44460)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+          (fixes bug 44460)
+        
+        :
+        
+        Added support for PDF File Attachments (Embedded Files).
+       Thanks to Andrejus Chaliapinas.</description></item>
+    <item><title>fop-project Test fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Test fix
+        by
+        GA
+        :
+        
+        Fix errors and warnings in example files. Add build.xml for documentation examples.
+      </description></item><item><title>fop-project Code fix
+          (bug 53458)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 53458)
+        
+        :
+        
+        Fix incorrect language and country code key generation in hyphenation tree cache.
+       Thanks to Dieter von Holten.</description></item><item><title>fop-project Images fix
+          (bug 53431)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Images fix
+        by
+        GA
+          (fixes bug 53431)
+        
+        :
+        
+        Fix incorrect SVG line dash pattern with PDF output format.
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Images update
+          (bug 40676)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Images update
+        by
+        GA
+          (fixes bug 40676)
+        
+        :
+        
+        Fix interoperability issue with Adobe reader regarding use of multiple filters.
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Code fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+        :
+        
+        Eliminate javadocs warnings.
+      </description></item><item><title>fop-project Renderers add
+          (bug 52338)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        VH
+          (fixes bug 52338)
+        
+        :
+        
+        Added possibility to embed TrueType fonts in PostScript.
+      </description></item><item><title>fop-project Images update
+          (bug 40676)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Images update
+        by
+        GA
+          (fixes bug 40676)
+        
+        :
+        
+        Update site documentation about PNG image loading configuration and support.
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Images update
+          (bug 40676)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Images update
+        by
+        GA
+          (fixes bug 40676)
+        
+        :
+        
+        Fix newly introduced findbugs warnings.
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Images fix
+          (bug 40676)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Images fix
+        by
+        GA
+          (fixes bug 40676)
+        
+        :
+        
+        Support use of ImageLoaderRawPNG decoder in order to prevent re-encoding of PNG images (and unnecssary output file bloat).
+       Thanks to Luis Bernardo, Matthias Reischenbacher.</description></item><item><title>fop-project Code fix
+          (bug 53412)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 53412)
+        
+        :
+        
+        Eliminate incorrect use of object identity which produces excessive property cache collisions.
+       Thanks to Alexios Giotis.</description></item><item><title>fop-project Code fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+        :
+        
+        Eliminate javadocs warnings.
+      </description></item><item><title>fop-project Code update
+          (bug 53055)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code update
+        by
+        GA
+          (fixes bug 53055)
+        
+        :
+        
+        Update xmlgraphics common jar to reflect recent fixes in XGC.
+      </description></item><item><title>fop-project Code update
+          (bug 43940)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code update
+        by
+        GA
+          (fixes bug 43940)
+        
+        :
+        
+        Fix handling of NaN, {+,-}Infinity, and other edge cases. Submitted by Julien Aymé.
+       Thanks to Julien Aymé.</description></item><item><title>fop-project Renderers fix
+          (bug 53304,53306)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        GA
+          (fixes bug 53304,53306)
+        
+        :
+        
+        Add version attribute to AT and IF intermediate formats. Also eliminate redundant use of reversed attribute in AT format.
+      </description></item><item><title>fop-project Renderers fix
+          (bug 53295)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        GA
+          (fixes bug 53295)
+        
+        :
+        
+        Add extension to place code just before PostScript %PageTrailer.
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Renderers fix
+          (bug 53294)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        GA
+          (fixes bug 53294)
+        
+        :
+        
+        Fix invalid PostScript file being created when font-size is 0.
+       Thanks to Robert Meyer.</description></item><item><title>fop-project Docs update</title><link>http://xmlgraphics.apache.org/fop/</link><description>Docs update
+        by
+        GA
+        :
+        
+        Update FAQ and New Bug documentation.
+      </description></item><item><title>fop-project Code add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        VH
+        :
+        
+        Added support for the role property on fo:page-sequence, fo:flow and fo:static-content. This 
+        allows to change the mapping of those FOs to PDF structure types when enabling 
+        accessibility.
+      </description></item><item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        VH
+        :
+        
+        Stop outputting the Type entry for structure elements in order to create a smaller PDF 
+        ouptut when accessibility is enabled.
+       Thanks to Martin Koegler.</description></item><item><title>fop-project Config fix
+          (bug 52144)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Config fix
+        by
+        GA
+          (fixes bug 52144)
+        
+        :
+        
+        Fix crash on use of version switch (-v).
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Renderers fix
+          (bug 53242)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        GA
+          (fixes bug 53242)
+        
+        :
+        
+        Support fractional line widths in AFP renderer, fixing problem with SVG line drawing.
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Config fix
+          (bug 53248)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Config fix
+        by
+        GA
+          (fixes bug 53248)
+        
+        :
+        
+        Fix exception thrown from use of -print option in CLI.
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Docs fix
+          (bug 53247)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Docs fix
+        by
+        GA
+          (fixes bug 53247)
+        
+        :
+        
+        Fix renderer mime type for PCL output; should be application/x-pcl.
+      </description></item><item><title>fop-project Renderers fix
+          (bug 40699)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        GA
+          (fixes bug 40699)
+        
+        :
+        
+        Fix for invalid PDF for certain numerical values in SVG lineargradient.
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Layout fix
+          (bug 53185)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        GA
+          (fixes bug 53185)
+        
+        :
+        
+        Unify date formatting between FOP and XGC as well as tidying the date format code.
+       Thanks to Robert Meyer.</description></item><item><title>fop-project Layout fix
+          (bug 45715)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        GA
+          (fixes bug 45715)
+        
+        :
+        
+        Fix for break before (break-before) not respected on blocks nested in inlines.
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Renderers fix
+          (bug 48723)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        GA
+          (fixes bug 48723)
+        
+        :
+        
+        Fix for XGC when rendering PostScript using SVG being drawn upside down when using a custom affine transform.
+       Thanks to Robert Meyer.</description></item><item><title>fop-project Code fix
+          (bug 43940)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 43940)
+        
+        :
+        
+        Use new double format utility to improve thread safety and performance.
+       Thanks to Ognjen Blagojevic.</description></item><item><title>fop-project Fonts fix
+          (bug 53148)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        GA
+          (fixes bug 53148)
+        
+        :
+        
+        Fix performance regression in JDK 1.6 Update 19 due to use of Java Beans API. Fix checkstyle errors.
+       Thanks to Tassos Charoulis.</description></item><item><title>fop-project Renderers fix
+          (bug 51484)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        GA
+          (fixes bug 51484)
+        
+        :
+        
+        Don't write final /sect suffix in RTF if section is last section.
+       Thanks to Benjamin Riefenstahl.</description></item><item><title>fop-project Fonts fix
+          (bug 53143)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        GA
+          (fixes bug 53143)
+        
+        :
+        
+        Ensure fonts are not loaded twice (redundantly).
+      </description></item><item><title>fop-project Test update
+          (bug 50196)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Test update
+        by
+        GA
+          (fixes bug 50196)
+        
+        :
+        
+        Add test for basic-link with padding.
+       Thanks to Matthias Reischenbacher.</description></item><item><title>fop-project Code update</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code update
+        by
+        GA
+        :
+        
+        Improve property function argument parsing, specifically, better separate required, optional, and variable arguments and the handling of optional argument defaults.
+        Regularize property function class names.
+      </description></item><item><title>fop-project Layout fix
+          (bug 51043)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        GA
+          (fixes bug 51043)
+        
+        :
+        
+        Don't restart layout unless abs(ipd difference) &gt; 1 in order to prevent rounding issues from triggering false restart.
+       Thanks to Pascal Sancho.</description></item><item><title>fop-project Fonts update</title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts update
+        by
+        GA
+        :
+        
+        Removing experimental feature that violates XSL-FO and Unicode semantics by misinterpreting Basic Latin code points. Users must use private use codepoints to access font specific
+        character mappings that have no assigned Unicode code point. See bug 50492.
+      </description></item><item><title>fop-project Layout fix
+          (bug 53103)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        GA
+          (fixes bug 53103)
+        
+        :
+        
+        Ensure that table cell spanning works in right-to-left writing mode.
+       Thanks to Matthias Reischenbacher.</description></item><item><title>fop-project Layout fix
+          (bug 53086)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        GA
+          (fixes bug 53086)
+        
+        :
+        
+        Ensure that table footer and header are included in bididirectional resolution.
+      </description></item><item><title>fop-project Layout fix
+          (bug 53097)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        GA
+          (fixes bug 53097)
+        
+        :
+        
+        Ensure writing-mode specified on fo:table is used to determine writing mode of table and its descendants.
+      </description></item><item><title>fop-project Code fix
+          (bug 53094)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 53094)
+        
+        :
+        
+        Convert block container overflow exception to event model, improving overflow property behavior.
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Code update
+          (bug 51617)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code update
+        by
+        GA
+          (fixes bug 51617)
+        
+        :
+        
+        Add run target for embedded examples. Add increased JVM memory heap flag for example8 in case font cache is rebuilt.
+      </description></item><item><title>fop-project Code fix
+          (bug 53083)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 53083)
+        
+        :
+        
+        Update to use of checkstyle-5.5 as default configuration. Remove checkstyle-4.0 configuration. Also, import environment build properties before local properties, so that latter can refer to former.
+      </description></item><item><title>fop-project Code fix
+          (bug 52572)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 52572)
+        
+        :
+        
+        Prevent NPE on use of unsupported collapse-with-precedence; fall back to collapse. Fix checkstyle errors from prior commit.
+       Thanks to Pascal Sancho.</description></item><item><title>fop-project Layout fix
+          (bug 52514)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        GA
+          (fixes bug 52514)
+        
+        :
+        
+        Ensure square image is appropriately scaled.
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Code fix
+          (bug 50062)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 50062)
+        
+        :
+        
+        Invoke JVM in headless mode from FOP command scripts and JS shell to prevent stealing focus from GUI applications.
+      </description></item><item><title>fop-project Renderers fix
+          (bug 52114)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        GA
+          (fixes bug 52114)
+        
+        :
+        
+        Take leading derived space before/after into account when computing rows for TXT renderer.
+      </description></item><item><title>fop-project Code add
+          (bug 49893)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        PH
+          (fixes bug 49893)
+        
+        :
+        
+        A global setting to wrap F11 images in page segments.
+      </description></item><item><title>fop-project Code fix
+          (bug 52763)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 52763)
+        
+        :
+        
+        Support list-block in marker, thus preventing NPE.
+      </description></item><item><title>fop-project Code fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+        :
+        
+        Must use unqualified (local name) when reporting invalid child error.
+      </description></item><item><title>fop-project Code fix
+          (bug 53065)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 53065)
+        
+        :
+        
+        Restore lookup on Event message lookup field part. Add locale field to Event to
+        enable locale dependent deferred bundle load during lookup field part substitution.
+      </description></item><item><title>fop-project Code fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        MH
+        :
+        
+        Bug in AFP font metrics that performed integer arithmetic when it should have been
+	double arithemetic.
+      </description></item><item><title>fop-project Code fix
+          (bug 49754)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 49754)
+        
+        :
+        
+        Bring clone() in line with the recommendations in Object.clone().
+       Thanks to Simon Pepping.</description></item><item><title>fop-project Code fix
+          (bug 52966)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 52966)
+        
+        :
+        
+        How to use native text with EPSDocumentGraphics2D.
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Code fix
+          (bug 51599)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 51599)
+        
+        :
+        
+        Allow https scheme URI for PDF external action target.
+       Thanks to Paul Huemer.</description></item><item><title>fop-project Code fix
+          (bug 50901)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 50901)
+        
+        :
+        
+        RTF percentage table column width not calculated from table.
+       Thanks to Carsten Pfeiffer.</description></item><item><title>fop-project Code fix
+          (bug 51009)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 51009)
+        
+        :
+        
+        RTF generates unexpected lines for blocks in tables. Also fix three findbugs issues.
+       Thanks to Max Aster.</description></item><item><title>fop-project Code fix
+          (bug 51007)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 51007)
+        
+        :
+        
+        RTF tables do not support percent column-widths.
+       Thanks to Max Aster.</description></item><item><title>fop-project Code fix
+          (bug 50435)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 50435)
+        
+        :
+        
+        Access denied (java.util.PropertyPermission org.apache.fop.fo.properties.use-cache read).
+       Thanks to Armin Haaf.</description></item><item><title>fop-project Code fix
+          (bug 49763)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 49763)
+        
+        :
+        
+        Incorrect message when encountering a block in an inline in a footnote.
+       Thanks to Adrian Buza.</description></item><item><title>fop-project Code fix
+          (bug 47380)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 47380)
+        
+        :
+        
+        Specified rule-thickness applies only when leader-pattern is rule, otherwise should use default thickness.
+       Thanks to Georg Datterl.</description></item><item><title>fop-project Code fix
+          (bug 49302)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 49302)
+        
+        :
+        
+        Eliminate duplicate code.
+       Thanks to Julien Aymé.</description></item><item><title>fop-project Code fix
+          (bug 49350)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 49350)
+        
+        :
+        
+        Correct coding error in AFPResourceLevel#equals.
+       Thanks to Julien Aymé.</description></item><item><title>fop-project Code fix
+          (bug 51836)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 51836)
+        
+        :
+        
+        Throw IFException instead of NPE if navigation target (page reference) doesn't exist.
+       Thanks to Melanie Drake.</description></item><item><title>fop-project Code fix
+          (bug 51808)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 51808)
+        
+        :
+        
+        Fixed memory waste in traits map.
+       Thanks to Sergey Vladimirov.</description></item><item><title>fop-project Code fix
+          (bug 51807)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 51807)
+        
+        :
+        
+        Fixed small memory waste in rowCells array construction.
+       Thanks to Sergey Vladimirov.</description></item><item><title>fop-project Code fix
+          (bug 53005)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        GA
+          (fixes bug 53005)
+        
+        :
+        
+        Fixed incorrect rejection of fo:wrapper inside fo:inline inside fo:footnote-body.
+       Thanks to Alberto Simões.</description></item><item><title>fop-project Code add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        VH
+        :
+        
+        Added support for PDF Object Streams. When accessibility is enabled and PDF version 1.5 
+        selected, the structure tree will be stored in object streams in order to reduce the size of 
+        the final PDF.
+       Thanks to Peter Hancock.</description></item><item><title>fop-project Code fix
+          (bug 46962)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        VH
+          (fixes bug 46962)
+        
+        :
+        
+        Fixed deadlock in PropertyCache.
+       Thanks to Alexios Giotis.</description></item><item><title>fop-project Config add
+          (bug 51385)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Config add
+        by
+        VH
+          (fixes bug 51385)
+        
+        :
+        
+        Added configuration option to set the version of the output PDF document.
+       Thanks to Mehdi Houshmand.</description></item><item><title>fop-project Code fix
+          (bug 52849)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        MH
+          (fixes bug 52849)
+        
+        :
+        
+        Fixed bug that caused a configured and installed SVG font to be stroked,
+        also added an event indicating when fonts are stroked.
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Code fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        PH
+        :
+        
+        Fix of a bug introduced when merging ImproveAccessibility.
+      </description></item><item><title>fop-project Code add
+          (bug 50391)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        PH
+          (fixes bug 50391)
+        
+        :
+        
+          Improved support for empty flow-name mapping.
+      </description></item><item><title>fop-project Layout add
+          (bug 32789, 49008, 49687)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout add
+        by
+        GA
+          (fixes bug 32789, 49008, 49687)
+        
+        :
+        
+        Add support for complex scripts, including: full bidi support, support for advanced
+        typographic tables, advanced support for number conversion.
+      </description></item><item><title>fop-project Fonts add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts add
+        by
+        GA
+        :
+        
+        Add support for OpenType advanced typographic tables (GDEF, GSUB, GPOS).
+      </description></item><item><title>fop-project Code fix
+          (bug 52655)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        VH
+          (fixes bug 52655)
+        
+        :
+        
+        Fixed rendering of special glyphs when using single-byte encoding mode.
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Code add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        PH
+        :
+        
+        Improvements of the Accessibility features.
+       Thanks to Vincent Hennebert.</description></item><item><title>fop-project Code add
+          (bug 52416)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        CB
+          (fixes bug 52416)
+        
+        :
+        
+        Suppress unnecessary "font not found warnings" when generating AFP with raster fonts 
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Code add
+          (bug 51209)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        CB
+          (fixes bug 51209)
+        
+        :
+        
+        SVG text in AFP creates miscoded GOCA text
+       Thanks to Luis Bernardo.</description></item><item><title>fop-project Code add
+          (bug 50391)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        CB
+          (fixes bug 50391)
+        
+        :
+        
+        Add support for different flow-name of fo:region-body in FOP
+       Thanks to Peter Hancock.</description></item><item><title>fop-project Code add
+          (bug 51664)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        CB
+          (fixes bug 51664)
+        
+        :
+        
+        Tagged PDF performance improvement plus tests
+       Thanks to Mehdi Houshmand.</description></item><item><title>fop-project Code add
+          (bug 52197)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        MH
+          (fixes bug 52197)
+        
+        :
+        
+        Improved AdobeStandardEncoding support in AFM files for type1 fonts
+      </description></item><item><title>fop-project Code add
+          (bug 52151)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        VH
+          (fixes bug 52151)
+        
+        :
+        
+        Added ant script to get JaCoCo code coverage.
+       Thanks to Mehdi Houshmand.</description></item><item><title>fop-project Code add
+          (bug 52136)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        VH
+          (fixes bug 52136)
+        
+        :
+        
+        Added to build file JUnit target that uses a regex to run all of the test cases. This 
+        reduces the risk that some of them are omitted when building FOP.
+       Thanks to Mehdi Houshmand.</description></item><item><title>fop-project Code add
+          (bug 52089)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        PH
+          (fixes bug 52089)
+        
+        :
+        
+        Allow JPEG images to be embedded in an AFP document as is, without being decoded and 
+        encoded.
+       Thanks to Mehdi Houshmand.</description></item><item><title>fop-project Code add
+          (bug 52010)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        PH
+          (fixes bug 52010)
+        
+        :
+        
+        Simplification of the build: Reduced code duplication and layout engine tests.
+       Thanks to Mehdi Houshmand.</description></item><item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+        :
+        
+        Various bugfixes to make PDFDocumentGraphics2D operational again.
+      </description></item><item><title>fop-project Code add
+          (bug 51962)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        PH
+          (fixes bug 51962)
+        
+        :
+        
+        Fix for when the last simple-page-master referenced in a page-sequence-master is not
+        chosen when force-page-count=odd.
+       Thanks to Mehdi Houshmand.</description></item><item><title>fop-project Code add
+          (bug 51928)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        VH
+          (fixes bug 51928)
+        
+        :
+        
+        Upgraded all tests to JUnit 4.
+       Thanks to Mehdi Houshmand.</description></item><item><title>fop-project Fonts fix
+          (bug 48696)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        PH
+          (fixes bug 48696)
+        
+        :
+        
+        Bugfix for color model in IOCA IDE structure parameter for 4- and 8-bit grayscale images.
+        Revision 4.
+      </description></item><item><title>fop-project Fonts fix
+          (bug 51760)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        PH
+          (fixes bug 51760)
+        
+        :
+        
+        Changes the way PostScript handles Graphics2D images such that if the language is set to
+        level 3, the image is stored as an embedded file which has no length limit.  Previously it
+        was stored as an array which has a implementation limit of 65535 elements.
+       Thanks to Mehdi Houshmand.</description></item><item><title>fop-project Fonts fix
+          (bug 51759)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        PH
+          (fixes bug 51759)
+        
+        :
+        
+        PDFFactory responsible for asdigning name to a subset font.
+       Thanks to Mehdi Houshmand.</description></item><item><title>fop-project Fonts fix
+          (bug 51530)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        PH
+          (fixes bug 51530)
+        
+        :
+        
+        Improved support for EBCDIC encoded double byte fonts fo AFP.
+       Thanks to Mehdi Houshmand.</description></item><item><title>fop-project Fonts fix
+          (bug 51205)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        PH
+          (fixes bug 51205)
+        
+        :
+        
+        Corrected typographical errors in AFPBase12FontCollection.
+       Thanks to Mehdi Houshmand.</description></item><item><title>fop-project Renderers fix
+          (bug 48062)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        PH
+          (fixes bug 48062)
+        
+        :
+        
+        Improved fix of a bug relating to PCL painter thread safetly.  Previous fix in rev 895012
+        worked by synchronizing methods of a static instance of Java2DFontMetrics.  This fix uses a
+        unique instance for per thread.
+      </description></item><item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        PH
+        :
+        
+        Fixed a bug in AFP where an ArrayOutofBoundsException is throwqn when embedding a Page 
+        Segment.
+      </description></item><item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        VH
+        :
+        
+        Added support for 128bit encryption in PDF output.
+       Thanks to Michael Rubin.</description></item><item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        PH
+        :
+        
+        Fixed a bug in AFP where the object area axes of an Include Object was incorrectly set when 
+        rotated by 180. </description></item><item><title>fop-project Fonts fix
+          (bug 51596)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        JM
+          (fixes bug 51596)
+        
+        :
+        
+        Fixed a bug in TTF subsetting where a composite glyph could get
+        remapped more than once resulting in garbled character.
+       Thanks to Mehdi Houshmand.</description></item><item><title>fop-project Fonts fix
+          (bug 50605)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        JM
+          (fixes bug 50605)
+        
+        :
+        
+        Fixed a number of bugs concerning Type 1 and other single-byte fonts
+        (glyph width mismatches and overlapping characters).
+      </description></item><item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+        :
+        
+        Fixed a multi-threading bug for SVG images included through svg:image inside SVG documents.
+      </description></item><item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        PH
+        :
+        
+        Added an IFDocumentHandler filter for triggering rendering events.  Created an Event that
+        captures an end page event with the page number.
+      </description></item><item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        VH
+        :
+        
+        Fix for alternative text not working in tagged PDF for TIFF images.
+      </description></item><item><title>fop-project Renderers fix
+          (bug 50909)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        PH
+          (fixes bug 50909)
+        
+        :
+        
+        Fixed io exception in MODCAParser caused by the improper use of mark() and reset() on the
+        MODCA data input stream.  Added unit test. </description></item><item><title>fop-project Fonts fix
+          (bug 51144)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        JM
+          (fixes bug 51144)
+        
+        :
+        
+        Removed invalid entries in ToUnicode table of CID subset fonts. 
+       Thanks to Mehdi Houshmand.</description></item><item><title>fop-project Renderers fix
+          (bug 50899)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+          (fixes bug 50899)
+        
+        :
+        
+        Fixed mapping of font weights between CSS values and TextAttribute.WEIGHT_*. 
+       Thanks to Glenn Adams.</description></item><item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+        :
+        
+        AFP GOCA: fonts were not embedded from within AFPGraphics2D.
+      </description></item><item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+        :
+        
+        AFP GOCA: Changed the way FOP fonts are selected based on Batik's GVT fonts to match
+        the behaviour of PDF/PS output.
+      </description></item><item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+        :
+        
+        Added option to place AFP NOPs right before the end of a named page group (page-sequence),
+        rather than after the start.
+      </description></item><item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+        :
+        
+        Added option for PostScript output to optimize for file size rather than quality.
+      </description></item><item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+        :
+        
+        AFP GOCA: Added option to disable GOCA and to control text painting inside GOCA graphics.
+      </description></item><item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+        :
+        
+        AFP GOCA: Work-around for InfoPrint's AFP implementation which seems to lose
+        the character set state over Graphics Data (GAD) boundaries.
+      </description></item><item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+        :
+        
+        Bugfix for AFP GOCA segments: they were not properly marked as appended which could
+        lead to graphics state changes in some implementations.
+      </description></item><item><title>fop-project Renderers fix
+          (bug 51010)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        CB
+          (fixes bug 51010)
+        
+        :
+        
+        Bugzilla 51010: Bookmarks create useless lines in RTF 
+       Thanks to Max Aster.</description></item><item><title>fop-project Renderers fix
+          (bug 51008)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        CB
+          (fixes bug 51008)
+        
+        :
+        
+        Bugzilla 51008: page-number-citation-last does not work in RTF
+       Thanks to Max Aster.</description></item><item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        VH
+        :
+        
+        Added id element to intermediate format to track the origin of content.
+      </description></item><item><title>fop-project Renderers fix
+          (bug 50987)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        AD
+          (fixes bug 50987)
+        
+        :
+        
+        Bugzilla 50988: Fixed a NullPointerException in case a white-space fo:character was removed
+        due to white-space handling.
+       Thanks to Matthias Reischenbacher.</description></item><item><title>fop-project Renderers fix
+          (bug 50987)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        AD
+          (fixes bug 50987)
+        
+        :
+        
+        Bugzilla 50987: Fixed an issue in PDF output where a link was added to the parent tree 
+        instead of the related structure element.
+       Thanks to Martin Koegler.</description></item><item><title>fop-project Renderers fix
+          (bug 50986)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        AD
+          (fixes bug 50986)
+        
+        :
+        
+        Bugzilla 50986: Fixed an issue where invalid PDF page content was generated due to 
+        incorrect ET/EMC sequences.
+       Thanks to Martin Koegler.</description></item><item><title>fop-project Code fix
+          (bug 50593)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        AD
+          (fixes bug 50593)
+        
+        :
+        
+        Fixed regression introduced by Bugzilla 50593: bookmarks pointing to a non-existing
+        internal destination should just trigger a warning.
+      </description></item><item><title>fop-project Layout fix
+          (bug 50965)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        AD
+          (fixes bug 50965)
+        
+        :
+        
+        Bugzilla 50965: Fixed a regression in BlockContainerLayoutManager where margins were
+        no longer reset after forced breaks.
+       Thanks to Martin Koegler.</description></item><item><title>fop-project Layout fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        VH
+        :
+        
+        Implemented non-standard behavior for basic-link areas, such that they take into account the 
+        heights of their descendants areas.
+      </description></item><item><title>fop-project Layout fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        VH
+        :
+        
+        Fix for keep-together does not apply to fo:table-cell.
+      </description></item><item><title>fop-project Layout fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        VH
+        :
+        
+        Fix for keep-together on a table containing row-spanning cells that was not honored.
+      </description></item><item><title>fop-project Layout fix
+          (bug 50196)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        VH
+          (fixes bug 50196)
+        
+        :
+        
+        Fix forpadding-start ignored when table-header/footer is repeated.
+       Thanks to Matthias Reischenbacher.</description></item><item><title>fop-project Renderers fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+        :
+        
+        Increased maximum possible PDF size from 2GB to around 9GB (hard maximum imposed by the PDF specification).
+      </description></item><item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+        :
+        
+        Added support for CIE Lab colors (from XSL-FO 2.0 WD).
+      </description></item><item><title>fop-project Renderers add
+          (bug 49403)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+          (fixes bug 49403)
+        
+        :
+        
+        Initial work on spot colors (aka named colors) for PDF output.
+       Thanks to Patrick Jaromin.</description></item><item><title>fop-project Renderers fix
+          (bug 50705)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+          (fixes bug 50705)
+        
+        :
+        
+        Fix to preserve the order of AFP TLEs and NOPs as given in the XSL-FO document.
+       Thanks to Mehdi Houshmand.</description></item><item><title>fop-project Fonts add
+          (bug 50699)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts add
+        by
+        JM
+          (fixes bug 50699)
+        
+        :
+        
+        Added support for lookup of alternative glyphs when additional single-byte encodings are
+        used, ex. replacing "Omegagreek" by "Omega" and vice versa.
+       Thanks to Alexandros Papadakis.</description></item><item><title>fop-project Code add
+          (bug 48334)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code add
+        by
+        AD
+          (fixes bug 48334)
+        
+        :
+        
+        Added support for resolution of relative URIs against a specified xml:base during
+        property refinement.
+      </description></item><item><title>fop-project Renderers add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+        :
+        
+        Allow afp:no-operation to also appear under fo:page-sequence and fo:declarations.
+      </description></item><item><title>fop-project Code fix
+          (bug 50635)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        AD
+          (fixes bug 50635)
+        
+        :
+        
+        Fix for issue in RenderPagesModel.checkPreparedPages() where the same page-sequence
+        is potentially started multiple times.
+       Thanks to Martin Koegler.</description></item><item><title>fop-project Code fix
+          (bug 50636)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        AD
+          (fixes bug 50636)
+        
+        :
+        
+        Fix for performance issue when adding pages, if the total number of pages
+        is significantly large.
+       Thanks to Martin Koegler.</description></item><item><title>fop-project Code fix
+          (bug 50626)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        AD
+          (fixes bug 50626)
+        
+        :
+        
+        Fix for performance issue when adding nodes, if the number of children
+        is significantly large.
+       Thanks to Martin Koegler.</description></item><item><title>fop-project Config fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Config fix
+        by
+        SP
+        :
+        
+	Fix for relative URIs in the configuration file (base, font-base, hyphenation-base) are evaluated relative to the base URI of the configuration file.
+      </description></item><item><title>fop-project Layout fix
+          (bug 49848)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        AD
+          (fixes bug 49848)
+        
+        :
+        
+        Fix for correct behavior of keep-together.within-line in case there are nested inlines
+      </description></item><item><title>fop-project Code fix
+          (bug 50471)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        AD
+          (fixes bug 50471)
+        
+        :
+        
+        Fix for avoid ArrayIndexOutOfBoundsException for codepoints without a linebreak class
+      </description></item><item><title>fop-project Layout fix
+          (bug 48380)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        AD
+          (fixes bug 48380)
+        
+        :
+        
+        Fix for avoid ClassCastException when using fox:widow-content-limit
+      </description></item><item><title>fop-project Layout fix
+          (bug 50089)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        VH
+          (fixes bug 50089)
+        
+        :
+        
+        Fix for content after forced break in block-container is not rendered.
+      </description></item><item><title>fop-project Layout fix
+          (bug 42034)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        JM
+          (fixes bug 42034)
+        
+        :
+        
+        Fixed adjustment of inline parent area for justified text containing a forward page reference.
+      </description></item><item><title>fop-project Layout fix
+          (bug 38264)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        AD
+          (fixes bug 38264)
+        
+        :
+        
+        Fixed behavior when combining hyphenation with preserved linefeeds or whitespace.
+      </description></item><item><title>fop-project Code fix
+          (bug 49695)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Code fix
+        by
+        VH
+          (fixes bug 49695)
+        
+        :
+        
+        Replaced magic numbers with constants from UnitConv and GraphicsConstants.
+       Thanks to Joshua Marquart.</description></item><item><title>fop-project Renderers add
+          (bug 42600)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+          (fixes bug 42600)
+        
+        :
+        
+        Added some support for break-before/-after for RTF output.
+       Thanks to Max Aster.</description></item><item><title>fop-project Renderers add
+          (bug 49379)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+          (fixes bug 49379)
+        
+        :
+        
+        Added ability to embed an external AFP page segment resource file (AFP output only).
+       Thanks to Peter Hancock.</description></item><item><title>fop-project Renderers fix
+          (bug 46360)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers fix
+        by
+        JM
+          (fixes bug 46360)
+        
+        :
+        
+        Fixed a multi-threading issue when rendering SVG.
+       Thanks to Alexios Giotis.</description></item><item><title>fop-project Layout fix
+          (bug 49885)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Layout fix
+        by
+        JM
+          (fixes bug 49885)
+        
+        :
+        
+        Fixed retrieval of available BPD for cases spanning columns and multiple pages with differing page masters.
+      </description></item><item><title>fop-project Renderers remove</title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers remove
+        by
+        VH
+        :
+        
+        Removed old Renderer implementations for those output formats that have a version based on 
+        the new DocumentHandler architecture available (AFP, PCL, PDF, PS).
+      </description></item><item><title>fop-project Fonts fix</title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts fix
+        by
+        AC
+        :
+        
+        Reinstated support for being able to specify a font cache filepath in the fop user configuration.
+      </description></item><item><title>fop-project Fonts add</title><link>http://xmlgraphics.apache.org/fop/</link><description>Fonts add
+        by
+        AC
+        :
+        
+        Added convenience support for the flushing of the Fop font cache file from the command line.
+      </description></item><item><title>fop-project Renderers add
+          (bug 44460)
+        </title><link>http://xmlgraphics.apache.org/fop/</link><description>Renderers add
+        by
+        JM
+          (fixes bug 44460)
+        
+        :
+        
+        Added support for PDF File Attachments (Embedded Files).
+       Thanks to Andrejus Chaliapinas.</description></item></channel></rss>

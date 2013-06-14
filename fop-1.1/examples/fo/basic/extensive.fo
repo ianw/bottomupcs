@@ -1,0 +1,148 @@
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:svg="http://www.w3.org/2000/svg">
+<fo:layout-master-set>
+<fo:simple-page-master master-name="one">
+<fo:region-body margin-top="50pt" margin-bottom="50pt" margin-left="100pt" margin-right="100pt"/>
+</fo:simple-page-master>
+</fo:layout-master-set>
+<fo:page-sequence master-reference="one">
+<fo:flow flow-name="xsl-region-body">
+<fo:block>A Block</fo:block>
+<fo:block text-align="end">An End Aligned Block</fo:block>
+<fo:block text-align="center">A Centered Block</fo:block>
+<fo:block>This is a multiple line block that extends over more than one line. There should be appropriate line breaks. Alignment is default.</fo:block>
+<fo:block text-align="end">This is a multiple line block that extends over more than one line. There should be appropriate line breaks. Alignment is end.</fo:block>
+<fo:block text-align="center">This is a multiple line block that extends over more than one line. There should be appropriate line breaks. Alignment is centered.</fo:block>
+<fo:block text-align="justify">This is a multiple line block that extends over more than one line. There should be appropriate line breaks. I'm going to keep going so I can get three lines to check how all but the last justify. There, that should do it. Alignment is justified.</fo:block>
+<fo:block>A block for comparison</fo:block>
+<fo:block space-before.optimum="12pt">A block with 12pt space-before</fo:block>
+<fo:block>A block for comparison</fo:block>
+<fo:block space-after.optimum="12pt">A block with 12pt space-after</fo:block>
+<fo:block>A block for comparison</fo:block>
+<fo:block space-before.optimum="12pt" space-after.optimum="12pt">A block with both 12pt space-before and space-after</fo:block>
+<fo:block>A block for comparison</fo:block>
+<fo:block start-indent="50pt">This is a multiple line block that extends over more than one line. There should be appropriate line breaks. There is a start-indent of 50pt.</fo:block>
+<fo:block end-indent="50pt">This is a multiple line block that extends over more than one line. There should be appropriate line breaks. There is an end-indent of 50pt.</fo:block>
+<fo:block start-indent="50pt" end-indent="50pt">This is a multiple line block that extends over more than one line. There should be appropriate line breaks. There is a start-indent and end-indent of 50pt.</fo:block>
+<fo:block font-size="15pt">This is a multiple line block that extends over more than one line. There should be appropriate line breaks. The font-size is set to 15pt.</fo:block>
+<fo:block line-height="20pt">This is a multiple line block that extends over more than one line. There should be appropriate line breaks. The line-height is set to 20pt.</fo:block>
+<fo:block font-size="15pt" line-height="20pt">This is a multiple line block that extends over more than one line. There should be appropriate line breaks. The font-size is set to 15pt and the line-height is set to 20pt.</fo:block>
+<fo:block font-size="15pt" line-height="15pt">This is a multiple line block that extends over more than one line. There should be appropriate line breaks. The font-size is set to 15pt and the line-height is set to 15pt.</fo:block>
+<fo:block space-before.optimum="12pt" space-after.optimum="12pt"><fo:block space-before.optimum="12pt" space-after.optimum="12pt">A block within a block</fo:block></fo:block>
+<fo:block space-before.optimum="12pt" space-after.optimum="12pt">Text before<fo:block space-before.optimum="12pt" space-after.optimum="12pt">A block within a block</fo:block>Text after</fo:block>
+<fo:block space-before.optimum="12pt" space-after.optimum="12pt" start-indent="50pt">Text before<fo:block space-before.optimum="12pt" space-after.optimum="12pt">A block within a block with 50pt start-intent</fo:block>Text after</fo:block>
+<fo:block space-before.optimum="12pt" space-after.optimum="12pt" start-indent="50pt">And again for the page break, text before<fo:block space-before.optimum="12pt" space-after.optimum="12pt">A block within a block with 50pt start-intent</fo:block>Text after</fo:block>
+<fo:block space-before.optimum="12pt" space-after.optimum="12pt" start-indent="50pt">Text before<fo:block space-before.optimum="12pt" space-after.optimum="12pt">A block with 50pt start-indent within a block with 50pt start-intent</fo:block>Text after</fo:block>
+<fo:block space-before.optimum="12pt" space-after.optimum="12pt" start-indent="50pt">Text before<fo:block space-before.optimum="12pt" space-after.optimum="12pt" start-indent="100pt">A block with 100pt start-indent within a block with 50pt start-intent</fo:block>Text after</fo:block>
+<fo:list-block provisional-distance-between-starts="12pt" space-before.optimum="12pt" text-align="justify">
+<fo:list-item>
+<fo:list-item-label end-indent="label-end()"><fo:block>&#x2022;</fo:block></fo:list-item-label>
+<fo:list-item-body start-indent="body-start()"><fo:block>This is a multiple line block that extends over more than one line. There should be appropriate line breaks.</fo:block></fo:list-item-body>
+</fo:list-item>
+<fo:list-item>
+<fo:list-item-label end-indent="label-end()"><fo:block>&#x2022;</fo:block></fo:list-item-label>
+<fo:list-item-body start-indent="body-start()"><fo:block>This is a multiple line block that extends over more than one line. There should be appropriate line breaks.</fo:block><fo:block>This is a multiple line block that extends over more than one line. There should be appropriate line breaks.</fo:block><fo:block>This is a multiple line block that extends over more than one line. There should be appropriate line breaks.</fo:block></fo:list-item-body>
+</fo:list-item>
+</fo:list-block>
+<fo:list-block start-indent="50pt" provisional-distance-between-starts="12pt" space-before.optimum="12pt" text-align="justify">
+<fo:list-item>
+<fo:list-item-label end-indent="label-end()"><fo:block>&#x2022;</fo:block></fo:list-item-label>
+<fo:list-item-body start-indent="body-start()"><fo:block>This is a multiple line block that extends over more than one line. There should be appropriate line breaks. The list-block has a start-indent of 50pt and a text-align of justified.</fo:block></fo:list-item-body>
+</fo:list-item>
+<fo:list-item>
+<fo:list-item-label end-indent="label-end()"><fo:block>&#x2022;</fo:block></fo:list-item-label>
+<fo:list-item-body start-indent="body-start()"><fo:block>This is a multiple line block that extends over more than one line. There should be appropriate line breaks.</fo:block><fo:block>This is a second multiple line block that extends over more than one line. There should be appropriate line breaks.</fo:block><fo:block>This is a third multiple line block that extends over more than one line. There should be appropriate line breaks.</fo:block></fo:list-item-body>
+</fo:list-item>
+</fo:list-block>
+<fo:list-block provisional-distance-between-starts="12pt" space-before.optimum="12pt" text-align="justify">
+<fo:list-item>
+<fo:list-item-label end-indent="label-end()"><fo:block>&#x2022;</fo:block></fo:list-item-label>
+<fo:list-item-body start-indent="body-start()"><fo:block>This is a multiple line block that extends over more than one line. There should be appropriate line breaks.</fo:block><fo:block start-indent="100pt">This is a multiple line block with start-indent 100pt that extends over more than one line. There should be appropriate line breaks.</fo:block><fo:block>This is a multiple line block that extends over more than one line. There should be appropriate line breaks.</fo:block></fo:list-item-body>
+</fo:list-item>
+<fo:list-item>
+<fo:list-item-label end-indent="label-end()"><fo:block>&#x2022;</fo:block></fo:list-item-label>
+<fo:list-item-body start-indent="body-start()"><fo:block>This is a multiple line block that extends over more than one line. There should be appropriate line breaks.<fo:block>This is an embedded multiple line block that extends over more than one line. There should be appropriate line breaks.</fo:block>This is a multiple line block that extends over more than one line. There should be appropriate line breaks.</fo:block></fo:list-item-body>
+</fo:list-item>
+</fo:list-block>
+      <fo:list-block provisional-distance-between-starts="12pt" space-before.optimum="12pt">
+        <fo:list-item>
+          <fo:list-item-label end-indent="label-end()"><fo:block>&#x2022;</fo:block></fo:list-item-label>
+          <fo:list-item-body start-indent="body-start()"><fo:block>A block in a list-item-body</fo:block></fo:list-item-body>
+        </fo:list-item>
+        <fo:list-item>
+          <fo:list-item-label end-indent="label-end()"><fo:block>&#x2022;</fo:block></fo:list-item-label>
+          <fo:list-item-body start-indent="body-start()">
+            <fo:list-block provisional-distance-between-starts="12pt">
+              <fo:list-item>
+                <fo:list-item-label end-indent="label-end()"><fo:block>&#x2022;</fo:block></fo:list-item-label>
+                <fo:list-item-body start-indent="body-start()"><fo:block>This is a list item in a list that is itself a list item</fo:block></fo:list-item-body>
+              </fo:list-item>
+            </fo:list-block>
+          </fo:list-item-body>
+        </fo:list-item>
+      </fo:list-block>
+      <fo:block break-before="page" font-size="24pt" line-height="28pt" space-before.optimum="12pt" space-after.optimum="12pt">Next Stage</fo:block>
+      <fo:block>Right, now we are ready to try some newly implemented things like rules. What follows is a display rule of default thickness 1pt and a space-before and space-after of 12pt.</fo:block>
+      <fo:block><fo:leader leader-pattern="rule" space-before.optimum="12pt" space-after.optimum="12pt"/></fo:block>
+      <fo:block>Now what follows is a leader of thickness 5pt with start-indent of 100pt (same space-before/after as before).</fo:block>
+      <fo:block><fo:leader leader-pattern="rule" space-before.optimum="12pt" space-after.optimum="12pt" rule-thickness="5pt" start-indent="100pt"/></fo:block>
+      <fo:block font-size="24pt" line-height="28pt" space-before.optimum="12pt" space-after.optimum="12pt"
+      ><fo:inline color="#500">C</fo:inline
+      ><fo:inline color="#700">o</fo:inline
+      ><fo:inline color="#900">l</fo:inline
+      ><fo:inline color="#B00">o</fo:inline
+      ><fo:inline color="#D00">u</fo:inline
+      ><fo:inline color="#F00">r</fo:inline
+      ></fo:block>
+      <fo:block color="black">black</fo:block>
+      <fo:block color="green">green</fo:block>
+      <fo:block color="silver">silver</fo:block>
+      <fo:block color="lime">lime</fo:block>
+      <fo:block color="gray">gray</fo:block>
+      <fo:block color="olive">olive</fo:block>
+      <fo:block color="white">white</fo:block>
+      <fo:block color="yellow">yellow</fo:block>
+      <fo:block color="maroon">maroon</fo:block>
+      <fo:block color="navy">navy</fo:block>
+      <fo:block color="red">red</fo:block>
+      <fo:block color="blue">blue</fo:block>
+      <fo:block color="purple">purple</fo:block>
+      <fo:block color="teal">teal</fo:block>
+      <fo:block color="fuchsia">fuchsia</fo:block>
+      <fo:block color="aqua">aqua</fo:block>
+      <fo:block break-before="even-page" font-size="24pt" line-height="28pt" space-before.optimum="12pt" space-after.optimum="12pt">Wrap</fo:block>
+      <fo:block space-before.optimum="12pt">This is a rather long sentence that is going to keep on going and going, not really to demonstrate anything other that normal wrapping because the following paragraph will show what happens when wrap-option is set to no-wrap.</fo:block>
+      <fo:block space-before.optimum="12pt" wrap-option="no-wrap">This is a rather long sentence that is going to keep on going and going to demonstrate what happens when wrap-option is set to no-wrap which is unlike the preceding sentence where it defaults to wrap.</fo:block>
+      <fo:block space-before.optimum="12pt" wrap-option="wrap">This is a rather long sentence that is going to keep on going and going, not really to demonstrate anything other that normal wrapping but it differs from the first of these three sentences in that wrap is set explicitly.</fo:block>
+      <fo:block font-size="24pt" line-height="28pt" space-before.optimum="12pt" space-after.optimum="12pt">White Space Collapse</fo:block>
+<fo:block>This            is            default!</fo:block>
+<fo:block white-space-collapse="false">This            is            false!</fo:block>
+<fo:block white-space-collapse="true">This            is            true!</fo:block>
+<fo:block font-family="monospace"
+          white-space-collapse="false"
+          linefeed-treatment="preserve"
+          white-space-treatment="preserve"
+          wrap-option="no-wrap">
+<![CDATA[<?xml version="1.0"?>
+<document>
+    <heading>This is a heading</heading>
+    <list>
+        <item>Item one</item>
+        <item>Item two</item>
+    </list>
+</document>]]>
+</fo:block>
+      <fo:block break-before="page" font-size="24pt" line-height="28pt" space-before.optimum="12pt" space-after.optimum="12pt">Embedded SVG</fo:block>
+      <fo:block><fo:instream-foreign-object>
+        <svg:svg width="400pt" height="200pt">
+          <svg:rect style="fill:none;stroke:blue" x="20pt" y="20pt" width="100pt" height="100pt"/>
+          <svg:line x1="20pt" y1="20pt" x2="120pt" y2="120pt"/>
+          <svg:line x1="120pt" y1="20pt" x2="20pt" y2="120pt"/>
+          <svg:text x="20pt" y="150pt">Hello SVG!</svg:text>
+        </svg:svg>
+      </fo:instream-foreign-object></fo:block>
+      <fo:block>The above is an example of an SVG graphic</fo:block>
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>
+
+

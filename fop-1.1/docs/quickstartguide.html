@@ -1,0 +1,399 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.10-dev">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Apache&trade; FOP: Quick Start Guide</title>
+<link type="text/css" href="skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="skin/print.css" rel="stylesheet">
+<link type="text/css" href="skin/profile.css" rel="stylesheet">
+<script src="skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="favicon.ico">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://xmlgraphics.apache.org/"><img class="logoImage" alt="Apache XML Graphics" src="images/group-logo.gif" title="Apache XML Graphics is responsible for the creation and maintenance of software for managing the conversion of XML formats to graphical output, and the creation and maintenance of related software components, based on software licensed to the Foundation"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://xmlgraphics.apache.org/fop/"><img class="logoImage" alt="Apache FOP" src="images/logo.jpg" title="Apache FOP (Formatting Objects Processor) is the world's first output independent formatter. Output formats currently supported include PDF, PCL, PS, SVG, XML (area tree representation), Print, AWT, MIF and TXT. The primary output target is PDF."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="xmlgraphics.apache.org" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li class="current">
+<a class="selected" href="index.html">Home</a>
+</li>
+<li>
+<a class="unselected" href="1.0/index.html">Version 1.0</a>
+</li>
+<li>
+<a class="unselected" href="1.1/index.html">Version 1.1</a>
+</li>
+<li>
+<a class="unselected" href="trunk/index.html">FOP Trunk</a>
+</li>
+<li>
+<a class="unselected" href="dev/index.html">Development</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">The Apache Software Foundation</a> &gt; <a href="http://xmlgraphics.apache.org/">Apache XML Graphics Project</a><script src="skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_selected_1.1', 'skin/')" id="menu_selected_1.1Title" class="menutitle" style="background-image: url('skin/images/chapter_open.gif');">About</div>
+<div id="menu_selected_1.1" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="index.html">Introduction</a>
+</div>
+<div class="menuitem">
+<a href="download.html">Download</a>
+</div>
+<div class="menupage">
+<div class="menupagetitle">Quick Start Guide</div>
+</div>
+<div class="menuitem">
+<a href="compliance.html" title="FOP Compliance">Compliance</a>
+</div>
+<div class="menuitem">
+<a href="gethelp.html">Getting Help</a>
+</div>
+<div class="menuitem">
+<a href="faq.html">FAQs</a>
+</div>
+<div class="menuitem">
+<a href="maillist.html">Mailing Lists</a>
+</div>
+<div class="menuitem">
+<a href="license.html">License</a>
+</div>
+<div class="menuitem">
+<a href="http://www.apache.org/foundation/sponsorship.html">ASF Sponsorship Program</a>
+</div>
+<div class="menuitem">
+<a href="http://www.apache.org/foundation/thanks.html">ASF Thanks</a>
+</div>
+<div class="menuitem">
+<a href="http://www.apache.org/security/">Security</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2', 'skin/')" id="menu_1.2Title" class="menutitle">Resources</div>
+<div id="menu_1.2" class="menuitemgroup">
+<div class="menuitem">
+<a href="fo.html">XSL-FO</a>
+</div>
+<div class="menuitem">
+<a href="examples.html">Examples</a>
+</div>
+<div class="menuitem">
+<a href="bugs.html">Bugs</a>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/xmlgraphics-fop/FrontPage">Wiki</a>
+</div>
+<div class="menuitem">
+<a href="resources.html">Other</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.3', 'skin/')" id="menu_1.3Title" class="menutitle">Project</div>
+<div id="menu_1.3" class="menuitemgroup">
+<div class="menuitem">
+<a href="news.html">News</a>
+</div>
+<div class="menuitem">
+<a href="team.html">Who We Are</a>
+</div>
+<div class="menuitem">
+<a href="status.html">Status</a>
+</div>
+<div class="menuitem">
+<a href="knownissues.html">Known Issues</a>
+</div>
+<div class="menuitem">
+<a href="changes.html">Changes</a>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="raw XML" class="xmllink">
+<a class="dida" href="quickstartguide.xml"><img alt="XML - icon" src="skin/images/xmldoc.gif" class="skin"><br>
+        XML</a>
+</div>
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="quickstartguide.pdf"><img alt="PDF -icon" src="skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<div class="trail">Font size: 
+	          &nbsp;<input value="Reset" class="resetfont" title="Reset text" onclick="ndeSetTextSize('reset'); return false;" type="button">      
+	          &nbsp;<input value="-a" class="smallerfont" title="Shrink text" onclick="ndeSetTextSize('decr'); return false;" type="button">
+	          &nbsp;<input value="+a" class="biggerfont" title="Enlarge text" onclick="ndeSetTextSize('incr'); return false;" type="button">
+</div>
+<h1>Apache&trade; FOP: Quick Start Guide</h1>
+<h3>Everything you need to start using and appreciating Apache&trade; FOP quickly.</h3>
+<div id="front-matter">
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#essentials">Apache&trade; FOP Essentials</a>
+</li>
+<li>
+<a href="#hello-world">Hello World with FOP</a>
+</li>
+</ul>
+</div>
+</div>
+    
+<a name="essentials"></a>
+<h2 class="underlined_10">Apache&trade; FOP Essentials</h2>
+<div class="section">
+<p>The goal of this <strong>Quick Start Guide</strong> is to help novice users get Apache FOP up and running quickly. Typically, you'll need to:</p>
+<ol>
+        
+<li>
+<a href="download.html">Download FOP</a>
+</li>
+        
+<li>
+<a href="1.1/compiling.html">Build FOP</a> (you can skip this step if you download the binary distribution!)</li>
+        
+<li>
+<a href="1.1/configuration.html">Configure FOP</a>
+</li>
+        
+<li>
+<a href="1.1/running.html">Run FOP</a>
+</li>
+      
+</ol>
+<p>Here are some links to help you find out what FOP can do, as well as how and where to get help:</p>
+<ul>
+        
+<li>
+<a href="1.1/embedding.html">Calling FOP from a Java Application</a>
+</li>
+        
+<li>
+<a href="1.1/servlets.html">Using FOP in Servlets</a>
+</li>
+        
+<li>
+<a href="1.1/anttask.html">Using FOP in an 'Ant' Build Script</a>
+</li>
+        
+<li>
+<a href="compliance.html" title="FOP Compliance">XSL-FO Compliance</a> (what FOP supports and what it doesn't)</li>
+        
+<li>
+<a href="faq.html">FAQs</a>
+</li>
+        
+<li>
+<a href="gethelp.html">Getting Help</a>
+</li>
+        
+<li>
+<a href="maillist.html">Mailing Lists</a>
+</li>
+      
+</ul>
+<p>
+        Once you've familiarized yourself with the basics, you can get more detailed information,
+        in the detailed FOP <a href="1.1/index.html">product documentation</a>.
+      </p>
+</div>
+    
+    
+<a name="hello-world"></a>
+<h2 class="underlined_10">Hello World with FOP</h2>
+<div class="section">
+<p>
+        This section walks you through a "Hello World!" page with Apache FOP. We're assuming you
+        download the binary distribution and that you have a Java Runtime Environment (version 1.4
+        or later) installed.
+      </p>
+<ol>
+        
+<li>
+          Unpack the downloaded binary distribution to a directory of your choice (for example,
+          <span class="codefrag">C:\FOP</span> if you're on Windows). Let's call that
+          directory &lt;fop-home&gt;.
+        </li>
+        
+<li>
+          Get a command prompt in the &lt;fop-home&gt; directory and write:<br>
+          Windows: <span class="codefrag">fop -fo examples/fo/basic/readme.fo -awt</span>
+<br>
+          Unix: <span class="codefrag">./fop -fo examples/fo/basic/readme.fo -awt</span>
+<br>
+        
+</li>
+        
+<li>
+          If all went well, this should open a window showing you a "readme"-style document.
+          This is just to verify that FOP runs correctly.
+        </li>
+        
+<li>
+          Now, take your favorite XML editor and create a small XML file like the following. Replace
+          "Frank" with your own first name to make it a bit more personal and save it as
+          <span class="codefrag">name.xml</span>:<br>
+          
+<pre class="code">&lt;name&gt;Frank&lt;/name&gt;</pre>
+        
+</li>
+        
+<li>
+          To produce a PDF file from this XML file, we need an XSLT stylesheet that converts the
+          XML to XSL-FO. This is the first step in the processing chain. The second step will be
+          done by FOP when it reads the generated XSL-FO document and formats it to a PDF document.
+          You can copy the following minimal XSLT stylesheet, which takes your first name and
+          produces a "Hello World!"-style document (save it as <span class="codefrag">name2fo.xsl</span>):<br>
+          
+<pre class="code">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;xsl:stylesheet version="1.0"
+      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+      xmlns:fo="http://www.w3.org/1999/XSL/Format"&gt;
+  &lt;xsl:output method="xml" indent="yes"/&gt;
+  &lt;xsl:template match="/"&gt;
+    &lt;fo:root&gt;
+      &lt;fo:layout-master-set&gt;
+        &lt;fo:simple-page-master master-name="A4-portrait"
+              page-height="29.7cm" page-width="21.0cm" margin="2cm"&gt;
+          &lt;fo:region-body/&gt;
+        &lt;/fo:simple-page-master&gt;
+      &lt;/fo:layout-master-set&gt;
+      &lt;fo:page-sequence master-reference="A4-portrait"&gt;
+        &lt;fo:flow flow-name="xsl-region-body"&gt;
+          &lt;fo:block&gt;
+            Hello, &lt;xsl:value-of select="name"/&gt;!
+          &lt;/fo:block&gt;
+        &lt;/fo:flow&gt;
+      &lt;/fo:page-sequence&gt;
+    &lt;/fo:root&gt;
+  &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;</pre>
+          
+        
+</li>
+        
+<li>
+          Finally, let's put the previous two steps together: Go back to the command prompt and
+          enter the following command:<br>
+          Windows: <span class="codefrag">fop -xml name.xml -xsl name2fo.xsl -pdf name.pdf</span>
+<br>
+          Unix: <span class="codefrag">./fop -xml name.xml -xsl name2fo.xsl -pdf name.pdf</span>
+<br>
+        
+</li>
+        
+<li>
+          You've produced your first PDF with Apache FOP! Please open <span class="codefrag">name.pdf</span>
+          in your favorite PDF viewer.
+        </li>
+      
+</ol>
+</div>
+  
+<span class="version">
+          version 1394416</span>
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         1999-2012 <a href="http://www.apache.org/licenses/">The Apache Software Foundation. Licensed under Apache License 2.0</a>
+<br>
+    Apache, Apache FOP, the Apache feather logo, and the Apache FOP
+    logos are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+  </div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

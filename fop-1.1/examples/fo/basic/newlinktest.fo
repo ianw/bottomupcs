@@ -1,0 +1,148 @@
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+
+    <!-- layout for the first page -->
+    <fo:simple-page-master master-name="first"
+                  margin-top="1in"
+                  margin-bottom="1in"
+                  margin-left="1in"
+                  margin-right="1in">
+      <fo:region-body margin-top="2.5cm" margin-bottom="1.5cm"/>
+      <fo:region-before extent="2.5cm"/>
+      <fo:region-after extent="1.5cm"/>
+    </fo:simple-page-master>
+
+
+  </fo:layout-master-set>
+  <!-- end: defines page layout -->
+
+  <!-- actual layout -->
+  <fo:page-sequence master-reference="first">
+
+    <!-- header -->
+    <fo:static-content flow-name="xsl-region-before">
+      <fo:block text-align="end"
+            font-size="8pt"
+            font-family="serif"
+            line-height="14pt" >
+            <fo:basic-link external-destination="http://xmlgraphics.apache.org/fop"
+                           color="rgb(150,150,150)" font-style="italic">
+               http://xmlgraphics.apache.org/fop
+            </fo:basic-link>
+      </fo:block>
+    </fo:static-content>
+
+
+<fo:flow flow-name="xsl-region-body">
+
+  <fo:block space-after.optimum="3pt" font-family="serif" id="block1">
+     FOP is the world's first print formatter driven by XSL formatting
+     objects. It is a Java 1.1 application that reads a formatting object
+     tree and then turns it into a PDF document. The formatting object
+     tree, can be in the form of an XML document (output by an XSLT engine
+     like XT or Xalan) or can be passed in memory as a DOM Document or (in
+     the case of XT) SAX events.
+  </fo:block>
+
+  <fo:block space-after.optimum="12pt" font-family="serif">FOP is part of Apache's XML project. The homepage of FOP is
+     <fo:inline font-style="italic" font-family="serif"><fo:basic-link color="blue" external-destination="http://xmlgraphics.apache.org/fop">http://xmlgraphics.apache.org/fop</fo:basic-link></fo:inline>
+  </fo:block>
+
+<fo:block space-after.optimum="12pt" font-family="serif" font-weight="bold" text-align="center">
+align="start"
+</fo:block>
+
+<fo:block space-after.optimum="12pt" font-family="serif" text-align="start">
+     Apache FOP is the world's first print formatter driven by XSL formatting
+     objects. It is a Java 1.1 application that reads a <fo:basic-link internal-destination="block1" color="blue">formatting object</fo:basic-link>
+     tree and then turns it into a <fo:basic-link internal-destination="block1" color="blue">PDF document</fo:basic-link>. The formatting object
+     tree, can be in the form of an XML <fo:basic-link internal-destination="block1" color="blue">document</fo:basic-link> (output by an XSLT engine
+     like XT or Xalan) or can be passed in memory as a DOM Document or (in
+     the case of XT) SAX events.
+
+  </fo:block>
+
+<fo:block space-after.optimum="12pt" font-family="serif" font-weight="bold" text-align="center">
+align="center"
+</fo:block>
+
+<fo:block space-after.optimum="12pt" font-family="serif" text-align="center">
+     Apache FOP is the world's first print formatter driven by XSL formatting
+     objects. It is a Java 1.1 application that reads a <fo:basic-link internal-destination="block1" color="blue">formatting object</fo:basic-link>
+     tree and then turns it into a <fo:basic-link internal-destination="block1" color="blue">PDF document</fo:basic-link>. The formatting object
+     tree, can be in the form of an XML <fo:basic-link internal-destination="block1" color="blue">document</fo:basic-link> (output by an XSLT engine
+     like XT or Xalan) or can be passed in memory as a DOM Document or (in
+     the case of XT) SAX events.
+
+  </fo:block>
+
+<fo:block space-after.optimum="12pt" font-family="serif" font-weight="bold" text-align="center">
+align="justify"
+</fo:block>
+
+  <fo:block space-after.optimum="12pt" font-family="serif" text-align="justify">
+     Apache FOP is the world's first print formatter driven by XSL formatting
+     objects. It is a Java 1.1 application that reads a <fo:basic-link internal-destination="block1" color="blue">formatting object</fo:basic-link>
+     tree and then turns it into a <fo:basic-link internal-destination="block1" color="blue">PDF document</fo:basic-link>. The formatting object
+     tree, can be in the form of an XML <fo:basic-link internal-destination="block1" color="blue">document</fo:basic-link> (output by an XSLT engine
+     like XT or Xalan) or can be passed in memory as a DOM Document or (in
+     the case of XT) SAX events.
+
+  </fo:block>
+
+<!-- table start -->
+    <fo:table table-layout="fixed" width="100%" border-collapse="separate">
+      <fo:table-column column-width="50mm"/>
+      <fo:table-column column-width="50mm"/>
+      <fo:table-column column-width="50mm"/>
+      <fo:table-body>
+        <fo:table-row>
+          <fo:table-cell ><fo:block>good</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>bad</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block><fo:basic-link internal-destination="block1" color="blue">ugly</fo:basic-link></fo:block></fo:table-cell>
+        </fo:table-row>
+        <fo:table-row>
+          <fo:table-cell ><fo:block>nice</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block><fo:basic-link internal-destination="block1" color="blue">dice</fo:basic-link></fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>vice</fo:block></fo:table-cell>
+        </fo:table-row>
+        <fo:table-row>
+          <fo:table-cell ><fo:block>literature</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>music</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block><fo:basic-link internal-destination="block1" color="blue">art</fo:basic-link></fo:block></fo:table-cell>
+        </fo:table-row>
+        <fo:table-row>
+          <fo:table-cell ><fo:block><fo:basic-link internal-destination="block1" color="blue">java</fo:basic-link></fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>perl</fo:block></fo:table-cell>
+          <fo:table-cell ><fo:block>python</fo:block></fo:table-cell>
+        </fo:table-row>
+      </fo:table-body>
+    </fo:table>
+    <!-- table end -->
+
+  <fo:block break-before="page" space-after.optimum="12pt" font-family="serif" text-align="start" font-weight="bold">
+      Links in different orientations
+  </fo:block>
+
+      <fo:block>
+        This block container has a different reference orientation.
+        <fo:block-container reference-orientation="90" inline-progression-dimension="150pt">
+          <fo:block>
+            A link applies to the inline parent area that is created
+            by the basic-link. This inline area has a trait specifying
+            the link.
+          </fo:block>
+          <fo:block>
+            <fo:basic-link external-destination="http://xmlgraphics.apache.org/fop"
+                           color="blue" text-decoration="underline">
+               http://xmlgraphics.apache.org/fop
+            </fo:basic-link>
+          </fo:block>
+        </fo:block-container>
+      </fo:block>
+
+
+</fo:flow>
+
+</fo:page-sequence>
+</fo:root>

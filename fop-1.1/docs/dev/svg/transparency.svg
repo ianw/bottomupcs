@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- $Id: transparency.svg 426576 2006-07-28 15:44:37Z jeremias $ -->
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<g>
+
+<text x="20" y="20" style="font-size:18">Transparency in SVG (to PDF)</text>
+
+<text x="20" y="35" style="font-size:12">Shapes</text>
+<rect x="30" y="55" width="100" height="80" style="fill:green;stroke:blue;stroke-width:3;fill-opacity:0.5;stroke-opacity:0.6"/>
+<rect x="80" y="95" width="100" height="80" style="fill:red;stroke:yellow;stroke-width:3;fill-opacity:0.5"/>
+
+
+</g>
+
+<g>
+<defs>
+      <filter id="Turb" filterUnits="objectBoundingBox"
+              x="0%" y="0%" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="1"/>
+      </filter>
+</defs>
+
+<text x="20" y="205" style="font-size:12">Image</text>
+    <rect x="20" y="210" width="40" height="35" style="fill:blue" />
+<text x="60" y="255" style="font-size:20;font-weight:bold">SEE</text>
+    <rect x="25" y="215" width="100" height="75" style="filter:url(#Turb)" />
+
+
+</g>
+
+<text x="220" y="35" style="font-size:12">Text</text>
+<rect x="240" y="55" width="130" height="50" style="fill:blue"/>
+<text x="280" y="75" style="font-size:20;font-weight:bold;fill-opacity:0.6;fill:green">SEE</text>
+<text x="250" y="95" style="font-size:20;font-weight:bold;fill-opacity:0.4;fill:orange;stroke:red">THROUGH</text>
+
+<text x="220" y="205" style="font-size:12">Uniform Image Transparency</text>
+<defs>
+      <filter id="matrixGreen" filterUnits="objectBoundingBox"
+              x="0%" y="0%" width="100%" height="100%">
+        <feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="2" stitchTiles="noStitch" seed="0" result="turb"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 0 1" />
+      </filter>
+</defs>
+<rect x="240" y="225" width="100" height="75" style="opacity:0.4;filter:url(#matrixGreen)" />
+
+
+</svg>
+

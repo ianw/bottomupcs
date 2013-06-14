@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id$ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "document-v13.dtd">
+<document xmlns:xi="http://www.w3.org/2001/XInclude">
+  <header>
+    <title>Apache&#8482; FOP Version 1.1</title>
+    <version>$Revision$</version>
+  </header>
+  <body>
+    <section id="intro">
+      <title>Introduction</title>
+      <p>
+        This is Version 1.1 of Apache FOP. FOP 1.1 contains many bug
+        fixes and a number of improvements, including
+        important features such as support for <link href="complexscripts.html">Complex Scripts</link>
+        (e.g., Arabic, Hebrew, Indic, and Southeast Asian scripts). To see what has changed since the last release,
+        please visit <link href="releaseNotes_1.1.html">Release Notes</link>.
+      </p>
+      <p>
+	This release implements a substantial subset of the W3C XSL-FO 1.1
+	Recommendation. For a detailed overview of FOP's
+	compliance with this recommendation, see <link href="../compliance.html">Compliance</link>.
+      </p>
+    </section>
+    <section id="upgrading">
+      <title>Upgrading from an earlier version</title>
+      <p>
+        If you're upgrading to this version from an earlier version of FOP, please read the 
+        information on <link href="upgrading.html">Upgrading</link>!
+      </p>
+    </section>
+    <section id="download">
+      <title>Download</title>
+      <p>
+        To download this version, please visit <link href="../download.html">Downloading</link>.
+      </p>
+    </section>
+  </body>
+</document>

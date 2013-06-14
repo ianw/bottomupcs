@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+  
+  http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- $Id: bleed-and-crop-marks.fo 800143 2009-08-02 19:43:19Z jeremias $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"
+  xmlns:fox="http://xmlgraphics.apache.org/fop/extensions"
+  font-family="sans-serif" font-size="9pt">
+
+  <fo:layout-master-set>
+    <fo:simple-page-master master-name="business-card"
+          page-width="84mm" page-height="53mm"
+          fox:bleed="3mm" fox:crop-box="media-box" fox:crop-offset="10mm" fox:scale="4">
+       <fo:region-body margin-bottom="3mm" margin-left="3mm" margin-right="3mm"/>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+
+  <fo:page-sequence master-reference="business-card">
+    <fo:flow flow-name="xsl-region-body">
+      <fo:block-container id="crop-marks" absolute-position="fixed">
+        <fo:block line-height="1" font-size="0pt">
+          <fo:instream-foreign-object>
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="84mm" height="53mm" viewBox="0 0 84 53" overflow="visible">
+              <style type="text/css"><![CDATA[
+    .line { fill:none; stroke:black; stroke-width:0.1 }
+    .colorbox { stroke:black; stroke-width:0.1 }
+]]></style>
+              
+              <defs>
+                <rect id="box" class="colorbox" width="5" height="4"/>
+              </defs>
+              <g id="cut-marks">
+                <polyline class="line" points="0,-3 0,-10" />
+                <polyline class="line" points="84,-3 84,-10" />
+                
+                <polyline class="line" points="-3,0 -10,0" />
+                <polyline class="line" points="-3,53 -10,53" />
+                
+                <polyline class="line" points="0,56 0,63" />
+                <polyline class="line" points="84,56 84,63" />
+                
+                <polyline class="line" points="87,0 94,0" />
+                <polyline class="line" points="87,53 94,53" />
+              </g>
+              
+              <g id="grays" transform="translate(88,4)">
+                <use xlink:href="#box" y="0" style="fill:rgb(0%,0%,0%)"/>
+                <use xlink:href="#box" y="4" style="fill:rgb(10%,10%,10%)"/>
+                <use xlink:href="#box" y="8" style="fill:rgb(20%,20%,20%)"/>
+                <use xlink:href="#box" y="12" style="fill:rgb(30%,30%,30%)"/>
+                <use xlink:href="#box" y="16" style="fill:rgb(40%,40%,40%)"/>
+                <use xlink:href="#box" y="20" style="fill:rgb(50%,50%,50%)"/>
+                <use xlink:href="#box" y="24" style="fill:rgb(60%,60%,60%)"/>
+                <use xlink:href="#box" y="28" style="fill:rgb(70%,70%,70%)"/>
+                <use xlink:href="#box" y="32" style="fill:rgb(80%,80%,80%)"/>
+                <use xlink:href="#box" y="36" style="fill:rgb(90%,90%,90%)"/>
+                <use xlink:href="#box" y="40" style="fill:rgb(100%,100%,100%)"/>
+              </g>
+
+              <g id="cyan" transform="translate(4,-9)">
+                <use xlink:href="#box" x="0" style="fill:rgb(0%,100%,100%)"/>
+                <use xlink:href="#box" x="5" style="fill:rgb(5%,100%,100%)"/>
+                <use xlink:href="#box" x="10" style="fill:rgb(25%,100%,100%)"/>
+                <use xlink:href="#box" x="15" style="fill:rgb(50%,100%,100%)"/>
+                <use xlink:href="#box" x="20" style="fill:rgb(75%,100%,100%)"/>
+                <use xlink:href="#box" x="25" style="fill:rgb(95%,100%,100%)"/>
+              </g>
+              <g id="magenta" transform="translate(50,-9)">
+                <use xlink:href="#box" x="0" style="fill:rgb(100%,0%,100%)"/>
+                <use xlink:href="#box" x="5" style="fill:rgb(100%,5%,100%)"/>
+                <use xlink:href="#box" x="10" style="fill:rgb(100%,25%,100%)"/>
+                <use xlink:href="#box" x="15" style="fill:rgb(100%,50%,100%)"/>
+                <use xlink:href="#box" x="20" style="fill:rgb(100%,75%,100%)"/>
+                <use xlink:href="#box" x="25" style="fill:rgb(100%,95%,100%)"/>
+              </g>
+              <g id="yellow" transform="translate(4,58)">
+                <use xlink:href="#box" x="0" style="fill:rgb(100%,100%,0%)"/>
+                <use xlink:href="#box" x="5" style="fill:rgb(100%,100%,5%)"/>
+                <use xlink:href="#box" x="10" style="fill:rgb(100%,100%,25%)"/>
+                <use xlink:href="#box" x="15" style="fill:rgb(100%,100%,50%)"/>
+                <use xlink:href="#box" x="20" style="fill:rgb(100%,100%,75%)"/>
+                <use xlink:href="#box" x="25" style="fill:rgb(100%,100%,95%)"/>
+              </g>
+              <g id="base-colors" transform="translate(50,58)">
+                <use xlink:href="#box" x="0" style="fill:red"/>
+                <use xlink:href="#box" x="5" style="fill:green"/>
+                <use xlink:href="#box" x="10" style="fill:blue"/>
+                <use xlink:href="#box" x="15" style="fill:cyan"/>
+                <use xlink:href="#box" x="20" style="fill:magenta"/>
+                <use xlink:href="#box" x="25" style="fill:yellow"/>
+              </g>
+              
+            </svg>
+          </fo:instream-foreign-object>
+        </fo:block>
+      </fo:block-container>
+      
+      <fo:block-container id="background" absolute-position="fixed"
+        inline-progression-dimension="84mm" block-progression-dimension="14mm"
+        overflow="visible">
+        <fo:block line-height="1" font-size="0pt">
+          <fo:instream-foreign-object>
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+              width="84mm" height="14mm" viewBox="0 0 84 14" overflow="visible">
+              
+              <defs>
+                <linearGradient id="MyGradient">
+                  <stop offset="0%" stop-color="#FF0000"/>
+                  <stop offset="30%" stop-color="#FF0000"/>
+                  <stop offset="55%" stop-color="#FFFFFF"/>
+                  <stop offset="100%" stop-color="#FFFFFF"/>
+                </linearGradient>
+              </defs>
+              <rect x="-3" y="-3" width="87" height="17" style="fill:url(#MyGradient); stroke:none"/>
+            </svg>
+          </fo:instream-foreign-object>
+        </fo:block>
+      </fo:block-container>
+      
+      <fo:block-container block-progression-dimension="14mm" display-align="center">
+        <fo:block font-weight="bold" font-size="9mm" line-height="1.5" color="white">ACME</fo:block>
+      </fo:block-container>
+      <fo:block start-indent="3mm" end-indent="3mm"/>
+      <fo:block text-align="end" space-before="3mm" space-before.conditionality="retain">
+        <fo:block font-size="14pt" font-weight="bold" space-after="2mm">
+          Pepé Le Pew
+        </fo:block>
+        <fo:block font-size="12pt" space-after="4mm">
+          Expert d'Amour
+        </fo:block>
+      </fo:block>
+      <fo:block>
+        <fo:block>13 Pleasantstreet</fo:block>
+        <fo:block>Acme Acres</fo:block>
+        <fo:block>+1 (23) 456-7890</fo:block>
+        <fo:block>pepe@looney.toon</fo:block>
+      </fo:block>
+    </fo:flow>
+   </fo:page-sequence>
+</fo:root>

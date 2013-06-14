@@ -1,0 +1,1809 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- $Id: xslfoRef.xml 627324 2008-02-13 09:35:01Z maxberger $ -->
+<!--
+tbd: - internal linking
+     - one line explanation
+     - example
+please note: the short explanation of each fo is based (mostly verbatim) on the section 6.3 of
+the Extensible Stylesheet Language (XSL) Version 1.0 W3C Candidate Recommendation 21 November 2000.
+           authors: Sharon Adler, Anders Berglund, Jeff Caruso, Stephen Deach
+                    Paul Grosso, Eduardo Gutentag, Alex Milowski, Scott Parnell,
+                    Jeremy Richman, Steve Zilles
+           url: http://www.w3.org/TR/2000/CR-xsl-20001121/
+
+-->
+<root>
+<div0><head>formatting objects</head>
+<div id="fo:basic-link">
+<fo>fo:basic-link</fo>
+<explanation>represents the start resource of a simple link.</explanation>
+<content>(#PCDATA|%inline;|%block;)*</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-margin-properties-inline</property>
+  <property>common-relative-position-properties</property>
+  <property>alignment-adjust</property>
+  <property>alignment-baseline</property>
+  <property>baseline-shift</property>
+  <property>destination-placement-offset</property>
+  <property>dominant-baseline</property>
+  <property>external-destination</property>
+  <property>id</property>
+  <property>indicate-destination</property>
+  <property>internal-destination</property>
+  <property>keep-together</property>
+  <property>keep-with-next</property>
+  <property>keep-with-previous</property>
+  <property>line-height</property>
+  <property>line-height-shift-adjustment</property>
+  <property>show-destination</property>
+  <property>target-processing-context</property>
+  <property>target-presentation-context</property>
+  <property>target-stylesheet</property>
+</properties>
+</div><div id="fo:bidi-override">
+<fo>fo:bidi-override</fo>
+<explanation> overrides the default Unicode-bidirectionality algorithm direction for different
+ (or nested) inline scripts in mixed-language documents</explanation>
+<content>(#PCDATA|%inline;|%block;)*</content>
+<properties>
+  <property>common-aural-properties</property>
+  <property>common-font-properties</property>
+  <property>common-relative-position-properties</property>
+  <property>color</property>
+  <property>direction</property>
+  <property>id</property>
+  <property>letter-spacing</property>
+  <property>line-height</property>
+  <property>line-height-shift-adjustment</property>
+  <property>score-spaces</property>
+  <property>text-shadow</property>
+  <property>text-transform</property>
+  <property>unicode-bidi</property>
+  <property>word-spacing</property>
+</properties>
+</div><div id="fo:block">
+<fo>fo:block</fo>
+<explanation>commonly used for formatting paragraphs, titles, headlines, figure and table captions</explanation>
+<content>(#PCDATA|%inline;|%block;)*</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-font-properties</property>
+  <property>common-hyphenation-properties</property>
+  <property>common-margin-properties-block</property>
+  <property>common-relative-position-properties</property>
+  <property>break-after</property>
+  <property>break-before</property>
+  <property>color</property>
+  <property>text-depth</property>
+  <property>text-altitude</property>
+  <property>hyphenation-keep</property>
+  <property>hyphenation-ladder-count</property>
+  <property>id</property>
+  <property>keep-together</property>
+  <property>keep-with-next</property>
+  <property>keep-with-previous</property>
+  <property>last-line-end-indent</property>
+  <property>linefeed-treatment</property>
+  <property>line-height</property>
+  <property>line-height-shift-adjustment</property>
+  <property>line-stacking-strategy</property>
+  <property>orphans</property>
+  <property>space-treatment</property>
+  <property>span</property>
+  <property>text-align</property>
+  <property>text-align-last</property>
+  <property>text-indent</property>
+  <property>visibility</property>
+  <property>white-space-collapse</property>
+  <property>widows</property>
+  <property>wrap-option</property>
+  <property>z-index</property>
+</properties>
+</div><div id="fo:block-container">
+<fo>fo:block-container</fo>
+<explanation>generates a block-level reference-area</explanation>
+<content>(%block;)+</content>
+<properties>
+  <property>common-absolute-position-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-margin-properties-block</property>
+  <property>block-progression-dimension</property>
+  <property>break-after</property>
+  <property>break-before</property>
+  <property>clip</property>
+  <property>display-align</property>
+  <property>height</property>
+  <property>id</property>
+  <property>inline-progression-dimension</property>
+  <property>keep-together</property>
+  <property>keep-with-next</property>
+  <property>keep-with-previous</property>
+  <property>overflow</property>
+  <property>reference-orientation</property>
+  <property>span</property>
+  <property>width</property>
+  <property>writing-mode</property>
+</properties>
+</div><div id="fo:character">
+<fo>fo:character</fo>
+<explanation>represents a character that is mapped to a glyph for presentation</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-font-properties</property>
+  <property>common-hyphenation-properties</property>
+  <property>common-margin-properties-inline</property>
+  <property>common-relative-position-properties</property>
+  <property>alignment-adjust</property>
+  <property>treat-as-word-space</property>
+  <property>alignment-baseline</property>
+  <property>baseline-shift</property>
+  <property>character</property>
+  <property>color</property>
+  <property>dominant-baseline</property>
+  <property>text-depth</property>
+  <property>text-altitude</property>
+  <property>glyph-orientation-horizontal</property>
+  <property>glyph-orientation-vertical</property>
+  <property>id</property>
+  <property>keep-with-next</property>
+  <property>keep-with-previous</property>
+  <property>letter-spacing</property>
+  <property>line-height</property>
+  <property>line-height-shift-adjustment</property>
+  <property>score-spaces</property>
+  <property>suppress-at-line-break</property>
+  <property>text-decoration</property>
+  <property>text-shadow</property>
+  <property>text-transform</property>
+  <property>word-spacing</property>
+</properties>
+</div><div id="fo:color-profile">
+<fo>fo:color-profile</fo>
+<explanation>declares a color profile for a stylesheet</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>src</property>
+  <property>color-profile-name</property>
+  <property>rendering-intent</property>
+</properties>
+</div><div id="fo:conditional-page-master-reference">
+<fo>fo:conditional-page-master-reference</fo>
+<explanation>identifies a page-master that is to be used when the conditions on its use are satisfied</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>master-name</property>
+  <property>page-position</property>
+  <property>odd-or-even</property>
+  <property>blank-or-not-blank</property>
+</properties>
+</div><div id="fo:declarations">
+<fo>fo:declarations</fo>
+<explanation>groups global declarations for a stylesheet</explanation>
+<content>(color-profile)+</content>
+</div><div id="fo:external-graphic">
+<fo>fo:external-graphic</fo>
+<explanation>used for a graphic where the graphics data resides outside of the XML result tree in the fo namespace</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-margin-properties-inline</property>
+  <property>common-relative-position-properties</property>
+  <property>alignment-adjust</property>
+  <property>alignment-baseline</property>
+  <property>baseline-shift</property>
+  <property>block-progression-dimension</property>
+  <property>content-height</property>
+  <property>content-type</property>
+  <property>content-width</property>
+  <property>display-align</property>
+  <property>dominant-baseline</property>
+  <property>height</property>
+  <property>id</property>
+  <property>inline-progression-dimension</property>
+  <property>keep-with-next</property>
+  <property>keep-with-previous</property>
+  <property>line-height</property>
+  <property>line-height-shift-adjustment</property>
+  <property>overflow</property>
+  <property>scaling</property>
+  <property>scaling-method</property>
+  <property>src</property>
+  <property>text-align</property>
+  <property>width</property>
+</properties>
+</div><div id="fo:float">
+<fo>fo:float</fo>
+<explanation>used when an area is intended to float to one side, with normal content flowing alongside</explanation>
+<content>(%block;)+</content>
+<properties>
+  <property>float</property>
+  <property>clear</property>
+</properties>
+</div><div id="fo:flow">
+<fo>fo:flow</fo>
+<explanation>container for the flow objects which contain the text/images/etc. for the resulting pages</explanation>
+<content>(%block;)+</content>
+<properties>
+  <property>flow-name</property>
+</properties>
+</div><div id="fo:footnote">
+<fo>fo:footnote</fo>
+<explanation>produces a footnote citation and the corresponding footnote</explanation>
+<content>(inline,footnote-body)</content>
+</div><div id="fo:footnote-body">
+<fo>fo:footnote-body</fo>
+<explanation>generates the content of the footnote</explanation>
+<content>(%block;)+</content>
+</div><div id="fo:initial-property-set">
+<fo>fo:initial-property-set</fo>
+<explanation>specifies formatting properties for the first line of an fo:block</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-font-properties</property>
+  <property>common-relative-position-properties</property>
+  <property>color</property>
+  <property>id</property>
+  <property>letter-spacing</property>
+  <property>line-height</property>
+  <property>line-height-shift-adjustment</property>
+  <property>score-spaces</property>
+  <property>text-decoration</property>
+  <property>text-shadow</property>
+  <property>text-transform</property>
+  <property>word-spacing</property>
+</properties>
+</div><div id="fo:inline">
+<fo>fo:inline</fo>
+<explanation>is commonly used for formatting a portion of text with a background or enclosing it in a border</explanation>
+<content>(#PCDATA|%inline;|%block;)*</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-font-properties</property>
+  <property>common-margin-properties-inline</property>
+  <property>common-relative-position-properties</property>
+  <property>alignment-adjust</property>
+  <property>alignment-baseline</property>
+  <property>baseline-shift</property>
+  <property>color</property>
+  <property>dominant-baseline</property>
+  <property>id</property>
+  <property>keep-together</property>
+  <property>keep-with-next</property>
+  <property>keep-with-previous</property>
+  <property>line-height</property>
+  <property>line-height-shift-adjustment</property>
+  <property>text-decoration</property>
+  <property>visibility</property>
+  <property>z-index</property>
+</properties>
+</div><div id="fo:inline-container">
+<fo>fo:inline-container</fo>
+<explanation>generates an inline reference-area</explanation>
+<content>(%block;)+</content>
+<properties>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-margin-properties-inline</property>
+  <property>common-relative-position-properties</property>
+  <property>alignment-adjust</property>
+  <property>alignment-baseline</property>
+  <property>baseline-shift</property>
+  <property>block-progression-dimension</property>
+  <property>clip</property>
+  <property>display-align</property>
+  <property>dominant-baseline</property>
+  <property>height</property>
+  <property>id</property>
+  <property>inline-progression-dimension</property>
+  <property>keep-together</property>
+  <property>keep-with-next</property>
+  <property>keep-with-previous</property>
+  <property>line-height</property>
+  <property>line-height-shift-adjustment</property>
+  <property>overflow</property>
+  <property>reference-orientation</property>
+  <property>width</property>
+  <property>writing-mode</property>
+</properties>
+</div><div id="fo:instream-foreign-object">
+<fo>fo:instream-foreign-object</fo>
+<explanation>is used for an inline graphic or other "generic" object where the object data resides as descendants of the fo:instream-foreign-object</explanation>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-margin-properties-inline</property>
+  <property>common-relative-position-properties</property>
+  <property>alignment-adjust</property>
+  <property>alignment-baseline</property>
+  <property>baseline-shift</property>
+  <property>block-progression-dimension</property>
+  <property>content-height</property>
+  <property>content-type</property>
+  <property>content-width</property>
+  <property>display-align</property>
+  <property>dominant-baseline</property>
+  <property>height</property>
+  <property>id</property>
+  <property>inline-progression-dimension</property>
+  <property>keep-with-next</property>
+  <property>keep-with-previous</property>
+  <property>line-height</property>
+  <property>line-height-shift-adjustment</property>
+  <property>overflow</property>
+  <property>scaling</property>
+  <property>scaling-method</property>
+  <property>text-align</property>
+  <property>width</property>
+</properties>
+</div><div id="fo:layout-master-set">
+<fo>fo:layout-master-set</fo>
+<explanation>is a wrapper around all masters used in the document</explanation>
+<content>(simple-page-master|page-sequence-master)+</content>
+</div><div id="fo:leader">
+<fo>fo:leader</fo>
+<explanation>generates leaders consisting either of a rule or of a row of a repeating character or cyclically repeating pattern of characters that may be used for connecting two text formatting objects</explanation>
+<content>(#PCDATA|%inline;)*</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-font-properties</property>
+  <property>common-margin-properties-inline</property>
+  <property>common-relative-position-properties</property>
+  <property>alignment-adjust</property>
+  <property>alignment-baseline</property>
+  <property>baseline-shift</property>
+  <property>color</property>
+  <property>dominant-baseline</property>
+  <property>text-depth</property>
+  <property>text-altitude</property>
+  <property>id</property>
+  <property>leader-alignment</property>
+  <property>leader-length</property>
+  <property>leader-pattern</property>
+  <property>leader-pattern-width</property>
+  <property>rule-style</property>
+  <property>rule-thickness</property>
+  <property>letter-spacing</property>
+  <property>line-height</property>
+  <property>line-height-shift-adjustment</property>
+  <property>text-shadow</property>
+  <property>visibility</property>
+  <property>word-spacing</property>
+  <property>z-index</property>
+</properties>
+</div><div id="fo:list-block">
+<fo>fo:list-block</fo>
+<explanation>container for a list</explanation>
+<content>(list-item+)</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-margin-properties-block</property>
+  <property>common-relative-position-properties</property>
+  <property>break-after</property>
+  <property>break-before</property>
+  <property>id</property>
+  <property>keep-together</property>
+  <property>keep-with-next</property>
+  <property>keep-with-previous</property>
+  <property>provisional-distance-between-starts</property>
+  <property>provisional-label-separation</property>
+</properties>
+</div><div id="fo:list-item">
+<fo>fo:list-item</fo>
+<explanation>contains the label and the body of an item in a list</explanation>
+<content>(list-item-label,list-item-body)</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-margin-properties-block</property>
+  <property>common-relative-position-properties</property>
+  <property>break-after</property>
+  <property>break-before</property>
+  <property>id</property>
+  <property>keep-together</property>
+  <property>keep-with-next</property>
+  <property>keep-with-previous</property>
+  <property>relative-align</property>
+</properties>
+</div><div id="fo:list-item-body">
+<fo>fo:list-item-body</fo>
+<explanation>contains the content of the body of a list-item</explanation>
+<content>(%block;)+</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>id</property>
+  <property>keep-together</property>
+</properties>
+</div><div id="fo:list-item-label">
+<fo>fo:list-item-label</fo>
+<explanation> contains the content of the label of a list-item; typically used to either enumerate, identify, or adorn the list-item's body</explanation>
+<content>(%block;)+</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>id</property>
+  <property>keep-together</property>
+</properties>
+</div><div id="fo:marker">
+<fo>fo:marker</fo>
+<explanation>is used in conjunction with fo:retrieve-marker to produce running headers or footers</explanation>
+<content>(#PCDATA|%inline;|%block;)*</content>
+<properties>
+  <property>marker-class-name</property>
+</properties>
+</div><div id="fo:multi-case">
+<fo>fo:multi-case</fo>
+<explanation> is used to contain (within an fo:multi-switch) each alternative sub-tree of formatting objects among which the parent fo:multi-switch will choose one to show and will hide the rest</explanation>
+<content>(#PCDATA|%inline;|%block;)*</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>id</property>
+  <property>starting-state</property>
+  <property>case-name</property>
+  <property>case-title</property>
+</properties>
+</div><div id="fo:multi-properties">
+<fo>fo:multi-properties</fo>
+<explanation> is used to switch between two or more property sets that are associated with a given portion of content</explanation>
+<content>(multi-property-set+,wrapper)</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>id</property>
+</properties>
+</div><div id="fo:multi-property-set">
+<fo>fo:multi-property-set</fo>
+<explanation> is used to specify an alternative set of formatting properties that, dependent on a User Agent state, are applied to the content</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>id</property>
+  <property>active-state</property>
+</properties>
+</div><div id="fo:multi-switch">
+<fo>fo:multi-switch</fo>
+<explanation>wraps the specification of alternative sub-trees of formatting objects (each sub-tree being within an fo:multi-case), and controls the switching (activated via fo:multi-toggle) from one alternative to another</explanation>
+<content>(multi-case+)</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>auto-restore</property>
+  <property>id</property>
+</properties>
+</div><div id="fo:multi-toggle">
+<fo>fo:multi-toggle</fo>
+<explanation>is used within an fo:multi-case to switch to another fo:multi-case</explanation>
+<content>(#PCDATA|%inline;|%block;)*</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>id</property>
+  <property>switch-to</property>
+</properties>
+</div><div id="fo:page-number">
+<fo>fo:page-number</fo>
+<explanation>represents the current page-number</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-font-properties</property>
+  <property>common-margin-properties-inline</property>
+  <property>common-relative-position-properties</property>
+  <property>alignment-adjust</property>
+  <property>alignment-baseline</property>
+  <property>baseline-shift</property>
+  <property>dominant-baseline</property>
+  <property>id</property>
+  <property>keep-with-next</property>
+  <property>keep-with-previous</property>
+  <property>letter-spacing</property>
+  <property>line-height</property>
+  <property>line-height-shift-adjustment</property>
+  <property>score-spaces</property>
+  <property>text-decoration</property>
+  <property>text-shadow</property>
+  <property>text-transform</property>
+  <property>word-spacing</property>
+</properties>
+</div><div id="fo:page-number-citation">
+<fo>fo:page-number-citation</fo>
+<explanation>references the page-number for the page containing the first normal area returned by the cited formatting object</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-font-properties</property>
+  <property>common-margin-properties-inline</property>
+  <property>common-relative-position-properties</property>
+  <property>alignment-adjust</property>
+  <property>alignment-baseline</property>
+  <property>baseline-shift</property>
+  <property>dominant-baseline</property>
+  <property>id</property>
+  <property>keep-with-next</property>
+  <property>keep-with-previous</property>
+  <property>letter-spacing</property>
+  <property>line-height</property>
+  <property>line-height-shift-adjustment</property>
+  <property>ref-id</property>
+  <property>score-spaces</property>
+  <property>text-decoration</property>
+  <property>text-shadow</property>
+  <property>text-transform</property>
+  <property>word-spacing</property>
+</properties>
+</div><div id="fo:page-sequence">
+<fo>fo:page-sequence</fo>
+<explanation> is used to specify how to create a (sub-)sequence of pages within a document; for example, a chapter of a report. The content of these pages comes from flow children of the fo:page-sequence</explanation>
+<content>(title?,static-content*,flow)</content>
+<properties>
+  <property>country</property>
+  <property>format</property>
+  <property>language</property>
+  <property>letter-value</property>
+  <property>grouping-separator</property>
+  <property>grouping-size</property>
+  <property>id</property>
+  <property>initial-page-number</property>
+  <property>force-page-count</property>
+  <property>master-name</property>
+</properties>
+</div><div id="fo:page-sequence-master">
+<fo>fo:page-sequence-master</fo>
+<explanation>specifies sequences of page-masters that are used when generating a sequence of pages</explanation>
+<content>(single-page-master-reference|repeatable-page-master-reference| repeatable-page-master-alternatives)+</content>
+<properties>
+  <property>master-name</property>
+</properties>
+</div><div id="fo:region-after">
+<fo>fo:region-after</fo>
+<explanation>defines a viewport that is located on the "after" side of fo:region-body region</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>common-border-padding-and-background-properties</property>
+  <property>clip</property>
+  <property>display-align</property>
+  <property>extent</property>
+  <property>overflow</property>
+  <property>precedence</property>
+  <property>region-name</property>
+  <property>reference-orientation</property>
+  <property>writing-mode</property>
+</properties>
+</div><div id="fo:region-before">
+<fo>fo:region-before</fo>
+<explanation>defines a viewport that is located on the "before" side of fo:region-body region</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>common-border-padding-and-background-properties</property>
+  <property>clip</property>
+  <property>display-align</property>
+  <property>extent</property>
+  <property>overflow</property>
+  <property>precedence</property>
+  <property>region-name</property>
+  <property>reference-orientation</property>
+  <property>writing-mode</property>
+</properties>
+</div><div id="fo:region-body">
+<fo>fo:region-body</fo>
+<explanation>specifies a viewport/reference pair that is located in the "center" of the fo:simple-page-master</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-margin-properties-block</property>
+  <property>clip</property>
+  <property>column-count</property>
+  <property>column-gap</property>
+  <property>display-align</property>
+  <property>overflow</property>
+  <property>region-name</property>
+  <property>reference-orientation</property>
+  <property>writing-mode</property>
+</properties>
+</div><div id="fo:region-end">
+<fo>fo:region-end</fo>
+<explanation>defines a viewport that is located on the "end" side of fo:region-body region</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>common-border-padding-and-background-properties</property>
+  <property>clip</property>
+  <property>display-align</property>
+  <property>extent</property>
+  <property>overflow</property>
+  <property>region-name</property>
+  <property>reference-orientation</property>
+  <property>writing-mode</property>
+</properties>
+</div><div id="fo:region-start">
+<fo>fo:region-start</fo>
+<explanation>defines a viewport that is located on the "start" side of fo:region-body region</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>common-border-padding-and-background-properties</property>
+  <property>clip</property>
+  <property>display-align</property>
+  <property>extent</property>
+  <property>overflow</property>
+  <property>region-name</property>
+  <property>reference-orientation</property>
+  <property>writing-mode</property>
+</properties>
+</div><div id="fo:repeatable-page-master-alternatives">
+<fo>fo:repeatable-page-master-alternatives</fo>
+<explanation>
+specifies a sub-sequence consisting of repeated instances of a set of alternative page-masters</explanation>
+<content>(conditional-page-master-reference+)</content>
+<properties>
+  <property>maximum-repeats</property>
+</properties>
+</div><div id="fo:repeatable-page-master-reference">
+<fo>fo:repeatable-page-master-reference</fo>
+<explanation>specifies a sub-sequence consisting of repeated instances of a single page-master</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>master-name</property>
+  <property>maximum-repeats</property>
+</properties>
+</div><div id="fo:retrieve-marker">
+<fo>fo:retrieve-marker</fo>
+<explanation>s used in conjunction with fo:marker to produce running headers or footers</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>retrieve-class-name</property>
+  <property>retrieve-position</property>
+  <property>retrieve-boundary</property>
+</properties>
+</div><div id="fo:root">
+<fo>fo:root</fo>
+<explanation>top node of an xsl formatting objects tree</explanation>
+<content>(layout-master-set,declarations?,page-sequence+)</content>
+<properties>
+  <property>media-usage</property>
+</properties>
+</div><div id="fo:simple-page-master">
+<fo>fo:simple-page-master</fo>
+<explanation> is used in the generation of pages and specifies the geometry of the page. The page may be subdivided into up to five regions</explanation>
+<content>(region-body,region-before?,region-after?,region-start?,region-end?)</content>
+<properties>
+  <property>common-margin-properties-block</property>
+  <property>master-name</property>
+  <property>page-height</property>
+  <property>page-width</property>
+  <property>reference-orientation</property>
+  <property>writing-mode</property>
+</properties>
+</div><div id="fo:single-page-master-reference">
+<fo>fo:single-page-master-reference</fo>
+<explanation>specifies a sub-sequence consisting of a single instance of a single page-master</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>master-name</property>
+</properties>
+</div><div id="fo:static-content">
+<fo>fo:static-content</fo>
+<explanation>holds a sequence or a tree of formatting objects that is to be presented in a single region or repeated in like-named regions on one or more pages in the page-sequence. Its common use is for repeating or running headers and footers</explanation>
+<content>(%block;)+</content>
+<properties>
+  <property>flow-name</property>
+</properties>
+</div><div id="fo:table">
+<fo>fo:table</fo>
+<explanation>container for a table</explanation>
+<content>(table-column*,table-header?,table-footer?,table-body+)</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-margin-properties-block</property>
+  <property>common-relative-position-properties</property>
+  <property>block-progression-dimension</property>
+  <property>border-after-precedence</property>
+  <property>border-before-precedence</property>
+  <property>border-collapse</property>
+  <property>border-end-precedence</property>
+  <property>border-separation</property>
+  <property>border-start-precedence</property>
+  <property>break-after</property>
+  <property>break-before</property>
+  <property>id</property>
+  <property>inline-progression-dimension</property>
+  <property>height</property>
+  <property>keep-together</property>
+  <property>keep-with-next</property>
+  <property>keep-with-previous</property>
+  <property>table-layout</property>
+  <property>table-omit-footer-at-break</property>
+  <property>table-omit-header-at-break</property>
+  <property>width</property>
+  <property>writing-mode</property>
+</properties>
+</div><div id="fo:table-and-caption">
+<fo>fo:table-and-caption</fo>
+<explanation>is used for formatting a table together with its caption</explanation>
+<content>(table-caption?,table)</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-margin-properties-block</property>
+  <property>common-relative-position-properties</property>
+  <property>caption-side</property>
+  <property>id</property>
+  <property>keep-together</property>
+  <property>keep-with-next</property>
+  <property>keep-with-previous</property>
+</properties>
+</div><div id="fo:table-body">
+<fo>fo:table-body</fo>
+<explanation>contains the table body</explanation>
+<content>(table-row+|table-cell+)</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-relative-position-properties</property>
+  <property>id</property>
+</properties>
+</div><div id="fo:table-caption">
+<fo>fo:table-caption</fo>
+<explanation>contains the caption for the table (only when using the fo:table-and-caption)</explanation>
+<content>(%block;)+</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-relative-position-properties</property>
+  <property>block-progression-dimension</property>
+  <property>height</property>
+  <property>id</property>
+  <property>inline-progression-dimension</property>
+  <property>keep-together</property>
+  <property>width</property>
+</properties>
+</div><div id="fo:table-cell">
+<fo>fo:table-cell</fo>
+<explanation>contains content to be placed in a table cell</explanation>
+<content>(%block;)+</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-relative-position-properties</property>
+  <property>border-after-precedence</property>
+  <property>border-before-precedence</property>
+  <property>border-end-precedence</property>
+  <property>border-start-precedence</property>
+  <property>block-progression-dimension</property>
+  <property>column-number</property>
+  <property>display-align</property>
+  <property>relative-align</property>
+  <property>empty-cells</property>
+  <property>ends-row</property>
+  <property>height</property>
+  <property>id</property>
+  <property>number-columns-spanned</property>
+  <property>number-rows-spanned</property>
+  <property>starts-row</property>
+  <property>width</property>
+</properties>
+</div><div id="fo:table-column">
+<fo>fo:table-column</fo>
+<explanation>specifies characteristics applicable to table cells that have the same column and span.</explanation>
+<content>EMPTY</content>
+<properties>
+  <property>common-border-padding-and-background-properties</property>
+  <property>column-number</property>
+  <property>column-width</property>
+  <property>number-columns-repeated</property>
+  <property>number-columns-spanned</property>
+  <property>visibility</property>
+</properties>
+</div><div id="fo:table-footer">
+<fo>fo:table-footer</fo>
+<explanation>contain the table footer</explanation>
+<content>(table-row+|table-cell+)</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-relative-position-properties</property>
+  <property>id</property>
+</properties>
+</div><div id="fo:table-header">
+<fo>fo:table-header</fo>
+<explanation>contains the table header</explanation>
+<content>(table-row+|table-cell+)</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-relative-position-properties</property>
+  <property>id</property>
+</properties>
+</div><div id="fo:table-row">
+<fo>fo:table-row</fo>
+<explanation>groups table-cells into rows</explanation>
+<content>(table-cell+)</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>block-progression-dimension</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-relative-position-properties</property>
+  <property>break-after</property>
+  <property>break-before</property>
+  <property>id</property>
+  <property>height</property>
+  <property>keep-together</property>
+  <property>keep-with-next</property>
+  <property>keep-with-previous</property>
+</properties>
+</div><div id="fo:title">
+<fo>fo:title</fo>
+<explanation> is used to associate a title with a given document. This title may be used by an interactive User Agent to identify the document</explanation>
+<content>(#PCDATA|%inline;)*</content>
+<properties>
+  <property>common-accessibility-properties</property>
+  <property>common-aural-properties</property>
+  <property>common-border-padding-and-background-properties</property>
+  <property>common-font-properties</property>
+  <property>common-margin-properties-inline</property>
+  <property>baseline-shift</property>
+  <property>color</property>
+  <property>line-height</property>
+  <property>line-height-shift-adjustment</property>
+  <property>visibility</property>
+  <property>z-index</property>
+</properties>
+</div><div id="fo:wrapper">
+<fo>fo:wrapper</fo>
+<explanation>is used to specify inherited properties for a group of formatting objects. It has no additional formatting semantics</explanation>
+<content>(#PCDATA|%inline;|%block;)*</content>
+<properties>
+  <property>id</property>
+</properties>
+</div></div0>
+
+<div0><head>formatting object content</head>
+<div>
+<fo>%block;</fo>
+<properties>
+  <property>block</property>
+  <property>block-container</property>
+  <property>list-block</property>
+  <property>table</property>
+  <property>table-and-caption</property>
+</properties>
+</div>
+<div>
+<fo>%inline;</fo>
+<properties>
+<property>basic-link</property>
+<property>bidi-override</property>
+<property>character</property>
+<property>external-graphic</property>
+<property>inline</property>
+<property>inline-container</property>
+<property>instream-foreign-object</property>
+<property>leader</property>
+<property>multi-toggle</property>
+<property>page-number</property>
+<property>page-number-citation</property>
+</properties>
+</div>
+</div0>
+
+<div0><head>property groups</head>
+<div>
+<fo>Common Accessibility Properties</fo>
+<properties>
+  <property>role</property>
+  <property>source-document</property>
+</properties>
+</div>
+<div>
+<fo>Common Absolute Position Properties</fo>
+<properties>
+  <property>absolute-position</property>
+  <property>top</property>
+  <property>right</property>
+  <property>bottom</property>
+  <property>left</property>
+</properties>
+</div>
+<div>
+<fo>Common Aural Properties</fo>
+<properties>
+  <property>azimuth</property>
+  <property>cue-after</property>
+  <property>cue-before</property>
+  <property>elevation</property>
+  <property>pause-after</property>
+  <property>pause-before</property>
+  <property>pitch</property>
+  <property>pitch-range</property>
+  <property>play-during</property>
+  <property>richness</property>
+  <property>speak</property>
+  <property>speak-header</property>
+  <property>speak-numeral</property>
+  <property>speak-punctuation</property>
+  <property>speech-rate</property>
+  <property>stress</property>
+  <property>voice-family</property>
+  <property>volume</property>
+</properties>
+</div>
+<div>
+<fo>Common Border, Padding, and Background Properties</fo>
+<properties>
+  <property>background-attachment</property>
+  <property>background-color</property>
+  <property>background-image</property>
+  <property>background-repeat</property>
+  <property>background-position-horizontal</property>
+  <property>background-position-vertical</property>
+  <property>border-before-color</property>
+  <property>border-before-style</property>
+  <property>border-before-width</property>
+  <property>border-after-color</property>
+  <property>border-after-style</property>
+  <property>border-after-width</property>
+  <property>border-start-color</property>
+  <property>border-start-style</property>
+  <property>border-start-width</property>
+  <property>border-end-color</property>
+  <property>border-end-style</property>
+  <property>border-end-width</property>
+  <property>border-top-color</property>
+  <property>border-top-style</property>
+  <property>border-top-width</property>
+  <property>border-bottom-color</property>
+  <property>border-bottom-style</property>
+  <property>border-bottom-width</property>
+  <property>border-left-color</property>
+  <property>border-left-style</property>
+  <property>border-left-width</property>
+  <property>border-right-color</property>
+  <property>border-right-style</property>
+  <property>border-right-width</property>
+  <property>padding-before</property>
+  <property>padding-after</property>
+  <property>padding-start</property>
+  <property>padding-end</property>
+  <property>padding-top</property>
+  <property>padding-bottom</property>
+  <property>padding-left</property>
+  <property>padding-right</property>
+</properties>
+</div>
+<div>
+<fo>Common Font Properties</fo>
+<properties>
+  <property>Fonts and Font Data</property>
+  <property>font-family</property>
+  <property>font-selection-strategy</property>
+  <property>font-size</property>
+  <property>font-stretch</property>
+  <property>font-size-adjust</property>
+  <property>font-style</property>
+  <property>font-variant</property>
+  <property>font-weight</property>
+</properties>
+</div>
+<div>
+<fo>Common HyphenationProperties</fo>
+<properties>
+  <property>country</property>
+  <property>language</property>
+  <property>script</property>
+  <property>hyphenate</property>
+  <property>hyphenation-character</property>
+  <property>hyphenation-push-character-count</property>
+  <property>hyphenation-remain-character-count</property>
+</properties>
+</div>
+<div>
+<fo>Common MarginProperties-Block</fo>
+<properties>
+  <property>margin-top</property>
+  <property>margin-bottom</property>
+  <property>margin-left</property>
+  <property>margin-right</property>
+  <property>space-before</property>
+  <property>space-after</property>
+  <property>start-indent</property>
+  <property>end-indent</property>
+</properties>
+</div>
+<div>
+<fo>CommonMargin Properties-Inline</fo>
+<properties>
+  <property>space-end</property>
+  <property>space-start</property>
+</properties>
+</div>
+<div>
+<fo>Common Relative Position Properties</fo>
+<properties>
+  <property>relative-position</property>
+  <property>top</property>
+  <property>right</property>
+  <property>bottom</property>
+  <property>left</property>
+</properties>
+</div>
+</div0>
+<div0><head>properties</head>
+<div id="absolute-position">
+<property-def>absolute-position</property-def>
+<values>auto | absolute | fixed | inherit</values>
+</div><div id="active-state">
+<property-def>active-state</property-def>
+<values>link | visited | active | hover | focus</values>
+</div><div id="alignment-adjust">
+<property-def>alignment-adjust</property-def>
+<values>auto | baseline | before-edge| text-before-edge | middle | central | after-edge| text-after-edge | ideographic | alphabetic | hanging | mathematical| &lt;percentage&gt; | &lt;length&gt;| inherit</values>
+</div><div id="alignment-baseline">
+<property-def>alignment-baseline</property-def>
+<values>auto | baseline | before-edge| text-before-edge | middle | central | after-edge| text-after-edge | ideographic | alphabetic | hanging | mathematical| inherit</values>
+</div><div id="auto-restore">
+<property-def>auto-restore</property-def>
+<values>true | false</values>
+</div><div id="azimuth">
+<property-def>azimuth</property-def>
+<values>&lt;angle&gt; | [[ left-side | far-left | left| center-left | center | center-right | right | far-right | right-side] || behind ] | leftwards | rightwards | inherit</values>
+</div><div id="background">
+<property-def>background</property-def>
+<values>[&lt;background-color&gt; ||&lt;background-image&gt;|| &lt;background-repeat&gt; || &lt;background-attachment&gt; || &lt;background-position&gt;]] | inherit</values>
+</div><div id="background-attachment">
+<property-def>background-attachment</property-def>
+<values>scroll | fixed | inherit</values>
+</div><div id="background-color">
+<property-def>background-color</property-def>
+<values>&lt;color&gt; | transparent | inherit</values>
+</div><div id="background-image">
+<property-def>background-image</property-def>
+<values>&lt;uri-specification&gt; | none | inherit</values>
+</div><div id="background-position">
+<property-def>background-position</property-def>
+<values>[ [&lt;percentage&gt; | &lt;length&gt; ]{1,2} |[ [top | center | bottom] || [left | center | right] ] ] | inherit</values>
+</div><div id="background-position-horizontal">
+<property-def>background-position-horizontal</property-def>
+<values>&lt;percentage&gt; | &lt;length&gt; |left | center | right | inherit</values>
+</div><div id="background-position-vertical">
+<property-def>background-position-vertical</property-def>
+<values>&lt;percentage&gt; | &lt;length&gt; |top | center | bottom | inherit</values>
+</div><div id="background-repeat">
+<property-def>background-repeat</property-def>
+<values>repeat | repeat-x | repeat-y | no-repeat | inherit</values>
+</div><div id="baseline-shift">
+<property-def>baseline-shift</property-def>
+<values>baseline | sub | super | &lt;percentage&gt; | &lt;length&gt;| inherit</values>
+</div><div id="blank-or-not-blank">
+<property-def>blank-or-not-blank</property-def>
+<values>blank | not-blank | any | inherit</values>
+</div><div id="block-progression-dimension">
+<property-def>block-progression-dimension</property-def>
+<values>auto | &lt;length&gt; | &lt;percentage&gt; | &lt;length-range&gt;| inherit</values>
+</div><div id="border">
+<property-def>border</property-def>
+<values>[ &lt;border-width&gt; || &lt;border-style&gt;|| &lt;color&gt; ] | inherit</values>
+</div><div id="border-after-color">
+<property-def>border-after-color</property-def>
+<values>&lt;color&gt; | inherit</values>
+</div><div id="border-after-precedence">
+<property-def>border-after-precedence</property-def>
+<values>force | &lt;integer&gt; | inherit</values>
+</div><div id="border-after-style">
+<property-def>border-after-style</property-def>
+<values>&lt;border-style&gt; | inherit</values>
+</div><div id="border-after-width">
+<property-def>border-after-width</property-def>
+<values>&lt;border-width&gt; | &lt;length-conditional&gt; | inherit</values>
+</div><div id="border-before-color">
+<property-def>border-before-color</property-def>
+<values>&lt;color&gt; | inherit</values>
+</div><div id="border-before-precedence">
+<property-def>border-before-precedence</property-def>
+<values>force | &lt;integer&gt; | inherit</values>
+</div><div id="border-before-style">
+<property-def>border-before-style</property-def>
+<values>&lt;border-style&gt; | inherit</values>
+</div><div id="border-before-width">
+<property-def>border-before-width</property-def>
+<values>&lt;border-width&gt; | &lt;length-conditional&gt; | inherit</values>
+</div><div id="border-bottom">
+<property-def>border-bottom</property-def>
+<values>[ &lt;border-top-width&gt; || &lt;border-style&gt;|| &lt;color&gt; ] | inherit</values>
+</div><div id="border-bottom-color">
+<property-def>border-bottom-color</property-def>
+<values>&lt;color&gt; | inherit</values>
+</div><div id="border-bottom-style">
+<property-def>border-bottom-style</property-def>
+<values>&lt;border-style&gt; | inherit</values>
+</div><div id="border-bottom-width">
+<property-def>border-bottom-width</property-def>
+<values>&lt;border-width&gt; | inherit</values>
+</div><div id="border-collapse">
+<property-def>border-collapse</property-def>
+<values>collapse | separate | inherit</values>
+</div><div id="border-color">
+<property-def>border-color</property-def>
+<values>&lt;color&gt;{1,4} | transparent | inherit</values>
+</div><div id="border-end-color">
+<property-def>border-end-color</property-def>
+<values>&lt;color&gt; | inherit</values>
+</div><div id="border-end-precedence">
+<property-def>border-end-precedence</property-def>
+<values>force | &lt;integer&gt; | inherit</values>
+</div><div id="border-end-style">
+<property-def>border-end-style</property-def>
+<values>&lt;border-style&gt; | inherit</values>
+</div><div id="border-end-width">
+<property-def>border-end-width</property-def>
+<values>&lt;border-width&gt; | &lt;length-conditional&gt; | inherit</values>
+</div><div id="border-left">
+<property-def>border-left</property-def>
+<values>[ &lt;border-top-width&gt; || &lt;border-style&gt;|| &lt;color&gt; ] | inherit</values>
+</div><div id="border-left-color">
+<property-def>border-left-color</property-def>
+<values>&lt;color&gt; | inherit</values>
+</div><div id="border-left-style">
+<property-def>border-left-style</property-def>
+<values>&lt;border-style&gt; | inherit</values>
+</div><div id="border-left-width">
+<property-def>border-left-width</property-def>
+<values>&lt;border-width&gt; | inherit</values>
+</div><div id="border-right">
+<property-def>border-right</property-def>
+<values>[ &lt;border-top-width&gt; || &lt;border-style&gt;|| &lt;color&gt; ] | inherit</values>
+</div><div id="border-right-color">
+<property-def>border-right-color</property-def>
+<values>&lt;color&gt; | inherit</values>
+</div><div id="border-right-style">
+<property-def>border-right-style</property-def>
+<values>&lt;border-style&gt; | inherit</values>
+</div><div id="border-right-width">
+<property-def>border-right-width</property-def>
+<values>&lt;border-width&gt; | inherit</values>
+</div><div id="border-separation">
+<property-def>border-separation</property-def>
+<values>&lt;length-bp-ip-direction&gt; | inherit</values>
+</div><div id="border-spacing">
+<property-def>border-spacing</property-def>
+<values>&lt;length&gt; &lt;length&gt;? | inherit</values>
+</div><div id="border-start-color">
+<property-def>border-start-color</property-def>
+<values>&lt;color&gt; | inherit</values>
+</div><div id="border-start-precedence">
+<property-def>border-start-precedence</property-def>
+<values>force | &lt;integer&gt; | inherit</values>
+</div><div id="border-start-style">
+<property-def>border-start-style</property-def>
+<values>&lt;border-style&gt; | inherit</values>
+</div><div id="border-start-width">
+<property-def>border-start-width</property-def>
+<values>&lt;border-width&gt; | &lt;length-conditional&gt; | inherit</values>
+</div><div id="border-style">
+<property-def>border-style</property-def>
+<values>&lt;border-style&gt;{1,4} | inherit</values>
+</div><div id="border-top">
+<property-def>border-top</property-def>
+<values>[ &lt;border-top-width&gt; || &lt;border-style&gt;|| &lt;color&gt; ] | inherit</values>
+</div><div id="border-top-color">
+<property-def>border-top-color</property-def>
+<values>&lt;color&gt; | inherit</values>
+</div><div id="border-top-style">
+<property-def>border-top-style</property-def>
+<values>&lt;border-style&gt; | inherit</values>
+</div><div id="border-top-width">
+<property-def>border-top-width</property-def>
+<values>&lt;border-width&gt; | inherit</values>
+</div><div id="border-width">
+<property-def>border-width</property-def>
+<values>&lt;border-width&gt;{1,4} | inherit</values>
+</div><div id="bottom">
+<property-def>bottom</property-def>
+<values>&lt;length&gt; | &lt;percentage&gt; | auto | inherit</values>
+</div><div id="break-after">
+<property-def>break-after</property-def>
+<values>auto | column | page | even-page | odd-page | inherit</values>
+</div><div id="break-before">
+<property-def>break-before</property-def>
+<values>auto | column | page | even-page | odd-page | inherit</values>
+</div><div id="caption-side">
+<property-def>caption-side</property-def>
+<values>before | after | start | end | top | bottom | left | right | inherit</values>
+</div><div id="case-name">
+<property-def>case-name</property-def>
+<values>&lt;name&gt;</values>
+</div><div id="case-title">
+<property-def>case-title</property-def>
+<values>&lt;string&gt;</values>
+</div><div id="character">
+<property-def>character</property-def>
+<values>&lt;character&gt;</values>
+</div><div id="clear">
+<property-def>clear</property-def>
+<values>start | end | left | right | both | none | inherit</values>
+</div><div id="clip">
+<property-def>clip</property-def>
+<values>&lt;shape&gt; | auto | inherit</values>
+</div><div id="color">
+<property-def>color</property-def>
+<values>&lt;color&gt; | inherit</values>
+</div><div id="color-profile-name">
+<property-def>color-profile-name</property-def>
+<values>&lt;name&gt; | inherit</values>
+</div><div id="column-count">
+<property-def>column-count</property-def>
+<values>&lt;number&gt; | inherit</values>
+</div><div id="column-gap">
+<property-def>column-gap</property-def>
+<values>&lt;length&gt; | &lt;percentage&gt; | inherit</values>
+</div><div id="column-number">
+<property-def>column-number</property-def>
+<values>&lt;number&gt;</values>
+</div><div id="column-width">
+<property-def>column-width</property-def>
+<values>&lt;length&gt; | &lt;percentage&gt;</values>
+</div><div id="content-height">
+<property-def>content-height</property-def>
+<values>auto | scale-to-fit | &lt;length&gt; | &lt;percentage&gt; | inherit</values>
+</div><div id="content-type">
+<property-def>content-type</property-def>
+<values>&lt;string&gt; | auto</values>
+</div><div id="content-width">
+<property-def>content-width</property-def>
+<values>auto | scale-to-fit | &lt;length&gt; | &lt;percentage&gt; | inherit</values>
+</div><div id="country">
+<property-def>country</property-def>
+<values>none | &lt;country&gt; | inherit</values>
+</div><div id="cue">
+<property-def>cue</property-def>
+<values>&lt;cue-before&gt; || &lt;cue-after&gt; | inherit</values>
+</div><div id="cue-after">
+<property-def>cue-after</property-def>
+<values>&lt;uri-specification&gt; | none | inherit </values>
+</div><div id="cue-before">
+<property-def>cue-before</property-def>
+<values>&lt;uri-specification&gt; | none | inherit </values>
+</div><div id="destination-placement-offset">
+<property-def>destination-placement-offset</property-def>
+<values>&lt;length&gt;</values>
+</div><div id="direction">
+<property-def>direction</property-def>
+<values>ltr | rtl | inherit</values>
+</div><div id="display-align">
+<property-def>display-align</property-def>
+<values>auto | before | center | after| inherit</values>
+</div><div id="dominant-baseline">
+<property-def>dominant-baseline</property-def>
+<values>auto | use-script | no-change | reset-size| ideographic | alphabetic | hanging | mathematical| inherit</values>
+</div><div id="elevation">
+<property-def>elevation</property-def>
+<values>&lt;angle&gt; | below | level | above | higher| lower | inherit</values>
+</div><div id="empty-cells">
+<property-def>empty-cells</property-def>
+<values>show | hide | inherit</values>
+</div><div id="end-indent">
+<property-def>end-indent</property-def>
+<values>&lt;length&gt; | inherit</values>
+</div><div id="ends-row">
+<property-def>ends-row</property-def>
+<values>true | false</values>
+</div><div id="extent">
+<property-def>extent</property-def>
+<values>&lt;length&gt; | &lt;percentage&gt; | inherit</values>
+</div><div id="external-destination">
+<property-def>external-destination</property-def>
+<values>&lt;uri-specification&gt;</values>
+</div><div id="float">
+<property-def>float</property-def>
+<values>before | start | end | left | right | none | inherit</values>
+</div><div id="flow-name">
+<property-def>flow-name</property-def>
+<values>&lt;name&gt;</values>
+</div><div id="font">
+<property-def>font</property-def>
+<values>[ [ &lt;font-style&gt; || &lt;font-variant&gt;|| &lt;font-weight&gt; ]? &lt;font-size&gt; [ / &lt;line-height&gt;]? &lt;font-family&gt;] | caption | icon | menu | message-box | small-caption | status-bar| inherit</values>
+</div><div id="font-family">
+<property-def>font-family</property-def>
+<values>[[ &lt;family-name&gt; | &lt;generic-family&gt;],]* [&lt;family-name&gt; | &lt;generic-family&gt;] | inherit</values>
+</div><div id="font-selection-strategy">
+<property-def>font-selection-strategy</property-def>
+<values>auto | character-by-character | inherit</values>
+</div><div id="font-size">
+<property-def>font-size</property-def>
+<values>&lt;absolute-size&gt; | &lt;relative-size&gt; | &lt;length&gt;| &lt;percentage&gt; | inherit</values>
+</div><div id="font-size-adjust">
+<property-def>font-size-adjust</property-def>
+<values>&lt;number&gt; | none | inherit</values>
+</div><div id="font-stretch">
+<property-def>font-stretch</property-def>
+<values>normal | wider | narrower | ultra-condensed| extra-condensed | condensed | semi-condensed | semi-expanded |expanded | extra-expanded | ultra-expanded | inherit</values>
+</div><div id="font-style">
+<property-def>font-style</property-def>
+<values>normal | italic | oblique |  backslant | inherit</values>
+</div><div id="font-variant">
+<property-def>font-variant</property-def>
+<values>normal | small-caps | inherit</values>
+</div><div id="font-weight">
+<property-def>font-weight</property-def>
+<values>normal | bold | bolder | lighter | 100 | 200| 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit</values>
+</div><div id="force-page-count">
+<property-def>force-page-count</property-def>
+<values>auto | even | odd | end-on-even | end-on-odd | no-force| inherit</values>
+</div><div id="format">
+<property-def>format</property-def>
+<values>&lt;string&gt;</values>
+</div><div id="glyph-orientation-horizontal">
+<property-def>glyph-orientation-horizontal</property-def>
+<values>&lt;angle&gt; | inherit</values>
+</div><div id="glyph-orientation-vertical">
+<property-def>glyph-orientation-vertical</property-def>
+<values>auto | &lt;angle&gt; | inherit</values>
+</div><div id="grouping-separator">
+<property-def>grouping-separator</property-def>
+<values>&lt;character&gt;</values>
+</div><div id="grouping-size">
+<property-def>grouping-size</property-def>
+<values>&lt;number&gt;</values>
+</div><div id="height">
+<property-def>height</property-def>
+<values>&lt;length&gt; | &lt;percentage&gt; | auto | inherit</values>
+</div><div id="hyphenate">
+<property-def>hyphenate</property-def>
+<values>false | true | inherit</values>
+</div><div id="hyphenation-character">
+<property-def>hyphenation-character</property-def>
+<values>&lt;character&gt; | inherit</values>
+</div><div id="hyphenation-keep">
+<property-def>hyphenation-keep</property-def>
+<values>auto | column | page | inherit</values>
+</div><div id="hyphenation-ladder-count">
+<property-def>hyphenation-ladder-count</property-def>
+<values>no-limit | &lt;number&gt; | inherit</values>
+</div><div id="hyphenation-push-character-count">
+<property-def>hyphenation-push-character-count</property-def>
+<values>&lt;number&gt; | inherit</values>
+</div><div id="hyphenation-remain-character-count">
+<property-def>hyphenation-remain-character-count</property-def>
+<values>&lt;number&gt; | inherit</values>
+</div><div id="id">
+<property-def>id</property-def>
+<values> &lt;id&gt;</values>
+</div><div id="indicate-destination">
+<property-def>indicate-destination</property-def>
+<values>true | false</values>
+</div><div id="initial-page-number">
+<property-def>initial-page-number</property-def>
+<values>auto | auto-odd | auto-even | &lt;number&gt; | inherit</values>
+</div><div id="inline-progression-dimension">
+<property-def>inline-progression-dimension</property-def>
+<values>auto | &lt;length&gt; | &lt;percentage&gt; | &lt;length-range&gt;| inherit</values>
+</div><div id="internal-destination">
+<property-def>internal-destination</property-def>
+<values>empty string |  &lt;idref&gt;</values>
+</div><div id="keep-together">
+<property-def>keep-together</property-def>
+<values>&lt;keep&gt; | inherit</values>
+</div><div id="keep-with-next">
+<property-def>keep-with-next</property-def>
+<values>&lt;keep&gt; | inherit</values>
+</div><div id="keep-with-previous">
+<property-def>keep-with-previous</property-def>
+<values>&lt;keep&gt; | inherit</values>
+</div><div id="language">
+<property-def>language</property-def>
+<values>none | &lt;language&gt; | inherit</values>
+</div><div id="last-line-end-indent">
+<property-def>last-line-end-indent</property-def>
+<values>&lt;length&gt; | &lt;percentage&gt; | inherit</values>
+</div><div id="leader-alignment">
+<property-def>leader-alignment</property-def>
+<values>none | reference-area | page | inherit</values>
+</div><div id="leader-length">
+<property-def>leader-length</property-def>
+<values>&lt;length-range&gt; | inherit</values>
+</div><div id="leader-pattern">
+<property-def>leader-pattern</property-def>
+<values>space | rule | dots | use-content | inherit</values>
+</div><div id="leader-pattern-width">
+<property-def>leader-pattern-width</property-def>
+<values>use-font-metrics | &lt;length&gt; | inherit</values>
+</div><div id="left">
+<property-def>left</property-def>
+<values>&lt;length&gt; | &lt;percentage&gt; | auto | inherit</values>
+</div><div id="letter-spacing">
+<property-def>letter-spacing</property-def>
+<values>normal | &lt;length&gt; | &lt;space&gt; | inherit</values>
+</div><div id="letter-value">
+<property-def>letter-value</property-def>
+<values>auto | alphabetic | traditional</values>
+</div><div id="line-height">
+<property-def>line-height</property-def>
+<values>normal | &lt;length&gt; | &lt;number&gt; | &lt;percentage&gt; | &lt;space&gt;| inherit</values>
+</div><div id="line-height-shift-adjustment">
+<property-def>line-height-shift-adjustment</property-def>
+<values>consider-shifts | disregard-shifts | inherit</values>
+</div><div id="line-stacking-strategy">
+<property-def>line-stacking-strategy</property-def>
+<values>line-height | font-height | max-height | inherit</values>
+</div><div id="linefeed-treatment">
+<property-def>linefeed-treatment</property-def>
+<values>ignore | preserve | treat-as-space | treat-as-zero-width-space | inherit</values>
+</div><div id="margin">
+<property-def>margin</property-def>
+<values>&lt;margin-width&gt;{1,4} | inherit </values>
+</div><div id="margin-bottom">
+<property-def>margin-bottom</property-def>
+<values>&lt;margin-width&gt; | inherit</values>
+</div><div id="margin-left">
+<property-def>margin-left</property-def>
+<values>&lt;margin-width&gt; | inherit</values>
+</div><div id="margin-right">
+<property-def>margin-right</property-def>
+<values>&lt;margin-width&gt; | inherit</values>
+</div><div id="margin-top">
+<property-def>margin-top</property-def>
+<values>&lt;margin-width&gt; | inherit</values>
+</div><div id="marker-class-name">
+<property-def>marker-class-name</property-def>
+<values>&lt;name&gt;</values>
+</div><div id="master-name">
+<property-def>master-name</property-def>
+<values>&lt;name&gt;</values>
+</div><div id="max-height">
+<property-def>max-height</property-def>
+<values>&lt;length&gt; | &lt;percentage&gt; | none | inherit </values>
+</div><div id="max-width">
+<property-def>max-width</property-def>
+<values>&lt;length&gt; | &lt;percentage&gt; | none | inherit</values>
+</div><div id="maximum-repeats">
+<property-def>maximum-repeats</property-def>
+<values>&lt;number&gt; | no-limit | inherit</values>
+</div><div id="media-usage">
+<property-def>media-usage</property-def>
+<values>auto | paginate | bounded-in-one-dimension | unbounded</values>
+</div><div id="min-height">
+<property-def>min-height</property-def>
+<values>&lt;length&gt; | &lt;percentage&gt; | inherit </values>
+</div><div id="min-width">
+<property-def>min-width</property-def>
+<values>&lt;length&gt; | &lt;percentage&gt; | inherit</values>
+</div><div id="number-columns-repeated">
+<property-def>number-columns-repeated</property-def>
+<values>&lt;number&gt;</values>
+</div><div id="number-columns-spanned">
+<property-def>number-columns-spanned</property-def>
+<values>&lt;number&gt;</values>
+</div><div id="number-rows-spanned">
+<property-def>number-rows-spanned</property-def>
+<values>&lt;number&gt;</values>
+</div><div id="odd-or-even">
+<property-def>odd-or-even</property-def>
+<values>odd | even | any | inherit</values>
+</div><div id="orphans">
+<property-def>orphans</property-def>
+<values>&lt;integer&gt; | inherit</values>
+</div><div id="overflow">
+<property-def>overflow</property-def>
+<values>visible | hidden | scroll | error-if-overflow | auto | inherit</values>
+</div><div id="padding">
+<property-def>padding</property-def>
+<values>&lt;padding-width&gt;{1,4} | inherit</values>
+</div><div id="padding-after">
+<property-def>padding-after</property-def>
+<values>&lt;padding-width&gt; | &lt;length-conditional&gt; | inherit</values>
+</div><div id="padding-before">
+<property-def>padding-before</property-def>
+<values>&lt;padding-width&gt; | &lt;length-conditional&gt; | inherit</values>
+</div><div id="padding-bottom">
+<property-def>padding-bottom</property-def>
+<values>&lt;padding-width&gt; | inherit</values>
+</div><div id="padding-end">
+<property-def>padding-end</property-def>
+<values>&lt;padding-width&gt; | &lt;length-conditional&gt; | inherit</values>
+</div><div id="padding-left">
+<property-def>padding-left</property-def>
+<values>&lt;padding-width&gt; | inherit</values>
+</div><div id="padding-right">
+<property-def>padding-right</property-def>
+<values>&lt;padding-width&gt; | inherit</values>
+</div><div id="padding-start">
+<property-def>padding-start</property-def>
+<values>&lt;padding-width&gt; | &lt;length-conditional&gt; | inherit</values>
+</div><div id="padding-top">
+<property-def>padding-top</property-def>
+<values>&lt;padding-width&gt; | inherit</values>
+</div><div id="page-break-after">
+<property-def>page-break-after</property-def>
+<values>auto | always | avoid | left | right | inherit</values>
+</div><div id="page-break-before">
+<property-def>page-break-before</property-def>
+<values>auto | always | avoid | left | right | inherit</values>
+</div><div id="page-break-inside">
+<property-def>page-break-inside</property-def>
+<values>avoid | auto | inherit</values>
+</div><div id="page-height">
+<property-def>page-height</property-def>
+<values>auto | indefinite | &lt;length&gt; | inherit</values>
+</div><div id="page-position">
+<property-def>page-position</property-def>
+<values>first | last | rest | any | inherit</values>
+</div><div id="page-width">
+<property-def>page-width</property-def>
+<values>auto | indefinite | &lt;length&gt; | inherit</values>
+</div><div id="pause">
+<property-def>pause</property-def>
+<values>[&lt;time&gt; | &lt;percentage&gt;]{1,2} | inherit</values>
+</div><div id="pause-after">
+<property-def>pause-after</property-def>
+<values>&lt;time&gt; | &lt;percentage&gt; | inherit</values>
+</div><div id="pause-before">
+<property-def>pause-before</property-def>
+<values>&lt;time&gt; | &lt;percentage&gt; | inherit</values>
+</div><div id="pitch">
+<property-def>pitch</property-def>
+<values>&lt;frequency&gt; | x-low | low | medium | high| x-high | inherit</values>
+</div><div id="pitch-range">
+<property-def>pitch-range</property-def>
+<values>&lt;number&gt; | inherit</values>
+</div><div id="play-during">
+<property-def>play-during</property-def>
+<values>&lt;uri-specification&gt; mix? repeat? | auto | none | inherit </values>
+</div><div id="position">
+<property-def>position</property-def>
+<values>static | relative | absolute | fixed | inherit</values>
+</div><div id="precedence">
+<property-def>precedence</property-def>
+<values>true | false | inherit</values>
+</div><div id="provisional-distance-between-starts">
+<property-def>provisional-distance-between-starts</property-def>
+<values>&lt;length&gt; | inherit</values>
+</div><div id="provisional-label-separation">
+<property-def>provisional-label-separation</property-def>
+<values>&lt;length&gt; | inherit</values>
+</div><div id="ref-id">
+<property-def>ref-id</property-def>
+<values>&lt;idref&gt; | inherit</values>
+</div><div id="reference-orientation">
+<property-def>reference-orientation</property-def>
+<values> 0 | 90 | 180 | 270 | -90 | -180 | -270 | inherit</values>
+</div><div id="region-name">
+<property-def>region-name</property-def>
+<values>xsl-region-body | xsl-region-start | xsl-region-end| xsl-region-before | xsl-region-after | xsl-before-float-separator| xsl-footnote-separator | &lt;name&gt;</values>
+</div><div id="relative-align">
+<property-def>relative-align</property-def>
+<values>before | baseline| inherit</values>
+</div><div id="relative-position">
+<property-def>relative-position</property-def>
+<values>static | relative | inherit</values>
+</div><div id="rendering-intent">
+<property-def>rendering-intent</property-def>
+<values>auto | perceptual | relative-colorimetric | saturation | absolute-colorimetric | inherit</values>
+</div><div id="retrieve-boundary">
+<property-def>retrieve-boundary</property-def>
+<values>page | page-sequence | document</values>
+</div><div id="retrieve-class-name">
+<property-def>retrieve-class-name</property-def>
+<values>&lt;name&gt;</values>
+</div><div id="retrieve-position">
+<property-def>retrieve-position</property-def>
+<values>first-starting-within-page | first-including-carryover |last-starting-within-page | last-ending-within-page</values>
+</div><div id="richness">
+<property-def>richness</property-def>
+<values>&lt;number&gt; | inherit</values>
+</div><div id="right">
+<property-def>right</property-def>
+<values>&lt;length&gt; | &lt;percentage&gt; | auto | inherit</values>
+</div><div id="role">
+<property-def>role</property-def>
+<values>&lt;string&gt; | &lt;uri-specification&gt; | none | inherit</values>
+</div><div id="rule-style">
+<property-def>rule-style</property-def>
+<values>none | dotted | dashed | solid | double | groove| ridge | inherit</values>
+</div><div id="rule-thickness">
+<property-def>rule-thickness</property-def>
+<values>&lt;length&gt;</values>
+</div><div id="scaling">
+<property-def>scaling</property-def>
+<values>uniform | non-uniform | inherit</values>
+</div><div id="scaling-method">
+<property-def>scaling-method</property-def>
+<values>auto | integer-pixels | resample-any-method | inherit</values>
+</div><div id="score-spaces">
+<property-def>score-spaces</property-def>
+<values>true | false | inherit</values>
+</div><div id="script">
+<property-def>script</property-def>
+<values>none | auto | &lt;script&gt; | inherit</values>
+</div><div id="show-destination">
+<property-def>show-destination</property-def>
+<values>replace | new</values>
+</div><div id="size">
+<property-def>size</property-def>
+<values>&lt;length&gt;{1,2} | auto | landscape | portrait| inherit</values>
+</div><div id="source-document">
+<property-def>source-document</property-def>
+<values>&lt;uri-specification&gt; [&lt;uri-specification&gt;]* | none | inherit</values>
+</div><div id="space-after">
+<property-def>space-after</property-def>
+<values>&lt;space&gt; | inherit</values>
+</div><div id="space-before">
+<property-def>space-before</property-def>
+<values>&lt;space&gt; | inherit</values>
+</div><div id="space-end">
+<property-def>space-end</property-def>
+<values>&lt;space&gt; | inherit</values>
+</div><div id="space-start">
+<property-def>space-start</property-def>
+<values>&lt;space&gt; | inherit</values>
+</div><div id="space-treatment">
+<property-def>space-treatment</property-def>
+<values>ignore | preserve | ignore-if-before-linefeed |ignore-if-after-linefeed | ignore-if-surrounding-linefeed | inherit</values>
+</div><div id="span">
+<property-def>span</property-def>
+<values>none | all | inherit</values>
+</div><div id="speak">
+<property-def>speak</property-def>
+<values>normal | none | spell-out | inherit</values>
+</div><div id="speak-header">
+<property-def>speak-header</property-def>
+<values>once | always | inherit</values>
+</div><div id="speak-numeral">
+<property-def>speak-numeral</property-def>
+<values>digits | continuous | inherit</values>
+</div><div id="speak-punctuation">
+<property-def>speak-punctuation</property-def>
+<values>code | none | inherit</values>
+</div><div id="speech-rate">
+<property-def>speech-rate</property-def>
+<values>&lt;number&gt; | x-slow | slow | medium | fast| x-fast | faster | slower | inherit</values>
+</div><div id="src">
+<property-def>src</property-def>
+<values>&lt;uri-specification&gt; | inherit</values>
+</div><div id="start-indent">
+<property-def>start-indent</property-def>
+<values>&lt;length&gt; | inherit</values>
+</div><div id="starting-state">
+<property-def>starting-state</property-def>
+<values>show | hide</values>
+</div><div id="starts-row">
+<property-def>starts-row</property-def>
+<values>true | false</values>
+</div><div id="stress">
+<property-def>stress</property-def>
+<values>&lt;number&gt; | inherit</values>
+</div><div id="suppress-at-line-break">
+<property-def>suppress-at-line-break</property-def>
+<values>auto | suppress | retain | inherit</values>
+</div><div id="switch-to">
+<property-def>switch-to</property-def>
+<values>xsl-preceding | xsl-following | xsl-any | &lt;name&gt;[ &lt;name&gt;]*</values>
+</div><div id="table-layout">
+<property-def>table-layout</property-def>
+<values>auto | fixed | inherit</values>
+</div><div id="table-omit-footer-at-break">
+<property-def>table-omit-footer-at-break</property-def>
+<values>true | false</values>
+</div><div id="table-omit-header-at-break">
+<property-def>table-omit-header-at-break</property-def>
+<values>true | false</values>
+</div><div id="target-presentation-context">
+<property-def>target-presentation-context</property-def>
+<values>use-target-processing-context |  &lt;uri-specification&gt;</values>
+</div><div id="target-processing-context">
+<property-def>target-processing-context</property-def>
+<values>document-root |  &lt;uri-specification&gt;</values>
+</div><div id="target-stylesheet">
+<property-def>target-stylesheet</property-def>
+<values>use-normal-stylesheet |  &lt;uri-specification&gt;</values>
+</div><div id="text-align">
+<property-def>text-align</property-def>
+<values>start | center | end | justify | inside | outside| left | right | &lt;string&gt; | inherit</values>
+</div><div id="text-align-last">
+<property-def>text-align-last</property-def>
+<values>relative | start | center | end | justify | inside| outside | left | right | inherit</values>
+</div><div id="text-altitude">
+<property-def>text-altitude</property-def>
+<values>use-font-metrics | &lt;length&gt; | inherit</values>
+</div><div id="text-decoration">
+<property-def>text-decoration</property-def>
+<values>none | [ [ underline | no-underline] || [ overline | no-overline ]|| [ line-through | no-line-through ] || [ blink | no-blink ] ]| inherit</values>
+</div><div id="text-depth">
+<property-def>text-depth</property-def>
+<values>use-font-metrics | &lt;length&gt; | inherit</values>
+</div><div id="text-indent">
+<property-def>text-indent</property-def>
+<values>&lt;length&gt; | &lt;percentage&gt; | inherit</values>
+</div><div id="text-shadow">
+<property-def>text-shadow</property-def>
+<values>none | [&lt;color&gt; || &lt;length&gt; &lt;length&gt; &lt;length&gt;?,]* [&lt;color&gt; || &lt;length&gt; &lt;length&gt; &lt;length&gt;?] | inherit</values>
+</div><div id="text-transform">
+<property-def>text-transform</property-def>
+<values>capitalize | uppercase | lowercase | none | inherit</values>
+</div><div id="top">
+<property-def>top</property-def>
+<values>&lt;length&gt; | &lt;percentage&gt; | auto | inherit</values>
+</div><div id="treat-as-word-space">
+<property-def>treat-as-word-space</property-def>
+<values>auto | true | false | inherit</values>
+</div><div id="unicode-bidi">
+<property-def>unicode-bidi</property-def>
+<values>normal | embed | bidi-override | inherit</values>
+</div><div id="vertical-align">
+<property-def>vertical-align</property-def>
+<values>baseline | middle | sub | super | text-top |text-bottom | &lt;percentage&gt; | &lt;length&gt; | top | bottom | inherit</values>
+</div><div id="visibility">
+<property-def>visibility</property-def>
+<values>visible | hidden | collapse | inherit</values>
+</div><div id="voice-family">
+<property-def>voice-family</property-def>
+<values>[[&lt;specific-voice&gt; | &lt;generic-voice&gt;],]* [&lt;specific-voice&gt; | &lt;generic-voice&gt; ] | inherit</values>
+</div><div id="volume">
+<property-def>volume</property-def>
+<values>&lt;number&gt; | &lt;percentage&gt; | silent | x-soft| soft | medium | loud | x-loud | inherit</values>
+</div><div id="white-space">
+<property-def>white-space</property-def>
+<values>normal | pre | nowrap | inherit</values>
+</div><div id="white-space-collapse">
+<property-def>white-space-collapse</property-def>
+<values>false | true | inherit</values>
+</div><div id="widows">
+<property-def>widows</property-def>
+<values>&lt;integer&gt; | inherit</values>
+</div><div id="width">
+<property-def>width</property-def>
+<values>&lt;length&gt; | &lt;percentage&gt; | auto | inherit</values>
+</div><div id="word-spacing">
+<property-def>word-spacing</property-def>
+<values>normal | &lt;length&gt; | &lt;space&gt; | inherit</values>
+</div><div id="wrap-option">
+<property-def>wrap-option</property-def>
+<values>no-wrap | wrap | inherit</values>
+</div><div id="writing-mode">
+<property-def>writing-mode</property-def>
+<values>lr-tb | rl-tb | tb-rl | lr | rl | tb | inherit</values>
+</div><div id="xml:lang">
+<property-def>xml:lang</property-def>
+<values>&lt;country-language&gt; | inherit</values>
+</div><div id="z-index">
+<property-def>z-index</property-def>
+<values>auto | &lt;integer&gt; | inherit</values>
+</div></div0></root>

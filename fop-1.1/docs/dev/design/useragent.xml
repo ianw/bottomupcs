@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: useragent.xml 1298724 2012-03-09 07:55:31Z cbowditch $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Apache&#8482; FOP Design: User Agent</title>
+    <version>$Revision: 1298724 $</version>
+    <authors>
+      <person name="Keiron Liddle" email="keiron@aftexsw.com"/>
+    </authors>
+  </header>
+
+    <body>
+<section id="intro">
+  <title>Introduction</title>
+<p>
+Technically the user agent is Apache&#8482; FOP in the role of determining the
+output format and when resolving various attributes. The user
+agent is represented by a class that is available to others to
+specify how FOP should behave.
+  </p>
+  <p>
+The user agent is used by the formatting process to determine
+certain user definable values.
+  </p>
+  <p>
+It will enable the customisation of values for generating and
+rendering the document.
+  </p>
+  <p>
+The user agent must be available to the layout processor and
+the renderer. Users can supply their own user agent or use
+the default one for a particular renderer.
+  </p>
+  <p>
+The user agent needs to be made available to the property
+resolution layout process and the renderer.
+   </p>
+
+  <p>
+Standard Features:
+  </p>
+       <ul>
+       <li>error handling, what to do if fo markup is invalid</li>
+       <li>auto overflow value and handling error-if-overflow</li>
+       <li>adjusting length values (eg. for borders) to renderable values</li>
+       <li>available fonts</li>
+       <li>converting cm/in to pt (dpi)</li>
+       <li>active state for multi properties</li>
+       <li>title, used to identify a set of pages (in a page sequence)</li>
+       <li>the width (in inline-progression-dimension) of a character with
+treat-word-as-space true</li>
+       <li>maximum space used by conditional areas from region-reference-area</li>
+       <li>if there should be "hot links" to before floats or footnotes</li>
+       <li>when to clear side floats if space in inline-progression-dimension
+is not enough</li>
+       <li>placement of left over footnotes on a page with a region-body</li>
+       <li>using color property as border colour</li>
+       <li>interpretting all border styles (except outset) as solid</li>
+       <li>thin, medium and thick values for border width</li>
+       <li>initial font-family value</li>
+       <li>absolute font sizes (eg, xx-small, x-small etc.)</li>
+       <li>relative font sizes (eg. larger, smaller)</li>
+       <li>small caps simulation</li>
+       <li>font weight mapping</li>
+       <li>baseline info for a font if not available</li>
+       <li>determining sub/superscript when another baseline is dominant</li>
+       <li>scaling method for external-graphic and instream-foreign-object</li>
+       <li>the width of a replaced element</li>
+       <li>"normal" line height value</li>
+       <li>text alignment (stretching the line with letter and word spacing)</li>
+       <li>text transform</li>
+       <li>initial color</li>
+       <li>rendering intent of auto</li>
+       <li>dot character for leader</li>
+       <li>line breaking with leaders, use optimum length when breaking the line</li>
+       <li>page height/width of auto</li>
+       <li>left and right caption widths</li>
+       <li>glyph orientation vertical of auto</li>
+       <li>rendering processor of content-type (mime type)</li>
+       </ul>
+
+  <p>
+Interactive Features:
+  </p>
+       <ul>
+       <li>inline and block scroll amount</li>
+       <li>dynamic effects, links and property sets</li>
+       <li>initial "pause-after", "pause-before" and "voice-family" value</li>
+       <li>treating fixed as scroll on background attachement</li>
+       <li>media usage of auto</li>
+       </ul>
+
+  </section>
+
+    </body>
+</document>

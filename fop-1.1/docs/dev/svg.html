@@ -1,0 +1,458 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.10-dev">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Apache&trade; FOP Development: SVG Issues</title>
+<link type="text/css" href="../skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="../skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="../skin/print.css" rel="stylesheet">
+<link type="text/css" href="../skin/profile.css" rel="stylesheet">
+<script src="../skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="../skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="../skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="../favicon.ico">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://xmlgraphics.apache.org/"><img class="logoImage" alt="Apache XML Graphics" src="../images/group-logo.gif" title="Apache XML Graphics is responsible for the creation and maintenance of software for managing the conversion of XML formats to graphical output, and the creation and maintenance of related software components, based on software licensed to the Foundation"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://xmlgraphics.apache.org/fop/"><img class="logoImage" alt="Apache FOP" src="../images/logo.jpg" title="Apache FOP (Formatting Objects Processor) is the world's first output independent formatter. Output formats currently supported include PDF, PCL, PS, SVG, XML (area tree representation), Print, AWT, MIF and TXT. The primary output target is PDF."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="xmlgraphics.apache.org" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="../index.html">Home</a>
+</li>
+<li>
+<a class="unselected" href="../1.0/index.html">Version 1.0</a>
+</li>
+<li>
+<a class="unselected" href="../1.1/index.html">Version 1.1</a>
+</li>
+<li>
+<a class="unselected" href="../trunk/index.html">FOP Trunk</a>
+</li>
+<li class="current">
+<a class="selected" href="../dev/index.html">Development</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">The Apache Software Foundation</a> &gt; <a href="http://xmlgraphics.apache.org/">Apache XML Graphics Project</a><script src="../skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_1.1', '../skin/')" id="menu_1.1Title" class="menutitle">About</div>
+<div id="menu_1.1" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/index.html">Basics</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_selected_1.2', '../skin/')" id="menu_selected_1.2Title" class="menutitle" style="background-image: url('../skin/images/chapter_open.gif');">Design</div>
+<div id="menu_selected_1.2" class="selectedmenuitemgroup" style="display: block;">
+<div onclick="SwitchMenu('menu_1.2.1', '../skin/')" id="menu_1.2.1Title" class="menutitle">About</div>
+<div id="menu_1.2.1" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/design/index.html">Introduction</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2.2', '../skin/')" id="menu_1.2.2Title" class="menutitle">Core Process</div>
+<div id="menu_1.2.2" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/design/startup.html">Startup</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/parsing.html">XML Parsing</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/fotree.html">FO Tree</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/properties.html">Properties</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/layout.html">Layout</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/breakpos.html">Break Possibility</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/areas.html">Area Tree</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/renderers.html">Renderers</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2.3', '../skin/')" id="menu_1.2.3Title" class="menutitle">Miscellaneous</div>
+<div id="menu_1.2.3" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/design/images.html">Images</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/pdf-library.html">PDF Library</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/svg.html">SVG</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/embedding.html">Embedding</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/extending.html">Extending</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/optimise.html">Optimisations</a>
+</div>
+<div class="menuitem">
+<a href="../dev/design/useragent.html">User Agent</a>
+</div>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/xmlgraphics-fop/FOPProjectPages">Unresolved (Wiki)</a>
+</div>
+<div class="menupage">
+<div class="menupagetitle">SVG</div>
+</div>
+<div class="menuitem">
+<a href="../dev/extensions.html">Extensions</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.3', '../skin/')" id="menu_1.3Title" class="menutitle">Develop</div>
+<div id="menu_1.3" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/implement.html">Walk-Thru</a>
+</div>
+<div class="menuitem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;email1=&amp;emailtype1=substring&amp;emailassigned_to1=1&amp;email2=&amp;emailtype2=substring&amp;emailreporter2=1&amp;bugidtype=include&amp;bug_id=&amp;changedin=&amp;votes=&amp;chfieldfrom=&amp;chfieldto=Now&amp;chfieldvalue=&amp;product=Fop&amp;short_desc=%5BPATCH%5D&amp;short_desc_type=allwordssubstr&amp;long_desc=&amp;long_desc_type=allwordssubstr&amp;bug_file_loc=&amp;bug_file_loc_type=allwordssubstr&amp;keywords=&amp;keywords_type=anywords&amp;field0-0-0=noop&amp;type0-0-0=noop&amp;value0-0-0=&amp;namedcmd=Fop+all&amp;newqueryname=fop+patch+queue&amp;tofooter=1&amp;order=Reuse+same+sort+as+last+time">Patch Queue</a>
+</div>
+<div class="menuitem">
+<a href="../dev/conventions.html">Conventions</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.4', '../skin/')" id="menu_1.4Title" class="menutitle">Test</div>
+<div id="menu_1.4" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/testing.html">Testing</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.5', '../skin/')" id="menu_1.5Title" class="menutitle">Deploy</div>
+<div id="menu_1.5" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/doc.html">Doc Mgmt</a>
+</div>
+<div class="menuitem">
+<a href="../dev/release.html">Release</a>
+</div>
+<div class="menuitem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;email1=&amp;emailtype1=substring&amp;emailassigned_to1=1&amp;email2=&amp;emailtype2=substring&amp;emailreporter2=1&amp;bugidtype=include&amp;bug_id=&amp;changedin=&amp;votes=&amp;chfieldfrom=&amp;chfieldto=Now&amp;chfieldvalue=&amp;product=Fop&amp;short_desc=&amp;short_desc_type=allwordssubstr&amp;long_desc=&amp;long_desc_type=allwordssubstr&amp;bug_file_loc=&amp;bug_file_loc_type=allwordssubstr&amp;keywords=&amp;keywords_type=anywords&amp;field0-0-0=noop&amp;type0-0-0=noop&amp;value0-0-0=&amp;order=bug_severity%2Cpriority%20DESC">Bugs</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.6', '../skin/')" id="menu_1.6Title" class="menutitle">Resources</div>
+<div id="menu_1.6" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/faq.html">FAQs</a>
+</div>
+<div class="menuitem">
+<a href="../dev/tools.html">Tools</a>
+</div>
+<div class="menuitem">
+<a href="http://svn.apache.org/viewvc/xmlgraphics/fop">ViewVC</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.7', '../skin/')" id="menu_1.7Title" class="menutitle">SubPackages</div>
+<div id="menu_1.7" class="menuitemgroup">
+<div class="menuitem">
+<a href="../dev/rtflib.html">RTFlib</a>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="../skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="raw XML" class="xmllink">
+<a class="dida" href="svg.xml"><img alt="XML - icon" src="../skin/images/xmldoc.gif" class="skin"><br>
+        XML</a>
+</div>
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="svg.pdf"><img alt="PDF -icon" src="../skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<div class="trail">Font size: 
+	          &nbsp;<input value="Reset" class="resetfont" title="Reset text" onclick="ndeSetTextSize('reset'); return false;" type="button">      
+	          &nbsp;<input value="-a" class="smallerfont" title="Shrink text" onclick="ndeSetTextSize('decr'); return false;" type="button">
+	          &nbsp;<input value="+a" class="biggerfont" title="Enlarge text" onclick="ndeSetTextSize('incr'); return false;" type="button">
+</div>
+<h1>Apache&trade; FOP Development: SVG Issues</h1>
+<div id="front-matter">
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#Examples">Examples</a>
+</li>
+<li>
+<a href="#Developer+Notes">Developer Notes</a>
+<ul class="minitoc">
+<li>
+<a href="#Classes">Classes</a>
+</li>
+<li>
+<a href="#Ideas">Ideas</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+    
+<p>See also <a href="../trunk/graphics.html#svg">SVG User Documentation</a> for more information.</p>
+          
+<a name="Examples"></a>
+<h2 class="underlined_10">Examples</h2>
+<div class="section">
+<p>
+These examples illustrate a number of issues relating to conversion
+to PDF:
+            </p>
+<table class="ForrestTable" cellspacing="1" cellpadding="4">
+    
+<caption>SVG to PDF examples</caption>
+    
+<tr>
+      
+<th colspan="1" rowspan="1"></th>
+      <th colspan="1" rowspan="1">svg file</th>
+      <th colspan="1" rowspan="1">png file</th>
+      <th colspan="1" rowspan="1">pdf result</th>
+    
+</tr>
+    
+<tr>
+      
+<td colspan="1" rowspan="1">images</td>
+      <td colspan="1" rowspan="1"><a href="svg/images.svg">images.svg</a></td>
+      <td colspan="1" rowspan="1"><a href="svg/images.png">images.png</a></td>
+      <td colspan="1" rowspan="1"><a href="svg/images.pdf">images.pdf</a></td>
+    
+</tr>
+    
+<tr>
+      
+<td colspan="1" rowspan="1">svg linking</td>
+      <td colspan="1" rowspan="1"><a href="svg/link.svg">link.svg</a></td>
+      <td colspan="1" rowspan="1"><a href="svg/link.png">link.png</a></td>
+      <td colspan="1" rowspan="1"><a href="svg/link.pdf">link.pdf</a></td>
+    
+</tr>
+    
+<tr>
+      
+<td colspan="1" rowspan="1">gradients and patterns</td>
+      <td colspan="1" rowspan="1"><a href="svg/paints.svg">paints.svg</a></td>
+      <td colspan="1" rowspan="1"><a href="svg/paints.png">paints.png</a></td>
+      <td colspan="1" rowspan="1"><a href="svg/paints.pdf">paints.pdf</a></td>
+    
+</tr>
+    
+<tr>
+      
+<td colspan="1" rowspan="1">various text and effects on text</td>
+      <td colspan="1" rowspan="1"><a href="svg/text.svg">text.svg</a></td>
+      <td colspan="1" rowspan="1"><a href="svg/text.png">text.png</a></td>
+      <td colspan="1" rowspan="1"><a href="svg/text.pdf">text.pdf</a></td>
+    
+</tr>
+    
+<tr>
+      
+<td colspan="1" rowspan="1">transparent objects</td>
+      <td colspan="1" rowspan="1"><a href="svg/transparency.svg">transparency.svg</a></td>
+      <td colspan="1" rowspan="1"><a href="svg/transparency.png">transparency.png</a></td>
+      <td colspan="1" rowspan="1"><a href="svg/transparency.pdf">transparency.pdf</a></td>
+    
+</tr>
+  
+</table>
+<p>
+ As can be seen most of the specific issues are handled.
+    </p>
+<div class="note">
+<div class="label">Note</div>
+<div class="content">
+You will need Acrobat 5.0 to see transparency.
+</div>
+</div>
+<table class="ForrestTable" cellspacing="1" cellpadding="4">
+    
+<caption>XSL:FO to PDF examples</caption>
+    
+<tr>
+      
+<th colspan="1" rowspan="1"></th>
+      <th colspan="1" rowspan="1">fo file</th>
+      <th colspan="1" rowspan="1">pdf result</th>
+    
+</tr>
+    
+<tr>
+      
+<td colspan="1" rowspan="1">embedding svg</td>
+      <td colspan="1" rowspan="1"><a href="fo/embedding.fo">embedding.fo</a></td>
+      <td colspan="1" rowspan="1"><a href="fo/embedding.fo.pdf">embedding.fo.pdf</a></td>
+    
+</tr>
+  
+</table>
+</div>
+          
+<a name="Developer+Notes"></a>
+<h2 class="underlined_10">Developer Notes</h2>
+<div class="section">
+<p>
+For most output formats in FOP the SVG is simply drawn into
+an image with Batik.
+For PDF there are a set of classes to handle drawing the
+<a class="external" href="http://xml.apache.org/batik/architecture.html">GVT (Graphic Vector Toolkit)</a>
+into PDF markup.
+            </p>
+<a name="Classes"></a>
+<h3 class="underlined_5">Classes</h3>
+<p>
+These are the relevant classes, found in the package org.apache.fop.svg :
+    </p>
+<ul>
+
+<li>
+<em>PDFGraphics2D</em>
+
+<br>
+used for drawing onto a Graphics2D into an existing pdf document, used
+internally to draw the svg.
+</li>
+
+<li>
+<em>PDFDocumentGraphics2D</em>
+
+<br>
+used to create a pdf document and inherits from PDFGraphics2D to do the
+rest of the drawing. Used by the transcoder to create a standalone pdf
+document from an svg. Can be used independantly the same as any Graphics2D.
+</li>
+
+<li>
+<em>PDFTranscoder</em>
+
+<br>
+used by Batik to transcode an svg document into a standalone pdf, via
+PDFDocumentGraphics2D.
+</li>
+
+</ul>
+<a name="Ideas"></a>
+<h3 class="underlined_5">Ideas</h3>
+<p>
+Batik can convert ttf to svg font.
+This svg font could be converted into a pdf stroked font
+(type 3 font).
+        </p>
+</div>
+  
+<span class="version">
+          version 1298724</span>
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         1999-2012 <a href="http://www.apache.org/licenses/">The Apache Software Foundation. Licensed under Apache License 2.0</a>
+<br>
+    Apache, Apache FOP, the Apache feather logo, and the Apache FOP
+    logos are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+  </div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

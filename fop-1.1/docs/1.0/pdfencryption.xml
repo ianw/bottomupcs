@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: pdfencryption.xml 1298724 2012-03-09 07:55:31Z cbowditch $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "document-v13.dtd">
+<document xmlns:xi="http://www.w3.org/2001/XInclude">
+  <header>
+    <title>Apache&#8482; FOP: PDF encryption.</title>
+    <version>$Revision: 1298724 $</version>
+    <authors>
+      <person name="J.Pietschmann" email="pietsch@apache.org"/>
+      <person name="Jeremias Märki" email="jeremias@apache.org"/>
+    </authors>
+  </header>
+  <body>
+    <section>
+      <title>Overview</title>
+      <p>
+        Apache&#8482; FOP supports encryption of PDF output, thanks to Patrick
+        C. Lankswert. This feature is commonly used to prevent
+        unauthorized viewing, printing, editing, copying text from the
+        document and doing annotations. It is also possible to ask the
+        user for a password in order to view the contents. Note that
+        there already exist third party applications which can decrypt
+        an encrypted PDF without effort and allow the aforementioned
+        operations, therefore the degree of protection is limited.
+      </p>
+      <p>
+        For further information about features and restrictions regarding PDF
+        encryption, look at the documentation coming with Adobe Acrobat or the
+        technical documentation on the Adobe web site.
+      </p>
+    </section>
+    <section>
+      <title>Usage (command line)</title>
+      <p>
+        Encryption is enabled by supplying any of the encryption related
+        options.
+      </p>
+      <p>
+        An owner password is set with the <code>-o</code> option. This
+        password is actually used as encryption key. Many tools for
+        PDF processing ask for this password to disregard any
+        restriction imposed on the PDF document.
+      </p>
+      <p>
+        If no owner password has been supplied but FOP was asked to apply some
+        restrictions, a random password is used. In this case it is obviously
+        impossiible to disregard restrictions in PDF processing tools.
+      </p>
+      <p>
+        A user password, supplied with the <code>-u</code> option, will
+        cause the PDF display software to ask the reader for this password in
+        order to view the contents of the document. If no user password was
+        supplied, viewing the content is not restricted.
+      </p>
+      <p>
+        Further restrictions can be imposed by using the <code>-noprint</code>,
+        <code>-nocopy</code>, <code>-noedit</code> and
+        <code>-noannotations</code> options, which disable printing, copying
+        text, editing in Adobe Acrobat and making annotations, respectively.
+      </p>
+    </section>
+    <section>
+      <title>Usage (embedded)</title>
+      <p>
+        When FOP is embedded in another Java application you need to set an 
+        options map on the renderer. These are the supported options:
+      </p>
+      <table>
+        <tr>
+          <th colspan="1" rowspan="1">Option</th>
+          <th colspan="1" rowspan="1">Description</th>
+          <th colspan="1" rowspan="1">Values</th>
+          <th colspan="1" rowspan="1">Default</th>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">ownerPassword</td>
+          <td colspan="1" rowspan="1">The owner password</td>
+          <td colspan="1" rowspan="1">String</td>
+          <td colspan="1" rowspan="1"/>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">userPassword</td>
+          <td colspan="1" rowspan="1">The user password</td>
+          <td colspan="1" rowspan="1">String</td>
+          <td colspan="1" rowspan="1"/>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">allowPrint</td>
+          <td colspan="1" rowspan="1">Allows/disallows printing of the PDF</td>
+          <td colspan="1" rowspan="1">"TRUE" or "FALSE"</td>
+          <td colspan="1" rowspan="1">"TRUE"</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">allowCopyContent</td>
+          <td colspan="1" rowspan="1">Allows/disallows copy/paste of content</td>
+          <td colspan="1" rowspan="1">"TRUE" or "FALSE"</td>
+          <td colspan="1" rowspan="1">"TRUE"</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">allowEditContent</td>
+          <td colspan="1" rowspan="1">Allows/disallows editing of content</td>
+          <td colspan="1" rowspan="1">"TRUE" or "FALSE"</td>
+          <td colspan="1" rowspan="1">"TRUE"</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">allowEditAnnotations</td>
+          <td colspan="1" rowspan="1">Allows/disallows editing of annotations</td>
+          <td colspan="1" rowspan="1">"TRUE" or "FALSE"</td>
+          <td colspan="1" rowspan="1">"TRUE"</td>
+        </tr>
+      </table>
+      <note>
+        Encryption is enabled as soon as one of these options is set.
+      </note>
+      <p>
+        An example to enable PDF encryption in Java code:
+      </p>
+      <source xml:space="preserve"><![CDATA[
+import org.apache.fop.pdf.PDFEncryptionParams;
+
+[..]
+
+FOUserAgent userAgent = fopFactory.newFOUserAgent();
+useragent.getRendererOptions().put("encryption-params", new PDFEncryptionParams(
+    null, "password", false, false, true, true));
+Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, userAgent);
+[..]]]></source>
+      <p>
+        The parameters for the constructor of PDFEncryptionParams are:
+      </p>
+      <ol>
+        <li>userPassword: String, may be null</li>
+        <li>ownerPassword: String, may be null</li>
+        <li>allowPrint: true if printing is allowed</li>
+        <li>allowCopyContent: true if copying content is allowed</li>
+        <li>allowEditContent: true if editing content is allowed</li>
+        <li>allowEditAnnotations: true if editing annotations is allowed</li>
+      </ol>
+      <p>
+        Alternatively, you can set each value separately in the Map provided by 
+        FOUserAgent.getRendererOptions() by using the following keys:
+      </p>
+      <ol>
+        <li>user-password: String</li>
+        <li>owner-password: String</li>
+        <li>noprint: Boolean or "true"/"false"</li>
+        <li>nocopy: Boolean or "true"/"false"</li>
+        <li>noedit: Boolean or "true"/"false"</li>
+        <li>noannotations: Boolean or "true"/"false"</li>
+      </ol>
+    </section>
+    <section>
+      <title>Environment</title>
+      <p>
+        In order to use PDF encryption, FOP has to be compiled with
+        cryptography support. Currently, only <link href="http://java.sun.com/j2se/1.4/docs/guide/security/jce/JCERefGuide.html">JCE</link>
+        is supported. JCE is part of JDK 1.4. For earlier JDKs, it can
+        be installed separately. The build process automatically
+        detects JCE presence and installs PDF encryption support if
+        possible, otherwise a stub is compiled in.
+      </p>
+      <p>
+        Cryptography support must also be present at run time. In particular, a
+        provider for the RC4 cipher is needed. Unfortunately, the sample JCE
+        provider in Sun's JDK 1.4 does <strong>not</strong> provide RC4. If you
+        get a message saying
+      </p>
+      <source xml:space="preserve"><![CDATA["Cannot find any provider supporting RC4"]]></source>
+      <p>
+        then you don't have the needed infrastructure.
+      </p>
+      <p>
+        There are several commercial and a few Open Source packages which
+        provide RC4. A pure Java implementation is produced by <link href="http://www.bouncycastle.org/">The Legion of the Bouncy
+        Castle</link>. <link href="http://www.mozilla.org/projects/security/pki/jss/">Mozilla
+        JSS</link> is an interface to a native implementation.
+      </p>
+    </section>
+    <section id="install_crypto">
+      <title>Installing a crypto provider</title>
+      <p>
+        The pure Java implementation from <link href="http://www.bouncycastle.org/">Bouncy Castle</link> is easy to
+        install.
+      </p>
+      <ol>
+        <li>
+          Download the binary distribution for your JDK version.
+        </li>
+        <li>
+          Unpack the distribution. Add the jar file to your classpath. A
+          convenient way to use the jar on Linux is to simply drop it into the
+          FOP lib directory, it will be automatically picked up by
+          <code>fop.sh</code>.
+        </li>
+        <li>
+          Open the <code>java.security</code> file and add<br/>
+          <code>security.provider.6=org.bouncycastle.jce.provider.BouncyCastleProvider</code>,<br/>
+          preferably at the end of the block defining the other crypto
+          providers. For JDK 1.4 this is detailed on <link href="http://java.sun.com/j2se/1.4/docs/guide/security/jce/JCERefGuide.html#InstallProvider">Sun's web site</link>.
+        </li>
+      </ol>
+      <p>
+        If you have any experience with Mozilla JSS or any other
+        cryptography provider, please post it to the fop-user list.
+      </p>
+    </section>
+  </body>
+</document>

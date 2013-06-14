@@ -1,0 +1,44 @@
+   =========================================================================
+   ==  NOTICE file corresponding to section 4(d) of the Apache License,   ==
+   ==  Version 2.0, in this case for the Apache Xalan distribution.       ==
+   =========================================================================
+
+   This product includes software developed by
+   The Apache Software Foundation (http://www.apache.org/).
+
+   Portions of this software was originally based on the following:
+     - software copyright (c) 1999-2002, Lotus Development Corporation.,
+       http://www.lotus.com.
+     - software copyright (c) 2001-2002, Sun Microsystems.,
+       http://www.sun.com.
+     - software copyright (c) 2003, IBM Corporation., http://www.ibm.com.
+     - voluntary contributions made by Ovidiu Predescu <ovidiu@cup.hp.com> on
+       behalf of the Apache Software Foundation that was originally developed
+       at Hewlett Packard Company. 
+
+   The binary distribution package (ie. jars, samples and documentation) of
+   this product includes software developed by the following:
+       
+     - The Apache Software Foundation 
+         - Xerces Java - see xercesImpl.README.txt 
+         - JAXP 1.3 APIs - see xml-apis.README.txt
+         - Bytecode Engineering Library - see BCEL.README.txt
+         - Regular Expression - see regexp.README.txt
+       
+     - Scott Hudson, Frank Flannery, C. Scott Ananian 
+         - CUP Parser Generator runtime (javacup\runtime) - see runtime.README.txt 
+ 
+ 
+   The source distribution package (ie. all source and tools required to build
+   Xalan Java) of this product includes software developed by the following:
+       
+     - The Apache Software Foundation
+         - Xerces Java - see xercesImpl.README.txt 
+         - JAXP 1.3 APIs - see xml-apis.README.txt
+         - Bytecode Engineering Library - see BCEL.README.txt
+         - Regular Expression - see regexp.README.txt
+         - Ant - see ant.README.txt
+         - Stylebook doc tool - see stylebook-1.0-b3_xalan-2.README.txt    
+       
+     - Elliot Joel Berk and C. Scott Ananian 
+         - Lexical Analyzer Generator (JLex) - see JLex.README.txt

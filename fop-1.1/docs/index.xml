@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: index.xml 1394416 2012-10-05 08:56:54Z gadams $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Apache&#8482; FOP</title>
+    <version>$Revision: 1394416 $</version>
+  </header>
+  <body>
+    <section id="intro">
+      <title>Introduction</title>
+      <p>
+        Apache&#8482; FOP (Formatting Objects Processor) is a print formatter driven by XSL
+        formatting objects (XSL-FO) and an output independent formatter. It is a Java
+        application that reads a formatting object (FO) tree and renders the resulting
+        pages to a specified output. <link href="1.1/output.html">Output formats</link>
+        currently supported include PDF, PS, PCL, AFP, XML (area tree representation),
+        Print, AWT and PNG, and to a lesser extent, RTF and TXT. The primary output target is PDF.
+      </p>
+      <p>
+        The Apache&#8482; FOP project is part of the <link href="http://www.apache.org">Apache&#8482;</link>
+        Software Foundation, which is a wider community of users and developers of open source projects.
+      </p>
+      <figure width="480" height="260" src="images/document.jpg" alt="Render Diagram"/>
+      <p>
+        The latest version of FOP is available at <link href="1.1/">FOP 1.1</link>.
+      </p>
+    <p>
+      Support for each of the standard's objects and properties is detailed in <link href="compliance.html">FOP Compliance</link>.
+      <link href="download.html">Download</link> options include a precompiled version, source code, and many example files to get you started. <link href="resources.html">Resources</link> include links to XSL-FO introductions and many other useful references. A checklist for <link href="gethelp.html">Getting Help</link> will guide you toward maximizing the usefulness of FOP.
+    </p>
+    <p>FOP is proud to be part of <link href="http://xmlgraphics.apache.org">Apache's XML Graphics project</link>.
+    </p>
+    </section>
+
+  <section id="demo">
+    <title>Demonstration</title>
+        <figure width="480" height="260" src="images/layout.jpg" alt="Formatting Diagram"/>
+<p>
+This image is a demonstration of a real two page document. The XML data on the left
+is formatted into the two pages on the right. The document contains static areas that appear on every page, an external graphic, a footnote on the first page, and a table that goes across both pages.
+</p>
+<p>
+FOP uses the standard XSL-FO file format as input, lays the content out into pages, then renders it to the requested output.
+One great advantage of using XSL-FO as input is that XSL-FO is itself an XML file, which means that it can be conveniently created from a variety of sources.
+The most common method is to convert semantic XML to XSL-FO, using an XSLT transformation.</p>
+  </section>
+  <section id="objectives">
+    <title>FOP Objectives</title>
+    <p>The goals of the Apache FOP project are to deliver an XSL-FO to PDF formatter that
+      is compliant to at least the Basic conformance level described in the W3C
+      Recommendation from 05 December 2006, and that complies with the November 2001
+      Portable Document Format Specification (Version 1.4) from Adobe Systems.
+    </p>
+
+    <p>Conformance to the XML 1.0 and 1.1 Recommendations, XSLT 1.0 and 2.0 Recommendations and the XML Namespaces Recommendation is
+       understood. Other relevant documents, such as the XPath and XLink Working Drafts, are referenced as necessary. The FOP
+       Project will attempt to use the latest version of evolving specifications.
+    </p>
+  </section>
+  <note>
+    The PDF files on this site are created using Apache FOP.
+  </note>
+  </body>
+</document>

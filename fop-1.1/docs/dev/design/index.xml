@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: index.xml 1298724 2012-03-09 07:55:31Z cbowditch $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Apache&#8482; FOP Design: Introduction</title>
+    <version>$Revision: 1298724 $</version>
+    <authors>
+      <person name="Keiron Liddle" email="keiron@aftexsw.com"/>
+    </authors>
+  </header>
+  <body>
+    <note>The articles in this section pertain mainly to the <em>redesign</em> or <em>trunk</em> line of development.
+The redesign is mainly focusing on parts of the layout process (converting the FO tree into the Area Tree).
+Therefore other (non-layout) sections in this document are probably largely accurate for the maintenance branch, but should be used with care in that context.</note>
+    <section id="black-box">
+      <title>The Black Box View</title>
+      <p>From a user's standpoint, Apache&#8482; FOP is a black box that an xml file as input, performs some magic, then creates the desired output:</p>
+      <table>
+        <caption>Apache&#65533; FOP from a User's Standpoint</caption>
+        <tr>
+          <th colspan="1" rowspan="1">Process</th>
+          <th colspan="1" rowspan="1">Result</th>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">.</td>
+          <td colspan="1" rowspan="1">XSL-FO document</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">FOP</td>
+          <td colspan="1" rowspan="1">Output: PDF, Postscript, Print, etc.</td>
+        </tr>
+      </table>
+      <p>Although this is simple, it is useful in defining the outer limits of FOP's core processing.
+There may be other things going on under FOP's control that are not really part of FOP.
+For example, FOP provides a convenience mechanism that takes semantic XML + an XSLT transformation as input, instead of XSL-FO.
+This is done outside of FOP's core processing (by Xalan), and it is therefore outside the scope of FOP's design, and outside the scope of the FOP design documents.</p>
+    </section>
+    <section id="primary-goals">
+      <title>Primary Design Goals</title>
+      <p>A discussion of project design properly begins with a list of the goals of the project.
+Out of these goals will flow the design issues and details, and eventually, the implementation.</p>
+      <section id="pri-goal-conformance">
+        <title>Conformance to the XSL-FO Specification</title>
+        <p>The current design goal is to reach the "basic" level of conformance, and to have enough flexibility in the design to reach "complete" conformance without major rewriting.
+After "basic" conformance is achieved, it is probable that higher levels of conformance will be sought.</p>
+      </section>
+      <section id="pri-goal-unlimited-size">
+        <title>Process Files of Arbitrary Size</title>
+        <p>Except for user storage limitations, the design goal is to be able to process files of any size. In a separate but related issue, the design goal is to be able to process page-sequence elements of any size. (See <link href="fotree.html#recycle">Recycling FO Tree Memory</link> for a discussion of the use of page-sequence as a logical subdivided "chunk" on an FO document).</p>
+      </section>
+    </section>
+    <section id="secondary-goals">
+      <title>Secondary Design Goals</title>
+      <section id="sec-goal-memory">
+        <title>Minimize Memory Use</title>
+        <p>Many FOP design decisions revolve around trying to minimize the use of memory.
+The primary purpose here is to reduce the amount of data that must be serialized to storage during processing.
+Since our primary design goals include the ability to process files of arbitrary size, there is no way to avoid the need to serialize.
+However, many FOP users provide web access to documents that are created in real time.
+Performance is therefore an important issue in these real-world applications.
+To the extent that it can be done so without jeopardizing the primary design goals, FOP developers have identified keeping a small memory footprint as being an important secondary goal.</p>
+      </section>
+    </section>
+    <section id="big-picture">
+      <title>The Big Picture View</title>
+      <p>With our design goals outlined, we'll now open the Black Box and look at the major processes inside.
+FOP has adopted the basic structure of the XSL-FO standard itself as a convenient model for the major processes in FOP. The Result in each row is the input for the next.</p>
+      <table>
+        <caption>FOP's Big Picture Design</caption>
+        <tr>
+          <th colspan="1" rowspan="1">Process</th>
+          <th colspan="1" rowspan="1">Process Result/Input for Next</th>
+          <th colspan="1" rowspan="1">Notes</th>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">.</td>
+          <td colspan="1" rowspan="1">XSL-FO document</td>
+          <td colspan="1" rowspan="1">.</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1"><link href="parsing.html">Parsing</link></td>
+          <td colspan="1" rowspan="1"><link href="fotree.html">FO Tree</link></td>
+          <td colspan="1" rowspan="1">.</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1"><link href="properties.html#refine">Refinement</link></td>
+          <td colspan="1" rowspan="1"><link href="properties.html#refined-fo-tree">Refined FO Tree</link></td>
+          <td colspan="1" rowspan="1">.</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1"><link href="layout.html">Layout</link></td>
+          <td colspan="1" rowspan="1"><link href="areas.html">Area Tree</link></td>
+          <td colspan="1" rowspan="1">Layout and Area Tree are not needed or used for the structural outputs (MIF and RTF), as they are not paginated.</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1"><link href="renderers.html">Renderer</link></td>
+          <td colspan="1" rowspan="1">Output: PDF, Postscript, Print, etc.</td>
+          <td colspan="1" rowspan="1">.</td>
+        </tr>
+      </table>
+      <p>In general, each piece of data will be processed in the same way.
+However, some information may be used more than once, and some may be used out of order.
+To reduce memory, one process may start before the previous process is completed.</p>
+      <p>For a detailed discussion of the design of any component, follow its link in the table above.
+Each component outlines the design issues which have already been addressed.
+These resolution of these design issues is in support of the primary and secondary goals, so they are not necessarily written in stone.
+However, most of them have been discussed at length among the developers, and are reasonably well settled.</p>
+    </section>
+
+
+    <section id="vocabulary">
+      <title>Vocabulary</title>
+      <p>This section will attempt to provide information about any jargon used in the design documentation.</p>
+      <p>There is a rough relationship between terms used to describe the various trees in XSL-FO processing, all of which come from the XML and XSL-FO standards. In the table below, the <em>terms</em> (but not the actual items) in each column are roughly equivalent to each other:</p>
+      <table>
+        <tr>
+          <th colspan="1" rowspan="1">Tree Concept</th>
+          <th colspan="1" rowspan="1">Thing (Noun)</th>
+          <th colspan="1" rowspan="1">Descriptive Item (Adjective)</th>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">XML</td>
+          <td colspan="1" rowspan="1">Element</td>
+          <td colspan="1" rowspan="1">Attribute</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">FO Tree</td>
+          <td colspan="1" rowspan="1">Object</td>
+          <td colspan="1" rowspan="1">Property</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">Area Tree</td>
+          <td colspan="1" rowspan="1">Area</td>
+          <td colspan="1" rowspan="1">Trait</td>
+        </tr>
+      </table>
+      <ul>
+        <li><strong>LM</strong>: Layout Manager.</li>
+        <li><strong>PLB</strong>: PropertyListBuilder.</li>
+      </ul>
+    </section>
+  </body>
+</document>

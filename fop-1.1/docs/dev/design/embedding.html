@@ -1,0 +1,468 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="Apache Forrest" name="Generator">
+<meta name="Forrest-version" content="0.10-dev">
+<meta name="Forrest-skin-name" content="pelt">
+<title>Apache&trade; FOP Design: Embedding Apache� FOP in Other Applications</title>
+<link type="text/css" href="../../skin/basic.css" rel="stylesheet">
+<link media="screen" type="text/css" href="../../skin/screen.css" rel="stylesheet">
+<link media="print" type="text/css" href="../../skin/print.css" rel="stylesheet">
+<link type="text/css" href="../../skin/profile.css" rel="stylesheet">
+<script src="../../skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="../../skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="../../skin/fontsize.js" language="javascript" type="text/javascript"></script>
+<link rel="shortcut icon" href="../../favicon.ico">
+</head>
+<body onload="init()">
+<script type="text/javascript">ndeSetTextSize();</script>
+<div id="top">
+<!--+
+    |header
+    +-->
+<div class="header">
+<!--+
+    |start group logo
+    +-->
+<div class="grouplogo">
+<a href="http://xmlgraphics.apache.org/"><img class="logoImage" alt="Apache XML Graphics" src="../../images/group-logo.gif" title="Apache XML Graphics is responsible for the creation and maintenance of software for managing the conversion of XML formats to graphical output, and the creation and maintenance of related software components, based on software licensed to the Foundation"></a>
+</div>
+<!--+
+    |end group logo
+    +-->
+<!--+
+    |start Project Logo
+    +-->
+<div class="projectlogo">
+<a href="http://xmlgraphics.apache.org/fop/"><img class="logoImage" alt="Apache FOP" src="../../images/logo.jpg" title="Apache FOP (Formatting Objects Processor) is the world's first output independent formatter. Output formats currently supported include PDF, PCL, PS, SVG, XML (area tree representation), Print, AWT, MIF and TXT. The primary output target is PDF."></a>
+</div>
+<!--+
+    |end Project Logo
+    +-->
+<!--+
+    |start Search
+    +-->
+<div class="searchbox">
+<form action="http://www.google.com/search" method="get" class="roundtopsmall">
+<input value="xmlgraphics.apache.org" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
+                    <input name="Search" value="Search" type="submit">
+</form>
+</div>
+<!--+
+    |end search
+    +-->
+<!--+
+    |start Tabs
+    +-->
+<ul id="tabs">
+<li>
+<a class="unselected" href="../../index.html">Home</a>
+</li>
+<li>
+<a class="unselected" href="../../1.0/index.html">Version 1.0</a>
+</li>
+<li>
+<a class="unselected" href="../../1.1/index.html">Version 1.1</a>
+</li>
+<li>
+<a class="unselected" href="../../trunk/index.html">FOP Trunk</a>
+</li>
+<li class="current">
+<a class="selected" href="../../dev/index.html">Development</a>
+</li>
+</ul>
+<!--+
+    |end Tabs
+    +-->
+</div>
+</div>
+<div id="main">
+<div id="publishedStrip">
+<!--+
+    |start Subtabs
+    +-->
+<div id="level2tabs"></div>
+<!--+
+    |end Endtabs
+    +-->
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<!--+
+    |breadtrail
+    +-->
+<div class="breadtrail">
+<a href="http://www.apache.org/">The Apache Software Foundation</a> &gt; <a href="http://xmlgraphics.apache.org/">Apache XML Graphics Project</a><script src="../../skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+</div>
+<!--+
+    |start Menu, mainarea
+    +-->
+<!--+
+    |start Menu
+    +-->
+<div id="menu">
+<div onclick="SwitchMenu('menu_1.1', '../../skin/')" id="menu_1.1Title" class="menutitle">About</div>
+<div id="menu_1.1" class="menuitemgroup">
+<div class="menuitem">
+<a href="../../dev/index.html">Basics</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_selected_1.2', '../../skin/')" id="menu_selected_1.2Title" class="menutitle" style="background-image: url('../../skin/images/chapter_open.gif');">Design</div>
+<div id="menu_selected_1.2" class="selectedmenuitemgroup" style="display: block;">
+<div onclick="SwitchMenu('menu_1.2.1', '../../skin/')" id="menu_1.2.1Title" class="menutitle">About</div>
+<div id="menu_1.2.1" class="menuitemgroup">
+<div class="menuitem">
+<a href="../../dev/design/index.html">Introduction</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.2.2', '../../skin/')" id="menu_1.2.2Title" class="menutitle">Core Process</div>
+<div id="menu_1.2.2" class="menuitemgroup">
+<div class="menuitem">
+<a href="../../dev/design/startup.html">Startup</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/parsing.html">XML Parsing</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/fotree.html">FO Tree</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/properties.html">Properties</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/layout.html">Layout</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/breakpos.html">Break Possibility</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/areas.html">Area Tree</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/renderers.html">Renderers</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_selected_1.2.3', '../../skin/')" id="menu_selected_1.2.3Title" class="menutitle" style="background-image: url('../../skin/images/chapter_open.gif');">Miscellaneous</div>
+<div id="menu_selected_1.2.3" class="selectedmenuitemgroup" style="display: block;">
+<div class="menuitem">
+<a href="../../dev/design/images.html">Images</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/pdf-library.html">PDF Library</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/svg.html">SVG</a>
+</div>
+<div class="menupage">
+<div class="menupagetitle">Embedding</div>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/extending.html">Extending</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/optimise.html">Optimisations</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/design/useragent.html">User Agent</a>
+</div>
+</div>
+<div class="menuitem">
+<a href="http://wiki.apache.org/xmlgraphics-fop/FOPProjectPages">Unresolved (Wiki)</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/svg.html">SVG</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/extensions.html">Extensions</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.3', '../../skin/')" id="menu_1.3Title" class="menutitle">Develop</div>
+<div id="menu_1.3" class="menuitemgroup">
+<div class="menuitem">
+<a href="../../dev/implement.html">Walk-Thru</a>
+</div>
+<div class="menuitem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;email1=&amp;emailtype1=substring&amp;emailassigned_to1=1&amp;email2=&amp;emailtype2=substring&amp;emailreporter2=1&amp;bugidtype=include&amp;bug_id=&amp;changedin=&amp;votes=&amp;chfieldfrom=&amp;chfieldto=Now&amp;chfieldvalue=&amp;product=Fop&amp;short_desc=%5BPATCH%5D&amp;short_desc_type=allwordssubstr&amp;long_desc=&amp;long_desc_type=allwordssubstr&amp;bug_file_loc=&amp;bug_file_loc_type=allwordssubstr&amp;keywords=&amp;keywords_type=anywords&amp;field0-0-0=noop&amp;type0-0-0=noop&amp;value0-0-0=&amp;namedcmd=Fop+all&amp;newqueryname=fop+patch+queue&amp;tofooter=1&amp;order=Reuse+same+sort+as+last+time">Patch Queue</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/conventions.html">Conventions</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.4', '../../skin/')" id="menu_1.4Title" class="menutitle">Test</div>
+<div id="menu_1.4" class="menuitemgroup">
+<div class="menuitem">
+<a href="../../dev/testing.html">Testing</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.5', '../../skin/')" id="menu_1.5Title" class="menutitle">Deploy</div>
+<div id="menu_1.5" class="menuitemgroup">
+<div class="menuitem">
+<a href="../../dev/doc.html">Doc Mgmt</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/release.html">Release</a>
+</div>
+<div class="menuitem">
+<a href="http://issues.apache.org/bugzilla/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;email1=&amp;emailtype1=substring&amp;emailassigned_to1=1&amp;email2=&amp;emailtype2=substring&amp;emailreporter2=1&amp;bugidtype=include&amp;bug_id=&amp;changedin=&amp;votes=&amp;chfieldfrom=&amp;chfieldto=Now&amp;chfieldvalue=&amp;product=Fop&amp;short_desc=&amp;short_desc_type=allwordssubstr&amp;long_desc=&amp;long_desc_type=allwordssubstr&amp;bug_file_loc=&amp;bug_file_loc_type=allwordssubstr&amp;keywords=&amp;keywords_type=anywords&amp;field0-0-0=noop&amp;type0-0-0=noop&amp;value0-0-0=&amp;order=bug_severity%2Cpriority%20DESC">Bugs</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.6', '../../skin/')" id="menu_1.6Title" class="menutitle">Resources</div>
+<div id="menu_1.6" class="menuitemgroup">
+<div class="menuitem">
+<a href="../../dev/faq.html">FAQs</a>
+</div>
+<div class="menuitem">
+<a href="../../dev/tools.html">Tools</a>
+</div>
+<div class="menuitem">
+<a href="http://svn.apache.org/viewvc/xmlgraphics/fop">ViewVC</a>
+</div>
+</div>
+<div onclick="SwitchMenu('menu_1.7', '../../skin/')" id="menu_1.7Title" class="menutitle">SubPackages</div>
+<div id="menu_1.7" class="menuitemgroup">
+<div class="menuitem">
+<a href="../../dev/rtflib.html">RTFlib</a>
+</div>
+</div>
+<div id="credit"></div>
+<div id="roundbottom">
+<img style="display: none" class="corner" height="15" width="15" alt="" src="../../skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+<!--+
+  |alternative credits
+  +-->
+<div id="credit2"></div>
+</div>
+<!--+
+    |end Menu
+    +-->
+<!--+
+    |start content
+    +-->
+<div id="content">
+<div title="raw XML" class="xmllink">
+<a class="dida" href="embedding.xml"><img alt="XML - icon" src="../../skin/images/xmldoc.gif" class="skin"><br>
+        XML</a>
+</div>
+<div title="Portable Document Format" class="pdflink">
+<a class="dida" href="embedding.pdf"><img alt="PDF -icon" src="../../skin/images/pdfdoc.gif" class="skin"><br>
+        PDF</a>
+</div>
+<div class="trail">Font size: 
+	          &nbsp;<input value="Reset" class="resetfont" title="Reset text" onclick="ndeSetTextSize('reset'); return false;" type="button">      
+	          &nbsp;<input value="-a" class="smallerfont" title="Shrink text" onclick="ndeSetTextSize('decr'); return false;" type="button">
+	          &nbsp;<input value="+a" class="biggerfont" title="Enlarge text" onclick="ndeSetTextSize('incr'); return false;" type="button">
+</div>
+<h1>Apache&trade; FOP Design: Embedding Apache� FOP in Other Applications</h1>
+<div id="front-matter">
+<div id="minitoc-area">
+<ul class="minitoc">
+<li>
+<a href="#intro">Introduction</a>
+</li>
+<li>
+<a href="#Settings">Settings</a>
+<ul class="minitoc">
+<li>
+<a href="#User+Agent">User Agent</a>
+</li>
+<li>
+<a href="#Logging">Logging</a>
+</li>
+<li>
+<a href="#XML+input">XML input</a>
+</li>
+<li>
+<a href="#general+options">general options</a>
+</li>
+<li>
+<a href="#Rendering+Options">Rendering Options</a>
+</li>
+<li>
+<a href="#Render+Results">Render Results</a>
+</li>
+<li>
+<a href="#Setting+Up">Setting Up</a>
+</li>
+<li>
+<a href="#Others">Others</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<a name="intro"></a>
+<h2 class="underlined_10">Introduction</h2>
+<div class="section">
+<p>
+This is the design for the external interface when Apache&trade; FOP is to be embedded
+inside another java application.
+  </p>
+<p>
+Common places where FOP is embedded is in a report production application
+of a server side application such as <a class="external" href="http://xml.apache.org/cocoon/index.html">Cocoon</a>.
+   </p>
+</div>
+
+<a name="Settings"></a>
+<h2 class="underlined_10">Settings</h2>
+<div class="section">
+<a name="User+Agent"></a>
+<h3 class="underlined_5">User Agent</h3>
+<p>
+Possible meanings for a user agent:
+</p>
+<ul>
+
+<li>something that makes decisions where the specifiction indicates
+that the user agent should decide</li>
+
+<li>FOP as the user agent, represented by a class that handles
+various setup and decision values</li>
+
+<li>an class that handles context for a particular FOP conversion
+that can be configured/overridden when embedding</li>
+
+</ul>
+<p>
+The user agent is responsible for supplying user or context
+specific information. The list of user agent values can be found on the
+<a target="_top" href="useragent.html">User Agent</a> page.
+   </p>
+<a name="Logging"></a>
+<h3 class="underlined_5">Logging</h3>
+<ul>
+
+<li>logging level</li>
+
+<li>logging messages of various levels</li>
+
+<li>error handling</li>
+
+<li>Logging setup (LogKit, Log4J, JDK14Logging)</li>
+
+</ul>
+<a name="XML+input"></a>
+<h3 class="underlined_5">XML input</h3>
+<ul>
+
+<li>various ways to supply FOP with the xsl:fo file, fo, xml+xsl</li>
+
+<li>sax handler</li>
+
+</ul>
+<a name="general+options"></a>
+<h3 class="underlined_5">general options</h3>
+<ul>
+
+<li>base url</li>
+
+<li>uri resolvers</li>
+
+<li>which implementation of a particular LayoutManager to use</li>
+
+</ul>
+<a name="Rendering+Options"></a>
+<h3 class="underlined_5">Rendering Options</h3>
+<ul>
+
+<li>embedding fonts</li>
+
+<li>compression in pdf</li>
+
+<li>image embedding</li>
+
+</ul>
+<p>
+for the PS renderer (eventually):
+</p>
+<ul>
+
+<li>PostScript Level</li>
+
+<li>PPD to use</li>
+
+<li>binary/ascii switch</li>
+
+</ul>
+<a name="Render+Results"></a>
+<h3 class="underlined_5">Render Results</h3>
+<p>
+Generate Output statistics from FOP:
+   </p>
+<ul>
+
+<li>Number of pages total</li>
+
+<li>Number of pages of each page-sequence</li>
+
+<li>page-master used for each page (could be used to control
+the paper bin to get paper from, important for me in conjunction
+with PS Renderer)</li>
+
+<li>recoverable errors such as overflow</li>
+
+</ul>
+<a name="Setting+Up"></a>
+<h3 class="underlined_5">Setting Up</h3>
+<p>
+The Driver handles the XML input.
+The user agent information is through the FOUserAgent.
+Handle logging through the user agent.
+Options could also be handled through the user agent, using mime type
+selection for renderer options.
+</p>
+<a name="Others"></a>
+<h3 class="underlined_5">Others</h3>
+<p>
+Render to more than one renderer at once (maybe not from the command line).
+For example you could generate a PDF for the archive
+and the PS for the printer in one run. It would probably be faster than
+converting the PDF to PostScript afterwards.
+Make the fo tree reuseable.
+If the fonts are the same then use the
+same area tree to output to different renderers.
+</p>
+<p>
+Several code pieces for resolving URLs and/or
+file locations are scattered all over FOP and Batik. These should
+be replaced with an URIResolver invocation to unify behaviour and
+remove redundancies.
+   </p>
+</div>
+
+    
+<p align="right">
+<font size="-2">by&nbsp;Keiron Liddle</font>
+</p>
+<span class="version">
+          version 1298724</span>
+</div>
+<!--+
+    |end content
+    +-->
+<div class="clearboth">&nbsp;</div>
+</div>
+<div id="footer">
+<!--+
+    |start bottomstrip
+    +-->
+<div class="lastmodified">
+<script type="text/javascript"><!--
+document.write("Last Published: " + document.lastModified);
+//  --></script>
+</div>
+<div class="copyright">
+        Copyright &copy;
+         1999-2012 <a href="http://www.apache.org/licenses/">The Apache Software Foundation. Licensed under Apache License 2.0</a>
+<br>
+    Apache, Apache FOP, the Apache feather logo, and the Apache FOP
+    logos are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+  </div>
+<!--+
+    |end bottomstrip
+    +-->
+</div>
+</body>
+</html>

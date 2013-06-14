@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+  <!-- defines page layout -->
+  <fo:layout-master-set>
+    <fo:simple-page-master master-name="first"
+                           page-height="29.7cm" 
+                           page-width="21cm"
+                           margin-top="1cm"
+                           margin-bottom="2cm"
+                           margin-left="2.5cm"
+                           margin-right="2.5cm">
+      <fo:region-body margin-top="3cm"/>
+      <fo:region-before extent="3cm"/>
+      <fo:region-after extent="1.5cm"/>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+  <!-- end: defines page layout -->
+
+  <!-- actual layout -->
+  <fo:page-sequence master-reference="first">
+
+    <!-- text body -->
+    <fo:flow flow-name="xsl-region-body">
+
+      <!-- Normal text -->
+      <fo:block text-align="center">0. Normal text without link
+      </fo:block>
+
+
+      <!-- Normal text -->
+      <fo:block text-align="center"
+                font-family="serif">1. <fo:basic-link external-destination="normal.pdf">normal.pdf</fo:basic-link>
+      </fo:block>
+
+      <!-- Normal text -->
+      <fo:block text-align="center">---</fo:block>
+
+      <!-- Normal text -->
+      <fo:block text-align="center">
+        2. A one line example (text-align='start'): <fo:basic-link external-destination="normal.pdf">normal.pdf</fo:basic-link>
+      </fo:block>
+
+      <!-- Normal text -->
+      <fo:block text-align="center">---</fo:block>
+
+      <!-- Normal text -->
+      <fo:block text-align="start">
+        3. A multiline text (text-align='start'). The Extensible Markup Language (XML) is a subset of SGML that is completely described in this document. Its goal is to
+        enable generic SGML to be served, received, and processed on the Web in the way that is now possible with HTML. XML
+        has been designed for ease of implementation and for interoperability with both SGML and HTML. For further information
+        go to <fo:basic-link external-destination="normal.pdf">normal.pdf</fo:basic-link>
+      </fo:block>
+
+      <!-- Normal text -->
+      <fo:block text-align="center">---</fo:block>
+
+      <!-- Normal text -->
+      <fo:block text-align="center">
+        4. A multiline text (text-align='centered'). The Extensible Markup Language (XML) is a subset of SGML that is completely described in this document. Its goal is to
+        enable generic SGML to be served, received, and processed on the Web in the way that is now possible with HTML. XML
+        has been designed for ease of implementation and for interoperability with both SGML and HTML. For further information
+        go to <fo:basic-link external-destination="normal.pdf">normal.pdf</fo:basic-link>
+      </fo:block>
+
+      <!-- Normal text -->
+      <fo:block text-align="center">---</fo:block>
+
+      <!-- Normal text -->
+      <fo:block text-align="end">
+        5. A multiline text (text-align='end'). The Extensible Markup Language (XML) is a subset of SGML that is completely described in this document. Its goal is to
+        enable generic SGML to be served, received, and processed on the Web in the way that is now possible with HTML. XML
+        has been designed for ease of implementation and for interoperability with both SGML and HTML. For further information
+        go to <fo:basic-link external-destination="normal.pdf">normal.pdf</fo:basic-link>
+      </fo:block>
+
+      <!-- Normal text -->
+      <fo:block text-align="center">---</fo:block>
+
+      <!-- Normal text -->
+      <fo:block text-align="justify">
+        6. A multiline text (text-align='justify'). The Extensible Markup Language (XML) is a subset of SGML that is completely described in this document. Its goal is to
+        enable generic SGML to be served, received, and processed on the Web in the way that is now possible with HTML. XML
+        has been designed for ease of implementation and for interoperability with both SGML and HTML. For further information
+        go to <fo:basic-link external-destination="normal.pdf">normal.pdf</fo:basic-link>
+      </fo:block>
+
+      <!-- Normal text -->
+      <fo:block text-align="center">---</fo:block>
+
+      <!-- Normal text -->
+      <fo:block text-align="start"
+                space-before.optimum="6pt"
+                line-height="24pt"
+                font-family="serif"
+                padding-top="3pt"
+                >
+        7. A multiline text (text-align='start', space-before.optimum=6pt, font-family=serif padding-top="3pt"). The Extensible Markup Language (XML) is a subset of SGML that is completely described in this document. Its goal is to
+        enable <fo:basic-link external-destination="normal.pdf">generic</fo:basic-link> SGML to be served, received, and processed on the Web in the way that is now possible with HTML. XML
+        has been designed for ease of implementation and for interoperability with both SGML and HTML. For further information
+        go to <fo:basic-link external-destination="normal.pdf">normal.pdf</fo:basic-link>
+      </fo:block>
+
+      <!-- Normal text -->
+      <fo:block text-align="start"
+                space-before.optimum="6pt"
+                line-height="24pt"
+                font-family="serif"
+                padding-top="3pt"
+                >
+        8. A multiline text (text-align='start', space-before.optimum=6pt, font-family=serif, padding-top="3pt"). The Extensible Markup Language (XML) is a subset of SGML that is completely described in this document. Its goal is to
+        enable <fo:basic-link external-destination="normal.pdf">generic</fo:basic-link> SGML to be served, received, and processed on the Web in the way that is now possible with HTML. XML
+        has been designed for ease of implementation and for interoperability with both SGML and HTML. For further information
+        go to <fo:basic-link external-destination="normal.pdf">normal.pdf</fo:basic-link>
+      </fo:block>
+
+      <!-- Normal text -->
+      <fo:block text-align="start"
+                space-before.optimum="6pt"
+                line-height="24pt"
+                font-family="serif"
+                padding-top="3pt"
+                >
+        9. Linking to a specific page of an external:
+        <fo:basic-link external-destination="extensive.pdf#page=1">extensive.pdf, Page 2</fo:basic-link>.
+      </fo:block>
+
+      <!-- Normal text -->
+<!--      <fo:block text-align="start"
+                space-before.optimum="6pt"
+                line-height="24pt"
+                font-family="serif"
+                padding-top="3pt"
+                >
+        8. A multiline text (text-align='start', space-before.optimum=6pt, font-family=serif, padding-top="3pt"). The Extensible Markup Language (XML) is a subset of SGML that is completely described in this document. Its goal is to
+        enable <fo:basic-link external-destination="normal.pdf">generic</fo:basic-link> SGML to be served, received, and processed on the Web in the way that is now possible with HTML. XML
+        has been designed for ease of implementation and for interoperability with both SGML and HTML. For further information
+        go to <fo:basic-link external-destination="normal.pdf">normal.pdf</fo:basic-link>
+      </fo:block>
+-->
+
+
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

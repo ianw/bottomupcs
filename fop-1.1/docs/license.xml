@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- $Id: license.xml 1357814 2012-07-05 19:15:13Z gadams $ --><!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.3//EN" "http://forrest.apache.org/dtd/document-v13.dtd">
+<document>
+  <header>
+    <title>Apache&#8482; FOP License</title>
+    <version>$Revision: 1357814 $</version>
+  </header>
+<body>
+<section>
+  <title>License</title>
+  <p>
+    All new Apache&#8482; FOP releases will be licensed under the <strong>Apache&#8482; License, version 2.0</strong>.
+    Releases up through version 0.20.5 were released under the Apache&#8482; License, version 1.1.
+  </p>
+  <p>
+    To inspect the license terms please consult the LICENSE and NOTICE files in the root
+    directory of the distribution. The full license text can also be accessed via the web
+    from the <jump href="http://www.apache.org/licenses/">Apache Licenses page</jump>.
+  </p>
+  <p>
+    Apache FOP comes with a number of libraries all of which are currently coming from within
+    the Apache Software Foundation. These libraries are all licensed under one of the
+    Apache License versions. There is one exception which is "xml-apis.jar" which contains
+    code licensed by the <fork href="http://www.w3.org">W3C</fork>. Please consult the
+    license files included with the libraries in the "lib" directory for details.
+  </p>
+</section>
+</body>
+</document>
