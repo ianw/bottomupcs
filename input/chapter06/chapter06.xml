@@ -186,7 +186,7 @@
 	      format="SVG" scalefit="1" width="100%"
 	      contentdept="100%"/>
 	    </imageobject>
-	    <imageobject>
+	    <imageobject role="html">
 	      <imagedata fileref="chapter06/figures/alignment.png" format="PNG" />
 	    </imageobject>
 	    <textobject>
@@ -267,7 +267,7 @@
 		format="SVG" scalefit="1" width="100%"
 		contentdept="100%"/>
 	      </imageobject>
-	      <imageobject>
+	      <imageobject role="html">
 		<imagedata fileref="chapter06/figures/padding.png" format="PNG" />
 	      </imageobject>
 	      <textobject>

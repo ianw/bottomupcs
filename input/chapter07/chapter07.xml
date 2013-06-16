@@ -144,7 +144,7 @@
 	    format="SVG" scalefit="1" width="100%"
 	    contentdept="100%"/>
 	  </imageobject>
-	  <imageobject>
+	  <imageobject role="html">
 	    <imagedata fileref="chapter07/figures/elf-overview.png" format="PNG" />
 	  </imageobject>
 	  <textobject>

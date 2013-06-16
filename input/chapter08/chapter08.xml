@@ -409,7 +409,7 @@
 	    format="SVG" scalefit="1" width="100%" contentdept="100%"
 	    />
 	  </imageobject>
-	  <imageobject>
+	  <imageobject role="html">
 	    <imagedata fileref="chapter08/figures/got-plt.png" format="PNG" />
 	  </imageobject>
 	  <textobject>
@@ -970,7 +970,7 @@
 	    format="SVG" scalefit="1" width="100%" contentdept="100%"
 	    />
 	  </imageobject>
-	  <imageobject>
+	  <imageobject role="html">
 	    <imagedata fileref="chapter08/figures/libs.png" format="PNG" />
 	  </imageobject>
 	  <textobject>

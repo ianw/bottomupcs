@@ -92,7 +92,7 @@
               format="SVG" scalefit="1" width="100%"
               contentdept="100%" />
             </imageobject>
-            <imageobject>
+            <imageobject role="html">
               <imagedata fileref="chapter05/figures/canonical.png" format="PNG" />
             </imageobject>
             <textobject>
@@ -177,7 +177,7 @@
 	  <imagedata fileref="chapter05/figures/page.svg" format="SVG"
 	  scalefit="1" width="100%" contentdept="100%" />
         </imageobject>
-	<imageobject>
+	<imageobject role="html">
 	  <imagedata fileref="chapter05/figures/page.png" format="PNG" />
         </imageobject>
 	<textobject>
@@ -323,7 +323,7 @@
 	    format="SVG" scalefit="1" width="100%"
 	    contentdept="100%"/>
 	  </imageobject>
-	  <imageobject>
+	  <imageobject role="html">
 	    <imagedata fileref="chapter05/figures/virtaddress.png" format="PNG" />
 	  </imageobject>
 	  <textobject>
@@ -633,7 +633,7 @@
 	      format="SVG" scalefit="1" width="100%"
 	      contentdept="100%"/>
 	    </imageobject>
-	    <imageobject>
+	    <imageobject role="html">
 	      <imagedata fileref="chapter05/figures/segmentation.png" format="PNG" />
 	    </imageobject>
 	    <textobject>
@@ -915,7 +915,7 @@
 	    format="SVG" scalefit="1" width="100%"
 	    contentdept="100%"/>
 	  </imageobject>
-	  <imageobject>
+	  <imageobject role="html">
 	    <imagedata fileref="chapter05/figures/linux-layout.png" format="PNG" />
 	  </imageobject>
 	  <textobject>
@@ -968,7 +968,7 @@
 	    format="SVG" scalefit="1" width="100%"
 	    contentdept="100%"/>
 	  </imageobject>
-	  <imageobject>
+	  <imageobject role="html">
 	    <imagedata fileref="chapter05/figures/threelevel.png" format="PNG" />
 	  </imageobject>
 	  <textobject>
@@ -1066,7 +1066,7 @@
 	    format="SVG" scalefit="1" width="100%"
 	    contentdept="100%"/>
 	  </imageobject>
-	  <imageobject>
+	  <imageobject role="html">
 	    <imagedata fileref="chapter05/figures/ia64-regions-keys.png" format="PNG" />
 	  </imageobject>
 	  <textobject>
@@ -1104,7 +1104,7 @@
 	    format="SVG" scalefit="1" width="100%"
 	    contentdept="100%"/>
 	  </imageobject>
-	  <imageobject>
+	  <imageobject role="html">
 	    <imagedata fileref="chapter05/figures/ia64-tlb-translation.png" format="PNG" />
 	  </imageobject>
 	  <textobject>
@@ -1221,7 +1221,7 @@
               <imageobject>
                 <imagedata fileref="chapter05/figures/hierarchial-pt.png" format="PNG" />
               </imageobject>
-              <textobject>
+              <textobject role="html">
                 <phrase>The hierarchical page-table</phrase>
               </textobject>
             </mediaobject>
@@ -1260,7 +1260,7 @@
 	    format="SVG" scalefit="1" width="100%"
 	    contentdept="100%"/>
 	  </imageobject>
-	  <imageobject>
+	  <imageobject role="html">
 	    <imagedata fileref="chapter05/figures/ia64-short-format.png" format="PNG" />
 	  </imageobject>
 	  <textobject>
@@ -1289,7 +1289,7 @@
                 format="SVG" scalefit="1" width="100%"
                 contentdept="100%"/>
               </imageobject>
-              <imageobject>
+              <imageobject role="html">
                 <imagedata fileref="chapter05/figures/ia64-ptes.png" format="PNG" />
               </imageobject>
               <textobject>

@@ -15,7 +15,7 @@
 	  <imagedata fileref="chapter02/figures/computer.svg"
 	  format="SVG" scalefit="1" width="100%" contentdept="100%"/>
 	</imageobject>
-	<imageobject>
+	<imageobject role="html">
 	  <imagedata fileref="chapter02/figures/computer.png" format="PNG" />
 	</imageobject>
 	  <caption>The CPU performs instructions on values held in
@@ -149,7 +149,7 @@
 	      format="SVG" scalefit="1" width="100%"
 	      contentdept="100%"/>
 	    </imageobject>
-	    <imageobject>
+	    <imageobject role="html">
 	      <imagedata fileref="chapter02/figures/block.png" format="PNG" />
 	    </imageobject>
 	      <caption>The CPU is made up of many different
@@ -590,7 +590,7 @@
 	      format="SVG" scalefit="1" width="100%"
 	      contentdept="100%"/>
 	    </imageobject>
-	    <imageobject>
+	    <imageobject role="html">
 	      <imagedata fileref="chapter02/figures/sets.png" format="PNG" />
 	    </imageobject>
 	     <caption>
@@ -728,7 +728,7 @@
 	    format="SVG" scalefit="1" width="100%"
 	    contentdept="100%"/>
 	  </imageobject>
-	  <imageobject>
+	  <imageobject role="html">
 	    <imagedata fileref="chapter02/figures/tags.png" format="PNG" />
 	  </imageobject>
 	  <caption><para>Tags need to be checked in parallel to keep
@@ -852,7 +852,7 @@ multiplex the output of the many sets, which can also add latency.
 	      format="SVG" scalefit="1" width="100%"
 	      contentdept="100%"/>
 	    </imageobject>
-	    <imageobject>
+	    <imageobject role="html">
 	      <imagedata fileref="chapter02/figures/interrupt.png" format="PNG" />
 	    </imageobject>
 	    <caption>A generic overview of handling an interrupt.  The
@@ -1078,7 +1078,7 @@ multiplex the output of the many sets, which can also add latency.
 	  <imagedata fileref="chapter02/images/uhci.svg" format="SVG"
 	  scalefit="1" width="100%" contentdept="100%"/>
 	</imageobject>
-	<imageobject>
+	<imageobject role="html">
 	  <imagedata fileref="chapter02/images/uhci.png" format="PNG" />
 	</imageobject>
 	    <caption><para>An overview of a UCHI controller, taken
@@ -1460,7 +1460,7 @@ multiplex the output of the many sets, which can also add latency.
 	  <imagedata fileref="chapter02/figures/hypercube.svg"
 	  format="SVG" scalefit="1" width="100%" contentdept="100%"/>
 	</imageobject>
-	<imageobject>
+	<imageobject role="html">
 	  <imagedata fileref="chapter02/figures/hypercube.png" format="PNG" />
 	</imageobject>
 	  <caption>An example of a hypercube.  Hypercubes provide a
@@ -1646,7 +1646,7 @@ multiplex the output of the many sets, which can also add latency.
 	  <imagedata fileref="chapter02/figures/memorder.svg"
 	  format="SVG" scalefit="1" width="100%" contentdept="100%"/>
 	</imageobject>
-	<imageobject>
+	<imageobject role="html">
 	  <imagedata fileref="chapter02/figures/memorder.png" format="PNG" />
 	</imageobject>
 	  <caption>An illustration of valid reorderings around

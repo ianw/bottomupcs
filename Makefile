@@ -50,11 +50,16 @@ $(pdf.output)/csbu.fo: input/csbu.xml $(sources)
 #html depends on having png figures around.
 html: input/csbu.xml $(html.css) $(sources) $(pngs)
 	mkdir -p ./html.output
-#copy all .c files into appropriate places
-	-for dir in $(sourcedirs); do \
-	cp -r --parents $$dir/code/* $(html.output); \
+
+	#copy all .c files into appropriate places
+	echo $(sourcedirs:input/%=%)
+	-cd input; \
+	 for dir in $(sourcedirs:input/%=%); do \
+		cp -r --parents $$dir/code/* ../$(html.output); \
+		cp -r --parents $$dir/figures/*.png ../$(html.output); \
 	done
-	java -jar ./lib/saxon.jar \
+	java -classpath $(saxon.classpath) \
+		com.icl.saxon.StyleSheet \
 		input/csbu.xml docbook-xsl/xhtml5/chunkfast.xsl \
 		base.dir=$(html.output) \
 		use.id.as.filename=1 \

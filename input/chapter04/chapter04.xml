@@ -27,7 +27,7 @@
 	  <imagedata fileref="chapter04/figures/theprocess.svg"
 	  format="SVG" scalefit="1" width="100%" contentdept="100%"/>
 	</imageobject>
-	<imageobject>
+	<imageobject role="html">
 	  <imagedata fileref="chapter04/figures/theprocess.png" format="PNG" />
 	</imageobject>
 	<textobject>
@@ -134,7 +134,7 @@
 	      format="SVG" scalefit="1" width="100%"
 	      contentdept="100%" />
 	    </imageobject>
-	    <imageobject>
+	    <imageobject role="html">
 	      <imagedata fileref="chapter04/figures/stack.png" format="PNG" />
 	    </imageobject>
 	    <textobject>
@@ -338,7 +338,7 @@
 	      format="SVG" scalefit="1" width="100%"
 	      contentdept="100%" />
 	    </imageobject>
-	    <imageobject>
+	    <imageobject role="html">
 	      <imagedata fileref="chapter04/figures/memory-layout.png" format="PNG" />
 	    </imageobject>
 	    <textobject>
@@ -583,7 +583,7 @@
 		format="SVG" scalefit="1" width="100%"
 		contentdept="100%"/>
 	      </imageobject>
-	      <imageobject>
+	      <imageobject role="html">
 		<imagedata fileref="chapter04/figures/threads.png" format="PNG" />
 	      </imageobject>
 	      <textobject>
@@ -911,7 +911,7 @@ longer and longer to decide which processes will run next.</para>
 	  <imagedata fileref="chapter04/figures/o1queue.svg"
 	  format="SVG" scalefit="1" width="100%" contentdept="100%" />
 	</imageobject>
-	<imageobject>
+	<imageobject role="html">
 	  <imagedata fileref="chapter04/figures/o1queue.png" format="PNG" />
 	</imageobject>
 	<textobject>

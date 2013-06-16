@@ -930,7 +930,7 @@
 		format="SVG" scalefit="1" width="100%"
 		contentdept="100%" />
 	      </imageobject>
-	      <imageobject>
+	      <imageobject role="html">
 		<imagedata fileref="chapter01/figures/masking.png" format="PNG" />
 	      </imageobject>
 	      <textobject>
@@ -1093,7 +1093,7 @@
 		format="SVG" scalefit="1" width="100%"
 		contentdept="100%" />
 	      </imageobject>
-	      <imageobject>
+	      <imageobject role="html">
 		<imagedata fileref="chapter01/figures/types.png" format="PNG" />
 	      </imageobject>
 	      <textobject>
@@ -1393,7 +1393,7 @@
 	  <title>Example of warnings when types are not matched</title>
 	  <programlisting><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="chapter01/code/type-warnings.txt" format="linespecific" />
+		<imagedata fileref="code/type-warnings.txt" format="linespecific" />
 		</imageobject>
 	      </inlinemediaobject></programlisting>
 	</example>
@@ -1817,7 +1817,7 @@
 	  <title>Floats versus Doubles</title>
 	  <programlisting><inlinemediaobject>
 	      <imageobject>
-		<imagedata fileref="chapter01/code/floatvdouble.txt" format="linespecific" />
+		<imagedata fileref="code/floatvdouble.txt" format="linespecific" />
 		</imageobject>
 	      </inlinemediaobject></programlisting>
 	</example>
@@ -1950,7 +1950,7 @@
 	    <title>Program to find first set bit</title>
 	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 		<imageobject>
-		  <imagedata fileref="chapter01/code/ffs.c" format="linespecific" />
+		  <imagedata fileref="code/ffs.c" format="linespecific" />
 		</imageobject>
 	      </inlinemediaobject></programlisting>
 	  </example>
@@ -1973,7 +1973,7 @@
 	    <title>Examining Floats</title>
 	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
 		<imageobject>
-		  <imagedata fileref="chapter01/code/float.c" format="linespecific" />
+		  <imagedata fileref="code/float.c" format="linespecific" />
 		</imageobject>
 	      </inlinemediaobject></programlisting>
 	  </example>

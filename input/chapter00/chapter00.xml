@@ -60,7 +60,7 @@
 	  <imagedata fileref="chapter00/figures/abstraction.svg"
 	  format="SVG" scalefit="1" width="100%" contentdept="100%" />
 	</imageobject>
-	<imageobject>
+	<imageobject role="html">
 	  <imagedata fileref="chapter00/figures/abstraction.png" format="PNG" />
 	</imageobject>
 	<textobject>
@@ -239,7 +239,7 @@
 	  format="SVG" scalefit="1" width="100%"
 	  contentdept="100%"></imagedata>
 	</imageobject>
-	<imageobject>
+	<imageobject role="html">
 	  <imagedata fileref="chapter00/figures/stdfds.png" format="PNG"></imagedata>
 	</imageobject>
 	<textobject>

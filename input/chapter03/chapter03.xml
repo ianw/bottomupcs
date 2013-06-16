@@ -150,7 +150,7 @@
 	  <imagedata fileref="chapter03/figures/kernel.svg"
 	  format="SVG" scalefit="1" width="100%" contentdept="100%" />
 	</imageobject>
-	<imageobject>
+	<imageobject role="html">
 	  <imagedata fileref="chapter03/figures/kernel.png" format="PNG" />
 	</imageobject>
 	<caption>
@@ -312,7 +312,7 @@
 	      format="SVG" scalefit="1" width="100%"
 	      contentdept="100%" />
 	    </imageobject>
-	    <imageobject>
+	    <imageobject role="html">
 	      <imagedata fileref="chapter03/figures/virtual.png" format="PNG" />
 	    </imageobject>
 	    <caption>
@@ -884,7 +884,7 @@
 	      format="SVG" scalefit="1" width="100%"
 	      contentdept="100%"/>
 	    </imageobject>
-	    <imageobject>
+	    <imageobject role="html">
 	      <imagedata fileref="chapter03/figures/priv.png" format="PNG" />
 	    </imageobject>
 	    <caption>
@@ -987,7 +987,7 @@
 		format="SVG" scalefit="1" width="100%"
 		contentdept="100%"/>
 	      </imageobject>
-	      <imageobject>
+	      <imageobject role="html">
 		<imagedata fileref="chapter03/figures/ia32-segmentation.png" format="PNG" />
 	      </imageobject>
 	      <caption>
@@ -1030,7 +1030,7 @@
 		format="SVG" scalefit="1" width="100%"
 		contentdept="100%"/>
 	      </imageobject>
-	      <imageobject>
+	      <imageobject role="html">
 		<imagedata fileref="chapter03/figures/ia32-segments.png" format="PNG" />
 	      </imageobject>
 	      <caption>
