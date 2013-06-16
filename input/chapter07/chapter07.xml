@@ -738,7 +738,7 @@
 
 	<para>The kernel creates the core dump file within the bounds
 	  of the current <computeroutput>ulimit</computeroutput>
-	  settings &mdash; since a program using a lot of memory could
+	  settings — since a program using a lot of memory could
 	  result in a very large dump, potentially filling up disk and
 	  making problems even worse, generally the
 	  <computeroutput>ulimit</computeroutput> is set low or even
@@ -769,7 +769,7 @@
     an executable file.  We can see the virtual addresses at which the
     <computeroutput>LOAD</computeroutput> segments are required to be
     placed at.  We can further see that one segment is for code
-    &mdash; it has read and execute permissions only &mdash; and one
+    — it has read and execute permissions only — and one
     is for data, unsurprisingly with read and write permissions, but
     importantly no execute permissions (without execute permissions,
     even if a bug allowed an attacker to introduce arbitrary data the
@@ -789,14 +789,14 @@
     <para>The program segments must be loaded at these addresses; the
     last step of the linker is to resolve most relocations (<xref
     linkend="symbols_and_relocations"></xref>) and patch them with the
-    assumed absolute addresses &mdash; the data describing the
+    assumed absolute addresses — the data describing the
     relocation is then discarded in the final binary and there is no
     longer a way to find this information.
     </para>
 
     <para>In reality, executables generally have external dependencies
       on <emphasis>shared libraries</emphasis>, or pieces of common
-      code abstracted and shared among the entire system &mdash;
+      code abstracted and shared among the entire system —
       almost all of the confusing parts of <xref
       linkend="elf_executable"></xref> relate to the use of shared
       libraries.  Libraries are discussed in <xref

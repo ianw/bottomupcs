@@ -62,7 +62,7 @@
 
 	<para>While 64-bit processors have 64-bit wide registers,
           systems generally do not implement all 64-bits for
-          addressing &mdash; it is not actually possible to do
+          addressing — it is not actually possible to do
           <computeroutput>load</computeroutput> or
           <computeroutput>store</computeroutput> to all 16 exabytes of
           theoretical physical memory!</para>
@@ -226,7 +226,7 @@
     which of virtual-page points to which physical frame.  This
     information is kept in a <emphasis>page-table</emphasis> which, in
     its simplest form, could simply be a table where each row contains
-    its associated frame &mdash; this is termed a <emphasis>linear
+    its associated frame — this is termed a <emphasis>linear
     page-table</emphasis>.  If you were to use this simple system,
     with a 32 bit address-space and 4 KiB pages there would be 1048576
     possible pages to keep track of in the page table
@@ -674,8 +674,8 @@
 	<title>Page Faults</title>
 
 	<para>When a virtual address is requested of the hardware
-	  &mdash; say via a <computeroutput>load</computeroutput>
-	  instruction requesting to get some data &mdash; the
+	  — say via a <computeroutput>load</computeroutput>
+	  instruction requesting to get some data — the
 	  processor looks for the virtual-address to physical-address
 	  translation in its TLB.  If it has a valid translation it
 	  can then combine this with the offset portion to go straight
@@ -849,7 +849,7 @@
           which traverses the page-table to find the
           virtual-to-physical translation and installs it in the TLB.
           This would be termed a <emphasis>software-loaded
-          TLB</emphasis> &mdash; but there is another alternative; the
+          TLB</emphasis> — but there is another alternative; the
           <emphasis>hardware-loaded TLB</emphasis>.</para>
 
         <para>In a hardware loaded TLB, the processor architecture
@@ -1419,6 +1419,6 @@
 <!--
 Local Variables:
 mode: sgml
-sgml-parent-document: ("../csbu.sgml" "book" "chapter")
+sgml-parent-document: ("../csbu.xml" "book" "chapter")
 End:
 -->

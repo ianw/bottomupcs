@@ -1110,9 +1110,9 @@
 	    <computeroutput>sysexit</computeroutput> to get back)
 	    which speed up the whole process over a
 	    <computeroutput>int 0x80</computeroutput> call by removing
-	    the general nature of a far-call &mdash; that is the
+	    the general nature of a far-call — that is the
 	    possibility of transitioning into any segment at any ring
-	    level &mdash; and restricting the call to only transition
+	    level — and restricting the call to only transition
 	    to ring 0 code at a specific segment and offset, as stored
 	    in registers.</para>
 

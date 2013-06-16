@@ -654,7 +654,7 @@
 	      particular address could be located in any way. Thus an
 	      <emphasis>n</emphasis>-way set associative cache will
 	      allow a cache line to exist in any entry of a set sized
-	      total blocks mod n &mdash; <xref
+	      total blocks mod n — <xref
 	      linkend="cache_associativity"></xref> shows a sample
 	      8-element, 4-way set associative cache; in this case the
 	      two addresses have four possible locations, meaning only
@@ -708,7 +708,7 @@
 	  given address resides in the cache or not.  Clearly, caches
 	  must keep a directory of what data currently resides in the
 	  cache lines. The cache directory and data may co-located on
-	  the processor, but may also be separate &mdash; such as in
+	  the processor, but may also be separate — such as in
 	  the case of the POWER5 processor which has an on-core L3
 	  directory, but actually accessing the data requires
 	  traversing the L3 bus to access off-core memory. An
@@ -778,7 +778,7 @@ multiplex the output of the many sets, which can also add latency.
 	multiplexor which outputs a final <emphasis>hit</emphasis> or
 	<emphasis>miss</emphasis> result.  As describe above, the more
 	associative a cache is, the less bits are required for index
-	and the more as tag bits &mdash; to the extreme of a
+	and the more as tag bits — to the extreme of a
 	fully-associative cache where no bits are used as index bits.
 	The parallel matching of tags bits is the expensive component
 	of cache design and generally the limiting factor on how many
@@ -912,7 +912,7 @@ multiplex the output of the many sets, which can also add latency.
 	  <title>Types of interrupts</title>
 
 	  <para>There are two main ways of signalling interrupts on a
-	    line &mdash; <emphasis>level</emphasis> and
+	    line — <emphasis>level</emphasis> and
 	    <emphasis>edge</emphasis> triggered.</para>
 
 	  <para>Level-triggered interrupts define voltage of the
@@ -1098,7 +1098,7 @@ multiplex the output of the many sets, which can also add latency.
 
 	<para>Starting at the top-left of the overview, the controller
 	has a <emphasis>frame</emphasis> register with a counter which
-	is incremented periodically &mdash; every millisecond.  This
+	is incremented periodically — every millisecond.  This
 	value is used to index into a <emphasis>frame list</emphasis>
 	created by software.  Each entry in this table points to a
 	queue of <emphasis>transfer descriptors</emphasis>.  Software
@@ -1110,8 +1110,8 @@ multiplex the output of the many sets, which can also add latency.
 
 	<para>As you can see from the diagram, the way the data is
 	linked means that transfer descriptors for isochronous data
-	are associated with only one particular frame pointer &mdash;
-	in other words only one particular time period &mdash; and
+	are associated with only one particular frame pointer —
+	in other words only one particular time period — and
 	after that will be discarded.  However, the interrupt, control
 	and bulk data are all <emphasis>queued</emphasis> after the
 	isochronous data and thus if not transmitted in one frame
@@ -1259,7 +1259,7 @@ multiplex the output of the many sets, which can also add latency.
 	  <para>In <xref linkend="cache_in_depth"></xref> we described
 	    <emphasis>inclusive</emphasis> v
 	    <emphasis>exclusive</emphasis> caches.  In general, L1
-	    caches are usually inclusive &mdash; that is all data in
+	    caches are usually inclusive — that is all data in
 	    the L1 cache also resides in the L2 cache. In a
 	    multiprocessor system, an inclusive L1 cache means that
 	    only the L2 cache need snoop memory traffic to maintain
@@ -1824,6 +1824,6 @@ multiplex the output of the many sets, which can also add latency.
 <!--
 Local Variables:
 mode: sgml
-sgml-parent-document: ("../csbu.sgml" "book" "chapter")
+sgml-parent-document: ("../csbu.xml" "book" "chapter")
 End:
 -->

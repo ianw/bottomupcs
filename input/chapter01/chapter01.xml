@@ -1999,7 +1999,6 @@ $ ./float 8.45
 	</sect4>
       </sect3>
 
-
     </sect2>
 
   </sect1>
@@ -2009,6 +2008,6 @@ $ ./float 8.45
 <!--
 Local Variables:
 mode: sgml
-sgml-parent-document: ("../csbu.sgml" "book" "chapter")
+sgml-parent-document: ("../csbu.xml" "book" "chapter")
 End:
 -->
