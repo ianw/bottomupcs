@@ -21,9 +21,6 @@
 
 <!ENTITY glossary SYSTEM "glossary.xml">
 
-<!-- mdash isn't XML  -->
-<!ENTITY mdash "&#8212;">
-
 <!ENTITY csbu "Computer Science from the Bottom Up">
 
 ]>
@@ -56,7 +53,7 @@
   </copyright>
 
   <abstract>
-   <para>&csbu; &mdash; A free, online book designed to teach computer
+   <para>&csbu; — A free, online book designed to teach computer
    science from the bottom end up.  Topics covered include binary and
    binary logic, operating systems internals, toolchain fundamentals
    and system library fundamentals.</para>
