@@ -82,9 +82,9 @@
 	  </tgroup>
 	</table>
 
-	<para>Or, in other words, 2 &times;
-	10<superscript>2</superscript> &plus; 3 &times;
-	10<superscript>0</superscript> &equals; 200 &plus; 3 &equals;
+	<para>Or, in other words, 2 ×
+	10<superscript>2</superscript> + 3 ×
+	10<superscript>0</superscript> = 200 + 3 =
 	203.  To represent the same thing in binary, we would have the
 	following table.</para>
 
@@ -116,11 +116,11 @@
 	  </tgroup>
 	</table>
 
-	<para>That equates to 2<superscript>7</superscript> &plus;
-	2<superscript>6</superscript> &plus;
-	2<superscript>3</superscript>&plus;2<superscript>1</superscript>
-	&plus; 2<superscript>0</superscript> &equals; 128 &plus; 64
-	&plus; 8 &plus; 2 &plus; 1 &equals; 203.</para>
+	<para>That equates to 2<superscript>7</superscript> +
+	2<superscript>6</superscript> +
+	2<superscript>3</superscript>+2<superscript>1</superscript>
+	+ 2<superscript>0</superscript> = 128 + 64
+	+ 8 + 2 + 1 = 203.</para>
 
 	<sect4>
 	  <title>Conversion</title>
@@ -152,52 +152,52 @@
 	  </thead>
 	      <tbody>
 		<row>
-		  <entry>203<subscript>10</subscript> &divide; 2 &equals;</entry>
+		  <entry>203<subscript>10</subscript> ÷ 2 =</entry>
 		  <entry>101</entry>
 		  <entry>1</entry>
 		  <entry></entry>
 		</row>
 		<row>
-		  <entry>101<subscript>10</subscript> &divide; 2 &equals;</entry>
+		  <entry>101<subscript>10</subscript> ÷ 2 =</entry>
 		  <entry>50</entry>
 		  <entry>1</entry>
-		  <entry>&uarr;</entry>
+		  <entry>↑</entry>
 		</row>
 		<row>
-		  <entry>50<subscript>10</subscript> &divide; 2 &equals;</entry>
+		  <entry>50<subscript>10</subscript> ÷ 2 =</entry>
 		  <entry>25</entry>
 		  <entry>0</entry>
-		  <entry>&uarr;</entry>
+		  <entry>↑</entry>
 		</row>
 		<row>
-		  <entry>25<subscript>10</subscript> &divide; 2 &equals;</entry>
+		  <entry>25<subscript>10</subscript> ÷ 2 =</entry>
 		  <entry>12</entry>
 		  <entry>1</entry>
-		  <entry>&uarr;</entry>
+		  <entry>↑</entry>
 		</row>
 		<row>
-		  <entry>12<subscript>10</subscript> &divide; 2 &equals;</entry>
+		  <entry>12<subscript>10</subscript> ÷ 2 =</entry>
 		  <entry>6</entry>
 		  <entry>0</entry>
-		  <entry>&uarr;</entry>
+		  <entry>↑</entry>
 		</row>
 		<row>
-		  <entry>6<subscript>10</subscript> &divide; 2 &equals;</entry>
+		  <entry>6<subscript>10</subscript> ÷ 2 =</entry>
 		  <entry>3</entry>
 		  <entry>0</entry>
-		  <entry>&uarr;</entry>
+		  <entry>↑</entry>
 		</row>
 		<row>
-		  <entry>3<subscript>10</subscript> &divide; 2 &equals;</entry>
+		  <entry>3<subscript>10</subscript> ÷ 2 =</entry>
 		  <entry>1</entry>
 		  <entry>1</entry>
-		  <entry>&uarr;</entry>
+		  <entry>↑</entry>
 		</row>
 		<row>
-		  <entry>1<subscript>10</subscript> &divide; 2 &equals;</entry>
+		  <entry>1<subscript>10</subscript> ÷ 2 =</entry>
 		  <entry>0</entry>
 		  <entry>1</entry>
-		  <entry>&uarr;</entry>
+		  <entry>↑</entry>
 		</row>
 	      </tbody>
 	    </tgroup>
@@ -229,7 +229,7 @@
 	unique combinations.</para>
 
 	<para>8 bits gives us
-	<computeroutput>2<superscript>8</superscript> &equals;
+	<computeroutput>2<superscript>8</superscript> =
 	256</computeroutput> unique representations, more than enough
 	for our alphabet combinations.  We call a group of 8 bits a
 	<emphasis>byte</emphasis>.  Guess how bit a C
@@ -416,7 +416,7 @@
 	  connection is described as something like 1500
 	  kilobits/second.  The calculation is simple; multiply by
 	  1000 (for the kilo), divide by 8 to get bytes and then 1024
-	  to get kilobytes (so 1500 kilobits/s&equals;183 kilobytes
+	  to get kilobytes (so 1500 kilobits/s=183 kilobytes
 	  per second).</para>
 
 	  <para>The SI standardisation body has recognised these dual
@@ -854,16 +854,16 @@
 	  </thead>
 	  <tbody>
 	    <row>
-	      <entry>203<subscript>10</subscript> &divide; 16 &equals;</entry>
+	      <entry>203<subscript>10</subscript> ÷ 16 =</entry>
 	      <entry>12</entry>
 	      <entry>11 (0xB)</entry>
 	      <entry></entry>
 	    </row>
 	    <row>
-	      <entry>12<subscript>10</subscript> &divide; 16 &equals;</entry>
+	      <entry>12<subscript>10</subscript> ÷ 16 =</entry>
 	      <entry>0</entry>
 	      <entry>12 (0xC)</entry>
-	      <entry>&uarr;</entry>
+	      <entry>↑</entry>
 	    </row>
 	  </tbody>
 	</tgroup>
@@ -899,7 +899,7 @@
 
 	<para>Remember each bit represents two states, so if we know a
 	variable only has, say, 16 possible states it can be
-	represented by 4 bits (i.e. 2<superscript>4</superscript>&equals;16
+	represented by 4 bits (i.e. 2<superscript>4</superscript>=16
 	unique values).  But the smallest type we can declare in C is
 	8 bits (a <computeroutput>char</computeroutput>), so we can
 	either waste four bits, or find some way to use those left
@@ -1520,7 +1520,7 @@
 	  added to it and we discard any left over carry bit.  So to
 	  continue with the example from before,
 	  <computeroutput>-90</computeroutput> would be
-	  <computeroutput>~01011010&plus;1&equals;10100101&plus;1 =
+	  <computeroutput>~01011010+1=10100101+1 =
 	  10100110</computeroutput>.</para>
 
 	  <para>This means there is a slightly odd symmetry in the
@@ -1532,7 +1532,7 @@
 	  two's complement we can represent -127 thru 128.  This is
 	  because we have removed the problem of having two zeros;
 	  consider that "negative zero" is <computeroutput>(~00000000
-	 &plus;1)&equals;(11111111&plus;1)&equals;00000000</computeroutput> (note
+	 +1)=(11111111+1)=00000000</computeroutput> (note
 	  discarded carry bit).</para>
 
 	  <table>
@@ -1650,7 +1650,7 @@
 	<para>In the IEEE floating point model, we break up the
 	available bits to represent the sign, mantissa and exponent of
 	a decimal number.  A decimal number is represented by
-	<computeroutput>sign &times; significand &times;
+	<computeroutput>sign × significand ×
 	2^<superscript>exponent</superscript></computeroutput>.</para>
 
 	<para>The sign bit equates to either
@@ -1877,7 +1877,7 @@
 		  <entry>0</entry>
 		  <entry>0</entry>
 		  <entry>2^<superscript>0</superscript></entry>
-		  <entry>(0.25&plus;0.125) &times; 1 &equals; 0.375 </entry>
+		  <entry>(0.25+0.125) × 1 = 0.375 </entry>
 		</row>
 		<row>
 		  <entry>0</entry>
@@ -1888,7 +1888,7 @@
 		  <entry>0</entry>
 		  <entry>0</entry>
 		  <entry>2^<superscript>-1</superscript></entry>
-		  <entry>(0.5&plus;0.25)&times;.5&equals;0.375</entry>
+		  <entry>(0.5+0.25)×.5=0.375</entry>
 		</row>
 		<row>
 		  <entry>1</entry>
@@ -1899,7 +1899,7 @@
 		  <entry>0</entry>
 		  <entry>0</entry>
 		  <entry>2^<superscript>-2</superscript></entry>
-		  <entry>(1&plus;0.5)&times;0.25&equals;0.375</entry>
+		  <entry>(1+0.5)×0.25=0.375</entry>
 		</row>
 	      </tbody>
 	    </tgroup>

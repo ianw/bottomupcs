@@ -23,11 +23,6 @@
 
 <!-- mdash isn't XML  -->
 <!ENTITY mdash "&#8212;">
-<!ENTITY times "&#215;">
-<!ENTITY plus "&#215;">
-<!ENTITY equals "&#215;">
-<!ENTITY divide "&#215;">
-<!ENTITY uarr "&#215;"> 
 
 <!ENTITY csbu "Computer Science from the Bottom Up">
 

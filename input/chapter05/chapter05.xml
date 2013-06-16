@@ -230,7 +230,7 @@
     page-table</emphasis>.  If you were to use this simple system,
     with a 32 bit address-space and 4 KiB pages there would be 1048576
     possible pages to keep track of in the page table
-    (2<superscript>32</superscript> &divide; 4096); hence the table
+    (2<superscript>32</superscript> ÷ 4096); hence the table
     would be 1048576 entries long to ensure we can always map a
     virtual page to a physical page.</para>
 
@@ -1320,7 +1320,7 @@
             should be more than regained in lower refill costs from
             the efficient hardware walker.  Note that a pathological
             case could skip over
-            <computeroutput>page_size</computeroutput> &divide;
+            <computeroutput>page_size</computeroutput> ÷
             <computeroutput>translation_size</computeroutput> entries,
             causing repeated nested faults, but this is a very
             unlikely access pattern.</para>
