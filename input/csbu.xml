@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE book [
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+                   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"
+[
 
 <!-- Computer Science from the Bottom Up
 
@@ -25,7 +27,7 @@
 
 ]>
 
-<book xmlns="http://docbook.org/ns/docbook" version="5.0">
+<book>
 
 <title>&csbu;</title>
 

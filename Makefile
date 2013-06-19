@@ -35,7 +35,7 @@ pdf: $(svgs) $(pdf.output)/csbu.pdf
 $(pdf.output)/csbu.pdf : $(pdf.output)/csbu.fo
 	$(fop) $< $@
 
-$(pdf.output)/csbu.fo: input/csbu.xml $(sources)
+$(pdf.output)/csbu.fo: validate input/csbu.xml $(sources)
 	mkdir -p ./pdf.output
 	#a bit hacky; copy all svg to be alongside .fo for fop to find
 	# as image references are like "chapterXX/foo.svg"
@@ -48,7 +48,7 @@ $(pdf.output)/csbu.fo: input/csbu.xml $(sources)
 		textinsert.extension=1
 
 #html depends on having png figures around.
-html: input/csbu.xml $(html.css) $(sources) $(pngs)
+html: validate input/csbu.xml $(html.css) $(sources) $(pngs)
 	mkdir -p ./html.output
 
 	#copy all .c files into appropriate places
@@ -69,6 +69,10 @@ html: input/csbu.xml $(html.css) $(sources) $(pngs)
 	cp --parents $(pngs) $(html.output)
 	cp $(html.css) draft.png $(html.output)
 	cp google726839f49cefc875.html $(html.output)
+
+.PHONY: validate
+validate:
+	cd input; xmllint --postvalid --noout csbu.xml
 
 .PHONY: clean
 clean:
