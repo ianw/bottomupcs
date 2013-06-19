@@ -44,7 +44,7 @@ body {
 }
 
 /* TABLE OF CONTENTS */
-.TOC { 
+.toc { 
        border: 1px solid #66CC00;
        background: #CCFFCC;
        padding: 5px;
@@ -52,7 +52,7 @@ body {
 
 
 /* TITLE */
-h1.TITLE { 
+h1.title { 
            color: #336699;
            padding: 5px;
            border-left: 5px solid #336699;
@@ -61,20 +61,20 @@ h1.TITLE {
 
 /* FIGURE */
 /* hack just to get the title */
-.FIGURE p b { 
+.figure p b { 
               background: #ddd;
               width: 400px;
  }
 
 /* CHAPTER AND SECT1 HEADERS */
-.CHAPTER h1 { 
+.chapter h1 { 
               color: #990000;
               padding: 5px;
               background: #FFCCCC;
               border-left: 5px solid #990000;
              }
 
-.SECT1 h1 { 
+.sect1 h1 { 
               color: #990000;
               padding: 5px;
               background: #FFCCCC;
@@ -82,7 +82,7 @@ h1.TITLE {
 
             }
 
-.SECT2 h2 { 
+.sect2 h2 { 
             color: #006400;
             background: #B4EEB4;
             padding: 2px;
@@ -91,7 +91,7 @@ h1.TITLE {
  }
 
 /* HEADER */
-.NAVHEADER { 
+.navheader { 
              background: #eeeeee;
              border: 1px solid #aaaaaa;
              color: #333333;
@@ -99,14 +99,14 @@ h1.TITLE {
              font-size: 93%;
              }
 
-.NAVHEADER hr { 
+.navheader hr { 
                 padding: 0px;
                 margin: 0px;
                 border: 0px;
                 }
 
 /* FOOTER */
-.NAVFOOTER { 
+.navfooter { 
              background: #eeeeee;
              border: 1px solid #aaaaaa;
              color: #333333;
@@ -115,7 +115,7 @@ h1.TITLE {
              margin-top: 10px;
              }
 
-.NAVFOOTER hr { 
+.navfooter hr { 
                 padding: 0px;
                 margin: 0px;
                 border: 0px;

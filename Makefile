@@ -60,12 +60,9 @@ html: validate input/csbu.xml $(html.css) $(sources) $(pngs)
 	done
 	java -classpath $(saxon.classpath) \
 		com.icl.saxon.StyleSheet \
-		input/csbu.xml docbook-xsl/xhtml5/chunkfast.xsl \
+		input/csbu.xml csbu.xsl \
 		base.dir=$(html.output) \
-		use.id.as.filename=1 \
-		make.clean.html=1 \
-		chunk.first.selection=1 \
-		html.ext=".html"
+		html.stylesheet='csbu.css'
 	cp --parents $(pngs) $(html.output)
 	cp $(html.css) draft.png $(html.output)
 	cp google726839f49cefc875.html $(html.output)
