@@ -44,12 +44,29 @@ body {
 }
 
 /* TABLE OF CONTENTS */
-.toc { 
+div.toc { 
        border: 1px solid #66CC00;
        background: #CCFFCC;
        padding: 5px;
  }
 
+div.list-of-figures {
+    margin-top: 10px;
+    border: 1px solid #ffcc00;
+    background: #FFFF99;
+    padding: 5px;
+}
+
+div.list-of-figures, div.list-of-tables, div.list-of-examples {
+    margin-top: 10px;
+    border: 1px solid #ffcc00;
+    background: #FFFF99;
+    padding: 5px;
+}
+
+.toc-title {
+    font-weight: bold;
+}
 
 /* TITLE */
 h1.title { 
