@@ -1,15 +1,21 @@
+# XML sources
 sourcedirs=input/chapter00 input/chapter01 input/chapter02 input/chapter03 input/chapter04 input/chapter05 input/chapter06 input/chapter07 input/chapter08 input/chapter09
+
+# xfig figures that are converted
 figuredirs=input/chapter00/figures input/chapter01/figures input/chapter02/figures input/chapter03/figures input/chapter04/figures input/chapter05/figures input/chapter06/figures input/chapter07/figures input/chapter08/figures
+
+# static image dirs -- images that aren't converted
 imagedirs=input/chapter02/images
 
 sources := $(foreach dir,$(sourcedirs),$(wildcard $(dir)/*.xml))
 figures := $(foreach dir,$(figuredirs),$(wildcard $(dir)/*.xfig))
-pngs := $(patsubst %.xfig,%.png,$(figures))
-epss := $(patsubst %.xfig,%.eps,$(figures))
-svgs := $(patsubst %.xfig,%.svg,$(figures))
+gen_pngs := $(patsubst %.xfig,%.png,$(figures))
+gen_epss := $(patsubst %.xfig,%.eps,$(figures))
+gen_svgs := $(patsubst %.xfig,%.svg,$(figures))
 
-pngs += $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.png))
-epss += $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.eps))
+pngs := $(gen_pngs) $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.png))
+epss := $(gen_epss) $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.eps))
+svgs := $(gen_svgs) $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.svg))
 
 html.output=html.output
 html.css=css/csbu.css
@@ -35,11 +41,19 @@ pdf: $(svgs) $(pdf.output)/csbu.pdf
 $(pdf.output)/csbu.pdf : $(pdf.output)/csbu.fo
 	$(fop) $< $@
 
-$(pdf.output)/csbu.fo: validate input/csbu.xml $(sources)
+# general overview
+#
+#  use xmllint to build a .xml file (xmllint has xincludes support,
+#  saxon doesn't.  xinclude seems more reliable for finding souce
+#  files for .txt or .c examples)
+#
+#  use saxon to apply xsl and get final output
+
+$(pdf.output)/csbu.fo: input/csbu.xml $(sources)
 	rm -rf ./pdf.output
 	mkdir -p ./pdf.output
 	#a bit hacky; copy all svg to be alongside .fo for fop to find
-	# as image references are like "chapterXX/foo.svg"
+	#as image references are like "chapterXX/foo.svg"
 	cd input ; cp -r --parents $(svgs:input/%=%) ../$(pdf.output)
 	xmllint --xinclude --noent ./input/csbu.xml > $(pdf.output)/csbu.xml
 	cd $(pdf.output) ; java -classpath $(saxon.classpath) \
@@ -50,7 +64,7 @@ $(pdf.output)/csbu.fo: validate input/csbu.xml $(sources)
 		textinsert.extension=1
 
 #html depends on having png figures around.
-html: validate input/csbu.xml $(html.css) $(sources) $(pngs)
+html: input/csbu.xml $(html.css) $(sources) $(pngs)
 	rm -rf ./html.output
 	mkdir -p ./html.output
 
@@ -75,10 +89,6 @@ html: validate input/csbu.xml $(html.css) $(sources) $(pngs)
 	cp $(html.css) draft.png $(html.output)
 	cp google726839f49cefc875.html $(html.output)
 
-.PHONY: validate
-validate:
-	cd input; xmllint --postvalid --noout csbu.xml
-
 .PHONY: clean
 clean:
-	rm -rf $(html.output) $(pdf.output) $(pngs) $(epss) $(svgs)
+	rm -rf $(html.output) $(pdf.output) $(gen_pngs) $(gen_epss) $(gen_svgs)
