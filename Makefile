@@ -14,7 +14,7 @@ epss += $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.eps))
 html.output=html.output
 html.css=css/csbu.css
 
-saxon.classpath="saxon65/saxon.jar:docbook-xsl/extensions/saxon65.jar"
+saxon.classpath="../saxon65/saxon.jar:../docbook-xsl/extensions/saxon65.jar"
 pdf.output=pdf.output
 fop=fop-1.1/fop
 
@@ -36,19 +36,22 @@ $(pdf.output)/csbu.pdf : $(pdf.output)/csbu.fo
 	$(fop) $< $@
 
 $(pdf.output)/csbu.fo: validate input/csbu.xml $(sources)
+	rm -rf ./pdf.output
 	mkdir -p ./pdf.output
 	#a bit hacky; copy all svg to be alongside .fo for fop to find
 	# as image references are like "chapterXX/foo.svg"
 	cd input ; cp -r --parents $(svgs:input/%=%) ../$(pdf.output)
-	java -classpath $(saxon.classpath) \
+	xmllint --xinclude --noent ./input/csbu.xml > $(pdf.output)/csbu.xml
+	cd $(pdf.output) ; java -classpath $(saxon.classpath) \
 		com.icl.saxon.StyleSheet \
-		-o $(pdf.output)/csbu.fo \
-		input/csbu.xml docbook-xsl/fo/docbook.xsl \
+		-o csbu.fo \
+		csbu.xml ../docbook-xsl/fo/docbook.xsl \
                 use.extensions=1 \
 		textinsert.extension=1
 
 #html depends on having png figures around.
 html: validate input/csbu.xml $(html.css) $(sources) $(pngs)
+	rm -rf ./html.output
 	mkdir -p ./html.output
 
 	#copy all .c files into appropriate places
@@ -58,11 +61,16 @@ html: validate input/csbu.xml $(html.css) $(sources) $(pngs)
 		cp -r --parents $$dir/code/* ../$(html.output); \
 		cp -r --parents $$dir/figures/*.png ../$(html.output); \
 	done
-	java -classpath $(saxon.classpath) \
+	xmllint --xinclude --noent ./input/csbu.xml > $(html.output)/csbu.xml
+	cd $(html.output); java -classpath $(saxon.classpath) \
 		com.icl.saxon.StyleSheet \
-		input/csbu.xml csbu.xsl \
-		base.dir=$(html.output) \
-		html.stylesheet='csbu.css'
+		./csbu.xml ../csbu.xsl \
+		base.dir=. \
+		html.stylesheet='csbu.css' \
+		use.extensions=1 \
+		textinsert.extension=1 \
+		tablecolumns.extension=1
+
 	cp --parents $(pngs) $(html.output)
 	cp $(html.css) draft.png $(html.output)
 	cp google726839f49cefc875.html $(html.output)

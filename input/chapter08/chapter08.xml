@@ -112,11 +112,11 @@
 
 	<example>
 	  <title>Specifying Dynamic Libraries</title>
-	  <programlisting lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter08/code/dynamic-needed.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	<title>Signals Example</title>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/dynamic-needed.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 
@@ -135,11 +135,11 @@
 
 	<example>
 	  <title>Looking at dynamic libraries</title>
-	  <programlisting lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter08/code/ldd.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	<title>Signals Example</title>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/ldd.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 
@@ -169,11 +169,10 @@
 
     <example>
       <title>Checking the program interpreter</title>
-      <programlisting lang="C"><inlinemediaobject>
-	  <imageobject>
-	    <imagedata fileref="chapter08/code/interpreter.txt" format="linespecific" />
-	      </imageobject>
-	</inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/interpreter.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
     </example>
 
     <para>You can see above that the interpreter is set to be
@@ -229,11 +228,10 @@
 
       <example>
 	<title>Relocation as defined by ELF</title>
-	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	    <imageobject>
-	      <imagedata fileref="chapter08/code/elfrelocs.txt" format="linespecific" />
-	    </imageobject>
-	  </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/elfrelocs.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
       </example>
 
       <para>The <computeroutput>r_offset</computeroutput> field refers
@@ -284,11 +282,10 @@
 
 	<example>
 	  <title>Specifying Dynamic Libraries</title>
-	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter08/code/relocs.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/relocs.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	<para>We thus have one relocation in
@@ -433,11 +430,10 @@
 
 	<example>
 	  <title>Using the GOT</title>
-	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter08/code/got.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/got.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	<para>Above we create a simple shared library which refers to
@@ -480,11 +476,10 @@
 
 	<example>
 	  <title>Relocations against the GOT</title>
-	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter08/code/got-relocs.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/got-relocs.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	<para>We can also check out the relocation for this entry too.
@@ -573,11 +568,10 @@
 
 	<example>
 	  <title>Hello World PLT example</title>
-	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter08/code/hello.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/hello.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 
@@ -594,11 +588,10 @@
 
 	<example>
 	  <title>Hello world main()</title>
-	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter08/code/hello-main-dis.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/hello-main-dis.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	<para>The call to 0x4000000000000520 must be us calling the
@@ -608,11 +601,10 @@
 
 	<example>
 	  <title>Hello world sections</title>
-	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter08/code/hello-sections.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/hello-sections.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	<para>That address is (unsurprisingly) in the
@@ -624,11 +616,10 @@
 
 	<example>
 	  <title>Hello world PLT</title>
-	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter08/code/hello-plt.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/hello-plt.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	<para>Let us step through the instructions.  Firstly, we add
@@ -654,11 +645,10 @@
 
 	<example>
 	  <title>Hello world GOT</title>
-	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter08/code/hello-got.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/hello-got.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	<para>0x6000000000000ec0 + 0x50 = 0x6000000000000f10, or the
@@ -699,12 +689,10 @@
 
 	<example>
 	  <title>Dynamic Segment</title>
-	  <programlisting linenumbering="numbered"
-	  lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter08/code/hello-dynamic.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/hello-dynamic.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	<para>Do you notice anything about it?  It's the same value as
@@ -724,12 +712,10 @@
 	  <title>Code in the dynamic linker for setting up special
 	  values
 	  (from libc <computeroutput>sysdeps/ia64/dl-machine.h</computeroutput>)</title>
-	  <programlisting linenumbering="numbered"
-	  lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter08/code/runtime_setup.c" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter08/code/runtime_setup.c" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	<para>We can see how this gets setup by the dynamic linker by
@@ -1061,11 +1047,10 @@
 
 	<example>
 	  <title>Symbol definition from ELF</title>
-	  <programlisting lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter08/code/symbol.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/symbol.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	<table>
@@ -1162,11 +1147,10 @@
 
 	<example>
 	  <title>Examples of symbol bindings</title>
-	  <programlisting lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter08/code/bindings.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/bindings.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	<para>Notice the use of
@@ -1203,11 +1187,10 @@
 
 	  <example>
 	    <title>Example of <computeroutput>LD_PRELOAD</computeroutput></title>
-	    <programlisting lang="C"><inlinemediaobject>
-		<imageobject>
-		  <imagedata fileref="chapter08/code/ld_preload.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/ld_preload.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	  </example>
 
 	  <para>In the above example we override the
@@ -1304,11 +1287,10 @@
 
 	  <example>
 	    <title>Example of symbol versioning</title>
-	    <programlisting lang="C"><inlinemediaobject>
-		<imageobject>
-		  <imagedata fileref="chapter08/code/symbolver.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter08/code/symbolver.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	  </example>
 
 	  <para>In the simplest case as above, we simply state if the

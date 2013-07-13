@@ -986,11 +986,10 @@
 
 	<example id="flag-code">
 	  <title>Using flags</title>
-	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter01/code/flags.c" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter01/code/flags.c" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	</sect4>
@@ -1391,11 +1390,10 @@
 
 	<example id="type-warnings">
 	  <title>Example of warnings when types are not matched</title>
-	  <programlisting><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="code/type-warnings.txt" format="linespecific" />
-		</imageobject>
-	      </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter01/code/type-warnings.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
       </sect3>
@@ -1815,11 +1813,11 @@
 
 	<example id="float-v-double">
 	  <title>Floats versus Doubles</title>
-	  <programlisting><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="code/floatvdouble.txt" format="linespecific" />
-		</imageobject>
-	      </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter01/code/floatvdouble.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
+
 	</example>
 
 	<para>A practical example is illustrated above.  Notice that
@@ -1948,11 +1946,10 @@
 
 	    <example id="ffs">
 	    <title>Program to find first set bit</title>
-	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-		<imageobject>
-		  <imagedata fileref="code/ffs.c" format="linespecific" />
-		</imageobject>
-	      </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter01/code/ffs.c" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	  </example>
 
 	  </sect5>
@@ -1971,11 +1968,11 @@
 
 	  <example id="float-examine">
 	    <title>Examining Floats</title>
-	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-		<imageobject>
-		  <imagedata fileref="code/float.c" format="linespecific" />
-		</imageobject>
-	      </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter01/code/float.c" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
+
 	  </example>
 
 	  <para>Sample output of the value

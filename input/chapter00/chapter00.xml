@@ -80,11 +80,10 @@
 
       <example id="abstraction-code">
 	<title>Abstraction with function pointers</title>
-	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	    <imageobject>
-	      <imagedata fileref="code/abstraction.c" format="linespecific"></imagedata>
-	    </imageobject>
-	  </inlinemediaobject></programlisting>
+	<programlisting linenumbering="numbered" lang="C">
+          <xi:include href="chapter00/code/abstraction.c" parse="text"
+            xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        </programlisting>
       </example>
 
       <para>Code such as the above is the simplest example of

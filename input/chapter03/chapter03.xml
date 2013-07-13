@@ -559,11 +559,10 @@
 
       <example>
 	<title>getpid() example</title>
-	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	    <imageobject>
-	      <imagedata fileref="chapter03/code/getpid.c" format="linespecific" />
-	    </imageobject>
-	  </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter03/code/getpid.c" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
       </example>
 
       <para>We start by writing a small C program which we can start
@@ -610,11 +609,10 @@
 
 	<example>
 	  <title>PowerPC system call example</title>
-	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter03/code/unistd-powerpc.h" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter03/code/unistd-powerpc.h" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 	
 	<para>This code snippet from the kernel header file
@@ -752,11 +750,10 @@
 
 	<example>
 	  <title>x86 system call example</title>
-	  <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter03/code/unistd-x86.h" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter03/code/unistd-x86.h" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	<para>The x86 architecture is very different from the PowerPC

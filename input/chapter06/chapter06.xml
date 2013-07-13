@@ -244,11 +244,10 @@
 
 	  <example id="struct-padding">
 	    <title>Struct padding example</title>
-	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-		<imageobject>
-		  <imagedata fileref="chapter06/code/struct-padding.txt" format="linespecific" />
-		</imageobject>
-	      </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter06/code/struct-padding.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	  </example>
 
 	  <para>In the example above, we contrive a structure that has
@@ -353,11 +352,10 @@
 
 	  <example id="stack-padding">
 	    <title>Stack alignment example</title>
-	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-		<imageobject>
-		  <imagedata fileref="chapter06/code/stack-align.txt" format="linespecific" />
-		</imageobject>
-	      </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" >
+              <xi:include href="chapter06/code/stack-align.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	  </example>
 
 	  <para>In the example above, taken from an Itanium machine,
@@ -388,11 +386,10 @@
 
 	  <example id="page-alignment">
 	    <title>Page alignment manipulations</title>
-	    <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-		<imageobject>
-		  <imagedata fileref="chapter06/code/page.txt" format="linespecific" />
-		</imageobject>
-	      </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter06/code/page.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	  </example>
 
 	  <para>Above we can see that there are a number of different
@@ -691,20 +688,19 @@
 
     <example id="c-hello">
       <title>Hello World</title>
-      <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	  <imageobject>
-	    <imagedata fileref="chapter06/code/hello.c" format="linespecific" />
-	  </imageobject>
-	</inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter06/code/hello.c" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
     </example>    
 
     <example>
       <title>Function Example</title>
-      <programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	  <imageobject>
-	    <imagedata fileref="chapter06/code/function.c" format="linespecific" />
-	  </imageobject>
-	</inlinemediaobject></programlisting>
+
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter06/code/function.c" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
     </example>
 
     <sect2>
@@ -722,11 +718,10 @@
 
       <example>
 	<title>Compilation Example</title>
-	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	    <imageobject>
-	      <imagedata fileref="chapter06/code/compiled.txt" format="linespecific" />
-	    </imageobject>
-	  </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter06/code/compiled.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
       </example>
 
       <para>The assembly is a little to complex to fully describe, but
@@ -752,11 +747,10 @@
 
       <example>
 	<title>Assembly Example</title>
-	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	    <imageobject>
-	      <imagedata fileref="chapter06/code/assembly.txt" format="linespecific" />
-	    </imageobject>
-	  </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter06/code/assembly.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
       </example>
 
       <para>After assembling we have <emphasis>object</emphasis> code,
@@ -776,11 +770,10 @@
 
       <example>
 	<title>Readelf Example</title>
-	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	    <imageobject>
-	      <imagedata fileref="chapter06/code/readelf.txt" format="linespecific" />
-	    </imageobject>
-	  </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter06/code/readelf.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
       </example>
 
       <para>Although the output is quite complicated (again!) you
@@ -844,11 +837,10 @@
 
       <example>
 	<title>Linking Example</title>
-	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	    <imageobject>
-	      <imagedata fileref="chapter06/code/linking.txt" format="linespecific" />
-	    </imageobject>
-	  </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter06/code/linking.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
       </example>
 
       <para>The first thing you notice is that a program called
@@ -917,11 +909,10 @@
 
       <example>
 	<title>Executable Example</title>
-	<programlisting linenumbering="numbered" lang="C"><inlinemediaobject>
-	    <imageobject>
-	      <imagedata fileref="chapter06/code/executable.txt" format="linespecific" />
-	    </imageobject>
-	  </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter06/code/executable.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
       </example>
 
       <para>Some things to note</para>

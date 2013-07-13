@@ -256,11 +256,10 @@
 
 	<example id="stack-pointer">
 	  <title>Stack pointer example</title>
-	  <programlisting><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter04/code/sp.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter04/code/sp.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>    
 	
 	<para>Above we show a simple function allocating three
@@ -478,11 +477,10 @@
 
     <example id="pstree">
       <title><command>pstree</command> example</title>
-      <programlisting><inlinemediaobject>
-	  <imageobject>
-	    <imagedata fileref="chapter04/code/pstree.txt" format="linespecific" />
-	  </imageobject>
-	</inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" >
+              <xi:include href="chapter04/code/pstree.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
     </example>    
 
   </sect1>
@@ -738,11 +736,10 @@
 
 	<example id="zombie-example">
 	  <title>Zombie example process</title>
-	  <programlisting><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter04/code/zombie.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter04/code/zombie.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>    
 
 	<para>Above we create a zombie process.  The parent process
@@ -1074,12 +1071,11 @@ get around to interacting with it wants a fast response).</para></sect2>
 
       <example id="signal-example">
 	<title>Signals Example</title>
-	<programlisting><inlinemediaobject>
-	    <imageobject>
-	      <imagedata fileref="chapter04/code/signal.txt" format="linespecific" />
-	    </imageobject>
-	  </inlinemediaobject></programlisting>
-      </example>    
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter04/code/signal.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
+      </example>
 
       <para>We have simple program that simply defines a handler for
       the <computeroutput>SIGINT</computeroutput> signal, which is

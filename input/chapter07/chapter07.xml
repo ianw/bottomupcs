@@ -164,11 +164,10 @@
 
 	<example id="elf-header">
 	  <title>The ELF Header</title>
-	  <programlisting><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter07/code/elf-header.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter07/code/elf-header.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	<para>Above is the description as given in the API
@@ -177,11 +176,10 @@
 
 	<example id="readelf-elf-header">
 	  <title>The ELF Header, as shown by <application>readelf</application></title>
-	  <programlisting><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter07/code/readelf-elf-header.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter07/code/readelf-elf-header.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	<para>Above is a more human readable form as present by the
@@ -197,11 +195,10 @@
 
 	    <example id="elf-magic">
 	      <title>Inspecting the ELF magic number</title>
-	      <programlisting><inlinemediaobject>
-		  <imageobject>
-		    <imagedata fileref="chapter07/code/elf-magic.txt" format="linespecific" />
-		  </imageobject>
-		  </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter07/code/elf-magic.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	    </example>
 
 	<para>Note the 0x7F to start, then the ASCII encoded "ELF"
@@ -231,11 +228,10 @@
 
 	<example id="entry-point">
 	  <title>Investigating the entry point</title>
-	  <programlisting><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter07/code/entry-point.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter07/code/entry-point.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	<para>Above we can see that the entry point is actually a
@@ -317,11 +313,11 @@
 
 	  <example id="program-header">
 	    <title>The Program Header</title>
-	    <programlisting><inlinemediaobject>
-		<imageobject>
-		  <imagedata fileref="chapter07/code/program-header.txt" format="linespecific" />
-	      </imageobject>
-	      </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter07/code/program-header.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
+
 	  </example>
 
 	  <para>The definition of the program header is seen above.
@@ -407,11 +403,10 @@
 
 	  <example id="section-header">
 	    <title>Sections </title>
-	    <programlisting><inlinemediaobject>
-		<imageobject>
-		  <imagedata fileref="chapter07/code/section-header.txt" format="linespecific" />
-		</imageobject>
-	      </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter07/code/section-header.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	  </example>
 
 	  <para>Sections have a few more types defined for the
@@ -433,22 +428,21 @@
 
 	  <example id="section">
 	    <title>Sections </title>
-	    <programlisting><inlinemediaobject>
-		<imageobject>
-		  <imagedata fileref="chapter07/code/sections.c" format="linespecific" />
-		</imageobject>
-	      </inlinemediaobject></programlisting>
+
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter07/code/sections.c" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	  </example>
 
 	  <example id="section-readelf">
 	    <title>Sections readelf output </title>
-	    <programlisting>
-	    <inlinemediaobject>
-		<imageobject>
-		  <imagedata fileref="chapter07/code/sections.txt" format="linespecific" />
-		</imageobject>
-	      </inlinemediaobject></programlisting>
-	  </example>
+
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter07/code/sections.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
+          </example>
 
 	  <para>Above we have stripped some parts of the
 	  <application>readelf</application> output for clarity.  We
@@ -515,11 +509,12 @@
 
 	  <example id="sections-segments">
 	    <title>Sections and Segments</title>
-	    <programlisting><inlinemediaobject>
-		<imageobject>
-		  <imagedata fileref="chapter07/code/sections-segments.txt" format="linespecific" />
-		</imageobject>
-	    </inlinemediaobject></programlisting>
+
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter07/code/sections-segments.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
+
 	  </example>    
 
 	  <para><computeroutput>readelf</computeroutput> shows us the
@@ -590,11 +585,10 @@
 
       <example id="coredump_gdb">
 	<title>Example of creating a core dump and using it with <productname>gdb</productname></title>
-	<programlisting><inlinemediaobject>
-	    <imageobject>
-	      <imagedata fileref="chapter07/code/core-gdb.txt" format="linespecific" />
-	    </imageobject>
-	  </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" >
+              <xi:include href="chapter07/code/core-gdb.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
       </example>
 
       <sect3>
@@ -640,11 +634,11 @@
 	    <title>Example of stripping debugging information into
 	    separate files using
 	    <productname>objcopy</productname></title>
-	    <programlisting><inlinemediaobject>
-		<imageobject>
-		  <imagedata fileref="chapter07/code/debuglink.txt" format="linespecific" />
-	    </imageobject>
-	    </inlinemediaobject></programlisting>
+
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter07/code/debuglink.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	  </example>
 
 	<para>Symbols take up much less space, but are also targets
@@ -675,13 +669,12 @@
 	  <title>Example of using <productname>readelf</productname>
 	  and <productname>eu-readelf</productname> to examine a
 	  coredump.</title>
-	  <programlisting>
-	    <inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter07/code/core-internal.txt" format="linespecific" />
-	  </imageobject>
-	  </inlinemediaobject>
-	  </programlisting>
+
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter07/code/core-internal.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
+
 	</example>
 
 	<para>In <xref linkend="coredump_internal"></xref> we can see
@@ -779,11 +772,10 @@
 
     <example id="elf_executable">
       <title>Segments of an executable file</title>
-      <programlisting><inlinemediaobject>
-	  <imageobject>
-	    <imagedata fileref="chapter07/code/executable.txt" format="linespecific" />
-      </imageobject>
-      </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter07/code/executable.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
     </example>
 
     <para>The program segments must be loaded at these addresses; the
@@ -852,11 +844,10 @@
 
 	<example>
 	  <title>Creating and using a static library</title>
-	  <programlisting lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter07/code/static.txt" format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter07/code/static.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
 	<para>Firstly we compile or library to an object file, just as
@@ -1155,11 +1146,11 @@
 
       <example id="program-startup">
 	<title>Disassembley of program startup</title>
-	<programlisting><inlinemediaobject>
-	    <imageobject>
-	      <imagedata fileref="chapter07/code/startup.txt" format="linespecific" />
-	    </imageobject>
-	  </inlinemediaobject></programlisting>
+
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter07/code/startup.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
       </example>
 
       <para>Above we investigate the very simplest program.  Using
@@ -1226,11 +1217,10 @@
 
       <example id="constructor-destructor">
 	<title>Constructors and Destructors</title>
-	<programlisting><inlinemediaobject>
-	    <imageobject>
-	      <imagedata fileref="chapter07/code/construct-destruct.txt" format="linespecific" />
-	    </imageobject>
-	  </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="chapter07/code/construct-destruct.txt" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
       </example>
 
       <para>The last value pushed onto the stack for the

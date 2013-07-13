@@ -1598,12 +1598,10 @@ multiplex the output of the many sets, which can also add latency.
 
       <example>
 	<title>Memory Ordering</title>
-	  <programlisting lang="C"><inlinemediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter02/code/memorder.c"
-		format="linespecific" />
-	      </imageobject>
-	    </inlinemediaobject></programlisting>
+	  <programlisting linenumbering="numbered" lang="C">
+              <xi:include href="chapter02/code/memorder.c" parse="text"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+            </programlisting>
 	</example>
 
       <para>In this example, we have two stores that can be done in
