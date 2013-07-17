@@ -73,6 +73,14 @@
 
   </legalnotice>
 
+    <releaseinfo>
+
+      A PDF version is available at <ulink
+      url="http://www.bottomupcs.com/csbu.pdf"><citetitle>http://www.bottomupcs.com/csbu.pdf</citetitle></ulink>.
+      The original souces are available at <ulink url="https://github.com/ianw/bottomupcs"><citetitle>https://github.com/ianw/bottomupcs</citetitle></ulink>
+
+    </releaseinfo>
+
  </bookinfo>
 
  &intro;

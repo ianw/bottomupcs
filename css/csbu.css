@@ -46,7 +46,7 @@ body {
 /* TABLE OF CONTENTS */
 div.toc { 
        border: 1px solid #66CC00;
-       background: #CCFFCC;
+       background: #CCFF99;
        padding: 5px;
  }
 
@@ -72,9 +72,15 @@ div.list-of-figures, div.list-of-tables, div.list-of-examples {
 h1.title { 
            color: #336699;
            padding: 5px;
-           border-left: 5px solid #336699;
-           background: #BCD2EE;
+           border-bottom: 5px solid #336699;
+           background: #f5f5f5;
+           text-align:center;
  }
+
+h2.title {
+   border-bottom: 1px solid #aaaaaa;
+    
+}
 
 /* FIGURE */
 /* hack just to get the title */
@@ -85,10 +91,10 @@ h1.title {
 
 /* CHAPTER AND SECT1 HEADERS */
 .chapter h1 { 
-              color: #990000;
+              color: #800000;
               padding: 5px;
-              background: #FFCCCC;
-              border-left: 5px solid #990000;
+              background: #f5f5f5;
+              border-bottom: 5px solid #990000;
              }
 
 .sect1 h1 { 
@@ -137,3 +143,27 @@ h1.title {
                 margin: 0px;
                 border: 0px;
   }
+
+.releaseinfo { 
+             background: #eeeeee;
+             border: 1px solid #aaaaaa;
+             color: #333333;
+             padding: 10px;
+             font-size: 110%;
+             margin-top: 10px;
+             text-align:center;
+             }
+
+.legalnotice {
+    font-size: 90%;
+    background: #f5f5f5;
+    padding: 5px;
+}
+
+.copyright {
+    font-size: 80%;
+}
+
+.abstract-title {
+    font-weight: bold;
+}
