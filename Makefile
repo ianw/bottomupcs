@@ -69,11 +69,11 @@ html: input/csbu.xml $(html.css) $(sources) $(pngs)
 	mkdir -p ./html.output
 
 	#copy all .c files into appropriate places
-	echo $(sourcedirs:input/%=%)
 	-cd input; \
 	 for dir in $(sourcedirs:input/%=%); do \
 		cp -r --parents $$dir/code/* ../$(html.output); \
 		cp -r --parents $$dir/figures/*.png ../$(html.output); \
+		cp -r --parents $$dir/images/*.png ../$(html.output); \
 	done
 	xmllint --xinclude --noent ./input/csbu.xml > $(html.output)/csbu.xml
 	cd $(html.output); java -classpath $(saxon.classpath) \
@@ -85,7 +85,6 @@ html: input/csbu.xml $(html.css) $(sources) $(pngs)
 		textinsert.extension=1 \
 		tablecolumns.extension=1
 
-	cp --parents $(pngs) $(html.output)
 	cp $(html.css) draft.png $(html.output)
 	cp google726839f49cefc875.html $(html.output)
 
