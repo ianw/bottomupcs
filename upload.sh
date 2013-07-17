@@ -1,6 +1,8 @@
 #!/bin/bash
 
+make clean
+make html
 make pdf
-cp csbu.pdf ./html
-rsync -avz --delete ./html/ basie.netux.com.au:/var/www/bottomupcs
+cp pdf.output/csbu.pdf ./html.output
+rsync -avz --delete ./html.output/ basie.netux.com.au:/var/www/bottomupcs
 
