@@ -25,7 +25,7 @@
 
 </script>
 
-<div id="disqus_thread"></div>
+<div id="disqus_thread">&#160;</div>
     <script type="text/javascript">
         var disqus_shortname = 'bottomupcs'; // required: replace example with your forum shortname
 
