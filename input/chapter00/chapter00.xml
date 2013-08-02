@@ -128,7 +128,8 @@
     constructs used repeatedly through the Linux Kernel and other C
     programs.  Lets have a look at some specific elements.</para>
 
-      <para>We start out with a structure that defines the API.  The
+      <para>We start out with a structure that defines the API
+    (<computeroutput>struct greet_api</computeroutput>).  The
     functions whose names are encased in parenthesis with a pointer
     marker describe a <emphasis>function
     pointer</emphasis><footnote><para>Often you will see that the
@@ -136,22 +137,31 @@
     parameter is specified.  This allows the implementer to specify
     their own parameter names avoiding warnings from the
     compiler.</para></footnote>.  The function pointer describes the
-    prototype of function it must point to; pointing it at a function
-    without the correct return type or parameters will generate a
-    compiler warning, and will probably lead to incorrect operation or
-    crashes.</para>
+    <emphasis>prototype</emphasis> of function it must point to;
+    pointing it at a function without the correct return type or
+    parameters will generate a compiler warning at least; if left in
+    code will likely lead to incorrect operation or crashes.</para>
 
       <para>We then have our implementation of the API.  Often for
     more complex functionality you will see an idiom where API
     implementation functions will only be a wrapper around another
     function that is conventionally prepended with one or or two
-    underscores (i.e. <computeroutput>say_hello_fn()</computeroutput>
-    would call another function
-    <computeroutput>_say_hello_function()</computeroutput>).  This
-    avoids "namespace pollution" and often enables significant changes
-    in the internal workings whilst leaving the API constant.  Our
-    implementation is very simple however, and doesn't even need it's
-    own support functions.</para>
+    underscores<footnote> <para>A double-underscore function
+    <computeroutput>__foo</computeroutput> may conversationally be
+    referred to as "dunder foo".</para></footnote>
+    (i.e. <computeroutput>say_hello_fn()</computeroutput> would call
+    another function
+    <computeroutput>_say_hello_function()</computeroutput>).  This has
+    several uses; generally it relates to having simpler and smaller
+    parts of the API (marshalling or checking arguments, for example)
+    separate to more complex implemenation, which often eases the path
+    to significant changes in the internal workings whilst ensuring
+    the API remains constant.  Our implementation is very simple
+    however, and doesn't even need it's own support functions.  In
+    various projects, single, double or even triple underscore
+    function prefixes will mean different things, but universally it
+    is a visual warning that the function is not supposed to be called
+    directly from "beyond" the API.</para>
 
       <para>Second to last, we fill out the function pointers in
     <computeroutput>struct greet_api greet_api</computeroutput>.  The
@@ -161,6 +171,32 @@
 
       <para>Finally we can call the API functions through the
     structure in <computeroutput>main</computeroutput>.</para>
+
+      <para>You will see this idiom constantly when navigating the
+        souce code.  The tiny example below is taken from
+        <computeroutput>include/linux/virtio.h</computeroutput> in the
+        Linux kernel source to illustrate:</para>
+
+      <example id="virtio-abstraction">
+	<title>Abstraction in
+	<computeroutput>include/linux/virtio.h</computeroutput></title>
+	<programlisting language="c"><xi:include
+	href="chapter00/code/virtio.h" parse="text"
+	xmlns:xi="http://www.w3.org/2001/XInclude"/></programlisting>
+      </example>
+
+      <para> It's only necessary to vaguely understand that this
+        structure is a description of a virtual I/O device.  We can
+        see the user of this API (the device driver author) is
+        expected to provide a number of functions that will be called
+        under various conditions during system operation (when probing
+        for new hardware, when hardware is removed, etc).  It also
+        contains a range of data; structures which should be filled
+        with relevant data.</para>
+
+      <para>Starting with descriptors like this is usually the easiest
+      way into understanding the various layers of kernel code.</para>
+
     </sect2>
 
     <sect2>
@@ -180,52 +216,38 @@
       </itemizedlist>
 
       <para>For example, a library implementing access to the raw data
-	in JPEG files has both the advantage that the many programs
-	who wish to access image files can all use the same library
-	and the programmers building these programs do not need to
-	worry about the exact details of the JPEG file format, but can
-	concentrate their efforts on what their program wants to do
-	with the image.</para>
+        in JPEG files has both the advantage that the many programs
+        who wish to access image files can all use the same library
+        and the programmers building these programs do not need to
+        worry about the exact details of the JPEG file format, but can
+        concentrate their efforts on what their program wants to do
+        with the image.</para>
+
+      <para>The standard library of a UNIX platform is generically
+        referred to as <computeroutput>libc</computeroutput>.  It
+        provides the basic interface to the system: fundamental calls
+        such as <computeroutput>read()</computeroutput>,
+        <computeroutput>write()</computeroutput> and
+        <computeroutput>printf()</computeroutput>.  This API is
+        described in its entirety by a specification called
+        <computeroutput>POSIX</computeroutput>.  It is freely
+        available online and describes the many calls that make up the
+        standard UNIX API.</para>
+
+      <para>Most UNIX platforms broadly follow the POSIX standard,
+      though often differ small but sometimes important ways (hence
+      the complexity of the various GNU autotools, which often tries
+      to abstract away these differences for you).  Linux has many
+      interfaces that are not specified by POSIX; writing applications
+      that use them exclusively will make your application less
+      portable.</para>
+
+      <para>Libraries are a fundamental abstraction with many details.
+      Later chapters will describe how libraries work in much greater
+      detail.</para>
 
     </sect2>
 
-    <sect2>
-      <title>Summary</title>
-      <para>The essential points to note are</para>
-
-      <itemizedlist>
-	<listitem>
-	  <para>We are free to change the internal implementation at any
-	time; say to write to a file rather than the screen.</para>
-      </listitem>
-      <listitem>
-	<para>We can setup function pointers as handy ways to implement an API</para>
-      </listitem>
-    </itemizedlist>
-    </sect2>
-
-    <sect2>
-      <title>Exercises</title>
-      <itemizedlist>
-	<listitem>
-	  <para>Compile the above program with
-	  <application>gcc</application> and run it.</para>
-	</listitem>
-	<listitem>
-	  <para>Using the <computeroutput>%p</computeroutput>
-	  specifier of <computeroutput>printf</computeroutput> find
-	  the <emphasis>address</emphasis> of the
-	  <computeroutput>say_hello_fn</computeroutput> function.
-	  Compare this to the <emphasis>values</emphasis> of the same
-	  function.  Are they the same?</para>
-	</listitem>
-	<listitem>
-	  <para>Extend the API in some creative way by specifying a
-	  new function in the <computeroutput>struct
-	  greet_api</computeroutput> and implementing it.</para>
-	</listitem>
-      </itemizedlist>
-    </sect2>
   </sect1>
 
   <sect1 id="file_descriptors">
