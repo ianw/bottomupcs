@@ -5,12 +5,12 @@
   <sect1 id="everything_is_a_file">
     <title><emphasis>Everything is a file!</emphasis></title>
 
-    <para>If you learn nothing else, you should remember that in UNIX
-    everything is a file.</para>
+    <para>An often quoted tenet of UNIX-like systems such as Linux or
+    BSD is <emphasis>everything is a file</emphasis>.</para>
 
     <para>Imagine a file in the context something familiar like a word
-    processor.  There are two fundamental operations we can use on
-    this imaginary word processing file</para>
+    processor.  There are two fundamental operations we could use on
+    this imaginary word processing file:</para>
 
     <orderedlist>
       <listitem><para>Read it (existing saved data from the word processor).</para></listitem>
@@ -19,7 +19,7 @@
 
     <para>Now consider some of the common things attached to a
     computer and how they relate to our fundamental file
-    operations.</para>
+    operations:</para>
 
     <orderedlist>
       <listitem><para>The screen</para></listitem>
@@ -31,24 +31,37 @@
     <para>The screen and printer are both like a write-only file, but
     instead of being stored as bits on a disk the information is
     displayed as dots on a screen or lines on a page. The keyboard is
-    like a read only file with the data coming from keystrokes and the
-    CDROM is similar but rather than randomly coming from the user the
-    data is stored directly on the disk.</para>
+    like a read only file, with the data coming from keystrokes
+    provided by the user.  The CDROM is similar, but rather than
+    randomly coming from the user the data is stored directly on the
+    disk.</para>
 
-    <para>Thus a file is a good <emphasis>abstraction</emphasis> of
-    all the devices attached to the computer.  Some files may be
-    read-only, or write-only, or indeed both.</para>
+    <para>Thus the concept of a file is a good
+    <emphasis>abstraction</emphasis> of either a a sink for, or source
+    of, data.  As such it is an excellent abstraction of all the
+    devices one might attach to the computer.  This realisation is the
+    great power of UNIX and is evident across the design of the entire
+    platform.  It is one of the fundamental roles of the operating
+    system to provide this abstraction of the hardware to the
+    programmer.</para>
 
-  </sect1>
+    <para>It is probably not too much of a strech to say abstraction
+    is <emphasis>the</emphasis> primary concept that underpins all
+    modern computing.  No one person can understand everythinig from
+    designing a modern user-interface to the internal workings of a
+    modern CPU, much less build it all themselves.  To programmers,
+    abstractions are the <emphasis>lingua franca</emphasis> that
+    allows us to collaborate and invent.</para>
 
-  <sect1 id="abstration">
-    <title>Abstraction and function pointers</title>
-
-    <para>To a programmer, reading data from the keyboard or the CDROM
-    is essentially the same thing.  All the programmer cares about is
-    that the bits of data come from <emphasis>somewhere</emphasis>.
-    It is one of the fundamental roles of the operating system to
-    provide this <emphasis>abstraction</emphasis> for the programmer.</para>
+    <para>Learning to navigate across abstractions gives one greater
+      insight into how to <emphasis>use</emphasis> the abstractions in
+      the best and most innovative ways.  In this book, we are
+      concerned with abstractions at the lowest layers; bewteen
+      applications and the operating-system and the operating-system
+      and hardware.  Above this lies many more layers, each worthy of
+      their own books.  As these chapters progress, you will hopefully
+      gain some insight into the abstractions presented by a modern
+      operating-system.</para>
 
     <figure>
       <title>Abstraction</title>
@@ -69,27 +82,51 @@
       </mediaobject>
     </figure>
 
-    <sect2>
-      <title>Application Programming Interfaces</title>
 
-      <para>Abstraction is implemented by an <emphasis>Application
-    Programming Interface</emphasis>.  The programmer designs a set of
-    functions and variables as the API which other programmers will
-    use.  A common method used in the Linux Kernel is function
-    pointers.</para>
+  </sect1>
+
+  <sect1 id="abstration">
+    <title>Implementing abstraction</title>
+
+      <para>In general, abstraction is implemented by what is
+    generically termed an <emphasis>Application Programming
+    Interface</emphasis> (API).  API is a somewhat nebulous term that
+    means different things in the context of various programming
+    endavours.  Fundamentally, a programmer designs a set of functions
+    and documents their interface and functionality with the principle
+    that the actual implementation providing the API is opaque.</para>
+
+      <para>For example, many large web-applications provide an API
+      accessible via HTTP.  Accessing data via this method surely
+      triggers many complicated series of remote-procedure calls,
+      database queries and data transfer; all of which is opaque to
+      the end user who simply receives the contracted data.</para>
+
+      <para>Those familiar with <emphasis>object-oriented</emphasis>
+      languages such as Java, Python or C++ would be familiar with the
+      abstraction provided by <emphasis>classes</emphasis>.  Methods
+      provide the interface to the class, but abstract the
+      implementation.</para>
+
+    <sect2>
+      <title>Implementing abstraction with C</title>
+
+      <para>A common method used in the Linux Kernel and other large C
+      code bases, which lacks a built-in concept of
+      object-orientation, is <emphasis>function pointers</emphasis>.
+      Learning to read this idom is key to navigating most large C
+      code-bases.  By understanding how to read the abstractions
+      provided within the code an understanding of internal API
+      designs can be built.</para>
 
       <example id="abstraction-code">
 	<title>Abstraction with function pointers</title>
-	<programlisting linenumbering="numbered" lang="C">
-          <xi:include href="chapter00/code/abstraction.c" parse="text"
-            xmlns:xi="http://www.w3.org/2001/XInclude"/>
-        </programlisting>
+	<programlisting language="c"><xi:include href="chapter00/code/abstraction.c" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude"/></programlisting>
       </example>
 
       <para>Code such as the above is the simplest example of
-    constructs used repeatedly through the Linux Kernel (and indeed
-    many other projects).  Lets have a look at some specific
-    elements.</para>
+    constructs used repeatedly through the Linux Kernel and other C
+    programs.  Lets have a look at some specific elements.</para>
 
       <para>We start out with a structure that defines the API.  The
     functions whose names are encased in parenthesis with a pointer
@@ -107,7 +144,7 @@
       <para>We then have our implementation of the API.  Often for
     more complex functionality you will see an idiom where API
     implementation functions will only be a wrapper around another
-    function that is conventionally prepended with or or two
+    function that is conventionally prepended with one or or two
     underscores (i.e. <computeroutput>say_hello_fn()</computeroutput>
     would call another function
     <computeroutput>_say_hello_function()</computeroutput>).  This
