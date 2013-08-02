@@ -59,7 +59,7 @@ $(pdf.output)/csbu.fo: input/csbu.xml $(sources)
 	cd $(pdf.output) ; java -classpath $(saxon.classpath) \
 		com.icl.saxon.StyleSheet \
 		-o csbu.fo \
-		csbu.xml ../docbook-xsl/fo/docbook.xsl \
+		csbu.xml ../csbu-pdf.xsl \
                 use.extensions=1 \
 		textinsert.extension=1
 
@@ -78,7 +78,7 @@ html: input/csbu.xml $(html.css) $(sources) $(pngs)
 	xmllint --xinclude --noent ./input/csbu.xml > $(html.output)/csbu.xml
 	cd $(html.output); java -classpath $(saxon.classpath) \
 		com.icl.saxon.StyleSheet \
-		./csbu.xml ../csbu.xsl \
+		./csbu.xml ../csbu-html.xsl \
 		base.dir=. \
 		html.stylesheet='csbu.css' \
 		use.extensions=1 \

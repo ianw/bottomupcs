@@ -14,11 +14,19 @@ body {
 
 /* FIGURES AND LISTINGS */
 
+.example-title {
+    background: #aaaaaa;
+    color: #ffffff;
+    font-weight:bold;
+    padding: 10px;
+    border-radius: 15px;
+    font-size: 85%;
+}
+
 .programlisting { 
                   background: #efefef;
-                  margin: 0px;
-                  margin-left: auto;
-                  margin-right: auto;
+                  margin: 0px 20px 20px 20px;
+                  padding: 20px;
  }
 
 .figure { 
