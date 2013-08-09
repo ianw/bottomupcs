@@ -17,9 +17,8 @@
       <listitem><para>Write to it (new data from the user).</para></listitem>
     </orderedlist>
 
-    <para>Now consider some of the common things attached to a
-    computer and how they relate to our fundamental file
-    operations:</para>
+    <para>Consider some of the common things attached to a computer
+    and how they relate to our fundamental file operations:</para>
 
     <orderedlist>
       <listitem><para>The screen</para></listitem>
@@ -305,6 +304,30 @@
 	</textobject>
       </mediaobject>
     </figure>
+
+    <para>File descriptors are the gateway to some of the abstractions
+    described above.</para>
+
+    <figure>
+      <title>Abstraction</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="chapter00/figures/file-descriptors.eps" format="EPS" />
+	</imageobject>
+	<imageobject role="fo">
+	  <imagedata fileref="chapter00/figures/file-descriptors.svg"
+	  format="SVG" scalefit="1" width="100%" contentdept="100%" />
+	</imageobject>
+	<imageobject role="html">
+	  <imagedata fileref="chapter00/figures/file-descriptors.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	  <phrase>File descriptors associate the abstraction provided
+	  by device-drivers with a file interface provided to a user.</phrase>
+	</textobject>
+      </mediaobject>
+    </figure>
+
 
     <sect2>
       <title>The Shell</title> 
