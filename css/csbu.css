@@ -23,6 +23,42 @@ body {
     font-size: 85%;
 }
 
+.table-title {
+    background: #aaaaaa;
+    color: #ffffff;
+    font-weight:bold;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 15px;
+    font-size: 85%;
+}
+
+.table th {
+    padding: 5px;
+}
+
+.table td {
+    border: 1px dashed #bbbbbb;
+    padding: 5px;
+}
+
+.figure-title {
+    background: #aaaaaa;
+    color: #ffffff;
+    font-weight:bold;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 15px;
+    font-size: 85%;
+}
+
+
+.figure-contents {
+    border-bottom: 1px dashed;
+    padding-bottom: 5px;
+}
+
+
 .programlisting { 
                   background: #efefef;
                   margin: 0px 20px 20px 20px;
