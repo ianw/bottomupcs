@@ -832,7 +832,7 @@
       example, a sixteen bit variable can be represented by 0xAB12,
       and to find it in binary simply take each individual numeral,
       convert it as per the table and join them all together (so
-      <computeroutput>0xAB12</computeroutput> ends up as the 32 bit
+      <computeroutput>0xAB12</computeroutput> ends up as the 16-bit
       binary number
       <computeroutput>1010101100010010</computeroutput>).  We can use
       the reverse to convert from binary back to hexadecimal.</para>
