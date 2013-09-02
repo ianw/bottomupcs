@@ -1,5 +1,5 @@
 <chapter id="chapter00">
-  
+
   <title>General Unix and Advanced C</title>
 
   <sect1 id="everything_is_a_file">
@@ -250,8 +250,12 @@
   </sect1>
 
   <sect1 id="file_descriptors">
-    <title>Standard File Descriptors</title>
-    <para>Every running program under Unix starts with three files already opened</para>
+    <title>File Descriptors</title>
+
+    <para>One of the first things a UNIX programmer learns is that
+    every running program starts with three files already
+    opened:</para>
+
     <table>
       <title>Standard Files Provided by Unix</title>
       <tgroup cols="3">
@@ -282,9 +286,6 @@
       </tgroup>
     </table>
 
-    <para>So by default, all input will come from the keyboard and all
-    output (both normal and error output) will go to the screen.</para>
-
     <figure>
       <title>Default Unix Files</title>
       <mediaobject>
@@ -305,10 +306,13 @@
       </mediaobject>
     </figure>
 
-    <para>File descriptors are the gateway to some of the abstractions
-    described above.</para>
+    <para>This raises the question what an <emphasis>open
+        file</emphasis> represents.  The value returned by an
+        <computeroutput>open</computeroutput> call is termed a
+        <emphasis>file descriptor</emphasis> and is essentially an
+        index into an array of open files kept by the kernel.</para>
 
-    <figure>
+    <figure id="fd_abstraction">
       <title>Abstraction</title>
       <mediaobject>
 	<imageobject>
@@ -329,11 +333,94 @@
     </figure>
 
 
+    <para>In short, the file-descriptor is the gateway into the
+    kernel's abstractions of underlying hardware.  The overall view of
+    the abstraction is shown in <xref linkend="fd_abstraction"
+    />.</para>
+
+    <para>Starting at the lowest level, the operating system requires
+    a programmer to create a <emphasis>device-driver</emphasis> to be
+    able to communicate with a hardware device.  This device-driver is
+    written to an API provided by the kernel just like in <xref
+    linkend="virtio-abstraction" />; the device-driver will provide a
+    range of functions which are called by the kernel in response to
+    various requirements.  In the simplified example above, we can see
+    the drivers provide a <computeroutput>read</computeroutput> and
+    <computeroutput>write</computeroutput> function that will be
+    called in response to the analogous operations on the
+    file-descriptor. The device-driver knows how to convert these
+    generic requests into specific requests or commands for a
+    particular device.</para>
+
+    <para>To provide the abstraction to user-space, the kernel
+      provides a file-interface via what is generically termed a
+      <emphasis>device layer</emphasis>.  Physical devices on the host
+      are represented by a file in a special file-system such as
+      <computeroutput>/dev</computeroutput>.  In UNIX-like systems, so
+      called <emphasis>device-nodes</emphasis> have what are termed a
+      <emphasis>major</emphasis> and a <emphasis>minor</emphasis>
+      number which allows the kernel to associate particular nodes
+      with their underlying driver.  These can be identified via
+      <computeroutput>ls</computeroutput> as illustrated in <xref
+      linkend="major-minor-numbers" />.</para>
+
+      <example id="major-minor-numbers">
+	<title>Example of major and minor numbers</title>
+	<programlisting language="c"><xi:include
+	href="chapter00/code/major-minor.txt" parse="text"
+	xmlns:xi="http://www.w3.org/2001/XInclude"/></programlisting>
+      </example>
+
+    <para>This brings us to the file-descriptor, which is the handle
+    user-space uses to talk to the underlying device.  In a
+    broad-sense, what happens when a file is
+    <computeroutput>open</computeroutput>ed is that the kernel is
+    using the path information to map the file-descriptor with
+    something that provides an appropriate
+    <computeroutput>read</computeroutput> and
+    <computeroutput>write</computeroutput>, etc. API.  When this
+    <computeroutput>open</computeroutput> is for a device
+    (<computeroutput>/dev/sr0</computeroutput> above), the major and
+    minor number of the opened device-node provides the information
+    the kernel needs to find the correct device-driver and complete
+    the mapping.  The kernel will then know how to route further calls
+    such as <computeroutput>read</computeroutput> to the underlying
+    functions provided by the device-driver.</para>
+
+    <para>A non-device file operates similarly, although there are
+      more layers in-between.  The abstraction here is the
+      <emphasis>mount-point</emphasis>; mounting a file-system has the
+      dual purpose of setting up a mapping so the file-system knows
+      the underlying device that provides the storage and the kernel
+      knows that files opened under that mount-point should be
+      directed to the file-system driver.  Like device-drivers,
+      file-systems are written to a particular generic file-system API
+      provided by the kernel.
+    </para>
+
+    <para>There are indeed many other layers that complicate the
+    picture in real-life.  For example, the kernel will go to great
+    efforts to cache as much data from disks as possible in otherwise
+    free-memory; this provides many speed advantages.  It will also
+    try to organise device access in the most efficient ways possible;
+    for example trying to order disk-access to ensure data stored
+    physically close to each other is retrieved together, even if the
+    requests did not arrive in such an order.  Further, many devices
+    are of a more generic class such as USB or SCSI devices which
+    provide their own abstraction layers to write too.  Thus rather
+    than writing directly to devices, file-systems will go through
+    these many layers.  Understanding the kernel is to understand how
+    these many APIs interrelate and coexist.</para>
+
+<!-- This bit not relevant.  It would be more interesting to talk
+   about pipe() and how that connects together file descriptors, as an
+   example of ls > /tmp/foo.txt and ls | less really work
+
     <sect2>
       <title>The Shell</title> 
       
       <para>The shell is your gateway to interacting with the
-      operating system.  It has only one major task -- to allow you to
+      operating system.  It has only one major task — to allow you to
       execute programs (you will begin to understand how the shell
       actually does this when we talk about some of the internals of
       the operating system later).</para>
@@ -396,7 +483,7 @@
     </table>
 
     </sect2>
-
+-->
 
   </sect1>
 

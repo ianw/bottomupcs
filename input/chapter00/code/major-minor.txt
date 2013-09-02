@@ -1,0 +1,4 @@
+$ ls -l /dev/null /dev/zero /dev/tty
+crw-rw-rw- 1 root root 1, 3 Aug 26 13:12 /dev/null
+crw-rw-rw- 1 root root 5, 0 Sep  2 15:06 /dev/tty
+crw-rw-rw- 1 root root 1, 5 Aug 26 13:12 /dev/zero
