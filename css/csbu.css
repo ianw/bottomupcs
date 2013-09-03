@@ -86,7 +86,10 @@ body {
                          }
 
 .caption { 
-           font-size: 85%;
+           font-size: 75%;
+           color: #333;
+           width: 55%;
+           margin-left:45%;
 }
 
 /* TABLE OF CONTENTS */

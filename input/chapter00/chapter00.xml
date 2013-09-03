@@ -329,14 +329,25 @@
 	  <phrase>File descriptors associate the abstraction provided
 	  by device-drivers with a file interface provided to a user.</phrase>
 	</textobject>
+        <caption><para>File descriptors are an index into a
+        file-descriptor table stored by the kernel.  The kernel
+        creates a file-descriptor in response to an
+        <computeroutput>open</computeroutput> call and associates the
+        file-descriptor with some abstraction of an underlying
+        file-like object; be that an actual hardware device, or a
+        file-system or something else entirely.  Consequently a
+        processes <computeroutput>read</computeroutput> or
+        <computeroutput>write</computeroutput> calls that reference
+        that file-descriptor are routed to the correct place by the
+        kernel to ultimately do something useful.</para></caption>
       </mediaobject>
     </figure>
 
 
     <para>In short, the file-descriptor is the gateway into the
-    kernel's abstractions of underlying hardware.  The overall view of
-    the abstraction is shown in <xref linkend="fd_abstraction"
-    />.</para>
+    kernel's abstractions of underlying hardware.  An overall view of
+    the abstraction for physical-devices is shown in <xref
+    linkend="fd_abstraction" />.</para>
 
     <para>Starting at the lowest level, the operating system requires
     a programmer to create a <emphasis>device-driver</emphasis> to be
@@ -412,35 +423,36 @@
     these many layers.  Understanding the kernel is to understand how
     these many APIs interrelate and coexist.</para>
 
-<!-- This bit not relevant.  It would be more interesting to talk
-   about pipe() and how that connects together file descriptors, as an
-   example of ls > /tmp/foo.txt and ls | less really work
-
     <sect2>
-      <title>The Shell</title> 
-      
-      <para>The shell is your gateway to interacting with the
-      operating system.  It has only one major task — to allow you to
-      execute programs (you will begin to understand how the shell
-      actually does this when we talk about some of the internals of
-      the operating system later).</para>
+      <title>The Shell</title>
 
-      <para>But modern shells do much more than allow you to simply
-      execute a program.  They have powerful abilities to redirect
-      files, allow you to execute multiple programs simultaneously and
-      script complete programs.</para>
-      
-    </sect2>
+      <para>The shell is the gateway to interacting with the operating
+        system.  Be it <computeroutput>bash</computeroutput>,
+        <computeroutput>zsh</computeroutput>,
+        <computeroutput>csh</computeroutput> or any of the many other
+        shells, they all fundamentally have only one major task — to
+        allow you to execute programs (you will begin to understand
+        how the shell actually does this when we talk about some of
+        the internals of the operating system later).</para>
 
-    <sect2>
-      <title>Redirection</title> <para>Often we do not want the
-      standard files mentioned above to point to their default places.
-      For example, you may wish to capture all the output of a program
-      into a file on disk, or, alternatively have it read its commands
-      from a file you prepared earlier.  Another useful task might
-      like to pass the output of one program to the input of another.
-      It should come as no surprise you shell allows you to do all of
-      this (and more!)</para>
+      <para>But shells do much more than allow you to simply execute a
+      program.  They have powerful abilities to redirect files, allow
+      you to execute multiple programs simultaneously and script
+      complete programs.  These all come back to the
+      <emphasis>everything is a file</emphasis> idiom.</para>
+
+      <sect3>
+      <title>Redirection</title>
+
+        <para>Often we do not want the
+        standard file descriptors mentioned in <xref
+        linkend="file_descriptors" /> to point to their default places.
+        For example, you may wish to capture all the output of a
+        program into a file on disk, or, alternatively have it read
+        its commands from a file you prepared earlier.  Another useful
+        task might like to pass the output of one program to the input
+        of another.  With the operating system, the shell facilitates
+        all this and more.</para>
 
     <table>
       <title>Standard Shell Redirection Facilities</title>
@@ -481,10 +493,86 @@
 	</tbody>
       </tgroup>
     </table>
+      </sect3>
 
+      <sect3>
+        <title>Implementing
+        <computeroutput>pipe</computeroutput></title>
+
+        <para>The implementation of <computeroutput>ls |
+        more</computeroutput> is just another example of the power of
+        abstraction.  What fundamentally happens here is that instead
+        of associating the file-descriptor for the standard-output
+        with some sort of underlying device (such as the console, for
+        output to the terminal), the descriptor is pointed to an
+        in-memory buffer provided by the kernel commonly termed a
+        <computeroutput>pipe</computeroutput>.  The trick here is that
+        another process can associate its standard
+        <emphasis>input</emphasis> with the other-side of this same
+        buffer and effectively consume the output of the other
+        process.  This is illustrated in <xref
+        linkend="process_pipe"/></para>
+
+    <figure id="process_pipe">
+      <title>A pipe in action</title>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="chapter00/figures/pipe.eps" format="EPS" />
+	</imageobject>
+	<imageobject role="fo">
+	  <imagedata fileref="chapter00/figures/pipe.svg"
+	  format="SVG" scalefit="1" width="100%" contentdept="100%" />
+	</imageobject>
+	<imageobject role="html">
+	  <imagedata fileref="chapter00/figures/pipe.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	  <phrase>The pipe is an in-memory buffer provided by the
+	  kernel which allows the output of one process to be consumed
+	  as the input to another.</phrase>
+	</textobject>
+            <caption><para>The pipe is an in-memory buffer that
+            connects two processes together.  File-descriptors point
+            to the pipe object, which buffers data sent to it (via a
+            <computeroutput>write</computeroutput>) to be
+            <emphasis>drained</emphasis> (via a
+            <computeroutput>read</computeroutput>)</para></caption>
+      </mediaobject>
+    </figure>
+
+        <para>Writes to the pipe are stored by the kernel until a
+          corresponding read from the other side
+          <emphasis>drains</emphasis> the buffer.  This is a very
+          powerful concept and is one of the fundamental forms of
+          <emphasis>inter-process communication</emphasis> or IPC in
+          UNIX like operating systems.  The pipe allows more than just
+          a data transfer; it can act as a signaling channel.  If a
+          process <computeroutput>read</computeroutput>s an empty
+          pipe, it will by default <emphasis>block</emphasis> or be
+          put into hibernation until there is some data available
+          (this is discussed in much greater depth in <xref
+          linkend="chapter04"/>.  Thus two processes may use a pipe to
+          communicate that some action has been taken just by writing
+          a byte of data; rather than the actual data being important,
+          the mere presence of <emphasis>any</emphasis> data in the
+          pipe can signal a message.  Say for example one process
+          requests that another print a file - something that will
+          take some time.  The two processes may setup a pipe between
+          themselves where the requesting process does a
+          <computeroutput>read</computeroutput> on the empty pipe;
+          being empty that call blocks and the process does not
+          continue.  Once the print is done, the other process can
+          write a message into the pipe, which effectively wakes up
+          the requesting process and signals the work is done.</para>
+
+        <para>Allowing processes to pass
+          data between each other like this springs another common
+          UNIX idiom of small tools doing one particular thing.
+          Chaining these small tools gives a flexibility that a single
+          monolithic tool often can not.</para>
+
+      </sect3>
     </sect2>
--->
-
   </sect1>
 
 </chapter>
