@@ -56,7 +56,7 @@
     <para>Learning to navigate across abstractions gives one greater
       insight into how to <emphasis>use</emphasis> the abstractions in
       the best and most innovative ways.  In this book, we are
-      concerned with abstractions at the lowest layers; bewteen
+      concerned with abstractions at the lowest layers; between
       applications and the operating-system and the operating-system
       and hardware.  Above this lies many more layers, each worthy of
       their own books.  As these chapters progress, you will hopefully
