@@ -36,7 +36,7 @@
     disk.</para>
 
     <para>Thus the concept of a file is a good
-    <emphasis>abstraction</emphasis> of either a a sink for, or source
+    <emphasis>abstraction</emphasis> of either a sink for, or source
     of, data.  As such it is an excellent abstraction of all the
     devices one might attach to the computer.  This realisation is the
     great power of UNIX and is evident across the design of the entire
