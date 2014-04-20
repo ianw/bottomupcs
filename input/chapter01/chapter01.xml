@@ -308,7 +308,7 @@
      <para>The mathematics of error-correction codes is called Information
      Theory, and was developed by Claude Shannon while working at Bell
      Labs in 1948s. Shannon's theorem tells us the maximum rate we can
-     transmit a singal reliably over a noisy channel.
+     transmit a signal reliably over a noisy channel.
 
 	</sect4>
 
