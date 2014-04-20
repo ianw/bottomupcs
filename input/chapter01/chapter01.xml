@@ -299,7 +299,16 @@
 	  <para>In this way, the flipping of one bit will case a
 	  parity error, which can be detected.</para>
 
-	  <para>XXX more about error correcting</para>
+     <para>Parity checking lets us discover an error in a transmission,
+     so we can ask for the data to be re-transmitted. It is also possible
+     to write the data in a specific way (encode), so that we can correct
+     an error without the sender doing anything. These encodings are
+     called error-correcting codes. </para>
+
+     <para>The mathematics of error-correction codes is called Information
+     Theory, and was developed by Claude Shannon while working at Bell
+     Labs in 1948s. Shannon's theorem tells us the maximum rate we can
+     transmit a signal reliably over a noisy channel.</para>
 
 	</sect4>
 
@@ -377,7 +386,7 @@
 		</row>
 		<row>
 		  <entry>2<superscript>40</superscript></entry>
-		  <entry>Terrabyte</entry>
+		  <entry>Terabyte</entry>
 		</row>
 		<row>
 		  <entry>2<superscript>50</superscript></entry>
@@ -641,12 +650,15 @@
 	<para>Electronically, the boolean operations are implemented
 	in <emphasis>gates</emphasis> made by
 	<emphasis>transistors</emphasis>.  This is why you might have
-	heard about transistor counts and things like Moores Law.  The
-	more transistors, the more gates, the more things you can add
-	together.  To create the modern computer, there are an awful
-	lot of gates, and an awful lot of transistors.  Some of the
-	latest Itanium processors have around 460 million
-	transistors.</para>
+	heard about transistor counts.	The more transistors, the more
+	gates, the more things you can add together.  To create the
+	modern computer, there are an awful lot of gates, and an awful
+	lot of transistors.   As of 2012, Intel is shipping a 10-core
+	CPU with 2.5 billion transistors, and Nvidia has a GPU with over
+	7 billion transistors. The number of transistors in a CPU has
+	doubled every 18 months, since the late 1960s. This trend in
+	doubling is known as Moore's law, after the co-founder of Intel,
+	Gordon Moore.</para>
 
       </sect3>
 
@@ -1007,13 +1019,13 @@
       <para>Although a slight divergence, it is important to
       understand a bit of history about the C language.</para>
 
-      <para>C is the <emphasis>lingua franca</emphasis> of the systems
-      programming world.  Every operating system and its associated
-      system libraries in common use is written in C, and every system
-      provides a C compiler.  To stop the language diverging across
-      each of these systems where each would be sure to make numerous
-      incompatible changes, a strict standard has been written for the
-      language.</para>
+      <para>C is the common language of the systems programming world.
+      Every operating system and its associated system libraries in
+      common use is written in C, and every system provides a C compiler.
+      To stop the language diverging across each of these systems where
+      each would be sure to make numerous incompatible changes, a strict
+      standard has been written for the language.</para>
+
 
       <para>Officially this standard is known as ISO/IEC 9899:1999(E),
       but is more commonly referred to by its shortened name

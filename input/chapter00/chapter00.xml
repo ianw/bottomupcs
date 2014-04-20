@@ -44,18 +44,18 @@
     system to provide this abstraction of the hardware to the
     programmer.</para>
 
-    <para>It is probably not too much of a strech to say abstraction
+    <para>It is probably not too much of a stretch to say abstraction
     is <emphasis>the</emphasis> primary concept that underpins all
-    modern computing.  No one person can understand everythinig from
+    modern computing.  No one person can understand everything from
     designing a modern user-interface to the internal workings of a
     modern CPU, much less build it all themselves.  To programmers,
-    abstractions are the <emphasis>lingua franca</emphasis> that
-    allows us to collaborate and invent.</para>
+    abstractions are the common language that allows us to collaborate
+    and invent.</para>
 
     <para>Learning to navigate across abstractions gives one greater
       insight into how to <emphasis>use</emphasis> the abstractions in
       the best and most innovative ways.  In this book, we are
-      concerned with abstractions at the lowest layers; bewteen
+      concerned with abstractions at the lowest layers; between
       applications and the operating-system and the operating-system
       and hardware.  Above this lies many more layers, each worthy of
       their own books.  As these chapters progress, you will hopefully
@@ -258,10 +258,11 @@
 
     <table>
       <title>Standard Files Provided by Unix</title>
-      <tgroup cols="3">
+      <tgroup cols="4">
 	<thead>
 	  <row>
 	    <entry>Descriptive Name</entry>
+       <entry>Short Name</entry>
 	    <entry>File Number</entry>
 	    <entry>Description</entry>
 	  </row>
@@ -269,16 +270,19 @@
 	<tbody>
 	  <row>
 	    <entry>Standard In</entry>
+       <entry>stdin</entry>
 	    <entry>0</entry>
 	    <entry>Input from the keyboard</entry>
 	  </row>
 	  <row>
 	    <entry>Standard Out</entry>
+       <entry>stdout</entry>
 	    <entry>1</entry>
 	    <entry>Output to the console</entry>
 	  </row>
 	  <row>
 	    <entry>Standard Error</entry>
+       <entry>stderr</entry>
 	    <entry>2</entry>
 	    <entry>Error output to the console</entry>
 	  </row>
