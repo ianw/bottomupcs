@@ -1019,13 +1019,13 @@
       <para>Although a slight divergence, it is important to
       understand a bit of history about the C language.</para>
 
-      <para>C is the <emphasis>lingua franca</emphasis> of the systems
-      programming world.  Every operating system and its associated
-      system libraries in common use is written in C, and every system
-      provides a C compiler.  To stop the language diverging across
-      each of these systems where each would be sure to make numerous
-      incompatible changes, a strict standard has been written for the
-      language.</para>
+      <para>C is the common language of the systems programming world.
+      Every operating system and its associated system libraries in
+      common use is written in C, and every system provides a C compiler.
+      To stop the language diverging across each of these systems where
+      each would be sure to make numerous incompatible changes, a strict
+      standard has been written for the language.</para>
+
 
       <para>Officially this standard is known as ISO/IEC 9899:1999(E),
       but is more commonly referred to by its shortened name
