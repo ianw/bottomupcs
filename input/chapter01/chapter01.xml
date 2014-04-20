@@ -299,7 +299,16 @@
 	  <para>In this way, the flipping of one bit will case a
 	  parity error, which can be detected.</para>
 
-	  <para>XXX more about error correcting</para>
+     <para>Parity checking lets us discover an error in a transmission,
+     so we can ask for the data to be re-transmitted. It is also possible
+     to write the data in a specific way (encode), so that we can correct
+     an error without the sender doing anything. These encodings are
+     called error-correcting codes. </para>
+
+     <para>The mathematics of error-correction codes is called Information
+     Theory, and was developed by Claude Shannon while working at Bell
+     Labs in 1948s. Shannon's theorem tells us the maximum rate we can
+     transmit a singal reliably over a noisy channel.
 
 	</sect4>
 
