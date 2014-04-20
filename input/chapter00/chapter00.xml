@@ -44,7 +44,7 @@
     system to provide this abstraction of the hardware to the
     programmer.</para>
 
-    <para>It is probably not too much of a strech to say abstraction
+    <para>It is probably not too much of a stretch to say abstraction
     is <emphasis>the</emphasis> primary concept that underpins all
     modern computing.  No one person can understand everythinig from
     designing a modern user-interface to the internal workings of a
@@ -55,7 +55,7 @@
     <para>Learning to navigate across abstractions gives one greater
       insight into how to <emphasis>use</emphasis> the abstractions in
       the best and most innovative ways.  In this book, we are
-      concerned with abstractions at the lowest layers; bewteen
+      concerned with abstractions at the lowest layers; between
       applications and the operating-system and the operating-system
       and hardware.  Above this lies many more layers, each worthy of
       their own books.  As these chapters progress, you will hopefully
