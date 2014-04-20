@@ -49,8 +49,8 @@
     modern computing.  No one person can understand everythinig from
     designing a modern user-interface to the internal workings of a
     modern CPU, much less build it all themselves.  To programmers,
-    abstractions are the <emphasis>lingua franca</emphasis> that
-    allows us to collaborate and invent.</para>
+    abstractions are the common language that allows us to collaborate
+    and invent.</para>
 
     <para>Learning to navigate across abstractions gives one greater
       insight into how to <emphasis>use</emphasis> the abstractions in
