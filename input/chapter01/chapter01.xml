@@ -650,12 +650,16 @@
 	<para>Electronically, the boolean operations are implemented
 	in <emphasis>gates</emphasis> made by
 	<emphasis>transistors</emphasis>.  This is why you might have
-	heard about transistor counts and things like Moores Law.  The
-	more transistors, the more gates, the more things you can add
-	together.  To create the modern computer, there are an awful
-	lot of gates, and an awful lot of transistors.  Some of the
-	latest Itanium processors have around 460 million
-	transistors.</para>
+	heard about transistor counts.	The more transistors, the more
+	gates, the more things you can add together.  To create the
+	modern computer, there are an awful lot of gates, and an awful
+	lot of transistors.   As of 2012, Intel is shipping a 10-core
+	CPU with 2.5 billion transistors, and Nvidia has a GPU with over
+	7 billion transistors. The number of transistors in a CPU has
+	doubled every 18 months, since the late 1960s. This trend in
+	doubling is known as Moore's law, after the co-founder of Intel,
+	Gordon Moore.
+	</para>
 
       </sect3>
 
