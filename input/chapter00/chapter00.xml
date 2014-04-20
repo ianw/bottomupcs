@@ -46,7 +46,7 @@
 
     <para>It is probably not too much of a stretch to say abstraction
     is <emphasis>the</emphasis> primary concept that underpins all
-    modern computing.  No one person can understand everythinig from
+    modern computing.  No one person can understand everything from
     designing a modern user-interface to the internal workings of a
     modern CPU, much less build it all themselves.  To programmers,
     abstractions are the common language that allows us to collaborate
