@@ -308,7 +308,7 @@
      <para>The mathematics of error-correction codes is called Information
      Theory, and was developed by Claude Shannon while working at Bell
      Labs in 1948s. Shannon's theorem tells us the maximum rate we can
-     transmit a signal reliably over a noisy channel.
+     transmit a signal reliably over a noisy channel.</para>
 
 	</sect4>
 
@@ -658,8 +658,7 @@
 	7 billion transistors. The number of transistors in a CPU has
 	doubled every 18 months, since the late 1960s. This trend in
 	doubling is known as Moore's law, after the co-founder of Intel,
-	Gordon Moore.
-	</para>
+	Gordon Moore.</para>
 
       </sect3>
 
