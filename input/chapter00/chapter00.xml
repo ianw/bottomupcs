@@ -5,10 +5,10 @@
   <sect1 id="everything_is_a_file">
     <title><emphasis>Everything is a file!</emphasis></title>
 
-    <para>An often quoted tenet of UNIX-like systems such as Linux or
+    <para>An often-quoted tenet of UNIX-like systems such as Linux or
     BSD is <emphasis>everything is a file</emphasis>.</para>
 
-    <para>Imagine a file in the context something familiar like a word
+    <para>Imagine a file in the context of something familiar like a word
     processor.  There are two fundamental operations we could use on
     this imaginary word processing file:</para>
 
@@ -24,19 +24,19 @@
       <listitem><para>The screen</para></listitem>
       <listitem><para>The keyboard</para></listitem>
       <listitem><para>A printer</para></listitem>
-      <listitem><para>A CDROM</para></listitem>
+      <listitem><para>A CD-ROM</para></listitem>
     </orderedlist>
 
     <para>The screen and printer are both like a write-only file, but
     instead of being stored as bits on a disk the information is
     displayed as dots on a screen or lines on a page. The keyboard is
     like a read only file, with the data coming from keystrokes
-    provided by the user.  The CDROM is similar, but rather than
+    provided by the user.  The CD-ROM is similar, but rather than
     randomly coming from the user the data is stored directly on the
     disk.</para>
 
     <para>Thus the concept of a file is a good
-    <emphasis>abstraction</emphasis> of either a a sink for, or source
+    <emphasis>abstraction</emphasis> of either a sink for, or source
     of, data.  As such it is an excellent abstraction of all the
     devices one might attach to the computer.  This realisation is the
     great power of UNIX and is evident across the design of the entire
@@ -46,8 +46,8 @@
 
     <para>It is probably not too much of a strech to say abstraction
     is <emphasis>the</emphasis> primary concept that underpins all
-    modern computing.  No one person can understand everythinig from
-    designing a modern user-interface to the internal workings of a
+    modern computing.  No one person can understand everything from
+    designing a modern user interface to the internal workings of a
     modern CPU, much less build it all themselves.  To programmers,
     abstractions are the <emphasis>lingua franca</emphasis> that
     allows us to collaborate and invent.</para>
@@ -56,11 +56,11 @@
       insight into how to <emphasis>use</emphasis> the abstractions in
       the best and most innovative ways.  In this book, we are
       concerned with abstractions at the lowest layers; bewteen
-      applications and the operating-system and the operating-system
+      applications and the operating system and the operating system
       and hardware.  Above this lies many more layers, each worthy of
-      their own books.  As these chapters progress, you will hopefully
+      its own book.  As these chapters progress, you will hopefully
       gain some insight into the abstractions presented by a modern
-      operating-system.</para>
+      operating system.</para>
 
     <figure>
       <title>Abstraction</title>
@@ -76,7 +76,7 @@
 	  <imagedata fileref="chapter00/figures/abstraction.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	  <phrase>Can you spot the difference between a CDROM and a keyboard?  As an application programmer, you should not be able to.</phrase>
+	  <phrase>Can you spot the difference between a CD-ROM and a keyboard?  As an application programmer, you should not be able to.</phrase>
 	</textobject>
       </mediaobject>
     </figure>
@@ -91,14 +91,14 @@
     generically termed an <emphasis>Application Programming
     Interface</emphasis> (API).  API is a somewhat nebulous term that
     means different things in the context of various programming
-    endavours.  Fundamentally, a programmer designs a set of functions
+    endeavors.  Fundamentally, a programmer designs a set of functions
     and documents their interface and functionality with the principle
     that the actual implementation providing the API is opaque.</para>
 
-      <para>For example, many large web-applications provide an API
+      <para>For example, many large web applications provide an API
       accessible via HTTP.  Accessing data via this method surely
-      triggers many complicated series of remote-procedure calls,
-      database queries and data transfer; all of which is opaque to
+      triggers many complicated series of remote procedure calls,
+      database queries and data transfers; all of which is opaque to
       the end user who simply receives the contracted data.</para>
 
       <para>Those familiar with <emphasis>object-oriented</emphasis>
@@ -110,11 +110,11 @@
     <sect2>
       <title>Implementing abstraction with C</title>
 
-      <para>A common method used in the Linux Kernel and other large C
-      code bases, which lacks a built-in concept of
-      object-orientation, is <emphasis>function pointers</emphasis>.
-      Learning to read this idom is key to navigating most large C
-      code-bases.  By understanding how to read the abstractions
+      <para>A common method used in the Linux kernel and other large C
+      code bases, which lack a built-in concept of
+      object orientation, is <emphasis>function pointers</emphasis>.
+      Learning to read this idiom is key to navigating most large C
+      code bases.  By understanding how to read the abstractions
       provided within the code an understanding of internal API
       designs can be built.</para>
 
@@ -124,27 +124,27 @@
       </example>
 
       <para>Code such as the above is the simplest example of
-    constructs used repeatedly through the Linux Kernel and other C
-    programs.  Lets have a look at some specific elements.</para>
+    constructs used repeatedly throughout the Linux Kernel and other C
+    programs.  Let's have a look at some specific elements.</para>
 
       <para>We start out with a structure that defines the API
     (<computeroutput>struct greet_api</computeroutput>).  The
-    functions whose names are encased in parenthesis with a pointer
+    functions whose names are encased in parentheses with a pointer
     marker describe a <emphasis>function
     pointer</emphasis><footnote><para>Often you will see that the
     names of the parameters are omitted, and only the type of the
     parameter is specified.  This allows the implementer to specify
     their own parameter names avoiding warnings from the
     compiler.</para></footnote>.  The function pointer describes the
-    <emphasis>prototype</emphasis> of function it must point to;
+    <emphasis>prototype</emphasis> of the function it must point to;
     pointing it at a function without the correct return type or
     parameters will generate a compiler warning at least; if left in
     code will likely lead to incorrect operation or crashes.</para>
 
       <para>We then have our implementation of the API.  Often for
     more complex functionality you will see an idiom where API
-    implementation functions will only be a wrapper around another
-    function that is conventionally prepended with one or or two
+    implementation functions will only be wrappers around other
+    functions that are conventionally prepended with one or two
     underscores<footnote> <para>A double-underscore function
     <computeroutput>__foo</computeroutput> may conversationally be
     referred to as "dunder foo".</para></footnote>
@@ -153,18 +153,18 @@
     <computeroutput>_say_hello_function()</computeroutput>).  This has
     several uses; generally it relates to having simpler and smaller
     parts of the API (marshalling or checking arguments, for example)
-    separate to more complex implemenation, which often eases the path
+    separate from more complex implemenation, which often eases the path
     to significant changes in the internal workings whilst ensuring
-    the API remains constant.  Our implementation is very simple
-    however, and doesn't even need it's own support functions.  In
-    various projects, single, double or even triple underscore
+    the API remains constant.  Our implementation is very simple,
+    however, and doesn't even need its own support functions.  In
+    various projects, single-, double- or even triple-underscore
     function prefixes will mean different things, but universally it
     is a visual warning that the function is not supposed to be called
     directly from "beyond" the API.</para>
 
       <para>Second to last, we fill out the function pointers in
     <computeroutput>struct greet_api greet_api</computeroutput>.  The
-    name of the function is a pointer, therefore there is no need to
+    name of the function is a pointer; therefore there is no need to
     take the address of the function
     (i.e. <computeroutput>&amp;say_hello_fn</computeroutput>).</para>
 
@@ -189,12 +189,12 @@
         see the user of this API (the device driver author) is
         expected to provide a number of functions that will be called
         under various conditions during system operation (when probing
-        for new hardware, when hardware is removed, etc).  It also
+        for new hardware, when hardware is removed, etc.).  It also
         contains a range of data; structures which should be filled
         with relevant data.</para>
 
       <para>Starting with descriptors like this is usually the easiest
-      way into understanding the various layers of kernel code.</para>
+      way to begin understanding the various layers of kernel code.</para>
 
     </sect2>
 
@@ -216,7 +216,7 @@
 
       <para>For example, a library implementing access to the raw data
         in JPEG files has both the advantage that the many programs
-        who wish to access image files can all use the same library
+        that wish to access image files can all use the same library
         and the programmers building these programs do not need to
         worry about the exact details of the JPEG file format, but can
         concentrate their efforts on what their program wants to do
@@ -234,8 +234,8 @@
         standard UNIX API.</para>
 
       <para>Most UNIX platforms broadly follow the POSIX standard,
-      though often differ small but sometimes important ways (hence
-      the complexity of the various GNU autotools, which often tries
+      though often differ in small but sometimes important ways (hence
+      the complexity of the various GNU autotools, which often try
       to abstract away these differences for you).  Linux has many
       interfaces that are not specified by POSIX; writing applications
       that use them exclusively will make your application less
@@ -327,50 +327,50 @@
 	</imageobject>
 	<textobject>
 	  <phrase>File descriptors associate the abstraction provided
-	  by device-drivers with a file interface provided to a user.</phrase>
+	  by device drivers with a file interface provided to a user.</phrase>
 	</textobject>
         <caption><para>File descriptors are an index into a
-        file-descriptor table stored by the kernel.  The kernel
-        creates a file-descriptor in response to an
+        file descriptor table stored by the kernel.  The kernel
+        creates a file descriptor in response to an
         <computeroutput>open</computeroutput> call and associates the
-        file-descriptor with some abstraction of an underlying
-        file-like object; be that an actual hardware device, or a
+        file descriptor with some abstraction of an underlying
+        file-like object, be that an actual hardware device, or a
         file-system or something else entirely.  Consequently a
-        processes <computeroutput>read</computeroutput> or
+        process's <computeroutput>read</computeroutput> or
         <computeroutput>write</computeroutput> calls that reference
-        that file-descriptor are routed to the correct place by the
+        that file descriptor are routed to the correct place by the
         kernel to ultimately do something useful.</para></caption>
       </mediaobject>
     </figure>
 
 
-    <para>In short, the file-descriptor is the gateway into the
+    <para>In short, the file descriptor is the gateway into the
     kernel's abstractions of underlying hardware.  An overall view of
-    the abstraction for physical-devices is shown in <xref
+    the abstraction for physical devices is shown in <xref
     linkend="fd_abstraction" />.</para>
 
     <para>Starting at the lowest level, the operating system requires
-    a programmer to create a <emphasis>device-driver</emphasis> to be
-    able to communicate with a hardware device.  This device-driver is
+    a programmer to create a <emphasis>device driver</emphasis> to be
+    able to communicate with a hardware device.  This device driver is
     written to an API provided by the kernel just like in <xref
-    linkend="virtio-abstraction" />; the device-driver will provide a
+    linkend="virtio-abstraction" />; the device driver will provide a
     range of functions which are called by the kernel in response to
     various requirements.  In the simplified example above, we can see
     the drivers provide a <computeroutput>read</computeroutput> and
     <computeroutput>write</computeroutput> function that will be
     called in response to the analogous operations on the
-    file-descriptor. The device-driver knows how to convert these
+    file descriptor. The device driver knows how to convert these
     generic requests into specific requests or commands for a
     particular device.</para>
 
-    <para>To provide the abstraction to user-space, the kernel
-      provides a file-interface via what is generically termed a
+    <para>To provide the abstraction to user space, the kernel
+      provides a file interface via what is generically termed a
       <emphasis>device layer</emphasis>.  Physical devices on the host
-      are represented by a file in a special file-system such as
-      <computeroutput>/dev</computeroutput>.  In UNIX-like systems, so
-      called <emphasis>device-nodes</emphasis> have what are termed a
+      are represented by a file in a special file system such as
+      <computeroutput>/dev</computeroutput>.  In UNIX-like systems, so-called
+      <emphasis>device nodes</emphasis> have what are termed a
       <emphasis>major</emphasis> and a <emphasis>minor</emphasis>
-      number which allows the kernel to associate particular nodes
+      number, which allow the kernel to associate particular nodes
       with their underlying driver.  These can be identified via
       <computeroutput>ls</computeroutput> as illustrated in <xref
       linkend="major-minor-numbers" />.</para>
@@ -382,44 +382,44 @@
 	xmlns:xi="http://www.w3.org/2001/XInclude"/></programlisting>
       </example>
 
-    <para>This brings us to the file-descriptor, which is the handle
-    user-space uses to talk to the underlying device.  In a
-    broad-sense, what happens when a file is
+    <para>This brings us to the file descriptor, which is the handle
+    user space uses to talk to the underlying device.  In a
+    broad sense, what happens when a file is
     <computeroutput>open</computeroutput>ed is that the kernel is
-    using the path information to map the file-descriptor with
+    using the path information to map the file descriptor with
     something that provides an appropriate
     <computeroutput>read</computeroutput> and
-    <computeroutput>write</computeroutput>, etc. API.  When this
+    <computeroutput>write</computeroutput>, etc., API.  When this
     <computeroutput>open</computeroutput> is for a device
     (<computeroutput>/dev/sr0</computeroutput> above), the major and
-    minor number of the opened device-node provides the information
-    the kernel needs to find the correct device-driver and complete
+    minor number of the opened device node provides the information
+    the kernel needs to find the correct device driver and complete
     the mapping.  The kernel will then know how to route further calls
     such as <computeroutput>read</computeroutput> to the underlying
-    functions provided by the device-driver.</para>
+    functions provided by the device driver.</para>
 
     <para>A non-device file operates similarly, although there are
-      more layers in-between.  The abstraction here is the
-      <emphasis>mount-point</emphasis>; mounting a file-system has the
-      dual purpose of setting up a mapping so the file-system knows
+      more layers in between.  The abstraction here is the
+      <emphasis>mount point</emphasis>; mounting a file system has the
+      dual purpose of setting up a mapping so the file system knows
       the underlying device that provides the storage and the kernel
-      knows that files opened under that mount-point should be
-      directed to the file-system driver.  Like device-drivers,
-      file-systems are written to a particular generic file-system API
+      knows that files opened under that mount point should be
+      directed to the file system driver.  Like device drivers,
+      file systems are written to a particular generic file system API
       provided by the kernel.
     </para>
 
     <para>There are indeed many other layers that complicate the
-    picture in real-life.  For example, the kernel will go to great
-    efforts to cache as much data from disks as possible in otherwise
-    free-memory; this provides many speed advantages.  It will also
+    picture in real life.  For example, the kernel will go to great
+    efforts to cache as much data from disks as possible in otherwise-free
+    memory; this provides many speed advantages.  It will also
     try to organise device access in the most efficient ways possible;
-    for example trying to order disk-access to ensure data stored
-    physically close to each other is retrieved together, even if the
-    requests did not arrive in such an order.  Further, many devices
+    for example trying to order disk access to ensure data stored
+    physically close together is retrieved together, even if the
+    requests did not arrive in sequential order.  Further, many devices
     are of a more generic class such as USB or SCSI devices which
-    provide their own abstraction layers to write too.  Thus rather
-    than writing directly to devices, file-systems will go through
+    provide their own abstraction layers to write to.  Thus, rather
+    than writing directly to devices, file systems will go through
     these many layers.  Understanding the kernel is to understand how
     these many APIs interrelate and coexist.</para>
 
@@ -430,7 +430,7 @@
         system.  Be it <computeroutput>bash</computeroutput>,
         <computeroutput>zsh</computeroutput>,
         <computeroutput>csh</computeroutput> or any of the many other
-        shells, they all fundamentally have only one major task — to
+        shells, they all fundamentally have only one major task—to
         allow you to execute programs (you will begin to understand
         how the shell actually does this when we talk about some of
         the internals of the operating system later).</para>
@@ -448,7 +448,7 @@
         standard file descriptors mentioned in <xref
         linkend="file_descriptors" /> to point to their default places.
         For example, you may wish to capture all the output of a
-        program into a file on disk, or, alternatively have it read
+        program into a file on disk or, alternatively, have it read
         its commands from a file you prepared earlier.  Another useful
         task might like to pass the output of one program to the input
         of another.  With the operating system, the shell facilitates
@@ -502,16 +502,16 @@
         <para>The implementation of <computeroutput>ls |
         more</computeroutput> is just another example of the power of
         abstraction.  What fundamentally happens here is that instead
-        of associating the file-descriptor for the standard-output
+        of associating the file descriptor for the standard output
         with some sort of underlying device (such as the console, for
         output to the terminal), the descriptor is pointed to an
-        in-memory buffer provided by the kernel commonly termed a
+        in-memory buffer provided by the kernel, commonly termed a
         <computeroutput>pipe</computeroutput>.  The trick here is that
         another process can associate its standard
-        <emphasis>input</emphasis> with the other-side of this same
+        <emphasis>input</emphasis> with the other side of this same
         buffer and effectively consume the output of the other
         process.  This is illustrated in <xref
-        linkend="process_pipe"/></para>
+        linkend="process_pipe"/>.</para>
 
     <figure id="process_pipe">
       <title>A pipe in action</title>
@@ -532,11 +532,11 @@
 	  as the input to another.</phrase>
 	</textobject>
             <caption><para>The pipe is an in-memory buffer that
-            connects two processes together.  File-descriptors point
+            connects two processes together.  File descriptors point
             to the pipe object, which buffers data sent to it (via a
             <computeroutput>write</computeroutput>) to be
             <emphasis>drained</emphasis> (via a
-            <computeroutput>read</computeroutput>)</para></caption>
+            <computeroutput>read</computeroutput>).</para></caption>
       </mediaobject>
     </figure>
 
@@ -545,22 +545,22 @@
           <emphasis>drains</emphasis> the buffer.  This is a very
           powerful concept and is one of the fundamental forms of
           <emphasis>inter-process communication</emphasis> or IPC in
-          UNIX like operating systems.  The pipe allows more than just
+          UNIX-like operating systems.  The pipe allows more than just
           a data transfer; it can act as a signaling channel.  If a
           process <computeroutput>read</computeroutput>s an empty
           pipe, it will by default <emphasis>block</emphasis> or be
           put into hibernation until there is some data available
           (this is discussed in much greater depth in <xref
-          linkend="chapter04"/>.  Thus two processes may use a pipe to
+          linkend="chapter04"/>).  Thus two processes may use a pipe to
           communicate that some action has been taken just by writing
           a byte of data; rather than the actual data being important,
           the mere presence of <emphasis>any</emphasis> data in the
           pipe can signal a message.  Say for example one process
-          requests that another print a file - something that will
-          take some time.  The two processes may setup a pipe between
+          requests that another print a file—something that will
+          take some time.  The two processes may set up a pipe between
           themselves where the requesting process does a
           <computeroutput>read</computeroutput> on the empty pipe;
-          being empty that call blocks and the process does not
+          being empty, that call blocks and the process does not
           continue.  Once the print is done, the other process can
           write a message into the pipe, which effectively wakes up
           the requesting process and signals the work is done.</para>
@@ -568,7 +568,7 @@
         <para>Allowing processes to pass
           data between each other like this springs another common
           UNIX idiom of small tools doing one particular thing.
-          Chaining these small tools gives a flexibility that a single
+          Chaining these small tools gives flexibility that a single,
           monolithic tool often can not.</para>
 
       </sect3>
