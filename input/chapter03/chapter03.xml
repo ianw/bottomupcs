@@ -112,7 +112,7 @@
       <title>Performance</title>
 
       <para>As the operating system provides so many services to the
-      computer, it's performance is critical.  Many parts of the
+      computer, its performance is critical.  Many parts of the
       operating system run extremely frequently, so even an overhead
       of just a few processor cycles can add up to a big decrease in
       overall system performance.</para>
@@ -348,7 +348,7 @@
 	<para>Another option is to have the operating system aware of
 	the underlying hypervisor, and request system resources
 	through it.  This is sometimes referred to as
-	<emphasis>paravirtualisation</emphasis> due to it's halfway
+	<emphasis>paravirtualisation</emphasis> due to its halfway
 	nature.  This is similar to the way early versions of the Xen
 	system works and is a compromise solution.  It hopefully
 	provides better performance since the operating system is
@@ -516,13 +516,13 @@
       kernel looks in the predefined register for the system call
       number, and looks it up in a table to see which function it
       should call.  This function is called, does what it needs to do,
-      and places it's return value into <emphasis>another</emphasis>
+      and places its return value into <emphasis>another</emphasis>
       register defined by the ABI as the return register.</para>
 
       <para>The final step is for the kernel to make a jump
       instruction back to the userspace program, so it can continue
       off where it left from.  The userpsace program gets the data it
-      needs from the return register, and continues happily on it's
+      needs from the return register, and continues happily on its
       way!</para>
 
       <para>Although the details of the process can get quite hairy,
@@ -532,13 +532,13 @@
 
       <sect3>
 	<title>libc</title>
-	
+
 	<para>Although you can do all of the above by hand for each
 	system call, system libraries usually do most of the work for
 	you.  The standard library that deals with system calls on
 	UNIX like systems is <computeroutput>libc</computeroutput>; we
-	will learn more about it's roles in future weeks.</para>
-	
+	will learn more about its roles in future weeks.</para>
+
       </sect3>
 
     </sect2>
@@ -614,7 +614,7 @@
               xmlns:xi="http://www.w3.org/2001/XInclude" />
             </programlisting>
 	</example>
-	
+
 	<para>This code snippet from the kernel header file
 	<computeroutput>asm/unistd.h</computeroutput> shows how we can
 	implement system calls on PowerPC.  It looks very complicated,
@@ -697,7 +697,7 @@
 	one.  This code will then look in register 0 to find the
 	system call number; it then looks up a table and finds the
 	right function to jump to to handle that system call.  This
-	function receives it's arguments in registers 3 - 7.</para>
+	function receives its arguments in registers 3 - 7.</para>
 
 	<para>So, what happens once the system call handler runs and
 	completes?  Control returns to the next instruction after the
@@ -707,7 +707,7 @@
 	memory"; remember how we talked about pipelines in the
 	superscalar architecture?  This instruction ensures that
 	everything we think has been written to memory actually has
-	been, and isn't making it's way through a pipeline
+	been, and isn't making its way through a pipeline
 	somewhere.</para>
 
 	<para>Well, we're almost done!  The only thing left is to
@@ -852,7 +852,7 @@
       system, which we examine in the chapter after next.  The
       essential point is that the hardware is responsible for
       enforcing these rules.</para>
-      
+
       <para>The system call interface we have examined is the
 	gateway to the application getting to system resources.  By
 	forcing the application to request resources through a system
@@ -862,7 +862,7 @@
 	system call to open a file on disk, it will check the
 	permissions of the user against the file permissions and
 	allow or deny access.</para>
-  
+
 
       <sect3>
 	<title>Privilege Levels</title>
@@ -951,7 +951,7 @@
 	As the kernel runs in the innermost ring, it has permissions
 	to do any operation it wants; when it is finished it will
 	return control back to the application which will again be
-	running with it's lower privilege level.</para>
+	running with its lower privilege level.</para>
 
 	</sect4>
 

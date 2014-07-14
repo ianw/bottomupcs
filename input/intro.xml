@@ -1,7 +1,7 @@
 <preface id="intro">
-  
+
   <title>Introduction</title>
-  
+
   <sect1 id="welcome">
     <title>Welcome</title>
     <para>Welcome to &csbu;</para>
@@ -24,7 +24,7 @@
       </para>
 
       <para>To keep with the car analogy, the prospective student is
-      starting out trying to work on a Forumla One engine without ever
+      starting out trying to work on a Formula One engine without ever
       knowing how a two stroke motor operates.  During their shop
       class the student should pull apart, twist, turn and put back
       together that two stroke motor, and consequentially have a pretty
@@ -53,7 +53,7 @@
     </sect2>
 
     <sect2>
-      <title>Enabling technologies</title> 
+      <title>Enabling technologies</title>
 
       <para>This book is only possible thanks to the development of
       <glossterm linkend="opensource">Open Source</glossterm>

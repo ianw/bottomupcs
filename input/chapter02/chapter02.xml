@@ -422,7 +422,7 @@
 	around EPIC is Very Long Instruction World (VLIW), which is
 	where each instruction to the processor is extended to tell
 	the processor about where it should execute the instruction in
-	it's internal units.  The problem with this approach is that
+	its internal units.  The problem with this approach is that
 	code is then completely dependent on the model of processor is
 	has been compiled for.  Companies are always making revisions
 	to hardware, and making customers recompile their application
@@ -450,7 +450,7 @@
 	from cache memory, located directly on the processor chip.
 	Cache memory must be loaded in from the main system memory
 	(the Random Access Memory, or RAM).  RAM however, only retains
-	it's contents when the power is on, so needs to be stored on
+	its contents when the power is on, so needs to be stored on
 	more permanent storage.</para>
 
       <para>We call these layers of memory the <emphasis>memory
@@ -480,8 +480,8 @@
 	    </row>
 
 	    <row>
-	      <entry></entry> 
-	      <entry>RAM</entry> 
+	      <entry></entry>
+	      <entry>RAM</entry>
 	      <entry>All instructions and storage addresses for the
 		processor must come from RAM.  Although RAM is very
 		fast, there is still some significant time taken for
@@ -509,7 +509,7 @@
 	</table>
 
 	<para>The important point to know about the memory hierarchy
-	is the trade offs between speed an size -- the faster the
+	is the trade offs between speed and size -- the faster the
 	memory the smaller it is.  Of course, if you can find a way to
 	change this equation, you'll end up a billionaire!</para>
 
@@ -546,7 +546,7 @@
 	memory.  Cache is much smaller than main memories because it
 	is included inside the processor chip alongside the registers
 	and processor logic.  This is prime real estate in computing
-	terms, and there are both economic and physical limits to it's
+	terms, and there are both economic and physical limits to its
 	maximum size.  As manufacturers find more and more ways to
 	cram more and more transistors onto a chip cache sizes grow
 	considerably, but even the largest caches are tens of
@@ -797,10 +797,10 @@ multiplex the output of the many sets, which can also add latency.
       connect to your computer.  Obviously, the processor must have
       some way of talking to the peripherals to make them
       useful.</para>
-    
+
     <para>The communication channel between the processor and the
       peripherals is called a <emphasis>bus</emphasis>.</para>
-    
+
     <sect2>
       <title>Peripheral Bus concepts</title>
 
@@ -1009,7 +1009,7 @@ multiplex the output of the many sets, which can also add latency.
 	data directly between an peripheral and system RAM.</para>
 
       <para>The driver can setup a device to do a DMA transfer by
-	giving it the area of RAM to put it's data into.  It can then
+	giving it the area of RAM to put its data into.  It can then
 	start the DMA transfer and allow the CPU to continue with
 	other tasks.</para>
 
@@ -1065,7 +1065,7 @@ multiplex the output of the many sets, which can also add latency.
 
 	<para>There can be many interfaces (made of multiple
 	end-points) and interfaces are grouped into
-	<emphasis>configurations</emphasis>.  However Most devices
+	<emphasis>configurations</emphasis>.  However most devices
 	only have a single configuration.</para>
 
       <figure id="uhci">
@@ -1163,7 +1163,7 @@ multiplex the output of the many sets, which can also add latency.
       component that requires strict synchronisation.</para>
 
       <para>This is the CPU cache; remember the cache is a small area
-      of quickly access able memory that mirrors values stored in main
+      of quickly accessible memory that mirrors values stored in main
       system memory.  If one CPU modifies data in main memory and
       another CPU has an old copy of that memory in its cache the
       system will obviously not be in a consistent state.  Note that
@@ -1624,7 +1624,7 @@ multiplex the output of the many sets, which can also add latency.
       <para><emphasis>Acquire</emphasis> semantics is like a fence
       that only allows load and stores to move downwards through it.
       That is, when this load or store is complete you can be
-      gaurnteed that any later load or stores will see the value
+      guaranteed that any later load or stores will see the value
       (since they can not be moved above it).</para>
 
       <para><emphasis>Release</emphasis> semantics is the opposite,

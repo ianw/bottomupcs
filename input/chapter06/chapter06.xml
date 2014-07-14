@@ -1,5 +1,5 @@
 <chapter id="chapter06">
-  
+
   <title>The Toolchain</title>
 
   <sect1 id="compiled_v_interpreted">
@@ -11,7 +11,7 @@
       <para>So far we have discussed how a program is loaded into
     virtual memory, started as a process kept track of by the
     operating system and interacts with via system calls.</para>
-      
+
       <para>A program that can be loaded directly into memory needs to
     be in a straight <emphasis>binary</emphasis> format.  The process
     of converting source code, written in a language such as C, to a
@@ -37,7 +37,7 @@
       <para>We call this type of compiled program a
       <emphasis>interpreter</emphasis> because it interprets each line
       of the input file and executes it as code.  This way the program
-      does does not need to be compiled, and any changes will be seen
+      does not need to be compiled, and any changes will be seen
       the next time the interpreter runs the code.</para>
 
       <para>For their convenience, interpreted programs usually run
@@ -55,10 +55,10 @@
 
       <sect3>
 	<title>Virtual Machines</title>
-	
+
 	<para>A compiled program is completely dependent on the
 	hardware of the machine it is compiled for, since it must be
-	able to simply be copied to memory an executed.  A virtual
+	able to simply be copied to memory and executed.  A virtual
 	machine is an abstraction of hardware into software.</para>
 
 	<para>For example, Java is a hybrid language that is partly
@@ -144,7 +144,7 @@
 
     <sect2>
       <title>Syntax</title>
-      
+
       <para>Any computing language has a particular
       <emphasis>syntax</emphasis> that describes the rules of the
       language.  Both you and the compiler know the syntax rules, and
@@ -167,14 +167,14 @@
       <title>Assembly Generation</title>
 
       <para>The job of the compiler is to translate the higher level
-      language into assembely code suitable for the target being
+      language into assembly code suitable for the target being
       compiled for.  Obviously each different architecture has a
       different instruction set, different numbers of registers and
       different rules for correct operation.</para>
 
       <sect3>
 	<title>Alignment</title>
-	
+
 	<figure>
 	  <title>Alignment</title>
 	  <mediaobject>
@@ -190,16 +190,16 @@
 	      <imagedata fileref="chapter06/figures/alignment.png" format="PNG" />
 	    </imageobject>
 	    <textobject>
-	      
+
 	      <phrase>CPU's can generally only load values into
 		registers from memory on specific alignments.
 		Unaligned loads lead to, at best, performance
 		degredation.</phrase>
-	      
+
 	    </textobject>
 	  </mediaobject>
 	</figure>
-	
+
 	<para>Alignment of variables in memory is an important
 	consideration for the compiler. Systems programmers need to be
 	aware of alignment constratins to help the compiler create the
@@ -301,7 +301,7 @@
 
 	  <para>Obviously if this situation repeats the performance
 	  will be significantly reduced.  The situation would be
-	  releaved if the confilicting data were organised in slightly
+	  releaved if the conflicting data was organised in slightly
 	  different ways to avoid the cache line conflict.</para>
 
 	  <para>One possible way to detect this sort of situation is
@@ -420,7 +420,7 @@
     </sect2>
 
     <sect2>
-      <title>Optimisation</title> 
+      <title>Optimisation</title>
 
       <para>Once the compiler has an internal representation of the
       code, the <emphasis>really</emphasis> interesting part of the
@@ -548,7 +548,7 @@
     correctly.  For example, the
     <computeroutput>printf</computeroutput> call is kept in a library
     which must be combined with your executable to work.  So although
-    you do not explicilty have to worry about linking in this case,
+    you do not explicitly have to worry about linking in this case,
     there is most certainly still a linking process happening to
     create your executable.</para>
 
@@ -602,20 +602,20 @@
       <emphasis>definition</emphasis> (i.e. memory location) of the
       shared variable (otherwise it wouldn't be shared!), but both
       files need to reference it.</para>
-	
+
 	<para>To enable this, we declare the variable in one file, and
       then in the other file declare a variable of the same name but
       with the prefix <computeroutput>extern</computeroutput>.
       <computeroutput>extern</computeroutput> stands for
       <emphasis>external</emphasis> and to a human means that this
       variable is declared somewhere else.</para>
-	
+
 	<para>What <computeroutput>extern</computeroutput> says to a
       compiler is that it should not allocate any space in memory for
       this variable, and leave this symbol in the object code where it
       will be fixed up later.  The compiler can not possibly know
       where the symbol is actually defined but the
-      <emphasis>linker</emphasis>does, since it is it's job to look at
+      <emphasis>linker</emphasis>does, since it is its job to look at
       all object files together and combine them into a single
       executable.  So the linker will see the symbol left over in the
       second file, and say "I've seen that symbol before in file 1,
@@ -623,7 +623,7 @@
       <computeroutput>0x12345</computeroutput>".  Thus it can modify
       the symbol value to be the memory value of the variable in the
       first file.</para>
-	
+
 	<para><computeroutput>static</computeroutput> is almost the
       opposite of <computeroutput>extern</computeroutput>.  It places
       restrictions on the visiblity of the symbol it modifies.  If you
@@ -679,8 +679,8 @@
     want, because the exact commands and options to get a real life
     working executable on a real system can be quite complicated and
     architecture specific.</para>
-    
-    <para>We will show the compliation process with the two following
+
+    <para>We will show the compilation process with the two following
     examples.  Both are C source files, one defined the
     <computeroutput>main()</computeroutput> function for the inital
     program entry point, and another declares a helper type function.
@@ -692,7 +692,7 @@
               <xi:include href="chapter06/code/hello.c" parse="text"
               xmlns:xi="http://www.w3.org/2001/XInclude" />
             </programlisting>
-    </example>    
+    </example>
 
     <example>
       <title>Function Example</title>
@@ -862,7 +862,7 @@
 	<para>The path heirarchy is quite complicated, but in
 	  essence we can see that the final step is to link in some
 	  extra object files, namely </para>
-	
+
 	  <itemizedlist>
 	    <listitem>
 	      <para><computeroutput>crt1.o</computeroutput> : provided
