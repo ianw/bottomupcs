@@ -315,7 +315,7 @@
 	moved two int's into the array (<computeroutput>*j = i +
 	2</computeroutput>).  So at runtime, to fix this relocation
 	you need to find the address of symbol
-	<computeroutput>i</computeroutput> and put it's value, plus 8
+	<computeroutput>i</computeroutput> and put its value, plus 8
 	into <computeroutput>0x104f8</computeroutput>.</para>
 
       </sect3>
@@ -905,7 +905,7 @@
 	specify this version when they build the library.</para>
 
 	<para>Thus each minor version library file on disc can specify
-	 the same major version number in it's
+	 the same major version number in its
 	 <computeroutput>DT_SONAME</computeroutput> field, allowing
 	 the dynamic linker to know that this particular library file
 	 implements a particular major revision of the library API and

@@ -940,7 +940,7 @@
       <emphasis>three level page table</emphasis>.  The three level
       page table has proven to be robust choice, although it is not
       without it's criticism.  The details of the virtual memory
-      implementation of each processor vary widley meaning that the
+      implementation of each processor vary wildly meaning that the
       generic page table Linux chooses must be portable and relatively
       generic.</para>
 
@@ -1312,7 +1312,7 @@
             initial nested fault is amortised over subsequent HPW
             hits.</para>
 
-          <para>Themajor drawback is that the VLPT now requires TLB
+          <para>The major drawback is that the VLPT now requires TLB
             entries which causes an increase on TLB pressure.  Since
             each address space requires its own page table the
             overheads become greater as the system becomes more

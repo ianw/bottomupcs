@@ -36,7 +36,7 @@
     disk.</para>
 
     <para>Thus the concept of a file is a good
-    <emphasis>abstraction</emphasis> of either a a sink for, or source
+    <emphasis>abstraction</emphasis> of either a sink for, or source
     of, data.  As such it is an excellent abstraction of all the
     devices one might attach to the computer.  This realisation is the
     great power of UNIX and is evident across the design of the entire
@@ -46,7 +46,7 @@
 
     <para>It is probably not too much of a strech to say abstraction
     is <emphasis>the</emphasis> primary concept that underpins all
-    modern computing.  No one person can understand everythinig from
+    modern computing.  No one person can understand everything from
     designing a modern user-interface to the internal workings of a
     modern CPU, much less build it all themselves.  To programmers,
     abstractions are the <emphasis>lingua franca</emphasis> that
@@ -153,7 +153,7 @@
     <computeroutput>_say_hello_function()</computeroutput>).  This has
     several uses; generally it relates to having simpler and smaller
     parts of the API (marshalling or checking arguments, for example)
-    separate to more complex implemenation, which often eases the path
+    separate from more complex implemenation, which often eases the path
     to significant changes in the internal workings whilst ensuring
     the API remains constant.  Our implementation is very simple
     however, and doesn't even need it's own support functions.  In

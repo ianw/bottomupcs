@@ -6,7 +6,7 @@
     <title>What is a process?</title>
 
     <para>We are all familiar with the modern operating system running
-    many tasks all at once or <emphasis>multitasking</emphasis>.  
+    many tasks all at once or <emphasis>multitasking</emphasis>.
     </para>
 
     <para>We can think of each process as a bundle of elements kept by
@@ -48,9 +48,9 @@
 
     <sect2>
       <title>Memory</title> <para>We will learn exactly how a process
-      gets it's memory in the following weeks -- it is one of the most
+      gets its memory in the following weeks -- it is one of the most
       fundamental parts of how the operating system works.  However,
-      for now it is sufficient to know that each process gets it's own
+      for now it is sufficient to know that each process gets its own
       section of memory.</para>
 
       <para>In this memory all the program code is stored, along with
@@ -165,7 +165,7 @@
 
 	  <listitem>
   	    <para>This facilitates <emphasis>recursive</emphasis>
-	    calls.  This means a function is free to call its self
+	    calls.  This means a function is free to call itself
 	    again, because a new stack frame will be created for all
 	    its local variables.</para>
 	  </listitem>
@@ -260,8 +260,8 @@
               <xi:include href="chapter04/code/sp.txt" parse="text"
               xmlns:xi="http://www.w3.org/2001/XInclude" />
             </programlisting>
-	</example>    
-	
+	</example>
+
 	<para>Above we show a simple function allocating three
 	variables on the stack.  The disassembly illustrates the use
 	of the stack pointer on the x86 architecture<footnote>
@@ -352,7 +352,7 @@
 
 	<para>An example of how the process is laid out in memory by
 	the kernel is given above.  Starting from the top, the kernel
-	reserves its self some memory at the top of the process (we
+	reserves itself some memory at the top of the process (we
 	see with virtual memory how this memory is actually shared
 	between all processes).</para>
 
@@ -369,7 +369,7 @@
     </sect2>
 
     <sect2>
-      <title>File Descriptors</title> 
+      <title>File Descriptors</title>
       <para>In the first week we learnt about
       <computeroutput>stdin</computeroutput>,
       <computeroutput>stdout</computeroutput> and
@@ -399,7 +399,7 @@
       <para>So the other side of the equation is keeping track of the
       registers.  When it comes time for the currently running process
       to give up the processor so another process can run, it needs to
-      save it's current state.  Equally, we need to be able to restore
+      save its current state.  Equally, we need to be able to restore
       this state when the process is given more time to run on the
       CPU.  To do this the operating system needs to store a copy of
       the CPU registers to memory.  When it is time for the process to
@@ -425,7 +425,7 @@
 
 	<para>However, if the process has requested to read a file from
       disk we know from our memory hierarchy that this may take a
-      significant amount of time.  The process should give up it's
+      significant amount of time.  The process should give up its
       current execution to allow another process to run, but the
       kernel need not let the process run again until the data from
       the disk is available in memory.  Thus it can mark the process
@@ -435,7 +435,7 @@
       </sect3>
 
       <sect3>
-	<title>Priority</title> 
+	<title>Priority</title>
 	<para>Some processes are more important than others, and get a higher
 	priority.  See the discussion on the scheduler below.</para>
       </sect3>
@@ -454,11 +454,11 @@
 
   <sect1 id="process_hierarchy">
     <title>Process Hierarchy</title>
- 
+
     <para>Whilst the operating system can run many processes at the
     same time, in fact it only ever directly starts one process called
     the <emphasis>init</emphasis> (short for initial) process.  This
-    isn't a particularly special process except that it's PID is
+    isn't a particularly special process except that its PID is
     always 0 and it will <emphasis>always</emphasis> be
     running.</para>
 
@@ -481,7 +481,7 @@
               <xi:include href="chapter04/code/pstree.txt" parse="text"
               xmlns:xi="http://www.w3.org/2001/XInclude" />
             </programlisting>
-    </example>    
+    </example>
 
   </sect1>
 
@@ -587,7 +587,7 @@
 	      <textobject>
 		<phrase>The memory (including program code and
 		variables) of the process are shared by the threads,
-		but each has it's own kernel state, so they can be
+		but each has its own kernel state, so they can be
 		running different parts of the code at the same
 		time.</phrase>
 	      </textobject>
@@ -677,7 +677,7 @@
 	  only going to be reading the memory, then actually
 	  copying the data is unnecessary.</para>
 
-	  <para>However, when a process writes to it's memory, it
+	  <para>However, when a process writes to its memory, it
 	  needs to be a private copy that is not shared.  As the name
 	  suggests, copy on write optimises this by only doing the
 	  actual copy of the memory at the point when it is written
@@ -723,12 +723,12 @@
       return code with the <computeroutput>wait</computeroutput> call.
       However, if the parent exits before collecting this return code,
       the zombie process is still around, waiting aimlessly to give
-      it's status to someone.</para>
+      its status to someone.</para>
 
       <para>In this case, the zombie child will be
       <emphasis>reparented</emphasis> to the init process which has a
       special handler that <emphasis>reaps</emphasis> the return
-      value.  Thus the process is finally free and can the descriptor
+      value.  Thus the process is finally free and the descriptor
       can be removed from the kernels process table.</para>
 
       <sect3>
@@ -740,7 +740,7 @@
               <xi:include href="chapter04/code/zombie.txt" parse="text"
               xmlns:xi="http://www.w3.org/2001/XInclude" />
             </programlisting>
-	</example>    
+	</example>
 
 	<para>Above we create a zombie process.  The parent process
 	will sleep forever, whilst the child will exit after a few
@@ -755,7 +755,7 @@
 	<computeroutput>defunct</computeroutput> in the process
 	description.<footnote> <para>The square brackets around the
 	"z" of "zombie" are a little trick to remove the grep
-	processes its self from the ps output.
+	processes itself from the ps output.
 	<application>grep</application> interprets everything between
 	the square brackets as a character class, but because the
 	process name will be "grep [z]ombie" (with the brackets) this
@@ -813,7 +813,7 @@
 
 	<listitem>
 	  <para><emphasis>Preemptive</emphasis> scheduling is where the
-	  process is interrupted to stop it an allow another process
+	  process is interrupted to stop it to allow another process
 	  to run.  Each process gets a <emphasis>timeslice</emphasis>
 	  to run in; at the point of each context switch a timer will
 	  be reset and will deliver and interrupt when the timeslice
@@ -874,7 +874,7 @@
       behaviour.</para>
 
       <para>The current scheduler is known as the O(1) scheduler,
-which refers to the property that no many how many processes the
+which refers to the property that no matter how many processes the
 scheduler has to choose from, it will choose the next one to run in a
 constant amount of time<footnote><para><emphasis>Big-O</emphasis>
 notation is a way of describing how long an algorithm takes to run
@@ -953,7 +953,7 @@ get around to interacting with it wants a fast response).</para></sect2>
     otherwise controlling processes running in the system.</para>
 
     <para>When you type a command at the prompt of the shell, it will
-    <computeroutput>fork</computeroutput> a copy of it's self and
+    <computeroutput>fork</computeroutput> a copy of itself and
     <computeroutput>exec</computeroutput> the command that you have
     specified.</para>
 
@@ -992,7 +992,7 @@ get around to interacting with it wants a fast response).</para></sect2>
     the kernel to deal with that signal.  A handler is simply a
     designed function in the code that has been written to
     specifically deal with interrupt.  Often the signal will be sent
-    from inside the kernel its self, however it is also common for one
+    from inside the kernel itself, however it is also common for one
     process to send a signal to another process (one form of
     <emphasis>interprocess communication</emphasis>).  The signal
     handler gets called <emphasis>asynchronously</emphasis>; that is
