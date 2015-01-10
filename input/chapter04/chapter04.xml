@@ -1121,7 +1121,7 @@ get around to interacting with it wants a fast response).</para></sect2>
 
       <para>In desperation to get rid of the program, we finally try
       <computeroutput>ctrl-\</computeroutput> which sends a
-      <computeroutput>SIGABRT</computeroutput> (abort) to the process.
+      <computeroutput>SIGQUIT</computeroutput> (abort) to the process.
       But if the process has aborted, where did the
       <computeroutput>Quit</computeroutput> output come from?</para>
 
