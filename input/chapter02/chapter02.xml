@@ -513,7 +513,7 @@
 	memory the smaller it is.  Of course, if you can find a way to
 	change this equation, you'll end up a billionaire!</para>
 
-        <para>The reason caches are effective is becuase computer code
+        <para>The reason caches are effective is because computer code
         generally exhibits two forms of locality<indexterm id="locality">
 	  <primary>locality</primary>
 	</indexterm>
