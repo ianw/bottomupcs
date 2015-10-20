@@ -405,7 +405,7 @@
 	<para>The theory behind EPIC is that there is more information
 	available at higher levels which can make these decisions
 	better than the processor.  Analysing a stream of assembly
-	language instructions, as current processors do, looses a lot
+	language instructions, as current processors do, loses a lot
 	of information that the programmer may have provided in the
 	original source code.  Think of it as the difference between
 	studying a Shakespeare play and reading the Cliff's Notes
