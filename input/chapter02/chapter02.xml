@@ -1681,7 +1681,7 @@ multiplex the output of the many sets, which can also add latency.
 	<title>Locking</title>
 
 	<para>Knowing the memory ordering requirements of each
-	architecture is no practical for all programmers, and would
+	architecture is not practical for all programmers, and would
 	make programs difficult to port and debug across different
 	processor types.</para>
 
