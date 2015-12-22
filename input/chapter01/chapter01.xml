@@ -3,7 +3,7 @@
   <title>Binary and Number Representation</title>
 
   <sect1 id="binary">
-    <title>Binary -- the basis of computing</title>
+    <title>Binary — the basis of computing</title>
 
     <sect2>
       <title>Binary Theory</title>
@@ -11,14 +11,16 @@
       <sect3>
 	<title>Introduction</title>
 
-	<para>Binary is a number system which builds numbers from
-	elements called <emphasis>bits</emphasis>.  Each bit can be
-	represented by any two mutually exclusive states.  Generally,
-	when we write it down or code bits, we represent them with
+	<para>Binary is a base-2 number system that uses two mutually
+	exclusive states to represent information.  A binary number is
+	made up of elements called <emphasis>bits</emphasis> where
+	each bit can be in one of the two possible states.  Generally,
+	we represent them with the numerals
 	<computeroutput>1</computeroutput> and
 	<computeroutput>0</computeroutput>.  We also talk about them
-	being true and false, and the computer internally represents
-	bits with high and low voltages.</para>
+	being true and false.  Electrically, the two states might be
+	represented by high and low voltages or some form of switch
+	turned on or off.</para>
 
 	<para>We build binary numbers the same way we build numbers in
 	our traditional base 10 system.  However, instead of a one's
@@ -122,108 +124,75 @@
 	+ 2<superscript>0</superscript> = 128 + 64
 	+ 8 + 2 + 1 = 203.</para>
 
-	<sect4>
-	  <title>Conversion</title>
+      </sect3>
 
-	  <para>The easiest way to convert between bases is to use a
-	  computer, after all, that's what they're good at!  However,
-	  it is often useful to know how to do conversions by
-	  hand.</para>
+      <sect3>
+        <title>The basis of computing</title>
 
-	  <para>The easiest method to convert between bases is
-	  <emphasis>repeated division</emphasis>.  To convert,
-	  repeatedly divide the quotient by the base, until the
-	  quotient is zero, making note of the remainders at each
-	  step.  Then, write the remainders in reverse, starting at
-	  the bottom and appending to the right each time.  An example
-	  should illustrate; since we are converting to binary we use
-	  a base of 2.</para>
+        <para>You may be wondering how a simple number is the basis of
+        all the amazing things a computer can do.  Believe it or not,
+        it is!  The processor in your computer has a complex but
+        ultimately limited set of <emphasis>instructions</emphasis> it
+        can perform on values such as addition, multiplication, etc.
+        Essentially, each of these instructions is assigned a number
+        so that an entire program (add this to that, multiply by that,
+        divide by this and so on) can be represented by a just a
+        stream of numbers.  For example, if the processor knows
+        operation <computeroutput>2</computeroutput> is addition, then
+        <computeroutput>252</computeroutput> could mean "add 5 and 2
+        and store the output somewhere".  The reality is of course
+        much more complicated (see <xref linkend="chapter02" />) but,
+        in a nutshell, this is what a computer is.
+        </para>
 
-	  <table>
-	    <title>Convert 203 to binary</title>
-	    <tgroup cols="4">
-	  <thead>
-	    <row>
-	      <entry>Quotient</entry>
-	      <entry></entry>
-	      <entry>Remainder</entry>
-	      <entry></entry>
-	    </row>
-	  </thead>
-	      <tbody>
-		<row>
-		  <entry>203<subscript>10</subscript> ÷ 2 =</entry>
-		  <entry>101</entry>
-		  <entry>1</entry>
-		  <entry></entry>
-		</row>
-		<row>
-		  <entry>101<subscript>10</subscript> ÷ 2 =</entry>
-		  <entry>50</entry>
-		  <entry>1</entry>
-		  <entry>↑</entry>
-		</row>
-		<row>
-		  <entry>50<subscript>10</subscript> ÷ 2 =</entry>
-		  <entry>25</entry>
-		  <entry>0</entry>
-		  <entry>↑</entry>
-		</row>
-		<row>
-		  <entry>25<subscript>10</subscript> ÷ 2 =</entry>
-		  <entry>12</entry>
-		  <entry>1</entry>
-		  <entry>↑</entry>
-		</row>
-		<row>
-		  <entry>12<subscript>10</subscript> ÷ 2 =</entry>
-		  <entry>6</entry>
-		  <entry>0</entry>
-		  <entry>↑</entry>
-		</row>
-		<row>
-		  <entry>6<subscript>10</subscript> ÷ 2 =</entry>
-		  <entry>3</entry>
-		  <entry>0</entry>
-		  <entry>↑</entry>
-		</row>
-		<row>
-		  <entry>3<subscript>10</subscript> ÷ 2 =</entry>
-		  <entry>1</entry>
-		  <entry>1</entry>
-		  <entry>↑</entry>
-		</row>
-		<row>
-		  <entry>1<subscript>10</subscript> ÷ 2 =</entry>
-		  <entry>0</entry>
-		  <entry>1</entry>
-		  <entry>↑</entry>
-		</row>
-	      </tbody>
-	    </tgroup>
-	  </table>
+          <para>In the days of punch-cards, one could see with their
+          eye the one's and zero's that make up the program stream by
+          looking at the holes present on the card.  Of course this
+          moved to being stored via the polarity of small magnetic
+          particles rather quickly (tapes, disks) and onto the point
+          today that we can carry unimaginable amounts of data in our
+          pocket.</para>
 
-	  <para>Reading from the bottom and appending to the right
-	  each time gives <computeroutput>11001011</computeroutput>,
-	  which we saw from the previous example was 203.</para>
+        <para>Translating these numbers to something useful to humans
+        is what makes a computer so useful.  For example, screens are
+        made up of millions of discrete <emphasis>pixels</emphasis>,
+        each too small for the human eye to distinguish but combining
+        to make a complete image.  Generally each pixel has a certain
+        red, green and blue component that makes up it's display
+        color.  Of course, these values can be represented by numbers,
+        which of course can be represented by binary!  Thus any image
+        can be broken up into millions of individual dots, each dot
+        represented by a <emphasis>tuple</emphasis> of three values
+        representing the red, green and blue values for the pixel.
+        Thus given a long string of such numbers, formatted correctly,
+        the video hardware in your computer can convert those numbers
+        to electrical signals to turn on and off individual pixels and
+        hence display an image.
+        </para>
 
-	</sect4>
+          <para>As you read on, we will build up the entire modern
+            computing environment from this basic building block;
+            <emphasis>from the bottom-up</emphasis> if you
+            will!</para>
 
       </sect3>
 
       <sect3>
 	<title>Bits and Bytes</title>
 
-	<para>To represent all the letters of the alphabet we would
-	need at least enough different combinations to represent all
-	the lower case letters, the upper case letters, numbers and
-	punctuation, plus a few extras.  Adding this up means we need
-	probably around 80 different combinations.</para>
+	<para>As discussed above, we can essentially choose to
+	represent anything by a number, which can be converted to
+	binary and operated on by the computer.  For example, to
+	represent all the letters of the alphabet we would need at
+	least enough different combinations to represent all the lower
+	case letters, the upper case letters, numbers and punctuation,
+	plus a few extras.  Adding this up means we need probably
+	around 80 different combinations.</para>
 
 	<para>If we have two bits, we can represent four possible
 	unique combinations (<computeroutput>00 01 10
 	11</computeroutput>).  If we have three bits, we can represent
-	8 different combinations.  As we saw above, with
+	8 different combinations.  In general, with
 	<computeroutput>n</computeroutput> bits we can represent
 	<computeroutput>2<superscript>n</superscript></computeroutput>
 	unique combinations.</para>
@@ -232,7 +201,7 @@
 	<computeroutput>2<superscript>8</superscript> =
 	256</computeroutput> unique representations, more than enough
 	for our alphabet combinations.  We call a group of 8 bits a
-	<emphasis>byte</emphasis>.  Guess how bit a C
+	<emphasis>byte</emphasis>.  Guess how big a C
 	<computeroutput>char</computeroutput> variable is?  One
 	byte.</para>
 
@@ -242,10 +211,15 @@
 	  <para>Given that a byte can represent any of the values 0
 	  through 256, anyone could arbitrarily make up a mapping
 	  between characters and numbers.  For example, a video card
-	  manufacturer could decide that the value 10 represents
-	  <computeroutput>A</computeroutput>, so when value 10 is sent
-	  to the video card it displays a capital 'A' on the
-	  screen.</para>
+	  manufacturer could decide that
+	  <computeroutput>1</computeroutput> represents
+	  <computeroutput>A</computeroutput>, so when value
+	  <computeroutput>1</computeroutput> is sent to the video card
+	  it displays a capital 'A' on the screen.  A printer
+	  manufacturer might decide for some obscure reason that
+	  <computeroutput>1</computeroutput> represented a lower-case
+	  'z', meaning that complex conversions would be required to
+	  display and print the same thing.</para>
 
 	  <para>To avoid this happening, the <emphasis>American
 	  Standard Code for Information Interchange</emphasis> or
@@ -429,6 +403,94 @@
 	  but you may seem them in some literature.</para>
 
 	</sect4>
+
+        <sect4>
+	  <title>Conversion</title>
+
+	  <para>The easiest way to convert between bases is to use a
+	  computer, after all, that's what they're good at!  However,
+	  it is often useful to know how to do conversions by
+	  hand.</para>
+
+	  <para>The easiest method to convert between bases is
+	  <emphasis>repeated division</emphasis>.  To convert,
+	  repeatedly divide the quotient by the base, until the
+	  quotient is zero, making note of the remainders at each
+	  step.  Then, write the remainders in reverse, starting at
+	  the bottom and appending to the right each time.  An example
+	  should illustrate; since we are converting to binary we use
+	  a base of 2.</para>
+
+	  <table>
+	    <title>Convert 203 to binary</title>
+	    <tgroup cols="4">
+	  <thead>
+	    <row>
+	      <entry>Quotient</entry>
+	      <entry></entry>
+	      <entry>Remainder</entry>
+	      <entry></entry>
+	    </row>
+	  </thead>
+	      <tbody>
+		<row>
+		  <entry>203<subscript>10</subscript> ÷ 2 =</entry>
+		  <entry>101</entry>
+		  <entry>1</entry>
+		  <entry></entry>
+		</row>
+		<row>
+		  <entry>101<subscript>10</subscript> ÷ 2 =</entry>
+		  <entry>50</entry>
+		  <entry>1</entry>
+		  <entry>↑</entry>
+		</row>
+		<row>
+		  <entry>50<subscript>10</subscript> ÷ 2 =</entry>
+		  <entry>25</entry>
+		  <entry>0</entry>
+		  <entry>↑</entry>
+		</row>
+		<row>
+		  <entry>25<subscript>10</subscript> ÷ 2 =</entry>
+		  <entry>12</entry>
+		  <entry>1</entry>
+		  <entry>↑</entry>
+		</row>
+		<row>
+		  <entry>12<subscript>10</subscript> ÷ 2 =</entry>
+		  <entry>6</entry>
+		  <entry>0</entry>
+		  <entry>↑</entry>
+		</row>
+		<row>
+		  <entry>6<subscript>10</subscript> ÷ 2 =</entry>
+		  <entry>3</entry>
+		  <entry>0</entry>
+		  <entry>↑</entry>
+		</row>
+		<row>
+		  <entry>3<subscript>10</subscript> ÷ 2 =</entry>
+		  <entry>1</entry>
+		  <entry>1</entry>
+		  <entry>↑</entry>
+		</row>
+		<row>
+		  <entry>1<subscript>10</subscript> ÷ 2 =</entry>
+		  <entry>0</entry>
+		  <entry>1</entry>
+		  <entry>↑</entry>
+		</row>
+	      </tbody>
+	    </tgroup>
+	  </table>
+
+	  <para>Reading from the bottom and appending to the right
+	  each time gives <computeroutput>11001011</computeroutput>,
+	  which we saw from the previous example was 203.</para>
+
+	</sect4>
+
 
       </sect3>
 
