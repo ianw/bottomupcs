@@ -1,7 +1,6 @@
-<!-- Converted by db4-upgrade version 1.0 -->
-
+<?xml version="1.0"?>
 <book xmlns="http://docbook.org/ns/docbook" version="5.0">
-  
+  <title>README: Web-based Help from DocBook XML</title>
   <info>
     <legalnotice>
       <para>Permission is hereby granted, free of charge, to any person obtaining a copy of this
@@ -26,8 +25,8 @@
               Software will exist.</para>
           </listitem>
         </itemizedlist></para>
-      <formalpara><info><title>Warranty:</title></info>
-        
+      <formalpara>
+        <title>Warranty:</title>
         <para>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
           INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
           PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL DAVID CRAMER, KASUN GAJASINGHE, OR ANY
@@ -100,7 +99,7 @@
     <pubdate>January 2012</pubdate>
   </info>
   <chapter>
-    <info><title>Introduction</title>
+    <title>Introduction</title><info>
       <abstract>
         <!-- This becomes the brief description that appears in search results UNLESS there's a para or phrase with role="summary". If there is, then the role="summary" text wins. -->
         <para>Overview of the package.</para>
@@ -114,8 +113,8 @@
       then it is impossible to use services like Google to add search. <indexterm class="singular">
         <primary>features</primary>
       </indexterm>
-      <itemizedlist><info><title>Features</title></info>
-        
+      <itemizedlist>
+        <title>Features</title>
         <listitem>
           <para>Sophisticated CSS-based page layout</para>
         </listitem>
@@ -184,8 +183,8 @@
         </listitem>
       </itemizedlist></para>
   </chapter>
-  <chapter><info><title>Using the package</title></info>
-    
+  <chapter>
+    <title>Using the package</title>
     <para role="summary">The following sections describe how to
       install and use the package on Windows with the sample Ant build
       script. In an environment where unix shell command are
@@ -196,15 +195,15 @@
         <command>xsltproc</command> and <command>java</command>
       available in your <envar>PATH</envar>.</para>
     <section>
-      <info><title>Generating webhelp output using the Ant build.xml
-        file</title>
+      <title>Generating webhelp output using the Ant build.xml
+        file</title><info>
         <abstract>
           <para>Installation instructions</para>
         </abstract>
       </info>
       
-      <procedure><info><title>To install the package</title></info>
-        
+      <procedure>
+        <title>To install the package</title>
         <note>
           <para>The examples in this procedure assume a Windows
             installation, but the process is the same in other
@@ -386,8 +385,8 @@ suppress.footer.navigation=0</programlisting></para>
         </step>
       </procedure>
     </section>
-    <section><info><title>Using and customizing the output</title></info>
-      
+    <section>
+      <title>Using and customizing the output</title>
       <para>To deep link to a topic inside the help set, simply link directly to the page. This help
         system uses no frameset, so nothing further is necessary. <tip>
           <para>See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.sagehill.net/docbookxsl/Chunking.html">Chunking into
@@ -428,8 +427,8 @@ suppress.footer.navigation=0</programlisting></para>
               the toc Tree. Generally, you don't have to edit this file.</para>
           </listitem>
         </itemizedlist></para>
-      <section><info><title>Recommended Apache configurations</title></info>
-        
+      <section>
+        <title>Recommended Apache configurations</title>
         <para>If you are serving a long document from an Apache web
           server, we recommend you make the following additions or
           changes to your <filename>httpd.conf</filename> or
@@ -488,8 +487,8 @@ suppress.footer.navigation=0</programlisting></para>
           </calloutlist></para>
       </section>
     </section>
-    <section><info><title>Search indexing</title></info>
-      
+    <section>
+      <title>Search indexing</title>
       <para>Run <command>ant index</command> in the webhelp directory to index the content. Running
           <command>ant webhelp</command> will do the indexing as part of the process as well.</para>
       <para>Here's some detailed information about invoking the indexer. The indexing process is
@@ -566,8 +565,8 @@ suppress.footer.navigation=0</programlisting></para>
         <secondary>building</secondary>
       </indexterm>
     </section>
-    <section><info><title>Adding support for other (non-CJKV) languages</title></info>
-      
+    <section>
+      <title>Adding support for other (non-CJKV) languages</title>
       <para>To support stemming for a language, the search mechanism requires a stemmer implemented
         in both Java and JavaScript. The Java version is used by the indexer and the JavaScript
         verison is used to stem the user's input on the search form. Currently the search mechanism
@@ -616,8 +615,8 @@ suppress.footer.navigation=0</programlisting></para>
           <primary>stemming</primary>
         </indexterm></para>
     </section>
-    <section><info><title>Adding images</title></info>
-      
+    <section>
+      <title>Adding images</title>
       <para>This section shows how to add images to WebHelp. For that, follow the simple procedure given.<itemizedlist>
           <listitem>
             <para>Put the images in a subdirectory of your source file directory. For example
@@ -628,8 +627,8 @@ suppress.footer.navigation=0</programlisting></para>
             <para>Following image is from <emphasis role="bold">webhelp/docsrs/images/sample.jpg</emphasis>. The docbook code is shown
               below.</para>
             <para>
-              <figure><info><title>Sample Image</title></info>
-                
+              <figure>
+                <title>Sample Image</title>
                 <mediaobject>
                   <imageobject>
                     <imagedata fileref="images/sample.jpg" format="JPG"/>
@@ -637,8 +636,8 @@ suppress.footer.navigation=0</programlisting></para>
                 </mediaobject>
               </figure>
             </para>
-            <example><info><title>Example code for adding images. Note down the relative path used</title></info>
-              
+            <example>
+              <title>Example code for adding images. Note down the relative path used</title>
               <programlisting>&lt;figure&gt;
   &lt;title&gt;Sample&lt;/title&gt;
   &lt;mediaobject&gt;
@@ -661,16 +660,16 @@ input-images-dirs=images/**,figures/**,graphics/**</programlisting></para>
         </itemizedlist></para>
     </section>
   </chapter>
-  <chapter><info><title>Developer Docs</title></info>
-    
+  <chapter>
+    <title>Developer Docs</title>
     <para role="summary">This chapter provides an overview of how webhelp is implemented.</para>
     <para>The table of contents and search panes are implemented as divs and rendered as if they
       were the left pane in a frameset. As a result, the page must save the state of the table of
       contents and the search in cookies when you navigate away from a page. When you load a new
       page, the page reads these cookies and restores the state of the table of contents tree and
       search. The result is that the help system behaves exactly as if it were a frameset.</para>
-    <section><info><title>Design</title></info>
-      
+    <section>
+      <title>Design</title>
       <para role="summary">An overview of webhelp page structure.</para>
       <para>DocBook WebHelp page structure is fully built on css-based design abandoning frameset
         structure. Overall page structure can be divided in to three main sections <itemizedlist>
@@ -720,8 +719,8 @@ persist: "cookie"
           <primary>design</primary>
         </indexterm></para>
     </section>
-    <section><info><title>Search</title></info>
-      
+    <section>
+      <title>Search</title>
       <para role="summary">Overview design of Search mechanism.</para>
       <para>The serching is a fully client-side implementation of querying texts for content
         searching. There's no server involved. So, the search queries by the users are processed by
@@ -797,8 +796,8 @@ persist: "cookie"
         <indexterm>
           <primary>search</primary>
         </indexterm></para>
-      <section><info><title>New Stemmers</title></info>
-        
+      <section>
+        <title>New Stemmers</title>
         <para role="summary">Adding new Stemmers is very simple.</para>
         <para>Currently, only English, French, and German stemmers are integrated in to WebHelp. But
           the code is extensible such that you can add new stemmers easily by few steps.</para>
@@ -839,8 +838,8 @@ persist: "cookie"
                       <filename>docbook-webhelp/indexer/src/com/nexwave/nquindexer/IndexerTask.java</filename>
                     in a text editor and add your language code to the
                       <code>supportedLanguages</code> String Array. </para>
-                  <example><info><title>Add new language to supportedLanguages array</title></info>
-                    
+                  <example>
+                    <title>Add new language to supportedLanguages array</title>
                     <para> change the Array from,
                       <programlisting>
 private String[] supportedLanguages= {"en", "de", "fr", "cn", "ja", "ko"}; 
@@ -863,9 +862,9 @@ private String[] supportedLanguages= {"en", "de", "fr", "cn", "ja", "ko", <empha
                     stemmer Object in your language. It's self understandable. See the example. The
                     class names are at:
                       <filename>docbook-webhelp/indexer/src/com/nexwave/stemmer/snowball/ext/</filename>. </para>
-                  <example><info><title>Initialize correct stemmer based on the
-                        <code>webhelp.indexer.language</code> specified</title></info>
-                    
+                  <example>
+                    <title>Initialize correct stemmer based on the
+                        <code>webhelp.indexer.language</code> specified</title>
                     <programlisting>
       SnowballStemmer stemmer;
       if(indexerLanguage.equalsIgnoreCase("en")){
@@ -899,7 +898,7 @@ private String[] supportedLanguages= {"en", "de", "fr", "cn", "ja", "ko", <empha
     </section>
   </chapter>
   <chapter>
-    <info><title>FAQ</title>
+    <title>FAQ</title><info>
       <abstract>
         <para>Frequently Asked Questions</para>
       </abstract>

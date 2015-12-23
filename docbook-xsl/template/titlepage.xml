@@ -6,7 +6,7 @@
   <info>
     <title>Titlepage Template Stylesheet Reference</title>
     <releaseinfo role="meta">
-      $Id: titlepage.xsl 9600 2012-09-11 12:12:09Z kosek $
+      $Id: titlepage.xsl 9940 2014-09-06 16:06:50Z bobstayton $
     </releaseinfo>
   </info>
   <partintro xml:id="intro_partintro">
@@ -21,6 +21,76 @@
       stylesheets.</para>
 
   </partintro>
+
+<refentry xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="template.get.namespace.prefix">
+<refnamediv>
+<refname>get.namespace.prefix</refname>
+<refpurpose>Obtain namespace prefix for an element identified by a string containing qualified name</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis>&lt;xsl:template name="get.namespace.prefix"&gt;
+&lt;xsl:param name="element.name"/&gt;
+  ...
+&lt;/xsl:template&gt;</synopsis>
+</refsynopsisdiv>
+<refsect1><title>Description</title>
+
+<para>This template interprets a string containing a qualified name of an element
+and returns the namespace prefix, if any.</para>
+
+
+<para>Element name could be an XPath expression starting with the element name; this
+template will first determine if the occurrence of a colon is preceded by a valid
+NCName, assuming only ASCII characters.</para>
+
+</refsect1></refentry>
+
+<refentry xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="template.get.namespace.uri">
+<refnamediv>
+<refname>get.namespace.uri</refname>
+<refpurpose>Obtain URI for an element identified by a string containing qualified name</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis>&lt;xsl:template name="get.namespace.uri"&gt;
+&lt;xsl:param name="element.name"/&gt;
+&lt;xsl:param name="reference.node" select="."/&gt;
+&lt;xsl:param name="missing.namespace.warning" select="not(/t:templates/@t:missing-namespace-ok = 'yes')"/&gt;
+  ...
+&lt;/xsl:template&gt;</synopsis>
+</refsynopsisdiv>
+<refsect1><title>Description</title>
+
+<para>This template interprets a string containing a qualified name of an element
+and returns the namespace URI for that element, looking for namespace prefixes
+starting from a reference node.</para>
+
+</refsect1></refentry>
+
+<refentry xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="template.output.wrapper">
+<refnamediv>
+<refname>output.wrapper</refname>
+<refpurpose>Output the wrapper element</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis>&lt;xsl:template name="output.wrapper"&gt;
+&lt;xsl:param name="wrapper" select="ancestor-or-self::t:titlepage[@t:wrapper]"/&gt;
+&lt;xsl:param name="attr.copy.from" select="."/&gt;
+&lt;xsl:param name="attr.sets" select="''"/&gt;
+&lt;xsl:param name="content"/&gt;
+  ...
+&lt;/xsl:template&gt;</synopsis>
+</refsynopsisdiv>
+<refsect1><title>Description</title>
+
+<para>This template locates the namespace for the defined wrapper element
+and output it within that namespace. The content of the element is passed
+via the content argument.</para>
+
+
+<para>The attribute sets to use for the wrapper element and the element to
+copy non-template attributes from are also passed as arguments.</para>
+
+</refsect1></refentry>
 
 <refentry xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="templates">
 <refnamediv>
@@ -41,6 +111,13 @@ set of templates. This template creates an appropriate
 <para>If the <literal>t:templates</literal> element has a
 <literal>base-stylesheet</literal> attribute, an
 <literal>xsl:import</literal> statement is constructed for it.</para>
+
+
+
+<para>If the <literal>t:templates</literal> element has a
+<literal>copy-namespaces</literal> attribute, it is interpreted as a
+space-separated list of namespace prefixes to be copied from the template
+to the resulting stylesheet. Default namespace is always copied.</para>
 
 </refsect1></refentry>
 
@@ -129,22 +206,6 @@ more <literal>t:titlepage-content</literal>,
 <para>Each of these elements may be provided for the <quote>recto</quote>
 and <quote>verso</quote> sides of the title page.</para>
 
-
-</refsect1></refentry>
-
-<refentry xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="attr_star_in_copy.literal.atts">
-<refnamediv>
-<refname>@* (in copy.literal.atts mode)</refname>
-<refpurpose>Copy t:titlepage attributes</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-<synopsis>&lt;xsl:template match="@*" mode="copy.literal.atts"/&gt;</synopsis>
-</refsynopsisdiv>
-<refsect1><title>Description</title>
-
-<para>This template copies all of the <quote>other</quote> attributes
-from a <literal>t:titlepage</literal> element onto the specified
-wrapper.</para>
 
 </refsect1></refentry>
 

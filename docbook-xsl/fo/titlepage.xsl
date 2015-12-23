@@ -1,12 +1,10 @@
 <?xml version='1.0'?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:fo="http://www.w3.org/1999/XSL/Format"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: titlepage.xsl 9286 2012-04-19 10:10:58Z bobstayton $
+     $Id: titlepage.xsl 9993 2015-09-17 21:13:32Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -132,6 +130,13 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 <xsl:attribute-set name="simplesect.titlepage.verso.style"
                    use-attribute-sets="section.titlepage.verso.style"/>
 
+<xsl:attribute-set name="dialogue.titlepage.recto.style"/>
+<xsl:attribute-set name="dialogue.titlepage.verso.style"/>
+<xsl:attribute-set name="drama.titlepage.recto.style"/>
+<xsl:attribute-set name="drama.titlepage.verso.style"/>
+<xsl:attribute-set name="poetry.titlepage.recto.style"/>
+<xsl:attribute-set name="poetry.titlepage.verso.style"/>
+
 <xsl:attribute-set name="topic.titlepage.recto.style"/>
 <xsl:attribute-set name="topic.titlepage.verso.style"/>
 
@@ -211,16 +216,16 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <xsl:apply-templates select="."/>
 </xsl:template>
 
-<xsl:template match="d:abbrev" mode="titlepage.mode">
+<xsl:template match="abbrev" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:abstract" mode="titlepage.mode">
+<xsl:template match="abstract" mode="titlepage.mode">
   <fo:block xsl:use-attribute-sets="abstract.properties">
     <fo:block xsl:use-attribute-sets="abstract.title.properties">
       <xsl:choose>
-	<xsl:when test="d:title|d:info/d:title">
-	  <xsl:apply-templates select="d:title|d:info/d:title"/>
+	<xsl:when test="title|info/title">
+	  <xsl:apply-templates select="title|info/title"/>
 	</xsl:when>
 	<xsl:otherwise>
 	  <xsl:call-template name="gentext">
@@ -229,119 +234,119 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 	</xsl:otherwise>
       </xsl:choose>
     </fo:block>
-    <xsl:apply-templates select="*[not(self::d:title)]" mode="titlepage.mode"/>
+    <xsl:apply-templates select="*[not(self::title)]" mode="titlepage.mode"/>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:abstract/d:title" mode="titlepage.mode"/>
+<xsl:template match="abstract/title" mode="titlepage.mode"/>
 
-<xsl:template match="d:abstract/d:title" mode="titlepage.abstract.title.mode">
+<xsl:template match="abstract/title" mode="titlepage.abstract.title.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:address" mode="titlepage.mode">
+<xsl:template match="address" mode="titlepage.mode">
   <!-- use the normal address handling code -->
   <xsl:apply-templates select="."/>
 </xsl:template>
 
-<xsl:template match="d:affiliation" mode="titlepage.mode">
+<xsl:template match="affiliation" mode="titlepage.mode">
   <fo:block>
     <xsl:apply-templates mode="titlepage.mode"/>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:artpagenums" mode="titlepage.mode">
+<xsl:template match="artpagenums" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:author" mode="titlepage.mode">
+<xsl:template match="author" mode="titlepage.mode">
   <fo:block>
     <xsl:call-template name="anchor"/>
     <xsl:choose>
-      <xsl:when test="d:orgname">
+      <xsl:when test="orgname">
         <xsl:apply-templates/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:call-template name="person.name"/>
-        <xsl:if test="d:affiliation/d:orgname">
+        <xsl:if test="affiliation/orgname">
           <xsl:text>, </xsl:text>
-          <xsl:apply-templates select="d:affiliation/d:orgname" mode="titlepage.mode"/>
+          <xsl:apply-templates select="affiliation/orgname" mode="titlepage.mode"/>
         </xsl:if>
-        <xsl:if test="d:email|d:affiliation/d:address/d:email">
+        <xsl:if test="email|affiliation/address/email">
           <xsl:text> </xsl:text>
-          <xsl:apply-templates select="(d:email|d:affiliation/d:address/d:email)[1]"/>
+          <xsl:apply-templates select="(email|affiliation/address/email)[1]"/>
         </xsl:if>
       </xsl:otherwise>
     </xsl:choose>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:authorblurb" mode="titlepage.mode">
+<xsl:template match="authorblurb" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:authorgroup" mode="titlepage.mode">
+<xsl:template match="authorgroup" mode="titlepage.mode">
   <fo:wrapper>
     <xsl:call-template name="anchor"/>
     <xsl:apply-templates mode="titlepage.mode"/>
   </fo:wrapper>
 </xsl:template>
 
-<xsl:template match="d:authorinitials" mode="titlepage.mode">
+<xsl:template match="authorinitials" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:bibliomisc" mode="titlepage.mode">
+<xsl:template match="bibliomisc" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:bibliomset" mode="titlepage.mode">
+<xsl:template match="bibliomset" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:collab" mode="titlepage.mode">
+<xsl:template match="collab" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:collabname" mode="titlepage.mode">
+<xsl:template match="collabname" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:confgroup" mode="titlepage.mode">
+<xsl:template match="confgroup" mode="titlepage.mode">
   <fo:block>
     <xsl:apply-templates mode="titlepage.mode"/>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:confdates" mode="titlepage.mode">
+<xsl:template match="confdates" mode="titlepage.mode">
   <fo:block>
     <xsl:apply-templates mode="titlepage.mode"/>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:conftitle" mode="titlepage.mode">
+<xsl:template match="conftitle" mode="titlepage.mode">
   <fo:block>
     <xsl:apply-templates mode="titlepage.mode"/>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:confnum" mode="titlepage.mode">
+<xsl:template match="confnum" mode="titlepage.mode">
   <!-- suppress -->
 </xsl:template>
 
-<xsl:template match="d:contractnum" mode="titlepage.mode">
+<xsl:template match="contractnum" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:contractsponsor" mode="titlepage.mode">
+<xsl:template match="contractsponsor" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:contrib" mode="titlepage.mode">
+<xsl:template match="contrib" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:copyright" mode="titlepage.mode">
+<xsl:template match="copyright" mode="titlepage.mode">
   <xsl:call-template name="gentext">
     <xsl:with-param name="key" select="'Copyright'"/>
   </xsl:call-template>
@@ -351,43 +356,43 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:call-template>
   <xsl:call-template name="gentext.space"/>
   <xsl:call-template name="copyright.years">
-    <xsl:with-param name="years" select="d:year"/>
+    <xsl:with-param name="years" select="year"/>
     <xsl:with-param name="print.ranges" select="$make.year.ranges"/>
     <xsl:with-param name="single.year.ranges"
                     select="$make.single.year.ranges"/>
   </xsl:call-template>
   <xsl:call-template name="gentext.space"/>
-  <xsl:apply-templates select="d:holder" mode="titlepage.mode"/>
+  <xsl:apply-templates select="holder" mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:year" mode="titlepage.mode">
+<xsl:template match="year" mode="titlepage.mode">
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:holder" mode="titlepage.mode">
+<xsl:template match="holder" mode="titlepage.mode">
   <xsl:apply-templates/>
   <xsl:if test="position() &lt; last()">
     <xsl:text>, </xsl:text>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:corpauthor" mode="titlepage.mode">
+<xsl:template match="corpauthor" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:corpcredit" mode="titlepage.mode">
+<xsl:template match="corpcredit" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:corpname" mode="titlepage.mode">
+<xsl:template match="corpname" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:date" mode="titlepage.mode">
+<xsl:template match="date" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:edition" mode="titlepage.mode">
+<xsl:template match="edition" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
   <xsl:call-template name="gentext.space"/>
   <xsl:call-template name="gentext">
@@ -395,170 +400,170 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:editor" mode="titlepage.mode">
+<xsl:template match="editor" mode="titlepage.mode">
   <!-- The first editor is dealt with in the following template,
        which in turn displays all editors of the same mode. -->
 </xsl:template>
 
-<xsl:template match="d:editor[1]" priority="2" mode="titlepage.mode">
+<xsl:template match="editor[1]" priority="2" mode="titlepage.mode">
   <xsl:call-template name="gentext.edited.by"/>
   <xsl:call-template name="gentext.space"/>
   <xsl:call-template name="person.name.list">
-    <xsl:with-param name="person.list" select="../d:editor"/>
+    <xsl:with-param name="person.list" select="../editor"/>
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:firstname" mode="titlepage.mode">
+<xsl:template match="firstname" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:graphic" mode="titlepage.mode">
+<xsl:template match="graphic" mode="titlepage.mode">
   <!-- use the normal graphic handling code -->
   <xsl:apply-templates select="."/>
 </xsl:template>
 
-<xsl:template match="d:honorific" mode="titlepage.mode">
+<xsl:template match="honorific" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:isbn" mode="titlepage.mode">
+<xsl:template match="isbn" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:issn" mode="titlepage.mode">
+<xsl:template match="issn" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:biblioid" mode="titlepage.mode">
+<xsl:template match="biblioid" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:itermset" mode="titlepage.mode">
-  <xsl:apply-templates select="d:indexterm"/>
+<xsl:template match="itermset" mode="titlepage.mode">
+  <xsl:apply-templates select="indexterm"/>
 </xsl:template>
 
-<xsl:template match="d:invpartnumber" mode="titlepage.mode">
+<xsl:template match="invpartnumber" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:issuenum" mode="titlepage.mode">
+<xsl:template match="issuenum" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:jobtitle" mode="titlepage.mode">
+<xsl:template match="jobtitle" mode="titlepage.mode">
   <fo:block>
     <xsl:apply-templates mode="titlepage.mode"/>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:keywordset" mode="titlepage.mode">
+<xsl:template match="keywordset" mode="titlepage.mode">
 </xsl:template>
 
-<xsl:template match="d:legalnotice" mode="titlepage.mode">
+<xsl:template match="legalnotice" mode="titlepage.mode">
 
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
 
   <fo:block id="{$id}">
-    <xsl:if test="d:title"> <!-- FIXME: add param for using default title? -->
+    <xsl:if test="title"> <!-- FIXME: add param for using default title? -->
       <xsl:call-template name="formal.object.heading"/>
     </xsl:if>
     <xsl:apply-templates mode="titlepage.mode"/>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:legalnotice/d:title" mode="titlepage.mode">
+<xsl:template match="legalnotice/title" mode="titlepage.mode">
 </xsl:template>
 
-<xsl:template match="d:lineage" mode="titlepage.mode">
+<xsl:template match="lineage" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:modespec" mode="titlepage.mode">
+<xsl:template match="modespec" mode="titlepage.mode">
   <!-- discard -->
 </xsl:template>
 
-<xsl:template match="d:orgdiv" mode="titlepage.mode">
-  <xsl:if test="preceding-sibling::*[1][self::d:orgname]">
+<xsl:template match="orgdiv" mode="titlepage.mode">
+  <xsl:if test="preceding-sibling::*[1][self::orgname]">
     <xsl:text> </xsl:text>
   </xsl:if>
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:orgname" mode="titlepage.mode">
+<xsl:template match="orgname" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:othercredit" mode="titlepage.mode">
-  <xsl:variable name="contrib" select="string(d:contrib)"/>
+<xsl:template match="othercredit" mode="titlepage.mode">
+  <xsl:variable name="contrib" select="string(contrib)"/>
   <xsl:choose>
-    <xsl:when test="d:contrib">
-      <xsl:if test="not(preceding-sibling::d:othercredit[string(d:contrib)=$contrib])">
+    <xsl:when test="contrib">
+      <xsl:if test="not(preceding-sibling::othercredit[string(contrib)=$contrib])">
         <fo:block>
-          <xsl:apply-templates mode="titlepage.mode" select="d:contrib"/>
+          <xsl:apply-templates mode="titlepage.mode" select="contrib"/>
           <xsl:text>: </xsl:text>
           <xsl:call-template name="person.name"/>
-          <xsl:apply-templates mode="titlepage.mode" select="d:affiliation"/>
-          <xsl:apply-templates select="following-sibling::d:othercredit[string(d:contrib)=$contrib]" mode="titlepage.othercredits"/>
+          <xsl:apply-templates mode="titlepage.mode" select="affiliation"/>
+          <xsl:apply-templates select="following-sibling::othercredit[string(contrib)=$contrib]" mode="titlepage.othercredits"/>
         </fo:block>
       </xsl:if>
     </xsl:when>
     <xsl:otherwise>
       <fo:block><xsl:call-template name="person.name"/></fo:block>
-      <xsl:apply-templates mode="titlepage.mode" select="./d:affiliation"/>
+      <xsl:apply-templates mode="titlepage.mode" select="./affiliation"/>
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:othercredit" mode="titlepage.othercredits">
+<xsl:template match="othercredit" mode="titlepage.othercredits">
   <xsl:text>, </xsl:text>
   <xsl:call-template name="person.name"/>
 </xsl:template>
 
-<xsl:template match="d:othername" mode="titlepage.mode">
+<xsl:template match="othername" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:pagenums" mode="titlepage.mode">
+<xsl:template match="pagenums" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:printhistory" mode="titlepage.mode">
+<xsl:template match="printhistory" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:productname" mode="titlepage.mode">
+<xsl:template match="productname" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:productnumber" mode="titlepage.mode">
+<xsl:template match="productnumber" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:pubdate" mode="titlepage.mode">
+<xsl:template match="pubdate" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:publisher" mode="titlepage.mode">
+<xsl:template match="publisher" mode="titlepage.mode">
   <fo:block>
     <xsl:apply-templates mode="titlepage.mode"/>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:publishername" mode="titlepage.mode">
+<xsl:template match="publishername" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:pubsnumber" mode="titlepage.mode">
+<xsl:template match="pubsnumber" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:releaseinfo" mode="titlepage.mode">
+<xsl:template match="releaseinfo" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:revhistory" mode="titlepage.mode">
+<xsl:template match="revhistory" mode="titlepage.mode">
 
   <xsl:variable name="explicit.table.width">
     <xsl:call-template name="pi.dbfo_table-width"/>
@@ -587,8 +592,8 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
         <fo:table-cell number-columns-spanned="3" xsl:use-attribute-sets="revhistory.table.cell.properties">
           <fo:block xsl:use-attribute-sets="revhistory.title.properties">
 	    <xsl:choose>
-	      <xsl:when test="d:title|d:info/d:title">
-		<xsl:apply-templates select="d:title|d:info/d:title" mode="titlepage.mode"/>
+	      <xsl:when test="title|info/title">
+		<xsl:apply-templates select="title|info/title" mode="titlepage.mode"/>
 	      </xsl:when>
 	      <xsl:otherwise>
 		<xsl:call-template name="gentext">
@@ -599,18 +604,18 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 	  </fo:block>
         </fo:table-cell>
       </fo:table-row>
-      <xsl:apply-templates select="*[not(self::d:title)]" mode="titlepage.mode"/>
+      <xsl:apply-templates select="*[not(self::title)]" mode="titlepage.mode"/>
     </fo:table-body>
   </fo:table>
 
 </xsl:template>
 
 
-<xsl:template match="d:revhistory/d:revision" mode="titlepage.mode">
-  <xsl:variable name="revnumber" select="d:revnumber"/>
-  <xsl:variable name="revdate"   select="d:date"/>
-  <xsl:variable name="revauthor" select="d:authorinitials|d:author"/>
-  <xsl:variable name="revremark" select="d:revremark|d:revdescription"/>
+<xsl:template match="revhistory/revision" mode="titlepage.mode">
+  <xsl:variable name="revnumber" select="revnumber"/>
+  <xsl:variable name="revdate"   select="date"/>
+  <xsl:variable name="revauthor" select="authorinitials|author"/>
+  <xsl:variable name="revremark" select="revremark|revdescription"/>
   <fo:table-row>
     <fo:table-cell xsl:use-attribute-sets="revhistory.table.cell.properties">
       <fo:block>
@@ -650,59 +655,59 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:revision/d:revnumber" mode="titlepage.mode">
+<xsl:template match="revision/revnumber" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:revision/d:date" mode="titlepage.mode">
+<xsl:template match="revision/date" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:revision/d:authorinitials" mode="titlepage.mode">
+<xsl:template match="revision/authorinitials" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:revision/d:author" mode="titlepage.mode">
+<xsl:template match="revision/author" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:revision/d:revremark" mode="titlepage.mode">
+<xsl:template match="revision/revremark" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:revision/d:revdescription" mode="titlepage.mode">
+<xsl:template match="revision/revdescription" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:seriesvolnums" mode="titlepage.mode">
+<xsl:template match="seriesvolnums" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:shortaffil" mode="titlepage.mode">
+<xsl:template match="shortaffil" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:subjectset" mode="titlepage.mode">
+<xsl:template match="subjectset" mode="titlepage.mode">
   <!-- discard -->
 </xsl:template>
 
-<xsl:template match="d:subtitle" mode="titlepage.mode">
+<xsl:template match="subtitle" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:surname" mode="titlepage.mode">
+<xsl:template match="surname" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:title" mode="titlepage.mode">
+<xsl:template match="title" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:titleabbrev" mode="titlepage.mode">
+<xsl:template match="titleabbrev" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:volumenum" mode="titlepage.mode">
+<xsl:template match="volumenum" mode="titlepage.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
 </xsl:template>
 
@@ -715,7 +720,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 <!-- book recto -->
 
-<xsl:template match="d:bookinfo/d:authorgroup|d:book/d:info/d:authorgroup"
+<xsl:template match="bookinfo/authorgroup|book/info/authorgroup"
               mode="titlepage.mode" priority="2">
   <fo:block>
     <xsl:call-template name="anchor"/>
@@ -729,24 +734,24 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <fo:block>
     <xsl:apply-templates mode="titlepage.mode"/>
 
-    <xsl:if test="following-sibling::d:subtitle
-                  |following-sibling::d:info/d:subtitle
-                  |following-sibling::d:bookinfo/d:subtitle">
+    <xsl:if test="following-sibling::subtitle
+                  |following-sibling::info/subtitle
+                  |following-sibling::bookinfo/subtitle">
       <xsl:text>: </xsl:text>
 
-      <xsl:apply-templates select="(following-sibling::d:subtitle
-                                   |following-sibling::d:info/d:subtitle
-                                   |following-sibling::d:bookinfo/d:subtitle)[1]"
+      <xsl:apply-templates select="(following-sibling::subtitle
+                                   |following-sibling::info/subtitle
+                                   |following-sibling::bookinfo/subtitle)[1]"
                            mode="book.verso.subtitle.mode"/>
     </xsl:if>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:subtitle" mode="book.verso.subtitle.mode">
+<xsl:template match="subtitle" mode="book.verso.subtitle.mode">
   <xsl:apply-templates mode="titlepage.mode"/>
-  <xsl:if test="following-sibling::d:subtitle">
+  <xsl:if test="following-sibling::subtitle">
     <xsl:text>: </xsl:text>
-    <xsl:apply-templates select="following-sibling::d:subtitle[1]"
+    <xsl:apply-templates select="following-sibling::subtitle[1]"
                          mode="book.verso.subtitle.mode"/>
   </xsl:if>
 </xsl:template>
@@ -758,27 +763,27 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     </xsl:call-template>
     <xsl:text> </xsl:text>
     <xsl:call-template name="person.name.list">
-      <xsl:with-param name="person.list" select="d:author|d:corpauthor|d:editor"/>
+      <xsl:with-param name="person.list" select="author|corpauthor|editor"/>
     </xsl:call-template>
   </fo:block>
-  <xsl:apply-templates select="d:othercredit" mode="titlepage.mode"/>
+  <xsl:apply-templates select="othercredit" mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:bookinfo/d:author|d:book/d:info/d:author"
+<xsl:template match="bookinfo/author|book/info/author"
               mode="titlepage.mode" priority="2">
   <fo:block>
     <xsl:call-template name="person.name"/>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:bookinfo/d:corpauthor|d:book/d:info/d:corpauthor"
+<xsl:template match="bookinfo/corpauthor|book/info/corpauthor"
               mode="titlepage.mode" priority="2">
   <fo:block>
     <xsl:apply-templates/>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:bookinfo/d:pubdate|d:book/d:info/d:pubdate"
+<xsl:template match="bookinfo/pubdate|book/info/pubdate"
               mode="titlepage.mode" priority="2">
   <fo:block>
     <xsl:call-template name="gentext">

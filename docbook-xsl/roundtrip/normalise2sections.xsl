@@ -21,8 +21,8 @@
       <axsl:for-each select="@*">
         <axsl:copy/>
       </axsl:for-each>
-      <axsl:variable name="books" select="dbk:para[@rnd:style = &quot;d:book&quot; or @rnd:style = &quot;book-title&quot;]"/>
-      <axsl:variable name="toplevel-components" select="dbk:para[@rnd:style = &quot;d:article&quot; or @rnd:style = &quot;article-title&quot; or @rnd:style = &quot;d:appendix&quot; or @rnd:style = &quot;appendix-title&quot; or @rnd:style = &quot;d:chapter&quot; or @rnd:style = &quot;chapter-title&quot; or @rnd:style = &quot;d:preface&quot; or @rnd:style = &quot;preface-title&quot;]"/>
+      <axsl:variable name="books" select="dbk:para[@rnd:style = &quot;book&quot; or @rnd:style = &quot;book-title&quot;]"/>
+      <axsl:variable name="toplevel-components" select="dbk:para[@rnd:style = &quot;article&quot; or @rnd:style = &quot;article-title&quot; or @rnd:style = &quot;appendix&quot; or @rnd:style = &quot;appendix-title&quot; or @rnd:style = &quot;chapter&quot; or @rnd:style = &quot;chapter-title&quot; or @rnd:style = &quot;preface&quot; or @rnd:style = &quot;preface-title&quot;]"/>
       <axsl:choose>
         <axsl:when test="$books">
           <axsl:apply-templates select="$books[1]/preceding-sibling::*"/>
@@ -45,16 +45,16 @@
   <axsl:template match="dbk:para" mode="book">
     <axsl:param name="books" select="/.."/>
     <axsl:choose>
-      <axsl:when test="$books and (@rnd:style = &quot;d:book&quot; or @rnd:style = &quot;book-title&quot;)">
+      <axsl:when test="$books and (@rnd:style = &quot;book&quot; or @rnd:style = &quot;book-title&quot;)">
         <axsl:call-template name="make-book">
           <axsl:with-param name="books" select="$books"/>
-          <axsl:with-param name="book-components" select="$books[1]/preceding-sibling::dbk:para[@rnd:style = &quot;d:part&quot; or @rnd:style = &quot;part-title&quot; or @rnd:style = &quot;d:article&quot; or @rnd:style = &quot;article-title&quot; or @rnd:style = &quot;d:appendix&quot; or @rnd:style = &quot;appendix-title&quot; or @rnd:style = &quot;d:chapter&quot; or @rnd:style = &quot;chapter-title&quot; or @rnd:style = &quot;d:preface&quot; or @rnd:style = &quot;preface-title&quot;]"/>
+          <axsl:with-param name="book-components" select="$books[1]/preceding-sibling::dbk:para[@rnd:style = &quot;part&quot; or @rnd:style = &quot;part-title&quot; or @rnd:style = &quot;article&quot; or @rnd:style = &quot;article-title&quot; or @rnd:style = &quot;appendix&quot; or @rnd:style = &quot;appendix-title&quot; or @rnd:style = &quot;chapter&quot; or @rnd:style = &quot;chapter-title&quot; or @rnd:style = &quot;preface&quot; or @rnd:style = &quot;preface-title&quot;]"/>
         </axsl:call-template>
       </axsl:when>
       <axsl:otherwise>
         <axsl:call-template name="make-book">
           <axsl:with-param name="books" select="$books"/>
-          <axsl:with-param name="book-components" select="following-sibling::dbk:para[@rnd:style = &quot;d:part&quot; or @rnd:style = &quot;part-title&quot; or @rnd:style = &quot;d:article&quot; or @rnd:style = &quot;article-title&quot; or @rnd:style = &quot;d:appendix&quot; or @rnd:style = &quot;appendix-title&quot; or @rnd:style = &quot;d:chapter&quot; or @rnd:style = &quot;chapter-title&quot; or @rnd:style = &quot;d:preface&quot; or @rnd:style = &quot;preface-title&quot;]"/>
+          <axsl:with-param name="book-components" select="following-sibling::dbk:para[@rnd:style = &quot;part&quot; or @rnd:style = &quot;part-title&quot; or @rnd:style = &quot;article&quot; or @rnd:style = &quot;article-title&quot; or @rnd:style = &quot;appendix&quot; or @rnd:style = &quot;appendix-title&quot; or @rnd:style = &quot;chapter&quot; or @rnd:style = &quot;chapter-title&quot; or @rnd:style = &quot;preface&quot; or @rnd:style = &quot;preface-title&quot;]"/>
         </axsl:call-template>
       </axsl:otherwise>
     </axsl:choose>
@@ -77,16 +77,16 @@
   <axsl:template match="dbk:para" mode="toplevel-component">
     <axsl:param name="toplevel-components" select="/.."/>
     <axsl:choose>
-      <axsl:when test="$toplevel-components and (@rnd:style = &quot;d:article&quot; or @rnd:style = &quot;article-title&quot; or @rnd:style = &quot;d:appendix&quot; or @rnd:style = &quot;appendix-title&quot; or @rnd:style = &quot;d:chapter&quot; or @rnd:style = &quot;chapter-title&quot; or @rnd:style = &quot;d:preface&quot; or @rnd:style = &quot;preface-title&quot;)">
+      <axsl:when test="$toplevel-components and (@rnd:style = &quot;article&quot; or @rnd:style = &quot;article-title&quot; or @rnd:style = &quot;appendix&quot; or @rnd:style = &quot;appendix-title&quot; or @rnd:style = &quot;chapter&quot; or @rnd:style = &quot;chapter-title&quot; or @rnd:style = &quot;preface&quot; or @rnd:style = &quot;preface-title&quot;)">
         <axsl:call-template name="make-toplevel-component">
           <axsl:with-param name="toplevel-components" select="$toplevel-components"/>
-          <axsl:with-param name="sect1s" select="$toplevel-components[1]/preceding-sibling::dbk:para[@rnd:style = &quot;d:sect1&quot; or @rnd:style = &quot;sect1-title&quot;]"/>
+          <axsl:with-param name="sect1s" select="$toplevel-components[1]/preceding-sibling::dbk:para[@rnd:style = &quot;sect1&quot; or @rnd:style = &quot;sect1-title&quot;]"/>
         </axsl:call-template>
       </axsl:when>
       <axsl:otherwise>
         <axsl:call-template name="make-toplevel-component">
           <axsl:with-param name="toplevel-components" select="$toplevel-components"/>
-          <axsl:with-param name="sect1s" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect1&quot; or @rnd:style = &quot;sect1-title&quot;]"/>
+          <axsl:with-param name="sect1s" select="following-sibling::dbk:para[@rnd:style = &quot;sect1&quot; or @rnd:style = &quot;sect1-title&quot;]"/>
         </axsl:call-template>
       </axsl:otherwise>
     </axsl:choose>
@@ -109,11 +109,11 @@
     <axsl:param select="/.." name="book-components"/>
     <axsl:choose>
       <axsl:when test="generate-id() = generate-id($nextbook)"/>
-      <axsl:when test="@rnd:style = &quot;d:part&quot; or @rnd:style = &quot;part-title&quot; or @rnd:style = &quot;d:article&quot; or @rnd:style = &quot;article-title&quot; or @rnd:style = &quot;d:appendix&quot; or @rnd:style = &quot;appendix-title&quot; or @rnd:style = &quot;d:chapter&quot; or @rnd:style = &quot;chapter-title&quot; or @rnd:style = &quot;d:preface&quot; or @rnd:style = &quot;preface-title&quot;">
-        <axsl:variable name="nextbook-component" select="following-sibling::dbk:para[@rnd:style = &quot;d:part&quot; or @rnd:style = &quot;part-title&quot; or @rnd:style = &quot;d:article&quot; or @rnd:style = &quot;article-title&quot; or @rnd:style = &quot;d:appendix&quot; or @rnd:style = &quot;appendix-title&quot; or @rnd:style = &quot;d:chapter&quot; or @rnd:style = &quot;chapter-title&quot; or @rnd:style = &quot;d:preface&quot; or @rnd:style = &quot;preface-title&quot;][1]"/>
+      <axsl:when test="@rnd:style = &quot;part&quot; or @rnd:style = &quot;part-title&quot; or @rnd:style = &quot;article&quot; or @rnd:style = &quot;article-title&quot; or @rnd:style = &quot;appendix&quot; or @rnd:style = &quot;appendix-title&quot; or @rnd:style = &quot;chapter&quot; or @rnd:style = &quot;chapter-title&quot; or @rnd:style = &quot;preface&quot; or @rnd:style = &quot;preface-title&quot;">
+        <axsl:variable name="nextbook-component" select="following-sibling::dbk:para[@rnd:style = &quot;part&quot; or @rnd:style = &quot;part-title&quot; or @rnd:style = &quot;article&quot; or @rnd:style = &quot;article-title&quot; or @rnd:style = &quot;appendix&quot; or @rnd:style = &quot;appendix-title&quot; or @rnd:style = &quot;chapter&quot; or @rnd:style = &quot;chapter-title&quot; or @rnd:style = &quot;preface&quot; or @rnd:style = &quot;preface-title&quot;][1]"/>
         <axsl:choose>
           <axsl:when test="$nextbook-component">
-            <axsl:variable name="sect1s" select="$nextbook-component/preceding-sibling::dbk:para[@rnd:style = &quot;d:sect1&quot; or @rnd:style = &quot;sect1-title&quot;]"/>
+            <axsl:variable name="sect1s" select="$nextbook-component/preceding-sibling::dbk:para[@rnd:style = &quot;sect1&quot; or @rnd:style = &quot;sect1-title&quot;]"/>
 <!-- mode sections 1 -->
             <book-component xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -132,7 +132,7 @@
             </axsl:if>
           </axsl:when>
           <axsl:otherwise>
-            <axsl:variable name="sect1s" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect1&quot; or @rnd:style = &quot;sect1-title&quot;]"/>
+            <axsl:variable name="sect1s" select="following-sibling::dbk:para[@rnd:style = &quot;sect1&quot; or @rnd:style = &quot;sect1-title&quot;]"/>
 <!-- mode sections 2 -->
             <book-component xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -169,11 +169,11 @@
     <axsl:choose>
       <axsl:when test="generate-id() = generate-id($nextbook-component)"/>
       <axsl:when test="generate-id() = generate-id($nextbook)"/>
-      <axsl:when test="@rnd:style = &quot;d:sect1&quot; or @rnd:style = &quot;sect1-title&quot;">
-        <axsl:variable name="nextsect1" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect1&quot; or @rnd:style = &quot;sect1-title&quot;][1]"/>
+      <axsl:when test="@rnd:style = &quot;sect1&quot; or @rnd:style = &quot;sect1-title&quot;">
+        <axsl:variable name="nextsect1" select="following-sibling::dbk:para[@rnd:style = &quot;sect1&quot; or @rnd:style = &quot;sect1-title&quot;][1]"/>
         <axsl:choose>
           <axsl:when test="$nextsect1">
-            <axsl:variable name="sect2s" select="$nextsect1/preceding-sibling::dbk:para[@rnd:style = &quot;d:sect2&quot; or @rnd:style = &quot;sect2-title&quot;]"/>
+            <axsl:variable name="sect2s" select="$nextsect1/preceding-sibling::dbk:para[@rnd:style = &quot;sect2&quot; or @rnd:style = &quot;sect2-title&quot;]"/>
 <!-- mode sections 1 -->
             <sect1 xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -196,7 +196,7 @@
             </axsl:if>
           </axsl:when>
           <axsl:otherwise>
-            <axsl:variable name="sect2s" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect2&quot; or @rnd:style = &quot;sect2-title&quot;]"/>
+            <axsl:variable name="sect2s" select="following-sibling::dbk:para[@rnd:style = &quot;sect2&quot; or @rnd:style = &quot;sect2-title&quot;]"/>
 <!-- mode sections 2 -->
             <sect1 xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -242,11 +242,11 @@
       <axsl:when test="generate-id() = generate-id($nextsect1)"/>
       <axsl:when test="generate-id() = generate-id($nextbook-component)"/>
       <axsl:when test="generate-id() = generate-id($nextbook)"/>
-      <axsl:when test="@rnd:style = &quot;d:sect2&quot; or @rnd:style = &quot;sect2-title&quot;">
-        <axsl:variable name="nextsect2" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect2&quot; or @rnd:style = &quot;sect2-title&quot;][1]"/>
+      <axsl:when test="@rnd:style = &quot;sect2&quot; or @rnd:style = &quot;sect2-title&quot;">
+        <axsl:variable name="nextsect2" select="following-sibling::dbk:para[@rnd:style = &quot;sect2&quot; or @rnd:style = &quot;sect2-title&quot;][1]"/>
         <axsl:choose>
           <axsl:when test="$nextsect2">
-            <axsl:variable name="sect3s" select="$nextsect2/preceding-sibling::dbk:para[@rnd:style = &quot;d:sect3&quot; or @rnd:style = &quot;sect3-title&quot;]"/>
+            <axsl:variable name="sect3s" select="$nextsect2/preceding-sibling::dbk:para[@rnd:style = &quot;sect3&quot; or @rnd:style = &quot;sect3-title&quot;]"/>
 <!-- mode sections 1 -->
             <sect2 xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -273,7 +273,7 @@
             </axsl:if>
           </axsl:when>
           <axsl:otherwise>
-            <axsl:variable name="sect3s" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect3&quot; or @rnd:style = &quot;sect3-title&quot;]"/>
+            <axsl:variable name="sect3s" select="following-sibling::dbk:para[@rnd:style = &quot;sect3&quot; or @rnd:style = &quot;sect3-title&quot;]"/>
 <!-- mode sections 2 -->
             <sect2 xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -328,11 +328,11 @@
       <axsl:when test="generate-id() = generate-id($nextsect1)"/>
       <axsl:when test="generate-id() = generate-id($nextbook-component)"/>
       <axsl:when test="generate-id() = generate-id($nextbook)"/>
-      <axsl:when test="@rnd:style = &quot;d:sect3&quot; or @rnd:style = &quot;sect3-title&quot;">
-        <axsl:variable name="nextsect3" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect3&quot; or @rnd:style = &quot;sect3-title&quot;][1]"/>
+      <axsl:when test="@rnd:style = &quot;sect3&quot; or @rnd:style = &quot;sect3-title&quot;">
+        <axsl:variable name="nextsect3" select="following-sibling::dbk:para[@rnd:style = &quot;sect3&quot; or @rnd:style = &quot;sect3-title&quot;][1]"/>
         <axsl:choose>
           <axsl:when test="$nextsect3">
-            <axsl:variable name="sect4s" select="$nextsect3/preceding-sibling::dbk:para[@rnd:style = &quot;d:sect4&quot; or @rnd:style = &quot;sect4-title&quot;]"/>
+            <axsl:variable name="sect4s" select="$nextsect3/preceding-sibling::dbk:para[@rnd:style = &quot;sect4&quot; or @rnd:style = &quot;sect4-title&quot;]"/>
 <!-- mode sections 1 -->
             <sect3 xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -363,7 +363,7 @@
             </axsl:if>
           </axsl:when>
           <axsl:otherwise>
-            <axsl:variable name="sect4s" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect4&quot; or @rnd:style = &quot;sect4-title&quot;]"/>
+            <axsl:variable name="sect4s" select="following-sibling::dbk:para[@rnd:style = &quot;sect4&quot; or @rnd:style = &quot;sect4-title&quot;]"/>
 <!-- mode sections 2 -->
             <sect3 xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -427,11 +427,11 @@
       <axsl:when test="generate-id() = generate-id($nextsect1)"/>
       <axsl:when test="generate-id() = generate-id($nextbook-component)"/>
       <axsl:when test="generate-id() = generate-id($nextbook)"/>
-      <axsl:when test="@rnd:style = &quot;d:sect4&quot; or @rnd:style = &quot;sect4-title&quot;">
-        <axsl:variable name="nextsect4" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect4&quot; or @rnd:style = &quot;sect4-title&quot;][1]"/>
+      <axsl:when test="@rnd:style = &quot;sect4&quot; or @rnd:style = &quot;sect4-title&quot;">
+        <axsl:variable name="nextsect4" select="following-sibling::dbk:para[@rnd:style = &quot;sect4&quot; or @rnd:style = &quot;sect4-title&quot;][1]"/>
         <axsl:choose>
           <axsl:when test="$nextsect4">
-            <axsl:variable name="sect5s" select="$nextsect4/preceding-sibling::dbk:para[@rnd:style = &quot;d:sect5&quot; or @rnd:style = &quot;sect5-title&quot;]"/>
+            <axsl:variable name="sect5s" select="$nextsect4/preceding-sibling::dbk:para[@rnd:style = &quot;sect5&quot; or @rnd:style = &quot;sect5-title&quot;]"/>
 <!-- mode sections 1 -->
             <sect4 xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -466,7 +466,7 @@
             </axsl:if>
           </axsl:when>
           <axsl:otherwise>
-            <axsl:variable name="sect5s" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect5&quot; or @rnd:style = &quot;sect5-title&quot;]"/>
+            <axsl:variable name="sect5s" select="following-sibling::dbk:para[@rnd:style = &quot;sect5&quot; or @rnd:style = &quot;sect5-title&quot;]"/>
 <!-- mode sections 2 -->
             <sect4 xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -539,8 +539,8 @@
       <axsl:when test="generate-id() = generate-id($nextsect1)"/>
       <axsl:when test="generate-id() = generate-id($nextbook-component)"/>
       <axsl:when test="generate-id() = generate-id($nextbook)"/>
-      <axsl:when test="@rnd:style = &quot;d:sect5&quot; or @rnd:style = &quot;sect5-title&quot;">
-        <axsl:variable name="nextsect5" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect5&quot; or @rnd:style = &quot;sect5-title&quot;][1]"/>
+      <axsl:when test="@rnd:style = &quot;sect5&quot; or @rnd:style = &quot;sect5-title&quot;">
+        <axsl:variable name="nextsect5" select="following-sibling::dbk:para[@rnd:style = &quot;sect5&quot; or @rnd:style = &quot;sect5-title&quot;][1]"/>
 <!-- mode sections 3 -->
         <sect5 xmlns="http://docbook.org/ns/docbook">
           <axsl:call-template name="copy"/>
@@ -601,11 +601,11 @@
     <axsl:param select="/.." name="sect1s"/>
     <axsl:choose>
       <axsl:when test="generate-id() = generate-id($nexttoplevel-component)"/>
-      <axsl:when test="@rnd:style = &quot;d:sect1&quot; or @rnd:style = &quot;sect1-title&quot;">
-        <axsl:variable name="nextsect1" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect1&quot; or @rnd:style = &quot;sect1-title&quot;][1]"/>
+      <axsl:when test="@rnd:style = &quot;sect1&quot; or @rnd:style = &quot;sect1-title&quot;">
+        <axsl:variable name="nextsect1" select="following-sibling::dbk:para[@rnd:style = &quot;sect1&quot; or @rnd:style = &quot;sect1-title&quot;][1]"/>
         <axsl:choose>
           <axsl:when test="$nextsect1">
-            <axsl:variable name="sect2s" select="$nextsect1/preceding-sibling::dbk:para[@rnd:style = &quot;d:sect2&quot; or @rnd:style = &quot;sect2-title&quot;]"/>
+            <axsl:variable name="sect2s" select="$nextsect1/preceding-sibling::dbk:para[@rnd:style = &quot;sect2&quot; or @rnd:style = &quot;sect2-title&quot;]"/>
 <!-- mode sections 1 -->
             <sect1 xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -624,7 +624,7 @@
             </axsl:if>
           </axsl:when>
           <axsl:otherwise>
-            <axsl:variable name="sect2s" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect2&quot; or @rnd:style = &quot;sect2-title&quot;]"/>
+            <axsl:variable name="sect2s" select="following-sibling::dbk:para[@rnd:style = &quot;sect2&quot; or @rnd:style = &quot;sect2-title&quot;]"/>
 <!-- mode sections 2 -->
             <sect1 xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -661,11 +661,11 @@
     <axsl:choose>
       <axsl:when test="generate-id() = generate-id($nextsect1)"/>
       <axsl:when test="generate-id() = generate-id($nexttoplevel-component)"/>
-      <axsl:when test="@rnd:style = &quot;d:sect2&quot; or @rnd:style = &quot;sect2-title&quot;">
-        <axsl:variable name="nextsect2" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect2&quot; or @rnd:style = &quot;sect2-title&quot;][1]"/>
+      <axsl:when test="@rnd:style = &quot;sect2&quot; or @rnd:style = &quot;sect2-title&quot;">
+        <axsl:variable name="nextsect2" select="following-sibling::dbk:para[@rnd:style = &quot;sect2&quot; or @rnd:style = &quot;sect2-title&quot;][1]"/>
         <axsl:choose>
           <axsl:when test="$nextsect2">
-            <axsl:variable name="sect3s" select="$nextsect2/preceding-sibling::dbk:para[@rnd:style = &quot;d:sect3&quot; or @rnd:style = &quot;sect3-title&quot;]"/>
+            <axsl:variable name="sect3s" select="$nextsect2/preceding-sibling::dbk:para[@rnd:style = &quot;sect3&quot; or @rnd:style = &quot;sect3-title&quot;]"/>
 <!-- mode sections 1 -->
             <sect2 xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -688,7 +688,7 @@
             </axsl:if>
           </axsl:when>
           <axsl:otherwise>
-            <axsl:variable name="sect3s" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect3&quot; or @rnd:style = &quot;sect3-title&quot;]"/>
+            <axsl:variable name="sect3s" select="following-sibling::dbk:para[@rnd:style = &quot;sect3&quot; or @rnd:style = &quot;sect3-title&quot;]"/>
 <!-- mode sections 2 -->
             <sect2 xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -734,11 +734,11 @@
       <axsl:when test="generate-id() = generate-id($nextsect2)"/>
       <axsl:when test="generate-id() = generate-id($nextsect1)"/>
       <axsl:when test="generate-id() = generate-id($nexttoplevel-component)"/>
-      <axsl:when test="@rnd:style = &quot;d:sect3&quot; or @rnd:style = &quot;sect3-title&quot;">
-        <axsl:variable name="nextsect3" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect3&quot; or @rnd:style = &quot;sect3-title&quot;][1]"/>
+      <axsl:when test="@rnd:style = &quot;sect3&quot; or @rnd:style = &quot;sect3-title&quot;">
+        <axsl:variable name="nextsect3" select="following-sibling::dbk:para[@rnd:style = &quot;sect3&quot; or @rnd:style = &quot;sect3-title&quot;][1]"/>
         <axsl:choose>
           <axsl:when test="$nextsect3">
-            <axsl:variable name="sect4s" select="$nextsect3/preceding-sibling::dbk:para[@rnd:style = &quot;d:sect4&quot; or @rnd:style = &quot;sect4-title&quot;]"/>
+            <axsl:variable name="sect4s" select="$nextsect3/preceding-sibling::dbk:para[@rnd:style = &quot;sect4&quot; or @rnd:style = &quot;sect4-title&quot;]"/>
 <!-- mode sections 1 -->
             <sect3 xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -765,7 +765,7 @@
             </axsl:if>
           </axsl:when>
           <axsl:otherwise>
-            <axsl:variable name="sect4s" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect4&quot; or @rnd:style = &quot;sect4-title&quot;]"/>
+            <axsl:variable name="sect4s" select="following-sibling::dbk:para[@rnd:style = &quot;sect4&quot; or @rnd:style = &quot;sect4-title&quot;]"/>
 <!-- mode sections 2 -->
             <sect3 xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -820,11 +820,11 @@
       <axsl:when test="generate-id() = generate-id($nextsect2)"/>
       <axsl:when test="generate-id() = generate-id($nextsect1)"/>
       <axsl:when test="generate-id() = generate-id($nexttoplevel-component)"/>
-      <axsl:when test="@rnd:style = &quot;d:sect4&quot; or @rnd:style = &quot;sect4-title&quot;">
-        <axsl:variable name="nextsect4" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect4&quot; or @rnd:style = &quot;sect4-title&quot;][1]"/>
+      <axsl:when test="@rnd:style = &quot;sect4&quot; or @rnd:style = &quot;sect4-title&quot;">
+        <axsl:variable name="nextsect4" select="following-sibling::dbk:para[@rnd:style = &quot;sect4&quot; or @rnd:style = &quot;sect4-title&quot;][1]"/>
         <axsl:choose>
           <axsl:when test="$nextsect4">
-            <axsl:variable name="sect5s" select="$nextsect4/preceding-sibling::dbk:para[@rnd:style = &quot;d:sect5&quot; or @rnd:style = &quot;sect5-title&quot;]"/>
+            <axsl:variable name="sect5s" select="$nextsect4/preceding-sibling::dbk:para[@rnd:style = &quot;sect5&quot; or @rnd:style = &quot;sect5-title&quot;]"/>
 <!-- mode sections 1 -->
             <sect4 xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -855,7 +855,7 @@
             </axsl:if>
           </axsl:when>
           <axsl:otherwise>
-            <axsl:variable name="sect5s" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect5&quot; or @rnd:style = &quot;sect5-title&quot;]"/>
+            <axsl:variable name="sect5s" select="following-sibling::dbk:para[@rnd:style = &quot;sect5&quot; or @rnd:style = &quot;sect5-title&quot;]"/>
 <!-- mode sections 2 -->
             <sect4 xmlns="http://docbook.org/ns/docbook">
               <axsl:call-template name="copy"/>
@@ -919,8 +919,8 @@
       <axsl:when test="generate-id() = generate-id($nextsect2)"/>
       <axsl:when test="generate-id() = generate-id($nextsect1)"/>
       <axsl:when test="generate-id() = generate-id($nexttoplevel-component)"/>
-      <axsl:when test="@rnd:style = &quot;d:sect5&quot; or @rnd:style = &quot;sect5-title&quot;">
-        <axsl:variable name="nextsect5" select="following-sibling::dbk:para[@rnd:style = &quot;d:sect5&quot; or @rnd:style = &quot;sect5-title&quot;][1]"/>
+      <axsl:when test="@rnd:style = &quot;sect5&quot; or @rnd:style = &quot;sect5-title&quot;">
+        <axsl:variable name="nextsect5" select="following-sibling::dbk:para[@rnd:style = &quot;sect5&quot; or @rnd:style = &quot;sect5-title&quot;][1]"/>
 <!-- mode sections 3 -->
         <sect5 xmlns="http://docbook.org/ns/docbook">
           <axsl:call-template name="copy"/>

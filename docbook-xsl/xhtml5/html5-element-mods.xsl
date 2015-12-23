@@ -5,17 +5,16 @@
 ]>
 <xsl:stylesheet 
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-  xmlns:d="http://docbook.org/ns/docbook"
-xmlns:exsl="http://exslt.org/common"
+  xmlns:exsl="http://exslt.org/common"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:stbl="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.Table"
   xmlns:xtbl="xalan://com.nwalsh.xalan.Table"
   xmlns:lxslt="http://xml.apache.org/xslt"
   xmlns:ptbl="http://nwalsh.com/xslt/ext/xsltproc/python/Table"
-  exclude-result-prefixes="exsl stbl xtbl lxslt ptbl d"
+  exclude-result-prefixes="exsl stbl xtbl lxslt ptbl"
   version="1.0">
 
-<!-- $Id: html5-element-mods.xsl,v 1.2 2011-09-18 17:47:28 bobs Exp $ -->
+<!-- $I html5-element-mods.xsl,v 1.2 2011-09-18 17:47:28 bobs Exp $ -->
 
 <!--==============================================================-->
 <!--  DocBook XSL Parameter settings                              -->
@@ -42,7 +41,7 @@ xmlns:exsl="http://exslt.org/common"
 </xsl:template>
 
 <!-- HTML5: Replace HTML acronum with abbr for HTML 5 -->
-<xsl:template match="d:acronym">
+<xsl:template match="acronym">
   <xsl:call-template name="inline.charseq">
     <xsl:with-param name="wrapper-name">abbr</xsl:with-param>
   </xsl:call-template>
@@ -51,7 +50,7 @@ xmlns:exsl="http://exslt.org/common"
 <!-- HTML5: replace border="0" with border="" -->
 <!-- HTML5: No @summary allowed -->
 <!-- HTML5: replace many table atts with CSS styles -->
-<xsl:template match="d:tgroup" name="tgroup">
+<xsl:template match="tgroup" name="tgroup">
   <xsl:if test="not(@cols) or @cols = '' or string(number(@cols)) = 'NaN'">
     <xsl:message terminate="yes">
       <xsl:text>Error: CALS tables must specify the number of columns.</xsl:text>
@@ -303,15 +302,15 @@ xmlns:exsl="http://exslt.org/common"
 
     <xsl:copy-of select="$colgroup"/>
 
-    <xsl:apply-templates select="d:thead"/>
-    <xsl:apply-templates select="d:tfoot"/>
-    <xsl:apply-templates select="d:tbody"/>
+    <xsl:apply-templates select="thead"/>
+    <xsl:apply-templates select="tfoot"/>
+    <xsl:apply-templates select="tbody"/>
 
-    <xsl:if test=".//d:footnote|../d:title//d:footnote">
+    <xsl:if test=".//footnote|../title//footnote">
       <tbody class="footnotes">
         <tr>
           <td colspan="{@cols}">
-            <xsl:apply-templates select=".//d:footnote|../d:title//d:footnote" mode="table.footnote.mode"/>
+            <xsl:apply-templates select=".//footnote|../title//footnote" mode="table.footnote.mode"/>
           </td>
         </tr>
       </tbody>
@@ -327,7 +326,7 @@ xmlns:exsl="http://exslt.org/common"
   <xsl:apply-templates select="$colgroup.nodeset" mode="convert.to.style"/>
 </xsl:template>
 
-<xsl:template match="d:colgroup" mode="convert.to.style">
+<xsl:template match="colgroup" mode="convert.to.style">
   <xsl:copy>
     <xsl:copy-of select="@*"/>
     <xsl:apply-templates mode="convert.to.style"/>
@@ -345,14 +344,24 @@ xmlns:exsl="http://exslt.org/common"
       <xsl:choose>
         <!-- width and height attributes are ok for img element -->
         <xsl:when test="local-name() = 'width' and $element != 'img'">
+          <xsl:variable name="attvalue" select="normalize-space(.)"/>
           <xsl:text>width: </xsl:text>
-          <xsl:value-of select="."/>
+          <xsl:value-of select="$attvalue"/>
+          <!-- if integer value, add px unit -->
+          <xsl:if test="floor($attvalue) = $attvalue">
+            <xsl:text>px</xsl:text>
+          </xsl:if>
           <xsl:text>; </xsl:text>
         </xsl:when>
 
         <xsl:when test="local-name() = 'height' and $element != 'img'">
-          <xsl:text>height </xsl:text>
-          <xsl:value-of select="."/>
+          <xsl:variable name="attvalue" select="normalize-space(.)"/>
+          <xsl:text>height: </xsl:text>
+          <xsl:value-of select="$attvalue"/>
+          <!-- if integer value, add px unit -->
+          <xsl:if test="floor($attvalue) = $attvalue">
+            <xsl:text>px</xsl:text>
+          </xsl:if>
           <xsl:text>; </xsl:text>
         </xsl:when>
 
@@ -377,12 +386,14 @@ xmlns:exsl="http://exslt.org/common"
         <xsl:when test="local-name() = 'cellspacing'">
           <xsl:text>border-spacing: </xsl:text>
           <xsl:value-of select="."/>
+          <xsl:text>px</xsl:text>
           <xsl:text>; </xsl:text>
         </xsl:when>
 
         <xsl:when test="local-name() = 'cellpadding'">
           <xsl:text>padding: </xsl:text>
           <xsl:value-of select="."/>
+          <xsl:text>px</xsl:text>
           <xsl:text>; </xsl:text>
         </xsl:when>
       </xsl:choose>
@@ -427,11 +438,11 @@ xmlns:exsl="http://exslt.org/common"
 </xsl:template>
 
 <!-- HTML5: convert some attributes to CSS style attribute -->
-<xsl:template match="d:entry|d:entrytbl">
+<xsl:template match="entry|entrytbl">
   <xsl:param name="col">
     <xsl:choose>
       <xsl:when test="@revisionflag">
-        <xsl:number from="d:row"/>
+        <xsl:number from="row"/>
       </xsl:when>
       <xsl:otherwise>1</xsl:otherwise>
     </xsl:choose>
@@ -454,47 +465,47 @@ xmlns:exsl="http://exslt.org/common"
 
 </xsl:template>
 
-<xsl:template match="d:mediaobject|d:inlinemediaobject">
+<xsl:template match="mediaobject|inlinemediaobject">
   <xsl:call-template name="convert.styles"/>
 </xsl:template>
 
-<xsl:template match="d:qandaset">
+<xsl:template match="qandaset">
   <xsl:call-template name="convert.styles"/>
 </xsl:template>
 
-<xsl:template match="d:calloutlist|d:revhistory|d:footnote|d:figure|d:co">
+<xsl:template match="calloutlist|revhistory|footnote|figure|co">
   <xsl:call-template name="convert.styles"/>
 </xsl:template>
 
-<xsl:template match="d:revhistory" mode="titlepage.mode">
+<xsl:template match="revhistory" mode="titlepage.mode">
   <xsl:call-template name="convert.styles"/>
 </xsl:template>
 
-<xsl:template match="d:variablelist">
+<xsl:template match="variablelist">
   <xsl:call-template name="convert.styles"/>
 </xsl:template>
 
-<xsl:template match="d:orderedlist[@inheritnum = 'inherit']">
+<xsl:template match="orderedlist[@inheritnum = 'inherit']">
   <xsl:call-template name="convert.styles"/>
 </xsl:template>
 
-<xsl:template match="d:simplelist">
+<xsl:template match="simplelist">
   <xsl:call-template name="convert.styles"/>
 </xsl:template>
 
-<xsl:template match="d:blockquote">
+<xsl:template match="blockquote">
   <xsl:call-template name="convert.styles"/>
 </xsl:template>
 
-<xsl:template match="d:note|d:important|d:warning|d:caution|d:tip">
+<xsl:template match="note|important|warning|caution|tip">
   <xsl:call-template name="convert.styles"/>
 </xsl:template>
 
-<xsl:template match="d:funcprototype" mode="ansi-tabular">
+<xsl:template match="funcprototype" mode="ansi-tabular">
   <xsl:call-template name="convert.styles"/>
 </xsl:template>
 
-<xsl:template match="d:funcprototype" mode="kr-tabular">
+<xsl:template match="funcprototype" mode="kr-tabular">
   <xsl:call-template name="convert.styles"/>
 </xsl:template>
 
@@ -549,27 +560,27 @@ xmlns:exsl="http://exslt.org/common"
 </xsl:template>
 
 <!-- HTML5: uses <ul> instead of <dl> for TOC -->
-<xsl:template match="d:question" mode="qandatoc.mode">
+<xsl:template match="question" mode="qandatoc.mode">
   <xsl:variable name="firstch">
     <!-- Use a titleabbrev or title if available -->
     <xsl:choose>
-      <xsl:when test="../d:blockinfo/d:titleabbrev">
-        <xsl:apply-templates select="../d:blockinfo/d:titleabbrev[1]/node()"/>
+      <xsl:when test="../blockinfo/titleabbrev">
+        <xsl:apply-templates select="../blockinfo/titleabbrev[1]/node()"/>
       </xsl:when>
-      <xsl:when test="../d:blockinfo/d:title">
-        <xsl:apply-templates select="../d:blockinfo/d:title[1]/node()"/>
+      <xsl:when test="../blockinfo/title">
+        <xsl:apply-templates select="../blockinfo/title[1]/node()"/>
       </xsl:when>
-      <xsl:when test="../d:info/d:titleabbrev">
-        <xsl:apply-templates select="../d:info/d:titleabbrev[1]/node()"/>
+      <xsl:when test="../info/titleabbrev">
+        <xsl:apply-templates select="../info/titleabbrev[1]/node()"/>
       </xsl:when>
-      <xsl:when test="../d:titleabbrev">
-        <xsl:apply-templates select="../d:titleabbrev[1]/node()"/>
+      <xsl:when test="../titleabbrev">
+        <xsl:apply-templates select="../titleabbrev[1]/node()"/>
       </xsl:when>
-      <xsl:when test="../d:info/d:title">
-        <xsl:apply-templates select="../d:info/d:title[1]/node()"/>
+      <xsl:when test="../info/title">
+        <xsl:apply-templates select="../info/title[1]/node()"/>
       </xsl:when>
-      <xsl:when test="../d:title">
-        <xsl:apply-templates select="../d:title[1]/node()"/>
+      <xsl:when test="../title">
+        <xsl:apply-templates select="../title[1]/node()"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:apply-templates select="(*[local-name(.)!='label'])[1]/node()"/>
@@ -596,7 +607,7 @@ xmlns:exsl="http://exslt.org/common"
         </xsl:call-template>
       </xsl:attribute>
       <xsl:apply-templates select="." mode="label.markup"/>
-      <xsl:if test="contains($deflabel,'number') and not(d:label)">
+      <xsl:if test="contains($deflabel,'number') and not(label)">
         <xsl:apply-templates select="." mode="intralabel.punctuation"/>
       </xsl:if>
       <xsl:text> </xsl:text>
@@ -605,13 +616,13 @@ xmlns:exsl="http://exslt.org/common"
     <!-- * include nested qandaset/qandaentry in TOC if user wants it -->
 
     <xsl:if test="not($qanda.nested.in.toc = 0)">
-      <xsl:apply-templates select="following-sibling::d:answer" mode="qandatoc.mode"/>
+      <xsl:apply-templates select="following-sibling::answer" mode="qandatoc.mode"/>
     </xsl:if>
   </li>
 </xsl:template>
 
-<xsl:template match="d:answer" mode="qandatoc.mode">
-  <xsl:if test="descendant::d:question">
+<xsl:template match="answer" mode="qandatoc.mode">
+  <xsl:if test="descendant::question">
     <xsl:call-template name="process.qanda.toc"/>
   </xsl:if>
 </xsl:template>
@@ -619,128 +630,202 @@ xmlns:exsl="http://exslt.org/common"
 <!-- html5 uses <ul> instead of <dl> for toc -->
 <xsl:template name="process.qanda.toc">
   <ul>
-    <xsl:apply-templates select="d:qandadiv" mode="qandatoc.mode"/>
-    <xsl:apply-templates select="d:qandaset|d:qandaentry" mode="qandatoc.mode"/>
+    <xsl:apply-templates select="qandadiv" mode="qandatoc.mode"/>
+    <xsl:apply-templates select="qandaset|qandaentry" mode="qandatoc.mode"/>
   </ul>
 </xsl:template>
 
-<xsl:template match="d:qandadiv" mode="qandatoc.mode">
+<xsl:template match="qandadiv" mode="qandatoc.mode">
   <!--
-  <dt><xsl:apply-templates select="d:title" mode="qandatoc.mode"/></dt>
+  <dt><xsl:apply-templates select="title" mode="qandatoc.mode"/></dt>
   <dd><xsl:call-template name="process.qanda.toc"/></dd>
   -->
   <li>
-    <xsl:apply-templates select="d:title" mode="qandatoc.mode"/>
+    <xsl:apply-templates select="title" mode="qandatoc.mode"/>
     <xsl:call-template name="process.qanda.toc"/>
   </li>
 </xsl:template>
 
-<xsl:template match="d:audiodata">
-  <xsl:variable name="filename">
-    <xsl:call-template name="mediaobject.filename">
-      <xsl:with-param name="object" select=".."/>
-    </xsl:call-template>
-  </xsl:variable>
+<!-- output html5 video and source elements -->
+<xsl:template match="videoobject">
+  <video>
+    <xsl:call-template name="common.html.attributes"/>
+    <xsl:call-template name="video.poster"/>
+    <!-- copy videodata attributes from first videodata child only -->
+    <xsl:apply-templates select="videodata[1]/@*" mode="video.attribute"/>
+    <xsl:apply-templates select="videodata[1]/multimediaparam" mode="video.attribute"/>
 
+    <!-- generate <source> element for each videodata element -->
+    <xsl:apply-templates select="videodata"/>
+
+    <!-- add any fallback content -->
+    <xsl:call-template name="video.fallback"/>
+
+  </video>
+</xsl:template>
+
+<!-- output html5 audio and source elements -->
+<xsl:template match="audioobject">
   <audio>
     <xsl:call-template name="common.html.attributes"/>
 
-    <xsl:attribute name="src">
-      <xsl:value-of select="$filename"/>
-    </xsl:attribute>
+    <!-- copy audiodata attributes from first audiodata child only -->
+    <xsl:apply-templates select="audiodata[1]/@*" mode="audio.attribute"/>
+    <xsl:apply-templates select="audiodata[1]/multimediaparam" mode="audio.attribute"/>
 
-    <xsl:apply-templates select="@*"/>
-    <xsl:apply-templates select="../d:multimediaparam"/>
+    <!-- generate <source> element for each videodata element -->
+    <xsl:apply-templates select="audiodata"/>
 
     <!-- add any fallback content -->
     <xsl:call-template name="audio.fallback"/>
+
   </audio>
 </xsl:template>
 
-<!-- generate <video> element for html5 -->
-<xsl:template match="d:videodata">
+<xsl:template match="videodata">
+
   <xsl:variable name="filename">
     <xsl:call-template name="mediaobject.filename">
-      <xsl:with-param name="object" select=".."/>
+      <!-- Call it with the videodata as the object -->
+      <xsl:with-param name="object" select="."/>
     </xsl:call-template>
   </xsl:variable>
 
-  <video>
+  <source>
     <xsl:call-template name="common.html.attributes"/>
 
     <xsl:attribute name="src">
       <xsl:value-of select="$filename"/>
     </xsl:attribute>
 
-    <xsl:call-template name="video.poster"/>
+    <xsl:apply-templates select="@format" mode="source.attribute"/>
 
-    <xsl:apply-templates select="@*[local-name() != 'fileref']"/>
-    <xsl:apply-templates select="../d:multimediaparam"/>
+    <xsl:apply-templates select="multimediaparam" mode="source.attribute"/>
     
-    <!-- add any fallback content -->
-    <xsl:call-template name="video.fallback"/>
-  </video>
+  </source>
+</xsl:template>
+
+<xsl:template match="audiodata">
+
+  <xsl:variable name="filename">
+    <xsl:call-template name="mediaobject.filename">
+      <!-- Call it with the videodata as the object -->
+      <xsl:with-param name="object" select="."/>
+    </xsl:call-template>
+  </xsl:variable>
+
+  <source>
+    <xsl:call-template name="common.html.attributes"/>
+
+    <xsl:attribute name="src">
+      <xsl:value-of select="$filename"/>
+    </xsl:attribute>
+
+    <xsl:apply-templates select="@format" mode="source.attribute"/>
+
+    <xsl:apply-templates select="multimediaparam" mode="source.attribute"/>
+    
+  </source>
+</xsl:template>
+
+<!-- attributes handled in modes, so default is off -->
+<xsl:template match="@*" mode="source.attribute"/>
+<xsl:template match="@*" mode="video.attribute"/>
+<xsl:template match="@*" mode="audio.attribute"/>
+
+<xsl:template match="@format" mode="source.attribute">
+  <xsl:attribute name="type">
+    <xsl:value-of select="normalize-space(.)"/>
+  </xsl:attribute>
 </xsl:template>
 
 <!-- use only an imageobject with @role = 'poster' -->
 <xsl:template name="video.poster">
-  <xsl:variable name="imageobject" select="../../d:imageobject[@role = 'poster'][1]"/>
+  <!-- context is videoobject -->
+  <xsl:variable name="imageobject" 
+                select="../../imageobject[@role = 'poster'][1] | 
+                           ../imageobject[@role = 'poster'][1]"/>
   <xsl:if test="$imageobject">
     <xsl:attribute name="poster">
-      <xsl:value-of select="$imageobject/d:imagedata/@fileref"/>
+      <xsl:value-of select="$imageobject/imagedata/@fileref"/>
     </xsl:attribute> 
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:videodata/@fileref">
-  <!-- already handled by videodata template -->
+<xsl:template match="videodata/@fileref" mode="source.attribute">
+  <!-- process in normal mode -->
+  <xsl:apply-templates select="."/>
 </xsl:template>
 
-<xsl:template match="d:audiodata/@fileref">
-  <!-- already handled by audiodata template -->
+<xsl:template match="videodata/@fileref" mode="video.attribute"/>
+
+<xsl:template match="audiodata/@fileref" mode="source.attribute">
+  <!-- process in normal mode -->
+  <xsl:apply-templates select="."/>
 </xsl:template>
 
-<xsl:template match="d:videodata/@contentwidth">
+<xsl:template match="audiodata/@fileref" mode="audio.attribute"/>
+
+<xsl:template match="videodata/@contentwidth | videodata/@width" 
+              mode="video.attribute">
   <xsl:attribute name="width">
     <xsl:value-of select="."/>
   </xsl:attribute>
 </xsl:template>
 
-<xsl:template match="d:videodata/@contentdepth">
+<xsl:template match="videodata/@contentdepth | videodata/@depth"
+              mode="video.attribute">
   <xsl:attribute name="height">
     <xsl:value-of select="."/>
   </xsl:attribute>
 </xsl:template>
 
-<xsl:template match="d:videodata/@depth">
-  <xsl:attribute name="height">
-    <xsl:value-of select="."/>
-  </xsl:attribute>
-</xsl:template>
+<xsl:template match="multimediaparam" mode="source.attribute"/>
+<xsl:template match="multimediaparam" mode="video.attribute"/>
 
-<!-- pass through these attributes -->
-<xsl:template match="d:videodata/@autoplay |
-                     d:videodata/@controls |
-                     d:audiodata/@autoplay |
-                     d:audiodata/@controls">
-  <xsl:copy-of select="."/>
-</xsl:template>
-
-<xsl:template match="d:videodata/@*" priority="-1">
-  <!-- Do nothing with the rest of the attributes -->
-</xsl:template>
-
-<xsl:template match="d:audiodata/@*" priority="-1">
-  <!-- Do nothing with the rest of the attributes -->
-</xsl:template>
-
-<xsl:template match="d:multimediaparam">
+<xsl:template match="multimediaparam[@name = 'autoplay' or
+                                       @name = 'controls' or
+                                       @name = 'height' or
+                                       @name = 'loop' or
+                                       @name = 'muted' or
+                                       @name = 'preload' or
+                                       @name = 'width']"
+             mode="video.attribute">
   <xsl:call-template name="process.multimediaparam">
     <xsl:with-param name="object" select=".."/>
     <xsl:with-param name="param.name" select="@name"/>
     <xsl:with-param name="param.value" select="@value"/>
   </xsl:call-template>
 </xsl:template>
+
+<xsl:template match="multimediaparam[@name = 'autoplay' or
+                                       @name = 'controls' or
+                                       @name = 'loop' or
+                                       @name = 'muted' or
+                                       @name = 'preload']"
+             mode="audio.attribute">
+  <xsl:call-template name="process.multimediaparam">
+    <xsl:with-param name="object" select=".."/>
+    <xsl:with-param name="param.name" select="@name"/>
+    <xsl:with-param name="param.value" select="@value"/>
+  </xsl:call-template>
+</xsl:template>
+
+<xsl:template match="multimediaparam[not(@name = 'autoplay' or
+                                       @name = 'controls' or
+                                       @name = 'height' or
+                                       @name = 'loop' or
+                                       @name = 'muted' or
+                                       @name = 'preload' or
+                                       @name = 'width')]"
+             mode="source.attribute">
+  <xsl:call-template name="process.multimediaparam">
+    <xsl:with-param name="object" select=".."/>
+    <xsl:with-param name="param.name" select="@name"/>
+    <xsl:with-param name="param.value" select="@value"/>
+  </xsl:call-template>
+</xsl:template>
+
 
 <!-- Determines the best value of a media attribute from the
   attributes and multimediaparam elements -->
@@ -765,20 +850,47 @@ xmlns:exsl="http://exslt.org/common"
 </xsl:template>
 
 <xsl:template name="video.fallback">
-  <xsl:param name="videodata" select="."/>
-  <xsl:variable name="textobject" select="$videodata/../../d:textobject"/>
+  <xsl:param name="videoobject" select="."/>
+  <xsl:variable name="textobject" select="$videoobject/../textobject"/>
 
-  <xsl:apply-templates select="$textobject" mode="fallback"/>
+  <xsl:choose>
+    <xsl:when test="$textobject">
+      <xsl:apply-templates select="$textobject" mode="fallback"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="video.fallback.text"/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+
+<xsl:template name="video.fallback.text">
+  <xsl:call-template name="gentext">
+    <xsl:with-param name="key" select="'video-unsupported'"/>
+  </xsl:call-template>
 </xsl:template>
 
 <xsl:template name="audio.fallback">
   <xsl:param name="audiodata" select="."/>
-  <xsl:variable name="textobject" select="$audiodata/../../d:textobject"/>
+  <xsl:variable name="textobject" select="$audiodata/../../textobject"/>
 
-  <xsl:apply-templates select="$textobject" mode="fallback"/>
+  <xsl:choose>
+    <xsl:when test="$textobject">
+      <xsl:apply-templates select="$textobject" mode="fallback"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="audio.fallback.text"/>
+    </xsl:otherwise>
+  </xsl:choose>
+
 </xsl:template>
 
-<xsl:template match="d:textobject" mode="fallback">
+<xsl:template name="audio.fallback.text">
+  <xsl:call-template name="gentext">
+    <xsl:with-param name="key" select="'audio-unsupported'"/>
+  </xsl:call-template>
+</xsl:template>
+
+<xsl:template match="textobject" mode="fallback">
   <div>
     <xsl:apply-templates select="." mode="class.attribute"/>
     <xsl:apply-templates/>

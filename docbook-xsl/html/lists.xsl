@@ -1,11 +1,9 @@
 <?xml version='1.0'?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-version='1.0'>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version='1.0'>
 
 <!-- ********************************************************************
-     $Id: lists.xsl 9307 2012-04-28 03:55:07Z bobstayton $
+     $Id: lists.xsl 9792 2013-08-28 23:03:16Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -16,7 +14,7 @@ version='1.0'>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:itemizedlist">
+<xsl:template match="itemizedlist">
   <!-- Handle spacing="compact" as multiple class attribute instead
        of the deprecated HTML compact attribute -->
   <xsl:variable name="default.class">
@@ -40,17 +38,17 @@ version='1.0'>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
     <xsl:call-template name="anchor"/>
-    <xsl:if test="d:title|d:info/d:title">
+    <xsl:if test="title|info/title">
       <xsl:call-template name="formal.object.heading"/>
     </xsl:if>
 
     <!-- Preserve order of PIs and comments -->
     <xsl:apply-templates 
-        select="*[not(self::d:listitem
-                  or self::d:title
-                  or self::d:titleabbrev)]
-                |comment()[not(preceding-sibling::d:listitem)]
-                |processing-instruction()[not(preceding-sibling::d:listitem)]"/>
+        select="*[not(self::listitem
+                  or self::title
+                  or self::titleabbrev)]
+                |comment()[not(preceding-sibling::listitem)]
+                |processing-instruction()[not(preceding-sibling::listitem)]"/>
 
     <ul>
       <xsl:call-template name="generate.class.attribute">
@@ -74,18 +72,18 @@ version='1.0'>
       </xsl:choose>
 
       <xsl:apply-templates 
-            select="d:listitem
-                    |comment()[preceding-sibling::d:listitem]
-                    |processing-instruction()[preceding-sibling::d:listitem]"/>
+            select="listitem
+                    |comment()[preceding-sibling::listitem]
+                    |processing-instruction()[preceding-sibling::listitem]"/>
     </ul>
   </div>
 </xsl:template>
 
-<xsl:template match="d:itemizedlist/d:title">
+<xsl:template match="itemizedlist/title">
   <!-- nop -->
 </xsl:template>
 
-<xsl:template match="d:itemizedlist/d:listitem">
+<xsl:template match="itemizedlist/listitem">
   <xsl:variable name="mark" select="../@mark"/>
   <xsl:variable name="override" select="@override"/>
 
@@ -142,7 +140,7 @@ version='1.0'>
   </li>
 </xsl:template>
 
-<xsl:template match="d:orderedlist">
+<xsl:template match="orderedlist">
   <!-- Handle spacing="compact" as multiple class attribute instead
        of the deprecated HTML compact attribute -->
   <xsl:variable name="default.class">
@@ -183,20 +181,20 @@ version='1.0'>
     <xsl:call-template name="id.attribute"/>
     <xsl:call-template name="anchor"/>
 
-    <xsl:if test="d:title|d:info/d:title">
+    <xsl:if test="title|info/title">
       <xsl:call-template name="formal.object.heading"/>
     </xsl:if>
 
     <!-- Preserve order of PIs and comments -->
     <xsl:apply-templates 
-        select="*[not(self::d:listitem
-                  or self::d:title
-                  or self::d:titleabbrev)]
-                |comment()[not(preceding-sibling::d:listitem)]
-                |processing-instruction()[not(preceding-sibling::d:listitem)]"/>
+        select="*[not(self::listitem
+                  or self::title
+                  or self::titleabbrev)]
+                |comment()[not(preceding-sibling::listitem)]
+                |processing-instruction()[not(preceding-sibling::listitem)]"/>
 
     <xsl:choose>
-      <xsl:when test="@inheritnum='inherit' and ancestor::d:listitem[parent::d:orderedlist]">
+      <xsl:when test="@inheritnum='inherit' and ancestor::listitem[parent::orderedlist]">
         <table border="{$table.border.off}">
           <xsl:call-template name="generate.class.attribute">
             <xsl:with-param name="class" select="$default.class"/>
@@ -208,9 +206,9 @@ version='1.0'>
           <tbody>
             <xsl:apply-templates 
                 mode="orderedlist-table"
-                select="d:listitem
-                        |comment()[preceding-sibling::d:listitem]
-                        |processing-instruction()[preceding-sibling::d:listitem]"/>
+                select="listitem
+                        |comment()[preceding-sibling::listitem]
+                        |processing-instruction()[preceding-sibling::listitem]"/>
           </tbody>
         </table>
       </xsl:when>
@@ -230,20 +228,20 @@ version='1.0'>
             </xsl:attribute>
           </xsl:if>
           <xsl:apply-templates 
-                select="d:listitem
-                        |comment()[preceding-sibling::d:listitem]
-                        |processing-instruction()[preceding-sibling::d:listitem]"/>
+                select="listitem
+                        |comment()[preceding-sibling::listitem]
+                        |processing-instruction()[preceding-sibling::listitem]"/>
         </ol>
       </xsl:otherwise>
     </xsl:choose>
   </div>
 </xsl:template>
 
-<xsl:template match="d:orderedlist/d:title">
+<xsl:template match="orderedlist/title">
   <!-- nop -->
 </xsl:template>
 
-<xsl:template match="d:orderedlist/d:listitem">
+<xsl:template match="orderedlist/listitem">
   <li>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
@@ -274,7 +272,7 @@ version='1.0'>
   </li>
 </xsl:template>
 
-<xsl:template match="d:orderedlist/d:listitem" mode="orderedlist-table">
+<xsl:template match="orderedlist/listitem" mode="orderedlist-table">
   <tr>
     <td>
       <xsl:apply-templates select="." mode="item-number"/>
@@ -299,7 +297,7 @@ version='1.0'>
   </tr>
 </xsl:template>
 
-<xsl:template match="d:variablelist">
+<xsl:template match="variablelist">
   <xsl:variable name="pi-presentation">
     <xsl:call-template name="pi.dbhtml_list-presentation"/>
   </xsl:variable>
@@ -343,7 +341,7 @@ version='1.0'>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
     <xsl:call-template name="anchor"/>
-    <xsl:if test="d:title|d:info/d:title">
+    <xsl:if test="title|info/title">
       <xsl:call-template name="formal.object.heading"/>
     </xsl:if>
 
@@ -351,11 +349,11 @@ version='1.0'>
       <xsl:when test="$presentation = 'table'">
         <!-- Preserve order of PIs and comments -->
         <xsl:apply-templates 
-          select="*[not(self::d:varlistentry
-                    or self::d:title
-                    or self::d:titleabbrev)]
-                  |comment()[not(preceding-sibling::d:varlistentry)]
-                  |processing-instruction()[not(preceding-sibling::d:varlistentry)]"/>
+          select="*[not(self::varlistentry
+                    or self::title
+                    or self::titleabbrev)]
+                  |comment()[not(preceding-sibling::varlistentry)]
+                  |processing-instruction()[not(preceding-sibling::varlistentry)]"/>
         <table border="{$table.border.off}">
           <xsl:call-template name="generate.class.attribute">
             <xsl:with-param name="class" select="$default.class"/>
@@ -382,51 +380,51 @@ version='1.0'>
           </colgroup>
           <tbody>
             <xsl:apply-templates mode="varlist-table"
-              select="d:varlistentry
-                      |comment()[preceding-sibling::d:varlistentry]
-                      |processing-instruction()[preceding-sibling::d:varlistentry]"/>
+              select="varlistentry
+                      |comment()[preceding-sibling::varlistentry]
+                      |processing-instruction()[preceding-sibling::varlistentry]"/>
           </tbody>
         </table>
       </xsl:when>
       <xsl:otherwise>
         <!-- Preserve order of PIs and comments -->
         <xsl:apply-templates 
-          select="*[not(self::d:varlistentry
-                    or self::d:title
-                    or self::d:titleabbrev)]
-                  |comment()[not(preceding-sibling::d:varlistentry)]
-                  |processing-instruction()[not(preceding-sibling::d:varlistentry)]"/>
+          select="*[not(self::varlistentry
+                    or self::title
+                    or self::titleabbrev)]
+                  |comment()[not(preceding-sibling::varlistentry)]
+                  |processing-instruction()[not(preceding-sibling::varlistentry)]"/>
         <dl>
           <xsl:call-template name="generate.class.attribute">
             <xsl:with-param name="class" select="$default.class"/>
           </xsl:call-template>
           <xsl:apply-templates 
-              select="d:varlistentry
-                      |comment()[preceding-sibling::d:varlistentry]
-                      |processing-instruction()[preceding-sibling::d:varlistentry]"/>
+              select="varlistentry
+                      |comment()[preceding-sibling::varlistentry]
+                      |processing-instruction()[preceding-sibling::varlistentry]"/>
         </dl>
       </xsl:otherwise>
     </xsl:choose>
   </div>
 </xsl:template>
 
-<xsl:template match="d:variablelist/d:title">
+<xsl:template match="variablelist/title">
   <!-- nop -->
 </xsl:template>
 
-<xsl:template match="d:itemizedlist/d:titleabbrev|d:orderedlist/d:titleabbrev">
+<xsl:template match="itemizedlist/titleabbrev|orderedlist/titleabbrev">
   <!--nop-->
 </xsl:template>
 
-<xsl:template match="d:variablelist/d:titleabbrev">
+<xsl:template match="variablelist/titleabbrev">
   <!--nop-->
 </xsl:template>
 
-<xsl:template match="d:listitem" mode="xref">
+<xsl:template match="listitem" mode="xref">
   <xsl:number format="1"/>
 </xsl:template>
 
-<xsl:template match="d:listitem/d:simpara" priority="2">
+<xsl:template match="listitem/simpara" priority="2">
   <!-- If a listitem contains only a single simpara, don't output
        the <p> wrapper; this has the effect of creating an li
        with simple text content. -->
@@ -457,18 +455,18 @@ version='1.0'>
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:varlistentry">
+<xsl:template match="varlistentry">
   <dt>
     <xsl:call-template name="id.attribute"/>
     <xsl:call-template name="anchor"/>
-    <xsl:apply-templates select="d:term"/>
+    <xsl:apply-templates select="term"/>
   </dt>
   <dd>
-    <xsl:apply-templates select="d:listitem"/>
+    <xsl:apply-templates select="listitem"/>
   </dd>
 </xsl:template>
 
-<xsl:template match="d:varlistentry" mode="varlist-table">
+<xsl:template match="varlistentry" mode="varlist-table">
   <xsl:variable name="presentation">
     <xsl:call-template name="pi.dbhtml_term-presentation">
       <xsl:with-param name="node" select=".."/>
@@ -483,7 +481,7 @@ version='1.0'>
   <tr>
     <xsl:call-template name="tr.attributes">
       <xsl:with-param name="rownum">
-        <xsl:number from="d:variablelist" count="d:varlistentry"/>
+        <xsl:number from="variablelist" count="varlistentry"/>
       </xsl:with-param>
     </xsl:call-template>
 
@@ -494,38 +492,38 @@ version='1.0'>
       <xsl:choose>
         <xsl:when test="$presentation = 'bold'">
           <strong>
-            <xsl:apply-templates select="d:term"/>
+            <xsl:apply-templates select="term"/>
             <xsl:value-of select="$separator"/>
           </strong>
         </xsl:when>
         <xsl:when test="$presentation = 'italic'">
           <em>
-            <xsl:apply-templates select="d:term"/>
+            <xsl:apply-templates select="term"/>
             <xsl:value-of select="$separator"/>
           </em>
         </xsl:when>
         <xsl:when test="$presentation = 'bold-italic'">
           <strong>
             <em>
-              <xsl:apply-templates select="d:term"/>
+              <xsl:apply-templates select="term"/>
               <xsl:value-of select="$separator"/>
             </em>
           </strong>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:apply-templates select="d:term"/>
+          <xsl:apply-templates select="term"/>
           <xsl:value-of select="$separator"/>
         </xsl:otherwise>
       </xsl:choose>
       </p>
     </td>
     <td>
-      <xsl:apply-templates select="d:listitem"/>
+      <xsl:apply-templates select="listitem"/>
     </td>
   </tr>
 </xsl:template>
 
-<xsl:template match="d:varlistentry/d:term">
+<xsl:template match="varlistentry/term">
   <span>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
@@ -550,7 +548,7 @@ version='1.0'>
   </span>
 </xsl:template>
 
-<xsl:template match="d:varlistentry/d:listitem">
+<xsl:template match="varlistentry/listitem">
   <!-- we can't just drop the anchor in since some browsers (Opera)
        get confused about line breaks if we do. So if the first child
        is a para, assume the para will put in the anchor. Otherwise,
@@ -573,7 +571,7 @@ version='1.0'>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:simplelist">
+<xsl:template match="simplelist">
   <!-- with no type specified, the default is 'vert' -->
   <xsl:call-template name="anchor"/>
   <table border="{$table.border.off}">
@@ -595,7 +593,7 @@ version='1.0'>
   </table>
 </xsl:template>
 
-<xsl:template match="d:simplelist[@type='inline']">
+<xsl:template match="simplelist[@type='inline']">
   <span>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
@@ -613,7 +611,7 @@ version='1.0'>
       </xsl:choose>
     </xsl:variable>
   
-    <xsl:for-each select="d:member">
+    <xsl:for-each select="member">
       <xsl:call-template name="simple.xlink">
         <xsl:with-param name="content">
           <xsl:apply-templates/>
@@ -635,7 +633,7 @@ version='1.0'>
   </span>
 </xsl:template>
 
-<xsl:template match="d:simplelist[@type='horiz']">
+<xsl:template match="simplelist[@type='horiz']">
   <xsl:call-template name="anchor"/>
   <table border="{$table.border.off}">
     <xsl:if test="$div.element != 'section'">
@@ -656,7 +654,7 @@ version='1.0'>
   </table>
 </xsl:template>
 
-<xsl:template match="d:simplelist[@type='vert']">
+<xsl:template match="simplelist[@type='vert']">
   <xsl:call-template name="anchor"/>
   <table border="{$table.border.off}">
     <xsl:if test="$div.element != 'section'">
@@ -680,7 +678,7 @@ version='1.0'>
 <xsl:template name="simplelist.horiz">
   <xsl:param name="cols">1</xsl:param>
   <xsl:param name="cell">1</xsl:param>
-  <xsl:param name="members" select="./d:member"/>
+  <xsl:param name="members" select="./member"/>
 
   <xsl:if test="$cell &lt;= count($members)">
     <tr>
@@ -706,7 +704,7 @@ version='1.0'>
 <xsl:template name="simplelist.horiz.row">
   <xsl:param name="cols">1</xsl:param>
   <xsl:param name="cell">1</xsl:param>
-  <xsl:param name="members" select="./d:member"/>
+  <xsl:param name="members" select="./member"/>
   <xsl:param name="curcol">1</xsl:param>
 
   <xsl:if test="$curcol &lt;= $cols">
@@ -732,7 +730,7 @@ version='1.0'>
 <xsl:template name="simplelist.vert">
   <xsl:param name="cols">1</xsl:param>
   <xsl:param name="cell">1</xsl:param>
-  <xsl:param name="members" select="./d:member"/>
+  <xsl:param name="members" select="./member"/>
   <xsl:param name="rows"
              select="floor((count($members)+$cols - 1) div $cols)"/>
 
@@ -763,7 +761,7 @@ version='1.0'>
   <xsl:param name="cols">1</xsl:param>
   <xsl:param name="rows">1</xsl:param>
   <xsl:param name="cell">1</xsl:param>
-  <xsl:param name="members" select="./d:member"/>
+  <xsl:param name="members" select="./member"/>
   <xsl:param name="curcol">1</xsl:param>
 
   <xsl:if test="$curcol &lt;= $cols">
@@ -787,7 +785,7 @@ version='1.0'>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:member">
+<xsl:template match="member">
   <xsl:call-template name="anchor"/>
   <xsl:call-template name="simple.xlink">
     <xsl:with-param name="content">
@@ -798,7 +796,7 @@ version='1.0'>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:procedure">
+<xsl:template match="procedure">
   <xsl:variable name="param.placement"
                 select="substring-after(normalize-space($formal.title.placement),
                                         concat(local-name(.), ' '))"/>
@@ -817,18 +815,18 @@ version='1.0'>
 
   <!-- Preserve order of PIs and comments -->
   <xsl:variable name="preamble"
-        select="*[not(self::d:step
-                  or self::d:title
-                  or self::d:titleabbrev)]
-                |comment()[not(preceding-sibling::d:step)]
-                |processing-instruction()[not(preceding-sibling::d:step)]"/>
+        select="*[not(self::step
+                  or self::title
+                  or self::titleabbrev)]
+                |comment()[not(preceding-sibling::step)]
+                |processing-instruction()[not(preceding-sibling::step)]"/>
 
   <div>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute">
       <xsl:with-param name="conditional">
         <xsl:choose>
-          <xsl:when test="d:title">0</xsl:when>
+          <xsl:when test="title">0</xsl:when>
           <xsl:otherwise>1</xsl:otherwise>
         </xsl:choose>
       </xsl:with-param>
@@ -836,26 +834,26 @@ version='1.0'>
     <xsl:call-template name="anchor">
       <xsl:with-param name="conditional">
         <xsl:choose>
-          <xsl:when test="d:title">0</xsl:when>
+          <xsl:when test="title|info/title|blockinfo/title">0</xsl:when>
           <xsl:otherwise>1</xsl:otherwise>
         </xsl:choose>
       </xsl:with-param>
     </xsl:call-template>
 
-    <xsl:if test="(d:title or d:info/d:title) and $placement = 'before'">
+    <xsl:if test="(title or info/title or blockinfo/title) and $placement = 'before'">
       <xsl:call-template name="formal.object.heading"/>
     </xsl:if>
 
     <xsl:apply-templates select="$preamble"/>
 
     <xsl:choose>
-      <xsl:when test="count(d:step) = 1">
+      <xsl:when test="count(step) = 1">
         <ul>
           <xsl:call-template name="generate.class.attribute"/>
           <xsl:apply-templates 
-            select="d:step
-                    |comment()[preceding-sibling::d:step]
-                    |processing-instruction()[preceding-sibling::d:step]"/>
+            select="step
+                    |comment()[preceding-sibling::step]
+                    |processing-instruction()[preceding-sibling::step]"/>
         </ul>
       </xsl:when>
       <xsl:otherwise>
@@ -865,24 +863,24 @@ version='1.0'>
             <xsl:value-of select="substring($procedure.step.numeration.formats,1,1)"/>
           </xsl:attribute>
           <xsl:apply-templates 
-            select="d:step
-                    |comment()[preceding-sibling::d:step]
-                    |processing-instruction()[preceding-sibling::d:step]"/>
+            select="step
+                    |comment()[preceding-sibling::step]
+                    |processing-instruction()[preceding-sibling::step]"/>
         </ol>
       </xsl:otherwise>
     </xsl:choose>
 
-    <xsl:if test="(d:title or d:info/d:title) and $placement != 'before'">
+    <xsl:if test="(title or info/title or blockinfo/title) and $placement != 'before'">
       <xsl:call-template name="formal.object.heading"/>
     </xsl:if>
   </div>
 </xsl:template>
 
-<xsl:template match="d:procedure/d:title">
+<xsl:template match="procedure/title">
   <!-- nop -->
 </xsl:template>
 
-<xsl:template match="d:substeps">
+<xsl:template match="substeps">
   <xsl:variable name="numeration">
     <xsl:call-template name="procedure.step.numeration"/>
   </xsl:variable>
@@ -896,7 +894,7 @@ version='1.0'>
   </ol>
 </xsl:template>
 
-<xsl:template match="d:step">
+<xsl:template match="step">
   <li>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
@@ -905,7 +903,7 @@ version='1.0'>
   </li>
 </xsl:template>
 
-<xsl:template match="d:stepalternatives">
+<xsl:template match="stepalternatives">
   <xsl:call-template name="anchor"/>
   <ul>
     <xsl:call-template name="common.html.attributes"/>
@@ -914,7 +912,7 @@ version='1.0'>
   </ul>
 </xsl:template>
 
-<xsl:template match="d:step/d:title">
+<xsl:template match="step/title">
   <p>
     <xsl:call-template name="common.html.attributes"/>
     <b>
@@ -925,7 +923,7 @@ version='1.0'>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:segmentedlist">
+<xsl:template match="segmentedlist">
   <xsl:variable name="presentation">
     <xsl:call-template name="pi.dbhtml_list-presentation"/>
   </xsl:variable>
@@ -952,7 +950,7 @@ version='1.0'>
   </div>
 </xsl:template>
 
-<xsl:template match="d:segmentedlist/d:title">
+<xsl:template match="segmentedlist/title">
   <div>
     <xsl:call-template name="common.html.attributes"/>
     <strong>
@@ -964,14 +962,14 @@ version='1.0'>
   </div>
 </xsl:template>
 
-<xsl:template match="d:segtitle">
+<xsl:template match="segtitle">
 </xsl:template>
 
-<xsl:template match="d:segtitle" mode="segtitle-in-seg">
+<xsl:template match="segtitle" mode="segtitle-in-seg">
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:seglistitem">
+<xsl:template match="seglistitem">
   <div>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
@@ -980,10 +978,10 @@ version='1.0'>
   </div>
 </xsl:template>
 
-<xsl:template match="d:seg">
-  <xsl:variable name="segnum" select="count(preceding-sibling::d:seg)+1"/>
-  <xsl:variable name="seglist" select="ancestor::d:segmentedlist"/>
-  <xsl:variable name="segtitles" select="$seglist/d:segtitle"/>
+<xsl:template match="seg">
+  <xsl:variable name="segnum" select="count(preceding-sibling::seg)+1"/>
+  <xsl:variable name="seglist" select="ancestor::segmentedlist"/>
+  <xsl:variable name="segtitles" select="$seglist/segtitle"/>
 
   <!--
      Note: segtitle is only going to be the right thing in a well formed
@@ -1005,7 +1003,7 @@ version='1.0'>
   </div>
 </xsl:template>
 
-<xsl:template match="d:segmentedlist" mode="seglist-table">
+<xsl:template match="segmentedlist" mode="seglist-table">
   <xsl:variable name="table-summary">
     <xsl:call-template name="pi.dbhtml_table-summary"/>
   </xsl:variable>
@@ -1014,7 +1012,7 @@ version='1.0'>
     <xsl:call-template name="pi.dbhtml_list-width"/>
   </xsl:variable>
 
-  <xsl:apply-templates select="d:title"/>
+  <xsl:apply-templates select="title"/>
 
   <table border="{$table.border.off}">
     <xsl:if test="$list-width != ''">
@@ -1030,25 +1028,25 @@ version='1.0'>
     <thead>
       <tr class="segtitle">
         <xsl:call-template name="tr.attributes">
-          <xsl:with-param name="row" select="d:segtitle[1]"/>
+          <xsl:with-param name="row" select="segtitle[1]"/>
           <xsl:with-param name="rownum" select="1"/>
         </xsl:call-template>
-        <xsl:apply-templates select="d:segtitle" mode="seglist-table"/>
+        <xsl:apply-templates select="segtitle" mode="seglist-table"/>
       </tr>
     </thead>
     <tbody>
-      <xsl:apply-templates select="d:seglistitem" mode="seglist-table"/>
+      <xsl:apply-templates select="seglistitem" mode="seglist-table"/>
     </tbody>
   </table>
 </xsl:template>
 
-<xsl:template match="d:segtitle" mode="seglist-table">
+<xsl:template match="segtitle" mode="seglist-table">
   <th><xsl:apply-templates/></th>
 </xsl:template>
 
-<xsl:template match="d:seglistitem" mode="seglist-table">
+<xsl:template match="seglistitem" mode="seglist-table">
   <xsl:variable name="seglinum">
-    <xsl:number from="d:segmentedlist" count="d:seglistitem"/>
+    <xsl:number from="segmentedlist" count="seglistitem"/>
   </xsl:variable>
 
   <tr>
@@ -1061,7 +1059,7 @@ version='1.0'>
   </tr>
 </xsl:template>
 
-<xsl:template match="d:seg" mode="seglist-table">
+<xsl:template match="seg" mode="seglist-table">
   <td>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
@@ -1069,12 +1067,12 @@ version='1.0'>
   </td>
 </xsl:template>
 
-<xsl:template match="d:seg[1]" mode="seglist-table">
+<xsl:template match="seg[1]" mode="seglist-table">
   <td>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
     <xsl:call-template name="anchor">
-      <xsl:with-param name="node" select="ancestor::d:seglistitem"/>
+      <xsl:with-param name="node" select="ancestor::seglistitem"/>
     </xsl:call-template>
     <xsl:apply-templates/>
   </td>
@@ -1082,20 +1080,20 @@ version='1.0'>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:calloutlist">
+<xsl:template match="calloutlist">
   <div>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
     <xsl:call-template name="anchor"/>
-    <xsl:if test="d:title|d:info/d:title">
+    <xsl:if test="title|info/title">
       <xsl:call-template name="formal.object.heading"/>
     </xsl:if>
 
     <!-- Preserve order of PIs and comments -->
     <xsl:apply-templates 
-         select="*[not(self::d:callout or self::d:title or self::d:titleabbrev)]
-                   |comment()[not(preceding-sibling::d:callout)]
-                   |processing-instruction()[not(preceding-sibling::d:callout)]"/>
+         select="*[not(self::callout or self::title or self::titleabbrev)]
+                   |comment()[not(preceding-sibling::callout)]
+                   |processing-instruction()[not(preceding-sibling::callout)]"/>
 
     <xsl:choose>
       <xsl:when test="$callout.list.table != 0">
@@ -1103,33 +1101,33 @@ version='1.0'>
           <xsl:if test="$div.element != 'section'">
             <xsl:attribute name="summary">Callout list</xsl:attribute>
           </xsl:if>
-          <xsl:apply-templates select="d:callout
-                                |comment()[preceding-sibling::d:callout]
-                                |processing-instruction()[preceding-sibling::d:callout]"/>
+          <xsl:apply-templates select="callout
+                                |comment()[preceding-sibling::callout]
+                                |processing-instruction()[preceding-sibling::callout]"/>
         </table>
       </xsl:when>
       <xsl:otherwise>
         <dl>
           <xsl:apply-templates select="." mode="class.attribute"/>
-          <xsl:apply-templates select="d:callout
-                                |comment()[preceding-sibling::d:callout]
-                                |processing-instruction()[preceding-sibling::d:callout]"/>
+          <xsl:apply-templates select="callout
+                                |comment()[preceding-sibling::callout]
+                                |processing-instruction()[preceding-sibling::callout]"/>
         </dl>
       </xsl:otherwise>
     </xsl:choose>
   </div>
 </xsl:template>
 
-<xsl:template match="d:calloutlist/d:title">
+<xsl:template match="calloutlist/title">
 </xsl:template>
 
-<xsl:template match="d:callout">
+<xsl:template match="callout">
   <xsl:choose>
     <xsl:when test="$callout.list.table != 0">
       <tr>
         <xsl:call-template name="tr.attributes">
           <xsl:with-param name="rownum">
-            <xsl:number from="d:calloutlist" count="d:callout"/>
+            <xsl:number from="calloutlist" count="callout"/>
           </xsl:with-param>
         </xsl:call-template>
 
@@ -1160,7 +1158,7 @@ version='1.0'>
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:callout/d:simpara" priority="2">
+<xsl:template match="callout/simpara" priority="2">
   <!-- If a callout contains only a single simpara, don't output
        the <p> wrapper; this has the effect of creating an li
        with simple text content. -->
@@ -1248,10 +1246,10 @@ version='1.0'>
     </xsl:when>
     <xsl:when test="local-name($target)='area'">
       <xsl:choose>
-        <xsl:when test="$target/parent::d:areaset">
+        <xsl:when test="$target/parent::areaset">
           <xsl:call-template name="callout-bug">
             <xsl:with-param name="conum">
-              <xsl:apply-templates select="$target/parent::d:areaset"
+              <xsl:apply-templates select="$target/parent::areaset"
                                    mode="conumber"/>
             </xsl:with-param>
           </xsl:call-template>

@@ -1,8 +1,6 @@
 <?xml version='1.0'?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:fo="http://www.w3.org/1999/XSL/Format"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions"
                 version='1.0'>
 
@@ -12,23 +10,23 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 <xsl:template name="axf-document-information">
 
-    <xsl:variable name="authors" select="(//d:author|//d:editor|
-                                          //d:corpauthor|//d:authorgroup)[1]"/>
+    <xsl:variable name="authors" select="(//author|//editor|
+                                          //corpauthor|//authorgroup)[1]"/>
     <xsl:if test="$authors">
       <xsl:variable name="author">
         <xsl:choose>
-          <xsl:when test="$authors[self::d:authorgroup]">
+          <xsl:when test="$authors[self::authorgroup]">
             <xsl:call-template name="person.name.list">
               <xsl:with-param name="person.list" 
-                 select="$authors/*[self::d:author|self::d:corpauthor|
-                               self::d:othercredit|self::d:editor]"/>
+                 select="$authors/*[self::author|self::corpauthor|
+                               self::othercredit|self::editor]"/>
             </xsl:call-template>
           </xsl:when>
-          <xsl:when test="$authors[self::d:corpauthor]">
+          <xsl:when test="$authors[self::corpauthor]">
             <xsl:value-of select="$authors"/>
           </xsl:when>
-           <xsl:when test="$authors[d:orgname]">
-            <xsl:value-of select="$authors/d:orgname"/>
+           <xsl:when test="$authors[orgname]">
+            <xsl:value-of select="$authors/orgname"/>
           </xsl:when>
           <xsl:otherwise>
             <xsl:call-template name="person.name">
@@ -58,11 +56,11 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
       </xsl:attribute>
     </axf:document-info>
 
-    <xsl:if test="//d:keyword">
+    <xsl:if test="//keyword">
       <xsl:element name="axf:document-info">
         <xsl:attribute name="name">keywords</xsl:attribute>
         <xsl:attribute name="value">
-          <xsl:for-each select="//d:keyword">
+          <xsl:for-each select="//keyword">
             <xsl:value-of select="normalize-space(.)"/>
             <xsl:if test="position() != last()">
               <xsl:text>, </xsl:text>
@@ -72,11 +70,11 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
       </xsl:element>
     </xsl:if>
 
-    <xsl:if test="//d:subjectterm">
+    <xsl:if test="//subjectterm">
       <xsl:element name="axf:document-info">
         <xsl:attribute name="name">subject</xsl:attribute>
         <xsl:attribute name="value">
-          <xsl:for-each select="//d:subjectterm">
+          <xsl:for-each select="//subjectterm">
             <xsl:value-of select="normalize-space(.)"/>
             <xsl:if test="position() != last()">
               <xsl:text>, </xsl:text>

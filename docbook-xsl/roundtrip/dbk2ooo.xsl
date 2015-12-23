@@ -100,7 +100,7 @@
   </xsl:template>
 
   <xsl:template name='doc:make-paragraph'>
-    <xsl:param name='style' select='"d:unknown"'/>
+    <xsl:param name='style' select='"unknown"'/>
     <xsl:param name='content'>
       <xsl:apply-templates mode='doc:body'/>
     </xsl:param>
@@ -118,7 +118,7 @@
   </xsl:template>
 
   <xsl:template name='doc:make-phrase'>
-    <xsl:param name='style' select='"d:unknown"'/>
+    <xsl:param name='style' select='"unknown"'/>
     <xsl:param name='content'>
       <xsl:apply-templates mode='doc:body'/>
     </xsl:param>

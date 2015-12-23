@@ -1,11 +1,10 @@
 <xsl:stylesheet
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-        xmlns:d="http://docbook.org/ns/docbook"
-xmlns:exsl="http://exslt.org/common"
+        xmlns:exsl="http://exslt.org/common"
         xmlns:ng="http://docbook.org/docbook-ng" 
         xmlns:db="http://docbook.org/ns/docbook"
         version="1.0" xmlns="http://www.w3.org/1999/xhtml"
-	exclude-result-prefixes="exsl ng db d">
+	exclude-result-prefixes="exsl ng db">
 
     <!-- ********************************************************************
      $Id$
@@ -376,41 +375,44 @@ border: none; background: none; font-weight: none; color: none; }
 	<!-- * Get a title for current doc so that we let the user -->
 	<!-- * know what document we are processing at this point. -->
 	<xsl:choose>
-	  
+	  <!-- Hack! If someone hands us a DocBook V5.x or DocBook NG document,
+	  toss the namespace and continue.  Use the docbook5 namespaced
+	  stylesheets for DocBook5 if you don't want to use this feature.-->
 	  <!-- include extra test for Xalan quirk -->
-	  <xsl:when test="namespace-uri(*[1]) != 'http://docbook.org/ns/docbook'">
- <xsl:call-template name="log.message">
- <xsl:with-param name="level">Note</xsl:with-param>
- <xsl:with-param name="source"><xsl:call-template name="get.doc.title"/></xsl:with-param>
- <xsl:with-param name="context-desc">
- <xsl:text>namesp. add</xsl:text>
- </xsl:with-param>
- <xsl:with-param name="message">
- <xsl:text>added namespace before processing</xsl:text>
- </xsl:with-param>
- </xsl:call-template>
- <xsl:variable name="addns">
-    <xsl:apply-templates mode="addNS"/>
-  </xsl:variable>
-  <xsl:apply-templates select="exsl:node-set($addns)"/>
-</xsl:when>
-	  <!-- Can't process unless namespace removed -->
-	  <xsl:when test="namespace-uri(*[1]) != 'http://docbook.org/ns/docbook'">
- <xsl:call-template name="log.message">
- <xsl:with-param name="level">Note</xsl:with-param>
- <xsl:with-param name="source"><xsl:call-template name="get.doc.title"/></xsl:with-param>
- <xsl:with-param name="context-desc">
- <xsl:text>namesp. add</xsl:text>
- </xsl:with-param>
- <xsl:with-param name="message">
- <xsl:text>added namespace before processing</xsl:text>
- </xsl:with-param>
- </xsl:call-template>
- <xsl:variable name="addns">
-    <xsl:apply-templates mode="addNS"/>
-  </xsl:variable>
-  <xsl:apply-templates select="exsl:node-set($addns)"/>
-</xsl:when>
+          <xsl:when test="$exsl.node.set.available != 0 and 
+                  namespace-uri(/*) = 'http://docbook.org/ns/docbook'">
+		<xsl:call-template name="log.message">
+		  <xsl:with-param name="level">Note</xsl:with-param>
+		  <xsl:with-param name="source" select="$doc.title"/>
+		  <xsl:with-param name="context-desc">
+			<xsl:text>namesp. cut</xsl:text>
+		  </xsl:with-param>
+		  <xsl:with-param name="message">
+			<xsl:text>stripped namespace before processing</xsl:text>
+		  </xsl:with-param>
+		</xsl:call-template>
+		<xsl:variable name="nons">
+        <xsl:apply-templates mode="stripNS"/>
+      </xsl:variable>
+		<!--
+		<xsl:message>Saving stripped document.</xsl:message>
+		<xsl:call-template name="write.chunk">
+        <xsl:with-param name="filename" select="'/tmp/stripped.xml'"/>
+        <xsl:with-param name="method" select="'xml'"/>
+        <xsl:with-param name="content">
+		<xsl:copy-of select="exsl:node-set($nons)"/>
+	  </xsl:with-param>
+      </xsl:call-template>
+		-->
+		<xsl:apply-templates select="exsl:node-set($nons)"/>
+	  </xsl:when>
+          <!-- Can't process unless namespace fixed with exsl node-set()-->
+          <xsl:when test="namespace-uri(/*) = 'http://docbook.org/ns/docbook'">
+            <xsl:message terminate="yes">
+              <xsl:text>Unable to strip the namespace from DB5 document,</xsl:text>
+              <xsl:text> cannot proceed.</xsl:text>
+            </xsl:message>
+          </xsl:when>
 	  <xsl:otherwise>
 		<xsl:choose>
 		  <xsl:when test="$rootid != ''">
@@ -451,7 +453,9 @@ border: none; background: none; font-weight: none; color: none; }
 	</xsl:choose>
 	
 
-	<xsl:call-template name="l10n.js"/>
+        <xsl:if test="$collect.xref.targets != 'only'">
+          <xsl:call-template name="l10n.js"/>
+        </xsl:if>
     </xsl:template>
 
 
@@ -785,7 +789,7 @@ border: none; background: none; font-weight: none; color: none; }
 
     <!-- Generates the webhelp table-of-contents (TOC). -->
     <xsl:template
-            match="d:book|d:part|d:reference|d:preface|d:chapter|d:bibliography|d:appendix|d:article|d:topic|d:glossary|d:section|d:simplesect|d:sect1|d:sect2|d:sect3|d:sect4|d:sect5|d:refentry|d:colophon|d:bibliodiv|d:index|d:setindex"
+            match="book|part|reference|preface|chapter|bibliography|appendix|article|topic|glossary|section|simplesect|sect1|sect2|sect3|sect4|sect5|refentry|colophon|bibliodiv|index|setindex"
             mode="webhelptoc">
         <xsl:param name="currentid"/>
         <xsl:variable name="title">
@@ -813,7 +817,7 @@ border: none; background: none; font-weight: none; color: none; }
 
         <xsl:variable name="id" select="generate-id(.)"/>
 
-        <xsl:if test="not(self::d:index) or (self::d:index and not($generate.index = 0))">
+        <xsl:if test="not(self::index) or (self::index and not($generate.index = 0))">
             <!--li style="white-space: pre; line-height: 0em;"-->
             <li>
                 <xsl:if test="$id = $currentid">
@@ -824,10 +828,10 @@ border: none; background: none; font-weight: none; color: none; }
                         <xsl:value-of select="$title"/>
                     </a>
                 </span>
-                <xsl:if test="d:part|d:reference|d:preface|d:chapter|d:bibliography|d:appendix|d:article|d:topic|d:glossary|d:section|d:simplesect|d:sect1|d:sect2|d:sect3|d:sect4|d:sect5|d:refentry|d:colophon|d:bibliodiv">
+                <xsl:if test="part|reference|preface|chapter|bibliography|appendix|article|topic|glossary|section|simplesect|sect1|sect2|sect3|sect4|sect5|refentry|colophon|bibliodiv">
                     <ul>
                         <xsl:apply-templates
-                                select="d:part|d:reference|d:preface|d:chapter|d:bibliography|d:appendix|d:article|d:topic|d:glossary|d:section|d:simplesect|d:sect1|d:sect2|d:sect3|d:sect4|d:sect5|d:refentry|d:colophon|d:bibliodiv"
+                                select="part|reference|preface|chapter|bibliography|appendix|article|topic|glossary|section|simplesect|sect1|sect2|sect3|sect4|sect5|refentry|colophon|bibliodiv"
                                 mode="webhelptoc">
                             <xsl:with-param name="currentid" select="$currentid"/>
                         </xsl:apply-templates>
@@ -868,7 +872,7 @@ border: none; background: none; font-weight: none; color: none; }
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:apply-templates
-                                            select="*/*[self::d:preface|self::d:chapter|self::d:appendix|self::d:part][1]"
+                                            select="*/*[self::preface|self::chapter|self::appendix|self::part][1]"
                                             mode="chunk-filename"/>
                                 </xsl:otherwise>
                             </xsl:choose>
@@ -899,7 +903,7 @@ border: none; background: none; font-weight: none; color: none; }
                     <head>
 		      <link rel="shortcut icon" href="favicon.ico"/>
 		      <meta http-equiv="Refresh" content="1; URL=content/{$default.topic}"/>
-		      <title><xsl:value-of select="//d:title[1]"/>&#160;</title>
+		      <title><xsl:value-of select="//title[1]"/>&#160;</title>
                     </head>
                     <body>
 		      If not automatically redirected, click <a href="content/{$default.topic}">content/<xsl:value-of select="$default.topic"/></a>

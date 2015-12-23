@@ -1,15 +1,14 @@
 <?xml version='1.0'?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:exsl="http://exslt.org/common"
+                xmlns:exsl="http://exslt.org/common"
                 xmlns:ng="http://docbook.org/docbook-ng"
                 xmlns:db="http://docbook.org/ns/docbook"
                 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0"
-                exclude-result-prefixes="exsl d"
+                exclude-result-prefixes="exsl"
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: other.xsl 8865 2010-08-20 18:22:06Z mzjn $
+     $Id: other.xsl 9950 2014-11-20 22:30:41Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -39,49 +38,6 @@ xmlns:exsl="http://exslt.org/common"
 
 <!-- ==================================================================== -->
 
-<xsl:preserve-space elements="*"/>
-
-<xsl:strip-space elements="
-d:abstract d:affiliation d:anchor d:answer d:appendix d:area d:areaset d:areaspec
-d:artheader d:article d:audiodata d:audioobject d:author d:authorblurb d:authorgroup
-d:beginpage d:bibliodiv d:biblioentry d:bibliography d:biblioset d:blockquote d:book
-d:bookbiblio d:bookinfo d:callout d:calloutlist d:caption d:caution d:chapter
-d:citerefentry d:cmdsynopsis d:co d:collab d:colophon d:colspec d:confgroup
-d:copyright d:dedication d:docinfo d:editor d:entrytbl d:epigraph d:equation
-d:example d:figure d:footnote d:footnoteref d:formalpara d:funcprototype
-d:funcsynopsis d:glossary d:glossdef d:glossdiv d:glossentry d:glosslist d:graphicco
-d:group d:highlights d:imagedata d:imageobject d:imageobjectco d:important d:index
-d:indexdiv d:indexentry d:indexterm d:informalequation d:informalexample
-d:informalfigure d:informaltable d:inlineequation d:inlinemediaobject
-d:itemizedlist d:itermset d:keycombo d:keywordset d:legalnotice d:listitem d:lot
-d:mediaobject d:mediaobjectco d:menuchoice d:msg d:msgentry d:msgexplan d:msginfo
-d:msgmain d:msgrel d:msgset d:msgsub d:msgtext d:note d:objectinfo
-d:orderedlist d:othercredit d:part d:partintro d:preface d:printhistory d:procedure
-d:programlistingco d:publisher d:qandadiv d:qandaentry d:qandaset d:question
-d:refentry d:reference d:refmeta d:refnamediv d:refsection d:refsect1 d:refsect1info d:refsect2
-d:refsect2info d:refsect3 d:refsect3info d:refsynopsisdiv d:refsynopsisdivinfo
-d:revhistory d:revision d:row d:sbr d:screenco d:screenshot d:sect1 d:sect1info d:sect2
-d:sect2info d:sect3 d:sect3info d:sect4 d:sect4info d:sect5 d:sect5info d:section
-d:sectioninfo d:seglistitem d:segmentedlist d:seriesinfo d:set d:setindex d:setinfo
-d:shortcut d:sidebar d:simplelist d:simplesect d:spanspec d:step d:subject
-d:subjectset d:substeps d:synopfragment d:table d:tbody d:textobject d:tfoot d:tgroup
-d:thead d:tip d:toc d:tocchap d:toclevel1 d:toclevel2 d:toclevel3 d:toclevel4
-d:toclevel5 d:tocpart d:varargs d:variablelist d:varlistentry d:videodata
-d:videoobject d:void d:warning d:subjectset
-
-d:classsynopsis
-d:constructorsynopsis
-d:destructorsynopsis
-d:fieldsynopsis
-d:methodparam
-d:methodsynopsis
-d:ooclass
-d:ooexception
-d:oointerface
-d:simplemsgentry
-d:manvolnum
-"/>
-
 <!-- ==================================================================== -->
 <!-- * Get character map contents -->
 <!-- ==================================================================== -->
@@ -90,7 +46,7 @@ d:manvolnum
     <xsl:if test="$man.charmap.enabled != 0">
       <xsl:variable name="lang">
         <xsl:call-template name="l10n.language">
-          <xsl:with-param name="target" select="//d:refentry[1]"/>
+          <xsl:with-param name="target" select="//refentry[1]"/>
         </xsl:call-template>
       </xsl:variable>
       <xsl:call-template name="read-character-map">
@@ -126,7 +82,7 @@ d:manvolnum
   <!-- redefine this any way you'd like to output messages -->
   <!-- DO NOT OUTPUT ANYTHING FROM THIS TEMPLATE -->
   <!-- Example:
-  <xsl:if test="//d:foo">
+  <xsl:if test="//foo">
     <xsl:call-template name="log.message">
       <xsl:with-param name="level">Warn</xsl:with-param>
       <xsl:with-param name="source" select="$refname"/>
@@ -157,7 +113,15 @@ d:manvolnum
 <!-- *  -->
 <!-- ******************************************************************** -->
 
-<xsl:template match="//d:refentry//text()">
+<xsl:template match="//refentry//text()">
+  <xsl:call-template name="escape.roff.specials">
+    <xsl:with-param name="content">
+      <xsl:value-of select="."/>
+    </xsl:with-param>
+  </xsl:call-template>
+</xsl:template>
+
+<xsl:template match="//refentry//text()" mode="no.anchor.mode">
   <xsl:call-template name="escape.roff.specials">
     <xsl:with-param name="content">
       <xsl:value-of select="."/>
@@ -581,7 +545,7 @@ d:manvolnum
     <xsl:param name="first.refname"/>
     <xsl:param name="section"/>
     <xsl:param name="lang"/>
-    <xsl:for-each select="d:refnamediv/d:refname">
+    <xsl:for-each select="refnamediv/refname">
       <xsl:if test=". != $first.refname">
         <xsl:call-template name="write.text.chunk">
           <xsl:with-param name="filename">
@@ -597,11 +561,22 @@ d:manvolnum
           <xsl:with-param name="message-epilog"> (soelim stub)</xsl:with-param>
           <xsl:with-param name="content">
             <xsl:value-of select="'.so '"/>
-            <xsl:call-template name="make.adjusted.man.filename">
-              <xsl:with-param name="name" select="$first.refname"/>
-              <xsl:with-param name="section" select="$section"/>
-              <xsl:with-param name="lang" select="$lang"/>
-            </xsl:call-template>
+            <xsl:variable name="full.filename">
+              <xsl:call-template name="make.adjusted.man.filename">
+                <xsl:with-param name="name" select="$first.refname"/>
+                <xsl:with-param name="section" select="$section"/>
+                <xsl:with-param name="lang" select="$lang"/>
+              </xsl:call-template>
+            </xsl:variable>
+            <xsl:choose>
+              <xsl:when test="starts-with($full.filename, $man.output.base.dir)">
+                <xsl:value-of 
+                   select="substring-after($full.filename,$man.output.base.dir)"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:value-of select="$full.filename"/>
+              </xsl:otherwise>
+            </xsl:choose>
             <xsl:text>&#10;</xsl:text>
           </xsl:with-param>
         </xsl:call-template>
@@ -617,7 +592,7 @@ d:manvolnum
   <!-- *  generated, including any "stub" pages. -->
   <xsl:template name="generate.manifest">
     <xsl:variable name="filelist">
-      <xsl:for-each select="//d:refentry">
+      <xsl:for-each select="//refentry">
         <!-- * all refname instances in a Refentry inherit their section -->
         <!-- * numbers from the parent Refentry; so we only need to get -->
         <!-- * the section once per Refentry, not once per Refname -->
@@ -629,7 +604,7 @@ d:manvolnum
         <xsl:variable name="lang">
           <xsl:call-template name="l10n.language"/>
         </xsl:variable>
-        <xsl:for-each select="d:refnamediv/d:refname">
+        <xsl:for-each select="refnamediv/refname">
           <xsl:call-template name="make.adjusted.man.filename">
             <xsl:with-param name="name" select="."/>
             <xsl:with-param name="section" select="$section"/>

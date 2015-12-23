@@ -1,4 +1,4 @@
-# $Id: Makefile.tests 8481 2009-07-13 20:18:41Z abdelazer $
+# $Id: Makefile.tests 9909 2014-02-24 19:40:27Z bobstayton $
 #
 # This makefile does a "smoketest" of stylesheets for various
 # output formats in the DocBook XSL Stylesheets release package.
@@ -63,13 +63,17 @@ smoketest-normal-profile:
 
 smoketest-chunk:
 	for stylesheet in $(MULTIFILE_STYLES) ; do \
+	echo "$(XSLT) $(TESTFILE) $$stylesheet manifest.in.base.dir=1 base.dir=$(TMP_OUTPUT_DIR)" ; \
 	$(XSLT) $(TESTFILE) $$stylesheet manifest.in.base.dir=1 base.dir=$(TMP_OUTPUT_DIR) ; \
+	echo "$(XSLT) $(TESTFILE_NS) $$stylesheet manifest.in.base.dir=1 base.dir=$(TMP_OUTPUT_DIR)" ; \
 	$(XSLT) $(TESTFILE_NS) $$stylesheet manifest.in.base.dir=1 base.dir=$(TMP_OUTPUT_DIR) ; \
 	done;
 
 smoketest-chunk-profile:
 	for stylesheet in $(MULTIFILE_PROFILE_STYLES) ; do \
+	echo "$(XSLT) $(TESTFILE) $$stylesheet manifest.in.base.dir=1 base.dir=$(TMP_OUTPUT_DIR)" ; \
 	$(XSLT) $(TESTFILE) $$stylesheet manifest.in.base.dir=1 base.dir=$(TMP_OUTPUT_DIR) ; \
+	echo "$(XSLT) $(TESTFILE_NS) $$stylesheet manifest.in.base.dir=1 base.dir=$(TMP_OUTPUT_DIR)" ; \
 	$(XSLT) $(TESTFILE_NS) $$stylesheet manifest.in.base.dir=1 base.dir=$(TMP_OUTPUT_DIR) ; \
 	done;
 

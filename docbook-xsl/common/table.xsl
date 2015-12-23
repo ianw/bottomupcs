@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:doc="http://nwalsh.com/xsl/documentation/1.0"
-                exclude-result-prefixes="doc d"
+                xmlns:doc="http://nwalsh.com/xsl/documentation/1.0"
+                exclude-result-prefixes="doc"
                 version="1.0">
 
 <!-- ********************************************************************
@@ -90,11 +89,11 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0"
     <xsl:when test="$entry/@spanname">
       <xsl:variable name="spanname" select="$entry/@spanname"/>
       <xsl:variable name="spanspec"
-                    select="($entry/ancestor::d:tgroup/d:spanspec[@spanname=$spanname]
-                             |$entry/ancestor::d:entrytbl/d:spanspec[@spanname=$spanname])[last()]"/>
+                    select="($entry/ancestor::tgroup/spanspec[@spanname=$spanname]
+                             |$entry/ancestor::entrytbl/spanspec[@spanname=$spanname])[last()]"/>
       <xsl:variable name="colspec"
-                    select="($entry/ancestor::d:tgroup/d:colspec[@colname=$spanspec/@namest]
-                             |$entry/ancestor::d:entrytbl/d:colspec[@colname=$spanspec/@namest])[last()]"/>
+                    select="($entry/ancestor::tgroup/colspec[@colname=$spanspec/@namest]
+                             |$entry/ancestor::entrytbl/colspec[@colname=$spanspec/@namest])[last()]"/>
       <xsl:call-template name="colspec.colnum">
         <xsl:with-param name="colspec" select="$colspec"/>
       </xsl:call-template>
@@ -102,8 +101,8 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0"
     <xsl:when test="$entry/@colname">
       <xsl:variable name="colname" select="$entry/@colname"/>
       <xsl:variable name="colspec"
-                    select="($entry/ancestor::d:tgroup/d:colspec[@colname=$colname]
-                             |$entry/ancestor::d:entrytbl/d:colspec[@colname=$colname])[last()]"/>
+                    select="($entry/ancestor::tgroup/colspec[@colname=$colname]
+                             |$entry/ancestor::entrytbl/colspec[@colname=$colname])[last()]"/>
       <xsl:call-template name="colspec.colnum">
         <xsl:with-param name="colspec" select="$colspec"/>
       </xsl:call-template>
@@ -111,8 +110,8 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0"
     <xsl:when test="$entry/@namest">
       <xsl:variable name="namest" select="$entry/@namest"/>
       <xsl:variable name="colspec"
-                    select="($entry/ancestor::d:tgroup/d:colspec[@colname=$namest]
-                             |$entry/ancestor::d:entrytbl/d:colspec[@colname=$namest])[last()]"/>
+                    select="($entry/ancestor::tgroup/colspec[@colname=$namest]
+                             |$entry/ancestor::entrytbl/colspec[@colname=$namest])[last()]"/>
       <xsl:call-template name="colspec.colnum">
         <xsl:with-param name="colspec" select="$colspec"/>
       </xsl:call-template>
@@ -153,11 +152,11 @@ or 0 (the empty string)</para>
     <xsl:when test="$colspec/@colnum">
       <xsl:value-of select="$colspec/@colnum"/>
     </xsl:when>
-    <xsl:when test="$colspec/preceding-sibling::d:colspec">
+    <xsl:when test="$colspec/preceding-sibling::colspec">
       <xsl:variable name="prec.colspec.colnum">
         <xsl:call-template name="colspec.colnum">
           <xsl:with-param name="colspec"
-                          select="$colspec/preceding-sibling::d:colspec[1]"/>
+                          select="$colspec/preceding-sibling::colspec[1]"/>
         </xsl:call-template>
       </xsl:variable>
       <xsl:value-of select="$prec.colspec.colnum + 1"/>
@@ -170,8 +169,8 @@ or 0 (the empty string)</para>
   <xsl:param name="entry" select="."/>
   <xsl:variable name="spanname" select="$entry/@spanname"/>
   <xsl:variable name="spanspec"
-                select="($entry/ancestor::d:tgroup/d:spanspec[@spanname=$spanname]
-                         |$entry/ancestor::d:entrytbl/d:spanspec[@spanname=$spanname])[last()]"/>
+                select="($entry/ancestor::tgroup/spanspec[@spanname=$spanname]
+                         |$entry/ancestor::entrytbl/spanspec[@spanname=$spanname])[last()]"/>
 
   <xsl:variable name="namest">
     <xsl:choose>
@@ -198,16 +197,16 @@ or 0 (the empty string)</para>
   <xsl:variable name="scol">
     <xsl:call-template name="colspec.colnum">
       <xsl:with-param name="colspec"
-                      select="($entry/ancestor::d:tgroup/d:colspec[@colname=$namest]
-                               |$entry/ancestor::d:entrytbl/d:colspec[@colname=$namest])[last()]"/>
+                      select="($entry/ancestor::tgroup/colspec[@colname=$namest]
+                               |$entry/ancestor::entrytbl/colspec[@colname=$namest])[last()]"/>
     </xsl:call-template>
   </xsl:variable>
 
   <xsl:variable name="ecol">
     <xsl:call-template name="colspec.colnum">
       <xsl:with-param name="colspec"
-                      select="($entry/ancestor::d:tgroup/d:colspec[@colname=$nameend]
-                               |$entry/ancestor::d:entrytbl/d:colspec[@colname=$nameend])[last()]"/>
+                      select="($entry/ancestor::tgroup/colspec[@colname=$nameend]
+                               |$entry/ancestor::entrytbl/colspec[@colname=$nameend])[last()]"/>
     </xsl:call-template>
   </xsl:variable>
 
@@ -250,16 +249,16 @@ or 0 (the empty string)</para>
 
 <xsl:template name="inherited.table.attribute">
   <xsl:param name="entry" select="."/>
-  <xsl:param name="row" select="$entry/ancestor-or-self::d:row[1]"/>
+  <xsl:param name="row" select="$entry/ancestor-or-self::row[1]"/>
   <xsl:param name="colnum" select="0"/>
   <xsl:param name="attribute" select="'colsep'"/>
 
-  <xsl:variable name="tgroup" select="$row/parent::*/parent::d:tgroup[1]"/>
+  <xsl:variable name="tgroup" select="$row/parent::*/parent::tgroup[1]"/>
   <xsl:variable name="tbody" select="$row/parent::*[1]"/>
 
-  <xsl:variable name="table" select="($tgroup/ancestor::d:table
-                                     |$tgroup/ancestor::d:informaltable
-                                     |$entry/ancestor::d:entrytbl)[last()]"/>
+  <xsl:variable name="table" select="($tgroup/ancestor::table
+                                     |$tgroup/ancestor::informaltable
+                                     |$entry/ancestor::entrytbl)[last()]"/>
 
   <xsl:variable name="entry.value">
     <xsl:call-template name="get-attribute">
@@ -279,9 +278,9 @@ or 0 (the empty string)</para>
     <xsl:if test="$entry/@spanname">
       <xsl:variable name="spanname" select="$entry/@spanname"/>
       <xsl:variable name="spanspec"
-                    select="$tgroup/d:spanspec[@spanname=$spanname]"/>
+                    select="$tgroup/spanspec[@spanname=$spanname]"/>
       <xsl:variable name="span.colspec"
-                    select="$tgroup/d:colspec[@colname=$spanspec/@namest]"/>
+                    select="$tgroup/colspec[@colname=$spanspec/@namest]"/>
 
       <xsl:variable name="spanspec.value">
         <xsl:call-template name="get-attribute">
@@ -313,7 +312,7 @@ or 0 (the empty string)</para>
     <xsl:if test="$entry/@namest">
       <xsl:variable name="namest" select="$entry/@namest"/>
       <xsl:variable name="colspec"
-                    select="$tgroup/d:colspec[@colname=$namest]"/>
+                    select="$tgroup/colspec[@colname=$namest]"/>
 
       <xsl:variable name="inner.namest.value">
         <xsl:call-template name="get-attribute">
@@ -411,9 +410,9 @@ or 0 (the empty string)</para>
   <xsl:param name="colnum" select="0"/>
   <xsl:param name="attribute" select="'colname'"/>
   <xsl:param name="colspec.ancestor" 
-             select="(ancestor::d:tgroup|ancestor::d:entrytbl)
+             select="(ancestor::tgroup|ancestor::entrytbl)
                      [position() = last()]"/>
-  <xsl:param name="colspecs" select="$colspec.ancestor/d:colspec"/>
+  <xsl:param name="colspecs" select="$colspec.ancestor/colspec"/>
   <xsl:param name="count" select="1"/>
 
   <xsl:choose>
@@ -489,12 +488,12 @@ or 0 (the empty string)</para>
 <xsl:template name="tabstyle">
   <xsl:param name="node" select="."/>
 
-  <xsl:variable name="tgroup" select="$node/d:tgroup[1] | 
-                                      $node/ancestor-or-self::d:tgroup[1]"/>
+  <xsl:variable name="tgroup" select="$node/tgroup[1] | 
+                                      $node/ancestor-or-self::tgroup[1]"/>
 
   <xsl:variable name="table" 
-                select="($node/ancestor-or-self::d:table | 
-                         $node/ancestor-or-self::d:informaltable)[last()]"/>
+                select="($node/ancestor-or-self::table | 
+                         $node/ancestor-or-self::informaltable)[last()]"/>
 
   <xsl:variable name="tabstyle">
     <xsl:choose>

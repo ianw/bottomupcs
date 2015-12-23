@@ -1,8 +1,6 @@
 <?xml version='1.0'?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:fo="http://www.w3.org/1999/XSL/Format"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 version='1.0'>
 
 <!-- ********************************************************************
@@ -15,8 +13,8 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
      ******************************************************************** -->
 
-<xsl:template match="d:keywordset"></xsl:template>
-<xsl:template match="d:subjectset"></xsl:template>
+<xsl:template match="keywordset"></xsl:template>
+<xsl:template match="subjectset"></xsl:template>
 
 <!-- ==================================================================== -->
 

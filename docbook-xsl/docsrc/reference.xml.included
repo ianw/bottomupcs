@@ -1408,6 +1408,59 @@ is used as the link text of a back reference in the index.
 </refsection>
 </refentry>
 
+<refentry version="5.0" id="autolink.index.see">
+<refmeta>
+<refentrytitle>autolink.index.see</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">boolean</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>autolink.index.see</refname>
+<refpurpose>Link index see and seealso to index primary</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="autolink.index.see.frag">&lt;xsl:param name="autolink.index.see" select="1"&gt;&lt;/xsl:param&gt;</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>If this param is set to a non-zero value,
+(default = 1), then the
+stylesheet will attempt for form a link between a 
+<tag>see</tag> or <tag>seealso</tag> element
+and a matching indexterm <tag>primary</tag> element.
+</para>
+
+<para>The stylesheet uses an exact text match after 
+applying the <literal>normalize-space()</literal> function.
+If the <tag>see</tag> or <tag>seealso</tag> text contains a comma,
+then only the text prior to the comma is used.
+This assumes the author is using the convention "see primary, secondary"
+to specify a subentry.  Automatic links always land on the primary
+entry in the index, so the reader has to look down to see the
+secondary entry.</para>
+<para>If there is no match on a 
+<tag>primary</tag>, no link is formed, but the text
+still displays.</para>
+
+<para>No attempt is made to automatically link to text in
+<tag>secondary</tag> or <tag>tertiary</tag> elements.
+If you want to link to such elements, you can form a
+manual link by adding a linkend attribute to the 
+<tag>see</tag> or <tag>seealso</tag> element, where
+the linkend references an id or xml:id attribute on
+such a subelement.  Such manual links take precedence over
+any automatic links.
+</para>
+
+<para>If this parameter is zero, then
+no automatic links from see and seealso
+are formed within the index.  Any manual links are
+still processed, however.</para>
+
+</refsection>
+</refentry>
+
 <refentry version="5.0" id="index.term.separator">
 <refmeta>
 <refentrytitle>index.term.separator</refentrytitle>
@@ -4258,14 +4311,19 @@ length (not a percentage).</para>
 
 <refsynopsisdiv>
 <programlisting id="table.cell.border.thickness.frag">
-&lt;xsl:param name="table.cell.border.thickness"&gt;0.5pt&lt;/xsl:param&gt;
+&lt;xsl:param name="table.cell.border.thickness"&gt;
+  &lt;xsl:choose&gt;
+    &lt;xsl:when test="contains($stylesheet.result.type,'html')"&gt;1px&lt;/xsl:when&gt;
+    &lt;xsl:otherwise&gt;0.5pt&lt;/xsl:otherwise&gt;
+  &lt;/xsl:choose&gt;
+&lt;/xsl:param&gt;
 </programlisting>
 </refsynopsisdiv>
 
 <refsection><info><title>Description</title></info>
 
 <para>If non-zero, specifies the thickness of borders on table
-cells. The units are points. See <link xlink:href="http://www.w3.org/TR/CSS21/box.html#border-width-properties">
+cells. See <link xlink:href="http://www.w3.org/TR/CSS21/box.html#border-width-properties">
 CSS</link></para>
 
 <note>
@@ -4355,7 +4413,12 @@ yellow.</para>
 
 <refsynopsisdiv>
 <programlisting id="table.frame.border.thickness.frag">
-&lt;xsl:param name="table.frame.border.thickness"&gt;0.5pt&lt;/xsl:param&gt;
+&lt;xsl:param name="table.frame.border.thickness"&gt;
+  &lt;xsl:choose&gt;
+    &lt;xsl:when test="contains($stylesheet.result.type,'html')"&gt;1px&lt;/xsl:when&gt;
+    &lt;xsl:otherwise&gt;0.5pt&lt;/xsl:otherwise&gt;
+  &lt;/xsl:choose&gt;
+&lt;/xsl:param&gt;
 </programlisting>
 </refsynopsisdiv>
 
@@ -5293,7 +5356,7 @@ included in both user.xml and reference.xml documents.
 <para>How do you write the link to custom.xml in intro.xml
 so that it is interpreted correctly in all 3 documents?</para>
 <itemizedlist>
-<listitem><para>If you use xref, it will fail in user.xml.</para>
+<listitem><para>If you use xref, it will fail in booklet.xml.</para>
 </listitem>
 <listitem><para>If you use olink (pointing to reference.xml),
 the reference in user.xml  
@@ -5467,6 +5530,53 @@ attribute whose value specifies a page reference.
 
 </refsection>
 </refentry>
+
+<refentry version="5.0" id="insert.xref.page.number.para">
+<refmeta>
+<refentrytitle>insert.xref.page.number.para</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">list</refmiscinfo> 
+<refmiscinfo class="other" otherclass="value">yes</refmiscinfo>
+<refmiscinfo class="other" otherclass="value">maybe</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>insert.xref.page.number.para</refname>
+<refpurpose>Turns page numbers in xrefs to paragraphs on and off</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="insert.xref.page.number.para.frag">
+&lt;xsl:param name="insert.xref.page.number.para"&gt;yes&lt;/xsl:param&gt;
+</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>The value of this parameter determines if
+cross references (<tag>xref</tag>s) to paragraphs in
+printed output will include page number citations.
+</para>
+<para>Historically, cross references to paragraphs
+included page number citations unconditionally, regardless
+of the <parameter>insert.xref.page.number</parameter>
+value.</para>
+<variablelist>
+<varlistentry>
+<term>yes</term>
+<listitem><para>Page number references will be generated
+for paragraphs.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>maybe</term>
+<listitem><para>Whether page number references are generated
+for an <tag>xref</tag> element referring to a paragraph will
+be controlled by the <parameter>insert.xref.page.number</parameter>
+rules.</para></listitem>
+</varlistentry>
+</variablelist>
+
+</refsection>
+</refentry>
+
 
 <refentry version="5.0" id="use.role.as.xrefstyle">
 <refmeta>
@@ -7758,6 +7868,42 @@ for the sequence of selection.</para>
 </refsection>
 </refentry>
 
+<refentry version="5.0" id="link.to.self.for.mediaobject">
+  <refmeta>
+    <refentrytitle>link.to.self.for.mediaobject</refentrytitle>
+    <refmiscinfo class="other" otherclass="datatype">boolean</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>link.to.self.for.mediaobject</refname>
+    <refpurpose>Include <tag>a</tag> element to image objects itself to go to a full-size, freely-zoomable version</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<programlisting id="link.to.self.for.mediaobject.frag">
+&lt;xsl:param name="link.to.self.for.mediaobject" select="0"&gt;&lt;/xsl:param&gt;
+</programlisting>
+  </refsynopsisdiv>
+
+  <refsection>
+    <info>
+      <title>Description</title>
+    </info>
+    <para>In some cases, it can be very helpful to be able to click on an embedded <tag>figure</tag>
+      or <tag>informalfigure</tag> to get a full-size, freely-zoomable version of an image, for
+      instance when targeting readers on smartphones. This is implemented for images only, but not
+      for audio or video objects. </para>
+        
+    <para>If non-zero, the image will be wrapped in an <tag>a</tag> element, using the <tag class="attribute">href</tag> 
+      attribute pointing to the image itself: </para>
+    <screen>&lt;a href="source/image"&gt;
+   &lt;!-- the image object --&gt;
+&lt;/a&gt;</screen>
+
+    <para> If the value of <parameter>link.to.self.for.mediaobject.xml</parameter> is zero
+      (default), then no <tag>a</tag> container is added. </para>
+  </refsection>
+</refentry>
+
 <refentry version="5.0" id="use.role.for.mediaobject">
 <refmeta>
 <refentrytitle>use.role.for.mediaobject</refentrytitle>
@@ -8868,6 +9014,39 @@ attribute</refpurpose>
 <refsynopsisdiv>
 <programlisting id="profile.os.frag">
 &lt;xsl:param name="profile.os"&gt;&lt;/xsl:param&gt;
+</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>The value of this parameter specifies profiles which should be
+included in the output. You can specify multiple profiles by
+separating them by semicolon. You can change separator character by
+<parameter>profile.separator</parameter>
+parameter.</para>
+
+<para>This parameter has effect only when you are using profiling
+stylesheets (<filename>profile-docbook.xsl</filename>,
+<filename>profile-chunk.xsl</filename>, &#8230;) instead of normal
+ones (<filename>docbook.xsl</filename>,
+<filename>chunk.xsl</filename>, &#8230;).</para>
+
+</refsection>
+</refentry>
+
+<refentry version="5.0" id="profile.outputformat">
+<refmeta>
+<refentrytitle>profile.outputformat</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">string</refmiscinfo>
+</refmeta>
+<refnamediv>
+    <refname>profile.outputformat</refname>
+    <refpurpose>Target profile for <tag class="attribute">outputformat</tag> attribute</refpurpose>
+  </refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="profile.outputformat.frag">
+&lt;xsl:param name="profile.outputformat"&gt;&lt;/xsl:param&gt;
 </programlisting>
 </refsynopsisdiv>
 
@@ -12221,6 +12400,59 @@ the divisions in an index.</para>
 </refsection>
 </refentry>
 
+<refentry version="5.0" id="autolink.index.see">
+<refmeta>
+<refentrytitle>autolink.index.see</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">boolean</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>autolink.index.see</refname>
+<refpurpose>Link index see and seealso to index primary</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="autolink.index.see.frag">&lt;xsl:param name="autolink.index.see" select="1"&gt;&lt;/xsl:param&gt;</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>If this param is set to a non-zero value,
+(default = 1), then the
+stylesheet will attempt for form a link between a 
+<tag>see</tag> or <tag>seealso</tag> element
+and a matching indexterm <tag>primary</tag> element.
+</para>
+
+<para>The stylesheet uses an exact text match after 
+applying the <literal>normalize-space()</literal> function.
+If the <tag>see</tag> or <tag>seealso</tag> text contains a comma,
+then only the text prior to the comma is used.
+This assumes the author is using the convention "see primary, secondary"
+to specify a subentry.  Automatic links always land on the primary
+entry in the index, so the reader has to look down to see the
+secondary entry.</para>
+<para>If there is no match on a 
+<tag>primary</tag>, no link is formed, but the text
+still displays.</para>
+
+<para>No attempt is made to automatically link to text in
+<tag>secondary</tag> or <tag>tertiary</tag> elements.
+If you want to link to such elements, you can form a
+manual link by adding a linkend attribute to the 
+<tag>see</tag> or <tag>seealso</tag> element, where
+the linkend references an id or xml:id attribute on
+such a subelement.  Such manual links take precedence over
+any automatic links.
+</para>
+
+<para>If this parameter is zero, then
+no automatic links from see and seealso
+are formed within the index.  Any manual links are
+still processed, however.</para>
+
+</refsection>
+</refentry>
+
 <refentry version="5.0" id="index.number.separator">
 <refmeta>
 <refentrytitle>index.number.separator</refentrytitle>
@@ -12520,6 +12752,33 @@ following in your customization layer:</para>
 
 </refsection>
 </refentry>
+
+<refentry version="5.0" id="toc.leader.properties">
+<refmeta>
+<refentrytitle>toc.leader.properties</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">attribute set</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>toc.leader.properties</refname>
+<refpurpose>How the leaders (rows of dots) are going to look like in ToC?</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="toc.leader.properties.frag">
+&lt;xsl:attribute-set name="toc.leader.properties"&gt;
+  &lt;xsl:attribute name="leader-pattern"&gt;dots&lt;/xsl:attribute&gt;
+  &lt;xsl:attribute name="leader-pattern-width"&gt;3pt&lt;/xsl:attribute&gt;
+  &lt;xsl:attribute name="leader-alignment"&gt;reference-area&lt;/xsl:attribute&gt;
+  &lt;xsl:attribute name="padding-left"&gt;3pt&lt;/xsl:attribute&gt;
+  &lt;xsl:attribute name="padding-right"&gt;3pt&lt;/xsl:attribute&gt;
+&lt;/xsl:attribute-set&gt;
+</programlisting>
+</refsynopsisdiv>
+<refsection><info><title>Description</title></info>
+<para>Specify leader pattern, </para>
+</refsection>
+</refentry>
+
 
 <refentry version="5.0" id="toc.margin.properties">
 <refmeta>
@@ -14195,7 +14454,12 @@ the <tag class="attribute">frame</tag> attribute on the table element.
 
 <refsynopsisdiv>
 <programlisting id="table.frame.border.thickness.frag">
-&lt;xsl:param name="table.frame.border.thickness"&gt;0.5pt&lt;/xsl:param&gt;
+&lt;xsl:param name="table.frame.border.thickness"&gt;
+  &lt;xsl:choose&gt;
+    &lt;xsl:when test="contains($stylesheet.result.type,'html')"&gt;1px&lt;/xsl:when&gt;
+    &lt;xsl:otherwise&gt;0.5pt&lt;/xsl:otherwise&gt;
+  &lt;/xsl:choose&gt;
+&lt;/xsl:param&gt;
 </programlisting>
 </refsynopsisdiv>
 
@@ -14275,14 +14539,19 @@ the <tag class="attribute">frame</tag> attribute on the table element.
 
 <refsynopsisdiv>
 <programlisting id="table.cell.border.thickness.frag">
-&lt;xsl:param name="table.cell.border.thickness"&gt;0.5pt&lt;/xsl:param&gt;
+&lt;xsl:param name="table.cell.border.thickness"&gt;
+  &lt;xsl:choose&gt;
+    &lt;xsl:when test="contains($stylesheet.result.type,'html')"&gt;1px&lt;/xsl:when&gt;
+    &lt;xsl:otherwise&gt;0.5pt&lt;/xsl:otherwise&gt;
+  &lt;/xsl:choose&gt;
+&lt;/xsl:param&gt;
 </programlisting>
 </refsynopsisdiv>
 
 <refsection><info><title>Description</title></info>
 
 <para>If non-zero, specifies the thickness of borders on table
-cells. The units are points. See <link xlink:href="http://www.w3.org/TR/CSS21/box.html#border-width-properties">
+cells. See <link xlink:href="http://www.w3.org/TR/CSS21/box.html#border-width-properties">
 CSS</link></para>
 
 <note>
@@ -15033,7 +15302,7 @@ included in both user.xml and reference.xml documents.
 <para>How do you write the link to custom.xml in intro.xml
 so that it is interpreted correctly in all 3 documents?</para>
 <itemizedlist>
-<listitem><para>If you use xref, it will fail in user.xml.</para>
+<listitem><para>If you use xref, it will fail in booklet.xml.</para>
 </listitem>
 <listitem><para>If you use olink (pointing to reference.xml),
 the reference in user.xml  
@@ -15213,6 +15482,53 @@ attribute whose value specifies a page reference.
 
 </refsection>
 </refentry>
+
+<refentry version="5.0" id="insert.xref.page.number.para">
+<refmeta>
+<refentrytitle>insert.xref.page.number.para</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">list</refmiscinfo> 
+<refmiscinfo class="other" otherclass="value">yes</refmiscinfo>
+<refmiscinfo class="other" otherclass="value">maybe</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>insert.xref.page.number.para</refname>
+<refpurpose>Turns page numbers in xrefs to paragraphs on and off</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="insert.xref.page.number.para.frag">
+&lt;xsl:param name="insert.xref.page.number.para"&gt;yes&lt;/xsl:param&gt;
+</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>The value of this parameter determines if
+cross references (<tag>xref</tag>s) to paragraphs in
+printed output will include page number citations.
+</para>
+<para>Historically, cross references to paragraphs
+included page number citations unconditionally, regardless
+of the <parameter>insert.xref.page.number</parameter>
+value.</para>
+<variablelist>
+<varlistentry>
+<term>yes</term>
+<listitem><para>Page number references will be generated
+for paragraphs.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>maybe</term>
+<listitem><para>Whether page number references are generated
+for an <tag>xref</tag> element referring to a paragraph will
+be controlled by the <parameter>insert.xref.page.number</parameter>
+rules.</para></listitem>
+</varlistentry>
+</variablelist>
+
+</refsection>
+</refentry>
+
 
 <refentry version="5.0" id="xref.properties">
 <refmeta>
@@ -15535,6 +15851,9 @@ particular list with the &#8220;dbfo&#8221; processing instruction using the
 </refsynopsisdiv>
 <refsection><info><title>Description</title></info>
 <para>Specify the spacing required before and after a list. It is necessary to specify the space after a list block because lists can come inside of paras.  </para>
+<para>This attribute set is not applied to nested lists, so that only the
+<parameter>list.item.spacing</parameter> attribute-set is used, which provides 
+consistent spacing.</para>
 </refsection>
 </refentry>
 
@@ -15556,7 +15875,39 @@ particular list with the &#8220;dbfo&#8221; processing instruction using the
 &lt;/xsl:attribute-set&gt;</programlisting>
 </refsynopsisdiv>
 <refsection><info><title>Description</title></info>
-<para>Specify what spacing you want between each list item.</para>
+<para>Specify what spacing you want before (and optionally after) each list item.</para>
+<para>See also <parameter>list.block.spacing</parameter>, which sets
+the spacing before and after an entire list.</para>
+</refsection>
+</refentry>
+
+<refentry version="5.0" id="mark.optional.procedure.steps">
+<refmeta>
+<refentrytitle>mark.optional.procedure.steps</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">boolean</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>mark.optional.procedure.steps</refname>
+<refpurpose>Specifies whether to mark optional procedure steps</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+  <programlisting id="mark.optional.procedure.steps.frag">
+    &lt;xsl:param name="mark.optional.procedure.steps"&gt;1&lt;/xsl:param&gt;
+  </programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>This parameter specifies whether a procedure step
+with attribute <tag>performance</tag> set to <literal>optional</literal>
+should be marked.  If set to 1 (the default value), then the
+text "(Optional)" appears at the start of the first paragraph.
+If set to zero, then no text is generated.</para>
+
+<para>The text can be customized in the gentext element with 
+key="optional-step".</para>
+
 </refsection>
 </refentry>
 
@@ -18254,6 +18605,32 @@ function even though it is available.</para>
 </refsection>
 </refentry>
 
+<refentry version="5.0" id="show.bookmarks">
+<refmeta>
+<refentrytitle>show.bookmarks</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">boolean</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>show.bookmarks</refname>
+<refpurpose>Display bookmarks in PDF output</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="show.bookmarks.frag">
+&lt;xsl:param name="show.bookmarks" select="1"&gt;&lt;/xsl:param&gt;
+</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>If non-zero (default), then bookmarks are generated in PDF
+output.  If set to zero, bookmarks are turned off.
+</para>
+<para>See also <parameter>xsl1.1.bookmarks</parameter>.</para>
+
+</refsection>
+</refentry>
+
 <refentry version="5.0" id="bookmarks.collapse">
 <refmeta>
 <refentrytitle>bookmarks.collapse</refentrytitle>
@@ -18277,6 +18654,42 @@ top-level bookmarks are displayed initially. Otherwise, the whole tree
 of bookmarks is displayed.</para>
 
 <para>This parameter currently works with FOP 0.93 or later.</para>
+
+</refsection>
+</refentry>
+
+<refentry version="5.0" id="xsl1.1.bookmarks">
+<refmeta>
+<refentrytitle>xsl1.1.bookmarks</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">boolean</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>xsl1.1.bookmarks</refname>
+<refpurpose>Use standard XSL 1.1 bookmark elements</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="xsl1.1.bookmarks.frag">&lt;xsl:param name="xsl1.1.bookmarks"&gt;
+  &lt;xsl:choose&gt;
+    &lt;xsl:when test="$fop1.extensions != 0"&gt;1&lt;/xsl:when&gt;
+    &lt;xsl:when test="$xep.extensions != 0"&gt;1&lt;/xsl:when&gt;
+    &lt;xsl:when test="$axf.extensions != 0"&gt;1&lt;/xsl:when&gt;
+    &lt;xsl:otherwise&gt;0&lt;/xsl:otherwise&gt;
+  &lt;/xsl:choose&gt;&lt;/xsl:param&gt;</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>If non-zero (default),
+the stylesheet uses the 
+<tag>fo:bookmark-tree</tag>
+and
+<tag>fo:bookmark</tag> elements that are
+standard in XSL 1.1, instead of each XSL-FO processor's proprietary
+bookmark elements.
+If zero, then the stylesheet uses the proprietary bookmark elements that
+predate XSL 1.1.
+</para>
 
 </refsection>
 </refentry>
@@ -23143,6 +23556,39 @@ ones (<filename>docbook.xsl</filename>,
 </refsection>
 </refentry>
 
+<refentry version="5.0" id="profile.outputformat">
+<refmeta>
+<refentrytitle>profile.outputformat</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">string</refmiscinfo>
+</refmeta>
+<refnamediv>
+    <refname>profile.outputformat</refname>
+    <refpurpose>Target profile for <tag class="attribute">outputformat</tag> attribute</refpurpose>
+  </refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="profile.outputformat.frag">
+&lt;xsl:param name="profile.outputformat"&gt;&lt;/xsl:param&gt;
+</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>The value of this parameter specifies profiles which should be
+included in the output. You can specify multiple profiles by
+separating them by semicolon. You can change separator character by
+<parameter>profile.separator</parameter>
+parameter.</para>
+
+<para>This parameter has effect only when you are using profiling
+stylesheets (<filename>profile-docbook.xsl</filename>,
+<filename>profile-chunk.xsl</filename>, &#8230;) instead of normal
+ones (<filename>docbook.xsl</filename>,
+<filename>chunk.xsl</filename>, &#8230;).</para>
+
+</refsection>
+</refentry>
+
 <refentry version="5.0" id="profile.revision">
 <refmeta>
 <refentrytitle>profile.revision</refentrytitle>
@@ -23915,6 +24361,272 @@ works only with XEP if you have <parameter>xep.extensions</parameter> set.</para
 
 </refsection>
 </refentry>
+
+</reference><reference id="publishers" xml:base="../fo/param.xml"><title>DocBook Publishers</title>
+<refentry version="5.0" id="publishers.properties">
+<refmeta>
+<refentrytitle>publishers.properties</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">attribute set</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>publishers.properties</refname>
+<refpurpose>Properties shared with the DocBook Publishers
+elements drama, poetry, and dialogue. </refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="publishers.properties.frag">
+&lt;xsl:attribute-set name="publishers.properties"&gt;
+  &lt;xsl:attribute name="space-before"&gt;1em&lt;/xsl:attribute&gt;
+  &lt;xsl:attribute name="space-after"&gt;1em&lt;/xsl:attribute&gt;
+  &lt;xsl:attribute name="keep-together.within-column"&gt;auto&lt;/xsl:attribute&gt;
+&lt;/xsl:attribute-set&gt;
+</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>This <literal>attribute set</literal> is used for common
+properties shared by the DocBook Publishers elements 
+<tag>dialogue</tag>,
+<tag>drama</tag>, and <tag>poetry</tag>.
+It is imported into each of the individual
+attribute sets for those elements.
+</para>
+
+</refsection>
+</refentry>
+
+<refentry version="5.0" id="dialogue.properties">
+<refmeta>
+<refentrytitle>dialogue.properties</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">attribute set</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>dialogue.properties</refname>
+<refpurpose>Properties applied to the DocBook Publishers dialogue element</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="dialogue.properties.frag">
+&lt;xsl:attribute-set name="dialogue.properties" use-attribute-sets="publishers.properties"&gt;&lt;/xsl:attribute-set&gt;
+</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>This <literal>attribute set</literal> is applied to the output 
+block for the DocBook Publishers <tag>dialogue</tag> element.
+By default, it imports the attributes defined in the
+<tag>publishers.properties</tag> attribute-set.
+</para>
+
+</refsection>
+</refentry>
+
+<refentry version="5.0" id="drama.properties">
+<refmeta>
+<refentrytitle>drama.properties</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">attribute set</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>drama.properties</refname>
+<refpurpose>Properties applied to the DocBook Publishers drama element</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="drama.properties.frag">
+&lt;xsl:attribute-set name="drama.properties" use-attribute-sets="publishers.properties"&gt;&lt;/xsl:attribute-set&gt;
+</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>This <literal>attribute set</literal> is applied to the output 
+block for the DocBook Publishers <tag>drama</tag> element.
+By default, it imports the attributes defined in the
+<tag>publishers.properties</tag> attribute-set.
+</para>
+
+</refsection>
+</refentry>
+
+<refentry version="5.0" id="poetry.properties">
+<refmeta>
+<refentrytitle>poetry.properties</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">attribute set</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>poetry.properties</refname>
+<refpurpose>Properties applied to the DocBook Publishers drama element</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="poetry.properties.frag">
+&lt;xsl:attribute-set name="poetry.properties" use-attribute-sets="publishers.properties"&gt;&lt;/xsl:attribute-set&gt;
+</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>This <literal>attribute set</literal> is applied to the output 
+block for the DocBook Publishers <tag>poetry</tag> element.
+By default, it imports the attributes defined in the
+<tag>publishers.properties</tag> attribute-set.
+</para>
+
+</refsection>
+</refentry>
+
+<refentry version="5.0" id="line.properties">
+<refmeta>
+<refentrytitle>line.properties</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">attribute set</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>line.properties</refname>
+<refpurpose>Properties applied to the DocBook Publishers
+line element. </refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="line.properties.frag">
+&lt;xsl:attribute-set name="line.properties"&gt;&lt;/xsl:attribute-set&gt;
+</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>This <literal>attribute set</literal> is applied
+to the <tag>block</tag> that contains the output of a 
+<tag>line</tag> element from DocBook Publishers.
+</para>
+
+</refsection>
+</refentry>
+
+<refentry version="5.0" id="linegroup.properties">
+<refmeta>
+<refentrytitle>linegroup.properties</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">attribute set</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>linegroup.properties</refname>
+<refpurpose>Properties applied to the DocBook Publishers
+linegroup element</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="linegroup.properties.frag">
+&lt;xsl:attribute-set name="linegroup.properties"&gt;
+  &lt;xsl:attribute name="provisional-distance-between-starts"&gt;20%&lt;/xsl:attribute&gt;
+  &lt;xsl:attribute name="provisional-label-separation"&gt;.3em&lt;/xsl:attribute&gt;
+  &lt;xsl:attribute name="space-before"&gt;.5em&lt;/xsl:attribute&gt;
+&lt;/xsl:attribute-set&gt;
+</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>This <literal>attribute set</literal> is applied
+to the <tag>list-block</tag> that contains the output of a 
+<tag>linegroup</tag> element from DocBook Publishers.
+</para>
+
+</refsection>
+</refentry>
+
+<refentry version="5.0" id="speaker.properties">
+<refmeta>
+<refentrytitle>speaker.properties</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">attribute set</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>speaker.properties</refname>
+<refpurpose>Properties applied to the DocBook Publishers
+speaker element</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="speaker.properties.frag">
+&lt;xsl:attribute-set name="speaker.properties"&gt;&lt;/xsl:attribute-set&gt;
+</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>This <literal>attribute set</literal> is applied
+to the <tag>block</tag> that contains the output of a 
+<tag>speaker</tag> element from DocBook Publishers.
+</para>
+
+</refsection>
+</refentry>
+
+<refentry version="5.0" id="stagedir.properties">
+<refmeta>
+<refentrytitle>stagedir.properties</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">attribute set</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>stagedir.properties</refname>
+<refpurpose>To add properties to the outer block of stage direction.</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="stagedir.properties.frag">
+&lt;xsl:attribute-set name="stagedir.properties"&gt;
+  &lt;xsl:attribute name="font-weight"&gt;bold&lt;/xsl:attribute&gt;
+  &lt;xsl:attribute name="font-style"&gt;italic&lt;/xsl:attribute&gt;
+  &lt;xsl:attribute name="space-before"&gt;1em&lt;/xsl:attribute&gt;
+  &lt;xsl:attribute name="space-after"&gt;1em&lt;/xsl:attribute&gt;
+&lt;/xsl:attribute-set&gt;
+</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>These properties are added to the outer block containing the
+entire stagedir.
+Use this attribute-set to set the space above and below,
+and any indent for the whole stagedir.</para>
+</refsection>
+
+</refentry>
+
+<refentry version="5.0" id="inlinestagedir.properties">
+<refmeta>
+<refentrytitle>inlinestagedir.properties</refentrytitle>
+<refmiscinfo class="other" otherclass="datatype">attribute set</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>inlinestagedir.properties</refname>
+<refpurpose>Properties applied to the DocBook Publishers
+inlinestagedir element. </refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<programlisting id="inlinestagedir.properties.frag">
+&lt;xsl:attribute-set name="inlinestagedir.properties"&gt;
+  &lt;xsl:attribute name="font-weight"&gt;bold&lt;/xsl:attribute&gt;
+  &lt;xsl:attribute name="font-style"&gt;italic&lt;/xsl:attribute&gt;
+&lt;/xsl:attribute-set&gt;
+</programlisting>
+</refsynopsisdiv>
+
+<refsection><info><title>Description</title></info>
+
+<para>This <literal>attribute set</literal> is applied
+to the <tag>fo:inline</tag> that contains the output of a 
+<tag>inlinestagedir</tag> element from DocBook Publishers.
+</para>
+
+<para>The XSL template that matches on <tag>inlinestagedir</tag>
+also adds square brackets around the text.</para>
+
+</refsection>
+</refentry>
+
 
 </reference>
     </part>
@@ -29666,7 +30378,7 @@ will be used to indent the TOC.</para>
     <part id="pi-html">
       <info xml:base="../html/pi.xml"><title>HTML Processing Instruction Reference</title>
     <releaseinfo role="meta">
-      $Id: pi.xsl 9022 2011-07-14 19:21:36Z bobstayton $
+      $Id: pi.xsl 9848 2014-01-17 22:44:39Z bobstayton $
     </releaseinfo>
   </info>
   <partintro id="partintro" xml:base="../html/pi.xml">
@@ -30817,7 +31529,7 @@ specifications in one processing instruction:
     <part id="pi-fo">
       <info xml:base="../fo/pi.xml"><title>FO Processing Instruction Reference</title>
     <releaseinfo role="meta">
-      $Id: pi.xsl 9267 2012-04-03 20:23:45Z bobstayton $
+      $Id: pi.xsl 9961 2015-04-02 17:44:30Z bobstayton $
     </releaseinfo>
   </info>
 
@@ -30954,6 +31666,36 @@ specifications in one processing instruction:
     
 <para><link role="tcg" xlink:href="SideFloats.html#SidebarFloats">A sidebar as
         side float</link></para>
+
+  </refsect1></refentry>
+
+<refentry id="dbfo_font-size" xml:base="../fo/pi.xml">
+<refnamediv>
+<refname>dbfo_font-size</refname>
+<refpurpose>Specifies &#8220;font-size&#8221; for block verbatim elements</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+
+    <synopsis><tag class="xmlpi">dbfo font-size="SIZE"</tag></synopsis>
+  
+</refsynopsisdiv>
+<refsect1><title>Description</title>
+    
+<para>Use the <tag class="xmlpi">dbfo font-size</tag> PI as a child of a
+      verbatim element (<tag>screen</tag>, <tag>programlisting</tag>, or
+      <tag>synopsis</tag>) to specify the &#8220;font-size&#8221;.</para>
+
+  </refsect1><refsect1><title>Parameters</title>
+    
+<variablelist>
+      <varlistentry><term>font-size="SIZE"</term>
+        <listitem>
+          
+<para>Specifies the font size (usually in points)</para>
+
+        </listitem>
+      </varlistentry>
+    </variablelist>
 
   </refsect1></refentry>
 
@@ -33131,7 +33873,7 @@ which would effectively move <quote>up</quote> the hierarchy.</para>
   <info>
     <title>Common &#187; Base Template Reference</title>
     <releaseinfo role="meta">
-      $Id: common.xsl 9347 2012-05-11 03:49:49Z bobstayton $
+      $Id: common.xsl 9965 2015-06-29 14:38:09Z tom_schr $
     </releaseinfo>
   </info>
   
@@ -34988,7 +35730,7 @@ unchanged.</para>
   <info xml:base="../fo/table.xml">
     <title>Formatting Object Table Reference</title>
     <releaseinfo role="meta">
-      $Id: table.xsl 9666 2012-11-14 04:42:56Z bobstayton $
+      $Id: table.xsl 9819 2013-10-16 18:51:18Z mzjn $
     </releaseinfo>
   </info>
   <partintro id="partintro" xml:base="../fo/table.xml">
@@ -35123,7 +35865,7 @@ proportional-column-width() function.</para>
   <info xml:base="../template/titlepage.xml">
     <title>Titlepage Template Stylesheet Reference</title>
     <releaseinfo role="meta">
-      $Id: titlepage.xsl 9600 2012-09-11 12:12:09Z kosek $
+      $Id: titlepage.xsl 9940 2014-09-06 16:06:50Z bobstayton $
     </releaseinfo>
   </info>
   <partintro id="intro_partintro" xml:base="../template/titlepage.xml">
@@ -35138,6 +35880,76 @@ proportional-column-width() function.</para>
       stylesheets.</para>
 
   </partintro>
+
+<refentry id="template.get.namespace.prefix" xml:base="../template/titlepage.xml">
+<refnamediv>
+<refname>get.namespace.prefix</refname>
+<refpurpose>Obtain namespace prefix for an element identified by a string containing qualified name</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis>&lt;xsl:template name="get.namespace.prefix"&gt;
+&lt;xsl:param name="element.name"/&gt;
+  ...
+&lt;/xsl:template&gt;</synopsis>
+</refsynopsisdiv>
+<refsect1><title>Description</title>
+
+<para>This template interprets a string containing a qualified name of an element
+and returns the namespace prefix, if any.</para>
+
+
+<para>Element name could be an XPath expression starting with the element name; this
+template will first determine if the occurrence of a colon is preceded by a valid
+NCName, assuming only ASCII characters.</para>
+
+</refsect1></refentry>
+
+<refentry id="template.get.namespace.uri" xml:base="../template/titlepage.xml">
+<refnamediv>
+<refname>get.namespace.uri</refname>
+<refpurpose>Obtain URI for an element identified by a string containing qualified name</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis>&lt;xsl:template name="get.namespace.uri"&gt;
+&lt;xsl:param name="element.name"/&gt;
+&lt;xsl:param name="reference.node" select="."/&gt;
+&lt;xsl:param name="missing.namespace.warning" select="not(/t:templates/@t:missing-namespace-ok = 'yes')"/&gt;
+  ...
+&lt;/xsl:template&gt;</synopsis>
+</refsynopsisdiv>
+<refsect1><title>Description</title>
+
+<para>This template interprets a string containing a qualified name of an element
+and returns the namespace URI for that element, looking for namespace prefixes
+starting from a reference node.</para>
+
+</refsect1></refentry>
+
+<refentry id="template.output.wrapper" xml:base="../template/titlepage.xml">
+<refnamediv>
+<refname>output.wrapper</refname>
+<refpurpose>Output the wrapper element</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis>&lt;xsl:template name="output.wrapper"&gt;
+&lt;xsl:param name="wrapper" select="ancestor-or-self::t:titlepage[@t:wrapper]"/&gt;
+&lt;xsl:param name="attr.copy.from" select="."/&gt;
+&lt;xsl:param name="attr.sets" select="''"/&gt;
+&lt;xsl:param name="content"/&gt;
+  ...
+&lt;/xsl:template&gt;</synopsis>
+</refsynopsisdiv>
+<refsect1><title>Description</title>
+
+<para>This template locates the namespace for the defined wrapper element
+and output it within that namespace. The content of the element is passed
+via the content argument.</para>
+
+
+<para>The attribute sets to use for the wrapper element and the element to
+copy non-template attributes from are also passed as arguments.</para>
+
+</refsect1></refentry>
 
 <refentry id="templates" xml:base="../template/titlepage.xml">
 <refnamediv>
@@ -35158,6 +35970,13 @@ set of templates. This template creates an appropriate
 <para>If the <literal>t:templates</literal> element has a
 <literal>base-stylesheet</literal> attribute, an
 <literal>xsl:import</literal> statement is constructed for it.</para>
+
+
+
+<para>If the <literal>t:templates</literal> element has a
+<literal>copy-namespaces</literal> attribute, it is interpreted as a
+space-separated list of namespace prefixes to be copied from the template
+to the resulting stylesheet. Default namespace is always copied.</para>
 
 </refsect1></refentry>
 
@@ -35246,22 +36065,6 @@ more <literal>t:titlepage-content</literal>,
 <para>Each of these elements may be provided for the <quote>recto</quote>
 and <quote>verso</quote> sides of the title page.</para>
 
-
-</refsect1></refentry>
-
-<refentry id="attr_star_in_copy.literal.atts" xml:base="../template/titlepage.xml">
-<refnamediv>
-<refname>@* (in copy.literal.atts mode)</refname>
-<refpurpose>Copy t:titlepage attributes</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-<synopsis>&lt;xsl:template match="@*" mode="copy.literal.atts"/&gt;</synopsis>
-</refsynopsisdiv>
-<refsect1><title>Description</title>
-
-<para>This template copies all of the <quote>other</quote> attributes
-from a <literal>t:titlepage</literal> element onto the specified
-wrapper.</para>
 
 </refsect1></refentry>
 

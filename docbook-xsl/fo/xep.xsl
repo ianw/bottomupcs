@@ -1,13 +1,11 @@
 <?xml version='1.0'?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:fo="http://www.w3.org/1999/XSL/Format"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 xmlns:rx="http://www.renderx.com/XSL/Extensions"
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: xep.xsl 9293 2012-04-19 18:42:11Z bobstayton $
+     $Id: xep.xsl 9838 2014-01-07 21:36:28Z bobstayton $
      ********************************************************************
      (c) Stephane Bline Peregrine Systems 2001
      Implementation of xep extensions:
@@ -21,22 +19,22 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 <xsl:template name="xep-document-information">
   <rx:meta-info>
     <xsl:variable name="authors" 
-                  select="(//d:author|//d:editor|//d:corpauthor|//d:authorgroup)[1]"/>
+                  select="(//author|//editor|//corpauthor|//authorgroup)[1]"/>
     <xsl:if test="$authors">
       <xsl:variable name="author">
         <xsl:choose>
-          <xsl:when test="$authors[self::d:authorgroup]">
+          <xsl:when test="$authors[self::authorgroup]">
             <xsl:call-template name="person.name.list">
               <xsl:with-param name="person.list" 
-                        select="$authors/*[self::d:author|self::d:corpauthor|
-                               self::d:othercredit|self::d:editor]"/>
+                        select="$authors/*[self::author|self::corpauthor|
+                               self::othercredit|self::editor]"/>
             </xsl:call-template>
           </xsl:when>
-          <xsl:when test="$authors[self::d:corpauthor]">
+          <xsl:when test="$authors[self::corpauthor]">
             <xsl:value-of select="$authors"/>
           </xsl:when>
-          <xsl:when test="$authors[d:orgname]">
-            <xsl:value-of select="$authors/d:orgname"/>
+          <xsl:when test="$authors[orgname]">
+            <xsl:value-of select="$authors/orgname"/>
           </xsl:when>
           <xsl:otherwise>
             <xsl:call-template name="person.name">
@@ -75,11 +73,11 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
       </xsl:attribute>
     </xsl:element>
 
-    <xsl:if test="//d:keyword">
+    <xsl:if test="//keyword">
       <xsl:element name="rx:meta-field">
         <xsl:attribute name="name">keywords</xsl:attribute>
         <xsl:attribute name="value">
-          <xsl:for-each select="//d:keyword">
+          <xsl:for-each select="//keyword">
             <xsl:value-of select="normalize-space(.)"/>
             <xsl:if test="position() != last()">
               <xsl:text>, </xsl:text>
@@ -89,11 +87,11 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
       </xsl:element>
     </xsl:if>
 
-    <xsl:if test="//d:subjectterm">
+    <xsl:if test="//subjectterm">
       <xsl:element name="rx:meta-field">
         <xsl:attribute name="name">subject</xsl:attribute>
         <xsl:attribute name="value">
-          <xsl:for-each select="//d:subjectterm">
+          <xsl:for-each select="//subjectterm">
             <xsl:value-of select="normalize-space(.)"/>
             <xsl:if test="position() != last()">
               <xsl:text>, </xsl:text>
@@ -113,11 +111,11 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <xsl:apply-templates select="*" mode="xep.outline"/>
 </xsl:template>
 
-<xsl:template match="d:set|d:book|d:part|d:reference|d:preface|d:chapter|d:appendix|d:article
-                     |d:glossary|d:bibliography|d:index|d:setindex|d:topic
-                     |d:refentry|d:refsynopsisdiv
-                     |d:refsect1|d:refsect2|d:refsect3|d:refsection
-                     |d:sect1|d:sect2|d:sect3|d:sect4|d:sect5|d:section"
+<xsl:template match="set|book|part|reference|preface|chapter|appendix|article
+                     |glossary|bibliography|index|setindex|topic
+                     |refentry|refsynopsisdiv
+                     |refsect1|refsect2|refsect3|refsection
+                     |sect1|sect2|sect3|sect4|sect5|section"
               mode="xep.outline">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
@@ -129,9 +127,12 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <!-- Put the root element bookmark at the same level as its children -->
   <!-- If the object is a set or book, generate a bookmark for the toc -->
   <xsl:choose>
-    <xsl:when test="self::d:index and $generate.index = 0"/>	
+    <xsl:when test="self::index and $generate.index = 0"/>	
     <xsl:when test="parent::*">
       <rx:bookmark internal-destination="{$id}">
+        <xsl:attribute name="starting-state">
+          <xsl:value-of select="$bookmarks.state"/>
+        </xsl:attribute>
         <rx:bookmark-label>
           <xsl:value-of select="normalize-space($bookmark-label)"/>
         </rx:bookmark-label>
@@ -141,6 +142,9 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     <xsl:otherwise>
       <xsl:if test="$bookmark-label != ''">
         <rx:bookmark internal-destination="{$id}">
+          <xsl:attribute name="starting-state">
+            <xsl:value-of select="$bookmarks.state"/>
+          </xsl:attribute>
           <rx:bookmark-label>
             <xsl:value-of select="normalize-space($bookmark-label)"/>
           </rx:bookmark-label>
@@ -153,9 +157,9 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
         </xsl:call-template>
       </xsl:variable>
       <xsl:if test="contains($toc.params, 'toc')
-                    and d:set|d:book|d:part|d:reference|d:section|d:sect1|d:refentry
-                        |d:article|d:topic|d:bibliography|d:glossary|d:chapter
-                        |d:appendix">
+                    and set|book|part|reference|section|sect1|refentry
+                        |article|topic|bibliography|glossary|chapter
+                        |appendix">
         <rx:bookmark internal-destination="toc...{$id}">
           <rx:bookmark-label>
             <xsl:call-template name="gentext">

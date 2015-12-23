@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-		xmlns:d="http://docbook.org/ns/docbook"
-xmlns:ng="http://docbook.org/docbook-ng" 
+		xmlns:ng="http://docbook.org/docbook-ng" 
 		xmlns:db="http://docbook.org/ns/docbook"
 		xmlns:exsl="http://exslt.org/common" version="1.0"
-		exclude-result-prefixes="exsl db ng d">
+		exclude-result-prefixes="exsl db ng">
 
 <!-- 
 ********************************************************************************

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="ASCII"?>
 <!--This file was created automatically by html2xhtml-->
 <!--from the HTML stylesheets.-->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:d="http://docbook.org/ns/docbook"
-xmlns:xslthl="http://xslthl.sf.net" xmlns="http://www.w3.org/1999/xhtml" exclude-result-prefixes="xslthl d" version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xslthl="http://xslthl.sf.net" xmlns="http://www.w3.org/1999/xhtml" exclude-result-prefixes="xslthl" version="1.0">
   <!-- ********************************************************************
-     $Id: highlight.xsl 8911 2010-09-28 17:02:06Z abdelazer $
+     $Id: highlight.xsl 9725 2013-02-28 14:49:03Z kosek $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -51,11 +50,9 @@ xmlns:xslthl="http://xslthl.sf.net" xmlns="http://www.w3.org/1999/xhtml" exclude
     </span>
   </xsl:template>
   <xsl:template match="xslthl:html" mode="xslthl">
-    <strong>
-      <em style="color: red">
-        <xsl:apply-templates mode="xslthl"/>
-      </em>
-    </strong>
+    <span class="hl-html" style="color: navy; font-weight: bold">
+      <xsl:apply-templates mode="xslthl"/>
+    </span>
   </xsl:template>
   <xsl:template match="xslthl:xslt" mode="xslthl">
     <strong style="color: #0066FF">

@@ -4,13 +4,12 @@
 %common.entities;
 ]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:xlink='http://www.w3.org/1999/xlink'
-                exclude-result-prefixes="xlink d"
+                xmlns:xlink='http://www.w3.org/1999/xlink'
+                exclude-result-prefixes="xlink"
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: glossary.xsl 9709 2013-01-22 18:56:09Z bobstayton $
+     $Id: glossary.xsl 9922 2014-07-31 17:33:43Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -21,7 +20,7 @@ xmlns:xlink='http://www.w3.org/1999/xlink'
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:glossary">
+<xsl:template match="glossary">
   &setup-language-variable;
   <xsl:call-template name="id.warning"/>
 
@@ -34,11 +33,11 @@ xmlns:xlink='http://www.w3.org/1999/xlink'
     <xsl:call-template name="glossary.titlepage"/>
 
     <xsl:choose>
-      <xsl:when test="d:glossdiv">
-        <xsl:apply-templates select="(d:glossdiv[1]/preceding-sibling::*)"/>
+      <xsl:when test="glossdiv">
+        <xsl:apply-templates select="(glossdiv[1]/preceding-sibling::*)"/>
       </xsl:when>
-      <xsl:when test="d:glossentry">
-        <xsl:apply-templates select="(d:glossentry[1]/preceding-sibling::*)"/>
+      <xsl:when test="glossentry">
+        <xsl:apply-templates select="(glossentry[1]/preceding-sibling::*)"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:apply-templates/>
@@ -46,19 +45,19 @@ xmlns:xlink='http://www.w3.org/1999/xlink'
     </xsl:choose>
 
     <xsl:choose>
-      <xsl:when test="d:glossdiv">
-        <xsl:apply-templates select="d:glossdiv"/>
+      <xsl:when test="glossdiv">
+        <xsl:apply-templates select="glossdiv"/>
       </xsl:when>
-      <xsl:when test="d:glossentry">
+      <xsl:when test="glossentry">
         <dl>
           <xsl:choose>
             <xsl:when test="$glossary.sort != 0">
-              <xsl:apply-templates select="d:glossentry">
-				<xsl:sort lang="{$language}" select="normalize-space(translate(concat(@sortas, d:glossterm[not(parent::d:glossentry/@sortas) or parent::d:glossentry/@sortas = '']), &lowercase;, &uppercase;))"/>
+              <xsl:apply-templates select="glossentry">
+				<xsl:sort lang="{$language}" select="normalize-space(translate(concat(@sortas, glossterm[not(parent::glossentry/@sortas) or parent::glossentry/@sortas = '']), &lowercase;, &uppercase;))"/>
               </xsl:apply-templates>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:apply-templates select="d:glossentry"/>
+              <xsl:apply-templates select="glossentry"/>
             </xsl:otherwise>
           </xsl:choose>
         </dl>
@@ -68,38 +67,38 @@ xmlns:xlink='http://www.w3.org/1999/xlink'
       </xsl:otherwise>
     </xsl:choose>
 
-    <xsl:if test="not(parent::d:article)">
+    <xsl:if test="not(parent::article)">
       <xsl:call-template name="process.footnotes"/>
     </xsl:if>
   </xsl:element>
 </xsl:template>
 
-<xsl:template match="d:glossary/d:glossaryinfo"></xsl:template>
-<xsl:template match="d:glossary/d:info"></xsl:template>
-<xsl:template match="d:glossary/d:title"></xsl:template>
-<xsl:template match="d:glossary/d:subtitle"></xsl:template>
-<xsl:template match="d:glossary/d:titleabbrev"></xsl:template>
+<xsl:template match="glossary/glossaryinfo"></xsl:template>
+<xsl:template match="glossary/info"></xsl:template>
+<xsl:template match="glossary/title"></xsl:template>
+<xsl:template match="glossary/subtitle"></xsl:template>
+<xsl:template match="glossary/titleabbrev"></xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:glosslist">
+<xsl:template match="glosslist">
   &setup-language-variable;
   <div>
     <xsl:apply-templates select="." mode="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
     <xsl:call-template name="anchor"/>
-    <xsl:if test="d:blockinfo/d:title|d:info/d:title|d:title">
+    <xsl:if test="blockinfo/title|info/title|title">
       <xsl:call-template name="formal.object.heading"/>
     </xsl:if>
     <dl>
       <xsl:choose>
         <xsl:when test="$glossary.sort != 0">
-          <xsl:apply-templates select="d:glossentry">
-				<xsl:sort lang="{$language}" select="normalize-space(translate(concat(@sortas, d:glossterm[not(parent::d:glossentry/@sortas) or parent::d:glossentry/@sortas = '']), &lowercase;, &uppercase;))"/>
+          <xsl:apply-templates select="glossentry">
+				<xsl:sort lang="{$language}" select="normalize-space(translate(concat(@sortas, glossterm[not(parent::glossentry/@sortas) or parent::glossentry/@sortas = '']), &lowercase;, &uppercase;))"/>
           </xsl:apply-templates>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:apply-templates select="d:glossentry"/>
+          <xsl:apply-templates select="glossentry"/>
         </xsl:otherwise>
       </xsl:choose>
     </dl>
@@ -108,7 +107,7 @@ xmlns:xlink='http://www.w3.org/1999/xlink'
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:glossdiv">
+<xsl:template match="glossdiv">
   &setup-language-variable;
   <xsl:call-template name="id.warning"/>
 
@@ -117,26 +116,26 @@ xmlns:xlink='http://www.w3.org/1999/xlink'
     <xsl:call-template name="id.attribute">
       <xsl:with-param name="conditional" select="0"/>
     </xsl:call-template>
-    <xsl:apply-templates select="(d:glossentry[1]/preceding-sibling::*)"/>
+    <xsl:apply-templates select="(glossentry[1]/preceding-sibling::*)"/>
 
     <dl>
       <xsl:choose>
         <xsl:when test="$glossary.sort != 0">
-          <xsl:apply-templates select="d:glossentry">
+          <xsl:apply-templates select="glossentry">
             <xsl:sort lang="{$language}"
-                      select="translate(d:glossterm, $lowercase, 
+                      select="translate(glossterm, $lowercase, 
                                         $uppercase)"/>
           </xsl:apply-templates>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:apply-templates select="d:glossentry"/>
+          <xsl:apply-templates select="glossentry"/>
         </xsl:otherwise>
       </xsl:choose>
     </dl>
   </div>
 </xsl:template>
 
-<xsl:template match="d:glossdiv/d:title">
+<xsl:template match="glossdiv/title">
   <h3>
     <xsl:apply-templates select="." mode="common.html.attributes"/>
     <xsl:apply-templates/>
@@ -153,7 +152,7 @@ GlossEntry ::=
   (GlossSee | GlossDef+)
 -->
 
-<xsl:template match="d:glossentry">
+<xsl:template match="glossentry">
   <xsl:choose>
     <xsl:when test="$glossentry.show.acronym = 'primary'">
       <dt>
@@ -175,14 +174,14 @@ GlossEntry ::=
         </xsl:call-template>
 
         <xsl:choose>
-          <xsl:when test="d:acronym|d:abbrev">
-            <xsl:apply-templates select="d:acronym|d:abbrev"/>
+          <xsl:when test="acronym|abbrev">
+            <xsl:apply-templates select="acronym|abbrev"/>
             <xsl:text> (</xsl:text>
-            <xsl:apply-templates select="d:glossterm"/>
+            <xsl:apply-templates select="glossterm"/>
             <xsl:text>)</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:apply-templates select="d:glossterm"/>
+            <xsl:apply-templates select="glossterm"/>
           </xsl:otherwise>
         </xsl:choose>
       </dt>
@@ -206,13 +205,14 @@ GlossEntry ::=
           </xsl:with-param>
         </xsl:call-template>
 
-        <xsl:apply-templates select="d:glossterm"/>
+        <xsl:apply-templates select="glossterm"/>
 
-        <xsl:if test="d:acronym|d:abbrev">
+        <xsl:if test="acronym|abbrev">
           <xsl:text> (</xsl:text>
-          <xsl:apply-templates select="d:acronym|d:abbrev"/>
+          <xsl:apply-templates select="acronym|abbrev"/>
           <xsl:text>)</xsl:text>
         </xsl:if>
+        <xsl:apply-templates select="indexterm"/>
       </dt>
     </xsl:when>
     <xsl:otherwise>
@@ -234,38 +234,39 @@ GlossEntry ::=
           </xsl:with-param>
         </xsl:call-template>
 
-        <xsl:apply-templates select="d:glossterm"/>
+        <xsl:apply-templates select="glossterm"/>
+        <xsl:apply-templates select="indexterm"/>
       </dt>
     </xsl:otherwise>
   </xsl:choose>
 
-  <xsl:apply-templates select="d:indexterm|d:revhistory|d:glosssee|d:glossdef"/>
+  <xsl:apply-templates select="glosssee|glossdef"/>
 </xsl:template>
 
-<xsl:template match="d:glossentry/d:glossterm">
+<xsl:template match="glossentry/glossterm">
   <span>
     <xsl:apply-templates select="." mode="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
     <xsl:call-template name="anchor"/>
     <xsl:apply-templates/>
   </span>
-  <xsl:if test="following-sibling::d:glossterm">, </xsl:if>
+  <xsl:if test="following-sibling::glossterm">, </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:glossentry/d:acronym">
+<xsl:template match="glossentry/acronym">
   <xsl:apply-templates/>
-  <xsl:if test="following-sibling::d:acronym|following-sibling::d:abbrev">, </xsl:if>
+  <xsl:if test="following-sibling::acronym|following-sibling::abbrev">, </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:glossentry/d:abbrev">
+<xsl:template match="glossentry/abbrev">
   <xsl:apply-templates/>
-  <xsl:if test="following-sibling::d:acronym|following-sibling::d:abbrev">, </xsl:if>
+  <xsl:if test="following-sibling::acronym|following-sibling::abbrev">, </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:glossentry/d:revhistory">
+<xsl:template match="glossentry/revhistory">
 </xsl:template>
 
-<xsl:template match="d:glossentry/d:glosssee">
+<xsl:template match="glossentry/glosssee">
   <xsl:variable name="otherterm" select="@otherterm"/>
   <xsl:variable name="targets" select="key('id', $otherterm)"/>
   <xsl:variable name="target" select="$targets[1]"/>
@@ -322,13 +323,13 @@ GlossEntry ::=
   </dd>
 </xsl:template>
 
-<xsl:template match="d:glossentry/d:glossdef">
+<xsl:template match="glossentry/glossdef">
   <dd>
     <xsl:apply-templates select="." mode="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
     <xsl:call-template name="anchor"/>
     <xsl:apply-templates select="*[local-name(.) != 'glossseealso']"/>
-    <xsl:if test="d:glossseealso">
+    <xsl:if test="glossseealso">
       <p>
         <xsl:variable name="template">
           <xsl:call-template name="gentext.template">
@@ -337,7 +338,7 @@ GlossEntry ::=
           </xsl:call-template>
         </xsl:variable>
         <xsl:variable name="title">
-          <xsl:apply-templates select="d:glossseealso"/>
+          <xsl:apply-templates select="glossseealso"/>
         </xsl:variable>
         <xsl:call-template name="substitute-markup">
           <xsl:with-param name="template" select="$template"/>
@@ -348,7 +349,7 @@ GlossEntry ::=
   </dd>
 </xsl:template>
 
-<xsl:template match="d:glossseealso">
+<xsl:template match="glossseealso">
   <xsl:variable name="otherterm" select="@otherterm"/>
   <xsl:variable name="targets" select="key('id', $otherterm)"/>
   <xsl:variable name="target" select="$targets[1]"/>
@@ -401,10 +402,10 @@ GlossEntry ::=
 
 <!-- Glossary collection -->
 
-<xsl:template match="d:glossary[@role='auto']" priority="2">
+<xsl:template match="glossary[@role='auto']" priority="2">
   &setup-language-variable;
   <xsl:variable name="terms" 
-                select="//d:glossterm[not(parent::d:glossdef)]|//d:firstterm"/>
+                select="//glossterm[not(parent::glossdef)]|//firstterm"/>
   <xsl:variable name="collection" select="document($glossary.collection, .)"/>
 
   <xsl:call-template name="id.warning"/>
@@ -434,14 +435,14 @@ GlossEntry ::=
     <xsl:call-template name="glossary.titlepage"/>
 
     <xsl:choose>
-      <xsl:when test="d:glossdiv and $collection//d:glossdiv">
-        <xsl:for-each select="$collection//d:glossdiv">
+      <xsl:when test="glossdiv and $collection//glossdiv">
+        <xsl:for-each select="$collection//glossdiv">
           <!-- first see if there are any in this div -->
           <xsl:variable name="exist.test">
-            <xsl:for-each select="d:glossentry">
-              <xsl:variable name="cterm" select="d:glossterm"/>
+            <xsl:for-each select="glossentry">
+              <xsl:variable name="cterm" select="glossterm"/>
               <xsl:if test="$terms[@baseform = $cterm or . = $cterm]">
-                <xsl:value-of select="d:glossterm"/>
+                <xsl:value-of select="glossterm"/>
               </xsl:if>
             </xsl:for-each>
           </xsl:variable>
@@ -457,17 +458,17 @@ GlossEntry ::=
         <dl>
           <xsl:choose>
             <xsl:when test="$glossary.sort != 0">
-              <xsl:for-each select="$collection//d:glossentry">
-				<xsl:sort lang="{$language}" select="normalize-space(translate(concat(@sortas, d:glossterm[not(parent::d:glossentry/@sortas) or parent::d:glossentry/@sortas = '']), &lowercase;, &uppercase;))"/>
-                <xsl:variable name="cterm" select="d:glossterm"/>
+              <xsl:for-each select="$collection//glossentry">
+				<xsl:sort lang="{$language}" select="normalize-space(translate(concat(@sortas, glossterm[not(parent::glossentry/@sortas) or parent::glossentry/@sortas = '']), &lowercase;, &uppercase;))"/>
+                <xsl:variable name="cterm" select="glossterm"/>
                 <xsl:if test="$terms[@baseform = $cterm or . = $cterm]">
                   <xsl:apply-templates select="." mode="auto-glossary"/>
                 </xsl:if>
               </xsl:for-each>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:for-each select="$collection//d:glossentry">
-                <xsl:variable name="cterm" select="d:glossterm"/>
+              <xsl:for-each select="$collection//glossentry">
+                <xsl:variable name="cterm" select="glossterm"/>
                 <xsl:if test="$terms[@baseform = $cterm or . = $cterm]">
                   <xsl:apply-templates select="." mode="auto-glossary"/>
                 </xsl:if>
@@ -478,7 +479,7 @@ GlossEntry ::=
       </xsl:otherwise>
     </xsl:choose>
 
-    <xsl:if test="not(parent::d:article)">
+    <xsl:if test="not(parent::article)">
       <xsl:call-template name="process.footnotes"/>
     </xsl:if>
   </div>
@@ -489,7 +490,7 @@ GlossEntry ::=
   <xsl:apply-templates select="."/>
 </xsl:template>
 
-<xsl:template match="d:glossdiv" mode="auto-glossary">
+<xsl:template match="glossdiv" mode="auto-glossary">
   <xsl:param name="terms" select="."/>
 
   &setup-language-variable;
@@ -499,22 +500,22 @@ GlossEntry ::=
     <xsl:call-template name="id.attribute">
       <xsl:with-param name="conditional" select="0"/>
     </xsl:call-template>
-    <xsl:apply-templates select="(d:glossentry[1]/preceding-sibling::*)"/>
+    <xsl:apply-templates select="(glossentry[1]/preceding-sibling::*)"/>
 
     <dl>
       <xsl:choose>
         <xsl:when test="$glossary.sort != 0">
-          <xsl:for-each select="d:glossentry">
-				<xsl:sort lang="{$language}" select="normalize-space(translate(concat(@sortas, d:glossterm[not(parent::d:glossentry/@sortas) or parent::d:glossentry/@sortas = '']), &lowercase;, &uppercase;))"/>
-            <xsl:variable name="cterm" select="d:glossterm"/>
+          <xsl:for-each select="glossentry">
+				<xsl:sort lang="{$language}" select="normalize-space(translate(concat(@sortas, glossterm[not(parent::glossentry/@sortas) or parent::glossentry/@sortas = '']), &lowercase;, &uppercase;))"/>
+            <xsl:variable name="cterm" select="glossterm"/>
             <xsl:if test="$terms[@baseform = $cterm or . = $cterm]">
               <xsl:apply-templates select="." mode="auto-glossary"/>
             </xsl:if>
           </xsl:for-each>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:for-each select="d:glossentry">
-            <xsl:variable name="cterm" select="d:glossterm"/>
+          <xsl:for-each select="glossentry">
+            <xsl:variable name="cterm" select="glossterm"/>
             <xsl:if test="$terms[@baseform = $cterm or . = $cterm]">
               <xsl:apply-templates select="." mode="auto-glossary"/>
             </xsl:if>

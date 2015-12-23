@@ -38,7 +38,7 @@ included in both user.xml and reference.xml documents.
 <para>How do you write the link to custom.xml in intro.xml
 so that it is interpreted correctly in all 3 documents?</para>
 <itemizedlist>
-<listitem><para>If you use xref, it will fail in user.xml.</para>
+<listitem><para>If you use xref, it will fail in booklet.xml.</para>
 </listitem>
 <listitem><para>If you use olink (pointing to reference.xml),
 the reference in user.xml  

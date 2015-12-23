@@ -9,9 +9,8 @@
 
 ]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:k="http://www.isogen.com/functions/com.isogen.saxoni18n.Saxoni18nService"
-                exclude-result-prefixes="k d"
+                xmlns:k="http://www.isogen.com/functions/com.isogen.saxoni18n.Saxoni18nService"
+                exclude-result-prefixes="k"
                 version="1.0">
 
 <!-- ********************************************************************
@@ -83,7 +82,7 @@ xmlns:k="http://www.isogen.com/functions/com.isogen.saxoni18n.Saxoni18nService"
   </xsl:variable>
 
   <xsl:variable name="terms"
-                select="//d:indexterm[count(.|key('k-group', k:getIndexGroupKey(&lang;, &primary;))[&scope;][1]) = 1 and not(@class = 'endofrange')]"/>
+                select="//indexterm[count(.|key('k-group', k:getIndexGroupKey(&lang;, &primary;))[&scope;][1]) = 1 and not(@class = 'endofrange')]"/>
 
   <xsl:variable name="alphabetical"
                 select="$terms[not(starts-with(
@@ -132,7 +131,7 @@ xmlns:k="http://www.isogen.com/functions/com.isogen.saxoni18n.Saxoni18nService"
 
 </xsl:template>
 
-<xsl:template match="d:indexterm" mode="index-div-kimber">
+<xsl:template match="indexterm" mode="index-div-kimber">
   <xsl:param name="scope" select="."/>
   <xsl:param name="role" select="''"/>
   <xsl:param name="type" select="''"/>

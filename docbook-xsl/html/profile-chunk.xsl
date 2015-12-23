@@ -1,8 +1,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:exsl="http://exslt.org/common"
+                xmlns:exsl="http://exslt.org/common"
 		version="1.0"
-                exclude-result-prefixes="exsl d">
+                exclude-result-prefixes="exsl">
 
 <!-- ********************************************************************
      $Id: profile-chunk.xsl 6910 2007-06-28 23:23:30Z xmldoc $

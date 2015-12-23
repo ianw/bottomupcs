@@ -1,7 +1,6 @@
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:d="http://docbook.org/ns/docbook"
-xmlns:w='http://schemas.microsoft.com/office/word/2003/wordml'
+  xmlns:w='http://schemas.microsoft.com/office/word/2003/wordml'
   xmlns:v='urn:schemas-microsoft-com:vml'
   xmlns:w10="urn:schemas-microsoft-com:office:word"
   xmlns:aml="http://schemas.microsoft.com/aml/2001/core"
@@ -30,8 +29,8 @@ xmlns:w='http://schemas.microsoft.com/office/word/2003/wordml'
   <xsl:include href='param.xsl'/>
 
   <xsl:strip-space elements='*'/>
-  <xsl:preserve-space elements='d:literallayout doc:literallayout
-                                d:programlisting doc:programlisting'/>
+  <xsl:preserve-space elements='literallayout doc:literallayout
+                                programlisting doc:programlisting'/>
 
   <xsl:variable name='templatedoc' select='document($wordml.template)'/>
 
@@ -51,8 +50,8 @@ xmlns:w='http://schemas.microsoft.com/office/word/2003/wordml'
     <xsl:text>&#xa;</xsl:text>
 
     <xsl:variable name='info'
-      select='$doc/d:book/d:bookinfo|$doc/d:article/d:articleinfo'/>
-    <xsl:variable name='authors' select='$info/d:author|$info/d:authorinitials|$info/d:authorgroup/d:author|$info/d:authorgroup/d:editor'/>
+      select='$doc/book/bookinfo|$doc/article/articleinfo'/>
+    <xsl:variable name='authors' select='$info/author|$info/authorinitials|$info/authorgroup/author|$info/authorgroup/editor'/>
 
     <w:wordDocument
       w:macrosPresent="no" w:embeddedObjPresent="no" w:ocxPresent="no">
@@ -73,8 +72,8 @@ xmlns:w='http://schemas.microsoft.com/office/word/2003/wordml'
         <o:LastAuthor>
           <xsl:variable name="content">
             <xsl:choose>
-              <xsl:when test='$info/d:revhistory/d:revision[1]/*[self::d:author|self::d:authorinitials]'>
-                <xsl:apply-templates select='$info/d:revhistory/d:revision[1]/*[self::d:author|self::d:authorinitials]' mode='doc:docprop.author'/>
+              <xsl:when test='$info/revhistory/revision[1]/*[self::author|self::authorinitials]'>
+                <xsl:apply-templates select='$info/revhistory/revision[1]/*[self::author|self::authorinitials]' mode='doc:docprop.author'/>
               </xsl:when>
               <xsl:when test='$authors'>
                 <xsl:apply-templates select='$authors[1]' mode='doc:docprop.author'/>
@@ -197,7 +196,7 @@ xmlns:w='http://schemas.microsoft.com/office/word/2003/wordml'
   </xsl:template>
 
   <xsl:template name='doc:make-paragraph'>
-    <xsl:param name='style' select='"d:unknown"'/>
+    <xsl:param name='style' select='"unknown"'/>
     <xsl:param name='content'>
       <xsl:apply-templates mode='doc:body'/>
     </xsl:param>
@@ -271,7 +270,7 @@ xmlns:w='http://schemas.microsoft.com/office/word/2003/wordml'
   <xsl:template name='doc:make-table'>
     <xsl:param name='columns'/>
     <xsl:param name='content'>
-      <xsl:apply-templates select='*[not(self::d:caption|self::doc:caption|self::d:textobject|self::doc:textobject)]'
+      <xsl:apply-templates select='*[not(self::caption|self::doc:caption|self::textobject|self::doc:textobject)]'
         mode='doc:body'/>
     </xsl:param>
 

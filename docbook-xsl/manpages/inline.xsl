@@ -1,12 +1,10 @@
 <?xml version='1.0'?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:exsl="http://exslt.org/common"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:exsl="http://exslt.org/common"
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: inline.xsl 7897 2008-03-10 15:46:03Z xmldoc $
+     $Id: inline.xsl 9923 2014-08-08 17:54:56Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -17,7 +15,7 @@ xmlns:exsl="http://exslt.org/common"
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:replaceable|d:varname|d:structfield">
+<xsl:template match="replaceable|varname|structfield">
   <xsl:if test="$man.hyphenate.computer.inlines = 0">
     <xsl:call-template name="suppress.hyphenation"/>
   </xsl:if>
@@ -27,7 +25,7 @@ xmlns:exsl="http://exslt.org/common"
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:option|d:userinput|d:envar|d:errorcode|d:constant|d:markup">
+<xsl:template match="option|userinput|envar|errorcode|constant|markup">
   <xsl:if test="$man.hyphenate.computer.inlines = 0">
     <xsl:call-template name="suppress.hyphenation"/>
   </xsl:if>
@@ -37,14 +35,14 @@ xmlns:exsl="http://exslt.org/common"
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:classname">
+<xsl:template match="classname">
   <xsl:if test="$man.hyphenate.computer.inlines = 0">
     <xsl:call-template name="suppress.hyphenation"/>
   </xsl:if>
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:command">
+<xsl:template match="command">
   <xsl:if test="$man.hyphenate.computer.inlines = 0">
     <xsl:call-template name="suppress.hyphenation"/>
   </xsl:if>
@@ -54,8 +52,8 @@ xmlns:exsl="http://exslt.org/common"
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:type[not(ancestor::d:cmdsynopsis) and
-                     not(ancestor::d:funcsynopsis)]">
+<xsl:template match="type[not(ancestor::cmdsynopsis) and
+                     not(ancestor::funcsynopsis)]">
   <xsl:if test="$man.hyphenate.computer.inlines = 0">
     <xsl:call-template name="suppress.hyphenation"/>
   </xsl:if>
@@ -65,8 +63,8 @@ xmlns:exsl="http://exslt.org/common"
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:function[not(ancestor::d:cmdsynopsis) and
-                     not(ancestor::d:funcsynopsis)]">
+<xsl:template match="function[not(ancestor::cmdsynopsis) and
+                     not(ancestor::funcsynopsis)]">
   <xsl:if test="$man.hyphenate.computer.inlines = 0">
     <xsl:call-template name="suppress.hyphenation"/>
   </xsl:if>
@@ -76,8 +74,8 @@ xmlns:exsl="http://exslt.org/common"
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:parameter[not(ancestor::d:cmdsynopsis) and
-                     not(ancestor::d:funcsynopsis)]">
+<xsl:template match="parameter[not(ancestor::cmdsynopsis) and
+                     not(ancestor::funcsynopsis)]">
   <xsl:if test="$man.hyphenate.computer.inlines = 0">
     <xsl:call-template name="suppress.hyphenation"/>
   </xsl:if>
@@ -87,7 +85,7 @@ xmlns:exsl="http://exslt.org/common"
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:filename">
+<xsl:template match="filename">
   <!-- * add hyphenation suppression in Filename output only if -->
   <!-- * break.after.slash is also non-zero -->
   <xsl:if test="$man.hyphenate.filenames = 0 and
@@ -102,7 +100,7 @@ xmlns:exsl="http://exslt.org/common"
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
-<xsl:template match="d:emphasis">
+<xsl:template match="emphasis">
   <xsl:choose>
     <xsl:when test="
       @role = 'bold' or
@@ -122,7 +120,7 @@ xmlns:exsl="http://exslt.org/common"
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:optional">
+<xsl:template match="optional">
   <xsl:value-of select="$arg.choice.opt.open.str"/>
   <xsl:apply-templates/>
   <xsl:value-of select="$arg.choice.opt.close.str"/>
@@ -143,14 +141,14 @@ xmlns:exsl="http://exslt.org/common"
   <xsl:text>)</xsl:text>
 </xsl:template>
 
-<xsl:template match="d:citerefentry">
+<xsl:template match="citerefentry">
   <xsl:call-template name="do-citerefentry">
-    <xsl:with-param name="refentrytitle" select="d:refentrytitle"/>
-    <xsl:with-param name="manvolnum" select="d:manvolnum"/>
+    <xsl:with-param name="refentrytitle" select="refentrytitle"/>
+    <xsl:with-param name="manvolnum" select="manvolnum"/>
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:trademark|d:productname">
+<xsl:template match="trademark|productname">
   <xsl:apply-templates/>
   <xsl:choose>
     <!-- * Just use true Unicode chars for copyright, trademark, etc., -->
@@ -171,7 +169,7 @@ xmlns:exsl="http://exslt.org/common"
     </xsl:when>
     <!-- * for Trademark element, render a trademark symbol by default -->
     <!-- * even if no "class" value is specified -->
-    <xsl:when test="self::d:trademark" >
+    <xsl:when test="self::trademark" >
       <xsl:text>&#x2122;</xsl:text>
     </xsl:when>
     <xsl:otherwise>
@@ -183,39 +181,29 @@ xmlns:exsl="http://exslt.org/common"
 
 <!-- * span seems to sneak through into output sometimes, possibly due -->
 <!-- * to failed Olink processing; so we need to catch it -->
-<xsl:template match="d:span">
+<xsl:template match="span">
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:inlinemediaobject">
+<xsl:template match="inlinemediaobject">
   <xsl:apply-templates/>
 </xsl:template>
 
-<!-- * indexterm instances produce groff comments like this: -->
-<!-- * .\" primary: secondary: tertiary -->
-<xsl:template match="d:indexterm">
-  <xsl:text>.\" </xsl:text>
-  <xsl:apply-templates/>
-  <xsl:text>&#10;</xsl:text>
-</xsl:template>
+<!-- * indexterm instances are omitted from output since there 
+is no nroff markup to handle them. -->
+<xsl:template match="indexterm"/>
 
-<xsl:template match="d:primary">
+<xsl:template match="primary">
   <xsl:value-of select="normalize-space(.)"/>
 </xsl:template>
 
-<xsl:template match="d:secondary|d:tertiary">
+<xsl:template match="secondary|tertiary">
   <xsl:text>: </xsl:text>
   <xsl:value-of select="normalize-space(.)"/>
 </xsl:template>
 
-<!-- * non-empty remark instances produce groff comments -->
-<xsl:template match="d:remark">
-  <xsl:variable name="content" select="normalize-space(.)"/>
-  <xsl:if test="not($content = '')">
-    <xsl:text>.\" </xsl:text>
-    <xsl:value-of select="$content"/>
-    <xsl:text>&#10;</xsl:text>
-  </xsl:if>
-</xsl:template>
+<!-- * remark instances are omitted from output since they
+can mess up whitespace management. -->
+<xsl:template match="remark"/>
 
 </xsl:stylesheet>

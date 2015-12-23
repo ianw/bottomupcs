@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:exsl="http://exslt.org/common" version="1.0" exclude-result-prefixes="exsl">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:exsl="http://exslt.org/common" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:dbs="http://docbook.org/ns/docbook-slides" version="1.0" exclude-result-prefixes="exsl">
 
 <!-- This stylesheet was created by template/titlepage.xsl-->
 
@@ -62,7 +62,7 @@
 </xsl:template>
 
 <xsl:template name="slides.titlepage">
-  <block>
+  <fo:block>
     <xsl:variable name="recto.content">
       <xsl:call-template name="slides.titlepage.before.recto"/>
       <xsl:call-template name="slides.titlepage.recto"/>
@@ -76,7 +76,7 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="(normalize-space($recto.content) != '') or ($recto.elements.count &gt; 0)">
-      <block><xsl:copy-of select="$recto.content"/></block>
+      <fo:block><xsl:copy-of select="$recto.content"/></fo:block>
     </xsl:if>
     <xsl:variable name="verso.content">
       <xsl:call-template name="slides.titlepage.before.verso"/>
@@ -91,10 +91,10 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="(normalize-space($verso.content) != '') or ($verso.elements.count &gt; 0)">
-      <block><xsl:copy-of select="$verso.content"/></block>
+      <fo:block><xsl:copy-of select="$verso.content"/></fo:block>
     </xsl:if>
     <xsl:call-template name="slides.titlepage.separator"/>
-  </block>
+  </fo:block>
 </xsl:template>
 
 <xsl:template match="*" mode="slides.titlepage.recto.mode">
@@ -110,40 +110,40 @@
 </xsl:template>
 
 <xsl:template match="title" mode="slides.titlepage.recto.auto.mode">
-<block xsl:use-attribute-sets="slides.titlepage.title.properties">
+<fo:block xsl:use-attribute-sets="slides.titlepage.title.properties">
 <xsl:call-template name="presentation.title">
 </xsl:call-template>
-</block>
+</fo:block>
 </xsl:template>
 
 <xsl:template match="subtitle" mode="slides.titlepage.recto.auto.mode">
-<block xsl:use-attribute-sets="slides.titlepage.subtitle.properties">
+<fo:block xsl:use-attribute-sets="slides.titlepage.subtitle.properties">
 <xsl:apply-templates select="." mode="slides.titlepage.recto.mode"/>
-</block>
+</fo:block>
 </xsl:template>
 
 <xsl:template match="corpauthor" mode="slides.titlepage.recto.auto.mode">
-<block xsl:use-attribute-sets="slides.titlepage.corpauthor.properties">
+<fo:block xsl:use-attribute-sets="slides.titlepage.corpauthor.properties">
 <xsl:apply-templates select="." mode="slides.titlepage.recto.mode"/>
-</block>
+</fo:block>
 </xsl:template>
 
 <xsl:template match="authorgroup" mode="slides.titlepage.recto.auto.mode">
-<block xsl:use-attribute-sets="slides.titlepage.authorgroup.properties">
+<fo:block xsl:use-attribute-sets="slides.titlepage.authorgroup.properties">
 <xsl:apply-templates select="." mode="slides.titlepage.recto.mode"/>
-</block>
+</fo:block>
 </xsl:template>
 
 <xsl:template match="author" mode="slides.titlepage.recto.auto.mode">
-<block xsl:use-attribute-sets="slides.titlepage.author.properties">
+<fo:block xsl:use-attribute-sets="slides.titlepage.author.properties">
 <xsl:apply-templates select="." mode="slides.titlepage.recto.mode"/>
-</block>
+</fo:block>
 </xsl:template>
 
 <xsl:template match="pubdate" mode="slides.titlepage.recto.auto.mode">
-<block xsl:use-attribute-sets="slides.titlepage.pubdate.properties">
+<fo:block xsl:use-attribute-sets="slides.titlepage.pubdate.properties">
 <xsl:apply-templates select="." mode="slides.titlepage.recto.mode"/>
-</block>
+</fo:block>
 </xsl:template>
 
 </xsl:stylesheet>

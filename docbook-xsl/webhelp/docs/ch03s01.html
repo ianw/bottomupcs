@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
-<title>Design -  - README: Web-based Help from DocBook XML</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"></meta><link rel="home" href="index.html" title="README: Web-based Help from DocBook XML"></link><link rel="up" href="ch03.html" title="Developer Docs"></link><link rel="prev" href="ch03.html" title="Developer Docs"></link><link rel="next" href="ch03s02.html" title="Search"></link><meta name="Section-title" content="Design"></meta><script type="text/javascript">
+<title>Design -  - README: Web-based Help from DocBook XML</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.0"></meta><link rel="home" href="index.html" title="README: Web-based Help from DocBook XML"></link><link rel="up" href="ch03.html" title="Developer Docs"></link><link rel="prev" href="ch03.html" title="Developer Docs"></link><link rel="next" href="ch03s02.html" title="Search"></link><meta name="Section-title" content="Design"></meta><script type="text/javascript">
             //The id for tree cookie
-            var treeCookieId = "treeview-1102";
+            var treeCookieId = "treeview-1636";
             var language = "en";
             var w = new Object();
             //Localization
@@ -127,15 +127,26 @@ border: none; background: none; font-weight: none; color: none; }
                                         |
                                         <a accesskey="u" class="navLinkUp" tabindex="5" href="ch03.html">Up</a>
                                     |
-                                    <a accesskey="n" class="navLinkNext" tabindex="5" href="ch03s02.html">Next</a></td></tr></table></div></div><div id="content"><div class="section"><div xmlns="" class="titlepage"><div><div><h2 xmlns="http://www.w3.org/1999/xhtml" class="title" style="clear: both"><a id="idp268368"></a>Design</h2></div></div></div>
-<p class="summary">An overview of webhelp page structure.</p><p>DocBook WebHelp page structure is fully built on css-based design abandoning frameset
-        structure. Overall page structure can be divided in to three main sections </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>Header: Header is a separate Div which include company logo, navigation
-              button(prev, next etc.), page title and heading of parent topic.</p></li><li class="listitem"><p>Content: This includes the content of the documentation. The processing of this
+                                    <a accesskey="n" class="navLinkNext" tabindex="5" href="ch03s02.html">Next</a></td></tr></table></div></div><div id="content"><div class="section"><div xmlns="" class="titlepage"><div><div><h2 xmlns="http://www.w3.org/1999/xhtml" class="title" style="clear: both"><a id="idp220320"></a>Design</h2></div></div></div>
+      
+      <p class="summary">An overview of webhelp page structure.</p>
+      <p>DocBook WebHelp page structure is fully built on css-based design abandoning frameset
+        structure. Overall page structure can be divided in to three main sections </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            <p>Header: Header is a separate Div which include company logo, navigation
+              button(prev, next etc.), page title and heading of parent topic.</p>
+          </li><li class="listitem">
+            <p>Content: This includes the content of the documentation. The processing of this
               part is done by <a class="ulink" href="http://docbook.sourceforge.net/release/xsl/current/xhtml/chunk.xsl" target="_top"> DocBook
                 XSL Chunking customization</a>. Few further css-styling applied from
-                <code class="filename">positioning.css</code>. </p></li><li class="listitem"><p>Left Navigation: This includes the table of contents and search tab. This is
-              customized using <a class="ulink" href="http://jqueryui.com/" target="_top">jquery-ui</a> styling.</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Tabbed Navigation: The navigation pane is organized in to two tabs. Contents
-                  tab, and Search tab. Tabbed output is achieved using <a class="ulink" href="http://docs.jquery.com/UI/Tabs" target="_top">JQuery Tabs plugin</a>. </p></li><li class="listitem"><p>Table of Contents (TOC) tree: When building the chunked html from the docbook
+                <code class="filename">positioning.css</code>. </p>
+          </li><li class="listitem">
+            <p>Left Navigation: This includes the table of contents and search tab. This is
+              customized using <a class="ulink" href="http://jqueryui.com/" target="_top">jquery-ui</a> styling.</p>
+            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+                <p>Tabbed Navigation: The navigation pane is organized in to two tabs. Contents
+                  tab, and Search tab. Tabbed output is achieved using <a class="ulink" href="http://docs.jquery.com/UI/Tabs" target="_top">JQuery Tabs plugin</a>. </p>
+              </li><li class="listitem">
+                <p>Table of Contents (TOC) tree: When building the chunked html from the docbook
                   file, Table of Contents is generated as an Unordered List (a list made from
                     <code class="code">&lt;ul&gt; &lt;li&gt;</code> tags). When page loads in the browser, we apply
                   styling to it to achieve the nice look that you see. Styling for TOC tree is done
@@ -150,6 +161,11 @@ control: "#sidetreecontrol",
 persist: "cookie"
 });
 </pre><p>
-                </p></li><li class="listitem"><p>Search Tab: This includes the search feature.</p></li></ul></div></li></ul></div><p>
-        <a id="idp281632" class="indexterm"></a></p></div><script type="text/javascript" src="common/main.js"></script><script type="text/javascript" src="common/splitterInit.js"></script><div class="navfooter"><hr></hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s02.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></div><div id="sidebar"><div id="leftnavigation" style="padding-top:3px;"><div id="tabs"><ul><li><a href="#treeDiv" style="outline:0;" tabindex="1"><span class="contentsTab">Contents</span></a></li><li><a href="#searchDiv" style="outline:0;" tabindex="1" onclick="doSearch()"><span class="searchTab">Search</span></a></li></ul><div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;"></img><div id="ulTreeDiv" style="display:none"><ul id="tree" class="filetree"><li><span class="file"><a href="ch01.html" tabindex="1">Introduction</a></span></li><li><span class="file"><a href="ch02.html" tabindex="1">Using the package</a></span><ul><li><span class="file"><a href="ch02s01.html" tabindex="1">Generating webhelp output using the Ant build.xml
+                </p>
+              </li><li class="listitem">
+                <p>Search Tab: This includes the search feature.</p>
+              </li></ul></div>
+          </li></ul></div><p>
+        <a id="idp233936" class="indexterm"></a></p>
+    </div><script type="text/javascript" src="common/main.js"></script><script type="text/javascript" src="common/splitterInit.js"></script><div class="navfooter"><hr></hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s02.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></div><div id="sidebar"><div id="leftnavigation" style="padding-top:3px;"><div id="tabs"><ul><li><a href="#treeDiv" style="outline:0;" tabindex="1"><span class="contentsTab">Contents</span></a></li><li><a href="#searchDiv" style="outline:0;" tabindex="1" onclick="doSearch()"><span class="searchTab">Search</span></a></li></ul><div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;"></img><div id="ulTreeDiv" style="display:none"><ul id="tree" class="filetree"><li><span class="file"><a href="ch01.html" tabindex="1">Introduction</a></span></li><li><span class="file"><a href="ch02.html" tabindex="1">Using the package</a></span><ul><li><span class="file"><a href="ch02s01.html" tabindex="1">Generating webhelp output using the Ant build.xml
         file</a></span></li><li><span class="file"><a href="ch02s02.html" tabindex="1">Using and customizing the output</a></span><ul><li><span class="file"><a href="ch02s02s01.html" tabindex="1">Recommended Apache configurations</a></span></li></ul></li><li><span class="file"><a href="ch02s03.html" tabindex="1">Search indexing</a></span></li><li><span class="file"><a href="ch02s04.html" tabindex="1">Adding support for other (non-CJKV) languages</a></span></li><li><span class="file"><a href="ch02s05.html" tabindex="1">Adding images</a></span></li></ul></li><li><span class="file"><a href="ch03.html" tabindex="1">Developer Docs</a></span><ul><li id="webhelp-currentid"><span class="file"><a href="ch03s01.html" tabindex="1">Design</a></span></li><li><span class="file"><a href="ch03s02.html" tabindex="1">Search</a></span><ul><li><span class="file"><a href="ch03s02s01.html" tabindex="1">New Stemmers</a></span></li></ul></li></ul></li><li><span class="file"><a href="ch04.html" tabindex="1">FAQ</a></span></li><li><span class="file"><a href="ch05.html" tabindex="1">Test section</a></span><ul><li><span class="file"><a href="ch05s01.html" tabindex="1">Some search words for testing</a></span></li><li><span class="file"><a href="ch05s02.html" tabindex="1">Some search words for testing (inflected)</a></span></li></ul></li><li><span class="file"><a href="ix01.html" tabindex="1">Index</a></span></li></ul></div></div><div id="searchDiv"><div id="search"><form onsubmit="Verifie(searchForm);return false" name="searchForm" class="searchForm"><div><input id="textToSearch" name="textToSearch" type="search" placeholder="Search" class="searchText" tabindex="1"></input> &nbsp; <input onclick="Verifie(searchForm)" type="button" class="searchButton" value="Go" id="doSearch" tabindex="1"></input></div></form></div><div id="searchResults"><center></center></div><p class="searchHighlight"><a href="#" onclick="toggleHighlight()">Search Highlighter (On/Off)</a></p></div></div></div></div></body></html>

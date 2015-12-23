@@ -19,10 +19,10 @@ $(document).ready(function() {
 		    && location.hostname == this.hostname) {
 		    var $target = $(this.hash);
 		    $target = $target.length && $target
-			|| $('[name=' + this.hash.slice(1) +']');
+			|| $('[id=' + this.hash.slice(1) +']');
 		if (!(this.hash == "#searchDiv" || this.hash == "#treeDiv"  || this.hash == "") && $target.length) {
 			var targetOffset = $target.offset().top - 120;
-			$('html,body')
+			$('#content')
 			    .animate({scrollTop: targetOffset}, 200);
 			return false;
 		    }

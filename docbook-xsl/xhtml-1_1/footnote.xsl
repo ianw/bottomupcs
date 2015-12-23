@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="ASCII"?><!--This file was created automatically by html2xhtml--><!--from the HTML stylesheets.--><xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:d="http://docbook.org/ns/docbook"
-xmlns:exsl="http://exslt.org/common" xmlns="http://www.w3.org/1999/xhtml" exclude-result-prefixes="exsl d" version="1.0">
+<?xml version="1.0" encoding="ASCII"?>
+<!--This file was created automatically by html2xhtml-->
+<!--from the HTML stylesheets.-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:exsl="http://exslt.org/common" xmlns="http://www.w3.org/1999/xhtml" exclude-result-prefixes="exsl" version="1.0">
 
 <!-- ********************************************************************
      $Id: footnote.xsl 9665 2012-11-08 14:26:20Z kosek $
@@ -15,7 +17,7 @@ xmlns:exsl="http://exslt.org/common" xmlns="http://www.w3.org/1999/xhtml" exclud
 The footnote text is handled in name="process.footnote".
 The footnote marker gets an id of @id, while the
 footnote text gets an id of #ftn.@id. They cross link to each other. -->
-<xsl:template match="d:footnote">
+<xsl:template match="footnote">
   <xsl:variable name="name">
     <xsl:call-template name="object.id">
       <xsl:with-param name="conditional" select="0"/>
@@ -46,7 +48,7 @@ footnote text gets an id of #ftn.@id. They cross link to each other. -->
   </a>
 </xsl:template>
 
-<xsl:template match="d:footnoteref">
+<xsl:template match="footnoteref">
   <xsl:variable name="targets" select="key('id',@linkend)"/>
   <xsl:variable name="footnote" select="$targets[1]"/>
 
@@ -83,14 +85,14 @@ linkend/id: <xsl:value-of select="@linkend"/>
   </a>
 </xsl:template>
 
-<xsl:template match="d:footnote" mode="footnote.number">
+<xsl:template match="footnote" mode="footnote.number">
   <xsl:choose>
     <xsl:when test="string-length(@label) != 0">
       <xsl:value-of select="@label"/>
     </xsl:when>
-    <xsl:when test="ancestor::d:table or ancestor::d:informaltable">
+    <xsl:when test="ancestor::table or ancestor::informaltable">
       <xsl:variable name="tfnum">
-        <xsl:number level="any" from="d:table|d:informaltable" format="1"/>
+        <xsl:number level="any" from="table|informaltable" format="1"/>
       </xsl:variable>
 
       <xsl:choose>
@@ -98,13 +100,13 @@ linkend/id: <xsl:value-of select="@linkend"/>
           <xsl:value-of select="substring($table.footnote.number.symbols, $tfnum, 1)"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:number level="any" from="d:table | d:informaltable" format="{$table.footnote.number.format}"/>
+          <xsl:number level="any" from="table | informaltable" format="{$table.footnote.number.format}"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:when>
     <xsl:otherwise>
-      <xsl:variable name="pfoot" select="preceding::d:footnote[not(@label)]"/>
-      <xsl:variable name="ptfoot" select="preceding::d:table//d:footnote |                                           preceding::d:informaltable//d:footnote"/>
+      <xsl:variable name="pfoot" select="preceding::footnote[not(@label)]"/>
+      <xsl:variable name="ptfoot" select="preceding::table//footnote |                                           preceding::informaltable//footnote"/>
       <xsl:variable name="fnum" select="count($pfoot) - count($ptfoot) + 1"/>
 
       <xsl:choose>
@@ -121,13 +123,13 @@ linkend/id: <xsl:value-of select="@linkend"/>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:footnote/d:para[1]|d:footnote/d:simpara[1]" priority="2">
+<xsl:template match="footnote/para[1]|footnote/simpara[1]" priority="2">
   <!-- this only works if the first thing in a footnote is a para, -->
   <!-- which is ok, because it usually is. -->
   <xsl:variable name="href">
     <xsl:text>#</xsl:text>
     <xsl:call-template name="object.id">
-      <xsl:with-param name="object" select="ancestor::d:footnote"/>
+      <xsl:with-param name="object" select="ancestor::footnote"/>
     </xsl:call-template>
   </xsl:variable>
 
@@ -143,7 +145,7 @@ linkend/id: <xsl:value-of select="@linkend"/>
         <sup>
           <xsl:apply-templates select="." mode="class.attribute"/>
           <xsl:text>[</xsl:text>
-          <xsl:apply-templates select="ancestor::d:footnote" mode="footnote.number"/>
+          <xsl:apply-templates select="ancestor::footnote" mode="footnote.number"/>
           <xsl:text>] </xsl:text>
         </sup>
       </a>
@@ -159,13 +161,13 @@ linkend/id: <xsl:value-of select="@linkend"/>
   <xsl:variable name="name">
     <xsl:text>ftn.</xsl:text>
     <xsl:call-template name="object.id">
-      <xsl:with-param name="object" select="ancestor::d:footnote"/>
+      <xsl:with-param name="object" select="ancestor::footnote"/>
     </xsl:call-template>
   </xsl:variable>
   <xsl:variable name="href">
     <xsl:text>#</xsl:text>
     <xsl:call-template name="object.id">
-      <xsl:with-param name="object" select="ancestor::d:footnote"/>
+      <xsl:with-param name="object" select="ancestor::footnote"/>
     </xsl:call-template>
   </xsl:variable>
   <xsl:variable name="footnote.mark">
@@ -185,7 +187,7 @@ linkend/id: <xsl:value-of select="@linkend"/>
       </xsl:choose>
       <sup>
         <xsl:text>[</xsl:text>
-        <xsl:apply-templates select="ancestor::d:footnote" mode="footnote.number"/>
+        <xsl:apply-templates select="ancestor::footnote" mode="footnote.number"/>
         <xsl:text>] </xsl:text>
       </sup>
     </a>
@@ -243,8 +245,8 @@ linkend/id: <xsl:value-of select="@linkend"/>
 <!-- ==================================================================== -->
 
 <xsl:template name="process.footnotes">
-  <xsl:variable name="footnotes" select=".//d:footnote"/>
-  <xsl:variable name="table.footnotes" select=".//d:table//d:footnote | .//d:informaltable//d:footnote"/>
+  <xsl:variable name="footnotes" select=".//footnote"/>
+  <xsl:variable name="table.footnotes" select=".//table//footnote | .//informaltable//footnote"/>
 
   <!-- Only bother to do this if there's at least one non-table footnote -->
   <xsl:if test="count($footnotes)&gt;count($table.footnotes)">
@@ -256,7 +258,7 @@ linkend/id: <xsl:value-of select="@linkend"/>
     </div>
   </xsl:if>
 
-  <xsl:if test="$annotation.support != 0 and //d:annotation">
+  <xsl:if test="$annotation.support != 0 and //annotation">
     <div class="annotation-list">
       <div class="annotation-nocss">
 	<p>The following annotations are from this essay. You are seeing
@@ -264,7 +266,7 @@ linkend/id: <xsl:value-of select="@linkend"/>
 	techniques used to make them appear as &#8216;popups&#8217; on modern browsers.</p>
       </div>
 
-      <xsl:apply-templates select="//d:annotation" mode="annotation-popup"/>
+      <xsl:apply-templates select="//annotation" mode="annotation-popup"/>
     </div>
   </xsl:if>
 </xsl:template>
@@ -277,7 +279,7 @@ linkend/id: <xsl:value-of select="@linkend"/>
   <!-- nop -->
 </xsl:template>
 
-<xsl:template match="d:footnote" name="process.footnote" mode="process.footnote.mode">
+<xsl:template match="footnote" name="process.footnote" mode="process.footnote.mode">
   <xsl:variable name="id">
     <xsl:text>ftn.</xsl:text>
     <xsl:call-template name="object.id">
@@ -318,10 +320,10 @@ linkend/id: <xsl:value-of select="@linkend"/>
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:table//d:footnote | d:informaltable//d:footnote" mode="process.footnote.mode">
+<xsl:template match="table//footnote | informaltable//footnote" mode="process.footnote.mode">
 </xsl:template>
 
-<xsl:template match="d:footnote" mode="table.footnote.mode">
+<xsl:template match="footnote" mode="table.footnote.mode">
   <xsl:call-template name="process.footnote"/>
 </xsl:template>
 

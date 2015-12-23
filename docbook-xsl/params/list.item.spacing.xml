@@ -21,6 +21,8 @@
 </xsl:attribute-set></src:fragment>
 </refsynopsisdiv>
 <refsection><info><title>Description</title></info>
-<para>Specify what spacing you want between each list item.</para>
+<para>Specify what spacing you want before (and optionally after) each list item.</para>
+<para>See also <parameter>list.block.spacing</parameter>, which sets
+the spacing before and after an entire list.</para>
 </refsection>
 </refentry>

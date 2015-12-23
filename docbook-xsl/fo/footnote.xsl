@@ -1,10 +1,9 @@
 <?xml version='1.0'?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:fo="http://www.w3.org/1999/XSL/Format"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:exsl="http://exslt.org/common"
-                exclude-result-prefixes="exsl xlink d"
+                exclude-result-prefixes="exsl xlink"
                 version='1.0'>
 
 <!-- ********************************************************************
@@ -32,9 +31,9 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:inline>
 </xsl:template>
 
-<xsl:template match="d:footnote">
+<xsl:template match="footnote">
   <xsl:choose>
-    <xsl:when test="ancestor::d:table or ancestor::d:informaltable">
+    <xsl:when test="ancestor::table or ancestor::informaltable">
       <xsl:call-template name="format.footnote.mark">
         <xsl:with-param name="mark">
           <xsl:apply-templates select="." mode="footnote.number"/>
@@ -58,7 +57,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:footnoteref">
+<xsl:template match="footnoteref">
   <xsl:variable name="footnote" select="key('id',@linkend)"/>
 
   <xsl:if test="not(local-name($footnote) = 'footnote')">
@@ -77,14 +76,14 @@ linkend/id: <xsl:value-of select="@linkend"/>
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:footnote" mode="footnote.number">
+<xsl:template match="footnote" mode="footnote.number">
   <xsl:choose>
     <xsl:when test="string-length(@label) != 0">
       <xsl:value-of select="@label"/>
     </xsl:when>
-    <xsl:when test="ancestor::d:table or ancestor::d:informaltable">
+    <xsl:when test="ancestor::table or ancestor::informaltable">
       <xsl:variable name="tfnum">
-        <xsl:number level="any" from="d:table|d:informaltable" format="1"/>
+        <xsl:number level="any" from="table|informaltable" format="1"/>
       </xsl:variable>
 
       <xsl:choose>
@@ -92,7 +91,7 @@ linkend/id: <xsl:value-of select="@linkend"/>
           <xsl:value-of select="substring($table.footnote.number.symbols, $tfnum, 1)"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:number level="any" from="d:table|d:informaltable"
+          <xsl:number level="any" from="table|informaltable"
                       format="{$table.footnote.number.format}"/>
         </xsl:otherwise>
       </xsl:choose>
@@ -118,13 +117,13 @@ linkend/id: <xsl:value-of select="@linkend"/>
         <!-- * non-zero -->
         <!-- FIXME: list in @from is probably not complete -->
         <xsl:number level="any" 
-                    from="d:chapter|d:appendix|d:preface|d:article|d:refentry|d:bibliography" 
-                    count="d:footnote[not(@label)][not(ancestor::d:table) and not(ancestor::d:informaltable)]
-                    |d:ulink[$ulink.footnotes != 0][node()][@url != .][not(ancestor::d:footnote)][$ulink.show != 0]
+                    from="chapter|appendix|preface|article|refentry|bibliography" 
+                    count="footnote[not(@label)][not(ancestor::table) and not(ancestor::informaltable)]
+                    |ulink[$ulink.footnotes != 0][node()][@url != .][not(ancestor::footnote)][$ulink.show != 0]
                     |*[node()][@xlink:href][not(@xlink:href = .)][not(starts-with(@xlink:href,'#'))]
                       [not(contains(@xlink:href,'#') and @xlink:role = $xolink.role)]
                       [not(@xlink:type) or @xlink:type='simple']
-                      [not(ancestor::d:footnote)][$ulink.footnotes != 0][$ulink.show != 0]
+                      [not(ancestor::footnote)][$ulink.footnotes != 0][$ulink.show != 0]
                     "
                     format="1"/>
       </xsl:variable>
@@ -146,7 +145,7 @@ linkend/id: <xsl:value-of select="@linkend"/>
   <xsl:variable name="footnote.mark">
     <xsl:call-template name="format.footnote.mark">
       <xsl:with-param name="mark">
-        <xsl:apply-templates select="ancestor::d:footnote" mode="footnote.number"/>
+        <xsl:apply-templates select="ancestor::footnote" mode="footnote.number"/>
       </xsl:with-param>
     </xsl:call-template>
   </xsl:variable>
@@ -173,23 +172,23 @@ linkend/id: <xsl:value-of select="@linkend"/>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:footnote/d:para[1]
-                     |d:footnote/d:simpara[1]
-                     |d:footnote/d:formalpara[1]"
+<xsl:template match="footnote/para[1]
+                     |footnote/simpara[1]
+                     |footnote/formalpara[1]"
               priority="2">
   <!-- this only works if the first thing in a footnote is a para, -->
   <!-- which is ok, because it usually is. -->
   <fo:block>
     <xsl:call-template name="format.footnote.mark">
       <xsl:with-param name="mark">
-        <xsl:apply-templates select="ancestor::d:footnote" mode="footnote.number"/>
+        <xsl:apply-templates select="ancestor::footnote" mode="footnote.number"/>
       </xsl:with-param>
     </xsl:call-template>
     <xsl:apply-templates/>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:footnote" mode="table.footnote.mode">
+<xsl:template match="footnote" mode="table.footnote.mode">
   <xsl:choose>
     <xsl:when test="local-name(*[1]) = 'para' or local-name(*[1]) = 'simpara'">
       <fo:block xsl:use-attribute-sets="table.footnote.properties">

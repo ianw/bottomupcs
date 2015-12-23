@@ -1,13 +1,11 @@
 <?xml version='1.0'?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:fo="http://www.w3.org/1999/XSL/Format"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions"
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: division.xsl 9730 2013-03-15 15:26:25Z bobstayton $
+     $Id: division.xsl 9841 2014-01-07 22:31:09Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -33,7 +31,9 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
   <fo:block keep-with-next.within-column="always"
             hyphenate="false">
-    <xsl:if test="$axf.extensions != 0">
+    <xsl:if test="$axf.extensions != 0 and 
+                  $xsl1.1.bookmarks = 0 and 
+                  $show.bookmarks != 0">
       <xsl:attribute name="axf:outline-level">
         <xsl:choose>
           <xsl:when test="count($node/ancestor::*) > 0">
@@ -53,15 +53,15 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:set">
+<xsl:template match="set">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
 
   <xsl:variable name="preamble"
-                select="*[not(self::d:book or self::d:set or self::d:setindex)]"/>
+                select="*[not(self::book or self::set or self::setindex)]"/>
 
-  <xsl:variable name="content" select="d:book|d:set|d:setindex"/>
+  <xsl:variable name="content" select="book|set|setindex"/>
 
   <xsl:variable name="titlepage-master-reference">
     <xsl:call-template name="select.pagemaster">
@@ -211,26 +211,26 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <xsl:apply-templates select="$content"/>
 </xsl:template>
 
-<xsl:template match="d:set/d:setinfo"></xsl:template>
-<xsl:template match="d:set/d:title"></xsl:template>
-<xsl:template match="d:set/d:subtitle"></xsl:template>
-<xsl:template match="d:set/d:titleabbrev"></xsl:template>
+<xsl:template match="set/setinfo"></xsl:template>
+<xsl:template match="set/title"></xsl:template>
+<xsl:template match="set/subtitle"></xsl:template>
+<xsl:template match="set/titleabbrev"></xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:book">
+<xsl:template match="book">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
 
   <xsl:variable name="preamble"
-                select="d:title|d:subtitle|d:titleabbrev|d:bookinfo|d:info"/>
+                select="title|subtitle|titleabbrev|bookinfo|info"/>
 
   <xsl:variable name="content"
-                select="node()[not(self::d:title or self::d:subtitle
-                            or self::d:titleabbrev
-                            or self::d:info
-                            or self::d:bookinfo)]"/>
+                select="node()[not(self::title or self::subtitle
+                            or self::titleabbrev
+                            or self::info
+                            or self::bookinfo)]"/>
 
   <xsl:variable name="titlepage-master-reference">
     <xsl:call-template name="select.pagemaster">
@@ -252,8 +252,8 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     </xsl:call-template>
   </xsl:if>
 
-  <xsl:apply-templates select="d:dedication" mode="dedication"/>
-  <xsl:apply-templates select="d:acknowledgements" mode="acknowledgements"/>
+  <xsl:apply-templates select="dedication" mode="dedication"/>
+  <xsl:apply-templates select="acknowledgements" mode="acknowledgements"/>
 
   <xsl:call-template name="make.book.tocs"/>
 
@@ -263,11 +263,11 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 </xsl:template>
 
-<xsl:template match="d:book/d:bookinfo"></xsl:template>
-<xsl:template match="d:book/d:info"></xsl:template>
-<xsl:template match="d:book/d:title"></xsl:template>
-<xsl:template match="d:book/d:subtitle"></xsl:template>
-<xsl:template match="d:book/d:titleabbrev"></xsl:template>
+<xsl:template match="book/bookinfo"></xsl:template>
+<xsl:template match="book/info"></xsl:template>
+<xsl:template match="book/title"></xsl:template>
+<xsl:template match="book/subtitle"></xsl:template>
+<xsl:template match="book/titleabbrev"></xsl:template>
 
 <!-- Placeholder templates -->
 <xsl:template name="front.cover"/>
@@ -303,7 +303,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     </xsl:call-template>
   </xsl:if>
 
-  <xsl:if test="contains($toc.params,'figure') and .//d:figure">
+  <xsl:if test="contains($toc.params,'figure') and .//figure">
     <xsl:call-template name="page.sequence">
       <xsl:with-param name="master-reference"
                       select="$lot-master-reference"/>
@@ -312,13 +312,13 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
       <xsl:with-param name="content">
         <xsl:call-template name="list.of.titles">
           <xsl:with-param name="titles" select="'figure'"/>
-          <xsl:with-param name="nodes" select=".//d:figure"/>
+          <xsl:with-param name="nodes" select=".//figure"/>
         </xsl:call-template>
       </xsl:with-param>
     </xsl:call-template>
   </xsl:if>
 
-  <xsl:if test="contains($toc.params,'table') and .//d:table">
+  <xsl:if test="contains($toc.params,'table') and .//table">
     <xsl:call-template name="page.sequence">
       <xsl:with-param name="master-reference"
                       select="$lot-master-reference"/>
@@ -327,13 +327,13 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
       <xsl:with-param name="content">
         <xsl:call-template name="list.of.titles">
           <xsl:with-param name="titles" select="'table'"/>
-          <xsl:with-param name="nodes" select=".//d:table[not(@tocentry = 0)]"/>
+          <xsl:with-param name="nodes" select=".//table[not(@tocentry = 0)]"/>
         </xsl:call-template>
       </xsl:with-param>
     </xsl:call-template>
   </xsl:if>
 
-  <xsl:if test="contains($toc.params,'example') and .//d:example">
+  <xsl:if test="contains($toc.params,'example') and .//example">
     <xsl:call-template name="page.sequence">
       <xsl:with-param name="master-reference"
                       select="$lot-master-reference"/>
@@ -342,14 +342,14 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
       <xsl:with-param name="content">
         <xsl:call-template name="list.of.titles">
           <xsl:with-param name="titles" select="'example'"/>
-          <xsl:with-param name="nodes" select=".//d:example"/>
+          <xsl:with-param name="nodes" select=".//example"/>
         </xsl:call-template>
       </xsl:with-param>
     </xsl:call-template>
   </xsl:if>
 
   <xsl:if test="contains($toc.params,'equation') and 
-                 .//d:equation[d:title or d:info/d:title]">
+                 .//equation[title or info/title]">
     <xsl:call-template name="page.sequence">
       <xsl:with-param name="master-reference"
                       select="$lot-master-reference"/>
@@ -359,14 +359,14 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
         <xsl:call-template name="list.of.titles">
           <xsl:with-param name="titles" select="'equation'"/>
           <xsl:with-param name="nodes" 
-                          select=".//d:equation[d:title or d:info/d:title]"/>
+                          select=".//equation[title or info/title]"/>
         </xsl:call-template>
       </xsl:with-param>
     </xsl:call-template>
   </xsl:if>
 
   <xsl:if test="contains($toc.params,'procedure') and 
-                 .//d:procedure[d:title or d:info/d:title]">
+                 .//procedure[title or info/title]">
     <xsl:call-template name="page.sequence">
       <xsl:with-param name="master-reference"
                       select="$lot-master-reference"/>
@@ -376,7 +376,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
         <xsl:call-template name="list.of.titles">
           <xsl:with-param name="titles" select="'procedure'"/>
           <xsl:with-param name="nodes" 
-                          select=".//d:procedure[d:title or d:info/d:title]"/>
+                          select=".//procedure[title or info/title]"/>
         </xsl:call-template>
       </xsl:with-param>
     </xsl:call-template>
@@ -384,15 +384,15 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 </xsl:template>
 <!-- ==================================================================== -->
 
-<xsl:template match="d:part">
-  <xsl:if test="not(d:partintro)">
+<xsl:template match="part">
+  <xsl:if test="not(partintro)">
     <xsl:apply-templates select="." mode="part.titlepage.mode"/>
     <xsl:call-template name="generate.part.toc"/>
   </xsl:if>
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:part" mode="part.titlepage.mode">
+<xsl:template match="part" mode="part.titlepage.mode">
   <!-- done this way to force the context node to be the part -->
   <xsl:param name="additional.content"/>
 
@@ -471,11 +471,11 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:page-sequence>
 </xsl:template>
 
-<xsl:template match="d:part/d:docinfo|d:partinfo"></xsl:template>
-<xsl:template match="d:part/d:info"></xsl:template>
-<xsl:template match="d:part/d:title"></xsl:template>
-<xsl:template match="d:part/d:subtitle"></xsl:template>
-<xsl:template match="d:part/d:titleabbrev"></xsl:template>
+<xsl:template match="part/docinfo|partinfo"></xsl:template>
+<xsl:template match="part/info"></xsl:template>
+<xsl:template match="part/title"></xsl:template>
+<xsl:template match="part/subtitle"></xsl:template>
+<xsl:template match="part/titleabbrev"></xsl:template>
 
 <!-- ==================================================================== -->
 
@@ -495,14 +495,14 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     </xsl:call-template>
   </xsl:variable>
 
-  <xsl:variable name="nodes" select="$part/d:reference|
-                                     $part/d:preface|
-                                     $part/d:chapter|
-                                     $part/d:appendix|
-                                     $part/d:article|
-                                     $part/d:bibliography|
-                                     $part/d:glossary|
-                                     $part/d:index"/>
+  <xsl:variable name="nodes" select="$part/reference|
+                                     $part/preface|
+                                     $part/chapter|
+                                     $part/appendix|
+                                     $part/article|
+                                     $part/bibliography|
+                                     $part/glossary|
+                                     $part/index"/>
 
   <xsl:if test="count($nodes) &gt; 0 and contains($toc.params, 'toc')">
     <fo:page-sequence hyphenate="{$hyphenate}"
@@ -575,10 +575,10 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:part/d:partintro">
+<xsl:template match="part/partintro">
   <xsl:apply-templates select=".." mode="part.titlepage.mode">
     <xsl:with-param name="additional.content">
-      <xsl:if test="d:title">
+      <xsl:if test="title">
         <xsl:call-template name="partintro.titlepage"/>
       </xsl:if>
       <xsl:apply-templates/>
@@ -590,19 +590,20 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:partintro/d:title"></xsl:template>
-<xsl:template match="d:partintro/d:subtitle"></xsl:template>
-<xsl:template match="d:partintro/d:titleabbrev"></xsl:template>
+<xsl:template match="partintro/title"></xsl:template>
+<xsl:template match="partintro/subtitle"></xsl:template>
+<xsl:template match="partintro/titleabbrev"></xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:book" mode="division.number">
-  <xsl:number from="d:set" count="d:book" format="1."/>
+<xsl:template match="book" mode="division.number">
+  <xsl:number from="set" count="book" format="1."/>
 </xsl:template>
 
-<xsl:template match="d:part" mode="division.number">
-  <xsl:number from="d:book" count="d:part" format="I."/>
+<xsl:template match="part" mode="division.number">
+  <xsl:number from="book" count="part" format="I."/>
 </xsl:template>
 
+<!-- ==================================================================== -->
 </xsl:stylesheet>
 

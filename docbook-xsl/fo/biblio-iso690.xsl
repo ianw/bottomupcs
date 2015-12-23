@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:fo="http://www.w3.org/1999/XSL/Format"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 version='1.0'>
 
 <!-- ********************************************************************
@@ -45,27 +43,27 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     </xsl:when>
 
     <!-- SERIALS -->
-    <xsl:when test="./@role='serial' or ./d:biblioid/@class='issn' or ./d:issn">
+    <xsl:when test="./@role='serial' or ./biblioid/@class='issn' or ./issn">
       <xsl:call-template name="iso690.serial"/>
     </xsl:when>
 
     <!-- PARTS OF MONOGRAPHS -->
-    <xsl:when test="./@role='part' or (./d:bibliomisc[@role='secnum']|./d:bibliomisc[@role='sectitle'])">
+    <xsl:when test="./@role='part' or (./bibliomisc[@role='secnum']|./bibliomisc[@role='sectitle'])">
       <xsl:call-template name="iso690.monogr.part"/>
     </xsl:when>
 
     <!-- CONTRIBUTIONS TO MONOGRAPHS -->
-    <xsl:when test="./@role='contribution' or (./d:biblioset/@relation='part' and ./d:biblioset/@relation='book')">
+    <xsl:when test="./@role='contribution' or (./biblioset/@relation='part' and ./biblioset/@relation='book')">
       <xsl:call-template name="iso690.paper.mon"/>
     </xsl:when>
 
     <!-- ARTICLES, ETC., IN SERIALS -->
-    <xsl:when test="./@role='article' or (./d:biblioset/@relation='journal' and ./d:biblioset/@relation='article')">
+    <xsl:when test="./@role='article' or (./biblioset/@relation='journal' and ./biblioset/@relation='article')">
       <xsl:call-template name="iso690.article"/>
     </xsl:when>
 
     <!-- PATENT DOCUMENTS -->
-    <xsl:when test="./@role='patent' or (./d:bibliomisc[@role='patenttype'] and ./d:bibliomisc[@role='patentnum'])">
+    <xsl:when test="./@role='patent' or (./bibliomisc[@role='patenttype'] and ./bibliomisc[@role='patentnum'])">
       <xsl:call-template name="iso690.patent"/>
     </xsl:when>
 
@@ -108,15 +106,15 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <!-- Title and Type of medium -->
   <xsl:call-template name="iso690.title"/>
   <!-- Responsibility [nonEL] -->
-  <xsl:if test="not(./d:bibliomisc[@role='medium'])">
+  <xsl:if test="not(./bibliomisc[@role='medium'])">
     <xsl:call-template name="iso690.secondary"/>
   </xsl:if>
   <!-- Edition -->
   <xsl:call-template name="iso690.edition">
-    <xsl:with-param name="after" select="./d:bibliomisc[@role='issuing']"/>
+    <xsl:with-param name="after" select="./bibliomisc[@role='issuing']"/>
   </xsl:call-template>
   <!-- Issue designation (date and/or n°) [nonEL] -->
-  <xsl:if test="not(./d:bibliomisc[@role='medium'])">
+  <xsl:if test="not(./bibliomisc[@role='medium'])">
     <xsl:call-template name="iso690.issuing"/>
   </xsl:if>
   <!-- Place of publication, Publisher, Year/Date of publication, Date of update/revision, Date of citation -->
@@ -138,15 +136,15 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <!-- Title and Type of medium of host document -->
   <xsl:call-template name="iso690.title"/>
   <!-- Subordinate responsibility of host document [EL] -->
-  <xsl:if test="./d:bibliomisc[@role='medium']">
+  <xsl:if test="./bibliomisc[@role='medium']">
     <xsl:call-template name="iso690.secondary"/>
   </xsl:if>
   <!-- Edition -->
   <xsl:call-template name="iso690.edition">
-    <xsl:with-param name="after" select="./d:volumenum"/>
+    <xsl:with-param name="after" select="./volumenum"/>
   </xsl:call-template>
   <!-- Numeration of the part [nonEL]-->
-  <xsl:if test="not(./d:bibliomisc[@role='medium'])">
+  <xsl:if test="not(./bibliomisc[@role='medium'])">
     <xsl:call-template name="iso690.partnr"/>
   <!-- Subordinate responsibility [nonEL] -->
     <xsl:call-template name="iso690.secondary"/>
@@ -155,7 +153,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <xsl:call-template name="iso690.pub"/>
   <!-- Location within host -->
   <xsl:call-template name="iso690.part.location"/>
-  <xsl:if test="./d:bibliomisc[@role='medium']">
+  <xsl:if test="./bibliomisc[@role='medium']">
   <!-- Numeration within host document [EL] -->
   <!-- Notes [EL] -->
     <xsl:call-template name="iso690.notice"/>
@@ -169,14 +167,14 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 <!-- CONTRIBUTIONS TO MONOGRAPHS -->
 <xsl:template name="iso690.paper.mon">
 <!-- Contribution -->
-  <xsl:apply-templates mode="iso690.paper.part" select="./d:biblioset[@relation='part']"/>
+  <xsl:apply-templates mode="iso690.paper.part" select="./biblioset[@relation='part']"/>
 <!-- In -->
   <xsl:text>In </xsl:text>
 <!-- Host -->
-  <xsl:apply-templates mode="iso690.paper.book" select="./d:biblioset[@relation='book']"/>
+  <xsl:apply-templates mode="iso690.paper.book" select="./biblioset[@relation='book']"/>
 </xsl:template>
 
-<xsl:template match="d:biblioset" mode="iso690.paper.part">
+<xsl:template match="biblioset" mode="iso690.paper.part">
 <!-- Contribution -->
   <!-- Primary responsibility -->
   <xsl:call-template name="iso690.primary"/>
@@ -186,14 +184,14 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:biblioset" mode="iso690.paper.book">
+<xsl:template match="biblioset" mode="iso690.paper.book">
 <!-- Host -->
   <!-- Primary responsibility -->
   <xsl:call-template name="iso690.primary"/>
   <!-- Title and Type of medium -->
   <xsl:call-template name="iso690.title"/>
   <!-- Subordinate responsibility [EL] -->
-  <xsl:if test="./d:bibliomisc[@role='medium']">
+  <xsl:if test="./bibliomisc[@role='medium']">
     <xsl:call-template name="iso690.secondary"/>
   </xsl:if>
   <!-- Edition -->
@@ -203,7 +201,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <!-- Numeration within host document [EL] -->
   <!-- Location within host -->
   <xsl:call-template name="iso690.location"/>
-  <xsl:if test="./d:bibliomisc[@role='medium']">
+  <xsl:if test="./bibliomisc[@role='medium']">
   <!-- Notes [EL] -->
     <xsl:call-template name="iso690.notice"/>
   <!-- Avaibility and access [EL] -->
@@ -216,12 +214,12 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 <!-- ARTICLES, ETC., IN SERIALS -->
 <xsl:template name="iso690.article">
 <!-- Article -->
-  <xsl:apply-templates mode="iso690.article.art" select="./d:biblioset[@relation='article']"/>
+  <xsl:apply-templates mode="iso690.article.art" select="./biblioset[@relation='article']"/>
 <!-- Serial -->
-  <xsl:apply-templates mode="iso690.article.jour" select="./d:biblioset[@relation='journal']"/>
+  <xsl:apply-templates mode="iso690.article.jour" select="./biblioset[@relation='journal']"/>
 </xsl:template>
 
-<xsl:template match="d:biblioset" mode="iso690.article.art">
+<xsl:template match="biblioset" mode="iso690.article.art">
 <!-- Article -->
   <!-- Primary responsibility -->
   <xsl:call-template name="iso690.primary"/>
@@ -230,23 +228,23 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     <xsl:with-param name="italic" select="0"/>
   </xsl:call-template>
   <!-- Subordinate responsibility [nonEL] -->
-  <xsl:if test="not(../*/d:bibliomisc[@role='medium'])">
+  <xsl:if test="not(../*/bibliomisc[@role='medium'])">
     <xsl:call-template name="iso690.secondary"/>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:biblioset" mode="iso690.article.jour">
+<xsl:template match="biblioset" mode="iso690.article.jour">
 <!-- Serial -->
   <!-- Title and Type of medium -->
   <xsl:call-template name="iso690.title"/>
   <!-- Edition -->
   <xsl:call-template name="iso690.edition">
-    <xsl:with-param name="after" select="./d:pubdate[not(@role='issuing')]|./d:volumenum|./d:issuenum|./d:pagenums"/>
+    <xsl:with-param name="after" select="./pubdate[not(@role='issuing')]|./volumenum|./issuenum|./pagenums"/>
   </xsl:call-template>
   <!-- Number designation [EL] -->
   <!-- Location within host -->
   <xsl:call-template name="iso690.article.location"/>
-  <xsl:if test="./d:bibliomisc[@role='medium']">
+  <xsl:if test="./bibliomisc[@role='medium']">
   <!-- Notes [EL] -->
     <xsl:call-template name="iso690.notice"/>
   <!-- Avaibility and access [EL] -->
@@ -279,26 +277,26 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'primary.sep'"/></xsl:call-template>
   </xsl:param>
   <xsl:choose>
-    <xsl:when test="./d:authorgroup/d:author|./d:author">
+    <xsl:when test="./authorgroup/author|./author">
       <xsl:call-template name="iso690.author.list">
-        <xsl:with-param name="person.list" select=".//d:authorgroup/d:author|.//d:author"/>
+        <xsl:with-param name="person.list" select=".//authorgroup/author|.//author"/>
       </xsl:call-template>
     </xsl:when>
-    <xsl:when test="./d:authorgroup/d:editor|./d:editor">
+    <xsl:when test="./authorgroup/editor|./editor">
       <xsl:call-template name="iso690.author.list">
-        <xsl:with-param name="person.list" select=".//d:authorgroup/d:editor|.//d:editor"/>
+        <xsl:with-param name="person.list" select=".//authorgroup/editor|.//editor"/>
       </xsl:call-template>
     </xsl:when>
-    <xsl:when test="./d:authorgroup/d:corpauthor|./d:corpauthor">
+    <xsl:when test="./authorgroup/corpauthor|./corpauthor">
       <xsl:call-template name="iso690.author.list">
-        <xsl:with-param name="person.list" select=".//d:authorgroup/d:corpauthor|.//d:corpauthor"/>
+        <xsl:with-param name="person.list" select=".//authorgroup/corpauthor|.//corpauthor"/>
       </xsl:call-template>
     </xsl:when>
     <xsl:otherwise>
-      <xsl:if test="(./d:firstname)and(./d:surname)">
+      <xsl:if test="(./firstname)and(./surname)">
         <xsl:call-template name="iso690.author"/>
         <xsl:call-template name="iso690.endsep">
-          <xsl:with-param name="text" select="string(./d:firstname[1])"/>
+          <xsl:with-param name="text" select="string(./firstname[1])"/>
           <xsl:with-param name="sep" select="$primary.sep"/>
         </xsl:call-template>
       </xsl:if>
@@ -308,10 +306,10 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 <xsl:template name="iso690.author.list">
   <xsl:param name="person.list"
-             select="d:author|d:corpauthor|d:editor"/>
+             select="author|corpauthor|editor"/>
   <xsl:param name="person.count" select="count($person.list)"/>
   <xsl:param name="count" select="1"/>
-  <xsl:param name="group" select="./d:authorgroup[@role='many']"/>
+  <xsl:param name="group" select="./authorgroup[@role='many']"/>
   <xsl:param name="many" select="0"/>
 
   <xsl:param name="primary.many">
@@ -384,7 +382,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 </xsl:when>
                 <xsl:otherwise>
                   <xsl:call-template name="iso690.endsep">
-                    <xsl:with-param name="text" select="string($person.list[position()=$count]//d:firstname[1])"/>
+                    <xsl:with-param name="text" select="string($person.list[position()=$count]//firstname[1])"/>
                     <xsl:with-param name="sep" select="$primary.sep"/>
                   </xsl:call-template>
                 </xsl:otherwise>
@@ -445,12 +443,12 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <xsl:choose>
     <xsl:when test="name($node)!='corpauthor'">
       <fo:inline text-transform="uppercase">
-        <xsl:apply-templates mode="iso690.mode" select="$node//d:surname[1]"/>
+        <xsl:apply-templates mode="iso690.mode" select="$node//surname[1]"/>
       </fo:inline>
-      <xsl:if test="$node//d:surname and $node//d:firstname">
+      <xsl:if test="$node//surname and $node//firstname">
         <xsl:value-of select="$lastfirst.sep"/>
       </xsl:if>
-      <xsl:apply-templates mode="iso690.mode" select="$node//d:firstname[1]"/>
+      <xsl:apply-templates mode="iso690.mode" select="$node//firstname[1]"/>
     </xsl:when>
     <xsl:otherwise>
       <fo:inline text-transform="uppercase">
@@ -460,26 +458,26 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:corpauthor|d:firstname|d:surname" mode="iso690.mode">
+<xsl:template match="corpauthor|firstname|surname" mode="iso690.mode">
   <xsl:apply-templates mode="iso690.mode"/>
 </xsl:template>
 
 <!-- Title and Type of medium -->
 <xsl:template name="iso690.title">
-  <xsl:param name="medium" select="./d:bibliomisc[@role='medium']"/>
+  <xsl:param name="medium" select="./bibliomisc[@role='medium']"/>
   <xsl:param name="italic" select="1"/>
   <xsl:param name="sep">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'title.sep'"/></xsl:call-template>
   </xsl:param>
 
-  <xsl:apply-templates mode="iso690.mode" select="./d:title">
+  <xsl:apply-templates mode="iso690.mode" select="./title">
     <xsl:with-param name="medium" select="$medium"/>
     <xsl:with-param name="italic" select="$italic"/>
     <xsl:with-param name="sep" select="$sep"/>
   </xsl:apply-templates>
 </xsl:template>
 
-<xsl:template match="d:title" mode="iso690.mode">
+<xsl:template match="title" mode="iso690.mode">
   <xsl:param name="medium"/>
   <xsl:param name="italic" select="1"/>
   <xsl:param name="sep">
@@ -505,7 +503,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     <xsl:value-of select="$medium2"/>
   </xsl:if>
   <xsl:call-template name="iso690.endsep">
-    <xsl:with-param name="text" select="concat(string(.),string(../d:subtitle))"/>
+    <xsl:with-param name="text" select="concat(string(.),string(../subtitle))"/>
     <xsl:with-param name="sep" select="$sep"/>
   </xsl:call-template>
 </xsl:template>
@@ -521,17 +519,17 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'submaintitle.sep'"/></xsl:call-template>
   </xsl:param>
   <xsl:apply-templates mode="iso690.mode"/>
-  <xsl:if test="../d:subtitle">
+  <xsl:if test="../subtitle">
     <xsl:value-of select="$submaintitle.sep"/>
-    <xsl:apply-templates mode="iso690.mode" select="../d:subtitle"/>
+    <xsl:apply-templates mode="iso690.mode" select="../subtitle"/>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:subtitle" mode="iso690.mode">
+<xsl:template match="subtitle" mode="iso690.mode">
   <xsl:apply-templates mode="iso690.mode"/>
 </xsl:template>
 
-<xsl:template match="d:bibliomisc[@role='medium']" mode="iso690.mode">
+<xsl:template match="bibliomisc[@role='medium']" mode="iso690.mode">
   <xsl:apply-templates mode="iso690.mode"/>
 </xsl:template>
 
@@ -543,10 +541,10 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <xsl:param name="secondary.person.sep">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'secondary.person.sep'"/></xsl:call-template>
   </xsl:param>
-  <xsl:for-each select="./d:bibliomisc[@role='secondary']">
+  <xsl:for-each select="./bibliomisc[@role='secondary']">
     <xsl:apply-templates mode="iso690.mode" select="."/>
     <xsl:choose>
-      <xsl:when test="position()=count(../d:bibliomisc[@role='secondary'])">
+      <xsl:when test="position()=count(../bibliomisc[@role='secondary'])">
         <xsl:call-template name="iso690.endsep">
           <xsl:with-param name="text" select="string(.)"/>
           <xsl:with-param name="sep" select="$secondary.sep"/>
@@ -559,7 +557,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:for-each>
 </xsl:template>
 
-<xsl:template match="d:bibliomisc[@role='secondary']" mode="iso690.mode">
+<xsl:template match="bibliomisc[@role='secondary']" mode="iso690.mode">
   <xsl:apply-templates mode="iso690.mode"/>
 </xsl:template>
 
@@ -571,17 +569,17 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:param>
   <xsl:choose>
     <xsl:when test="string($after)!=''">
-      <xsl:apply-templates mode="iso690.mode" select="./d:edition">
+      <xsl:apply-templates mode="iso690.mode" select="./edition">
         <xsl:with-param name="sep" select="$edition.serial.sep"/>
       </xsl:apply-templates>
     </xsl:when>
     <xsl:otherwise>
-      <xsl:apply-templates mode="iso690.mode" select="./d:edition"/>
+      <xsl:apply-templates mode="iso690.mode" select="./edition"/>
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:edition" mode="iso690.mode">
+<xsl:template match="edition" mode="iso690.mode">
   <xsl:param name="sep">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'edition.sep'"/></xsl:call-template>
   </xsl:param>
@@ -604,53 +602,53 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'issuing.sep'"/></xsl:call-template>
   </xsl:param>
   <xsl:choose>
-    <xsl:when test="./d:pubdate[@role='issuing'] and ./d:volumenum[2] and ./d:issuenum[2]">
+    <xsl:when test="./pubdate[@role='issuing'] and ./volumenum[2] and ./issuenum[2]">
       <xsl:call-template name="iso690.issuedate"/>
-      <xsl:apply-templates mode="iso690.mode" select="./d:volumenum[1]">
+      <xsl:apply-templates mode="iso690.mode" select="./volumenum[1]">
         <xsl:with-param name="sep" select="$issuing.div"/>
       </xsl:apply-templates>
-      <xsl:apply-templates mode="iso690.mode" select="./d:issuenum[1]">
+      <xsl:apply-templates mode="iso690.mode" select="./issuenum[1]">
         <xsl:with-param name="sep" select="$issuing.range"/>
       </xsl:apply-templates>
-      <xsl:apply-templates mode="iso690.mode" select="./d:volumenum[2]">
+      <xsl:apply-templates mode="iso690.mode" select="./volumenum[2]">
         <xsl:with-param name="sep" select="$issuing.div"/>
       </xsl:apply-templates>
-      <xsl:apply-templates mode="iso690.mode" select="./d:issuenum[2]">
+      <xsl:apply-templates mode="iso690.mode" select="./issuenum[2]">
         <xsl:with-param name="sep" select="$issuing.sep"/>
       </xsl:apply-templates>
     </xsl:when>
-    <xsl:when test="./d:pubdate[@role='issuing'] and ./d:volumenum[2]">
+    <xsl:when test="./pubdate[@role='issuing'] and ./volumenum[2]">
       <xsl:call-template name="iso690.issuedate"/>
-      <xsl:apply-templates mode="iso690.mode" select="./d:volumenum[1]">
+      <xsl:apply-templates mode="iso690.mode" select="./volumenum[1]">
         <xsl:with-param name="sep" select="$issuing.range"/>
       </xsl:apply-templates>
-      <xsl:apply-templates mode="iso690.mode" select="./d:volumenum[2]">
+      <xsl:apply-templates mode="iso690.mode" select="./volumenum[2]">
         <xsl:with-param name="sep" select="$issuing.sep"/>
       </xsl:apply-templates>
     </xsl:when>
-    <xsl:when test="./d:pubdate[@role='issuing'] and ./d:volumenum and ./d:issuenum">
-      <xsl:apply-templates mode="iso690.mode" select="./d:pubdate[@role='issuing']">
+    <xsl:when test="./pubdate[@role='issuing'] and ./volumenum and ./issuenum">
+      <xsl:apply-templates mode="iso690.mode" select="./pubdate[@role='issuing']">
         <xsl:with-param name="sep" select="$issuing.div"/>
       </xsl:apply-templates>
-      <xsl:apply-templates mode="iso690.mode" select="./d:volumenum">
+      <xsl:apply-templates mode="iso690.mode" select="./volumenum">
         <xsl:with-param name="sep" select="$issuing.div"/>
       </xsl:apply-templates>
-      <xsl:apply-templates mode="iso690.mode" select="./d:issuenum">
+      <xsl:apply-templates mode="iso690.mode" select="./issuenum">
         <xsl:with-param name="sep" select="$issuing.sep"/>
       </xsl:apply-templates>
     </xsl:when>
-    <xsl:when test="./d:pubdate[@role='issuing']">
-      <xsl:apply-templates mode="iso690.mode" select="./d:pubdate[@role='issuing']">
+    <xsl:when test="./pubdate[@role='issuing']">
+      <xsl:apply-templates mode="iso690.mode" select="./pubdate[@role='issuing']">
         <xsl:with-param name="sep" select="$issuing.sep"/>
       </xsl:apply-templates>
     </xsl:when>
-    <xsl:when test="./d:volumenum">
-      <xsl:apply-templates mode="iso690.mode" select="./d:volumenum">
+    <xsl:when test="./volumenum">
+      <xsl:apply-templates mode="iso690.mode" select="./volumenum">
         <xsl:with-param name="sep" select="$issuing.sep"/>
       </xsl:apply-templates>
     </xsl:when>
-    <xsl:when test="./d:issuenum">
-      <xsl:apply-templates mode="iso690.mode" select="./d:issuenum">
+    <xsl:when test="./issuenum">
+      <xsl:apply-templates mode="iso690.mode" select="./issuenum">
         <xsl:with-param name="sep" select="$issuing.sep"/>
       </xsl:apply-templates>
     </xsl:when>
@@ -668,23 +666,23 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'issuing.sep'"/></xsl:call-template>
   </xsl:param>
   <xsl:choose>
-    <xsl:when test="./d:pubdate[@role='issuing'][2]">
-      <xsl:apply-templates mode="iso690.mode" select="./d:pubdate[@role='issuing'][1]">
+    <xsl:when test="./pubdate[@role='issuing'][2]">
+      <xsl:apply-templates mode="iso690.mode" select="./pubdate[@role='issuing'][1]">
         <xsl:with-param name="sep" select="$issuing.range"/>
       </xsl:apply-templates>
-      <xsl:apply-templates mode="iso690.mode" select="./d:pubdate[@role='issuing'][2]">
+      <xsl:apply-templates mode="iso690.mode" select="./pubdate[@role='issuing'][2]">
         <xsl:with-param name="sep" select="$issuing.div"/>
       </xsl:apply-templates>
     </xsl:when>
     <xsl:otherwise>
-      <xsl:apply-templates mode="iso690.mode" select="./d:pubdate[@role='issuing']">
+      <xsl:apply-templates mode="iso690.mode" select="./pubdate[@role='issuing']">
         <xsl:with-param name="sep" select="$issuing.div"/>
       </xsl:apply-templates>
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:pubdate[@role='issuing']" mode="iso690.mode">
+<xsl:template match="pubdate[@role='issuing']" mode="iso690.mode">
   <xsl:param name="sep"/>
   <xsl:variable name="substr" select="substring(string(.),string-length(string(.)))"/>
   <xsl:apply-templates mode="iso690.mode"/>
@@ -712,7 +710,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <xsl:param name="partnr.sep">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'partnr.sep'"/></xsl:call-template>
   </xsl:param>
-  <xsl:apply-templates mode="iso690.mode" select="./d:volumenum">
+  <xsl:apply-templates mode="iso690.mode" select="./volumenum">
     <xsl:with-param name="sep" select="$partnr.sep"/>
   </xsl:apply-templates>
 </xsl:template>
@@ -730,32 +728,32 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'pubinfo.sep'"/></xsl:call-template>
   </xsl:param>
   <xsl:choose>
-    <xsl:when test="(./d:publisher/d:publishername|./d:publishername|./d:publisher/d:address/d:city)and($onlydate=0)and(./d:pubdate[not(@role='issuing')]|./d:copyright/d:year|./d:date[@role='upd']|./d:date[@role='upd'])">
-      <xsl:apply-templates mode="iso690.mode" select="./d:publisher/d:address/d:city">
+    <xsl:when test="(./publisher/publishername|./publishername|./publisher/address/city)and($onlydate=0)and(./pubdate[not(@role='issuing')]|./copyright/year|./date[@role='upd']|./date[@role='upd'])">
+      <xsl:apply-templates mode="iso690.mode" select="./publisher/address/city">
         <xsl:with-param name="sep" select="$placesep"/>
       </xsl:apply-templates>
-      <xsl:apply-templates mode="iso690.mode" select="./d:publisher/d:publishername|./d:publishername">
+      <xsl:apply-templates mode="iso690.mode" select="./publisher/publishername|./publishername">
         <xsl:with-param name="sep" select="$pubsep"/>
       </xsl:apply-templates>
-      <xsl:apply-templates mode="iso690.mode" select="./d:pubdate[not(@role='issuing')]|./d:copyright/d:year">
+      <xsl:apply-templates mode="iso690.mode" select="./pubdate[not(@role='issuing')]|./copyright/year">
         <xsl:with-param name="sep" select="$endsep"/>
       </xsl:apply-templates>
-      <xsl:if test="not(./d:pubdate[not(@role='issuing')]|./d:copyright/d:year)">
+      <xsl:if test="not(./pubdate[not(@role='issuing')]|./copyright/year)">
         <xsl:call-template name="iso690.data">
           <xsl:with-param name="sep" select="$endsep"/>
         </xsl:call-template>
       </xsl:if>
     </xsl:when>
-    <xsl:when test="(./d:publisher/d:publishername|./d:publishername)and(./d:publisher/d:address/d:city)and($onlydate=0)">
-      <xsl:apply-templates mode="iso690.mode" select="./d:publisher/d:address/d:city">
+    <xsl:when test="(./publisher/publishername|./publishername)and(./publisher/address/city)and($onlydate=0)">
+      <xsl:apply-templates mode="iso690.mode" select="./publisher/address/city">
         <xsl:with-param name="sep" select="$placesep"/>
       </xsl:apply-templates>
-      <xsl:apply-templates mode="iso690.mode" select="./d:publisher/d:publishername|./d:publishername">
+      <xsl:apply-templates mode="iso690.mode" select="./publisher/publishername|./publishername">
         <xsl:with-param name="sep" select="$endsep"/>
       </xsl:apply-templates>
     </xsl:when>
-    <xsl:when test="($onlydate=1)or(./d:pubdate[not(@role='issuing')]|./d:copyright/d:year)">
-      <xsl:apply-templates mode="iso690.mode" select="./d:pubdate[not(@role='issuing')]|./d:copyright/d:year">
+    <xsl:when test="($onlydate=1)or(./pubdate[not(@role='issuing')]|./copyright/year)">
+      <xsl:apply-templates mode="iso690.mode" select="./pubdate[not(@role='issuing')]|./copyright/year">
         <xsl:with-param name="sep" select="$endsep"/>
       </xsl:apply-templates>
       <xsl:if test="$onlydate=1">
@@ -764,7 +762,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
         </xsl:call-template>
       </xsl:if>
     </xsl:when>
-    <xsl:when test="not(./d:pubdate[not(@role='issuing')]|./d:copyright/d:year)">
+    <xsl:when test="not(./pubdate[not(@role='issuing')]|./copyright/year)">
       <xsl:call-template name="iso690.data">
         <xsl:with-param name="sep" select="$endsep"/>
       </xsl:call-template>
@@ -777,7 +775,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'spec.pubinfo.sep'"/></xsl:call-template>
   </xsl:param>
   <xsl:choose>
-    <xsl:when test="./d:volumnum|./d:issuenum|./d:pagenums">
+    <xsl:when test="./volumnum|./issuenum|./pagenums">
       <xsl:call-template name="iso690.pub">
         <xsl:with-param name="endsep" select="$spec.pubinfo.sep"/>
       </xsl:call-template>
@@ -793,27 +791,27 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <xsl:param name="datecit2">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'datecit2'"/></xsl:call-template>
   </xsl:param>
-  <xsl:apply-templates mode="iso690.mode" select="./d:date[@role='upd']">
+  <xsl:apply-templates mode="iso690.mode" select="./date[@role='upd']">
     <xsl:with-param name="sep"/>
   </xsl:apply-templates>
-  <xsl:apply-templates mode="iso690.mode" select="./d:date[@role='cit']"/>
+  <xsl:apply-templates mode="iso690.mode" select="./date[@role='cit']"/>
   <xsl:choose>
-    <xsl:when test="./d:date[@role='cit']">
+    <xsl:when test="./date[@role='cit']">
       <xsl:call-template name="iso690.endsep">
         <xsl:with-param name="text" select="$datecit2"/>
         <xsl:with-param name="sep" select="$sep"/>
       </xsl:call-template>
     </xsl:when>
-    <xsl:when test="./d:date[@role='upd']">
+    <xsl:when test="./date[@role='upd']">
       <xsl:call-template name="iso690.endsep">
-        <xsl:with-param name="text" select="string(./d:date[@role='upd'])"/>
+        <xsl:with-param name="text" select="string(./date[@role='upd'])"/>
         <xsl:with-param name="sep" select="$sep"/>
       </xsl:call-template>
     </xsl:when>
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:publisher/d:address/d:city|d:publishername" mode="iso690.mode">
+<xsl:template match="publisher/address/city|publishername" mode="iso690.mode">
   <xsl:param name="sep"/>
   <xsl:param name="upd" select="0"/>
   <xsl:apply-templates mode="iso690.mode"/>
@@ -823,7 +821,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:pubdate|d:copyright/d:year" mode="iso690.mode">
+<xsl:template match="pubdate|copyright/year" mode="iso690.mode">
   <xsl:param name="sep"/>
   <xsl:param name="upd" select="1"/>
   <xsl:param name="datecit2">
@@ -840,25 +838,25 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <xsl:if test="$upd!=0">
     <xsl:choose>
       <xsl:when test="name(.)='pubdate'">
-        <xsl:apply-templates mode="iso690.mode" select="../d:date[@role='upd']"/>
-        <xsl:apply-templates mode="iso690.mode" select="../d:date[@role='cit']"/>
+        <xsl:apply-templates mode="iso690.mode" select="../date[@role='upd']"/>
+        <xsl:apply-templates mode="iso690.mode" select="../date[@role='cit']"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:apply-templates mode="iso690.mode" select="../../d:date[@role='upd']"/>
-        <xsl:apply-templates mode="iso690.mode" select="../../d:date[@role='cit']"/>
+        <xsl:apply-templates mode="iso690.mode" select="../../date[@role='upd']"/>
+        <xsl:apply-templates mode="iso690.mode" select="../../date[@role='cit']"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:if>
   <xsl:choose>
-    <xsl:when test="../d:date[@role='cit']|../../d:date[@role='cit'] and $upd!=0">
+    <xsl:when test="../date[@role='cit']|../../date[@role='cit'] and $upd!=0">
       <xsl:call-template name="iso690.endsep">
         <xsl:with-param name="text" select="$datecit2"/>
         <xsl:with-param name="sep" select="$sep"/>
       </xsl:call-template>
     </xsl:when>
-    <xsl:when test="../d:date[@role='upd']|../../d:date[@role='upd'] and $upd!=0">
+    <xsl:when test="../date[@role='upd']|../../date[@role='upd'] and $upd!=0">
       <xsl:call-template name="iso690.endsep">
-        <xsl:with-param name="text" select="string(../d:date[@role='upd'])"/>
+        <xsl:with-param name="text" select="string(../date[@role='upd'])"/>
         <xsl:with-param name="sep" select="$sep"/>
       </xsl:call-template>
     </xsl:when>
@@ -885,7 +883,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 </xsl:template>
 
 <!-- Date of update/revision -->
-<xsl:template match="d:date[@role='upd']" mode="iso690.mode">
+<xsl:template match="date[@role='upd']" mode="iso690.mode">
   <xsl:param name="sep">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'upd.sep'"/></xsl:call-template>
   </xsl:param>
@@ -894,7 +892,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 </xsl:template>
 
 <!-- Date of citation -->
-<xsl:template match="d:date[@role='cit']" mode="iso690.mode">
+<xsl:template match="date[@role='cit']" mode="iso690.mode">
   <xsl:param name="datecit1">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'datecit1'"/></xsl:call-template>
   </xsl:param>
@@ -911,7 +909,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <xsl:param name="extent.sep">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'extent.sep'"/></xsl:call-template>
   </xsl:param>
-  <xsl:apply-templates mode="iso690.mode" select="./d:pagenums">
+  <xsl:apply-templates mode="iso690.mode" select="./pagenums">
     <xsl:with-param name="sep" select="$extent.sep"/>
   </xsl:apply-templates>
 </xsl:template>
@@ -922,19 +920,19 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'location.sep'"/></xsl:call-template>
   </xsl:param>
   <xsl:choose>
-    <xsl:when test="./d:pagenums">
-      <xsl:apply-templates mode="iso690.mode" select="./d:bibliomisc[@role='secnum']"/>
-      <xsl:apply-templates mode="iso690.mode" select="./d:bibliomisc[@role='sectitle']"/>
-      <xsl:apply-templates mode="iso690.mode" select="./d:pagenums"/>
+    <xsl:when test="./pagenums">
+      <xsl:apply-templates mode="iso690.mode" select="./bibliomisc[@role='secnum']"/>
+      <xsl:apply-templates mode="iso690.mode" select="./bibliomisc[@role='sectitle']"/>
+      <xsl:apply-templates mode="iso690.mode" select="./pagenums"/>
     </xsl:when>
-    <xsl:when test="./d:bibliomisc[@role='sectitle']">
-      <xsl:apply-templates mode="iso690.mode" select="./d:bibliomisc[@role='secnum']"/>
-      <xsl:apply-templates mode="iso690.mode" select="./d:bibliomisc[@role='sectitle']">
+    <xsl:when test="./bibliomisc[@role='sectitle']">
+      <xsl:apply-templates mode="iso690.mode" select="./bibliomisc[@role='secnum']"/>
+      <xsl:apply-templates mode="iso690.mode" select="./bibliomisc[@role='sectitle']">
         <xsl:with-param name="sep" select="$location.sep"/>
       </xsl:apply-templates>
     </xsl:when>
     <xsl:otherwise>
-      <xsl:apply-templates mode="iso690.mode" select="./d:bibliomisc[@role='secnum']">
+      <xsl:apply-templates mode="iso690.mode" select="./bibliomisc[@role='secnum']">
         <xsl:with-param name="sep" select="$location.sep"/>
       </xsl:apply-templates>
     </xsl:otherwise>
@@ -949,17 +947,17 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'locs.sep'"/></xsl:call-template>
   </xsl:param>
   <xsl:choose>
-    <xsl:when test="not(./d:date[@role='upd']|./d:date[@role='cit'])">
+    <xsl:when test="not(./date[@role='upd']|./date[@role='cit'])">
       <xsl:choose>
-        <xsl:when test="./d:volumenum|./d:issuenum|./d:pagenums">
-          <xsl:apply-templates mode="iso690.mode" select="./d:pubdate[not(@role='issuing')]">
+        <xsl:when test="./volumenum|./issuenum|./pagenums">
+          <xsl:apply-templates mode="iso690.mode" select="./pubdate[not(@role='issuing')]">
             <xsl:with-param name="upd" select="0"/>
             <xsl:with-param name="sep" select="$locs.sep"/>
           </xsl:apply-templates>
           <xsl:call-template name="iso690.location"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:apply-templates mode="iso690.mode" select="./d:pubdate[not(@role='issuing')]">
+          <xsl:apply-templates mode="iso690.mode" select="./pubdate[not(@role='issuing')]">
             <xsl:with-param name="sep" select="$location.sep"/>
           </xsl:apply-templates>
         </xsl:otherwise>
@@ -967,38 +965,38 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     </xsl:when>
     <xsl:otherwise>
       <xsl:choose>
-        <xsl:when test="./d:volumenum|./d:issuenum|./d:pagenums">
-          <xsl:apply-templates mode="iso690.mode" select="./d:pubdate[not(@role='issuing')]">
+        <xsl:when test="./volumenum|./issuenum|./pagenums">
+          <xsl:apply-templates mode="iso690.mode" select="./pubdate[not(@role='issuing')]">
             <xsl:with-param name="upd" select="0"/>
             <xsl:with-param name="sep" select="$locs.sep"/>
           </xsl:apply-templates>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:apply-templates mode="iso690.mode" select="./d:pubdate[not(@role='issuing')]">
+          <xsl:apply-templates mode="iso690.mode" select="./pubdate[not(@role='issuing')]">
             <xsl:with-param name="upd" select="0"/>
             <xsl:with-param name="sep" select="$location.sep"/>
           </xsl:apply-templates>
         </xsl:otherwise>
       </xsl:choose>
       <xsl:choose>
-        <xsl:when test="./d:issuenum">
-          <xsl:apply-templates mode="iso690.mode" select="./d:volumenum"/>
-          <xsl:apply-templates mode="iso690.mode" select="./d:issuenum">
+        <xsl:when test="./issuenum">
+          <xsl:apply-templates mode="iso690.mode" select="./volumenum"/>
+          <xsl:apply-templates mode="iso690.mode" select="./issuenum">
             <xsl:with-param name="sep"/>
           </xsl:apply-templates>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:apply-templates mode="iso690.mode" select="./d:volumenum">
+          <xsl:apply-templates mode="iso690.mode" select="./volumenum">
             <xsl:with-param name="sep"/>
           </xsl:apply-templates>
         </xsl:otherwise>
       </xsl:choose>
       <xsl:choose>
-        <xsl:when test="./d:pagenums">
+        <xsl:when test="./pagenums">
           <xsl:call-template name="iso690.data">
             <xsl:with-param name="sep" select="$locs.sep"/>
           </xsl:call-template>
-          <xsl:apply-templates mode="iso690.mode" select="./d:pagenums"/>
+          <xsl:apply-templates mode="iso690.mode" select="./pagenums"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:call-template name="iso690.data">
@@ -1015,26 +1013,26 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'location.sep'"/></xsl:call-template>
   </xsl:param>
   <xsl:choose>
-    <xsl:when test="./d:volumenum and not(./d:issuenum) and not(./d:pagenums)">
-      <xsl:apply-templates mode="iso690.mode" select="./d:volumenum">
+    <xsl:when test="./volumenum and not(./issuenum) and not(./pagenums)">
+      <xsl:apply-templates mode="iso690.mode" select="./volumenum">
         <xsl:with-param name="sep" select="$location.sep"/>
       </xsl:apply-templates>
     </xsl:when>
-    <xsl:when test="./d:issuenum and not(./d:pagenums)">
-      <xsl:apply-templates mode="iso690.mode" select="./d:volumenum"/>
-      <xsl:apply-templates mode="iso690.mode" select="./d:issuenum">
+    <xsl:when test="./issuenum and not(./pagenums)">
+      <xsl:apply-templates mode="iso690.mode" select="./volumenum"/>
+      <xsl:apply-templates mode="iso690.mode" select="./issuenum">
         <xsl:with-param name="sep" select="$location.sep"/>
       </xsl:apply-templates>
     </xsl:when>
-    <xsl:when test="./d:pagenums">
-      <xsl:apply-templates mode="iso690.mode" select="./d:volumenum"/>
-      <xsl:apply-templates mode="iso690.mode" select="./d:issuenum"/>
-      <xsl:apply-templates mode="iso690.mode" select="./d:pagenums"/>
+    <xsl:when test="./pagenums">
+      <xsl:apply-templates mode="iso690.mode" select="./volumenum"/>
+      <xsl:apply-templates mode="iso690.mode" select="./issuenum"/>
+      <xsl:apply-templates mode="iso690.mode" select="./pagenums"/>
     </xsl:when>
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:bibliomisc[@role='secnum']|d:bibliomisc[@role='sectitle']" mode="iso690.mode">
+<xsl:template match="bibliomisc[@role='secnum']|bibliomisc[@role='sectitle']" mode="iso690.mode">
   <xsl:param name="sep">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'locs.sep'"/></xsl:call-template>
   </xsl:param>
@@ -1045,7 +1043,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:volumenum|d:issuenum" mode="iso690.mode">
+<xsl:template match="volumenum|issuenum" mode="iso690.mode">
   <xsl:param name="sep">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'locs.sep'"/></xsl:call-template>
   </xsl:param>
@@ -1056,7 +1054,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:pagenums" mode="iso690.mode">
+<xsl:template match="pagenums" mode="iso690.mode">
   <xsl:param name="sep">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'location.sep'"/></xsl:call-template>
   </xsl:param>
@@ -1069,15 +1067,15 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 <!-- Series -->
 <xsl:template name="iso690.serie">
-  <xsl:apply-templates mode="iso690.mode" select=".//d:bibliomisc[@role='serie']"/>
+  <xsl:apply-templates mode="iso690.mode" select=".//bibliomisc[@role='serie']"/>
 </xsl:template>
 
 <!-- Notes -->
 <xsl:template name="iso690.notice">
-  <xsl:apply-templates mode="iso690.mode" select=".//d:bibliomisc[not(@role)]"/>
+  <xsl:apply-templates mode="iso690.mode" select=".//bibliomisc[not(@role)]"/>
 </xsl:template>
 
-<xsl:template match="d:bibliomisc[not(@role)]|d:bibliomisc[@role='serie']" mode="iso690.mode">
+<xsl:template match="bibliomisc[not(@role)]|bibliomisc[@role='serie']" mode="iso690.mode">
   <xsl:param name="notice.sep">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'notice.sep'"/></xsl:call-template>
   </xsl:param>
@@ -1090,7 +1088,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 <!-- Avaibility and access -->
 <xsl:template name="iso690.access">
-  <xsl:for-each select="./d:biblioid[@class='uri']|./d:bibliomisc[@role='access']">
+  <xsl:for-each select="./biblioid[@class='uri']|./bibliomisc[@role='access']">
     <xsl:choose>
       <xsl:when test="position()=1">
         <xsl:apply-templates mode="iso690.mode" select="."/>
@@ -1104,7 +1102,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:for-each>
 </xsl:template>
 
-<xsl:template match="d:biblioid[@class='uri']/d:ulink|d:bibliomisc[@role='access']/d:ulink" mode="iso690.mode">
+<xsl:template match="biblioid[@class='uri']/ulink|bibliomisc[@role='access']/ulink" mode="iso690.mode">
   <xsl:param name="link1">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'link1'"/></xsl:call-template>
   </xsl:param>
@@ -1116,7 +1114,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <xsl:value-of select="$link2"/>
 </xsl:template>
 
-<xsl:template match="d:biblioid[@class='uri']|d:bibliomisc[@role='access']" mode="iso690.mode">
+<xsl:template match="biblioid[@class='uri']|bibliomisc[@role='access']" mode="iso690.mode">
   <xsl:param name="firstacc" select="1"/>
   <xsl:param name="access">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'access'"/></xsl:call-template>
@@ -1145,27 +1143,27 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     </xsl:otherwise>
   </xsl:choose>
   <xsl:choose>
-    <xsl:when test="(./d:ulink)and(string(./d:ulink)=string(.))">
+    <xsl:when test="(./ulink)and(string(./ulink)=string(.))">
       <xsl:choose>
-        <xsl:when test="(starts-with(./d:ulink/@url,'http://')or(starts-with(./d:ulink/@url,'https://')))">
+        <xsl:when test="(starts-with(./ulink/@url,'http://')or(starts-with(./ulink/@url,'https://')))">
           <xsl:value-of select="$onwww"/>
           <xsl:value-of select="$access.end"/>
-          <xsl:apply-templates mode="iso690.mode" select="./d:ulink"/>
+          <xsl:apply-templates mode="iso690.mode" select="./ulink"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="$oninet"/>
           <xsl:value-of select="$access.end"/>
-          <xsl:apply-templates mode="iso690.mode" select="./d:ulink"/>
+          <xsl:apply-templates mode="iso690.mode" select="./ulink"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:when>
-    <xsl:when test="(./d:ulink)and(string(./d:ulink)!=string(.))">
+    <xsl:when test="(./ulink)and(string(./ulink)!=string(.))">
       <xsl:value-of select="text()[1]"/>
       <xsl:call-template name="iso690.endsep">
         <xsl:with-param name="text" select="text()[1]"/>
         <xsl:with-param name="sep" select="$access.end"/>
       </xsl:call-template>
-      <xsl:apply-templates mode="iso690.mode" select="./d:ulink"/>
+      <xsl:apply-templates mode="iso690.mode" select="./ulink"/>
     </xsl:when>
     <xsl:otherwise>
       <xsl:apply-templates mode="iso690.mode"/>
@@ -1177,16 +1175,16 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 <!-- Standard number - ISBN -->
 <xsl:template name="iso690.isbn">
   <xsl:choose>
-    <xsl:when test="./d:biblioid/@class='isbn'">
-      <xsl:apply-templates mode="iso690.mode" select="./d:biblioid[@class='isbn']"/>
+    <xsl:when test="./biblioid/@class='isbn'">
+      <xsl:apply-templates mode="iso690.mode" select="./biblioid[@class='isbn']"/>
     </xsl:when>
-    <xsl:when test="./d:isbn">
-      <xsl:apply-templates mode="iso690.mode" select="./d:isbn"/>
+    <xsl:when test="./isbn">
+      <xsl:apply-templates mode="iso690.mode" select="./isbn"/>
     </xsl:when>
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:isbn|d:biblioid[@class='isbn']" mode="iso690.mode">
+<xsl:template match="isbn|biblioid[@class='isbn']" mode="iso690.mode">
   <xsl:param name="isbn">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'isbn'"/></xsl:call-template>
   </xsl:param>
@@ -1201,16 +1199,16 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 <!-- Standard number - ISSN -->
 <xsl:template name="iso690.issn">
   <xsl:choose>
-    <xsl:when test="./d:biblioid/@class='issn'">
-      <xsl:apply-templates mode="iso690.mode" select="./d:biblioid[@class='issn']"/>
+    <xsl:when test="./biblioid/@class='issn'">
+      <xsl:apply-templates mode="iso690.mode" select="./biblioid[@class='issn']"/>
     </xsl:when>
-    <xsl:when test="./d:issn">
-      <xsl:apply-templates mode="iso690.mode" select="./d:issn"/>
+    <xsl:when test="./issn">
+      <xsl:apply-templates mode="iso690.mode" select="./issn"/>
     </xsl:when>
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:issn|d:biblioid[@class='issn']" mode="iso690.mode">
+<xsl:template match="issn|biblioid[@class='issn']" mode="iso690.mode">
   <xsl:param name="issn">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'issn'"/></xsl:call-template>
   </xsl:param>
@@ -1227,23 +1225,23 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   <xsl:param name="patdate.sep">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'patdate.sep'"/></xsl:call-template>
   </xsl:param>
-  <xsl:apply-templates mode="iso690.mode" select="./d:address/d:country"/>
-  <xsl:apply-templates mode="iso690.mode" select="./d:bibliomisc[@role='patenttype']"/>
+  <xsl:apply-templates mode="iso690.mode" select="./address/country"/>
+  <xsl:apply-templates mode="iso690.mode" select="./bibliomisc[@role='patenttype']"/>
   <xsl:choose>
-    <xsl:when test="./d:biblioid[@class='other' and @otherclass='patentnum']">
-      <xsl:apply-templates mode="iso690.mode" select="./d:biblioid[@class='other' and @otherclass='patentnum']"/>
+    <xsl:when test="./biblioid[@class='other' and @otherclass='patentnum']">
+      <xsl:apply-templates mode="iso690.mode" select="./biblioid[@class='other' and @otherclass='patentnum']"/>
     </xsl:when>
     <xsl:otherwise>
-      <xsl:apply-templates mode="iso690.mode" select="./d:bibliomisc[@role='patentnum']"/>
+      <xsl:apply-templates mode="iso690.mode" select="./bibliomisc[@role='patentnum']"/>
     </xsl:otherwise>
   </xsl:choose>
-  <xsl:apply-templates mode="iso690.mode" select="./d:pubdate[not(@role='issuing')]">
+  <xsl:apply-templates mode="iso690.mode" select="./pubdate[not(@role='issuing')]">
     <xsl:with-param name="sep" select="$patdate.sep"/>
   </xsl:apply-templates>
 </xsl:template>
 
 <!-- Country or issuing office -->
-<xsl:template match="d:address/d:country" mode="iso690.mode">
+<xsl:template match="address/country" mode="iso690.mode">
   <xsl:param name="patcountry.sep">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'patcountry.sep'"/></xsl:call-template>
   </xsl:param>
@@ -1254,7 +1252,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 </xsl:template>
 
 <!-- Kind of patent document -->
-<xsl:template match="d:bibliomisc[@role='patenttype']" mode="iso690.mode">
+<xsl:template match="bibliomisc[@role='patenttype']" mode="iso690.mode">
   <xsl:param name="pattype.sep">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'pattype.sep'"/></xsl:call-template>
   </xsl:param>
@@ -1265,7 +1263,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 </xsl:template>
 
 <!-- Number -->
-<xsl:template match="d:biblioid[@class='other' and @otherclass='patentnum']|d:bibliomisc[@role='patentnum']" mode="iso690.mode">
+<xsl:template match="biblioid[@class='other' and @otherclass='patentnum']|bibliomisc[@role='patentnum']" mode="iso690.mode">
   <xsl:param name="patnum.sep">
     <xsl:call-template name="gentext.template"><xsl:with-param name="context" select="'iso690'"/><xsl:with-param name="name" select="'patnum.sep'"/></xsl:call-template>
   </xsl:param>

@@ -14,8 +14,10 @@
 ]>
 <t:templates xmlns:t="http://nwalsh.com/docbook/xsl/template/1.0"
              xmlns:param="http://nwalsh.com/docbook/xsl/template/1.0/param"
+             xmlns:dbs="http://docbook.org/ns/docbook-slides"
              xmlns:fo="http://www.w3.org/1999/XSL/Format"
-             xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+             xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+             t:copy-namespaces="dbs fo">
 
 <!-- ==================================================================== -->
 

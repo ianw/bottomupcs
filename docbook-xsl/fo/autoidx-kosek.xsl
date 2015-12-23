@@ -4,8 +4,7 @@
 %common.entities;
 ]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:fo="http://www.w3.org/1999/XSL/Format"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 xmlns:rx="http://www.renderx.com/XSL/Extensions"
                 xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions"
                 xmlns:i="urn:cz-kosek:functions:index"
@@ -13,7 +12,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 xmlns:func="http://exslt.org/functions"
                 xmlns:exslt="http://exslt.org/common"
                 extension-element-prefixes="func exslt"
-                exclude-result-prefixes="func exslt i l d"
+                exclude-result-prefixes="func exslt i l"
                 version="1.0">
 
 <!-- ********************************************************************
@@ -79,7 +78,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:variable>
 
   <xsl:variable name="terms"
-                select="//d:indexterm[count(.|key('group-code',
+                select="//indexterm[count(.|key('group-code',
                                           i:group-index(&primary;))
                                           [&scope;][1]) = 1
                                 and not(@class = 'endofrange')]"/>
@@ -93,7 +92,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:indexterm" mode="index-div-kosek">
+<xsl:template match="indexterm" mode="index-div-kosek">
   <xsl:param name="scope" select="."/>
   <xsl:param name="role" select="''"/>
   <xsl:param name="type" select="''"/>

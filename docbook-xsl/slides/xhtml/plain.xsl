@@ -2,10 +2,10 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 		xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:xlink="http://www.w3.org/1999/xlink"
-		xmlns:db="http://docbook.org/ns/docbook"
+		xmlns:d="http://docbook.org/ns/docbook"
 		xmlns:dbs="http://docbook.org/ns/docbook-slides"
 		xmlns:exsl="http://exslt.org/common"
-		exclude-result-prefixes="dbs db xlink"
+		exclude-result-prefixes="dbs d xlink"
 		extension-element-prefixes="exsl"
 		version="1.0">
 
@@ -284,29 +284,29 @@
   </div>
 </xsl:template>
 
-<xsl:template match="db:info">
-  <xsl:apply-templates select="db:title|db:titleabbrev|db:subtitle|db:author|db:authorgroup/db:author"/>
+<xsl:template match="d:info">
+  <xsl:apply-templates select="d:title|d:titleabbrev|d:subtitle|d:author|d:authorgroup/d:author"/>
 </xsl:template>
 
-<xsl:template match="db:title|db:titleabbrev">
-  <xsl:if test="not(self::db:title) or (not(preceding-sibling::db:titleabbrev) and not(following-sibling::db:titleabbrev))">
+<xsl:template match="d:title|d:titleabbrev">
+  <xsl:if test="not(self::d:title) or (not(preceding-sibling::d:titleabbrev) and not(following-sibling::d:titleabbrev))">
     <h1 class="title"><xsl:value-of select="."/></h1>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="db:subtitle">
+<xsl:template match="d:subtitle">
   <h1 class="subtitle"><xsl:value-of select="."/></h1>
 </xsl:template>
 
-<xsl:template match="db:author">
-  <h3 class="author"><xsl:apply-templates select="db:personname|db:orgname"/></h3>
-  <h4 class="email"><xsl:apply-templates select="db:email"/></h4>
-  <xsl:if test="db:affiliation">
-    <h4 class="affiliation"><xsl:value-of select="db:affiliation"/></h4>
+<xsl:template match="d:author">
+  <h3 class="author"><xsl:apply-templates select="d:personname|d:orgname"/></h3>
+  <h4 class="email"><xsl:apply-templates select="d:email"/></h4>
+  <xsl:if test="d:affiliation">
+    <h4 class="affiliation"><xsl:value-of select="d:affiliation"/></h4>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="db:email">
+<xsl:template match="d:email">
   <a>
     <xsl:attribute name="href">
       <xsl:text>mailto:</xsl:text><xsl:value-of select="."/>
@@ -330,19 +330,19 @@
   <xsl:apply-templates select="*"/>
 </xsl:template>
 
-<xsl:template match="db:itemizedlist">
+<xsl:template match="d:itemizedlist">
   <ul>
     <xsl:call-template name="list.content"/>
   </ul>
 </xsl:template>
 
-<xsl:template match="db:orderedlist">
+<xsl:template match="d:orderedlist">
   <ol>
     <xsl:call-template name="list.content"/>
   </ol>
 </xsl:template>
 
-<xsl:template match="db:mediaobject">
+<xsl:template match="d:mediaobject">
   <xsl:variable name="classValue">
     <xsl:call-template name="process.dbs.attributes">
       <xsl:with-param name="attributeSet" select="(ancestor-or-self::*/@dbs:incremental)[last()] | (ancestor-or-self::*/@dbs:collapsible)[last()] | self::*/@dbs:style"/>
@@ -350,13 +350,13 @@
   </xsl:variable>
 
   <div class="{$classValue}">
-    <xsl:apply-templates select="db:imageobject[1]"/>
+    <xsl:apply-templates select="d:imageobject[1]"/>
   </div>
 </xsl:template>
 
 <xsl:template name="bibliography.titlepage"/>
 
-<xsl:template match="db:bibliosource" mode="bibliography.mode">
+<xsl:template match="d:bibliosource" mode="bibliography.mode">
   <span>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
@@ -506,9 +506,9 @@
     <xsl:call-template name="gentext.space"/>
     <xsl:text>&#xa9;</xsl:text>
     <xsl:call-template name="gentext.space"/>
-    <xsl:value-of select="/dbs:slides/db:info/db:copyright/db:year"/>
+    <xsl:value-of select="/dbs:slides/d:info/d:copyright/d:year"/>
     <xsl:call-template name="gentext.space"/>
-    <xsl:value-of select="/dbs:slides/db:info/db:copyright/db:holder"/>
+    <xsl:value-of select="/dbs:slides/d:info/d:copyright/d:holder"/>
   </div>
 </xsl:template>
 
@@ -518,17 +518,17 @@
       <xsl:with-param name="key" select="'Published'"/>
     </xsl:call-template>
     <xsl:text>: </xsl:text>
-    <xsl:value-of select="/dbs:slides/db:info/db:pubdate"/>
+    <xsl:value-of select="/dbs:slides/d:info/d:pubdate"/>
   </div>
 </xsl:template>
 
 <xsl:template match="/" mode="slide.header.mode"/>
 
 <xsl:template match="/" mode="slide.footer.mode">
-  <xsl:if test="($generate.copyright != 0) and /dbs:slides/db:info/db:copyright">
+  <xsl:if test="($generate.copyright != 0) and /dbs:slides/d:info/d:copyright">
     <xsl:call-template name="slide.copyright"/>
   </xsl:if>
-  <xsl:if test="($generate.pubdate != 0) and /dbs:slides/db:info/db:pubdate">
+  <xsl:if test="($generate.pubdate != 0) and /dbs:slides/d:info/d:pubdate">
     <xsl:call-template name="slide.pubdate"/>
   </xsl:if>
 </xsl:template>

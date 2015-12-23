@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format"
-		xmlns:db="http://docbook.org/ns/docbook"
+		xmlns:d="http://docbook.org/ns/docbook"
 		xmlns:dbs="http://docbook.org/ns/docbook-slides"
 		xmlns:exsl="http://exslt.org/common"
-		exclude-result-prefixes="dbs db"
+		exclude-result-prefixes="dbs d"
 		extension-element-prefixes="exsl"
                 version="1.0">
 
@@ -109,7 +109,7 @@
 
 <xsl:template name="bibliography.titlepage"/>
 
-<!-- Do not add db namespace to dbs elements -->
+<!-- Do not add d namespace to dbs elements -->
 <xsl:template match="*[namespace-uri() = 'http://docbook.org/ns/docbook-slides']" mode="addNS">
   <xsl:copy-of select="."/>
 </xsl:template>
@@ -179,17 +179,17 @@
   </fo:bookmark>
 </xsl:template>
 
-<xsl:template match="db:author" mode="titlepage.mode">
+<xsl:template match="d:author" mode="titlepage.mode">
   <fo:block>
-    <xsl:apply-templates select="db:personname" mode="titlepage.mode"/>
+    <xsl:apply-templates select="d:personname" mode="titlepage.mode"/>
   </fo:block>
 
   <fo:block>
-    <xsl:apply-templates select="db:affiliation" mode="titlepage.mode"/>
+    <xsl:apply-templates select="d:affiliation" mode="titlepage.mode"/>
   </fo:block>
 
   <fo:block>
-    <xsl:apply-templates select="db:email" mode="titlepage.mode"/>
+    <xsl:apply-templates select="d:email" mode="titlepage.mode"/>
   </fo:block>
 </xsl:template>
 
@@ -280,7 +280,7 @@
       <fo:block xsl:use-attribute-sets="foil.properties">
 	<xsl:choose>
 	  <xsl:when test="$mode = 'normal'">
-	    <xsl:apply-templates select="*[not(self::dbs:foil)][not(self::db:info)][not(self::db:title)][not(self::db:titleabbrev)][not(self::db:subtitle)][not(self::dbs:speakernotes)][not(self::dbs:handoutnotes)]"/>
+	    <xsl:apply-templates select="*[not(self::dbs:foil)][not(self::d:info)][not(self::d:title)][not(self::d:titleabbrev)][not(self::d:subtitle)][not(self::dbs:speakernotes)][not(self::dbs:handoutnotes)]"/>
 
 	    <xsl:if test="self::dbs:foilgroup and ($generate.foilgroup.toc != 0)">
 	      <xsl:call-template name="foilgroup.generate.toc"/>
@@ -385,7 +385,7 @@
 </xsl:template>
 
 <xsl:template name="footer.center">
-  <xsl:if test="($generate.copyright != 0) and /dbs:slides/db:info/db:copyright">
+  <xsl:if test="($generate.copyright != 0) and /dbs:slides/d:info/d:copyright">
     <fo:block>
       <xsl:call-template name="gentext">
 	<xsl:with-param name="key" select="'Copyright'"/>
@@ -393,13 +393,13 @@
       <xsl:call-template name="gentext.space"/>
       <xsl:text>&#xa9;</xsl:text>
       <xsl:call-template name="gentext.space"/>
-      <xsl:value-of select="/dbs:slides/db:info/db:copyright/db:year"/>
+      <xsl:value-of select="/dbs:slides/d:info/d:copyright/d:year"/>
       <xsl:call-template name="gentext.space"/>
-      <xsl:value-of select="/dbs:slides/db:info/db:copyright/db:holder"/>
+      <xsl:value-of select="/dbs:slides/d:info/d:copyright/d:holder"/>
     </fo:block>
   </xsl:if>
 
-  <xsl:if test="($generate.pubdate != 0) and /dbs:slides/db:info/db:pubdate">
+  <xsl:if test="($generate.pubdate != 0) and /dbs:slides/d:info/d:pubdate">
     <xsl:call-template name="slide.pubdate"/>
   </xsl:if>
 </xsl:template>
@@ -429,7 +429,7 @@
       <xsl:with-param name="key" select="'Published'"/>
     </xsl:call-template>
     <xsl:text>: </xsl:text>
-    <xsl:value-of select="/dbs:slides/db:info/db:pubdate"/>
+    <xsl:value-of select="/dbs:slides/d:info/d:pubdate"/>
   </fo:block>
 </xsl:template>
 

@@ -1,12 +1,10 @@
 <?xml version='1.0'?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:fo="http://www.w3.org/1999/XSL/Format"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: block.xsl 9389 2012-06-02 19:02:39Z bobstayton $
+     $Id: block.xsl 9998 2015-10-15 17:47:59Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -17,7 +15,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:blockinfo|d:info">
+<xsl:template match="blockinfo|info">
   <!-- suppress -->
 </xsl:template>
 
@@ -39,7 +37,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:para">
+<xsl:template match="para">
   <xsl:variable name="keep.together">
     <xsl:call-template name="pi.dbfo_keep-together"/>
   </xsl:variable>
@@ -53,7 +51,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:simpara">
+<xsl:template match="simpara">
   <xsl:variable name="keep.together">
     <xsl:call-template name="pi.dbfo_keep-together"/>
   </xsl:variable>
@@ -67,7 +65,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:formalpara">
+<xsl:template match="formalpara">
   <xsl:variable name="keep.together">
     <xsl:call-template name="pi.dbfo_keep-together"/>
   </xsl:variable>
@@ -82,11 +80,11 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 </xsl:template>
 
 <!-- Only use title from info -->
-<xsl:template match="d:formalpara/d:info">
-  <xsl:apply-templates select="d:title"/>
+<xsl:template match="formalpara/info">
+  <xsl:apply-templates select="title"/>
 </xsl:template>
 
-<xsl:template match="d:formalpara/d:title|d:formalpara/d:info/d:title">
+<xsl:template match="formalpara/title|formalpara/info/title">
   <xsl:variable name="titleStr">
       <xsl:apply-templates/>
   </xsl:variable>
@@ -108,13 +106,13 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:inline>
 </xsl:template>
 
-<xsl:template match="d:formalpara/d:para">
+<xsl:template match="formalpara/para">
   <xsl:apply-templates/>
 </xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:blockquote">
+<xsl:template match="blockquote">
   <xsl:variable name="keep.together">
     <xsl:call-template name="pi.dbfo_keep-together"/>
   </xsl:variable>
@@ -125,7 +123,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     </xsl:if>
     <xsl:call-template name="anchor"/>
     <fo:block>
-      <xsl:if test="d:title|d:info/d:title">
+      <xsl:if test="title|info/title">
         <fo:block xsl:use-attribute-sets="formal.title.properties">
           <xsl:apply-templates select="." mode="object.title.markup"/>
         </fo:block>
@@ -133,31 +131,31 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
       <xsl:apply-templates select="*[local-name(.) != 'title'
                                    and local-name(.) != 'attribution']"/>
     </fo:block>
-    <xsl:if test="d:attribution">
+    <xsl:if test="attribution">
       <fo:block text-align="right">
         <!-- mdash -->
         <xsl:text>&#x2014;</xsl:text>
-        <xsl:apply-templates select="d:attribution"/>
+        <xsl:apply-templates select="attribution"/>
       </fo:block>
     </xsl:if>
   </fo:block>
 </xsl:template>
 
 <!-- Use an em dash per Chicago Manual of Style and https://sourceforge.net/tracker/index.php?func=detail&aid=2793878&group_id=21935&atid=373747 -->
-<xsl:template match="d:epigraph">
+<xsl:template match="epigraph">
   <fo:block>
     <xsl:call-template name="anchor"/>
-    <xsl:apply-templates select="d:para|d:simpara|d:formalpara|d:literallayout"/>
-    <xsl:if test="d:attribution">
+    <xsl:apply-templates select="child::*[local-name(.)!='attribution']"/>
+    <xsl:if test="attribution">
       <fo:inline>
         <xsl:text>&#x2014;</xsl:text>
-        <xsl:apply-templates select="d:attribution"/>
+        <xsl:apply-templates select="attribution"/>
       </fo:inline>
     </xsl:if>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:attribution">
+<xsl:template match="attribution">
   <fo:inline><xsl:apply-templates/></fo:inline>
 </xsl:template>
 
@@ -208,7 +206,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
         </fo:float>
       </xsl:variable>
       <xsl:choose>
-        <xsl:when test="$axf.extensions != 0 and self::d:sidebar">
+        <xsl:when test="$axf.extensions != 0 and self::sidebar">
           <fo:block xsl:use-attribute-sets="normal.para.spacing"
                     space-after="0pt"
                     space-after.precedence="force"
@@ -225,7 +223,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
                       end-indent="{$start.indent} + {$width} + {$end.indent}">
               <xsl:attribute name="start-indent">
                 <xsl:choose>
-                  <xsl:when test="ancestor::d:para">
+                  <xsl:when test="ancestor::para">
                     <!-- Special case for handling inline floats
                          in Antenna House-->
                     <xsl:value-of select="concat('-', $body.start.indent)"/>
@@ -258,7 +256,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
           </fo:float>
 
         </xsl:when>
-        <xsl:when test="$xep.extensions != 0 and self::d:sidebar">
+        <xsl:when test="$xep.extensions != 0 and self::sidebar">
           <!-- float needs some space above  to line up with following para -->
           <fo:block xsl:use-attribute-sets="normal.para.spacing">
             <xsl:copy-of select="$float"/>
@@ -278,7 +276,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:sidebar" name="sidebar">
+<xsl:template match="sidebar" name="sidebar">
   <!-- Also does margin notes -->
   <xsl:variable name="pi-type">
     <xsl:call-template name="pi.dbfo_float-type"/>
@@ -297,9 +295,9 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
         <fo:block xsl:use-attribute-sets="sidebar.properties"
                   id="{$id}">
           <xsl:call-template name="sidebar.titlepage"/>
-          <xsl:apply-templates select="node()[not(self::d:title) and
-                                         not(self::d:info) and
-                                         not(self::d:sidebarinfo)]"/>
+          <xsl:apply-templates select="node()[not(self::title) and
+                                         not(self::info) and
+                                         not(self::sidebarinfo)]"/>
         </fo:block>
       </xsl:variable>
 
@@ -355,9 +353,9 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 </xsl:template>
 
-<xsl:template match="d:sidebar/d:title|d:sidebarinfo|d:sidebar/d:info"/>
+<xsl:template match="sidebar/title|sidebarinfo|sidebar/info"/>
 
-<xsl:template match="d:sidebar/d:title|d:sidebarinfo/d:title|d:sidebar/d:info/d:title"
+<xsl:template match="sidebar/title|sidebarinfo/title|sidebar/info/title"
               mode="titlepage.mode" priority="1">
   <fo:block xsl:use-attribute-sets="sidebar.title.properties">
     <xsl:apply-templates/>
@@ -365,7 +363,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 </xsl:template>
 
 <!-- Turn off para space-before if sidebar starts with a para, not title -->
-<xsl:template match="d:sidebar/*[1][self::d:para]">
+<xsl:template match="sidebar/*[1][self::para]">
   <xsl:variable name="keep.together">
     <xsl:call-template name="pi.dbfo_keep-together"/>
   </xsl:variable>
@@ -386,9 +384,9 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 <xsl:template name="margin.note">
   <xsl:param name="content">
     <fo:block xsl:use-attribute-sets="margin.note.properties">
-      <xsl:if test="./d:title">
+      <xsl:if test="./title">
         <fo:block xsl:use-attribute-sets="margin.note.title.properties">
-          <xsl:apply-templates select="./d:title" mode="margin.note.title.mode"/>
+          <xsl:apply-templates select="./title" mode="margin.note.title.mode"/>
         </fo:block>
       </xsl:if>
       <xsl:apply-templates/>
@@ -435,13 +433,13 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:sidebar/d:title" mode="margin.note.title.mode">
+<xsl:template match="sidebar/title" mode="margin.note.title.mode">
   <xsl:apply-templates/>
 </xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:abstract">
+<xsl:template match="abstract">
   <xsl:variable name="keep.together">
     <xsl:call-template name="pi.dbfo_keep-together"/>
   </xsl:variable>
@@ -455,7 +453,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:abstract/d:title|d:abstract/d:info/d:title">
+<xsl:template match="abstract/title|abstract/info/title">
   <fo:block xsl:use-attribute-sets="abstract.title.properties">
     <xsl:apply-templates/>
   </fo:block>
@@ -463,43 +461,43 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:msgset">
+<xsl:template match="msgset">
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:msgentry">
+<xsl:template match="msgentry">
   <xsl:call-template name="block.object"/>
 </xsl:template>
 
-<xsl:template match="d:simplemsgentry">
+<xsl:template match="simplemsgentry">
   <xsl:call-template name="block.object"/>
 </xsl:template>
 
-<xsl:template match="d:msg">
+<xsl:template match="msg">
   <xsl:call-template name="block.object"/>
 </xsl:template>
 
-<xsl:template match="d:msgmain">
+<xsl:template match="msgmain">
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:msgsub">
+<xsl:template match="msgsub">
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:msgrel">
+<xsl:template match="msgrel">
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:msgtext">
+<xsl:template match="msgtext">
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:msginfo">
+<xsl:template match="msginfo">
   <xsl:call-template name="block.object"/>
 </xsl:template>
 
-<xsl:template match="d:msglevel">
+<xsl:template match="msglevel">
   <fo:block>
     <fo:inline font-weight="bold"
                keep-with-next.within-line="always">
@@ -512,7 +510,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:msgorig">
+<xsl:template match="msgorig">
   <fo:block>
     <fo:inline font-weight="bold"
                keep-with-next.within-line="always">
@@ -525,7 +523,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:msgaud">
+<xsl:template match="msgaud">
   <fo:block>
     <fo:inline font-weight="bold"
                keep-with-next.within-line="always">
@@ -538,11 +536,11 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:msgexplan">
+<xsl:template match="msgexplan">
   <xsl:call-template name="block.object"/>
 </xsl:template>
 
-<xsl:template match="d:msgexplan/d:title">
+<xsl:template match="msgexplan/title">
   <fo:block font-weight="bold"
             keep-with-next.within-column="always"
             hyphenate="false">
@@ -553,7 +551,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 <!-- ==================================================================== -->
 <!-- For better or worse, revhistory is allowed in content... -->
 
-<xsl:template match="d:revhistory">
+<xsl:template match="revhistory">
   <fo:table table-layout="fixed" xsl:use-attribute-sets="revhistory.table.properties">
     <xsl:call-template name="anchor"/>
     <fo:table-column column-number="1" column-width="proportional-column-width(1)"/>
@@ -564,8 +562,8 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
         <fo:table-cell number-columns-spanned="3" xsl:use-attribute-sets="revhistory.table.cell.properties">
           <fo:block xsl:use-attribute-sets="revhistory.title.properties">
             <xsl:choose>
-              <xsl:when test="d:title|d:info/d:title">
-                <xsl:apply-templates select="d:title|d:info/d:title" mode="titlepage.mode"/>
+              <xsl:when test="title|info/title">
+                <xsl:apply-templates select="title|info/title" mode="titlepage.mode"/>
               </xsl:when>
               <xsl:otherwise>
                 <xsl:call-template name="gentext">
@@ -581,15 +579,15 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:table>
 </xsl:template>
 
-<xsl:template match="d:revhistory/d:title">
+<xsl:template match="revhistory/title">
   <!-- Handled in titlepage.mode -->
 </xsl:template>
 
-<xsl:template match="d:revhistory/d:revision">
-  <xsl:variable name="revnumber" select="d:revnumber"/>
-  <xsl:variable name="revdate"   select="d:date"/>
-  <xsl:variable name="revauthor" select="d:authorinitials|d:author"/>
-  <xsl:variable name="revremark" select="d:revremark|d:revdescription"/>
+<xsl:template match="revhistory/revision">
+  <xsl:variable name="revnumber" select="revnumber"/>
+  <xsl:variable name="revdate"   select="date"/>
+  <xsl:variable name="revauthor" select="authorinitials|author"/>
+  <xsl:variable name="revremark" select="revremark|revdescription"/>
   <fo:table-row>
     <fo:table-cell xsl:use-attribute-sets="revhistory.table.cell.properties">
       <fo:block>
@@ -630,33 +628,33 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:revision/d:revnumber">
+<xsl:template match="revision/revnumber">
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:revision/d:date">
+<xsl:template match="revision/date">
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:revision/d:authorinitials">
+<xsl:template match="revision/authorinitials">
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:revision/d:author">
+<xsl:template match="revision/author">
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:revision/d:revremark">
+<xsl:template match="revision/revremark">
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:revision/d:revdescription">
+<xsl:template match="revision/revdescription">
   <xsl:apply-templates/>
 </xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:ackno|d:acknowledgements[parent::d:article]">
+<xsl:template match="ackno|acknowledgements[parent::article]">
   <fo:block xsl:use-attribute-sets="normal.para.spacing">
     <xsl:call-template name="anchor"/>
     <xsl:apply-templates/>
@@ -665,7 +663,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:highlights">
+<xsl:template match="highlights">
   <xsl:call-template name="block.object"/>
 </xsl:template>
 

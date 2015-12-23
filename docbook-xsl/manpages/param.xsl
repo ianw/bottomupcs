@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:d="http://docbook.org/ns/docbook"
-version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 
 <!-- This file is generated from param.xweb -->
 
@@ -162,11 +160,11 @@ or
 <xsl:param name="man.th.title.max.length">20</xsl:param>
 <xsl:param name="refentry.date.profile.enabled">0</xsl:param>
 <xsl:param name="refentry.date.profile">
-  (($info[//d:date])[last()]/d:date)[1]|
-  (($info[//d:pubdate])[last()]/d:pubdate)[1]
+  (($info[//date])[last()]/date)[1]|
+  (($info[//pubdate])[last()]/pubdate)[1]
 </xsl:param>
 <xsl:param name="refentry.manual.fallback.profile">
-d:refmeta/d:refmiscinfo[not(@class = 'date')][1]/node()</xsl:param>
+refmeta/refmiscinfo[not(@class = 'date')][1]/node()</xsl:param>
 <xsl:param name="refentry.manual.profile.enabled">0</xsl:param>
 <xsl:param name="refentry.manual.profile">
   (($info[//title])[last()]/title)[1]|
@@ -174,7 +172,7 @@ d:refmeta/d:refmiscinfo[not(@class = 'date')][1]/node()</xsl:param>
 </xsl:param>
 <xsl:param name="refentry.meta.get.quietly" select="0"/>
 <xsl:param name="refentry.source.fallback.profile">
-d:refmeta/d:refmiscinfo[not(@class = 'date')][1]/node()</xsl:param>
+refmeta/refmiscinfo[not(@class = 'date')][1]/node()</xsl:param>
 <xsl:param name="refentry.source.name.profile.enabled">0</xsl:param>
 <xsl:param name="refentry.source.name.profile">
   (($info[//productname])[last()]/productname)[1]|
@@ -187,9 +185,9 @@ d:refmeta/d:refmiscinfo[not(@class = 'date')][1]/node()</xsl:param>
 <xsl:param name="refentry.source.name.suppress">0</xsl:param>
 <xsl:param name="refentry.version.profile.enabled">0</xsl:param>
 <xsl:param name="refentry.version.profile">
-  (($info[//d:productnumber])[last()]/d:productnumber)[1]|
-  (($info[//d:edition])[last()]/d:edition)[1]|
-  (($info[//d:releaseinfo])[last()]/d:releaseinfo)[1]
+  (($info[//productnumber])[last()]/productnumber)[1]|
+  (($info[//edition])[last()]/edition)[1]|
+  (($info[//releaseinfo])[last()]/releaseinfo)[1]
 </xsl:param>
 <xsl:param name="refentry.version.suppress">0</xsl:param>
 </xsl:stylesheet>

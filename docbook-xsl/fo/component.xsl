@@ -1,13 +1,11 @@
 <?xml version='1.0'?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:fo="http://www.w3.org/1999/XSL/Format"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions"
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: component.xsl 9647 2012-10-26 17:42:03Z bobstayton $
+     $Id: component.xsl 9844 2014-01-07 23:55:47Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -41,14 +39,14 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
   <xsl:variable name="level">
     <xsl:choose>
-      <xsl:when test="ancestor::d:section">
-        <xsl:value-of select="count(ancestor::d:section)+1"/>
+      <xsl:when test="ancestor::section">
+        <xsl:value-of select="count(ancestor::section)+1"/>
       </xsl:when>
-      <xsl:when test="ancestor::d:sect5">6</xsl:when>
-      <xsl:when test="ancestor::d:sect4">5</xsl:when>
-      <xsl:when test="ancestor::d:sect3">4</xsl:when>
-      <xsl:when test="ancestor::d:sect2">3</xsl:when>
-      <xsl:when test="ancestor::d:sect1">2</xsl:when>
+      <xsl:when test="ancestor::sect5">6</xsl:when>
+      <xsl:when test="ancestor::sect4">5</xsl:when>
+      <xsl:when test="ancestor::sect3">4</xsl:when>
+      <xsl:when test="ancestor::sect2">3</xsl:when>
+      <xsl:when test="ancestor::sect1">2</xsl:when>
       <xsl:otherwise>1</xsl:otherwise>
     </xsl:choose>
   </xsl:variable>
@@ -73,7 +71,9 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
         <xsl:with-param name="key" select="'hyphenation-remain-character-count'"/>
       </xsl:call-template>
     </xsl:attribute>
-    <xsl:if test="$axf.extensions != 0">
+    <xsl:if test="$axf.extensions != 0 and 
+                  $xsl1.1.bookmarks = 0 and 
+                  $show.bookmarks != 0">
       <xsl:attribute name="axf:outline-level">
         <xsl:value-of select="count($node/ancestor::*)"/>
       </xsl:attribute>
@@ -124,7 +124,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:dedication" mode="dedication">
+<xsl:template match="dedication" mode="dedication">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -195,15 +195,15 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:page-sequence>
 </xsl:template>
 
-<xsl:template match="d:dedication"></xsl:template> <!-- see mode="dedication" -->
-<xsl:template match="d:dedication/d:docinfo"></xsl:template>
-<xsl:template match="d:dedication/d:title"></xsl:template>
-<xsl:template match="d:dedication/d:subtitle"></xsl:template>
-<xsl:template match="d:dedication/d:titleabbrev"></xsl:template>
+<xsl:template match="dedication"></xsl:template> <!-- see mode="dedication" -->
+<xsl:template match="dedication/docinfo"></xsl:template>
+<xsl:template match="dedication/title"></xsl:template>
+<xsl:template match="dedication/subtitle"></xsl:template>
+<xsl:template match="dedication/titleabbrev"></xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:acknowledgements" mode="acknowledgements">
+<xsl:template match="acknowledgements" mode="acknowledgements">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -271,15 +271,15 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:page-sequence>
 </xsl:template>
 
-<xsl:template match="d:acknowledgements"></xsl:template>
-<xsl:template match="d:acknowledgements/d:info"></xsl:template>
-<xsl:template match="d:acknowledgements/d:title"></xsl:template>
-<xsl:template match="d:acknowledgements/d:titleabbrev"></xsl:template>
-<xsl:template match="d:acknowledgements/d:subtitle"></xsl:template>
+<xsl:template match="acknowledgements"></xsl:template>
+<xsl:template match="acknowledgements/info"></xsl:template>
+<xsl:template match="acknowledgements/title"></xsl:template>
+<xsl:template match="acknowledgements/titleabbrev"></xsl:template>
+<xsl:template match="acknowledgements/subtitle"></xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:colophon">
+<xsl:template match="colophon">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -347,12 +347,12 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:page-sequence>
 </xsl:template>
 
-<xsl:template match="d:colophon/d:title"></xsl:template>
-<xsl:template match="d:colophon/d:subtitle"></xsl:template>
-<xsl:template match="d:colophon/d:titleabbrev"></xsl:template>
+<xsl:template match="colophon/title"></xsl:template>
+<xsl:template match="colophon/subtitle"></xsl:template>
+<xsl:template match="colophon/titleabbrev"></xsl:template>
 
 <!-- article/colophon has no page sequence -->
-<xsl:template match="d:article/d:colophon">
+<xsl:template match="article/colophon">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -367,7 +367,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:preface">
+<xsl:template match="preface">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -441,15 +441,15 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:page-sequence>
 </xsl:template>
 
-<xsl:template match="d:preface/d:docinfo|d:prefaceinfo"></xsl:template>
-<xsl:template match="d:preface/d:info"></xsl:template>
-<xsl:template match="d:preface/d:title"></xsl:template>
-<xsl:template match="d:preface/d:titleabbrev"></xsl:template>
-<xsl:template match="d:preface/d:subtitle"></xsl:template>
+<xsl:template match="preface/docinfo|prefaceinfo"></xsl:template>
+<xsl:template match="preface/info"></xsl:template>
+<xsl:template match="preface/title"></xsl:template>
+<xsl:template match="preface/titleabbrev"></xsl:template>
+<xsl:template match="preface/subtitle"></xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:chapter">
+<xsl:template match="chapter">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -522,15 +522,15 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:page-sequence>
 </xsl:template>
 
-<xsl:template match="d:chapter/d:docinfo|d:chapterinfo"></xsl:template>
-<xsl:template match="d:chapter/d:info"></xsl:template>
-<xsl:template match="d:chapter/d:title"></xsl:template>
-<xsl:template match="d:chapter/d:titleabbrev"></xsl:template>
-<xsl:template match="d:chapter/d:subtitle"></xsl:template>
+<xsl:template match="chapter/docinfo|chapterinfo"></xsl:template>
+<xsl:template match="chapter/info"></xsl:template>
+<xsl:template match="chapter/title"></xsl:template>
+<xsl:template match="chapter/titleabbrev"></xsl:template>
+<xsl:template match="chapter/subtitle"></xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:appendix">
+<xsl:template match="appendix">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -603,15 +603,15 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:page-sequence>
 </xsl:template>
 
-<xsl:template match="d:appendix/d:docinfo|d:appendixinfo"></xsl:template>
-<xsl:template match="d:appendix/d:info"></xsl:template>
-<xsl:template match="d:appendix/d:title"></xsl:template>
-<xsl:template match="d:appendix/d:titleabbrev"></xsl:template>
-<xsl:template match="d:appendix/d:subtitle"></xsl:template>
+<xsl:template match="appendix/docinfo|appendixinfo"></xsl:template>
+<xsl:template match="appendix/info"></xsl:template>
+<xsl:template match="appendix/title"></xsl:template>
+<xsl:template match="appendix/titleabbrev"></xsl:template>
+<xsl:template match="appendix/subtitle"></xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:article">
+<xsl:template match="article">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -684,14 +684,14 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:page-sequence>
 </xsl:template>
 
-<xsl:template match="d:article/d:artheader"></xsl:template>
-<xsl:template match="d:article/d:articleinfo"></xsl:template>
-<xsl:template match="d:article/d:info"></xsl:template>
-<xsl:template match="d:article/d:title"></xsl:template>
-<xsl:template match="d:article/d:subtitle"></xsl:template>
-<xsl:template match="d:article/d:titleabbrev"></xsl:template>
+<xsl:template match="article/artheader"></xsl:template>
+<xsl:template match="article/articleinfo"></xsl:template>
+<xsl:template match="article/info"></xsl:template>
+<xsl:template match="article/title"></xsl:template>
+<xsl:template match="article/subtitle"></xsl:template>
+<xsl:template match="article/titleabbrev"></xsl:template>
 
-<xsl:template match="d:article/d:appendix">
+<xsl:template match="article/appendix">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -705,7 +705,9 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:variable>
 
   <fo:block id='{$id}'>
-    <xsl:if test="$axf.extensions != 0">
+    <xsl:if test="$axf.extensions != 0 and 
+                  $xsl1.1.bookmarks = 0 and 
+                  $show.bookmarks != 0">
       <xsl:attribute name="axf:outline-level">
         <xsl:value-of select="count(ancestor::*)+2"/>
       </xsl:attribute>
@@ -772,59 +774,69 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     </xsl:call-template>
   </xsl:param>
 
-  <fo:page-sequence hyphenate="{$hyphenate}"
-                    master-reference="{$master-reference}">
-    <xsl:attribute name="language">
-      <xsl:value-of select="$language"/>
-    </xsl:attribute>
-    <xsl:attribute name="format">
-      <xsl:value-of select="$format"/>
-    </xsl:attribute>
-
-    <xsl:attribute name="initial-page-number">
-      <xsl:value-of select="$initial-page-number"/>
-    </xsl:attribute>
-
-    <xsl:attribute name="force-page-count">
-      <xsl:value-of select="$force-page-count"/>
-    </xsl:attribute>
-
-    <xsl:attribute name="hyphenation-character">
-      <xsl:call-template name="gentext">
-        <xsl:with-param name="key" select="'hyphenation-character'"/>
-      </xsl:call-template>
-    </xsl:attribute>
-    <xsl:attribute name="hyphenation-push-character-count">
-      <xsl:call-template name="gentext">
-        <xsl:with-param name="key" select="'hyphenation-push-character-count'"/>
-      </xsl:call-template>
-    </xsl:attribute>
-    <xsl:attribute name="hyphenation-remain-character-count">
-      <xsl:call-template name="gentext">
-        <xsl:with-param name="key" select="'hyphenation-remain-character-count'"/>
-      </xsl:call-template>
-    </xsl:attribute>
-
-    <xsl:apply-templates select="." mode="running.head.mode">
-      <xsl:with-param name="master-reference" select="$master-reference"/>
-      <xsl:with-param name="gentext-key" select="$gentext-key"/>
-    </xsl:apply-templates>
-
-    <xsl:apply-templates select="." mode="running.foot.mode">
-      <xsl:with-param name="master-reference" select="$master-reference"/>
-      <xsl:with-param name="gentext-key" select="$gentext-key"/>
-    </xsl:apply-templates>
-
-    <fo:flow flow-name="xsl-region-body">
-      <xsl:call-template name="set.flow.properties">
-        <xsl:with-param name="element" select="local-name(.)"/>
-        <xsl:with-param name="master-reference" select="$master-reference"/>
-      </xsl:call-template>
-
-      <xsl:copy-of select="$content"/>
-
-    </fo:flow>
-  </fo:page-sequence>
+  <xsl:choose>
+    <xsl:when test="string-length($content) != 0">
+      <fo:page-sequence hyphenate="{$hyphenate}"
+                        master-reference="{$master-reference}">
+        <xsl:attribute name="language">
+          <xsl:value-of select="$language"/>
+        </xsl:attribute>
+        <xsl:attribute name="format">
+          <xsl:value-of select="$format"/>
+        </xsl:attribute>
+    
+        <xsl:attribute name="initial-page-number">
+          <xsl:value-of select="$initial-page-number"/>
+        </xsl:attribute>
+    
+        <xsl:attribute name="force-page-count">
+          <xsl:value-of select="$force-page-count"/>
+        </xsl:attribute>
+    
+        <xsl:attribute name="hyphenation-character">
+          <xsl:call-template name="gentext">
+            <xsl:with-param name="key" select="'hyphenation-character'"/>
+          </xsl:call-template>
+        </xsl:attribute>
+        <xsl:attribute name="hyphenation-push-character-count">
+          <xsl:call-template name="gentext">
+            <xsl:with-param name="key" select="'hyphenation-push-character-count'"/>
+          </xsl:call-template>
+        </xsl:attribute>
+        <xsl:attribute name="hyphenation-remain-character-count">
+          <xsl:call-template name="gentext">
+            <xsl:with-param name="key" select="'hyphenation-remain-character-count'"/>
+          </xsl:call-template>
+        </xsl:attribute>
+    
+        <xsl:apply-templates select="." mode="running.head.mode">
+          <xsl:with-param name="master-reference" select="$master-reference"/>
+          <xsl:with-param name="gentext-key" select="$gentext-key"/>
+        </xsl:apply-templates>
+    
+        <xsl:apply-templates select="." mode="running.foot.mode">
+          <xsl:with-param name="master-reference" select="$master-reference"/>
+          <xsl:with-param name="gentext-key" select="$gentext-key"/>
+        </xsl:apply-templates>
+    
+        <fo:flow flow-name="xsl-region-body">
+          <xsl:call-template name="set.flow.properties">
+            <xsl:with-param name="element" select="local-name(.)"/>
+            <xsl:with-param name="master-reference" select="$master-reference"/>
+          </xsl:call-template>
+    
+          <xsl:copy-of select="$content"/>
+    
+        </fo:flow>
+      </fo:page-sequence>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:message>
+        <xsl:text>WARNING: call to template 'page.sequence' </xsl:text>
+        <xsl:text>has zero length content; no page-sequence generated.</xsl:text>
+      </xsl:message>
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 <xsl:template name="make.component.tocs">
@@ -842,42 +854,42 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     </xsl:call-template>
   </xsl:if>
 
-  <xsl:if test="contains($toc.params,'figure') and .//d:figure">
+  <xsl:if test="contains($toc.params,'figure') and .//figure">
     <xsl:call-template name="component.list.of.titles">
       <xsl:with-param name="titles" select="'figure'"/>
-      <xsl:with-param name="nodes" select=".//d:figure"/>
+      <xsl:with-param name="nodes" select=".//figure"/>
     </xsl:call-template>
   </xsl:if>
 
-  <xsl:if test="contains($toc.params,'table') and .//d:table">
+  <xsl:if test="contains($toc.params,'table') and .//table">
     <xsl:call-template name="component.list.of.titles">
       <xsl:with-param name="titles" select="'table'"/>
-      <xsl:with-param name="nodes" select=".//d:table[not(@tocentry = 0)]"/>
+      <xsl:with-param name="nodes" select=".//table[not(@tocentry = 0)]"/>
     </xsl:call-template>
   </xsl:if>
 
-  <xsl:if test="contains($toc.params,'example') and .//d:example">
+  <xsl:if test="contains($toc.params,'example') and .//example">
     <xsl:call-template name="component.list.of.titles">
       <xsl:with-param name="titles" select="'example'"/>
-      <xsl:with-param name="nodes" select=".//d:example"/>
+      <xsl:with-param name="nodes" select=".//example"/>
     </xsl:call-template>
   </xsl:if>
 
   <xsl:if test="contains($toc.params,'equation') and 
-                 .//d:equation[d:title or d:info/d:title]">
+                 .//equation[title or info/title]">
     <xsl:call-template name="component.list.of.titles">
       <xsl:with-param name="titles" select="'equation'"/>
       <xsl:with-param name="nodes" 
-                      select=".//d:equation[d:title or d:info/d:title]"/>
+                      select=".//equation[title or info/title]"/>
     </xsl:call-template>
   </xsl:if>
 
   <xsl:if test="contains($toc.params,'procedure') and 
-                 .//d:procedure[d:title or d:info/d:title]">
+                 .//procedure[title or info/title]">
     <xsl:call-template name="component.list.of.titles">
       <xsl:with-param name="titles" select="'procedure'"/>
       <xsl:with-param name="nodes" 
-                      select=".//d:procedure[d:title or d:info/d:title]"/>
+                      select=".//procedure[title or info/title]"/>
     </xsl:call-template>
   </xsl:if>
 
@@ -893,7 +905,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 </xsl:template>
 
-<xsl:template match="d:topic">
+<xsl:template match="topic">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -908,7 +920,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:element>
 </xsl:template>
 
-<xsl:template match="/d:topic | d:book/d:topic" name="topic.page.sequence">
+<xsl:template match="/topic | book/topic" name="topic.page.sequence">
   <xsl:variable name="master-reference">
     <xsl:call-template name="select.pagemaster"/>
   </xsl:variable>
@@ -931,10 +943,10 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:apply-templates>
 </xsl:template>
 
-<xsl:template match="d:topic/d:info"></xsl:template>
-<xsl:template match="d:topic/d:title"></xsl:template>
-<xsl:template match="d:topic/d:subtitle"></xsl:template>
-<xsl:template match="d:topic/d:titleabbrev"></xsl:template>
+<xsl:template match="topic/info"></xsl:template>
+<xsl:template match="topic/title"></xsl:template>
+<xsl:template match="topic/subtitle"></xsl:template>
+<xsl:template match="topic/titleabbrev"></xsl:template>
 
 </xsl:stylesheet>
 

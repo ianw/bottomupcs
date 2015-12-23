@@ -1,6 +1,9 @@
 <t:templates xmlns:t="http://nwalsh.com/docbook/xsl/template/1.0"
              xmlns:param="http://nwalsh.com/docbook/xsl/template/1.0/param"
-             xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+             xmlns:dbs="http://docbook.org/ns/docbook-slides"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+             t:copy-namespaces="dbs">
 
 <t:titlepage t:element="slides" t:wrapper="div" class="slide cover title">
   <t:titlepage-content t:side="recto">

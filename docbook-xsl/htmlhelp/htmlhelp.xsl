@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:doc="http://nwalsh.com/xsl/documentation/1.0"
+                xmlns:doc="http://nwalsh.com/xsl/documentation/1.0"
                 xmlns:exsl="http://exslt.org/common"
                 xmlns:set="http://exslt.org/sets"
 		version="1.0"
-                exclude-result-prefixes="doc exsl set d">
+                exclude-result-prefixes="doc exsl set">
 
 <!-- ********************************************************************
      $Id: htmlhelp.xsl 1676 2002-06-12 13:21:54Z kosek $

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 		xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:db="http://docbook.org/ns/docbook"
+		xmlns:d="http://docbook.org/ns/docbook"
 		xmlns:dbs="http://docbook.org/ns/docbook-slides"
-		exclude-result-prefixes="dbs db"
+		exclude-result-prefixes="dbs d"
 		version="1.0">
 
 <xsl:import href="plain.xsl"/>
@@ -50,7 +50,7 @@
   </div>
 </xsl:template>
 
-<xsl:template match="db:xref">
+<xsl:template match="d:xref">
   <xsl:variable name="target" select="id(./@linkend)"/>
 
   <xsl:choose>
@@ -66,12 +66,12 @@
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="db:biblioentry" mode="xref-to">
+<xsl:template match="d:biblioentry" mode="xref-to">
   <xsl:variable name="id" select="@xml:id"/>
 
   <xsl:choose>
     <xsl:when test="$bibliography.numbered != 0">
-      <xsl:number from="db:bibliography" count="db:biblioentry|db:bibliomixed" level="any" format="1"/>
+      <xsl:number from="d:bibliography" count="d:biblioentry|d:bibliomixed" level="any" format="1"/>
     </xsl:when>
 
     <xsl:otherwise>
@@ -80,7 +80,7 @@
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="db:mediaobject">
+<xsl:template match="d:mediaobject">
   <p>
     <xsl:if test="@dbs:style">
       <xsl:attribute name="class">

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet 
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-  xmlns:d="http://docbook.org/ns/docbook"
-xmlns:exsl="http://exslt.org/common"
+  xmlns:exsl="http://exslt.org/common"
   xmlns:epub="http://www.idpf.org/2007/ops"
-  exclude-result-prefixes="exsl d"
+  exclude-result-prefixes="exsl"
   version="1.0">
 
 <!-- $Id: chunk.xsl,v 1.1 2011-09-16 21:43:45 bobs Exp $ -->

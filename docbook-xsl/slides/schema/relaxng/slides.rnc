@@ -55,8 +55,8 @@ include "../../../../docbook/relaxng/docbook/docbook/docbook.rnc" inherit = db {
 dbs._any.attribute = attribute * { text }
 
 dbs.all.content = db.all.blocks? &
-  dbs.speakernotes &
-  dbs.handoutnotes &
+  dbs.speakernotes? &
+  dbs.handoutnotes? &
   db._any.svg? &
   db._any.mml? &
   dbs.block?

@@ -1,7 +1,6 @@
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:d="http://docbook.org/ns/docbook"
-xmlns:doc='http://docbook.org/ns/docbook'
+  xmlns:doc='http://docbook.org/ns/docbook'
   exclude-result-prefixes='doc'>
 
   <!-- ********************************************************************
@@ -25,18 +24,18 @@ xmlns:doc='http://docbook.org/ns/docbook'
 
   <!-- doc:docprop.author mode is for creating document metadata -->
 
-  <xsl:template match='d:author|doc:author|d:editor|doc:editor' mode='doc:docprop.author'>
-    <xsl:apply-templates select='d:firstname|doc:firstname |
-                                 d:personname/d:firstname|doc:personname/doc:firstname'
+  <xsl:template match='author|doc:author|editor|doc:editor' mode='doc:docprop.author'>
+    <xsl:apply-templates select='firstname|doc:firstname |
+                                 personname/firstname|doc:personname/doc:firstname'
       mode='doc:docprop.author'/>
     <xsl:text> </xsl:text>
-    <xsl:apply-templates select='d:surname|doc:surname |
-                                 d:personname/d:surname|doc:personname/doc:surname'
+    <xsl:apply-templates select='surname|doc:surname |
+                                 personname/surname|doc:personname/doc:surname'
       mode='doc:docprop.author'/>
   </xsl:template>
 
-  <xsl:template match='d:firstname|doc:firstname |
-                       d:surname|doc:surname'
+  <xsl:template match='firstname|doc:firstname |
+                       surname|doc:surname'
     mode='doc:docprop.author'>
     <xsl:apply-templates select='.' mode='doc:body'/>
   </xsl:template>
@@ -49,56 +48,56 @@ xmlns:doc='http://docbook.org/ns/docbook'
 
   <!-- doc:body mode is for processing components of a document -->
 
-  <xsl:template match='d:book|d:article|d:chapter|d:section|d:sect1|d:sect2|d:sect3|d:sect4|d:sect5|d:simplesect |
+  <xsl:template match='book|article|chapter|section|sect1|sect2|sect3|sect4|sect5|simplesect |
                        doc:book|doc:article|doc:chapter|doc:section|doc:sect1|doc:sect2|doc:sect3|doc:sect4|doc:sect5|doc:simplesect'
     mode='doc:body'>
     <xsl:call-template name='doc:make-subsection'/>
   </xsl:template>
 
-  <xsl:template match='d:articleinfo |
-		       d:chapterinfo |
-		       d:bookinfo |
+  <xsl:template match='articleinfo |
+		       chapterinfo |
+		       bookinfo |
                        doc:info |
                        doc:articleinfo |
 		       doc:chapterinfo |
 		       doc:bookinfo'
     mode='doc:body'>
-    <xsl:apply-templates select='d:title|d:subtitle|d:titleabbrev |
+    <xsl:apply-templates select='title|subtitle|titleabbrev |
                                  doc:title|doc:subtitle|doc:titleabbrev'
       mode='doc:body'/>
-    <xsl:apply-templates select='d:author|d:releaseinfo|d:abstract |
+    <xsl:apply-templates select='author|releaseinfo|abstract |
                                  doc:author|doc:releaseinfo|doc:abstract'
       mode='doc:body'/>
     <!-- current implementation ignores all other metadata -->
-    <xsl:for-each select='*[not(self::d:title|self::d:subtitle|self::d:titleabbrev|self::d:author|self::d:releaseinfo|self::d:abstract |
+    <xsl:for-each select='*[not(self::title|self::subtitle|self::titleabbrev|self::author|self::releaseinfo|self::abstract |
                           self::doc:title|self::doc:subtitle|self::doc:titleabbrev|self::doc:author|self::doc:releaseinfo|self::doc:abstract)]'>
       <xsl:call-template name='doc:nomatch'/>
     </xsl:for-each>
   </xsl:template>
 
-  <xsl:template match='d:title|d:subtitle|d:titleabbrev |
+  <xsl:template match='title|subtitle|titleabbrev |
                        doc:title|doc:subtitle|doc:titleabbrev'
     mode='doc:body'>
     <xsl:call-template name='doc:make-paragraph'>
       <xsl:with-param name='style'>
 	<xsl:choose>
-          <xsl:when test='(parent::d:section|parent::doc:section or
-                          parent::d:sectioninfo/parent::d:section|parent::doc:sectioninfo/parent::doc:section) and
-                          count(ancestor::d:section|ancestor::doc:section) > 5'>
+          <xsl:when test='(parent::section|parent::doc:section or
+                          parent::sectioninfo/parent::section|parent::doc:sectioninfo/parent::doc:section) and
+                          count(ancestor::section|ancestor::doc:section) > 5'>
             <xsl:call-template name='doc:warning'>
 	      <xsl:with-param name='message'>section nested deeper than 5 levels</xsl:with-param>
 	    </xsl:call-template>
             <xsl:text>sect5-</xsl:text>
             <xsl:value-of select='local-name()'/>
           </xsl:when>
-          <xsl:when test='parent::d:section|parent::doc:section or
-                          parent::d:sectioninfo/parent::d:section|parent::doc:sectioninfo/parent::doc:section'>
+          <xsl:when test='parent::section|parent::doc:section or
+                          parent::sectioninfo/parent::section|parent::doc:sectioninfo/parent::doc:section'>
             <xsl:text>sect</xsl:text>
-            <xsl:value-of select='count(ancestor::d:section|ancestor::doc:section)'/>
+            <xsl:value-of select='count(ancestor::section|ancestor::doc:section)'/>
             <xsl:text>-</xsl:text>
             <xsl:value-of select='local-name()'/>
           </xsl:when>
-          <xsl:when test='contains(local-name(..), "d:info")'>
+          <xsl:when test='contains(local-name(..), "info")'>
             <xsl:value-of select='local-name(../..)'/>
             <xsl:text>-</xsl:text>
             <xsl:value-of select='local-name()'/>
@@ -111,10 +110,10 @@ xmlns:doc='http://docbook.org/ns/docbook'
 	</xsl:choose>
       </xsl:with-param>
       <xsl:with-param name='outline.level'
-		      select='count(ancestor::*) - count(parent::*[contains(local-name(), "d:info")]) - 1'/>
+		      select='count(ancestor::*) - count(parent::*[contains(local-name(), "info")]) - 1'/>
       <xsl:with-param name='attributes.node'
-		      select='../parent::*[contains(local-name(current()), "d:info")] |
-			      parent::*[not(contains(local-name(current()), "d:info"))]'/>
+		      select='../parent::*[contains(local-name(current()), "info")] |
+			      parent::*[not(contains(local-name(current()), "info"))]'/>
       <xsl:with-param name='content'>
 	<xsl:apply-templates mode='doc:body'/>
       </xsl:with-param>
@@ -126,79 +125,79 @@ xmlns:doc='http://docbook.org/ns/docbook'
 
     <para>TODO: Handle all metadata elements, apart from titles.</para>
   </doc:template>
-  <xsl:template match='*[contains(local-name(), "d:info")]/*[not(self::d:title|self::d:subtitle|self::d:titleabbrev|self::doc:title|self::doc:subtitle|self::doc:titleabbrev)]'
+  <xsl:template match='*[contains(local-name(), "info")]/*[not(self::title|self::subtitle|self::titleabbrev|self::doc:title|self::doc:subtitle|self::doc:titleabbrev)]'
 		priority='0'
 		mode='doc:body'/>
 
-  <xsl:template match='d:author|d:editor|d:othercredit |
+  <xsl:template match='author|editor|othercredit |
                        doc:author|doc:editor|doc:othercredit'
     mode='doc:body'>
     <xsl:call-template name='doc:make-paragraph'>
       <xsl:with-param name='style'
 		      select='local-name()'/>
       <xsl:with-param name='content'>
-	<xsl:apply-templates select='d:personname|d:surname|d:firstname|d:honorific|d:lineage|d:othername|d:contrib |
+	<xsl:apply-templates select='personname|surname|firstname|honorific|lineage|othername|contrib |
                                      doc:personname|doc:surname|doc:firstname|doc:honorific|doc:lineage|doc:othername|doc:contrib'
 			     mode='doc:body'/>
       </xsl:with-param>
     </xsl:call-template>
 
-    <xsl:apply-templates select='d:affiliation|d:address |
+    <xsl:apply-templates select='affiliation|address |
                                  doc:affiliation|doc:address'
       mode='doc:body'/>
-    <xsl:apply-templates select='d:authorblurb|d:personblurb |
+    <xsl:apply-templates select='authorblurb|personblurb |
                                  doc:authorblurb|doc:personblurb'
       mode='doc:body'/>
   </xsl:template>
-  <xsl:template match='d:affiliation|doc:affiliation'
+  <xsl:template match='affiliation|doc:affiliation'
     mode='doc:body'>
     <xsl:call-template name='doc:make-paragraph'>
-      <xsl:with-param name='style' select='"d:affiliation"'/>
+      <xsl:with-param name='style' select='"affiliation"'/>
       <xsl:with-param name='content'>
 	<xsl:apply-templates mode='doc:body'/>
       </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
-  <xsl:template match='d:address[parent::d:author|parent::d:editor|parent::d:othercredit] |
+  <xsl:template match='address[parent::author|parent::editor|parent::othercredit] |
                        doc:address[parent::doc:author|parent::doc:editor|parent::doc:othercredit]'
 		mode='doc:body'>
     <xsl:call-template name='doc:make-paragraph'>
-      <xsl:with-param name='style' select='"d:address"'/>
+      <xsl:with-param name='style' select='"address"'/>
       <xsl:with-param name='content'>
 	<xsl:apply-templates mode='doc:body'/>
       </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
   <!-- do not attempt to handle recursive structures -->
-  <xsl:template match='d:address[not(parent::d:author|parent::d:editor|parent::d:othercredit)] |
+  <xsl:template match='address[not(parent::author|parent::editor|parent::othercredit)] |
                        doc:address[not(parent::doc:author|parent::doc:editor|parent::doc:othercredit)]'
     mode='doc:body'>
-    <xsl:apply-templates select='node()[not(self::d:affiliation|self::d:authorblurb|self::doc:affiliation|self::doc:authorblurb)]'/>
+    <xsl:apply-templates select='node()[not(self::affiliation|self::authorblurb|self::doc:affiliation|self::doc:authorblurb)]'/>
   </xsl:template>
-  <xsl:template match='d:abstract|doc:abstract'
+  <xsl:template match='abstract|doc:abstract'
     mode='doc:body'>
-    <xsl:if test='d:title|doc:title'>
+    <xsl:if test='title|doc:title'>
       <xsl:call-template name='doc:make-paragraph'>
         <xsl:with-param name='style' select='"abstract-title"'/>
         <xsl:with-param name='content'>
-          <xsl:apply-templates select='d:title/node()|doc:title/node()'
+          <xsl:apply-templates select='title/node()|doc:title/node()'
             mode='doc:body'/>
         </xsl:with-param>
       </xsl:call-template>
     </xsl:if>
 
-    <xsl:apply-templates select='*[not(self::d:title|self::doc:title)]'
+    <xsl:apply-templates select='*[not(self::title|self::doc:title)]'
       mode='doc:body'>
       <xsl:with-param name='class'>abstract</xsl:with-param>
     </xsl:apply-templates>
   </xsl:template>
   <!-- TODO -->
-  <xsl:template match='d:authorblurb|d:personblurb |
+  <xsl:template match='authorblurb|personblurb |
                        doc:authorblurb|doc:personblurb'
     mode='doc:body'/>
 
   <!-- TODO: handle inline markup (eg. emphasis) -->
-  <xsl:template match='d:surname|d:firstname|d:honorific|d:lineage|d:othername|d:contrib|d:email|d:shortaffil|d:jobtitle|d:orgname|d:orgdiv|d:street|d:pob|d:postcode|d:city|d:state|d:country|d:phone|d:fax|d:citetitle |
+  <xsl:template match='surname|firstname|honorific|lineage|othername|contrib|email|shortaffil|jobtitle|orgname|orgdiv|street|pob|postcode|city|state|country|phone|fax|citetitle |
                        doc:surname|doc:firstname|doc:honorific|doc:lineage|doc:othername|doc:contrib|doc:email|doc:shortaffil|doc:jobtitle|doc:orgname|doc:orgdiv|doc:street|doc:pob|doc:postcode|doc:city|doc:state|doc:country|doc:phone|doc:fax|doc:citetitle'
     mode='doc:body'>
     <xsl:if test='preceding-sibling::*'>
@@ -213,7 +212,7 @@ xmlns:doc='http://docbook.org/ns/docbook'
       <xsl:with-param name='content' select='node()'/>
     </xsl:call-template>
   </xsl:template>
-  <xsl:template match='d:email|doc:email'
+  <xsl:template match='email|doc:email'
     mode='doc:body'>
     <xsl:variable name='address'>
       <xsl:choose>
@@ -236,18 +235,18 @@ xmlns:doc='http://docbook.org/ns/docbook'
     </xsl:call-template>
   </xsl:template>
   <!-- otheraddr often contains ulink -->
-  <xsl:template match='d:otheraddr|doc:otheraddr'
+  <xsl:template match='otheraddr|doc:otheraddr'
     mode='doc:body'>
     <xsl:choose>
-      <xsl:when test='d:ulink|doc:ulink'>
-        <xsl:for-each select='d:ulink|doc:ulink'>
+      <xsl:when test='ulink|doc:ulink'>
+        <xsl:for-each select='ulink|doc:ulink'>
           <xsl:variable name='prev'
-            select='preceding-sibling::d:ulink[1] |
+            select='preceding-sibling::ulink[1] |
                     preceding-sibling::doc:ulink[1]'/>
           <xsl:choose>
             <xsl:when test='$prev'>
               <xsl:for-each
-                select='preceding-sibling::node()[generate-id(following-sibling::*[self::d:ulink|self::doc:ulink][1]) = generate-id(current())]'>
+                select='preceding-sibling::node()[generate-id(following-sibling::*[self::ulink|self::doc:ulink][1]) = generate-id(current())]'>
 		<xsl:call-template name='doc:handle-linebreaks'>
 		  <xsl:with-param name='style'>otheraddr</xsl:with-param>
 		</xsl:call-template>
@@ -261,10 +260,10 @@ xmlns:doc='http://docbook.org/ns/docbook'
           </xsl:choose>
           <xsl:apply-templates select='.'/>
         </xsl:for-each>
-        <xsl:if test='*[self::d:ulink|self::doc:ulink][last()]/following-sibling::node()'>
+        <xsl:if test='*[self::ulink|self::doc:ulink][last()]/following-sibling::node()'>
 	  <xsl:call-template name='doc:handle-linebreaks'>
 	    <xsl:with-param name='content'
-	      select='*[self::d:ulink|self::doc:ulink][last()]/following-sibling::node()'/>
+	      select='*[self::ulink|self::doc:ulink][last()]/following-sibling::node()'/>
 	    <xsl:with-param name='style'>otheraddr</xsl:with-param>
 	  </xsl:call-template>
         </xsl:if>
@@ -276,7 +275,7 @@ xmlns:doc='http://docbook.org/ns/docbook'
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-  <xsl:template match='d:ulink|doc:ulink'
+  <xsl:template match='ulink|doc:ulink'
     mode='doc:body'>
     <xsl:call-template name='doc:make-hyperlink'>
       <xsl:with-param name='target' select='@url'/>
@@ -289,25 +288,25 @@ xmlns:doc='http://docbook.org/ns/docbook'
   </xsl:template>
 
   <!-- Cannot round-trip this element -->
-  <xsl:template match='d:personname|doc:personname'
+  <xsl:template match='personname|doc:personname'
     mode='doc:body'>
     <xsl:apply-templates mode='doc:body'/>
   </xsl:template>
 
-  <xsl:template match='d:releaseinfo|doc:releaseinfo'
+  <xsl:template match='releaseinfo|doc:releaseinfo'
     mode='doc:body'>
     <xsl:call-template name='doc:make-paragraph'>
       <xsl:with-param name='style'
-        select='"d:releaseinfo"'/>
+        select='"releaseinfo"'/>
     </xsl:call-template>
   </xsl:template>
 
-  <xsl:template match='d:para|doc:para'
+  <xsl:template match='para|doc:para'
     mode='doc:body'>
     <xsl:param name='class'/>
 
     <xsl:variable name='block'
-      select='d:blockquote|d:calloutlist|d:classsynopsis|d:funcsynopsis|d:figure|d:glosslist|d:graphic|d:informalfigure|d:informaltable|d:itemizedlist|d:literallayout|d:mediaobject|d:mediaobjectco|d:note|d:caution|d:warning|d:important|d:tip|d:orderedlist|d:programlisting|d:revhistory|d:segmentedlist|d:simplelist|d:table|d:variablelist |
+      select='blockquote|calloutlist|classsynopsis|funcsynopsis|figure|glosslist|graphic|informalfigure|informaltable|itemizedlist|literallayout|mediaobject|mediaobjectco|note|caution|warning|important|tip|orderedlist|programlisting|revhistory|segmentedlist|simplelist|table|variablelist |
               doc:blockquote|doc:calloutlist|doc:classsynopsis|doc:funcsynopsis|doc:figure|doc:glosslist|doc:graphic|doc:informalfigure|doc:informaltable|doc:itemizedlist|doc:literallayout|doc:mediaobject|doc:mediaobjectco|doc:note|doc:caution|doc:warning|doc:important|doc:tip|doc:orderedlist|doc:programlisting|doc:revhistory|doc:segmentedlist|doc:simplelist|doc:table|doc:variablelist'/>
 
     <xsl:choose>
@@ -338,7 +337,7 @@ xmlns:doc='http://docbook.org/ns/docbook'
               </xsl:choose>
 	    </xsl:with-param>
 	    <xsl:with-param name='content'
-			    select='following-sibling::node()[generate-id(preceding-sibling::*[self::d:blockquote|self::d:calloutlist|self::d:figure|self::d:glosslist|self::d:graphic|self::d:informalfigure|self::d:informaltable|self::d:itemizedlist|self::d:literallayout|self::d:mediaobject|self::d:mediaobjectco|self::d:note|self::d:caution|self::d:warning|self::d:important|self::d:tip|self::d:orderedlist|self::d:programlisting|self::d:revhistory|self::d:segmentedlist|self::d:simplelist|self::d:table|self::d:variablelist | self::doc:blockquote|self::doc:calloutlist|self::doc:figure|self::doc:glosslist|self::doc:graphic|self::doc:informalfigure|self::doc:informaltable|self::doc:itemizedlist|self::doc:literallayout|self::doc:mediaobject|self::doc:mediaobjectco|self::doc:note|self::doc:caution|self::doc:warning|self::doc:important|self::doc:tip|self::doc:orderedlist|self::doc:programlisting|self::doc:revhistory|self::doc:segmentedlist|self::doc:simplelist|self::doc:table|self::doc:variablelist][1]) = generate-id(current())]'/>
+			    select='following-sibling::node()[generate-id(preceding-sibling::*[self::blockquote|self::calloutlist|self::figure|self::glosslist|self::graphic|self::informalfigure|self::informaltable|self::itemizedlist|self::literallayout|self::mediaobject|self::mediaobjectco|self::note|self::caution|self::warning|self::important|self::tip|self::orderedlist|self::programlisting|self::revhistory|self::segmentedlist|self::simplelist|self::table|self::variablelist | self::doc:blockquote|self::doc:calloutlist|self::doc:figure|self::doc:glosslist|self::doc:graphic|self::doc:informalfigure|self::doc:informaltable|self::doc:itemizedlist|self::doc:literallayout|self::doc:mediaobject|self::doc:mediaobjectco|self::doc:note|self::doc:caution|self::doc:warning|self::doc:important|self::doc:tip|self::doc:orderedlist|self::doc:programlisting|self::doc:revhistory|self::doc:segmentedlist|self::doc:simplelist|self::doc:table|self::doc:variablelist][1]) = generate-id(current())]'/>
           </xsl:call-template>
         </xsl:for-each>
       </xsl:when>
@@ -356,7 +355,7 @@ xmlns:doc='http://docbook.org/ns/docbook'
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-  <xsl:template match='d:simpara|doc:simpara'
+  <xsl:template match='simpara|doc:simpara'
     mode='doc:body'>
     <xsl:param name='class'/>
 
@@ -372,7 +371,7 @@ xmlns:doc='http://docbook.org/ns/docbook'
     </xsl:call-template>
   </xsl:template>
 
-  <xsl:template match='d:emphasis|doc:emphasis'
+  <xsl:template match='emphasis|doc:emphasis'
     mode='doc:body'>
     <xsl:call-template name='doc:make-phrase'>
       <xsl:with-param name='italic'>
@@ -383,16 +382,16 @@ xmlns:doc='http://docbook.org/ns/docbook'
       </xsl:with-param>
       <xsl:with-param name='bold'>
 	<xsl:choose>
-	  <xsl:when test='@role = "bold" or @role = "d:strong"'>1</xsl:when>
+	  <xsl:when test='@role = "bold" or @role = "strong"'>1</xsl:when>
 	  <xsl:otherwise>0</xsl:otherwise>
 	</xsl:choose>
       </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
 
-  <xsl:template match='d:informalfigure|doc:informalfigure'
+  <xsl:template match='informalfigure|doc:informalfigure'
     mode='doc:body'>
-    <xsl:if test='d:mediaobject/d:imageobject/d:imagedata |
+    <xsl:if test='mediaobject/imageobject/imagedata |
                   doc:mediaobject/doc:imageobject/doc:imagedata'>
       <xsl:call-template name='doc:make-paragraph'>
 	<xsl:with-param name='style' select='"informalfigure-imagedata"'/>
@@ -400,7 +399,7 @@ xmlns:doc='http://docbook.org/ns/docbook'
 	  <xsl:call-template name='doc:make-phrase'>
             <xsl:with-param name='style'/>
 	    <xsl:with-param name='content'>
-	      <xsl:apply-templates select='d:mediaobject/d:imageobject/d:imagedata/@fileref |
+	      <xsl:apply-templates select='mediaobject/imageobject/imagedata/@fileref |
                                            doc:mediaobject/doc:imageobject/doc:imagedata/@fileref'
 				   mode='textonly'/>
 	    </xsl:with-param>
@@ -408,38 +407,38 @@ xmlns:doc='http://docbook.org/ns/docbook'
 	</xsl:with-param>
       </xsl:call-template>
     </xsl:if>
-    <xsl:apply-templates select='d:caption|doc:caption'
+    <xsl:apply-templates select='caption|doc:caption'
       mode='doc:body'/>
-    <xsl:for-each select='*[not(self::d:mediaobject|self::doc:mediaobject|self::d:caption|self::doc:caption)]'>
+    <xsl:for-each select='*[not(self::mediaobject|self::doc:mediaobject|self::caption|self::doc:caption)]'>
       <xsl:call-template name='doc:nomatch'/>
     </xsl:for-each>
   </xsl:template>
 
-  <xsl:template match='d:mediaobject|d:mediaobjectco |
+  <xsl:template match='mediaobject|mediaobjectco |
                        doc:mediaobject|doc:mediaobjectco'
     mode='doc:body'>
-    <xsl:apply-templates select='d:objectinfo/d:title|doc:objectinfo/doc:title'/>
-    <xsl:apply-templates select='d:objectinfo/d:subtitle|d:objectinfo/d:subtitle |
+    <xsl:apply-templates select='objectinfo/title|doc:objectinfo/doc:title'/>
+    <xsl:apply-templates select='objectinfo/subtitle|objectinfo/subtitle |
                                  doc:objectinfo/doc:subtitle|doc:objectinfo/doc:subtitle'/>
     <!-- TODO: indicate error for other children of objectinfo -->
 
-    <xsl:apply-templates select='*[not(self::d:objectinfo|self::doc:objectinfo)]'/>
+    <xsl:apply-templates select='*[not(self::objectinfo|self::doc:objectinfo)]'/>
   </xsl:template>
-  <xsl:template match='d:imageobject|d:imageobjectco|d:audioobject|d:videoobject |
+  <xsl:template match='imageobject|imageobjectco|audioobject|videoobject |
                        doc:imageobject|doc:imageobjectco|doc:audioobject|doc:videoobject'
     mode='doc:body'>
-    <xsl:apply-templates select='d:objectinfo/d:title|doc:objectinfo/doc:title'/>
-    <xsl:apply-templates select='d:objectinfo/d:subtitle|doc:objectinfo/doc:subtitle'/>
+    <xsl:apply-templates select='objectinfo/title|doc:objectinfo/doc:title'/>
+    <xsl:apply-templates select='objectinfo/subtitle|doc:objectinfo/doc:subtitle'/>
     <!-- TODO: indicate error for other children of objectinfo -->
 
-    <xsl:apply-templates select='d:areaspec|doc:areaspec'/>
+    <xsl:apply-templates select='areaspec|doc:areaspec'/>
 
     <xsl:choose>
-      <xsl:when test='d:imagedata|d:audiodata|d:videodata |
+      <xsl:when test='imagedata|audiodata|videodata |
                       doc:imagedata|doc:audiodata|doc:videodata'>
 	<xsl:call-template name='doc:make-paragraph'>
 	  <xsl:with-param name='style'
-			  select='concat(local-name(), "-", local-name(d:imagedata|d:audiodata|d:videodata|doc:imagedata|doc:audiodata|doc:videodata))'/>
+			  select='concat(local-name(), "-", local-name(imagedata|audiodata|videodata|doc:imagedata|doc:audiodata|doc:videodata))'/>
 	  <xsl:with-param name='content'>
 	    <xsl:call-template name='doc:make-phrase'>
 	      <xsl:with-param name='content'>
@@ -450,7 +449,7 @@ xmlns:doc='http://docbook.org/ns/docbook'
 	  </xsl:with-param>
 	</xsl:call-template>
       </xsl:when>
-      <xsl:when test='self::d:imageobjectco/d:imageobject/d:imagedata |
+      <xsl:when test='self::imageobjectco/imageobject/imagedata |
                       self::doc:imageobjectco/doc:imageobject/doc:imagedata'>
 	<xsl:call-template name='doc:make-paragraph'>
 	  <xsl:with-param name='style'
@@ -466,14 +465,14 @@ xmlns:doc='http://docbook.org/ns/docbook'
 	</xsl:call-template>
       </xsl:when>
     </xsl:choose>
-    <xsl:apply-templates select='d:calloutlist|doc:calloutlist'/>
+    <xsl:apply-templates select='calloutlist|doc:calloutlist'/>
 
-    <xsl:for-each select='*[not(self::d:imageobject |
-			        self::d:imagedata |
-			        self::d:audiodata |
-				self::d:videodata |
-				self::d:areaspec  |
-				self::d:calloutlist |
+    <xsl:for-each select='*[not(self::imageobject |
+			        self::imagedata |
+			        self::audiodata |
+				self::videodata |
+				self::areaspec  |
+				self::calloutlist |
                                 self::doc:imageobject |
 			        self::doc:imagedata |
 			        self::doc:audiodata |
@@ -483,22 +482,22 @@ xmlns:doc='http://docbook.org/ns/docbook'
       <xsl:call-template name='doc:nomatch'/>
     </xsl:for-each>
   </xsl:template>
-  <xsl:template match='d:textobject|doc:textobject'
+  <xsl:template match='textobject|doc:textobject'
     mode='doc:body'>
     <xsl:choose>
-      <xsl:when test='d:objectinfo/d:title|d:objectinfo|d:subtitle |
+      <xsl:when test='objectinfo/title|objectinfo|subtitle |
                       doc:objectinfo/doc:title|doc:objectinfo|doc:subtitle'>
-	<xsl:apply-templates select='d:objectinfo/d:title|doc:objectinfo/doc:title'
+	<xsl:apply-templates select='objectinfo/title|doc:objectinfo/doc:title'
           mode='doc:body'/>
-	<xsl:apply-templates select='d:objectinfo/d:subtitle|doc:objectinfo/doc:subtitle'
+	<xsl:apply-templates select='objectinfo/subtitle|doc:objectinfo/doc:subtitle'
           mode='doc:body'/>
 	<!-- TODO: indicate error for other children of objectinfo -->
       </xsl:when>
 
       <!-- In a table, the table itself and the caption delimit the textobject -->
-      <xsl:when test='ancestor::d:table |
+      <xsl:when test='ancestor::table |
                       ancestor::doc:table |
-                      ancestor::d:informaltable |
+                      ancestor::informaltable |
                       ancestor::doc:informaltable'/>
 
       <xsl:otherwise>
@@ -519,11 +518,11 @@ xmlns:doc='http://docbook.org/ns/docbook'
       </xsl:otherwise>
     </xsl:choose>
 
-    <xsl:apply-templates select='*[not(self::d:objectinfo|self::doc:objectinfo)]'
+    <xsl:apply-templates select='*[not(self::objectinfo|self::doc:objectinfo)]'
       mode='doc:body'/>
   </xsl:template>
 
-  <xsl:template match='d:caption|doc:caption'
+  <xsl:template match='caption|doc:caption'
     mode='doc:body'>
     <xsl:choose>
       <xsl:when test='not(*)'>
@@ -535,10 +534,10 @@ xmlns:doc='http://docbook.org/ns/docbook'
         </xsl:call-template>
       </xsl:when>
       <xsl:when test='not(text()) and
-                      count(*) = count(d:para|doc:para) and
+                      count(*) = count(para|doc:para) and
                       count(*) = 1'>
         <xsl:call-template name='doc:make-paragraph'>
-          <xsl:with-param name='style' select='"d:caption"'/>
+          <xsl:with-param name='style' select='"caption"'/>
           <xsl:with-param name='content'>
             <xsl:apply-templates select='*/node()' mode='doc:body'/>
           </xsl:with-param>
@@ -552,18 +551,18 @@ xmlns:doc='http://docbook.org/ns/docbook'
         <xsl:call-template name='doc:make-paragraph'>
           <xsl:with-param name='style' select='"Caption"'/>
           <xsl:with-param name='content'>
-            <xsl:apply-templates select='*[self::d:para|self::doc:para][1]/node()'
+            <xsl:apply-templates select='*[self::para|self::doc:para][1]/node()'
               mode='doc:body'/>
           </xsl:with-param>
         </xsl:call-template>
-        <xsl:for-each select='text()|*[not(self::d:para|self::doc:para)]|*[self::d:para|self::doc:para][position() != 1]'>
+        <xsl:for-each select='text()|*[not(self::para|self::doc:para)]|*[self::para|self::doc:para][position() != 1]'>
           <xsl:call-template name='doc:nomatch'/>
         </xsl:for-each>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match='d:area|d:areaspec|doc:area|doc:areaspec'
+  <xsl:template match='area|areaspec|doc:area|doc:areaspec'
     mode='doc:body'>
     <xsl:call-template name='doc:make-paragraph'>
       <xsl:with-param name='style' select='local-name()'/>
@@ -571,18 +570,18 @@ xmlns:doc='http://docbook.org/ns/docbook'
     </xsl:call-template>
   </xsl:template>
 
-  <xsl:template match='d:calloutlist|doc:calloutlist'
+  <xsl:template match='calloutlist|doc:calloutlist'
     mode='doc:body'>
-    <xsl:apply-templates select='d:callout|doc:callout'/>
+    <xsl:apply-templates select='callout|doc:callout'/>
   </xsl:template>
 
-  <xsl:template match='d:callout|doc:callout'
+  <xsl:template match='callout|doc:callout'
     mode='doc:body'>
     <xsl:call-template name='doc:make-paragraph'>
-      <xsl:with-param name='style' select='"d:callout"'/>
+      <xsl:with-param name='style' select='"callout"'/>
       <xsl:with-param name='content'>
 	<!-- Normally a para would be the first child of a callout -->
-	<xsl:apply-templates select='*[1][self::d:para|self::doc:para]/node()'
+	<xsl:apply-templates select='*[1][self::para|self::doc:para]/node()'
           mode='list'/>
       </xsl:with-param>
     </xsl:call-template>
@@ -590,30 +589,30 @@ xmlns:doc='http://docbook.org/ns/docbook'
     <!-- This is to catch the case where a listitem's first child is not a paragraph.
        - We may not be able to represent this properly.
       -->
-    <xsl:apply-templates select='*[1][not(self::d:para|self::doc:para)]'
+    <xsl:apply-templates select='*[1][not(self::para|self::doc:para)]'
       mode='list'/>
 
     <xsl:apply-templates select='*[position() != 1]'
       mode='list'/>
   </xsl:template>
 
-  <xsl:template match='d:table|d:informaltable |
+  <xsl:template match='table|informaltable |
                        doc:table|doc:informaltable'
     mode='doc:body'>
     <xsl:call-template name='doc:make-table'>
       <xsl:with-param name='columns'>
-        <xsl:apply-templates select='d:tgroup/d:colspec|doc:tgroup/doc:colspec'
+        <xsl:apply-templates select='tgroup/colspec|doc:tgroup/doc:colspec'
           mode='doc:column'/>
       </xsl:with-param>
     </xsl:call-template>
-    <xsl:apply-templates select='d:textobject|doc:textobject'
+    <xsl:apply-templates select='textobject|doc:textobject'
       mode='doc:body'/>
     <xsl:choose>
-      <xsl:when test='d:caption|doc:caption'>
-        <xsl:apply-templates select='d:caption|doc:caption'
+      <xsl:when test='caption|doc:caption'>
+        <xsl:apply-templates select='caption|doc:caption'
           mode='doc:body'/>
       </xsl:when>
-      <xsl:when test='d:textobject|doc:textobject'>
+      <xsl:when test='textobject|doc:textobject'>
         <!-- Synthesize a caption to delimit the textobject -->
         <xsl:call-template name='doc:make-paragraph'>
           <xsl:with-param name='style'>Caption</xsl:with-param>
@@ -624,7 +623,7 @@ xmlns:doc='http://docbook.org/ns/docbook'
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match='d:colspec|doc:colspec' mode='doc:column'>
+  <xsl:template match='colspec|doc:colspec' mode='doc:column'>
     <xsl:variable name='width'>
       <xsl:choose>
         <xsl:when test='contains(@colwidth, "*")'>
@@ -642,7 +641,7 @@ xmlns:doc='http://docbook.org/ns/docbook'
     </xsl:call-template>
   </xsl:template>
 
-  <xsl:template match='d:colspec|doc:colspec' mode='doc:body'/>
+  <xsl:template match='colspec|doc:colspec' mode='doc:body'/>
 
   <xsl:template name='doc:repeat'>
     <xsl:param name='repeats' select='0'/>
@@ -656,18 +655,18 @@ xmlns:doc='http://docbook.org/ns/docbook'
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
-  <xsl:template match='d:tgroup|d:tbody|d:thead |
+  <xsl:template match='tgroup|tbody|thead |
                        doc:tgroup|doc:tbody|doc:thead'
     mode='doc:body'>
     <xsl:apply-templates mode='doc:body'/>
   </xsl:template>
-  <xsl:template match='d:row|doc:row' mode='doc:body'>
+  <xsl:template match='row|doc:row' mode='doc:body'>
     <xsl:call-template name='doc:make-table-row'>
-      <xsl:with-param name='is-header' select='boolean(parent::d:thead|parent::doc:thead)'/>
+      <xsl:with-param name='is-header' select='boolean(parent::thead|parent::doc:thead)'/>
     </xsl:call-template>
   </xsl:template>
 
-  <xsl:template match='d:entry|doc:entry' mode='doc:body'>
+  <xsl:template match='entry|doc:entry' mode='doc:body'>
 
     <!-- 
          Position = Sum(i,preceding-sibling[@colspan = ""]) + entry[i].@colspan)
@@ -693,14 +692,14 @@ xmlns:doc='http://docbook.org/ns/docbook'
 
           <xsl:variable name='combinedWidth'>
             <xsl:call-template name='doc:sum'>
-              <xsl:with-param name='nodes' select='ancestor::*[self::d:table|self::doc:table|self::d:informaltable|self::doc:informaltable][1]/*[self::d:tgroup|self::doc:tgroup]/*[self::d:colspec|self::doc:colspec][not(position() &lt; $position) and position() &lt; $limit]'/>
+              <xsl:with-param name='nodes' select='ancestor::*[self::table|self::doc:table|self::informaltable|self::doc:informaltable][1]/*[self::tgroup|self::doc:tgroup]/*[self::colspec|self::doc:colspec][not(position() &lt; $position) and position() &lt; $limit]'/>
               <xsl:with-param name='sum' select='"0"'/>
             </xsl:call-template>
           </xsl:variable>
           <xsl:value-of select='$combinedWidth'/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select='ancestor::*[self::d:table|self::doc:table|self::d:informaltable|self::doc:informaltable][1]/*[self::d:tgroup|self::doc:tgroup]/*[self::d:colspec|self::doc:colspec][position() = $position]/@colwidth'/>
+          <xsl:value-of select='ancestor::*[self::table|self::doc:table|self::informaltable|self::doc:informaltable][1]/*[self::tgroup|self::doc:tgroup]/*[self::colspec|self::doc:colspec][position() = $position]/@colwidth'/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
@@ -729,7 +728,7 @@ xmlns:doc='http://docbook.org/ns/docbook'
 
       <xsl:with-param name='content'>
 	<xsl:choose>
-          <xsl:when test='not(d:para|doc:para)'>
+          <xsl:when test='not(para|doc:para)'>
             <!-- TODO: check for any block elements -->
 	    <xsl:call-template name='doc:make-paragraph'>
               <xsl:with-param name='style'/>
@@ -756,8 +755,8 @@ xmlns:doc='http://docbook.org/ns/docbook'
 
     <xsl:variable name='add'>
       <xsl:choose>
-        <xsl:when test='$node/preceding-sibling::*[self::d:entry|self::doc:entry]/@colspan != ""'>
-          <xsl:value-of select='$node/preceding-sibling::*[self::d:entry|self::doc:entry]/@colspan'/>
+        <xsl:when test='$node/preceding-sibling::*[self::entry|self::doc:entry]/@colspan != ""'>
+          <xsl:value-of select='$node/preceding-sibling::*[self::entry|self::doc:entry]/@colspan'/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select='"1"'/>
@@ -766,11 +765,11 @@ xmlns:doc='http://docbook.org/ns/docbook'
     </xsl:variable>
 
     <xsl:choose>
-      <xsl:when test='count($node/preceding-sibling::*[self::d:entry|self::doc:entry]) &gt; 0'>
+      <xsl:when test='count($node/preceding-sibling::*[self::entry|self::doc:entry]) &gt; 0'>
         <xsl:call-template name='doc:sum-sibling'>
           <xsl:with-param name='sum' select='$sum + $add'/>
           <xsl:with-param name='node'
-            select='$node/preceding-sibling::*[self::d:entry|self::doc:entry][1]'/>
+            select='$node/preceding-sibling::*[self::entry|self::doc:entry][1]'/>
         </xsl:call-template>
       </xsl:when>
       <xsl:otherwise>
@@ -800,18 +799,18 @@ xmlns:doc='http://docbook.org/ns/docbook'
 
   </xsl:template>
 
-  <xsl:template match='*[self::d:para|self::d:simpara|self::doc:para|self::doc:simpara]/text()[string-length(normalize-space(.)) != 0]'
+  <xsl:template match='*[self::para|self::simpara|self::doc:para|self::doc:simpara]/text()[string-length(normalize-space(.)) != 0]'
     mode='doc:body'>
     <xsl:call-template name='doc:handle-linebreaks'/>
   </xsl:template>
 
-  <xsl:template match='text()[not(parent::d:para|parent::d:simpara|parent::d:literallayout|parent::d:programlisting | parent::doc:para|parent::doc:simpara|parent::doc:literallayout|parent::doc:programlisting)][string-length(normalize-space(.)) != 0]'
+  <xsl:template match='text()[not(parent::para|parent::simpara|parent::literallayout|parent::programlisting | parent::doc:para|parent::doc:simpara|parent::doc:literallayout|parent::doc:programlisting)][string-length(normalize-space(.)) != 0]'
     mode='doc:body'>
     <xsl:call-template name='doc:handle-linebreaks'/>
   </xsl:template>
   <xsl:template match='text()[string-length(normalize-space(.)) = 0]'
     mode='doc:body'/>
-  <xsl:template match='d:literallayout/text()|d:programlisting/text() |
+  <xsl:template match='literallayout/text()|programlisting/text() |
                        doc:literallayout/text()|doc:programlisting/text()'
     mode='doc:body'>
     <xsl:call-template name='doc:handle-linebreaks'/>
@@ -876,7 +875,7 @@ xmlns:doc='http://docbook.org/ns/docbook'
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match='d:authorblurb|d:formalpara|d:legalnotice|d:note|d:caution|d:warning|d:important|d:tip |
+  <xsl:template match='authorblurb|formalpara|legalnotice|note|caution|warning|important|tip |
                        doc:authorblurb|doc:formalpara|doc:legalnotice|doc:note|doc:caution|doc:warning|doc:important|doc:tip'
     mode='doc:body'>
     <xsl:apply-templates select='*'>
@@ -886,25 +885,25 @@ xmlns:doc='http://docbook.org/ns/docbook'
     </xsl:apply-templates>
   </xsl:template>
 
-  <xsl:template match='d:blockquote|doc:blockquote'
+  <xsl:template match='blockquote|doc:blockquote'
     mode='doc:body'>
-    <xsl:apply-templates select='d:blockinfo|d:title|doc:info|doc:title'
+    <xsl:apply-templates select='blockinfo|title|doc:info|doc:title'
       mode='doc:body'>
       <xsl:with-param name='class'>
         <xsl:value-of select='local-name()'/>
       </xsl:with-param>
     </xsl:apply-templates>
-    <xsl:apply-templates select='*[not(self::d:blockinfo|self::d:title|self::d:attribution|self::doc:info|self::doc:title|self::doc:attribution)]'
+    <xsl:apply-templates select='*[not(self::blockinfo|self::title|self::attribution|self::doc:info|self::doc:title|self::doc:attribution)]'
       mode='doc:body'>
-      <xsl:with-param name='class' select='"d:blockquote"'/>
+      <xsl:with-param name='class' select='"blockquote"'/>
     </xsl:apply-templates>
-    <xsl:if test='d:attribution|doc:attribution'>
+    <xsl:if test='attribution|doc:attribution'>
       <xsl:call-template name='doc:make-paragraph'>
 	<xsl:with-param name='style' select='"blockquote-attribution"'/>
 	<xsl:with-param name='content'>
           <xsl:call-template name='doc:make-phrase'>
             <xsl:with-param name='content'>
-              <xsl:apply-templates select='d:attribution/node()|doc:attribution/node()'/>
+              <xsl:apply-templates select='attribution/node()|doc:attribution/node()'/>
             </xsl:with-param>
           </xsl:call-template>
 	</xsl:with-param>
@@ -912,7 +911,7 @@ xmlns:doc='http://docbook.org/ns/docbook'
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match='d:literallayout|d:programlisting|doc:literallayout|doc:programlisting'
+  <xsl:template match='literallayout|programlisting|doc:literallayout|doc:programlisting'
     mode='doc:body'>
     <xsl:param name='class'/>
 
@@ -921,31 +920,31 @@ xmlns:doc='http://docbook.org/ns/docbook'
     </xsl:call-template>
   </xsl:template>
 
-  <xsl:template match='d:bridgehead|doc:bridgehead'
+  <xsl:template match='bridgehead|doc:bridgehead'
     mode='doc:body'>
     <xsl:call-template name='doc:make-paragraph'>
-      <xsl:with-param name='style' select='"d:bridgehead"'/>
+      <xsl:with-param name='style' select='"bridgehead"'/>
     </xsl:call-template>
   </xsl:template>
 
-  <xsl:template match='d:itemizedlist|d:orderedlist |
+  <xsl:template match='itemizedlist|orderedlist |
                        doc:itemizedlist|doc:orderedlist'
     mode='doc:body'>
-    <xsl:apply-templates select='d:listitem|doc:listitem'
+    <xsl:apply-templates select='listitem|doc:listitem'
       mode='doc:body'/>
   </xsl:template>
 
-  <xsl:template match='d:listitem|doc:listitem'
+  <xsl:template match='listitem|doc:listitem'
     mode='doc:body'>
     <xsl:call-template name='doc:make-paragraph'>
       <xsl:with-param name='style'
 		      select='concat(local-name(..), 
-			      count(ancestor::d:itemizedlist|ancestor::d:orderedlist|ancestor::doc:itemizedlist|ancestor::doc:orderedlist))'/>
+			      count(ancestor::itemizedlist|ancestor::orderedlist|ancestor::doc:itemizedlist|ancestor::doc:orderedlist))'/>
       <xsl:with-param name='is-listitem' select='true()'/>
 
       <xsl:with-param name='content'>
 	<!-- Normally a para would be the first child of a listitem -->
-	<xsl:apply-templates select='*[1][self::d:para|self::doc:para]/node()'
+	<xsl:apply-templates select='*[1][self::para|self::doc:para]/node()'
           mode='doc:body'/>
       </xsl:with-param>
     </xsl:call-template>
@@ -953,14 +952,14 @@ xmlns:doc='http://docbook.org/ns/docbook'
     <!-- This is to catch the case where a listitem's first child is not a paragraph.
        - We may not be able to represent this properly.
       -->
-    <xsl:apply-templates select='*[1][not(self::d:para|self::doc:para)]'
+    <xsl:apply-templates select='*[1][not(self::para|self::doc:para)]'
       mode='doc:list-continue'/>
 
     <xsl:apply-templates select='*[position() != 1]'
       mode='doc:list-continue'/>
   </xsl:template>  
 
-  <xsl:template match='d:para|doc:para' mode='doc:list-continue'>
+  <xsl:template match='para|doc:para' mode='doc:list-continue'>
     <xsl:apply-templates select='.'
       mode='doc:body'>
       <xsl:with-param name='class' select='"para-continue"'/>
@@ -973,9 +972,9 @@ xmlns:doc='http://docbook.org/ns/docbook'
     <xsl:apply-templates select='.' mode='doc:body'/>
   </xsl:template>
 
-  <xsl:template match='d:variablelist|doc:variablelist'
+  <xsl:template match='variablelist|doc:variablelist'
     mode='doc:body'>
-    <xsl:apply-templates select='*[not(self::d:varlistentry|self::doc:varlistentry)]'/>
+    <xsl:apply-templates select='*[not(self::varlistentry|self::doc:varlistentry)]'/>
 
     <xsl:call-template name='doc:make-table'>
       <xsl:with-param name='columns'>
@@ -987,11 +986,11 @@ xmlns:doc='http://docbook.org/ns/docbook'
 	</xsl:call-template>
       </xsl:with-param>
       <xsl:with-param name='rows'>
-	<xsl:apply-templates select='d:varlistentry|doc:varlistentry'/>
+	<xsl:apply-templates select='varlistentry|doc:varlistentry'/>
       </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
-  <xsl:template match='d:varlistentry|doc:varlistentry'
+  <xsl:template match='varlistentry|doc:varlistentry'
     mode='doc:body'>
     <xsl:call-template name='doc:make-table-row'>
       <xsl:with-param name='content'>
@@ -1000,9 +999,9 @@ xmlns:doc='http://docbook.org/ns/docbook'
 	    <xsl:call-template name='doc:make-paragraph'>
 	      <xsl:with-param name='style' select='"variablelist-term"'/>
 	      <xsl:with-param name='content'>
-		<xsl:apply-templates select='*[self::d:term|self::doc:term][1]/node()'
+		<xsl:apply-templates select='*[self::term|self::doc:term][1]/node()'
                   mode='doc:body'/>
-		<xsl:for-each select='*[self::d:term|self::doc:term][position() != 1]'>
+		<xsl:for-each select='*[self::term|self::doc:term][position() != 1]'>
 		  <xsl:call-template name='doc:make-phrase'>
 		    <xsl:with-param name='content'>
 		      <xsl:call-template name='doc:make-soft-break'/>
@@ -1016,7 +1015,7 @@ xmlns:doc='http://docbook.org/ns/docbook'
 	</xsl:call-template>
 	<xsl:call-template name='doc:make-table-cell'>
 	  <xsl:with-param name='content'>
-            <xsl:apply-templates select='d:listitem/node()|doc:listitem/node()'
+            <xsl:apply-templates select='listitem/node()|doc:listitem/node()'
               mode='doc:body'/>
 	  </xsl:with-param>
 	</xsl:call-template>
@@ -1028,12 +1027,12 @@ xmlns:doc='http://docbook.org/ns/docbook'
      - However, they may need to be added (perhaps as hidden text)
      - for round-tripping.
     -->
-  <xsl:template match='d:anchor|d:areaset|d:audiodata|d:audioobject|
-                       d:beginpage|
-                       d:constraint|
-                       d:indexterm|d:itermset|
-                       d:keywordset|
-                       d:msg |
+  <xsl:template match='anchor|areaset|audiodata|audioobject|
+                       beginpage|
+                       constraint|
+                       indexterm|itermset|
+                       keywordset|
+                       msg |
                        doc:anchor|doc:areaset|doc:audiodata|doc:audioobject|
                        doc:beginpage|
                        doc:constraint|
@@ -1062,101 +1061,101 @@ xmlns:doc='http://docbook.org/ns/docbook'
 
     <xsl:for-each select='$node'>
       <xsl:choose>
-        <xsl:when test='self::d:abstract |
-                        self::d:ackno |
-                        self::d:address |
-                        self::d:answer |
-                        self::d:appendix |
-                        self::d:artheader |
-                        self::d:authorgroup |
-                        self::d:bibliodiv |
-                        self::d:biblioentry |
-                        self::d:bibliography |
-                        self::d:bibliomixed |
-                        self::d:bibliomset |
-                        self::d:biblioset |
-                        self::d:bridgehead |
-                        self::d:calloutlist |
-                        self::d:caption |
-                        self::d:classsynopsis |
-                        self::d:colophon |
-                        self::d:constraintdef |
-                        self::d:copyright |
-                        self::d:dedication |
-                        self::d:epigraph |
-                        self::d:equation |
-                        self::d:example |
-                        self::d:figure |
-                        self::d:funcsynopsis |
-                        self::d:glossary |
-                        self::d:glossdef |
-                        self::d:glossdiv |
-                        self::d:glossentry |
-                        self::d:glosslist |
-                        self::d:graphic |
-                        self::d:highlights |
-                        self::d:imageobject |
-                        self::d:imageobjectco |
-                        self::d:index |
-                        self::d:indexdiv |
-                        self::d:indexentry |
-                        self::d:informalequation |
-                        self::d:informalexample |
-                        self::d:informalfigure |
-                        self::d:lot |
-                        self::d:lotentry |
-                        self::d:mediaobject |
-                        self::d:mediaobjectco |
-                        self::d:member |
-                        self::d:msgentry |
-                        self::d:msgset |
-                        self::d:part |
-                        self::d:partintro |
-                        self::d:personblurb |
-                        self::d:preface |
-                        self::d:printhistory |
-                        self::d:procedure |
-                        self::d:programlisting |
-                        self::d:programlistingco |
-                        self::d:publisher |
-                        self::d:qandadiv |
-                        self::d:qandaentry |
-                        self::d:qandaset |
-                        self::d:question |
-                        self::d:refdescriptor |
-                        self::d:refentry |
-                        self::d:refentrytitle |
-                        self::d:reference |
-                        self::d:refmeta |
-                        self::d:refname |
-                        self::d:refnamediv |
-                        self::d:refpurpose |
-                        self::d:refsect1 |
-                        self::d:refsect2 |
-                        self::d:refsect3 |
-                        self::d:refsection |
-                        self::d:refsynopsisdiv |
-                        self::d:screen |
-                        self::d:screenco |
-                        self::d:screenshot |
-                        self::d:seg |
-                        self::d:seglistitem |
-                        self::d:segmentedlist |
-                        self::d:segtitle |
-                        self::d:set |
-                        self::d:setindex |
-                        self::d:sidebar |
-                        self::d:simplelist |
-                        self::d:simplemsgentry |
-                        self::d:step |
-                        self::d:stepalternatives |
-                        self::d:subjectset |
-                        self::d:substeps |
-                        self::d:task |
-                        self::d:textobject |
-                        self::d:toc |
-                        self::d:videodata |
-                        self::d:videoobject |
+        <xsl:when test='self::abstract |
+                        self::ackno |
+                        self::address |
+                        self::answer |
+                        self::appendix |
+                        self::artheader |
+                        self::authorgroup |
+                        self::bibliodiv |
+                        self::biblioentry |
+                        self::bibliography |
+                        self::bibliomixed |
+                        self::bibliomset |
+                        self::biblioset |
+                        self::bridgehead |
+                        self::calloutlist |
+                        self::caption |
+                        self::classsynopsis |
+                        self::colophon |
+                        self::constraintdef |
+                        self::copyright |
+                        self::dedication |
+                        self::epigraph |
+                        self::equation |
+                        self::example |
+                        self::figure |
+                        self::funcsynopsis |
+                        self::glossary |
+                        self::glossdef |
+                        self::glossdiv |
+                        self::glossentry |
+                        self::glosslist |
+                        self::graphic |
+                        self::highlights |
+                        self::imageobject |
+                        self::imageobjectco |
+                        self::index |
+                        self::indexdiv |
+                        self::indexentry |
+                        self::informalequation |
+                        self::informalexample |
+                        self::informalfigure |
+                        self::lot |
+                        self::lotentry |
+                        self::mediaobject |
+                        self::mediaobjectco |
+                        self::member |
+                        self::msgentry |
+                        self::msgset |
+                        self::part |
+                        self::partintro |
+                        self::personblurb |
+                        self::preface |
+                        self::printhistory |
+                        self::procedure |
+                        self::programlisting |
+                        self::programlistingco |
+                        self::publisher |
+                        self::qandadiv |
+                        self::qandaentry |
+                        self::qandaset |
+                        self::question |
+                        self::refdescriptor |
+                        self::refentry |
+                        self::refentrytitle |
+                        self::reference |
+                        self::refmeta |
+                        self::refname |
+                        self::refnamediv |
+                        self::refpurpose |
+                        self::refsect1 |
+                        self::refsect2 |
+                        self::refsect3 |
+                        self::refsection |
+                        self::refsynopsisdiv |
+                        self::screen |
+                        self::screenco |
+                        self::screenshot |
+                        self::seg |
+                        self::seglistitem |
+                        self::segmentedlist |
+                        self::segtitle |
+                        self::set |
+                        self::setindex |
+                        self::sidebar |
+                        self::simplelist |
+                        self::simplemsgentry |
+                        self::step |
+                        self::stepalternatives |
+                        self::subjectset |
+                        self::substeps |
+                        self::task |
+                        self::textobject |
+                        self::toc |
+                        self::videodata |
+                        self::videoobject |
 
                         self::doc:abstract |
                         self::doc:ackno |
@@ -1254,9 +1253,9 @@ xmlns:doc='http://docbook.org/ns/docbook'
                         self::doc:videodata |
                         self::doc:videoobject |
 
-                        self::*[not(starts-with(local-name(), "d:informal")) and contains(local-name(), "d:info")]'>
+                        self::*[not(starts-with(local-name(), "informal")) and contains(local-name(), "info")]'>
           <xsl:call-template name='doc:make-paragraph'>
-            <xsl:with-param name='style' select='"d:blockerror"'/>
+            <xsl:with-param name='style' select='"blockerror"'/>
             <xsl:with-param name='content'>
               <xsl:call-template name='doc:make-phrase'>
                 <xsl:with-param name='content'>
@@ -1278,28 +1277,28 @@ xmlns:doc='http://docbook.org/ns/docbook'
           </xsl:call-template>
         </xsl:when>
         <!-- Some elements are sometimes blocks, sometimes inline
-             <xsl:when test='self::d:affiliation |
-                             self::d:alt |
-                             self::d:attribution |
-                             self::d:collab |
-                             self::d:collabname |
-                             self::d:confdates |
-                             self::d:confgroup |
-                             self::d:confnum |
-                             self::d:confsponsor |
-                             self::d:conftitle |
-                             self::d:contractnum |
-                             self::d:contractsponsor |
-                             self::d:contrib |
-                             self::d:corpauthor |
-                             self::d:corpcredit |
-                             self::d:corpname |
-                             self::d:edition |
-                             self::d:editor |
-                             self::d:jobtitle |
-                             self::d:personname |
-                             self::d:publishername |
-                             self::d:remark |
+             <xsl:when test='self::affiliation |
+                             self::alt |
+                             self::attribution |
+                             self::collab |
+                             self::collabname |
+                             self::confdates |
+                             self::confgroup |
+                             self::confnum |
+                             self::confsponsor |
+                             self::conftitle |
+                             self::contractnum |
+                             self::contractsponsor |
+                             self::contrib |
+                             self::corpauthor |
+                             self::corpcredit |
+                             self::corpname |
+                             self::edition |
+                             self::editor |
+                             self::jobtitle |
+                             self::personname |
+                             self::publishername |
+                             self::remark |
 
                              self::doc:affiliation |
                              self::doc:alt |
@@ -1328,7 +1327,7 @@ xmlns:doc='http://docbook.org/ns/docbook'
              -->
         <xsl:otherwise>
           <xsl:call-template name='doc:make-phrase'>
-            <xsl:with-param name='style' select='"d:inlineerror"'/>
+            <xsl:with-param name='style' select='"inlineerror"'/>
             <xsl:with-param name='content'>
               <xsl:value-of select='local-name()'/>
               <xsl:text> encountered</xsl:text>

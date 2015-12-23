@@ -21,7 +21,7 @@
   <axsl:strip-space elements="*"/>
   <axsl:preserve-space elements="dbk:para dbk:emphasis"/>
   <axsl:template match="dbk:appendix |&#10;  dbk:article |&#10;  dbk:book |&#10;  dbk:chapter |&#10;  dbk:part |&#10;  dbk:preface |&#10;  dbk:section |&#10;  dbk:sect1 |&#10;  dbk:sect2 |&#10;  dbk:sect3 |&#10;  dbk:sect4 |&#10;  dbk:sect5">
-    <axsl:variable name="subsections" select="dbk:para[@rnd:style = &quot;d:bibliography&quot; or @rnd:style = &quot;bibliography-title&quot; or @rnd:style = &quot;d:glossary&quot; or @rnd:style = &quot;glossary-title&quot; or @rnd:style = &quot;d:qandaset&quot; or @rnd:style = &quot;qandaset-title&quot;]"/>
+    <axsl:variable name="subsections" select="dbk:para[@rnd:style = &quot;bibliography&quot; or @rnd:style = &quot;bibliography-title&quot; or @rnd:style = &quot;glossary&quot; or @rnd:style = &quot;glossary-title&quot; or @rnd:style = &quot;qandaset&quot; or @rnd:style = &quot;qandaset-title&quot;]"/>
     <axsl:copy>
       <axsl:apply-templates select="@*"/>
       <axsl:choose>
@@ -41,9 +41,9 @@
       </axsl:choose>
     </axsl:copy>
     <axsl:choose>
-      <axsl:when test="following-sibling::*[self::dbk:appendix |&#10;  self::dbk:article |&#10;  self::dbk:book |&#10;  self::dbk:chapter |&#10;  self::dbk:part |&#10;  self::dbk:preface |&#10;  self::dbk:section |&#10;  self::dbk:sect1 |&#10;  self::dbk:sect2 |&#10;  self::dbk:sect3 |&#10;  self::dbk:sect4 |&#10;  self::dbk:sect5] | following-sibling::dbk:para[@rnd:style = &quot;d:bibliography&quot; or @rnd:style = &quot;bibliography-title&quot; or @rnd:style = &quot;d:glossary&quot; or @rnd:style = &quot;glossary-title&quot; or @rnd:style = &quot;d:qandaset&quot; or @rnd:style = &quot;qandaset-title&quot;]">
-        <axsl:variable name="nextComponent" select="following-sibling::*[self::dbk:appendix |&#10;  self::dbk:article |&#10;  self::dbk:book |&#10;  self::dbk:chapter |&#10;  self::dbk:part |&#10;  self::dbk:preface |&#10;  self::dbk:section |&#10;  self::dbk:sect1 |&#10;  self::dbk:sect2 |&#10;  self::dbk:sect3 |&#10;  self::dbk:sect4 |&#10;  self::dbk:sect5|self::dbk:para[@rnd:style = &quot;d:bibliography&quot; or @rnd:style = &quot;bibliography-title&quot; or @rnd:style = &quot;d:glossary&quot; or @rnd:style = &quot;glossary-title&quot; or @rnd:style = &quot;d:qandaset&quot; or @rnd:style = &quot;qandaset-title&quot;]][1]"/>
-        <axsl:apply-templates select="following-sibling::*[generate-id(following-sibling::*[self::dbk:appendix |&#10;  self::dbk:article |&#10;  self::dbk:book |&#10;  self::dbk:chapter |&#10;  self::dbk:part |&#10;  self::dbk:preface |&#10;  self::dbk:section |&#10;  self::dbk:sect1 |&#10;  self::dbk:sect2 |&#10;  self::dbk:sect3 |&#10;  self::dbk:sect4 |&#10;  self::dbk:sect5|self::dbk:para[@rnd:style = &quot;d:bibliography&quot; or @rnd:style = &quot;bibliography-title&quot; or @rnd:style = &quot;d:glossary&quot; or @rnd:style = &quot;glossary-title&quot; or @rnd:style = &quot;d:qandaset&quot; or @rnd:style = &quot;qandaset-title&quot;]][1]) = generate-id($nextComponent)]"/>
+      <axsl:when test="following-sibling::*[self::dbk:appendix |&#10;  self::dbk:article |&#10;  self::dbk:book |&#10;  self::dbk:chapter |&#10;  self::dbk:part |&#10;  self::dbk:preface |&#10;  self::dbk:section |&#10;  self::dbk:sect1 |&#10;  self::dbk:sect2 |&#10;  self::dbk:sect3 |&#10;  self::dbk:sect4 |&#10;  self::dbk:sect5] | following-sibling::dbk:para[@rnd:style = &quot;bibliography&quot; or @rnd:style = &quot;bibliography-title&quot; or @rnd:style = &quot;glossary&quot; or @rnd:style = &quot;glossary-title&quot; or @rnd:style = &quot;qandaset&quot; or @rnd:style = &quot;qandaset-title&quot;]">
+        <axsl:variable name="nextComponent" select="following-sibling::*[self::dbk:appendix |&#10;  self::dbk:article |&#10;  self::dbk:book |&#10;  self::dbk:chapter |&#10;  self::dbk:part |&#10;  self::dbk:preface |&#10;  self::dbk:section |&#10;  self::dbk:sect1 |&#10;  self::dbk:sect2 |&#10;  self::dbk:sect3 |&#10;  self::dbk:sect4 |&#10;  self::dbk:sect5|self::dbk:para[@rnd:style = &quot;bibliography&quot; or @rnd:style = &quot;bibliography-title&quot; or @rnd:style = &quot;glossary&quot; or @rnd:style = &quot;glossary-title&quot; or @rnd:style = &quot;qandaset&quot; or @rnd:style = &quot;qandaset-title&quot;]][1]"/>
+        <axsl:apply-templates select="following-sibling::*[generate-id(following-sibling::*[self::dbk:appendix |&#10;  self::dbk:article |&#10;  self::dbk:book |&#10;  self::dbk:chapter |&#10;  self::dbk:part |&#10;  self::dbk:preface |&#10;  self::dbk:section |&#10;  self::dbk:sect1 |&#10;  self::dbk:sect2 |&#10;  self::dbk:sect3 |&#10;  self::dbk:sect4 |&#10;  self::dbk:sect5|self::dbk:para[@rnd:style = &quot;bibliography&quot; or @rnd:style = &quot;bibliography-title&quot; or @rnd:style = &quot;glossary&quot; or @rnd:style = &quot;glossary-title&quot; or @rnd:style = &quot;qandaset&quot; or @rnd:style = &quot;qandaset-title&quot;]][1]) = generate-id($nextComponent)]"/>
       </axsl:when>
       <axsl:otherwise>
         <axsl:apply-templates select="following-sibling::*"/>
@@ -53,10 +53,10 @@
   <axsl:template match="dbk:para" mode="subsections">
     <axsl:param name="subsections" select="/.."/>
     <axsl:choose>
-      <axsl:when test="@rnd:style = &quot;d:bibliography&quot; or @rnd:style = &quot;bibliography-title&quot;">
+      <axsl:when test="@rnd:style = &quot;bibliography&quot; or @rnd:style = &quot;bibliography-title&quot;">
         <bibliography xmlns="http://docbook.org/ns/docbook">
           <axsl:call-template name="copy"/>
-          <axsl:variable name="bibliodivs" select="following-sibling::dbk:para[@rnd:style = &quot;d:bibliodiv&quot; or @rnd:style = &quot;bibliodiv-title&quot;]"/>
+          <axsl:variable name="bibliodivs" select="following-sibling::dbk:para[@rnd:style = &quot;bibliodiv&quot; or @rnd:style = &quot;bibliodiv-title&quot;]"/>
           <axsl:choose>
             <axsl:when test="$bibliodivs">
               <axsl:apply-templates select="following-sibling::*[1]" mode="bibliodivs">
@@ -72,10 +72,10 @@
           </axsl:choose>
         </bibliography>
       </axsl:when>
-      <axsl:when test="@rnd:style = &quot;d:glossary&quot; or @rnd:style = &quot;glossary-title&quot;">
+      <axsl:when test="@rnd:style = &quot;glossary&quot; or @rnd:style = &quot;glossary-title&quot;">
         <glossary xmlns="http://docbook.org/ns/docbook">
           <axsl:call-template name="copy"/>
-          <axsl:variable name="glossdivs" select="following-sibling::dbk:para[@rnd:style = &quot;d:glossdiv&quot; or @rnd:style = &quot;glossdiv-title&quot;]"/>
+          <axsl:variable name="glossdivs" select="following-sibling::dbk:para[@rnd:style = &quot;glossdiv&quot; or @rnd:style = &quot;glossdiv-title&quot;]"/>
           <axsl:choose>
             <axsl:when test="$glossdivs">
               <axsl:apply-templates select="following-sibling::*[1]" mode="glossdivs">
@@ -91,10 +91,10 @@
           </axsl:choose>
         </glossary>
       </axsl:when>
-      <axsl:when test="@rnd:style = &quot;d:qandaset&quot; or @rnd:style = &quot;qandaset-title&quot;">
+      <axsl:when test="@rnd:style = &quot;qandaset&quot; or @rnd:style = &quot;qandaset-title&quot;">
         <qandaset xmlns="http://docbook.org/ns/docbook">
           <axsl:call-template name="copy"/>
-          <axsl:variable name="qandadivs" select="following-sibling::dbk:para[@rnd:style = &quot;d:qandadiv&quot; or @rnd:style = &quot;qandadiv-title&quot;]"/>
+          <axsl:variable name="qandadivs" select="following-sibling::dbk:para[@rnd:style = &quot;qandadiv&quot; or @rnd:style = &quot;qandadiv-title&quot;]"/>
           <axsl:choose>
             <axsl:when test="$qandadivs">
               <axsl:apply-templates select="following-sibling::*[1]" mode="qandadivs">
@@ -124,7 +124,7 @@
     <axsl:param name="bibliodivs" select="/.."/>
     <axsl:choose>
       <axsl:when test="generate-id() = generate-id($nextSubsection)"/>
-      <axsl:when test="@rnd:style = &quot;d:bibliodiv&quot; or @rnd:style = &quot;bibliodiv-title&quot;">
+      <axsl:when test="@rnd:style = &quot;bibliodiv&quot; or @rnd:style = &quot;bibliodiv-title&quot;">
         <bibliodiv xmlns="http://docbook.org/ns/docbook">
           <axsl:call-template name="copy"/>
           <axsl:apply-templates select="following-sibling::*[1]" mode="terminal">
@@ -159,7 +159,7 @@
     <axsl:param name="glossdivs" select="/.."/>
     <axsl:choose>
       <axsl:when test="generate-id() = generate-id($nextSubsection)"/>
-      <axsl:when test="@rnd:style = &quot;d:glossdiv&quot; or @rnd:style = &quot;glossdiv-title&quot;">
+      <axsl:when test="@rnd:style = &quot;glossdiv&quot; or @rnd:style = &quot;glossdiv-title&quot;">
         <glossdiv xmlns="http://docbook.org/ns/docbook">
           <axsl:call-template name="copy"/>
           <axsl:apply-templates select="following-sibling::*[1]" mode="terminal">
@@ -194,7 +194,7 @@
     <axsl:param name="qandadivs" select="/.."/>
     <axsl:choose>
       <axsl:when test="generate-id() = generate-id($nextSubsection)"/>
-      <axsl:when test="@rnd:style = &quot;d:qandadiv&quot; or @rnd:style = &quot;qandadiv-title&quot;">
+      <axsl:when test="@rnd:style = &quot;qandadiv&quot; or @rnd:style = &quot;qandadiv-title&quot;">
         <qandadiv xmlns="http://docbook.org/ns/docbook">
           <axsl:call-template name="copy"/>
           <axsl:apply-templates select="following-sibling::*[1]" mode="terminal">

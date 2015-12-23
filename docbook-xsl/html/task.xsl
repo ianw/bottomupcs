@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="1.0">
 
 <!-- ********************************************************************
      $Id: task.xsl 9363 2012-05-12 23:42:32Z bobstayton $
@@ -16,7 +14,7 @@ version="1.0">
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:task">
+<xsl:template match="task">
   <xsl:variable name="param.placement"
                 select="substring-after(normalize-space($formal.title.placement),
                                         concat(local-name(.), ' '))"/>
@@ -34,46 +32,46 @@ version="1.0">
   </xsl:variable>
 
   <xsl:variable name="preamble"
-                select="*[not(self::d:title
-                              or self::d:titleabbrev)]"/>
+                select="*[not(self::title
+                              or self::titleabbrev)]"/>
 
   <div>
     <xsl:apply-templates select="." mode="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
     <xsl:call-template name="anchor"/>
 
-    <xsl:if test="(d:title or d:info/d:title) and $placement = 'before'">
+    <xsl:if test="(title or info/title) and $placement = 'before'">
       <xsl:call-template name="formal.object.heading"/>
     </xsl:if>
 
     <xsl:apply-templates select="$preamble"/>
 
-    <xsl:if test="(d:title or d:info/d:title) and $placement != 'before'">
+    <xsl:if test="(title or info/title) and $placement != 'before'">
       <xsl:call-template name="formal.object.heading"/>
     </xsl:if>
   </div>
 </xsl:template>
 
-<xsl:template match="d:task/d:title">
+<xsl:template match="task/title">
   <!-- nop -->
 </xsl:template>
 
-<xsl:template match="d:tasksummary">
+<xsl:template match="tasksummary">
   <xsl:call-template name="semiformal.object"/>
 </xsl:template>
 
-<xsl:template match="d:tasksummary/d:title"/>
+<xsl:template match="tasksummary/title"/>
 
-<xsl:template match="d:taskprerequisites">
+<xsl:template match="taskprerequisites">
   <xsl:call-template name="semiformal.object"/>
 </xsl:template>
 
-<xsl:template match="d:taskprerequisites/d:title"/>
+<xsl:template match="taskprerequisites/title"/>
 
-<xsl:template match="d:taskrelated">
+<xsl:template match="taskrelated">
   <xsl:call-template name="semiformal.object"/>
 </xsl:template>
 
-<xsl:template match="d:taskrelated/d:title"/>
+<xsl:template match="taskrelated/title"/>
 
 </xsl:stylesheet>

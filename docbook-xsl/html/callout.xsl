@@ -1,10 +1,9 @@
 <?xml version='1.0'?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:sverb="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.Verbatim"
+                xmlns:sverb="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.Verbatim"
                 xmlns:xverb="xalan://com.nwalsh.xalan.Verbatim"
                 xmlns:lxslt="http://xml.apache.org/xslt"
-                exclude-result-prefixes="sverb xverb lxslt d"
+                exclude-result-prefixes="sverb xverb lxslt"
                 version='1.0'>
 
 <!-- ********************************************************************
@@ -20,8 +19,8 @@ xmlns:sverb="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.Verbatim"
 <lxslt:component prefix="xverb"
                  functions="insertCallouts"/>
 
-<xsl:template match="d:programlistingco|d:screenco">
-  <xsl:variable name="verbatim" select="d:programlisting|d:screen"/>
+<xsl:template match="programlistingco|screenco">
+  <xsl:variable name="verbatim" select="programlisting|screen"/>
 
   <xsl:choose>
     <xsl:when test="$use.extensions != '0'
@@ -35,10 +34,10 @@ xmlns:sverb="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.Verbatim"
       <xsl:variable name="rtf-with-callouts">
         <xsl:choose>
           <xsl:when test="function-available('sverb:insertCallouts')">
-            <xsl:copy-of select="sverb:insertCallouts(d:areaspec,$rtf)"/>
+            <xsl:copy-of select="sverb:insertCallouts(areaspec,$rtf)"/>
           </xsl:when>
           <xsl:when test="function-available('xverb:insertCallouts')">
-            <xsl:copy-of select="xverb:insertCallouts(d:areaspec,$rtf)"/>
+            <xsl:copy-of select="xverb:insertCallouts(areaspec,$rtf)"/>
           </xsl:when>
           <xsl:otherwise>
             <xsl:message terminate="yes">
@@ -57,9 +56,9 @@ xmlns:sverb="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.Verbatim"
             <xsl:call-template name="number.rtf.lines">
               <xsl:with-param name="rtf" select="$rtf-with-callouts"/>
               <xsl:with-param name="pi.context"
-                              select="d:programlisting|d:screen"/>
+                              select="programlisting|screen"/>
             </xsl:call-template>
-            <xsl:apply-templates select="d:calloutlist"/>
+            <xsl:apply-templates select="calloutlist"/>
           </div>
         </xsl:when>
         <xsl:otherwise>
@@ -67,7 +66,7 @@ xmlns:sverb="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.Verbatim"
             <xsl:call-template name="common.html.attributes"/>
             <xsl:call-template name="id.attribute"/>
             <xsl:copy-of select="$rtf-with-callouts"/>
-            <xsl:apply-templates select="d:calloutlist"/>
+            <xsl:apply-templates select="calloutlist"/>
           </div>
         </xsl:otherwise>
       </xsl:choose>
@@ -82,18 +81,18 @@ xmlns:sverb="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.Verbatim"
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:areaspec|d:areaset|d:area">
+<xsl:template match="areaspec|areaset|area">
 </xsl:template>
 
-<xsl:template match="d:areaset" mode="conumber">
-  <xsl:number count="d:area|d:areaset" format="1"/>
+<xsl:template match="areaset" mode="conumber">
+  <xsl:number count="area|areaset" format="1"/>
 </xsl:template>
 
-<xsl:template match="d:area" mode="conumber">
-  <xsl:number count="d:area|d:areaset" format="1"/>
+<xsl:template match="area" mode="conumber">
+  <xsl:number count="area|areaset" format="1"/>
 </xsl:template>
 
-<xsl:template match="d:co" name="co">
+<xsl:template match="co" name="co">
   <!-- Support a single linkend in HTML -->
   <xsl:variable name="targets" select="key('id', @linkends)"/>
   <xsl:variable name="target" select="$targets[1]"/>
@@ -138,7 +137,7 @@ xmlns:sverb="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.Verbatim"
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:coref">
+<xsl:template match="coref">
   <!-- tricky; this relies on the fact that we can process the "co" that's -->
   <!-- "over there" as if it were "right here" -->
 
@@ -162,12 +161,12 @@ xmlns:sverb="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.Verbatim"
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:co" mode="callout-bug">
+<xsl:template match="co" mode="callout-bug">
   <xsl:call-template name="callout-bug">
     <xsl:with-param name="conum">
-      <xsl:number count="d:co"
+      <xsl:number count="co"
                   level="any"
-                  from="d:programlisting|d:screen|d:literallayout|d:synopsis"
+                  from="programlisting|screen|literallayout|synopsis"
                   format="1"/>
     </xsl:with-param>
   </xsl:call-template>

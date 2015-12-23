@@ -1,11 +1,10 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:saxon="http://icl.com/saxon"
+                xmlns:saxon="http://icl.com/saxon"
                 xmlns:lxslt="http://xml.apache.org/xslt"
                 xmlns:redirect="http://xml.apache.org/xalan/redirect"
                 xmlns:doc="http://nwalsh.com/xsl/documentation/1.0"
 		version="1.1"
-                exclude-result-prefixes="doc d"
+                exclude-result-prefixes="doc"
                 extension-element-prefixes="saxon redirect lxslt">
 
 <!-- ********************************************************************

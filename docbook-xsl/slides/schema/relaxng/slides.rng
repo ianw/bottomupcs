@@ -94,8 +94,12 @@
       <optional>
         <ref name="db.all.blocks"/>
       </optional>
-      <ref name="dbs.speakernotes"/>
-      <ref name="dbs.handoutnotes"/>
+      <optional>
+        <ref name="dbs.speakernotes"/>
+      </optional>
+      <optional>
+        <ref name="dbs.handoutnotes"/>
+      </optional>
       <optional>
         <ref name="db._any.svg"/>
       </optional>

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <!--This file was created automatically by html2xhtml-->
 <!--from the HTML stylesheets.-->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:d="http://docbook.org/ns/docbook"
-xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns="http://www.w3.org/1999/xhtml" version="1.0" exclude-result-prefixes="doc d">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns="http://www.w3.org/1999/xhtml" version="1.0" exclude-result-prefixes="doc">
 
 <!-- ********************************************************************
      $Id: maketoc.xsl 6910 2007-06-28 23:23:30Z xmldoc $
@@ -16,7 +15,7 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns="http://www.w3.org/199
 
 <!-- ==================================================================== -->
 
-<xsl:import href="docbook.xsl"/>
+<xsl:import href="docbook-no-doctype.xsl"/>
 <xsl:import href="chunk.xsl"/>
 
 <xsl:output method="xml" indent="no" encoding="UTF-8" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
@@ -25,7 +24,7 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns="http://www.w3.org/199
 
 <!-- refentry in autotoc.xsl does not use subtoc, so must
      handle it explicitly here. -->
-<xsl:template match="d:refentry" mode="toc">
+<xsl:template match="refentry" mode="toc">
   <xsl:param name="toc-context" select="."/>
 
   <xsl:call-template name="subtoc">
@@ -49,7 +48,7 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns="http://www.w3.org/199
     <xsl:variable name="id">
       <xsl:call-template name="object.id"/>
     </xsl:variable>
-    <d:tocentry linkend="{$id}">
+    <tocentry linkend="{$id}">
       <xsl:processing-instruction name="dbhtml">
         <xsl:text>filename="</xsl:text>
         <xsl:value-of select="$filename"/>
@@ -59,7 +58,7 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns="http://www.w3.org/199
 </xsl:text>
       <xsl:apply-templates mode="toc" select="$nodes"/>
       <xsl:call-template name="indent-spaces"/>
-    </d:tocentry>
+    </tocentry>
     <xsl:text>
 </xsl:text>
   </xsl:if>

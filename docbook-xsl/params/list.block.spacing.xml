@@ -25,5 +25,8 @@
 </refsynopsisdiv>
 <refsection><info><title>Description</title></info>
 <para>Specify the spacing required before and after a list. It is necessary to specify the space after a list block because lists can come inside of paras.  </para>
+<para>This attribute set is not applied to nested lists, so that only the
+<parameter>list.item.spacing</parameter> attribute-set is used, which provides 
+consistent spacing.</para>
 </refsection>
 </refentry>

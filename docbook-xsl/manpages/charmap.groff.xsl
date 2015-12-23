@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:u="http://docbook.sf.net/xmlns/unichar/1.0"
-                exclude-result-prefixes="u d">
+                xmlns:u="http://docbook.sf.net/xmlns/unichar/1.0"
+                exclude-result-prefixes="u">
 
 <!-- ********************************************************************
      $Id: charmap.groff.xsl 7806 2008-03-04 03:27:47Z xmldoc $

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <!--This file was created automatically by xsl2profile-->
 <!--from the DocBook XSL stylesheets.-->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:d="http://docbook.org/ns/docbook"
-xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org/docbook-ng" xmlns:db="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:exslt="http://exslt.org/common" exslt:dummy="dummy" ng:dummy="dummy" db:dummy="dummy" extension-element-prefixes="exslt" version="1.0" exclude-result-prefixes="doc ng db exsl exslt d">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org/docbook-ng" xmlns:db="http://docbook.org/ns/docbook" xmlns:exsl="http://exslt.org/common" xmlns:exslt="http://exslt.org/common" exslt:dummy="dummy" ng:dummy="dummy" db:dummy="dummy" extension-element-prefixes="exslt" version="1.0" exclude-result-prefixes="doc ng db exsl exslt">
 
 <xsl:import href="../html/chunk.xsl"/>
 
 <xsl:output method="html"/>
 
 <!-- ********************************************************************
-     $Id: javahelp.xsl 9152 2011-11-12 00:17:33Z bobstayton $
+     $Id: javahelp.xsl 9907 2014-02-24 19:01:48Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -20,44 +19,52 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
 
 <!-- ==================================================================== -->
 
-<xslo:include xmlns:xslo="http://www.w3.org/1999/XSL/Transform" href="../profiling/profile-mode.xsl"/><xslo:variable xmlns:xslo="http://www.w3.org/1999/XSL/Transform" name="profiled-content"> <xslo:choose> <xslo:when test="namespace-uri(*[1]) != 'http://docbook.org/ns/docbook'"> <xsl:message>Adding DocBook namespace to version 4 DocBook document</xsl:message> <xsl:variable name="addns"> <xsl:apply-templates mode="addNS" select="/"/> </xsl:variable> <xsl:apply-templates select="exsl:node-set($addns)" mode="profile"/> </xslo:when> <xslo:otherwise> <xslo:apply-templates select="/" mode="profile"/> </xslo:otherwise> </xslo:choose> </xslo:variable><xslo:variable xmlns:xslo="http://www.w3.org/1999/XSL/Transform" name="profiled-nodes" select="exslt:node-set($profiled-content)"/><xsl:template match="/">
+<xsl:variable name="no.namespace">
+  <xsl:if test="$exsl.node.set.available != 0 and                  namespace-uri(/*) = 'http://docbook.org/ns/docbook'">
+      <xsl:apply-templates select="/*" mode="stripNS"/>
+  </xsl:if>
+</xsl:variable>
+
+<xslo:include xmlns:xslo="http://www.w3.org/1999/XSL/Transform" href="../profiling/profile-mode.xsl"/><xslo:variable xmlns:xslo="http://www.w3.org/1999/XSL/Transform" name="profiled-content"><xslo:choose><xslo:when test="$exsl.node.set.available != 0 and                      namespace-uri(/*) = 'http://docbook.org/ns/docbook'"><xslo:variable name="no.namespace"><xslo:apply-templates select="/*" mode="stripNS"/></xslo:variable><xslo:call-template name="log.message"><xslo:with-param name="level">Note</xslo:with-param><xslo:with-param name="source"><xslo:call-template name="get.doc.title"/></xslo:with-param><xslo:with-param name="context-desc"><xslo:text>namesp. cut</xslo:text></xslo:with-param><xslo:with-param name="message"><xslo:text>stripped namespace before processing</xslo:text></xslo:with-param></xslo:call-template><xslo:apply-templates select="exslt:node-set($no.namespace)" mode="profile"/></xslo:when><xslo:otherwise><xslo:apply-templates select="/" mode="profile"/></xslo:otherwise></xslo:choose></xslo:variable><xslo:variable xmlns:xslo="http://www.w3.org/1999/XSL/Transform" name="profiled-nodes" select="exslt:node-set($profiled-content)"/><xsl:template match="/">
   <!-- * Get a title for current doc so that we let the user -->
   <!-- * know what document we are processing at this point. -->
   <xsl:variable name="doc.title">
     <xsl:call-template name="get.doc.title"/>
   </xsl:variable>
   <xsl:choose>
-    
+    <!-- fix namespace if necessary -->
+    <xsl:when test="false()"/>
+    <!-- Can't process unless namespace fixed with exsl node-set()-->
     <xsl:when test="false()"/>
     <xsl:otherwise>
-  <xsl:choose>
-    <xsl:when test="$rootid != ''">
       <xsl:choose>
-        <xsl:when test="count($profiled-nodes//*[@id=$rootid or @xml:id=$rootid]) = 0">
-          <xsl:message terminate="yes">
-            <xsl:text>ID '</xsl:text>
-            <xsl:value-of select="$rootid"/>
-            <xsl:text>' not found in document.</xsl:text>
-          </xsl:message>
+        <xsl:when test="$rootid != ''">
+          <xsl:choose>
+            <xsl:when test="count($profiled-nodes//*[@id=$rootid or @xml:id=$rootid]) = 0">
+              <xsl:message terminate="yes">
+                <xsl:text>ID '</xsl:text>
+                <xsl:value-of select="$rootid"/>
+                <xsl:text>' not found in document.</xsl:text>
+              </xsl:message>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:message>Formatting from <xsl:value-of select="$rootid"/></xsl:message>
+              <xsl:apply-templates select="$profiled-nodes//*[@id=$rootid or @xml:id=$rootid]" mode="process.root"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:message>Formatting from <xsl:value-of select="$rootid"/></xsl:message>
-          <xsl:apply-templates select="$profiled-nodes//*[@id=$rootid or @xml:id=$rootid]" mode="process.root"/>
+          <xsl:apply-templates select="$profiled-nodes" mode="process.root"/>
         </xsl:otherwise>
       </xsl:choose>
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:apply-templates select="$profiled-nodes" mode="process.root"/>
+      <xsl:for-each select="$profiled-nodes">    <!-- This is just a hook for building profiling stylesheets -->
+        <xsl:call-template name="helpset"/>
+        <xsl:call-template name="helptoc"/>
+        <xsl:call-template name="helpmap"/>
+        <xsl:call-template name="helpidx"/>
+      </xsl:for-each>
     </xsl:otherwise>
   </xsl:choose>
-  <xsl:for-each select="$profiled-nodes">    <!-- This is just a hook for building profiling stylesheets -->
-    <xsl:call-template name="helpset"/>
-    <xsl:call-template name="helptoc"/>
-    <xsl:call-template name="helpmap"/>
-    <xsl:call-template name="helpidx"/>
-  </xsl:for-each>
-</xsl:otherwise>
-</xsl:choose>
 </xsl:template>
 
 <xsl:param name="suppress.navigation" select="1"/>
@@ -148,7 +155,7 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
   </toc>
 </xsl:template>
 
-<xsl:template match="d:set" mode="jhtoc">
+<xsl:template match="set" mode="jhtoc">
   <xsl:variable name="id">
     <xsl:call-template name="object.id">
       <xsl:with-param name="object" select="."/>
@@ -162,11 +169,11 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
     <xsl:attribute name="text">
       <xsl:value-of select="normalize-space($title)"/>
     </xsl:attribute>
-    <xsl:apply-templates select="d:book" mode="jhtoc"/>
+    <xsl:apply-templates select="book" mode="jhtoc"/>
   </tocitem>
 </xsl:template>
 
-<xsl:template match="d:book" mode="jhtoc">
+<xsl:template match="book" mode="jhtoc">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -178,11 +185,11 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
     <xsl:attribute name="text">
       <xsl:value-of select="normalize-space($title)"/>
     </xsl:attribute>
-    <xsl:apply-templates select="d:part|d:reference|d:preface|d:chapter|d:appendix|d:article|d:colophon|d:glossary|d:bibliography" mode="jhtoc"/>
+    <xsl:apply-templates select="part|reference|preface|chapter|appendix|article|colophon|glossary|bibliography" mode="jhtoc"/>
   </tocitem>
 </xsl:template>
 
-<xsl:template match="d:part|d:reference|d:preface|d:chapter|d:appendix|d:article" mode="jhtoc">
+<xsl:template match="part|reference|preface|chapter|appendix|article" mode="jhtoc">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -194,11 +201,11 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
     <xsl:attribute name="text">
       <xsl:value-of select="normalize-space($title)"/>
     </xsl:attribute>
-    <xsl:apply-templates select="d:article|d:preface|d:chapter|d:appendix|d:refentry|d:section|d:sect1|d:glossary|d:bibliography" mode="jhtoc"/>
+    <xsl:apply-templates select="article|preface|chapter|appendix|refentry|section|sect1|glossary|bibliography" mode="jhtoc"/>
   </tocitem>
 </xsl:template>
 
-<xsl:template match="d:section" mode="jhtoc">
+<xsl:template match="section" mode="jhtoc">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -210,11 +217,11 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
     <xsl:attribute name="text">
       <xsl:value-of select="normalize-space($title)"/>
     </xsl:attribute>
-    <xsl:apply-templates select="d:section" mode="jhtoc"/>
+    <xsl:apply-templates select="section" mode="jhtoc"/>
   </tocitem>
 </xsl:template>
 
-<xsl:template match="d:sect1" mode="jhtoc">
+<xsl:template match="sect1" mode="jhtoc">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -226,11 +233,11 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
     <xsl:attribute name="text">
       <xsl:value-of select="normalize-space($title)"/>
     </xsl:attribute>
-    <xsl:apply-templates select="d:sect2" mode="jhtoc"/>
+    <xsl:apply-templates select="sect2" mode="jhtoc"/>
   </tocitem>
 </xsl:template>
 
-<xsl:template match="d:sect2" mode="jhtoc">
+<xsl:template match="sect2" mode="jhtoc">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -242,11 +249,11 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
     <xsl:attribute name="text">
       <xsl:value-of select="normalize-space($title)"/>
     </xsl:attribute>
-    <xsl:apply-templates select="d:sect3" mode="jhtoc"/>
+    <xsl:apply-templates select="sect3" mode="jhtoc"/>
   </tocitem>
 </xsl:template>
 
-<xsl:template match="d:sect3" mode="jhtoc">
+<xsl:template match="sect3" mode="jhtoc">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -258,11 +265,11 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
     <xsl:attribute name="text">
       <xsl:value-of select="normalize-space($title)"/>
     </xsl:attribute>
-    <xsl:apply-templates select="d:sect4" mode="jhtoc"/>
+    <xsl:apply-templates select="sect4" mode="jhtoc"/>
   </tocitem>
 </xsl:template>
 
-<xsl:template match="d:sect4" mode="jhtoc">
+<xsl:template match="sect4" mode="jhtoc">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -274,11 +281,11 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
     <xsl:attribute name="text">
       <xsl:value-of select="normalize-space($title)"/>
     </xsl:attribute>
-    <xsl:apply-templates select="d:sect5" mode="jhtoc"/>
+    <xsl:apply-templates select="sect5" mode="jhtoc"/>
   </tocitem>
 </xsl:template>
 
-<xsl:template match="d:sect5|d:colophon|d:refentry" mode="jhtoc">
+<xsl:template match="sect5|colophon|refentry" mode="jhtoc">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -294,7 +301,7 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
 </xsl:template>
 
 
-<xsl:template match="d:glossary" mode="jhtoc">
+<xsl:template match="glossary" mode="jhtoc">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -313,7 +320,7 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
 
 </xsl:template>
 
-<xsl:template match="d:bibliography" mode="jhtoc">
+<xsl:template match="bibliography" mode="jhtoc">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -353,16 +360,16 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
   <map version="1.0">
     <xsl:choose>
       <xsl:when test="$rootid != ''">
-        <xsl:apply-templates select="key('id',$rootid)//d:set                                      | key('id',$rootid)//d:book                                      | key('id',$rootid)//d:part                                      | key('id',$rootid)//d:reference                                      | key('id',$rootid)//d:preface                                      | key('id',$rootid)//d:chapter                                      | key('id',$rootid)//d:appendix                                      | key('id',$rootid)//d:article                                      | key('id',$rootid)//d:colophon                                      | key('id',$rootid)//d:refentry                                      | key('id',$rootid)//d:section                                      | key('id',$rootid)//d:sect1                                      | key('id',$rootid)//d:sect2                                      | key('id',$rootid)//d:sect3                                      | key('id',$rootid)//d:sect4                                      | key('id',$rootid)//d:sect5                                      | key('id',$rootid)//d:indexterm                                       | key('id',$rootid)//d:glossary                                      | key('id',$rootid)//d:bibliography          | key('id',$rootid)//*[@id]" mode="map"/>
+        <xsl:apply-templates select="key('id',$rootid)//set                                      | key('id',$rootid)//book                                      | key('id',$rootid)//part                                      | key('id',$rootid)//reference                                      | key('id',$rootid)//preface                                      | key('id',$rootid)//chapter                                      | key('id',$rootid)//appendix                                      | key('id',$rootid)//article                                      | key('id',$rootid)//colophon                                      | key('id',$rootid)//refentry                                      | key('id',$rootid)//section                                      | key('id',$rootid)//sect1                                      | key('id',$rootid)//sect2                                      | key('id',$rootid)//sect3                                      | key('id',$rootid)//sect4                                      | key('id',$rootid)//sect5                                      | key('id',$rootid)//indexterm                                       | key('id',$rootid)//glossary                                      | key('id',$rootid)//bibliography          | key('id',$rootid)//*[@id]" mode="map"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:apply-templates select="//d:set                                      | //d:book                                      | //d:part                                      | //d:reference                                      | //d:preface                                      | //d:chapter                                      | //d:appendix                                      | //d:article                                      | //d:colophon                                      | //d:refentry                                      | //d:section                                      | //d:sect1                                      | //d:sect2                                      | //d:sect3                                      | //d:sect4                                      | //d:sect5                                      | //d:indexterm                                      | //d:glossary                                      | //d:bibliography          | //*[@id]" mode="map"/>
+        <xsl:apply-templates select="//set                                      | //book                                      | //part                                      | //reference                                      | //preface                                      | //chapter                                      | //appendix                                      | //article                                      | //colophon                                      | //refentry                                      | //section                                      | //sect1                                      | //sect2                                      | //sect3                                      | //sect4                                      | //sect5                                      | //indexterm                                      | //glossary                                      | //bibliography          | //*[@id]" mode="map"/>
       </xsl:otherwise>
     </xsl:choose>
   </map>
 </xsl:template>
 
-<xsl:template match="d:set" mode="map">
+<xsl:template match="set" mode="map">
   <xsl:variable name="id">
     <xsl:call-template name="object.id">
       <xsl:with-param name="object" select="."/>
@@ -376,7 +383,7 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
   </mapID>
 </xsl:template>
 
-<xsl:template match="d:book" mode="map">
+<xsl:template match="book" mode="map">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -388,7 +395,7 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
   </mapID>
 </xsl:template>
 
-<xsl:template match="d:part|d:reference|d:preface|d:chapter|d:appendix|d:refentry|d:article|d:glossary|d:bibliography" mode="map">
+<xsl:template match="part|reference|preface|chapter|appendix|refentry|article|glossary|bibliography" mode="map">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -400,7 +407,7 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
   </mapID>
 </xsl:template>
 
-<xsl:template match="d:section|d:sect1|d:sect2|d:sect3|d:sect4|d:sect5|d:colophon" mode="map">
+<xsl:template match="section|sect1|sect2|sect3|sect4|sect5|colophon" mode="map">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -412,9 +419,9 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
   </mapID>
 </xsl:template>
 
-<xsl:template match="d:indexterm[@class='endofrange']" mode="map"/>
+<xsl:template match="indexterm[@class='endofrange']" mode="map"/>
 
-<xsl:template match="d:indexterm" mode="map">
+<xsl:template match="indexterm" mode="map">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -459,45 +466,45 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:ng="http://docbook.org
   <index version="1.0">
     <xsl:choose>
       <xsl:when test="$rootid != ''">
-        <xsl:apply-templates select="key('id',$rootid)//d:indexterm" mode="idx">
-	  <xsl:sort select="d:primary"/>
-	  <xsl:sort select="d:secondary"/>
-	  <xsl:sort select="d:tertiary"/>
+        <xsl:apply-templates select="key('id',$rootid)//indexterm" mode="idx">
+	  <xsl:sort select="primary"/>
+	  <xsl:sort select="secondary"/>
+	  <xsl:sort select="tertiary"/>
 	</xsl:apply-templates>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:apply-templates select="//d:indexterm" mode="idx">
-          <xsl:sort select="d:primary"/>
-	  <xsl:sort select="d:secondary"/>
-	  <xsl:sort select="d:tertiary"/>
+        <xsl:apply-templates select="//indexterm" mode="idx">
+          <xsl:sort select="primary"/>
+	  <xsl:sort select="secondary"/>
+	  <xsl:sort select="tertiary"/>
         </xsl:apply-templates>
       </xsl:otherwise>
     </xsl:choose>
   </index>
 </xsl:template>
 
-<xsl:template match="d:indexterm[@class='endofrange']" mode="idx"/>
+<xsl:template match="indexterm[@class='endofrange']" mode="idx"/>
 
-<xsl:template match="d:indexterm" mode="idx">
+<xsl:template match="indexterm" mode="idx">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
 
   <xsl:variable name="text">
-    <xsl:value-of select="normalize-space(d:primary)"/>
-    <xsl:if test="d:secondary">
+    <xsl:value-of select="normalize-space(primary)"/>
+    <xsl:if test="secondary">
       <xsl:text>, </xsl:text>
-      <xsl:value-of select="normalize-space(d:secondary)"/>
+      <xsl:value-of select="normalize-space(secondary)"/>
     </xsl:if>
-    <xsl:if test="d:tertiary">
+    <xsl:if test="tertiary">
       <xsl:text>, </xsl:text>
-      <xsl:value-of select="normalize-space(d:tertiary)"/>
+      <xsl:value-of select="normalize-space(tertiary)"/>
     </xsl:if>
   </xsl:variable>
 
   <xsl:choose>
-    <xsl:when test="d:see">
-      <xsl:variable name="see"><xsl:value-of select="normalize-space(d:see)"/></xsl:variable>
+    <xsl:when test="see">
+      <xsl:variable name="see"><xsl:value-of select="normalize-space(see)"/></xsl:variable>
       <indexitem text="{$text} see '{$see}'"/>
     </xsl:when>
     <xsl:otherwise>

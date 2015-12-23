@@ -1,13 +1,12 @@
 <?xml version='1.0'?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:doc="http://nwalsh.com/xsl/documentation/1.0"
+                xmlns:doc="http://nwalsh.com/xsl/documentation/1.0"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
-                exclude-result-prefixes="doc d"
+                exclude-result-prefixes="doc"
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: pi.xsl 9022 2011-07-14 19:21:36Z bobstayton $
+     $Id: pi.xsl 9848 2014-01-17 22:44:39Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -18,7 +17,7 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0"
 
 <doc:reference xmlns=""><info><title>HTML Processing Instruction Reference</title>
     <releaseinfo role="meta">
-      $Id: pi.xsl 9022 2011-07-14 19:21:36Z bobstayton $
+      $Id: pi.xsl 9848 2014-01-17 22:44:39Z bobstayton $
     </releaseinfo>
   </info>
   <partintro xml:id="partintro">
@@ -970,7 +969,7 @@ specifications in one processing instruction:
   </refparameter>
 </doc:pi>
 <xsl:template name="pi.dbcmdlist">
-  <xsl:variable name="cmdsynopses" select="..//d:cmdsynopsis"/>
+  <xsl:variable name="cmdsynopses" select="..//cmdsynopsis"/>
   <xsl:if test="count($cmdsynopses)&lt;1">
     <xsl:message><xsl:text>No cmdsynopsis elements matched dbcmdlist PI, perhaps it's nested too deep?</xsl:text>
     </xsl:message>
@@ -1000,7 +999,7 @@ specifications in one processing instruction:
   </refparameter>
 </doc:pi>
 <xsl:template name="pi.dbfunclist">
-  <xsl:variable name="funcsynopses" select="..//d:funcsynopsis"/>
+  <xsl:variable name="funcsynopses" select="..//funcsynopsis"/>
   <xsl:if test="count($funcsynopses)&lt;1">
     <xsl:message><xsl:text>No funcsynopsis elements matched dbfunclist PI, perhaps it's nested too deep?</xsl:text>
     </xsl:message>
@@ -1077,11 +1076,11 @@ specifications in one processing instruction:
   </xsl:param>
   <xsl:choose>
     <xsl:when test="$href != ''">
-      <xsl:variable name="content" select="document($href,/)"/>
+      <xsl:variable name="content" select="document($href,.)"/>
       <xsl:choose>
         <xsl:when test="$content/*">
           <xsl:choose>
-            <xsl:when test="$content/*[1][self::d:html]">
+            <xsl:when test="$content/*[1][self::html]">
               <!-- include just the children of html wrapper -->
               <xsl:copy-of select="$content/*[1]/node()"/>
             </xsl:when>

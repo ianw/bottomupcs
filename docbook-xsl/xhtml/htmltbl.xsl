@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="ASCII"?>
 <!--This file was created automatically by html2xhtml-->
 <!--from the HTML stylesheets.-->
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:d="http://docbook.org/ns/docbook"
-xmlns="http://www.w3.org/1999/xhtml" version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" version="1.0">
 
 <!-- ********************************************************************
-     $Id: htmltbl.xsl 9501 2012-07-16 00:14:50Z bobstayton $
+     $Id: htmltbl.xsl 9916 2014-05-15 16:08:21Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -17,37 +15,37 @@ xmlns="http://www.w3.org/1999/xhtml" version="1.0">
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:table" mode="htmlTable">
+<xsl:template match="table" mode="htmlTable">
   <xsl:element name="table" namespace="http://www.w3.org/1999/xhtml">
     <xsl:apply-templates select="@*" mode="htmlTableAtt"/>
     <xsl:call-template name="htmlTable"/>
   </xsl:element>
 </xsl:template>
 
-<xsl:template match="d:colgroup" mode="htmlTable">
+<xsl:template match="colgroup" mode="htmlTable">
   <xsl:element name="{local-name()}" namespace="http://www.w3.org/1999/xhtml">
     <xsl:apply-templates select="@*" mode="htmlTableAtt"/>
     <xsl:apply-templates mode="htmlTable"/>
   </xsl:element>
 </xsl:template>
 
-<xsl:template match="d:col" mode="htmlTable">
+<xsl:template match="col" mode="htmlTable">
   <xsl:element name="{local-name()}" namespace="http://www.w3.org/1999/xhtml">
     <xsl:apply-templates select="@*" mode="htmlTableAtt"/>
   </xsl:element>
 </xsl:template>
 
 <!-- Handled by formal.object.title template -->
-<xsl:template match="d:caption" mode="htmlTable"/>
+<xsl:template match="caption" mode="htmlTable"/>
 
-<xsl:template match="d:tbody|d:thead|d:tfoot|d:tr" mode="htmlTable">
+<xsl:template match="tbody|thead|tfoot|tr" mode="htmlTable">
   <xsl:element name="{local-name(.)}" namespace="http://www.w3.org/1999/xhtml">
     <xsl:apply-templates select="@*" mode="htmlTableAtt"/>
     <xsl:apply-templates mode="htmlTable"/>
   </xsl:element>
 </xsl:template>
 
-<xsl:template match="d:th|d:td" mode="htmlTable">
+<xsl:template match="th|td" mode="htmlTable">
   <xsl:element name="{local-name(.)}" namespace="http://www.w3.org/1999/xhtml">
     <xsl:apply-templates select="@*" mode="htmlTableAtt"/>
     <xsl:apply-templates/> <!-- *not* mode=htmlTable -->
@@ -60,7 +58,7 @@ xmlns="http://www.w3.org/1999/xhtml" version="1.0">
 <xsl:template mode="htmlTableAtt" match="@*"/>
 
 <!-- copy these through -->
-<xsl:template mode="htmlTableAtt" match="@abbr                    | @align                    | @axis                    | @bgcolor                    | @border                    | @cellpadding                    | @cellspacing                    | @char                    | @charoff                    | @class                    | @dir                    | @frame                    | @headers                    | @height                    | @lang                    | @nowrap                    | @onclick                    | @ondblclick                    | @onkeydown                    | @onkeypress                    | @onkeyup                    | @onmousedown                    | @onmousemove                    | @onmouseout                    | @onmouseover                    | @onmouseup                    | @rules                    | @style                    | @summary                    | @title                    | @valign                    | @valign                    | @width                    | @xml:lang">
+<xsl:template mode="htmlTableAtt" match="@abbr                    | @align                    | @axis                    | @bgcolor                    | @border                    | @cellpadding                    | @cellspacing                    | @char                    | @charoff                    | @class                    | @dir                    | @frame                    | @headers                    | @height                    | @id                    | @lang                    | @nowrap                    | @onclick                    | @ondblclick                    | @onkeydown                    | @onkeypress                    | @onkeyup                    | @onmousedown                    | @onmousemove                    | @onmouseout                    | @onmouseover                    | @onmouseup                    | @rules                    | @scope                    | @style                    | @summary                    | @title                    | @valign                    | @valign                    | @width                    | @xml:id                    | @xml:lang">
   <xsl:copy-of select="."/>
 </xsl:template>
 

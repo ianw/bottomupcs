@@ -7,7 +7,7 @@
 <info>
   <title>Release Notes for the DocBook XSL Stylesheets</title>
   <pubdate><?dbtimestamp format="Y-m-d"?></pubdate>
-  <releaseinfo role="cvs">$Revision: 9401 $ $Date: 2012-06-04 21:47:26 +0000 (Mon, 04 Jun 2012) $</releaseinfo>
+  <releaseinfo role="cvs">$Revision: 10004 $ $Date: 2015-10-15 21:10:53 +0000 (Thu, 15 Oct 2015) $</releaseinfo>
   <!-- * <author><orgname>DocBook Project Development Team</orgname></author> -->
 <abstract>
 <para condition="dot-zero;dot-one-plus">This release-notes
@@ -32,17 +32,16 @@ An online <link
   >hyperlinked change history</link> (warning: big file) of all
 changes made over the entire history of the codebase.</para>
 <para condition="dot-zero">As with all DocBook Project <link
-    linkend="dot0">dot-zero</link> releases, this is an
-  experimental release. It will be followed shortly by a stable
+    linkend="dot0">dot-zero</link> releases, this is a
+  candidate release for testing by the DocBook community. It will be followed shortly by a stable
   release.</para>
-<para condition="dot-one-plus">As with all DocBook Project “dot
+<!-- <para condition="dot-one-plus">As with all DocBook Project “dot
   one plus” releases, this release aspires to be stable (in
   contrast to <link linkend="dot0">dot-zero</link> releases, which
   are experimental).</para>
 <para condition="snapshot">This is a pre-release “snapshot” of the
 DocBook XSL Stylesheets. The change information in the first
-section of this file 
-(for “<xi:include href="NEWS.xml" xpointer="xpointer(/article/sect1/title/text())"/>”) is
+section of NEWS.xml is
 auto-generated from change descriptions stored in the project
 source-code repository.</para>
 <para condition="snapshot">That means the first section contains
@@ -50,20 +49,1033 @@ descriptions both of bug fixes and of feature changes. The
 remaining sections are manually edited changelog subsets that
 exclude bug-fix descriptions – that is, trimmed down to just those
 those descriptions that document enhancements and changes to the
-public APIs (user-configurable parameters).</para>
+public APIs (user-configurable parameters).</para>-->
 </abstract>
 </info>
 
-<sect1 condition="snapshot" xml:id="current">
-  <xi:include href="NEWS.xml" xpointer="xpointer(/article/sect1/*)"/>
-</sect1>
 
-<sect1 xml:id="V1.78.1">
+<section xml:id="Vsnapshot_9999">
+<title>Release Notes: 1.79.0</title>
+<para>The following is a list of changes that have been made
+        since the 1.78.1 release.</para>
+
+<section xml:id="Vsnapshot_9999_Gentext">
+<title>Gentext</title>
+<para>The following changes have been made to the
+            <filename>gentext</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>Dongsheng Song: locale/zh.xml; locale/zh_cn.xml</literal></para><screen><phrase role="commit-message">Fix Auditlocale.pl warning.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: locale/en.xml</literal></para><screen><phrase role="commit-message">Add elements dialogue, drama, and poetry from DocBook Publishers.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: locale/pt.xml</literal></para><screen><phrase role="commit-message">updates from DocBook user.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: locale/en.xml</literal></para><screen><phrase role="commit-message">Fix wording.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: locale/en.xml</literal></para><screen><phrase role="commit-message">Fix line breaks.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: locale/en.xml</literal></para><screen><phrase role="commit-message">Add text message for unsupported video and audio.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: xsl/xsl-primary-is-locale.xsl</literal></para><screen><phrase role="commit-message">Initial work on Ant build, common (L10N) directory handled so far</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: locale/ur.xml</literal></para><screen><phrase role="commit-message">Add <tag>email</tag> <tag>address</tag> for contributor.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: locale/ur.xml</literal></para><screen><phrase role="commit-message">Check in contributed locale file from Wasif Hasan Baig,
+contributed through SourceForge Patch # 187.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>kasunbg: locale/nl.xml</literal></para><screen><phrase role="commit-message">Committing Dutch translations of DocBook WebHelp. Patch provided by Marja van Waes.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>kasunbg: locale/ru.xml</literal></para><screen><phrase role="commit-message">Committing patch for Russian translations of webhelp. Patch provided by Alex Loginov and Yuri Chornoivan. Patch #1325</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>kasunbg: locale/uk.xml</literal></para><screen><phrase role="commit-message">Committing Ukrainian translations for Webhelp. Patch by Yuri Chornoivan. Patch #1324</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: locale/ca.xml; locale/da.xml; locale/cs.xml; locale/es.xml; locale/fr.xml; local⋯</literal></para><screen><phrase role="commit-message">Added missing <tag>keycap</tag> context for ca, cs, da, es, et, eu, and fr</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: locale/en.xml; locale/de.xml</literal></para><screen><phrase role="commit-message">Added option key for <tag>keycap</tag> context</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: locale/de.xml</literal></para><screen><phrase role="commit-message">Added key="optional-step" as done in r9745</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: locale/en.xml</literal></para><screen><phrase role="commit-message">Add key="optional-step".</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of Gentext changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_Common">
+<title>Common</title>
+<para>The following changes have been made to the
+            <filename>common</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>tom_schr: common.xsl</literal></para><screen><phrase role="commit-message">Added quotes around linkend to make spaces visible</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Added ant build for HTML stylesheets</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Initial work on Ant build, common (L10N) directory handled so far</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: titles.xsl</literal></para><screen><phrase role="commit-message">Replace hardcoded English text for <tag>question</tag> and <tag>answer</tag> elements 
+in mode="title.markup" with localized templates.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: addns.xsl</literal></para><screen><phrase role="commit-message">Move addns.xsl module from releasetools to common in preparation
+for switching to ns as the base stylesheets.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: l10n.xml; Makefile</literal></para><screen><phrase role="commit-message">Add new locale file ur.xml for Urdu.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: titles.xsl</literal></para><screen><phrase role="commit-message">Add missing template with match="<tag>toc</tag>" mode="title.markup".</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: titles.xsl</literal></para><screen><phrase role="commit-message">Fixed problem when referencing empty ulinks; use @url instead</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: olink.xsl</literal></para><screen><phrase role="commit-message">Make <tag>olink</tag> errors/warnings overridable in customizations.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: labels.xsl</literal></para><screen><phrase role="commit-message">Pass the object referenced as a parameter to mode="intralabel.punctuation"
+template.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: olink.xsl</literal></para><screen><phrase role="commit-message">1. Make page citations on &lt;<tag>xref</tag>/&gt; to paragraphs conditional on a new parameter,
+$insert.xref.page.number.para, default to 'yes' (before, page citations were
+added unconditionally). Remove similar special-casing for &lt;<tag>link</tag>/&gt;.
+
+2. Disable page citations for @xrefstyle="template:..." (if needed, they
+can be added with %p in the template - but they can't be disabled).</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: olink.xsl; titles.xsl; common.xsl</literal></para><screen><phrase role="commit-message">Pass referrer and target params to mode="xrefstyle" to allow customizations
+to be more specific.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: olink.xsl; titles.xsl; common.xsl</literal></para><screen><phrase role="commit-message">Add mode="xrefstyle" to replace many instances of redundant
+code determining the xrefstyle with xsl:apply-templates
+select="." mode="xrefstyle".  Also allows stylesheet
+customization to specify an xrefstyle per element type.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: gentext.xsl; labels.xsl</literal></para><screen><phrase role="commit-message">Add support for <tag>procedure</tag> <tag>title</tag> contained in <tag>info</tag> or blockinfo.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: common.xsl</literal></para><screen><phrase role="commit-message">In person.name template, change 'style' variable to a param
+so the name style can be selected by passing a param.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: gentext.xsl</literal></para><screen><phrase role="commit-message">Fix bug in <parameter>collect.xref.targets</parameter> that failed when $referrer template
+param not set by <tag>olink</tag>'s xref-to. Fixed using submitted patch.</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of Common changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_FO">
+<title>FO</title>
+<para>The following changes have been made to the
+            <filename>fo</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>Robert Stayton: lists.xsl</literal></para><screen><phrase role="commit-message">Fix bug #1368 "<tag>link</tag> to <tag>term</tag> with id does not work"</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: block.xsl</literal></para><screen><phrase role="commit-message">Fix bug #1367 double <tag>attribution</tag> in <tag>epigraph</tag>.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: param.xweb; param.ent</literal></para><screen><phrase role="commit-message">Add missing <parameter>profile.outputformat</parameter> param.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: publishers.xsl</literal></para><screen><phrase role="commit-message">Fix namespace declarations.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: titlepage.xsl</literal></para><screen><phrase role="commit-message">Add default attribute-sets for new Publishers elements.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: param.ent</literal></para><screen><phrase role="commit-message">Fix typo</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: titlepage.templates.xml</literal></para><screen><phrase role="commit-message">Add new DocBook Publishers elements.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: docbook.xsl</literal></para><screen><phrase role="commit-message">Add inclusion of new publishers.xsl module.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: publishers.xsl</literal></para><screen><phrase role="commit-message">Stylesheet module added to support new elements in DocBook Publishers.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: param.xweb; param.ent</literal></para><screen><phrase role="commit-message">Add the 9 new attribute sets for DocBook Publishers.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xref.xsl</literal></para><screen><phrase role="commit-message">Fix bug #1355 <tag>glossseealso</tag> generates duplicate id in certain cases.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xref.xsl</literal></para><screen><phrase role="commit-message">fix bug #1360 <tag>indexterm</tag> in <tag>varlistentry</tag>/<tag>term</tag> generates an error when <tag>xref</tag> to that <tag>term</tag>.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: inline.xsl</literal></para><screen><phrase role="commit-message">Fix bug #13598 inline.monoseq and other inline.*seq handle links incorrectly.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: pi.xsl</literal></para><screen><phrase role="commit-message">Fix bug in dbfo-need for admonitions, and get dbfo-need
+working properly in FOP1.1.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: pagesetup.xsl</literal></para><screen><phrase role="commit-message">Remove obsolete hardcoded margin-left="0pt" for the block
+containing header or footer.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: graphics.xsl</literal></para><screen><phrase role="commit-message">Fix bug #1336 to add support for recognizing
+file:/ image URLs as absolute paths.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: autotoc.xsl</literal></para><screen><phrase role="commit-message">Add support in <tag>TOC</tag> for <tag>article</tag> as child of set.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xref.xsl</literal></para><screen><phrase role="commit-message">Fix bug #1337 Elements with <tag>olink</tag> role do not behave as <tag>olink</tag>
+elements.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Added ant build for FO</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: inline.xsl</literal></para><screen><phrase role="commit-message">Only count regular &lt;<tag>emphasis</tag>&gt; elements (without @role="bold", etc) when determining
+whether nested <tag>emphasis</tag> needs to be displayed in italics or in regular; otherwise,
+the order of nesting in &lt;<tag>emphasis</tag> role="bold"&gt; and &lt;<tag>emphasis</tag>&gt; affects the font
+used.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: fop1.xsl; ptc.xsl</literal></para><screen><phrase role="commit-message">Apply patch #190 to include refsections in bookmarks for fop1 and
+ptc.xsl.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: block.xsl</literal></para><screen><phrase role="commit-message">Change the <tag>epigraph</tag> template to support schema extensions
+by processing all of its children instead of specific elements.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: pagesetup.xsl</literal></para><screen><phrase role="commit-message">Added "user.declarations" hook to implemented [#1330] 
+
+Added empty "user.declarations" template to make it easier for adding
+custom fo:declaration elements. The template is empty by default.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: inline.xsl</literal></para><screen><phrase role="commit-message">Fix test for nested links.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: biblio.xsl</literal></para><screen><phrase role="commit-message">Now <tag>biblioset</tag> outputs its id if it has one.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xref.xsl</literal></para><screen><phrase role="commit-message">pass xrefstyle param from <tag>link</tag> element to gentext.template so
+optional page number can be formatted to a style.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: docbook.xsl</literal></para><screen><phrase role="commit-message">Streamline handling of namespace fixup in preparation for making
+the namespaced version the source base.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: fo.xsl</literal></para><screen><phrase role="commit-message">FOP 1.1 now supports writing-mode="rl-tb", so add that change to the
+$direction.mode parameter.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: autoidx.xsl</literal></para><screen><phrase role="commit-message">Add missing xlink namespace declaration to the root element.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: param.xweb; param.ent; autoidx.xsl</literal></para><screen><phrase role="commit-message">Add support for $autolink.index.see to automatically form links
+between see and <tag>seealso</tag> <tag>index</tag> elements and <tag>primary</tag> elements
+in the <tag>index</tag>.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: inline.xsl</literal></para><screen><phrase role="commit-message">Add element name to warning message for nested links.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: inline.xsl</literal></para><screen><phrase role="commit-message">Fix bug #1306: warn of nested links.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: component.xsl</literal></para><screen><phrase role="commit-message">Fix bug #1320 so template page.sequence tests $content to make
+sure it is not empty.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: autotoc.xsl; refentry.xsl; param.xweb; docbook.xsl; param.ent; component.x⋯</literal></para><screen><phrase role="commit-message">Add support for $show.bookmarks param to turn bookmarks on or
+off.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: docbook.xsl</literal></para><screen><phrase role="commit-message">Add missing variable bookmarks.state.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: docbook.xsl</literal></para><screen><phrase role="commit-message">Add missing $document.element variable to new generate.bookmarks
+template.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: autotoc.xsl; refentry.xsl; param.xweb; docbook.xsl; param.ent; component.x⋯</literal></para><screen><phrase role="commit-message">Add support for standard XSL 1.1 bookmarks and parameter
+$xsl1.1.bookmarks to turn them on or off.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: xref.xsl</literal></para><screen><phrase role="commit-message">Fix invalid href generated if $insert.olink.pdf.frag=0 and $fop1.extensions=1.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: autotoc.xsl; param.xweb; param.ent; toc.xsl</literal></para><screen><phrase role="commit-message">Replace <tag>literal</tag> space inserted next to fo:leader in <tag>ToC</tag> with a padding. This
+works around a bug in FOP (see FOP-1444).
+Make <tag>ToC</tag> fo:leader properties configurable via attribute set.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: titlepage.templates.xml</literal></para><screen><phrase role="commit-message">Remove autoguessing of the namespace for wrapper elements; determine namespace by prefix, if any.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Mauritz Jeanson: table.xsl</literal></para><screen><phrase role="commit-message">Bug #1246: added missing with-param.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: xref.xsl</literal></para><screen><phrase role="commit-message">Make <tag>olink</tag> errors/warnings overridable in customizations.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: param.xweb; param.ent; xref.xsl</literal></para><screen><phrase role="commit-message">1. Make page citations on &lt;<tag>xref</tag>/&gt; to paragraphs conditional on a new parameter,
+$insert.xref.page.number.para, default to 'yes' (before, page citations were
+added unconditionally). Remove similar special-casing for &lt;<tag>link</tag>/&gt;.
+
+2. Disable page citations for @xrefstyle="template:..." (if needed, they
+can be added with %p in the template - but they can't be disabled).</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: fop1.xsl</literal></para><screen><phrase role="commit-message">Skip generating fox:destination on a <tag>footnote</tag> - id attribute on footnotes is not
+passed to generated FO, so FOP complains about unresolved ID in destination.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Mauritz Jeanson: lists.xsl</literal></para><screen><phrase role="commit-message">Fixed typo.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: lists.xsl</literal></para><screen><phrase role="commit-message">Fixed bug#1311 and added missing <parameter>para.properties</parameter></phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xref.xsl</literal></para><screen><phrase role="commit-message">Pass referrer and target params to mode="xrefstyle" to allow customizations
+to be more specific.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xref.xsl</literal></para><screen><phrase role="commit-message">Add mode="xrefstyle" to replace many instances of redundant
+code determining the xrefstyle with xsl:apply-templates
+select="." mode="xrefstyle".  Also allows stylesheet
+customization to specify an xrefstyle per element type.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: xref.xsl</literal></para><screen><phrase role="commit-message">Pass referrer and xrefstyle to "xref-to-suffix" and "xref-to-prefix"
+modes (to use the same signature than "xref-to" mode) as discussed with
+Bob on the mailinglist (2013-09-12)</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: pi.xsl; verbatim.xsl</literal></para><screen><phrase role="commit-message">Fix for enhancement/bug#1312: Support font size in verbatim elements</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: fop1.xsl</literal></para><screen><phrase role="commit-message">Unchanged, testing snapshot builds.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: docbook.xsl</literal></para><screen><phrase role="commit-message">No change, testing snapshot builds.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: block.xsl</literal></para><screen><phrase role="commit-message">No change, testing snapshot builds.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: block.xsl</literal></para><screen><phrase role="commit-message">No change, just checking snapshot build process.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: toc.xsl</literal></para><screen><phrase role="commit-message">Add missing template for <tag>tocdiv</tag>/<tag>title</tag> elements to fix bug #1310.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: docbook.xsl</literal></para><screen><phrase role="commit-message">Fix process.root template so document <tag>title</tag> can come from <tag>info</tag> as well.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: lists.xsl</literal></para><screen><phrase role="commit-message">Add support for <tag>procedure</tag> <tag>title</tag> when contained in blockinfo or <tag>info</tag>.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: fop1.xsl</literal></para><screen><phrase role="commit-message">Fix mode="fop1.foxdest" so only elements with id attribute get
+a fox:destination in the output.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: fop1.xsl</literal></para><screen><phrase role="commit-message">Remove extraneous call from fop1.foxdest mode per patch submission.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: autotoc.xsl</literal></para><screen><phrase role="commit-message">Add <parameter>toc.margin.properties</parameter> attribute-set to list.of.titles so
+it matches the <tag>TOC</tag> list.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: inline.xsl</literal></para><screen><phrase role="commit-message">Adjust exception for fop for <tag>menuchoice</tag> separator to
+use the $symbol.font.family if it is set.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: division.xsl</literal></para><screen><phrase role="commit-message">Fix comment.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: param.ent</literal></para><screen><phrase role="commit-message">Fix typo that prevents param.xsl update.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: lists.xsl; param.xweb; param.ent</literal></para><screen><phrase role="commit-message">Add <parameter>mark.optional.procedure.steps</parameter> param.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: qandaset.xsl</literal></para><screen><phrase role="commit-message">Fix bug in <tag>question</tag> template that output empty list-item-label when
+defaultlabel = 'none'.</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of FO changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_HTML">
+<title>HTML</title>
+<para>The following changes have been made to the
+            <filename>html</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>Robert Stayton: block.xsl</literal></para><screen><phrase role="commit-message">Fix Bug #1367 <tag>epigraph</tag> <tag>attribution</tag> appears twice in html output.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: param.xweb; param.ent</literal></para><screen><phrase role="commit-message">Add missing <parameter>profile.outputformat</parameter> param.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: titlepage.xsl; docbook.xsl; titlepage.templates.xml</literal></para><screen><phrase role="commit-message">Add support for DocBook Publishers elements.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: publishers.xsl</literal></para><screen><phrase role="commit-message">New module to support new elements in DocBook Publishers schema.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: table.xsl</literal></para><screen><phrase role="commit-message">Fix bug #1348 where class of output <tag>table</tag> not being set correctly.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: table.xsl</literal></para><screen><phrase role="commit-message">A <tag>table</tag> emitted by <tag>tgroup</tag> template now calls "common.html.attributes"
+to get the class attribute handled correctly.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: inline.xsl</literal></para><screen><phrase role="commit-message">Fix bug #13598 inline.monoseq and other inline.*seq handle links incorrectly.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: refentry.xsl</literal></para><screen><phrase role="commit-message">Add template for <tag>refpurpose</tag> in no.anchor.mode to generate
+the dash separator in <tag>TOC</tag> line for the <tag>refentry</tag> when
+the <tag>refpurpose</tag> contains a <tag>link</tag> or <tag>indexterm</tag>.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: inline.xsl</literal></para><screen><phrase role="commit-message">Add missing call to id.attribute template for <tag>orgdiv</tag>.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xref.xsl</literal></para><screen><phrase role="commit-message">If a <tag>link</tag> or <tag>xref</tag> has an @id or @xml:id, then add a span to
+include the id because simple.xlink no longer generates the
+id attribute.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: inline.xsl</literal></para><screen><phrase role="commit-message">Remove call to id.attribute template in simple.xlink
+because it produces duplicate ids in the output because
+the element template calling simple.xlink generates the
+id attribute.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: graphics.xsl</literal></para><screen><phrase role="commit-message">Check in fix for bug #1336 to support absolute file URLs
+that start with file:/.  Also consolidate code that determines
+whether an image file path is relative into a new template
+variable $is.relative.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: chunk-code.xsl</literal></para><screen><phrase role="commit-message">Add support for set nested inside set to recursive-chunk-filename.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: autotoc.xsl</literal></para><screen><phrase role="commit-message">Add support for set <tag>TOC</tag> to contain nested set or <tag>article</tag>
+elements.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Added clean targets</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Added ant build for HTML stylesheets</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: glossary.xsl</literal></para><screen><phrase role="commit-message">Move any indexterms in <tag>glossentry</tag> to be inside dt, instead of
+after dt which is invalid.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: htmltbl.xsl</literal></para><screen><phrase role="commit-message">Fix bug #1334 to copy through HTML <tag>table</tag> attributes @scope and @id.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: block.xsl</literal></para><screen><phrase role="commit-message">Change the <tag>epigraph</tag> template to support schema extensions
+by processing all of its children instead of specific elements.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: titlepage.xsl</literal></para><screen><phrase role="commit-message">Fix bug in handling of multiple editors and "edited by" <tag>label</tag>.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: titlepage.templates.xml</literal></para><screen><phrase role="commit-message">Fix misnamed attribute in <tag>sidebar</tag> template.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: inline.xsl</literal></para><screen><phrase role="commit-message">Fix check for nested links.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: chunk-common.xsl; chunktoc.xsl; chunk-code.xsl</literal></para><screen><phrase role="commit-message">Adjust handling of namespace fixup to streamline distro builds.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: docbook.xsl</literal></para><screen><phrase role="commit-message">Adjust handling of namespace conversion to streamline distro
+build.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: table.xsl</literal></para><screen><phrase role="commit-message">Fix bug #1298 where @rowheader = 'firstcol' incorrectly assigns
+&lt;<tag>th</tag>&gt; to cell that is first in a <tag>row</tag> but not the first column due
+to <tag>row</tag> span above.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: param.xweb; param.ent; autoidx.xsl</literal></para><screen><phrase role="commit-message">Add support for <parameter>autolink.index.see</parameter> param to <tag>link</tag> from see and
+<tag>seealso</tag> element to <tag>primary</tag> element in <tag>index</tag>.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: inline.xsl</literal></para><screen><phrase role="commit-message">Fix bug #1306 warn of nested links, since not supported in the output.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: pi.xsl</literal></para><screen><phrase role="commit-message">Fixes bug #1323 where &lt;?dbhtml-include?&gt; paths were not being
+interpreted relative to the XML.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: param.xweb</literal></para><screen><phrase role="commit-message">Add missing frag for new linke.to.self.for.mediaobject param.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: table.xsl</literal></para><screen><phrase role="commit-message">Fix bug in <tag>entry</tag> template where rowsep was incorrectly set to zero
+for cell with @morerows in <tag>thead</tag>.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: synop.xsl</literal></para><screen><phrase role="commit-message">Restore conditional named <tag>anchor</tag> in output if dbcmdlist PI is not used.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: graphics.xsl</literal></para><screen><phrase role="commit-message">Fixed [#1317]: process <tag>alt</tag> in <tag>inlinemediaobject</tag></phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: param.xweb; graphics.xsl; param.ent</literal></para><screen><phrase role="commit-message">Fixed ticket [#1315]: Add possibility to add a <tag>link</tag> to mediaobjects</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: titlepage.templates.xml</literal></para><screen><phrase role="commit-message">Remove autoguessing of the namespace for wrapper elements; determine namespace by prefix, if any.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: chunk-common.xsl; xref.xsl</literal></para><screen><phrase role="commit-message">Make <tag>olink</tag> errors/warnings overridable in customizations.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: param.xweb; param.ent</literal></para><screen><phrase role="commit-message">1. Make page citations on &lt;<tag>xref</tag>/&gt; to paragraphs conditional on a new parameter,
+$insert.xref.page.number.para, default to 'yes' (before, page citations were
+added unconditionally). Remove similar special-casing for &lt;<tag>link</tag>/&gt;.
+
+2. Disable page citations for @xrefstyle="template:..." (if needed, they
+can be added with %p in the template - but they can't be disabled).</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Mauritz Jeanson: index.xsl</literal></para><screen><phrase role="commit-message">Bug #1309: Added missing template for <tag>indexdiv</tag>/<tag>subtitle</tag>.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xref.xsl</literal></para><screen><phrase role="commit-message">Pass referrer and target params to mode="xrefstyle" to allow customizations
+to be more specific.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xref.xsl</literal></para><screen><phrase role="commit-message">Add mode="xrefstyle" to replace many instances of redundant
+code determining the xrefstyle with xsl:apply-templates
+select="." mode="xrefstyle".  Also allows stylesheet
+customization to specify an xrefstyle per element type.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: xref.xsl</literal></para><screen><phrase role="commit-message">Pass referrer and xrefstyle to "xref-to-suffix" and "xref-to-prefix"
+modes (to use the same signature than "xref-to" mode) as discussed with
+Bob on the mailinglist (2013-09-12)</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: chunk.xsl</literal></para><screen><phrase role="commit-message">No change, testing snapshot builds.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: toc.xsl</literal></para><screen><phrase role="commit-message">Add missing template for <tag>tocdiv</tag>/<tag>title</tag> elements to fix bug #1310.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: docbook.xsl</literal></para><screen><phrase role="commit-message">Remove a comment to test checkins and snapshot builds.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: lists.xsl</literal></para><screen><phrase role="commit-message">Add support for <tag>procedure</tag> <tag>title</tag> when contained in <tag>info</tag> or blockinfo.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: chunk-code.xsl</literal></para><screen><phrase role="commit-message">Enumarete separate file for <tag>revhistory</tag> if <parameter>generate.revhistory.link</parameter>=1</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: inline.xsl</literal></para><screen><phrase role="commit-message">Update the inline.charseq template to also call 'common.html.attributes'
+instead of using local-name for class value.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: docbook.xsl; html.xsl</literal></para><screen><phrase role="commit-message">Enabling ITS processing again</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: its.xsl</literal></para><screen><phrase role="commit-message">Change syntax for selecting @its:* attributes so it works
+in xsltproc (which should work with the original, but doesn't).</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: docbook.xsl; html.xsl</literal></para><screen><phrase role="commit-message">Turn off its.xsl update which is generating attribute insertion errors.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: its.xsl; docbook.xsl; html.xsl</literal></para><screen><phrase role="commit-message">Added basic support for ITS 2.0 markup. It gets propagated into HTML
+For more <tag>info</tag> about ITS see http://www.w3.org/<tag>TR</tag>/its20/</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: docbook.xsl</literal></para><screen><phrase role="commit-message">Added a comment line to test checkin process.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xref.xsl</literal></para><screen><phrase role="commit-message">Fix bug in mode=remove-ids that put <tag>link</tag> content outside the &lt;a&gt; element.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: chunktoc.xsl</literal></para><screen><phrase role="commit-message">Fixed SF ticket#3611689: added missing DocBook namespace declarations</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: chunker.xsl</literal></para><screen><phrase role="commit-message">Change the internal chunk.base.dir from a param to a variable.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: inline.xsl</literal></para><screen><phrase role="commit-message">Turn off id attribute on <tag>glossterm</tag> <tag>anchor</tag>, because it is on the element itself.</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of HTML changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_Manpages">
+<title>Manpages</title>
+<para>The following changes have been made to the
+            <filename>manpages</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>Robert Stayton: block.xsl; lists.xsl</literal></para><screen><phrase role="commit-message">Fix bug #1363 <tag>synopsis</tag> in <tag>variablelist</tag> <tag>term</tag> mangles line breaks.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: other.xsl</literal></para><screen><phrase role="commit-message">Remove redundant and out-of-date xsl:strip-space element.
+This is imported from common/common.xsl for all stylesheets.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Added clean targets</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Added ant build for manpages</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: inline.xsl</literal></para><screen><phrase role="commit-message">Fix bug #1340 by omitting <tag>indexterm</tag> and <tag>remark</tag> elements from the
+output.  Trying to include them as nroff comments resulted in extra
+whitespace in certain instances, so they are omitted.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: table.xsl; docbook.xsl; tbl.xsl</literal></para><screen><phrase role="commit-message">Adjust man stylesheet to better handle namespace fixup during
+distro builds.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: lists.xsl</literal></para><screen><phrase role="commit-message">Resolve ambiguous template match for <tag>remark</tag>.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: endnotes.xsl</literal></para><screen><phrase role="commit-message">Put internally generated earmark elements into own namespace to
+avoid complications with namespace stylesheet builds.  No change
+of <tag>function</tag>.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: other.xsl</literal></para><screen><phrase role="commit-message">Fixed bug #1313 where write.stubs template mistakenly includes
+$man.output.base.dir in the .so <tag>address</tag>.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: other.xsl</literal></para><screen><phrase role="commit-message">Escape text() nodes while also in no.anchor.mode for links.
+Fixes bug #1322.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: utility.xsl</literal></para><screen><phrase role="commit-message">Fixed bug #1321, also taking into account fixing bug #1281.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>dleidert: info.xsl</literal></para><screen><phrase role="commit-message">Fix a typo (http://bugs.debian.org/698962).</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of Manpages changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_Epub">
+<title>Epub</title>
+<para>The following changes have been made to the
+            <filename>epub</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>Robert Stayton: docbook.xsl</literal></para><screen><phrase role="commit-message">Fix bug #1341 Incorrect generation of content.opf for multiple
+names in $html.stylesheet param.  Backported the template
+named css.item from the epub3 stylesheet.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: docbook.xsl</literal></para><screen><phrase role="commit-message">Fix handling of <parameter>base.dir</parameter>, chunk.base.dir, and epub.oebps.dir
+combinations.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: docbook.xsl</literal></para><screen><phrase role="commit-message">Improve the handling of $chunk.base.dir when $base.dir contains
+the OEBPS directory in its value.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: docbook.xsl</literal></para><screen><phrase role="commit-message">Fix the namespace fixup step to match the other stylesheets.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: docbook.xsl</literal></para><screen><phrase role="commit-message">Extended <tag>date</tag> template in mode opf.metadata
+If a PI dbtimestamp is available, call datetime.format(<tag>date</tag>, 'Y-m-d'),
+otherwise use the normalized string content</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>dleidert: bin/spec/files</literal></para><screen><phrase role="commit-message">Fix svn:externals defintion.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: docbook.xsl</literal></para><screen><phrase role="commit-message">Introduced  variable in opf.guide</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: docbook.xsl</literal></para><screen><phrase role="commit-message">Improved modularization in opf.spine and created new spine.cover template</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: docbook.xsl</literal></para><screen><phrase role="commit-message">Improved opf.spine with <tag>info</tag> variable</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: docbook.xsl</literal></para><screen><phrase role="commit-message">Bugfix in opf.spine: removed double <tag>refentry</tag> entries</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: docbook.xsl</literal></para><screen><phrase role="commit-message">* Template package-identifier: introduced $info variable to simplify
+  code (similar to the EPUB3 stylesheets) 
+* Template opf.calloutlist: only call opf.reference.callout if
+  <parameter>callout.graphics</parameter> is set</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: docbook.xsl</literal></para><screen><phrase role="commit-message">Backported Bob's EPUB3 changes to EPUB2 from r9740 -&gt; r9742 -&gt; r9743:
+
+* Implement <parameter>base.dir</parameter>/OEBPS using internal chunk.base.dir instead of
+  new param epub.base.dir.
+
+* Additional changes, specific to this stylesheet:
+  - Construct parameter epub.metainf.dir from <parameter>base.dir</parameter> + 'META-INF/'
+  - Changed parameter epub.cover.filename epub.oebps.dir to
+    chunk.base.dir
+  - Template opf: concat <parameter>base.dir</parameter> with epub.opf.filename
+  - Replaced two subsequent xsl:value-of's with concat()</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: docbook.xsl</literal></para><screen><phrase role="commit-message">Fix bug in <tag>author</tag> template generating a span element inside an attribute value.</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of Epub changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_HTMLHelp">
+<title>HTMLHelp</title>
+<para>The following changes have been made to the
+            <filename>htmlhelp</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Added clean targets</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Extensions and other builds ported to Ant</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: htmlhelp-common.xsl</literal></para><screen><phrase role="commit-message">Adjust namespace fixup to conform to the namespace source
+conversion.</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of HTMLHelp changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_Eclipse">
+<title>Eclipse</title>
+<para>The following changes have been made to the
+            <filename>eclipse</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Added clean targets</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Extensions and other builds ported to Ant</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: eclipse.xsl</literal></para><screen><phrase role="commit-message">Adjust namespace fixup to conform to other conversions to
+namespaced source.</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of Eclipse changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_JavaHelp">
+<title>JavaHelp</title>
+<para>The following changes have been made to the
+            <filename>javahelp</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Added clean targets</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Extensions and other builds ported to Ant</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: javahelp.xsl</literal></para><screen><phrase role="commit-message">Adjust the namespace fixup to conform to the other namespaced source
+conversions.</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of JavaHelp changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_Slides">
+<title>Slides</title>
+<para>The following changes have been made to the
+            <filename>slides</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>Jirka Kosek: schema/relaxng/slides.rnc</literal></para><screen><phrase role="commit-message">Make speakernotes/handoutnotes optional as many presentations do not use them</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xhtml/plain.xsl; common/common.xsl; xhtml/slidy.xsl; xhtml/s5.xsl; fo/plai⋯</literal></para><screen><phrase role="commit-message">Rename the docbook prefix in the declaration too.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xhtml/plain.xsl; common/common.xsl; xhtml/slidy.xsl; xhtml/s5.xsl; fo/plai⋯</literal></para><screen><phrase role="commit-message">Change the docbook db: prefix to d: prefix in preparation of svn update to namespaced 
+stylesheets.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: xhtml/plain-titlepage.xml; fo/plain-titlepage.xml</literal></para><screen><phrase role="commit-message">Remove autoguessing of the namespace for wrapper elements; determine namespace by prefix, if any.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>dleidert: images/callouts/gen.sh</literal></para><screen><phrase role="commit-message">Leave executable permissions for script.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>dleidert: s5/ui/default/pretty.css; slidy/graphics/w3c-logo-blue.gif; s5/ui/default/notes.⋯</literal></para><screen><phrase role="commit-message">Drop executable permissions from files.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: doc/Makefile</literal></para><screen><phrase role="commit-message">Corrected path</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of Slides changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_Website">
+<title>Website</title>
+<para>The following changes have been made to the
+            <filename>website</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Added clean targets</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Extensions and other builds ported to Ant</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: olink.xsl</literal></para><screen><phrase role="commit-message">Make <tag>olink</tag> errors/warnings overridable in customizations.</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of Website changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_Webhelp">
+<title>Webhelp</title>
+<para>The following changes have been made to the
+            <filename>webhelp</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>Robert Stayton: xsl/webhelp-common.xsl</literal></para><screen><phrase role="commit-message">Fix bug 1357 to avoid creating l10n.js file if only collecting <tag>olink</tag> data.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: docsrc/xinclude-test.xml; docsrc/readme.xml</literal></para><screen><phrase role="commit-message">Convert XML doc to DB5.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xsl/webhelp-common.xsl</literal></para><screen><phrase role="commit-message">Fix error message for namespace fixup.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xsl/webhelp-common.xsl</literal></para><screen><phrase role="commit-message">fix bug in namespace fixup syntax.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xsl/webhelp-common.xsl</literal></para><screen><phrase role="commit-message">Adjust namespace fixup for namespace build process.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: xsl/titlepage.templates.xml</literal></para><screen><phrase role="commit-message">Remove autoguessing of the namespace for wrapper elements; determine namespace by prefix, if any.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: template/common/main.js</literal></para><screen><phrase role="commit-message">Fix for bug #1301</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of Webhelp changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_Params">
+<title>Params</title>
+<para>The following changes have been made to the
+            <filename>params</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>Robert Stayton: dialogue.properties.xml</literal></para><screen><phrase role="commit-message">Fix typo.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: publishers.properties.xml</literal></para><screen><phrase role="commit-message">Fix typo.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: speaker.properties.xml; publishers.properties.xml; inlinestagedir.properti⋯</literal></para><screen><phrase role="commit-message">New property sets for DocBook Publishers elements.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: table.frame.border.thickness.xml; table.cell.border.thickness.xml</literal></para><screen><phrase role="commit-message">Fix bug #1291, make default values different for HTML and FO.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: profile.outputformat.xml</literal></para><screen><phrase role="commit-message">Added missing support for outputformat attribute
+
+* Added missing parameter <parameter>profile.outputformat</parameter> in
+  params/profile.outputformat.xml
+* Added missing lines to check for outputformat attribute in
+  profiling/profile-mode.xsl</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: table.frame.border.thickness.xml; table.cell.border.thickness.xml</literal></para><screen><phrase role="commit-message">Changed default border thickness from 0.5pt to 1px. The reason is that Chrome rounds 0.5pt to 0px making borders invisible.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: list.block.spacing.xml</literal></para><screen><phrase role="commit-message">Fix typo in element name.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: autolink.index.see.xml</literal></para><screen><phrase role="commit-message">New param to control automatic links in <tag>index</tag> from see and
+<tag>seealso</tag> to <tag>indexterm</tag> <tag>primary</tag>.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: show.bookmarks.xml</literal></para><screen><phrase role="commit-message">New param to turn off PDF bookmarks.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xsl1.1.bookmarks.xml</literal></para><screen><phrase role="commit-message">Param to use standard XSL 1.1 bookmark elements.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>tom_schr: link.to.self.for.mediaobject.xml</literal></para><screen><phrase role="commit-message">Fixed ticket [#1315]: Add possibility to add a <tag>link</tag> to mediaobjects</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: toc.leader.properties.xml</literal></para><screen><phrase role="commit-message">Replace <tag>literal</tag> space inserted next to fo:leader in <tag>ToC</tag> with a padding. This
+works around a bug in FOP (see FOP-1444).
+Make <tag>ToC</tag> fo:leader properties configurable via attribute set.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: list.block.spacing.xml; list.item.spacing.xml</literal></para><screen><phrase role="commit-message">Clarify that <parameter>list.block.spacing</parameter> is not used in nested lists.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: insert.xref.page.number.para.xml</literal></para><screen><phrase role="commit-message">Missed new file in previous checkin.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: mark.optional.procedure.steps.xml</literal></para><screen><phrase role="commit-message">New param to turn off Optional text for optional steps.</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of Params changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_Profiling">
+<title>Profiling</title>
+<para>The following changes have been made to the
+            <filename>profiling</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>tom_schr: profile-mode.xsl</literal></para><screen><phrase role="commit-message">Added missing support for outputformat attribute
+
+* Added missing parameter <parameter>profile.outputformat</parameter> in
+  params/profile.outputformat.xml
+* Added missing lines to check for outputformat attribute in
+  profiling/profile-mode.xsl</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xsl2profile.xsl</literal></para><screen><phrase role="commit-message">Fix bug #1335 where profile-chunk.xsl was xsl:including
+chunk-code.xsl instead of profile-chunk-code.xsl.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xsl2profile.xsl</literal></para><screen><phrase role="commit-message">Fixed bug in handling of namespace fixup.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: xsl2profile.xsl</literal></para><screen><phrase role="commit-message">Adjust namespace fixup to match other templates.</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of Profiling changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_Lib">
+<title>Lib</title>
+<para>The following changes have been made to the
+            <filename>lib</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Added lib ant build support</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of Lib changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_Tools">
+<title>Tools</title>
+<para>The following changes have been made to the
+            <filename>tools</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>Jirka Kosek: build-shared.xml</literal></para><screen><phrase role="commit-message">Added lib ant build support</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: build-shared.xml</literal></para><screen><phrase role="commit-message">Added clean targets</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: lib/xml-apis.jar; lib/xercesImpl.jar; build-shared.xml; lib/xalan.jar</literal></para><screen><phrase role="commit-message">Extensions and other builds ported to Ant</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: build-shared.xml</literal></para><screen><phrase role="commit-message">Added ant build for HTML stylesheets</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: licenses/saxon/JAMESCLARK.txt; lib/jython.jar; lib/xercesImpl.jar; licenses/j⋯</literal></para><screen><phrase role="commit-message">Initial work on Ant build, common (L10N) directory handled so far</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of Tools changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_Template">
+<title>Template</title>
+<para>The following changes have been made to the
+            <filename>template</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>Robert Stayton: titlepage.xsl</literal></para><screen><phrase role="commit-message">Remove the d: namespace declaration because it is
+automatically added by the ns build process.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: titlepage.xsl</literal></para><screen><phrase role="commit-message">Added missing namespace declaration</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: titlepage.xsl</literal></para><screen><phrase role="commit-message">Remove d: namespace declaration from non namespaced version since
+it is automatically added to build the namespaced version.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: titlepage.xsl</literal></para><screen><phrase role="commit-message">Set the db.prefix to blank until convert to ns build.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: titlepage.xsl</literal></para><screen><phrase role="commit-message">Fix handling of namespace declaration for conversion to NS sourcebase.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Robert Stayton: titlepage.xsl</literal></para><screen><phrase role="commit-message">Modified to support roundtrip conversion between namespaced
+version and non-namespaced version.</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>stilor: titlepage.xsl</literal></para><screen><phrase role="commit-message">Remove autoguessing of the namespace for wrapper elements; determine namespace by prefix, if any.</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of Template changes for snapshot_9999-->
+
+<section xml:id="Vsnapshot_9999_Extensions">
+<title>Extensions</title>
+<para>The following changes have been made to the
+            <filename>extensions</filename> code
+            since the 1.78.1 release.</para>
+<itemizedlist>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Added clean targets</phrase></screen>
+</listitem>
+<listitem>
+<para><literal>Jirka Kosek: build.xml</literal></para><screen><phrase role="commit-message">Extensions and other builds ported to Ant</phrase></screen>
+</listitem>
+</itemizedlist>
+</section><!--end of Extensions changes for snapshot_9999-->
+
+</section>
+
+<section xml:id="V1.78.1">
 <title>Release Notes: 1.78.1</title>
 <para>The following is a list of changes that have been made
         since the 1.78.0 release.</para>
 
-<sect2 xml:id="V1.78.1_Common">
+<section xml:id="V1.78.1_Common">
 <title>Common</title>
 <para>The following changes have been made to the
             <filename>common</filename> code
@@ -89,9 +1101,9 @@ Process <tag>bridgehead</tag> in mode="title.markup", not normal mode.</phrase><
 <para><literal>Robert Stayton: gentext.xsl; labels.xsl</literal></para><screen><phrase role="commit-message">Make sure bridgeheads are not numbered in all contexts, including html <tag>title</tag> attributes.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Common changes for 1.78.1-->
+</section><!--end of Common changes for 1.78.1-->
 
-<sect2 xml:id="V1.78.1_FO">
+<section xml:id="V1.78.1_FO">
 <title>FO</title>
 <para>The following changes have been made to the
             <filename>fo</filename> code
@@ -119,9 +1131,9 @@ inline.italicseq so it is consistent with the others.</phrase></screen>
 <para><literal>Robert Stayton: xref.xsl</literal></para><screen><phrase role="commit-message">Make consistent handling of <tag>titleabbrev</tag> in xrefs.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for 1.78.1-->
+</section><!--end of FO changes for 1.78.1-->
 
-<sect2 xml:id="V1.78.1_HTML">
+<section xml:id="V1.78.1_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the
             <filename>html</filename> code
@@ -149,9 +1161,9 @@ inline.italicseq so it is consistent with the others.</phrase></screen>
 <para><literal>Robert Stayton: autoidx.xsl</literal></para><screen><phrase role="commit-message">Fix bug where prefer.index.titleabbrev ignored <tag>info</tag>/<tag>titleabbrev</tag>.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for 1.78.1-->
+</section><!--end of HTML changes for 1.78.1-->
 
-<sect2 xml:id="V1.78.1_Manpages">
+<section xml:id="V1.78.1_Manpages">
 <title>Manpages</title>
 <para>The following changes have been made to the
             <filename>manpages</filename> code
@@ -162,9 +1174,9 @@ inline.italicseq so it is consistent with the others.</phrase></screen>
 whitespace and inline element.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Manpages changes for 1.78.1-->
+</section><!--end of Manpages changes for 1.78.1-->
 
-<sect2 xml:id="V1.78.1_Webhelp">
+<section xml:id="V1.78.1_Webhelp">
 <title>Webhelp</title>
 <para>The following changes have been made to the
             <filename>webhelp</filename> code
@@ -183,9 +1195,9 @@ whitespace and inline element.</phrase></screen>
 <para><literal>David Cramer: Makefile; Makefile.sample</literal></para><screen><phrase role="commit-message">Webhelp: In Makefiles, do xinclude in first pass at document</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Webhelp changes for 1.78.1-->
+</section><!--end of Webhelp changes for 1.78.1-->
 
-<sect2 xml:id="V1.78.1_Params">
+<section xml:id="V1.78.1_Params">
 <title>Params</title>
 <para>The following changes have been made to the
             <filename>params</filename> code
@@ -199,9 +1211,9 @@ whitespace and inline element.</phrase></screen>
 It interferes with the start-indent property.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Params changes for 1.78.1-->
+</section><!--end of Params changes for 1.78.1-->
 
-<sect2 xml:id="V1.78.1_Highlighting">
+<section xml:id="V1.78.1_Highlighting">
 <title>Highlighting</title>
 <para>The following changes have been made to the
             <filename>highlighting</filename> code
@@ -211,15 +1223,15 @@ It interferes with the start-indent property.</phrase></screen>
 <para><literal>Jirka Kosek: c-hl.xml; cpp-hl.xml; sql2003-hl.xml; php-hl.xml; upc-hl.xml; bourne-hl.xml; ⋯</literal></para><screen><phrase role="commit-message">Added new definitions for syntax highlighting</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Highlighting changes for 1.78.1-->
+</section><!--end of Highlighting changes for 1.78.1-->
 
-</sect1>
-<sect1 xml:id="V1.78.0">
+</section>
+<section xml:id="V1.78.0">
 <title>Release Notes: 1.78.0</title>
 <para>The following is a list of changes that have been made
         since the 1.77.1 release.</para>
 
-<sect2 xml:id="V1.78.0_Gentext">
+<section xml:id="V1.78.0_Gentext">
 <title>Gentext</title>
 <para>The following changes have been made to the
             <filename>gentext</filename> code
@@ -241,9 +1253,9 @@ It interferes with the start-indent property.</phrase></screen>
 <para><literal>Robert Stayton: locale/en.xml</literal></para><screen><phrase role="commit-message">Add support for <tag>title</tag> element in <tag>screenshot</tag>, now allowed in DocBook 5.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Gentext changes for 1.78.0-->
+</section><!--end of Gentext changes for 1.78.0-->
 
-<sect2 xml:id="V1.78.0_Common">
+<section xml:id="V1.78.0_Common">
 <title>Common</title>
 <para>The following changes have been made to the
             <filename>common</filename> code
@@ -266,9 +1278,9 @@ with mode="label.markup" to be consistent with other element numbering.</phrase>
 external olinks inactive, as for epub output.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Common changes for 1.78.0-->
+</section><!--end of Common changes for 1.78.0-->
 
-<sect2 xml:id="V1.78.0_FO">
+<section xml:id="V1.78.0_FO">
 <title>FO</title>
 <para>The following changes have been made to the
             <filename>fo</filename> code
@@ -345,9 +1357,9 @@ text</phrase></screen>
 <para><literal>Robert Stayton: graphics.xsl</literal></para><screen><phrase role="commit-message">Restore formatting of <tag>figure</tag>/<tag>caption</tag> that was broken in 1.77.1.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for 1.78.0-->
+</section><!--end of FO changes for 1.78.0-->
 
-<sect2 xml:id="V1.78.0_HTML">
+<section xml:id="V1.78.0_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the
             <filename>html</filename> code
@@ -442,9 +1454,9 @@ is used for certain special chunkings such as Long Descriptions.</phrase></scree
 <para><literal>David Cramer: docbook.xsl</literal></para><screen><phrase role="commit-message">HTML: Add hook for easily customizing html/head/<tag>title</tag></phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for 1.78.0-->
+</section><!--end of HTML changes for 1.78.0-->
 
-<sect2 xml:id="V1.78.0_Manpages">
+<section xml:id="V1.78.0_Manpages">
 <title>Manpages</title>
 <para>The following changes have been made to the
             <filename>manpages</filename> code
@@ -469,9 +1481,9 @@ an extra line break in nroff output.</phrase></screen>
 <para><literal>Robert Stayton: lists.xsl</literal></para><screen><phrase role="commit-message">Fix bug 3545150 where <tag>procedure</tag>/step/<tag>title</tag> not rendered in man pages.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Manpages changes for 1.78.0-->
+</section><!--end of Manpages changes for 1.78.0-->
 
-<sect2 xml:id="V1.78.0_Roundtrip">
+<section xml:id="V1.78.0_Roundtrip">
 <title>Roundtrip</title>
 <para>The following changes have been made to the
             <filename>roundtrip</filename> code
@@ -482,9 +1494,9 @@ an extra line break in nroff output.</phrase></screen>
 WordML markup instead of just text.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Roundtrip changes for 1.78.0-->
+</section><!--end of Roundtrip changes for 1.78.0-->
 
-<sect2 xml:id="V1.78.0_Slides">
+<section xml:id="V1.78.0_Slides">
 <title>Slides</title>
 <para>The following changes have been made to the
             <filename>slides</filename> code
@@ -546,9 +1558,9 @@ WordML markup instead of just text.</phrase></screen>
 <para><literal>stefan: Makefile; common/common.xsl; common; fo/param.ent; graphics; xhtml/Makefile.param;⋯</literal></para><screen><phrase role="commit-message">Merge Slides GSoC project to trunk.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Slides changes for 1.78.0-->
+</section><!--end of Slides changes for 1.78.0-->
 
-<sect2 xml:id="V1.78.0_Webhelp">
+<section xml:id="V1.78.0_Webhelp">
 <title>Webhelp</title>
 <para>The following changes have been made to the
             <filename>webhelp</filename> code
@@ -627,9 +1639,9 @@ but do not yet add the <tag>book</tag> <tag>title</tag> to the page <tag>title</
 <para><literal>David Cramer: xsl/webhelp-common.xsl</literal></para><screen><phrase role="commit-message">Webhelp: fix missing <tag>reference</tag> to ie.css</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Webhelp changes for 1.78.0-->
+</section><!--end of Webhelp changes for 1.78.0-->
 
-<sect2 xml:id="V1.78.0_Params">
+<section xml:id="V1.78.0_Params">
 <title>Params</title>
 <para>The following changes have been made to the
             <filename>params</filename> code
@@ -661,9 +1673,9 @@ but do not yet add the <tag>book</tag> <tag>title</tag> to the page <tag>title</
 external olinks inactive, as for epub output.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Params changes for 1.78.0-->
+</section><!--end of Params changes for 1.78.0-->
 
-<sect2 xml:id="V1.78.0_Profiling">
+<section xml:id="V1.78.0_Profiling">
 <title>Profiling</title>
 <para>The following changes have been made to the
             <filename>profiling</filename> code
@@ -673,9 +1685,9 @@ external olinks inactive, as for epub output.</phrase></screen>
 <para><literal>Robert Stayton: xsl2profile.xsl</literal></para><screen><phrase role="commit-message">Test for @xml:id as well as @id for $rootid.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Profiling changes for 1.78.0-->
+</section><!--end of Profiling changes for 1.78.0-->
 
-<sect2 xml:id="V1.78.0_Tools">
+<section xml:id="V1.78.0_Tools">
 <title>Tools</title>
 <para>The following changes have been made to the
             <filename>tools</filename> code
@@ -688,9 +1700,9 @@ external olinks inactive, as for epub output.</phrase></screen>
 <para><literal>David Cramer: xsl/build/xsl-param-link.xsl; xsl/build/make-xsl-params.xsl</literal></para><screen><phrase role="commit-message">Slides: Change html to xhtml passim.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Tools changes for 1.78.0-->
+</section><!--end of Tools changes for 1.78.0-->
 
-<sect2 xml:id="V1.78.0_Template">
+<section xml:id="V1.78.0_Template">
 <title>Template</title>
 <para>The following changes have been made to the
             <filename>template</filename> code
@@ -700,11 +1712,11 @@ external olinks inactive, as for epub output.</phrase></screen>
 <para><literal>Jirka Kosek: titlepage.xsl</literal></para><screen><phrase role="commit-message">Autoguess of proper parameter settings</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Template changes for 1.78.0-->
+</section><!--end of Template changes for 1.78.0-->
 
-</sect1>
+</section>
 
-<sect1 xml:id="V1.77.0">
+<section xml:id="V1.77.0">
 <title>Release Notes: 1.77.1</title>
 <para>The following list summarizes the major changes that have been made
         since the 1.76.1 release.  It is followed by sections detailing changes to individual files
@@ -773,7 +1785,7 @@ caption handled by <literal>formal.object.title</literal> template.  Also adds s
                     <varlistentry>
                         <term>Side regions</term>
                         <listitem>
-                            <para>Add support for side page regions in addition to header and footer regions. This feature lets you add running content to the side margins, and by default the content is rotated 90 degrees.  Adds new templates named <literal>running.side.content</literal>, <literal>region.inner</literal> and <literal>region.outer</literal>; new template modes <literal><literal>region.inner.mode</literal> and <literal>region.outer.mode</literal>; </literal>new parameters named <literal>region.inner.extent</literal>, <literal>region.outer.extent</literal>, <literal>body.margin.inner</literal>, <literal>body.margin.outer</literal>,  and <literal>side.region.precedence</literal>; and new attribute-sets named <literal>inner.region.content.properties</literal>, <literal>outer.region.content.properties</literal>, <literal>region.inner.properties</literal>, and <literal>region.outer.properties</literal>.</para>
+                            <para>Add support for side page regions in addition to header and footer regions. This feature lets you add running content to the side margins, and by default the content is rotated 90 degrees.  Adds new templates named <literal>running.side.content</literal>, <literal>region.inner</literal> and <literal>region.outer</literal>; new template modes <literal>region.inner.mode</literal> and <literal>region.outer.mode</literal>; new parameters named <literal>region.inner.extent</literal>, <literal>region.outer.extent</literal>, <literal>body.margin.inner</literal>, <literal>body.margin.outer</literal>,  and <literal>side.region.precedence</literal>; and new attribute-sets named <literal>inner.region.content.properties</literal>, <literal>outer.region.content.properties</literal>, <literal>region.inner.properties</literal>, and <literal>region.outer.properties</literal>.</para>
                         </listitem>
                     </varlistentry>
                     <varlistentry>
@@ -871,7 +1883,7 @@ caption handled by <literal>formal.object.title</literal> template.  Also adds s
                 <para>New <literal>assembly.xsl</literal> stylesheet to convert a DocBook 5.1 assembly into a standard DocBook 5 document.  Also includes a <literal>topic-maker-chunk.xsl</literal> stylesheet that can convert a DocBook 5 book or article document into an assembly with a collection of modular files, including converting some elements to topic files.</para>
             </listitem>
     </itemizedlist>
-<sect2 xml:id="rnV1.77_Gentext">
+<section xml:id="rnV1.77_Gentext">
 <title>Gentext</title>
 <para>The following changes have been made to the
             <filename>gentext</filename> code
@@ -911,9 +1923,9 @@ In the long run, maybe moving the text into a context, not sure.</phrase></scree
 <para><literal>Jirka Kosek: locale/ru.xml</literal></para><screen><phrase role="commit-message">Aligned capitalization of first letters with English original</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Gentext changes for snapshot_-->
+</section><!--end of Gentext changes for snapshot_-->
 
-<sect2 xml:id="VrnV1.77_Common">
+<section xml:id="VrnV1.77_Common">
 <title>Common</title>
 <para>The following changes have been made to the
             <filename>common</filename> code
@@ -946,9 +1958,9 @@ to avoid unnecessary error message in document information.</phrase></screen>
 mode="label.markup".</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Common changes for snapshot_-->
+</section><!--end of Common changes for snapshot_-->
 
-<sect2 xml:id="rnV1.77_FO">
+<section xml:id="rnV1.77_FO">
 <title>FO</title>
 <para>The following changes have been made to the
             <filename>fo</filename> code
@@ -1048,9 +2060,9 @@ based on page master.</phrase></screen>
 <para><literal>Robert Stayton: component.xsl</literal></para><screen><phrase role="commit-message">Add template for <tag>article</tag>/<tag>colophon</tag> to avoid nested page-sequence.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for snapshot_-->
+</section><!--end of FO changes for snapshot_-->
 
-<sect2 xml:id="rnV1.77_HTML">
+<section xml:id="rnV1.77_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the
             <filename>html</filename> code
@@ -1153,10 +2165,10 @@ of class values.</phrase></screen>
 by the graphic size extension).</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for snapshot_-->
+</section><!--end of HTML changes for snapshot_-->
 
 
-<sect2 xml:id="rnV1.77_Epub">
+<section xml:id="rnV1.77_Epub">
 <title>Epub</title>
 <para>The following changes have been made to the
             <filename>epub</filename> code
@@ -1166,9 +2178,9 @@ by the graphic size extension).</phrase></screen>
 <para><literal>Robert Stayton: docbook.xsl</literal></para><screen><phrase role="commit-message">Replace $base.dir with $chunk.base.dir to ensure trailing slash in place.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Epub changes for snapshot_-->
+</section><!--end of Epub changes for snapshot_-->
 
-<sect2 xml:id="rnV1.77_HTMLHelp">
+<section xml:id="rnV1.77_HTMLHelp">
 <title>HTMLHelp</title>
 <para>The following changes have been made to the
             <filename>htmlhelp</filename> code
@@ -1178,9 +2190,9 @@ by the graphic size extension).</phrase></screen>
 <para><literal>Robert Stayton: htmlhelp-common.xsl</literal></para><screen><phrase role="commit-message">Change $base.dir to $chunk.base.dir to ensure trailing slash in place.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTMLHelp changes for snapshot_-->
+</section><!--end of HTMLHelp changes for snapshot_-->
 
-<sect2 xml:id="rnV1.77_Eclipse">
+<section xml:id="rnV1.77_Eclipse">
 <title>Eclipse</title>
 <para>The following changes have been made to the
             <filename>eclipse</filename> code
@@ -1190,9 +2202,9 @@ by the graphic size extension).</phrase></screen>
 <para><literal>Robert Stayton: eclipse.xsl; eclipse3.xsl</literal></para><screen><phrase role="commit-message">Use $chunk.base.dir instead of $base.dir to ensure trailing slash is in place.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Eclipse changes for snapshot_-->
+</section><!--end of Eclipse changes for snapshot_-->
 
-<sect2 xml:id="rnV1.77_">
+<section xml:id="rnV1.77_">
 <title>JavaHelp</title>
 <para>The following changes have been made to the
             <filename>javahelp</filename> code
@@ -1206,9 +2218,9 @@ by the graphic size extension).</phrase></screen>
 which simplifies customization. See bug #3310904.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of JavaHelp changes for snapshot_-->
+</section><!--end of JavaHelp changes for snapshot_-->
 
-<sect2 xml:id="rnV1.77_Webhelp">
+<section xml:id="rnV1.77_Webhelp">
 <title>Webhelp</title>
 <para>The following changes have been made to the
             <filename>webhelp</filename> code
@@ -1516,9 +2528,9 @@ Added cs localization</phrase></screen>
 Added hooks for adding additional user defined tabs</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Webhelp changes for snapshot_-->
+</section><!--end of Webhelp changes for snapshot_-->
 
-<sect2 xml:id="rnV1.77_Params">
+<section xml:id="rnV1.77_Params">
 <title>Params</title>
 <para>The following changes have been made to the
             <filename>params</filename> code
@@ -1583,9 +2595,9 @@ for more consistent id values.</phrase></screen>
 <para><literal>Mauritz Jeanson: graphicsize.extension.xml</literal></para><screen><phrase role="commit-message">Added <tag>info</tag> about supported image formats.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Params changes for snapshot_-->
+</section><!--end of Params changes for snapshot_-->
 
-<sect2 xml:id="rnV1.77_Highlighting">
+<section xml:id="rnV1.77_Highlighting">
 <title>Highlighting</title>
 <para>The following changes have been made to the
             <filename>highlighting</filename> code
@@ -1598,9 +2610,9 @@ for more consistent id values.</phrase></screen>
 <para><literal>Jirka Kosek: delphi-hl.xml</literal></para><screen><phrase role="commit-message">Additional keywords from Yuri Zhilin</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Highlighting changes for snapshot_-->
+</section><!--end of Highlighting changes for snapshot_-->
 
-<sect2 xml:id="rnV1.77_Profiling">
+<section xml:id="rnV1.77_Profiling">
 <title>Profiling</title>
 <para>The following changes have been made to the
             <filename>profiling</filename> code
@@ -1610,9 +2622,9 @@ for more consistent id values.</phrase></screen>
 <para><literal>David Cramer: profile-mode.xsl</literal></para><screen><phrase role="commit-message">When profile.* params only consist of space characters, then ignore them.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Profiling changes for snapshot_-->
+</section><!--end of Profiling changes for snapshot_-->
 
-<sect2 xml:id="rnV1.77_Lib">
+<section xml:id="rnV1.77_Lib">
 <title>Lib</title>
 <para>The following changes have been made to the
             <filename>lib</filename> code
@@ -1628,9 +2640,9 @@ that way with profiling/xsl2profile.xsl.</phrase></screen>
 the paths.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Lib changes for snapshot_-->
+</section><!--end of Lib changes for snapshot_-->
 
-<sect2 xml:id="rnV1.77_Template">
+<section xml:id="rnV1.77_Template">
 <title>Template</title>
 <para>The following changes have been made to the
             <filename>template</filename> code
@@ -1640,9 +2652,9 @@ the paths.</phrase></screen>
 <para><literal>Jirka Kosek: titlepage.xsl</literal></para><screen><phrase role="commit-message">Titlepage mechanism is now namespace aware to support XHTML. Please note that when generating titlepage template stylesheets you have to pass FO or XHTML namespace inside ns parameter. For HTML parameter should be empty.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Template changes for snapshot_-->
+</section><!--end of Template changes for snapshot_-->
 
-<sect2 xml:id="rnV1.77_Extensions">
+<section xml:id="rnV1.77_Extensions">
 <title>Extensions</title>
 <para>The following changes have been made to the
             <filename>extensions</filename> code
@@ -1655,9 +2667,9 @@ the paths.</phrase></screen>
 <para><literal>David Cramer: Makefile</literal></para><screen><phrase role="commit-message">Attempt to convince Makefile that webhelpindexer is dirty</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Extensions changes for snapshot_-->
+</section><!--end of Extensions changes for snapshot_-->
 
-<sect2 xml:id="rnV1.77_XSL-Saxon">
+<section xml:id="rnV1.77_XSL-Saxon">
 <title>XSL-Saxon</title>
 <para>The following changes have been made to the
             <filename>xsl-saxon</filename> code
@@ -1667,15 +2679,15 @@ the paths.</phrase></screen>
 <para><literal>Mauritz Jeanson: src/com/nwalsh/saxon/Verbatim.java; src/com/nwalsh/saxon/FormatGraphicCal⋯</literal></para><screen><phrase role="commit-message">Added fixes to ensure that generated XHTML markup for callouts is in the proper namespace.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of XSL-Saxon changes for snapshot_-->
+</section><!--end of XSL-Saxon changes for snapshot_-->
 
-</sect1>
-<sect1 xml:id="V1.77.1">
+</section>
+<section xml:id="V1.77.1">
 <title>Release Notes: 1.77.1</title>
 <para>The following is a list of changes that have been made
         since the 1.77.0 release.</para>
 
-<sect2 xml:id="Vsnapshot_9396_FO">
+<section xml:id="Vsnapshot_9396_FO">
 <title>FO</title>
 <para>The following changes have been made to the
             <filename>fo</filename> code
@@ -1692,9 +2704,9 @@ from the <tag>filename</tag>.</phrase></screen>
 <para><literal>Robert Stayton: math.xsl</literal></para><screen><phrase role="commit-message">Restored templates for mml:* elements that were accidentally deleted.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for snapshot_9396-->
+</section><!--end of FO changes for snapshot_9396-->
 
-<sect2 xml:id="Vsnapshot_9396_HTML">
+<section xml:id="Vsnapshot_9396_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the
             <filename>html</filename> code
@@ -1714,9 +2726,9 @@ match="<tag>indexterm</tag>" mode="<tag>reference</tag>".  That param is passed
 for endofrange processing to output the range separator.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for snapshot_9396-->
+</section><!--end of HTML changes for snapshot_9396-->
 
-<sect2 xml:id="Vsnapshot_9396_Roundtrip">
+<section xml:id="Vsnapshot_9396_Roundtrip">
 <title>Roundtrip</title>
 <para>The following changes have been made to the
             <filename>roundtrip</filename> code
@@ -1727,9 +2739,9 @@ for endofrange processing to output the range separator.</phrase></screen>
 from the <tag>filename</tag>.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Roundtrip changes for snapshot_9396-->
+</section><!--end of Roundtrip changes for snapshot_9396-->
 
-<sect2 xml:id="Vsnapshot_9396_Slides">
+<section xml:id="Vsnapshot_9396_Slides">
 <title>Slides</title>
 <para>The following changes have been made to the
             <filename>slides</filename> code
@@ -1740,9 +2752,9 @@ from the <tag>filename</tag>.</phrase></screen>
 from the <tag>filename</tag>.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Slides changes for snapshot_9396-->
+</section><!--end of Slides changes for snapshot_9396-->
 
-<sect2 xml:id="Vsnapshot_9396_Website">
+<section xml:id="Vsnapshot_9396_Website">
 <title>Website</title>
 <para>The following changes have been made to the
             <filename>website</filename> code
@@ -1753,9 +2765,9 @@ from the <tag>filename</tag>.</phrase></screen>
 from the <tag>filename</tag>.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Website changes for snapshot_9396-->
+</section><!--end of Website changes for snapshot_9396-->
 
-<sect2 xml:id="Vsnapshot_9396_Webhelp">
+<section xml:id="Vsnapshot_9396_Webhelp">
 <title>Webhelp</title>
 <para>The following changes have been made to the
             <filename>webhelp</filename> code
@@ -1786,15 +2798,15 @@ as &lt;<tag>trademark</tag>&gt; or &lt;<tag>superscript</tag>&gt;.</phrase></scr
 <para><literal>David Cramer: build.xml</literal></para><screen><phrase role="commit-message">Webhelp: calculate path to profile.xsl from main build.xml file</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Webhelp changes for snapshot_9396-->
+</section><!--end of Webhelp changes for snapshot_9396-->
 
-</sect1>
-<sect1 xml:id="V1.76.1">
+</section>
+<section xml:id="V1.76.1">
 <title>Release Notes: 1.76.1</title>
 <para>The following is a list of changes that have been made
         since the 1.76.0 release.</para>
 
-<sect2 xml:id="rnV1.76.1_FO">
+<section xml:id="rnV1.76.1_FO">
 <title>FO</title>
 <para>The following changes have been made to the
             <filename>fo</filename> code
@@ -1805,9 +2817,9 @@ as &lt;<tag>trademark</tag>&gt; or &lt;<tag>superscript</tag>&gt;.</phrase></scr
 bug report #3029845.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for 1.76.1-->
+</section><!--end of FO changes for 1.76.1-->
 
-<sect2 xml:id="rnV1.76.1_HTML">
+<section xml:id="rnV1.76.1_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the <filename>html</filename> code since the 1.76.0 release.</para>
 <itemizedlist>
@@ -1815,9 +2827,9 @@ bug report #3029845.</phrase></screen>
 <para><literal>Keith Fahlgren: highlight.xsl</literal></para><screen><phrase role="commit-message">Implementing handling for &lt;b&gt; and &lt;i&gt;: transform to &lt;strong&gt; and &lt;em&gt; for XHTML outputs and do not use in the highliting output (per Mauritz Jeanson)</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for 1.76.1-->
+</section><!--end of HTML changes for 1.76.1-->
 
-<sect2 xml:id="rnV1.76.1_Params">
+<section xml:id="rnV1.76.1_Params">
 <title>Params</title>
 <para>The following changes have been made to the
             <filename>params</filename> code
@@ -1827,11 +2839,11 @@ bug report #3029845.</phrase></screen>
 <para><literal>Robert Stayton: draft.mode.xml</literal></para><screen><phrase role="commit-message">Change default for <parameter>draft.mode</parameter> to 'no'.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Params changes for 1.76.1-->
+</section><!--end of Params changes for 1.76.1-->
 
 
-</sect1>
-  <sect1 xml:id="V1.76.0">
+</section>
+  <section xml:id="V1.76.0">
     <title>Release Notes: 1.76.0</title>
 <para>This release includes important bug fixes and adds the following
 significant feature changes:</para>
@@ -1867,7 +2879,7 @@ significant feature changes:</para>
 </variablelist>
 
     <para>The following is a list of changes that have been made since the 1.75.2 release.</para>
-    <sect2 xml:id="rnV1.76.0_Gentext">
+    <section xml:id="rnV1.76.0_Gentext">
       <title>Gentext</title>
       <para>The following changes have been made to the <filename>gentext</filename> code since the 1.75.2 release.</para>
       <itemizedlist>
@@ -1936,9 +2948,9 @@ significant feature changes:</para>
           </screen>
         </listitem>
       </itemizedlist>
-    </sect2>
+    </section>
     <!--end of Gentext changes for 1.76.0-->
-    <sect2 xml:id="rnV1.76.0_Common">
+    <section xml:id="rnV1.76.0_Common">
       <title>Common</title>
       <para>The following changes have been made to the <filename>common</filename> code since the 1.75.2 release.</para>
       <itemizedlist>
@@ -2078,9 +3090,9 @@ so that no &lt;ttl&gt; elements end up in the output. Closes bug #2830119.</phra
           </screen>
         </listitem>
       </itemizedlist>
-    </sect2>
+    </section>
     <!--end of Common changes for 1.76.0-->
-    <sect2 xml:id="rnV1.76.0_FO">
+    <section xml:id="rnV1.76.0_FO">
       <title>FO</title>
       <para>The following changes have been made to the
             <filename>fo</filename> code
@@ -2230,9 +3242,9 @@ next to the <tag>equation</tag>.</phrase>
           </screen>
         </listitem>
       </itemizedlist>
-    </sect2>
+    </section>
     <!--end of FO changes for 1.76.0-->
-    <sect2 xml:id="rnV1.76.0_HTML">
+    <section xml:id="rnV1.76.0_HTML">
       <title>HTML</title>
       <para>The following changes have been made to the
             <filename>html</filename> code
@@ -2467,9 +3479,9 @@ even if that typed <tag>index</tag> didn't include any symbols (they were in the
           </screen>
         </listitem>
       </itemizedlist>
-    </sect2>
+    </section>
     <!--end of HTML changes for 1.76.0-->
-    <sect2 xml:id="rnV1.76.0_Manpages">
+    <section xml:id="rnV1.76.0_Manpages">
       <title>Manpages</title>
       <para>The following changes have been made to the
             <filename>manpages</filename> code
@@ -2512,9 +3524,9 @@ sf.net #2642139).</phrase>
           </screen>
         </listitem>
       </itemizedlist>
-    </sect2>
+    </section>
     <!--end of Manpages changes for 1.76.0-->
-    <sect2 xml:id="rnV1.76.0_Epub">
+    <section xml:id="rnV1.76.0_Epub">
       <title>Epub</title>
       <para>The following changes have been made to the
             <filename>epub</filename> code
@@ -2638,9 +3650,9 @@ chunking strategy for refentries was too big a nut to crack at this time.</phras
           </screen>
         </listitem>
       </itemizedlist>
-    </sect2>
+    </section>
     <!--end of Epub changes for 1.76.0-->
-    <sect2 xml:id="rnV1.76.0_Eclipse">
+    <section xml:id="rnV1.76.0_Eclipse">
       <title>Eclipse</title>
       <para>The following changes have been made to the
             <filename>eclipse</filename> code
@@ -2658,9 +3670,9 @@ contributed in patch #2624668.</phrase>
           </screen>
         </listitem>
       </itemizedlist>
-    </sect2>
+    </section>
     <!--end of Eclipse changes for 1.76.0-->
-    <sect2 xml:id="rnV1.76.0_Params">
+    <section xml:id="rnV1.76.0_Params">
       <title>Params</title>
       <para>The following changes have been made to the
             <filename>params</filename> code
@@ -2717,9 +3729,9 @@ for local resolution.</phrase>
           </screen>
         </listitem>
       </itemizedlist>
-    </sect2>
+    </section>
     <!--end of Params changes for 1.76.0-->
-    <sect2 xml:id="rnV1.76.0_XSL-Xalan">
+    <section xml:id="rnV1.76.0_XSL-Xalan">
       <title>XSL-Xalan</title>
       <para>The following changes have been made to the
             <filename>xsl-xalan</filename> code
@@ -2734,15 +3746,15 @@ for local resolution.</phrase>
           </screen>
         </listitem>
       </itemizedlist>
-    </sect2>
+    </section>
     <!--end of XSL-Xalan changes for 1.76.0-->
-  </sect1>
-<sect1 xml:id="rn_V1.75.2">
+  </section>
+<section xml:id="rn_V1.75.2">
 <title>Release Notes: 1.75.2</title>
 <para>The following is a list of changes that have been made
         since the 1.75.1 release.</para>
 
-<sect2 xml:id="rn_V1.75.2_Gentext">
+<section xml:id="rn_V1.75.2_Gentext">
 <title>Gentext</title>
 <para>The following changes have been made to the
             <filename>gentext</filename> code
@@ -2761,9 +3773,9 @@ for local resolution.</phrase>
 <para><literal>Robert Stayton: locale/is.xml</literal></para><screen><phrase role="commit-message">New Icelandic locale file.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Gentext changes for 1.75.2-->
+</section><!--end of Gentext changes for 1.75.2-->
 
-<sect2 xml:id="rn_V1.75.2_Common">
+<section xml:id="rn_V1.75.2_Common">
 <title>Common</title>
 <para>The following changes have been made to the
             <filename>common</filename> code
@@ -2776,9 +3788,9 @@ for local resolution.</phrase>
 <para><literal>Robert Stayton: titles.xsl</literal></para><screen><phrase role="commit-message">Make sure <tag>title</tag> inside <tag>info</tag> is used if no other <tag>title</tag>.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Common changes for 1.75.2-->
+</section><!--end of Common changes for 1.75.2-->
 
-<sect2 xml:id="rn_V1.75.2_FO">
+<section xml:id="rn_V1.75.2_FO">
 <title>FO</title>
 <para>The following changes have been made to the
             <filename>fo</filename> code
@@ -2788,9 +3800,9 @@ for local resolution.</phrase>
 <para><literal>Robert Stayton: pi.xsl</literal></para><screen><phrase role="commit-message">Turn off dbfo-need for <parameter>fop1.extensions</parameter> also, per bug #2816141.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for 1.75.2-->
+</section><!--end of FO changes for 1.75.2-->
 
-<sect2 xml:id="rn_V1.75.2_HTML">
+<section xml:id="rn_V1.75.2_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the
             <filename>html</filename> code
@@ -2806,9 +3818,9 @@ for local resolution.</phrase>
 <para><literal>Norman Walsh: htmltbl.xsl</literal></para><screen><phrase role="commit-message">Remove ambiguity wrt @span, @rowspan, and @colspan</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for 1.75.2-->
+</section><!--end of HTML changes for 1.75.2-->
 
-<sect2 xml:id="rn_V1.75.2_Manpages">
+<section xml:id="rn_V1.75.2_Manpages">
 <title>Manpages</title>
 <para>The following changes have been made to the
             <filename>manpages</filename> code
@@ -2821,9 +3833,9 @@ for local resolution.</phrase>
 <para><literal>Mauritz Jeanson: docbook.xsl</literal></para><screen><phrase role="commit-message">Added stylesheet.result.type test for <tag>copyright</tag>. Closes bug #2813289.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Manpages changes for 1.75.2-->
+</section><!--end of Manpages changes for 1.75.2-->
 
-<sect2 xml:id="rn_V1.75.2_Epub">
+<section xml:id="rn_V1.75.2_Epub">
 <title>Epub</title>
 <para>The following changes have been made to the
             <filename>epub</filename> code
@@ -2836,9 +3848,9 @@ for local resolution.</phrase>
 <para><literal>Keith Fahlgren: bin/lib/docbook.rb; docbook.xsl</literal></para><screen><phrase role="commit-message">Cleaning up hardcoded values into parameters and fixing Ruby library to pass them properly; all thanks to patch from Liza Daly</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Epub changes for 1.75.2-->
+</section><!--end of Epub changes for 1.75.2-->
 
-<sect2 xml:id="rn_V1.75.2_Profiling">
+<section xml:id="rn_V1.75.2_Profiling">
 <title>Profiling</title>
 <para>The following changes have been made to the
             <filename>profiling</filename> code
@@ -2848,9 +3860,9 @@ for local resolution.</phrase>
 <para><literal>Robert Stayton: profile.xsl</literal></para><screen><phrase role="commit-message">Fix bug 2815493 missing <parameter>exsl.node.set.available</parameter> parameter.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Profiling changes for 1.75.2-->
+</section><!--end of Profiling changes for 1.75.2-->
 
-<sect2 xml:id="rn_V1.75.2_XSL-Saxon">
+<section xml:id="rn_V1.75.2_XSL-Saxon">
 <title>XSL-Saxon</title>
 <para>The following changes have been made to the
             <filename>xsl-saxon</filename> code
@@ -2860,9 +3872,9 @@ for local resolution.</phrase>
 <para><literal>Mauritz Jeanson: src/com/nwalsh/saxon/ColumnUpdateEmitter.java; src/com/nwalsh/saxon/Colum⋯</literal></para><screen><phrase role="commit-message">Added fixes so that colgroups in the XHTML namespace are processed properly.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of XSL-Saxon changes for 1.75.2-->
+</section><!--end of XSL-Saxon changes for 1.75.2-->
 
-<sect2 xml:id="rn_V1.75.2_XSL-Xalan">
+<section xml:id="rn_V1.75.2_XSL-Xalan">
 <title>XSL-Xalan</title>
 <para>The following changes have been made to the
             <filename>xsl-xalan</filename> code
@@ -2872,19 +3884,19 @@ for local resolution.</phrase>
 <para><literal>Mauritz Jeanson: nbproject/project.xml</literal></para><screen><phrase role="commit-message">Added missing NetBeans configuration.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of XSL-Xalan changes for 1.75.2-->
+</section><!--end of XSL-Xalan changes for 1.75.2-->
 
-</sect1>
+</section>
 
 
-<sect1 xml:id="rn_V1.75.1">
+<section xml:id="rn_V1.75.1">
 <title>Release Notes: 1.75.1</title>
 <para>This release includes bug fixes.</para>
 
 <para>The following is a list of changes that have been made since the 1.75.0 release.</para>
 
 
-<sect2 xml:id="rn_V1.75.1_FO">
+<section xml:id="rn_V1.75.1_FO">
 <title>FO</title>
 <para>The following changes have been made to the <filename>fo</filename> code since the 1.75.0 release.</para>
 <itemizedlist>
@@ -2895,9 +3907,9 @@ for local resolution.</phrase>
 <para><literal>Robert Stayton: lists.xsl</literal></para><screen><phrase role="commit-message">Fixed bug 2789947, id attribute missing on <tag>simplelist</tag> fo output.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for 1.75.1-->
+</section><!--end of FO changes for 1.75.1-->
 
-<sect2 xml:id="rn_V1.75.1_HTML">
+<section xml:id="rn_V1.75.1_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the
             <filename>html</filename> code
@@ -2910,9 +3922,9 @@ for local resolution.</phrase>
 <para><literal>Robert Stayton: lists.xsl</literal></para><screen><phrase role="commit-message">Fixed bug 2789678: apply-templates line accidentally deleted.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for 1.75.1-->
+</section><!--end of HTML changes for 1.75.1-->
 
-<sect2 xml:id="rn_V1.75.1_Epub">
+<section xml:id="rn_V1.75.1_Epub">
 <title>Epub</title>
 <para>The following changes have been made to the
             <filename>epub</filename> code
@@ -2928,9 +3940,9 @@ for local resolution.</phrase>
 <para><literal>Keith Fahlgren: bin/lib/docbook.rb</literal></para><screen><phrase role="commit-message">Tweaking solution to Bug #2750442 following regression reported by Michael Wiedmann.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Epub changes for 1.75.1-->
+</section><!--end of Epub changes for 1.75.1-->
 
-<sect2 xml:id="rn_V1.75.1_Params">
+<section xml:id="rn_V1.75.1_Params">
 <title>Params</title>
 <para>The following changes have been made to the
             <filename>params</filename> code
@@ -2940,12 +3952,12 @@ for local resolution.</phrase>
 <para><literal>Mauritz Jeanson: highlight.source.xml</literal></para><screen><phrase role="commit-message">Updated documentation to reflect changes made in r8419.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Params changes for 1.75.1-->
+</section><!--end of Params changes for 1.75.1-->
 
-</sect1>
+</section>
 
 
-<sect1 xml:id="V1.75.0">
+<section xml:id="V1.75.0">
 <title>Release Notes: 1.75.0</title>
 <para>This release includes important bug fixes and adds the following
 significant feature changes:
@@ -3037,7 +4049,7 @@ any dedications.</para>
 <para>The following is a list of changes that have been made
         since the 1.74.3 release.</para>
 
-<sect2 xml:id="rn_V1.75.0_Gentext">
+<section xml:id="rn_V1.75.0_Gentext">
 <title>Gentext</title>
 <para>The following changes have been made to the
             <filename>gentext</filename> code
@@ -3069,9 +4081,9 @@ message of 14 April 2009.</phrase></screen>
 <para><literal>Robert Stayton: locale/ru.xml</literal></para><screen><phrase role="commit-message">Checkin typo fix submitted in bug #2453406.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Gentext changes for 1.75.0-->
+</section><!--end of Gentext changes for 1.75.0-->
 
-<sect2 xml:id="rn_V1.75.0_Common">
+<section xml:id="rn_V1.75.0_Common">
 <title>Common</title>
 <para>The following changes have been made to the
             <filename>common</filename> code
@@ -3143,9 +4155,9 @@ any dedications.</phrase></screen>
 <para><literal>Robert Stayton: labels.xsl</literal></para><screen><phrase role="commit-message">Fix bug in labelling <tag>figure</tag> inside <tag>appendix</tag> inside <tag>article</tag> inside <tag>book</tag>.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Common changes for 1.75.0-->
+</section><!--end of Common changes for 1.75.0-->
 
-<sect2 xml:id="rn_V1.75.0_FO">
+<section xml:id="rn_V1.75.0_FO">
 <title>FO</title>
 <para>The following changes have been made to the
             <filename>fo</filename> code
@@ -3341,9 +4353,9 @@ instead of <tag>question</tag>, if available. For DocBook 5, use the <tag>info</
 <para><literal>Keith Fahlgren: verbatim.xsl</literal></para><screen><phrase role="commit-message">Alternate attempt at sanely including/excluding XSLTHT code</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for 1.75.0-->
+</section><!--end of FO changes for 1.75.0-->
 
-<sect2 xml:id="rn_V1.75.0_HTML">
+<section xml:id="rn_V1.75.0_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the
             <filename>html</filename> code
@@ -3513,9 +4525,9 @@ instead of <tag>question</tag>, if available. For DocBook 5, use the <tag>info</
 <para><literal>Keith Fahlgren: verbatim.xsl</literal></para><screen><phrase role="commit-message">Alternate attempt at sanely including/excluding XSLTHT code</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for 1.75.0-->
+</section><!--end of HTML changes for 1.75.0-->
 
-<sect2 xml:id="rn_V1.75.0_Manpages">
+<section xml:id="rn_V1.75.0_Manpages">
 <title>Manpages</title>
 <para>The following changes have been made to the
             <filename>manpages</filename> code
@@ -3529,9 +4541,9 @@ test of $exsl.node.set.available param.</phrase></screen>
 <para><literal>Mauritz Jeanson: lists.xsl</literal></para><screen><phrase role="commit-message">Added a template for <tag>bibliolist</tag>. Closes bug #1815916.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Manpages changes for 1.75.0-->
+</section><!--end of Manpages changes for 1.75.0-->
 
-<sect2 xml:id="rn_V1.75.0_Epub">
+<section xml:id="rn_V1.75.0_Epub">
 <title>ePub</title>
 <para>The following changes have been made to the
             <filename>epub</filename> code
@@ -3578,9 +4590,9 @@ to dc:creator element.</phrase></screen>
 <para><literal>Keith Fahlgren: bin/spec/epub_regressions_spec.rb; bin/spec/files/blockquotepre.xml</literal></para><screen><phrase role="commit-message">Added regression test and fix for XHTML validation problem with &lt;a&gt;s added inside &lt;<tag>blockquote</tag>&gt;; This potentially causes another problem (where something is referenced by has no <tag>anchor</tag>, but someone reporting that should cause the whole &lt;a id='thing'/&gt; thing to be reconsidered with modern browsers in mind.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Epub changes for 1.75.0-->
+</section><!--end of Epub changes for 1.75.0-->
 
-<sect2 xml:id="rn_V1.75.0_HTMLHelp">
+<section xml:id="rn_V1.75.0_HTMLHelp">
 <title>HTMLHelp</title>
 <para>The following changes have been made to the
             <filename>htmlhelp</filename> code
@@ -3590,10 +4602,10 @@ to dc:creator element.</phrase></screen>
 <para><literal>Robert Stayton: htmlhelp-common.xsl</literal></para><screen><phrase role="commit-message">Add support for generating <tag>olink</tag> target <tag>database</tag> for htmlhelp files.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTMLHelp changes for 1.75.0-->
+</section><!--end of HTMLHelp changes for 1.75.0-->
 
 
-<sect2 xml:id="rn_V1.75.0_Params">
+<section xml:id="rn_V1.75.0_Params">
 <title>Params</title>
 <para>The following changes have been made to the
             <filename>params</filename> code
@@ -3657,9 +4669,9 @@ writing mode.</phrase></screen>
 <para><literal>Robert Stayton: make.year.ranges.xml</literal></para><screen><phrase role="commit-message">Now handles <tag>year</tag> element containing a comma or dash without error.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Params changes for 1.75.0-->
+</section><!--end of Params changes for 1.75.0-->
 
-<sect2 xml:id="rn_V1.75.0_Highlighting">
+<section xml:id="rn_V1.75.0_Highlighting">
 <title>Highlighting</title>
 <para>The following changes have been made to the
             <filename>highlighting</filename> code
@@ -3675,9 +4687,9 @@ writing mode.</phrase></screen>
 <para><literal>Keith Fahlgren: common.xsl</literal></para><screen><phrase role="commit-message">Alternate attempt at sanely including/excluding XSLTHT code</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Highlighting changes for 1.75.0-->
+</section><!--end of Highlighting changes for 1.75.0-->
 
-<sect2 xml:id="rn_V1.75.0_XSL-Saxon">
+<section xml:id="rn_V1.75.0_XSL-Saxon">
 <title>XSL-Saxon</title>
 <para>The following changes have been made to the
             <filename>xsl-saxon</filename> code
@@ -3688,9 +4700,9 @@ writing mode.</phrase></screen>
 Hopefully this closes bug #894805.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of XSL-Saxon changes for 1.75.0-->
+</section><!--end of XSL-Saxon changes for 1.75.0-->
 
-<sect2 xml:id="rn_V1.75.0_XSL-Xalan">
+<section xml:id="rn_V1.75.0_XSL-Xalan">
 <title>XSL-Xalan</title>
 <para>The following changes have been made to the
             <filename>xsl-xalan</filename> code
@@ -3701,22 +4713,22 @@ Hopefully this closes bug #894805.</phrase></screen>
 Hopefully this closes bug #894805.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of XSL-Xalan changes for 1.75.0-->
+</section><!--end of XSL-Xalan changes for 1.75.0-->
 
 
-</sect1>
+</section>
 
-<sect1 xml:id="V1.74.3">
+<section xml:id="V1.74.3">
 <title>Release Notes: 1.74.3</title>
 <para>This release fixes some bugs in the 1.74.2 release.</para>
 <para>See <filename>highlighting/README</filename> for XSLTHL usage instructions.</para>
-</sect1>
-<sect1 xml:id="V1.74.2">
+</section>
+<section xml:id="V1.74.2">
 <title>Release Notes: 1.74.2</title>
 <para>This release fixes some bugs in the 1.74.1 release.</para>
-</sect1>
+</section>
 
-<sect1 xml:id="V1.74.1">
+<section xml:id="V1.74.1">
 <title>Release Notes: 1.74.1</title>
 <para>This release includes important bug fixes and adds the following
 significant feature changes:
@@ -3816,7 +4828,7 @@ Patch from Paolo Borelli. Closes #2086321.</para>
 <para>The following is a list of changes that have been made since the 1.74.0 release.</para>
 
 
-<sect2 xml:id="summary_V1.74.1_Gentext">
+<section xml:id="summary_V1.74.1_Gentext">
 <title>Gentext</title>
 <para>The following changes have been made to the <filename>gentext</filename> code since the 1.74.0 release.</para>
 <itemizedlist>
@@ -3833,9 +4845,9 @@ Patch from Paolo Borelli. Closes #2086321.</para>
 <para><literal>Robert Stayton: locale/lv.xml; locale/ca.xml; locale/pt.xml; locale/tr.xml; locale/af.xml;⋯</literal></para><screen><phrase role="commit-message">Add writing-mode gentext string to support right-to-left languages.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Gentext changes for 1.74.1-->
+</section><!--end of Gentext changes for 1.74.1-->
 
-<sect2 xml:id="summary_V1.74.1_FO">
+<section xml:id="summary_V1.74.1_FO">
 <title>FO</title>
 <para>The following changes have been made to the <filename>fo</filename> code since the 1.74.0 release.</para>
 <itemizedlist>
@@ -3863,9 +4875,9 @@ Patch from Paolo Borelli. Closes #2086321.</phrase></screen>
  -- support for new languages, including Perl, Python and Ruby was added</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for 1.74.1-->
+</section><!--end of FO changes for 1.74.1-->
 
-<sect2 xml:id="summary_V1.74.1_HTML">
+<section xml:id="summary_V1.74.1_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the <filename>html</filename> code since the 1.74.0 release.</para>
 <itemizedlist>
@@ -3880,9 +4892,9 @@ and changebars templates and contains additional logic for chunked output.
 See FRs #1015180 and #1819915.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for 1.74.1-->
+</section><!--end of HTML changes for 1.74.1-->
 
-<sect2 xml:id="summary_V1.74.1_Manpages">
+<section xml:id="summary_V1.74.1_Manpages">
 <title>Manpages</title>
 <para>The following changes have been made to the <filename>manpages</filename> code since the 1.74.0 release.</para>
 <itemizedlist>
@@ -3894,9 +4906,9 @@ pre-processed through tbl(1); groff can <tag>figure</tag> it out
 automatically, but apparently AT&amp;T troff needs to be explicitly told</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Manpages changes for 1.74.1-->
+</section><!--end of Manpages changes for 1.74.1-->
 
-<sect2 xml:id="summary_V1.74.1_Epub">
+<section xml:id="summary_V1.74.1_Epub">
 <title>ePub</title>
 <para>The following changes have been made to the <filename>epub</filename> code since the 1.74.0 release.</para>
 <itemizedlist>
@@ -3950,9 +4962,9 @@ DocBook::Epub
 - should include a CSS <tag>link</tag> in OPF file when a CSS file has been provided</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Epub changes for 1.74.1-->
+</section><!--end of Epub changes for 1.74.1-->
 
-<sect2 xml:id="summary_V1.74.1_Roundtrip">
+<section xml:id="summary_V1.74.1_Roundtrip">
 <title>Roundtrip</title>
 <para>The following changes have been made to the
             <filename>roundtrip</filename> code
@@ -3977,9 +4989,9 @@ to-DocBook: add cols attribute to <tag>tgroup</tag>
 from-DocBook: fix for <tag>blockquote</tag> <tag>title</tag></phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Roundtrip changes for 1.74.1-->
+</section><!--end of Roundtrip changes for 1.74.1-->
 
-<sect2 xml:id="summary_V1.74.1_Params">
+<section xml:id="summary_V1.74.1_Params">
 <title>Params</title>
 <para>The following changes have been made to the <filename>params</filename> since the 1.74.0 release.</para>
 <itemizedlist>
@@ -4034,9 +5046,9 @@ Patch from Paolo Borelli. Closes #2086321.</phrase></screen>
  -- support for new languages, including Perl, Python and Ruby was added</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Params changes for 1.74.1-->
+</section><!--end of Params changes for 1.74.1-->
 
-<sect2 xml:id="summary_V1.74.1_Highlighting">
+<section xml:id="summary_V1.74.1_Highlighting">
 <title>Highlighting</title>
 <para>The following changes have been made to the
             <filename>highlighting</filename> code
@@ -4049,12 +5061,12 @@ Patch from Paolo Borelli. Closes #2086321.</phrase></screen>
  -- support for new languages, including Perl, Python and Ruby was added</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Highlighting changes for 1.74.1-->
+</section><!--end of Highlighting changes for 1.74.1-->
 
-</sect1>
+</section>
 
 
-<sect1 xml:id="V1.74.0">
+<section xml:id="V1.74.0">
 <title>Release Notes: 1.74.0</title>
 <para>This release includes important bug fixes and adds the following
 significant feature changes:
@@ -4098,7 +5110,7 @@ generated and are quite similar to the XHTML target.</para></listitem>
 <para>The following is a list of changes that have been made
         since the 1.73.2 release.</para>
 
-<sect2 xml:id="V1.74.0_Gentext">
+<section xml:id="V1.74.0_Gentext">
 <title>Gentext</title>
 <para>The following changes have been made to the
             <filename>gentext</filename> code
@@ -4146,9 +5158,9 @@ that the actual glyphs so up when you edit it in a text editor
 <para><literal>Dongsheng Song: locale/zh_cn.xml</literal></para><screen><phrase role="commit-message">Added missing translations.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Gentext changes for 1.74.0-->
+</section><!--end of Gentext changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_Common">
+<section xml:id="V1.74.0_Common">
 <title>Common</title>
 <para>The following changes have been made to the
             <filename>common</filename> code
@@ -4256,9 +5268,9 @@ of &lt;title&gt;. Previously, having inline elements with @id/@xml:id in &lt;tit
 resulted in anchors both in the TOC and in the main flow. Closes bug #1797492.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Common changes for 1.74.0-->
+</section><!--end of Common changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_FO">
+<section xml:id="V1.74.0_FO">
 <title>FO</title>
 <para>The following changes have been made to the
             <filename>fo</filename> code
@@ -4404,9 +5416,9 @@ Closes #1785519. Thanks to Ken Morse for reporting and
 troubleshooting the problem.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for 1.74.0-->
+</section><!--end of FO changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_HTML">
+<section xml:id="V1.74.0_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the
             <filename>html</filename> code
@@ -4549,9 +5561,9 @@ Modified the href attribute on the legalnotice link.
 Closes bug #1790495.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for 1.74.0-->
+</section><!--end of HTML changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_Manpages">
+<section xml:id="V1.74.0_Manpages">
 <title>Manpages</title>
 <para>The following changes have been made to the
             <filename>manpages</filename> code
@@ -4997,9 +6009,9 @@ output surrounded by HTML &lt;em&gt; tags; fixed so that it gets roff
 ital markup). Closes bug #1858329.  Thanks to Sam Varshavchik.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Manpages changes for 1.74.0-->
+</section><!--end of Manpages changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_Epub">
+<section xml:id="V1.74.0_Epub">
 <title>Epub</title>
 <para>The following changes have been made to the
             <filename>epub</filename> code
@@ -5056,9 +6068,9 @@ Finished in 629.89194 seconds
 224 examples, 15 failures yields 6% failure rate</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Epub changes for 1.74.0-->
+</section><!--end of Epub changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_HTMLHelp">
+<section xml:id="V1.74.0_HTMLHelp">
 <title>HTMLHelp</title>
 <para>The following changes have been made to the
             <filename>htmlhelp</filename> code
@@ -5071,9 +6083,9 @@ This makes chunk.quietly=1 suppress chunk filename messages also for help
 support files (which seems to be what one would expect). See bug #1648360.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTMLHelp changes for 1.74.0-->
+</section><!--end of HTMLHelp changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_Eclipse">
+<section xml:id="V1.74.0_Eclipse">
 <title>Eclipse</title>
 <para>The following changes have been made to the
             <filename>eclipse</filename> code
@@ -5099,9 +6111,9 @@ This makes chunk.quietly=1 suppress chunk filename messages also for help
 support files (which seems to be what one would expect). See bug #1648360.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Eclipse changes for 1.74.0-->
+</section><!--end of Eclipse changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_JavaHelp">
+<section xml:id="V1.74.0_JavaHelp">
 <title>JavaHelp</title>
 <para>The following changes have been made to the
             <filename>javahelp</filename> code
@@ -5114,9 +6126,9 @@ This makes chunk.quietly=1 suppress chunk filename messages also for help
 support files (which seems to be what one would expect). See bug #1648360.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of JavaHelp changes for 1.74.0-->
+</section><!--end of JavaHelp changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_Roundtrip">
+<section xml:id="V1.74.0_Roundtrip">
 <title>Roundtrip</title>
 <para>The following changes have been made to the
             <filename>roundtrip</filename> code
@@ -5162,9 +6174,9 @@ support files (which seems to be what one would expect). See bug #1648360.</phra
 <para><literal>Steve Ball: normalise-common.xsl; blocks2dbk.xsl; template.xml; dbk2wordml.xsl; dbk2wp.xsl</literal></para><screen><phrase role="commit-message">Added support file. Added style locking. Conversion bug fixes.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Roundtrip changes for 1.74.0-->
+</section><!--end of Roundtrip changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_Slides">
+<section xml:id="V1.74.0_Slides">
 <title>Slides</title>
 <para>The following changes have been made to the
             <filename>slides</filename> code
@@ -5180,9 +6192,9 @@ else.</phrase></screen>
 <para><literal>Jirka Kosek: html/plain.xsl</literal></para><screen><phrase role="commit-message">Added support for showing foil number</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Slides changes for 1.74.0-->
+</section><!--end of Slides changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_Website">
+<section xml:id="V1.74.0_Website">
 <title>Website</title>
 <para>The following changes have been made to the
             <filename>website</filename> code
@@ -5192,9 +6204,9 @@ else.</phrase></screen>
 <para><literal>Michael(tm) Smith: extensions/saxon64/.classes/.gitignore; extensions/xalan2/.classes/com/⋯</literal></para><screen><phrase role="commit-message">renamed a bunch more .cvsignore files to .gitignore (to facilitate use of git-svn)</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Website changes for 1.74.0-->
+</section><!--end of Website changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_Params">
+<section xml:id="V1.74.0_Params">
 <title>Params</title>
 <para>The following changes have been made to the
             <filename>params</filename> code
@@ -5350,9 +6362,9 @@ default value for tables.</phrase></screen>
 there was a risk of misunderstanding how it works.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Params changes for 1.74.0-->
+</section><!--end of Params changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_Profiling">
+<section xml:id="V1.74.0_Profiling">
 <title>Profiling</title>
 <para>The following changes have been made to the
             <filename>profiling</filename> code
@@ -5366,10 +6378,10 @@ there was a risk of misunderstanding how it works.</phrase></screen>
 they can be more easily customized.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Profiling changes for 1.74.0-->
+</section><!--end of Profiling changes for 1.74.0-->
 
 
-<sect2 xml:id="V1.74.0_Tools">
+<section xml:id="V1.74.0_Tools">
 <title>Tools</title>
 <para>The following changes have been made to the
             <filename>tools</filename> code
@@ -5409,9 +6421,9 @@ notes. Corrected some problems in the target for the release-notes
 HTML build.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Tools changes for 1.74.0-->
+</section><!--end of Tools changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_Extensions">
+<section xml:id="V1.74.0_Extensions">
 <title>Extensions</title>
 <para>The following changes have been made to the
             <filename>extensions</filename> code
@@ -5426,9 +6438,9 @@ xsl/extensions/Makefile</phrase></screen>
 <para><literal>Michael(tm) Smith: .cvsignore</literal></para><screen><phrase role="commit-message">re-adding empty extensions subdir</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Extensions changes for 1.74.0-->
+</section><!--end of Extensions changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_XSL-Saxon">
+<section xml:id="V1.74.0_XSL-Saxon">
 <title>XSL-Saxon</title>
 <para>The following changes have been made to the
             <filename>xsl-saxon</filename> code
@@ -5449,9 +6461,9 @@ references. Closes #1792043. Thanks to Daniel Leidert.</phrase></screen>
 <para><literal>Michael(tm) Smith: nbproject/build-impl.xml; VERSION; Makefile; test</literal></para><screen><phrase role="commit-message">More tweaks to get release-ready</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of XSL-Saxon changes for 1.74.0-->
+</section><!--end of XSL-Saxon changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_XSL-Xalan">
+<section xml:id="V1.74.0_XSL-Xalan">
 <title>XSL-Xalan</title>
 <para>The following changes have been made to the
             <filename>xsl-xalan</filename> code
@@ -5472,9 +6484,9 @@ references. Closes #1792043. Thanks to Daniel Leidert.</phrase></screen>
 <para><literal>Michael(tm) Smith: Makefile; nbproject/build-impl.xml; VERSION</literal></para><screen><phrase role="commit-message">More tweaks to get release-ready</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of XSL-Xalan changes for 1.74.0-->
+</section><!--end of XSL-Xalan changes for 1.74.0-->
 
-<sect2 xml:id="V1.74.0_XSL-libxslt">
+<section xml:id="V1.74.0_XSL-libxslt">
 <title>XSL-libxslt</title>
 <para>The following changes have been made to the
             <filename>xsl-libxslt</filename> code
@@ -5495,22 +6507,22 @@ Replaced deprecated functions from the string module with string methods.</phras
 <para><literal>Mauritz Jeanson: python/README</literal></para><screen><phrase role="commit-message">Tweaked the text a little.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of XSL-libxslt changes for 1.74.0-->
+</section><!--end of XSL-libxslt changes for 1.74.0-->
 
-</sect1>
+</section>
 
-<sect1 xml:id="V1.73.2">
+<section xml:id="V1.73.2">
 <title>Release Notes: 1.73.2</title>
 <para>This is solely a minor bug-fix update to the 1.73.1 release.
   It fixes a packaging error in the 1.73.1 package, as well as a
   bug in footnote handling in FO output.</para>
-</sect1>
+</section>
 
-<sect1 xml:id="V1.73.1">
+<section xml:id="V1.73.1">
 <title>Release: 1.73.1</title>
 <para>This is mostly a bug-fix update to the 1.73.0 release.</para>
 
-<sect2 xml:id="V1.73.1_Gentext">
+<section xml:id="V1.73.1_Gentext">
 <title>Gentext</title>
 <para>The following changes have been made to the
             <filename>gentext</filename> code
@@ -5523,9 +6535,9 @@ Replaced deprecated functions from the string module with string methods.</phras
 <para><literal>Michael(tm) Smith: locale/lv.xml</literal></para><screen><phrase role="commit-message">Added localization for <tag>ProductionSet</tag>.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Gentext changes for 1.73.1-->
+</section><!--end of Gentext changes for 1.73.1-->
 
-<sect2 xml:id="V1.73.1_FO">
+<section xml:id="V1.73.1_FO">
 <title>FO</title>
 <para>The following changes have been made to the
             <filename>fo</filename> code
@@ -5546,9 +6558,9 @@ relevant; it is not a problem with FOP 0.93 or XEP 4.10. Closes bug #1760559.</p
 references in the <tag>index</tag> can be created. Closes bug #1775086.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for 1.73.1-->
+</section><!--end of FO changes for 1.73.1-->
 
-<sect2 xml:id="V1.73.1_HTML">
+<section xml:id="V1.73.1_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the
             <filename>html</filename> code
@@ -5590,9 +6602,9 @@ Added support for MathML in <tag>imagedata</tag>.</phrase></screen>
 (The two templates matching 'dbhh' are still in htmlhelp-common.xsl).</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for 1.73.1-->
+</section><!--end of HTML changes for 1.73.1-->
 
-<sect2 xml:id="V1.73.1_Manpages">
+<section xml:id="V1.73.1_Manpages">
 <title>Manpages</title>
 <para>The following changes have been made to the
             <filename>manpages</filename> code
@@ -5605,9 +6617,9 @@ non-para children only if the notesource is a <tag>footnote</tag> or
 the existing handling.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Manpages changes for 1.73.1-->
+</section><!--end of Manpages changes for 1.73.1-->
 
-<sect2 xml:id="V1.73.1_HTMLHelp">
+<section xml:id="V1.73.1_HTMLHelp">
 <title>HTMLHelp</title>
 <para>The following changes have been made to the
             <filename>htmlhelp</filename> code
@@ -5618,9 +6630,9 @@ the existing handling.</phrase></screen>
 eclipse, and javahelp stylesheets.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTMLHelp changes for 1.73.1-->
+</section><!--end of HTMLHelp changes for 1.73.1-->
 
-<sect2 xml:id="V1.73.1_Eclipse">
+<section xml:id="V1.73.1_Eclipse">
 <title>Eclipse</title>
 <para>The following changes have been made to the
             <filename>eclipse</filename> code
@@ -5631,9 +6643,9 @@ eclipse, and javahelp stylesheets.</phrase></screen>
 eclipse, and javahelp stylesheets.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Eclipse changes for 1.73.1-->
+</section><!--end of Eclipse changes for 1.73.1-->
 
-<sect2 xml:id="V1.73.1_JavaHelp">
+<section xml:id="V1.73.1_JavaHelp">
 <title>JavaHelp</title>
 <para>The following changes have been made to the
             <filename>javahelp</filename> code
@@ -5644,9 +6656,9 @@ eclipse, and javahelp stylesheets.</phrase></screen>
 eclipse, and javahelp stylesheets.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of JavaHelp changes for 1.73.1-->
+</section><!--end of JavaHelp changes for 1.73.1-->
 
-<sect2 xml:id="V1.73.1_Roundtrip">
+<section xml:id="V1.73.1_Roundtrip">
 <title>Roundtrip</title>
 <para>The following changes have been made to the
             <filename>roundtrip</filename> code
@@ -5657,9 +6669,9 @@ eclipse, and javahelp stylesheets.</phrase></screen>
 Added support for tables to pages2normalise</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Roundtrip changes for 1.73.1-->
+</section><!--end of Roundtrip changes for 1.73.1-->
 
-<sect2 xml:id="V1.73.1_Params">
+<section xml:id="V1.73.1_Params">
 <title>Params</title>
 <para>The following changes have been made to the
             <filename>params</filename> code
@@ -5673,10 +6685,10 @@ a <tag>procedure</tag> does not need to be kept together by default.</phrase></s
 <para><literal>Dave Pawson: title.font.family.xml; component.label.includes.part.label.xml; table.frame.b⋯</literal></para><screen><phrase role="commit-message">Regular formatting re-org.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Params changes for 1.73.1-->
-</sect1>
+</section><!--end of Params changes for 1.73.1-->
+</section>
 
-<sect1 xml:id="V1.73.0">
+<section xml:id="V1.73.0">
 <title>Release: 1.73.0</title>
 <para>This release includes important bug fixes and adds the following
 significant feature changes:
@@ -5757,7 +6769,7 @@ significant feature changes:
 </variablelist> 
 </para>
 
-<sect2 xml:id="V1.73.0_Gentext">
+<section xml:id="V1.73.0_Gentext">
 <title>Gentext</title>
 <para>The following changes have been made to the
 <filename>gentext</filename> code
@@ -5794,8 +6806,8 @@ since the 1.72.0 release.</para>
 <para><literal>Mauritz Jeanson: locale/uk.xml</literal></para><screen><phrase role="commit-message">Applied patch 1592083.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Gentext changes for 1.73.0-->
-<sect2 xml:id="V1.73.0_Common">
+</section><!--end of Gentext changes for 1.73.0-->
+<section xml:id="V1.73.0_Common">
 <title>Common</title>
 <para>The following changes have been made to the
 <filename>common</filename> code
@@ -5832,8 +6844,8 @@ handling for *<tag>info</tag>/<tag>title</tag> should be added.</phrase></screen
 around Xalan bug.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Common changes for 1.73.0-->
-<sect2 xml:id="V1.73.0_FO">
+</section><!--end of Common changes for 1.73.0-->
+<section xml:id="V1.73.0_FO">
 <title>FO</title>
 <para>The following changes have been made to the
 <filename>fo</filename> code
@@ -5916,8 +6928,8 @@ The code was provided by Jana Dvorakova</phrase></screen>
 <para><literal>Robert Stayton: inline.xsl</literal></para><screen><phrase role="commit-message">Add <parameter>fop1.extensions</parameter> for <tag>menuchoice</tag> arrow handling exception.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for 1.73.0-->
-<sect2 xml:id="V1.73.0_HTML">
+</section><!--end of FO changes for 1.73.0-->
+<section xml:id="V1.73.0_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the
             <filename>html</filename> code
@@ -6033,8 +7045,8 @@ have a class value too.</phrase></screen>
 Tested with Xalan, Saxon, and xsltproc.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for 1.73.0-->
-<sect2 xml:id="V1.73.0_Manpages">
+</section><!--end of HTML changes for 1.73.0-->
+<section xml:id="V1.73.0_Manpages">
 <title>Manpages</title>
 <para>The following changes have been made to the
             <filename>manpages</filename> code
@@ -6196,8 +7208,8 @@ out-of-line content:
   a bit better than it was.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Manpages changes for 1.73.0-->
-<sect2 xml:id="V1.73.0_Eclipse">
+</section><!--end of Manpages changes for 1.73.0-->
+<section xml:id="V1.73.0_Eclipse">
 <title>Eclipse</title>
 <para>The following changes have been made to the
             <filename>eclipse</filename> code
@@ -6210,8 +7222,8 @@ out-of-line content:
 <para><literal>David Cramer: eclipse.xsl</literal></para><screen><phrase role="commit-message">Added normalize-space around  to avoid leading whitespace from appearing in the output if there's extra leading whitespace (e.g. &lt;<tag>title</tag>&gt; Foo&lt;/<tag>title</tag>&gt;) in the source</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Eclipse changes for 1.73.0-->
-<sect2 xml:id="V1.73.0_JavaHelp">
+</section><!--end of Eclipse changes for 1.73.0-->
+<section xml:id="V1.73.0_JavaHelp">
 <title>JavaHelp</title>
 <para>The following changes have been made to the
             <filename>javahelp</filename> code
@@ -6225,8 +7237,8 @@ out-of-line content:
 Added support for <tag>glossary</tag> and <tag>bibliography</tag> in <tag>toc</tag> and map files.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of JavaHelp changes for 1.73.0-->
-<sect2 xml:id="V1.73.0_Roundtrip">
+</section><!--end of JavaHelp changes for 1.73.0-->
+<section xml:id="V1.73.0_Roundtrip">
 <title>Roundtrip</title>
 <para>The following changes have been made to the
             <filename>roundtrip</filename> code
@@ -6239,8 +7251,8 @@ Added support for <tag>glossary</tag> and <tag>bibliography</tag> in <tag>toc</t
 <para><literal>Steve Ball: template-pages.xml; dbk2wp.xsl; sections-spec.xml</literal></para><screen><phrase role="commit-message">fixed bugs</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Roundtrip changes for 1.73.0-->
-<sect2 xml:id="V1.73.0_Params">
+</section><!--end of Roundtrip changes for 1.73.0-->
+<section xml:id="V1.73.0_Params">
 <title>Params</title>
 <para>The following changes have been made to the
             <filename>params</filename> code
@@ -6330,8 +7342,8 @@ The code was provided by Jana Dvorakova</phrase></screen>
 <para><literal>Robert Stayton: header.table.properties.xml; footer.table.properties.xml</literal></para><screen><phrase role="commit-message">Support adding <tag>table</tag> properties to header and footer tables.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Params changes for 1.73.0-->
-<sect2 xml:id="V1.73.0_Highlighting">
+</section><!--end of Params changes for 1.73.0-->
+<section xml:id="V1.73.0_Highlighting">
 <title>Highlighting</title>
 <para>The following changes have been made to the
             <filename>highlighting</filename> code
@@ -6341,8 +7353,8 @@ The code was provided by Jana Dvorakova</phrase></screen>
 <para><literal>Jirka Kosek: c-hl.xml; xslthl-config.xml</literal></para><screen><phrase role="commit-message">Added support for C language. Provided by Bruno Guegan.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Highlighting changes for 1.73.0-->
-<sect2 xml:id="V1.73.0_Profiling">
+</section><!--end of Highlighting changes for 1.73.0-->
+<section xml:id="V1.73.0_Profiling">
 <title>Profiling</title>
 <para>The following changes have been made to the
             <filename>profiling</filename> code
@@ -6352,8 +7364,8 @@ The code was provided by Jana Dvorakova</phrase></screen>
 <para><literal>Robert Stayton: profile-mode.xsl</literal></para><screen><phrase role="commit-message">Add support for new profiling attributes audience and wordsize.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Profiling changes for 1.73.0-->
-<sect2 xml:id="V1.73.0_Lib">
+</section><!--end of Profiling changes for 1.73.0-->
+<section xml:id="V1.73.0_Lib">
 <title>Lib</title>
 <para>The following changes have been made to the
             <filename>lib</filename> code
@@ -6364,8 +7376,8 @@ The code was provided by Jana Dvorakova</phrase></screen>
 it can do both right/left padding.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Lib changes for 1.73.0-->
-<sect2 xml:id="V1.73.0_Tools">
+</section><!--end of Lib changes for 1.73.0-->
+<section xml:id="V1.73.0_Tools">
 <title>Tools</title>
 <para>The following changes have been made to the
             <filename>tools</filename> code
@@ -6378,8 +7390,8 @@ of which is to facilitate easy sync-up to the latest docbook-xsl
 snapshot (by means of rsync).</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Tools changes for 1.73.0-->
-<sect2 xml:id="V1.73.0_XSL-Saxon">
+</section><!--end of Tools changes for 1.73.0-->
+<section xml:id="V1.73.0_XSL-Saxon">
 <title>XSL-Saxon</title>
 <para>The following changes have been made to the
             <filename>xsl-saxon</filename> code
@@ -6399,8 +7411,8 @@ Part of fix for bug #1675513 (<tag>xref</tag> to <tag>area</tag> broken).</phras
 <para><literal>Michael(tm) Smith: saxon65/src/com/nwalsh/saxon/Website.java; xalan27/src/com/nwalsh/xalan⋯</literal></para><screen><phrase role="commit-message">Copied over Website XSL Java extensions.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of XSL-Saxon changes for 1.73.0-->
-<sect2 xml:id="V1.73.0_XSL-Xalan">
+</section><!--end of XSL-Saxon changes for 1.73.0-->
+<section xml:id="V1.73.0_XSL-Xalan">
 <title>XSL-Xalan</title>
 <para>The following changes have been made to the
             <filename>xsl-xalan</filename> code
@@ -6427,10 +7439,10 @@ Part of fix for bug #1675513 (<tag>xref</tag> to <tag>area</tag> broken).</phras
 <para><literal>Michael(tm) Smith: saxon65/src/com/nwalsh/saxon/Website.java; xalan27/src/com/nwalsh/xalan⋯</literal></para><screen><phrase role="commit-message">Copied over Website XSL Java extensions.</phrase></screen>
 </listitem>
 </itemizedlist>
-</sect2><!--end of XSL-Saxon changes for 1.73.0-->
-</sect1><!--end of changes for the 1.73.0 release-->
+</section><!--end of XSL-Saxon changes for 1.73.0-->
+</section><!--end of changes for the 1.73.0 release-->
 
-<sect1 xml:id="V1.72.0">
+<section xml:id="V1.72.0">
 <title>Release: 1.72.0</title>
 <para>This release includes important bug fixes and adds the following
 significant feature changes:
@@ -6592,7 +7604,7 @@ The following is a detailed list of changes (not
 including bug fixes) that have been made since the 1.71.1
 release.</para>
 
-<sect2 xml:id="V1.72.0_Common">
+<section xml:id="V1.72.0_Common">
 <title>Common</title>
 <para>The following changes have been made to the
             <filename>common</filename> code
@@ -6615,9 +7627,9 @@ release.</para>
 any <tag>table</tag> element.<alt>M: /trunk/xsl/common/table.xsl - Robert Stayton</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Common changes for 1.72.0-->
+</section><!--end of Common changes for 1.72.0-->
 
-<sect2 xml:id="V1.72.0_FO">
+<section xml:id="V1.72.0_FO">
 <title>FO</title>
 <para>The following changes have been made to the
             <filename>fo</filename> code
@@ -6648,9 +7660,9 @@ any <tag>table</tag> element.<alt>M: /trunk/xsl/common/table.xsl - Robert Stayto
 <literallayout><phrase role="commit-message">Add support for crop marks in Antenna House.<alt>M: /trunk/xsl/fo/axf.xsl; M: /trunk/xsl/fo/pagesetup.xsl - Robert Stayton</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for 1.72.0-->
+</section><!--end of FO changes for 1.72.0-->
 
-<sect2 xml:id="V1.72.0_HTML">
+<section xml:id="V1.72.0_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the
             <filename>html</filename> code
@@ -6709,9 +7721,9 @@ Better computation of <tag>title</tag> attribute on <tag>link</tag> too.<alt>M: 
 to HTML <tag>area</tag> coords.<alt>M: /trunk/xsl/html/graphics.xsl - Robert Stayton</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for 1.72.0-->
+</section><!--end of HTML changes for 1.72.0-->
 
-<sect2 xml:id="V1.72.0_Manpages">
+<section xml:id="V1.72.0_Manpages">
 <title>Manpages</title>
 <para>The following changes have been made to the
             <filename>manpages</filename> code
@@ -6776,9 +7788,9 @@ to format them instead (because .TP does not allow nesting). Closes bug #1602616
 Thanks to Daniel Leidert.<alt>M: /trunk/xsl/manpages/lists.xsl - Michael(tm) Smith</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Manpages changes for 1.72.0-->
+</section><!--end of Manpages changes for 1.72.0-->
 
-<sect2 xml:id="V1.72.0_Params">
+<section xml:id="V1.72.0_Params">
 <title>Params</title>
 <para>The following changes have been made to the
             <filename>params</filename> code
@@ -6835,9 +7847,9 @@ so it can be customized.<alt>M: /trunk/xsl/params/olink.properties.xml - Robert 
 <literallayout><phrase role="commit-message">Moved all properties to attribute-sets so can be customized more easily.<alt>M: /trunk/xsl/params/verbatim.properties.xml - Robert Stayton</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Params changes for 1.72.0-->
+</section><!--end of Params changes for 1.72.0-->
 
-<sect2 xml:id="V1.72.0_Template">
+<section xml:id="V1.72.0_Template">
 <title>Template</title>
 <para>The following changes have been made to the
             <filename>template</filename> code
@@ -6847,9 +7859,9 @@ so it can be customized.<alt>M: /trunk/xsl/params/olink.properties.xml - Robert 
 <literallayout><phrase role="commit-message">Added workaround for Xalan bug: use for-each and copy instead of copy-of (#1604770).<alt>M: /trunk/xsl/template/titlepage.xsl - Mauritz Jeanson</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Template changes for 1.72.0-->
+</section><!--end of Template changes for 1.72.0-->
 
-<sect2 xml:id="V1.72.0_Roundtrip">
+<section xml:id="V1.72.0_Roundtrip">
 <title>Roundtrip</title>
 <para>The following changes have been made to the
             <filename>roundtrip</filename> code
@@ -6859,10 +7871,10 @@ so it can be customized.<alt>M: /trunk/xsl/params/olink.properties.xml - Robert 
 <literallayout><phrase role="commit-message">rename to roundtrip, add OpenOffice support<alt>M: /trunk/xsl/roundtrip/docbook-pages.xsl; M: /trunk/xsl/roundtrip/specifications.xml; A: /trunk/xsl/roundtrip/dbk2ooo.xsl; M: /trunk/xsl/roundtrip/docbook.xsl; A: /trunk/xsl/roundtrip/dbk2pages.xsl; M: /trunk/xsl/roundtrip/template.xml; A: /trunk/xsl/roundtrip/dbk2wordml.xsl; A: /trunk/xsl/roundtrip/dbk2wp.xsl; M: /trunk/xsl/roundtrip/template.dot; M: /trunk/xsl/roundtrip/wordml-final.xsl - Steve Ball</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Roundtrip changes for 1.72.0-->
-</sect1><!--end of V1.72.0-->
+</section><!--end of Roundtrip changes for 1.72.0-->
+</section><!--end of V1.72.0-->
 
-<sect1 xml:id="V1.71.1">
+<section xml:id="V1.71.1">
 <title>Release: 1.71.1</title>
 <para>This is a minor update to the 1.71.0 release. Along with a
 number of bug fixes, it includes two feature changes:
@@ -6885,7 +7897,7 @@ number of bug fixes, it includes two feature changes:
 </itemizedlist>
 </para>
 
-<sect2 xml:id="V1.71.1_Common">
+<section xml:id="V1.71.1_Common">
 <title>Common</title>
 <para>The following changes have been made to the
             <filename>common</filename> code
@@ -6898,9 +7910,9 @@ number of bug fixes, it includes two feature changes:
 <literallayout><phrase role="commit-message">Add support for Xalan generating a root xml:base like saxon.<alt>M: /trunk/xsl/common/stripns.xsl - Robert Stayton</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Common changes for 1.71.1-->
+</section><!--end of Common changes for 1.71.1-->
 
-<sect2 xml:id="V1.71.1_FO">
+<section xml:id="V1.71.1_FO">
 <title>FO</title>
 <para>The following changes have been made to the
             <filename>fo</filename> code
@@ -6916,9 +7928,9 @@ number of bug fixes, it includes two feature changes:
 <literallayout><phrase role="commit-message">Added support for profiling based on xml:lang and status attributes.<alt>M: /trunk/xsl/fo/param.xweb; M: /trunk/xsl/fo/param.ent - Jirka Kosek</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for 1.71.1-->
+</section><!--end of FO changes for 1.71.1-->
 
-<sect2 xml:id="V1.71.1_HTML">
+<section xml:id="V1.71.1_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the
             <filename>html</filename> code
@@ -6965,9 +7977,9 @@ error messages and/or not behave as expected when processing
 files that are not newline-terminated.)<alt>M: /trunk/xsl/html/chunk-common.xsl; M: /trunk/xsl/html/titlepage.xsl; M: /trunk/xsl/html/param.xweb; M: /trunk/xsl/html/docbook.xsl; M: /trunk/xsl/html/graphics.xsl; M: /trunk/xsl/html/param.ent - Michael(tm) Smith</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for 1.71.1-->
+</section><!--end of HTML changes for 1.71.1-->
 
-<sect2 xml:id="V1.71.1_Highlighting">
+<section xml:id="V1.71.1_Highlighting">
 <title>Highlighting</title>
 <para>The following changes have been made to the
             <filename>highlighting</filename> code
@@ -6977,9 +7989,9 @@ files that are not newline-terminated.)<alt>M: /trunk/xsl/html/chunk-common.xsl;
 <literallayout><phrase role="commit-message">Added license information<alt>M: /trunk/xsl/highlighting/delphi-hl.xml; M: /trunk/xsl/highlighting/myxml-hl.xml; M: /trunk/xsl/highlighting/php-hl.xml; M: /trunk/xsl/highlighting/m2-hl.xml; M: /trunk/xsl/highlighting/ini-hl.xml; M: /trunk/xsl/highlighting/xslthl-config.xml; M: /trunk/xsl/highlighting/java-hl.xml - Jirka Kosek</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Highlighting changes for 1.71.1-->
+</section><!--end of Highlighting changes for 1.71.1-->
 
-<sect2 xml:id="V1.71.1_Manpages">
+<section xml:id="V1.71.1_Manpages">
 <title>Manpages</title>
 <para>The following changes have been made to the
             <filename>manpages</filename> code
@@ -7003,9 +8015,9 @@ handling of other indented content, and handling of authorblurb
 and <tag>personblurb</tag> in the AUTHORS <tag>section</tag>.<alt>M: /trunk/xsl/manpages/table.xsl; M: /trunk/xsl/manpages/block.xsl; M: /trunk/xsl/manpages/docbook.xsl; M: /trunk/xsl/manpages/links.xsl; M: /trunk/xsl/manpages/other.xsl; M: /trunk/xsl/manpages/utility.xsl - Michael(tm) Smith</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Manpages changes for 1.71.1-->
+</section><!--end of Manpages changes for 1.71.1-->
 
-<sect2 xml:id="V1.71.1_Params">
+<section xml:id="V1.71.1_Params">
 <title>Params</title>
 <para>The following changes have been made to the
             <filename>params</filename> code
@@ -7024,9 +8036,9 @@ error messages and/or not behave as expected when processing
 files that are not newline-terminated.)<alt>A: /trunk/xsl/params/html.append.xml; A: /trunk/xsl/params/chunk.append.xml - Michael(tm) Smith</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Params changes for 1.71.1-->
+</section><!--end of Params changes for 1.71.1-->
 
-<sect2 xml:id="V1.71.1_Profiling">
+<section xml:id="V1.71.1_Profiling">
 <title>Profiling</title>
 <para>The following changes have been made to the
             <filename>profiling</filename> code
@@ -7036,11 +8048,11 @@ files that are not newline-terminated.)<alt>A: /trunk/xsl/params/html.append.xml
 <literallayout><phrase role="commit-message">Added support for profiling based on xml:lang and status attributes.<alt>M: /trunk/xsl/profiling/profile.xsl; M: /trunk/xsl/profiling/profile-mode.xsl - Jirka Kosek</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Profiling changes for 1.71.1-->
+</section><!--end of Profiling changes for 1.71.1-->
 
-</sect1>
+</section>
 
-<sect1 xml:id="V1.71.0">
+<section xml:id="V1.71.0">
 <title>Release: 1.71.0</title>
 <para>This is mainly a bug fix release, but it also includes two
 significant feature changes:
@@ -7115,7 +8127,7 @@ significant feature changes:
 The following is a list of changes that have
 been made since the 1.70.1 release.</para>
 
-<sect2 xml:id="V1.71.0_Common">
+<section xml:id="V1.71.0_Common">
 <title>Common</title>
 <para>The following changes have been made to the
             <filename>common</filename> code
@@ -7136,9 +8148,9 @@ been made since the 1.70.1 release.</para>
 <literallayout><phrase role="commit-message">Support startinglinenumber on <tag>orderedlist</tag><alt>M: /trunk/xsl/common/common.xsl - Norman Walsh</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Common changes for 1.71.0-->
+</section><!--end of Common changes for 1.71.0-->
 
-<sect2 xml:id="V1.71.0_Extensions">
+<section xml:id="V1.71.0_Extensions">
 <title>Extensions</title>
 <para>The following changes have been made to the
             <filename>extensions</filename> code
@@ -7148,9 +8160,9 @@ been made since the 1.70.1 release.</para>
 <literallayout><phrase role="commit-message">Completely reworked extensions build system; now uses NetBeans and ant<alt>D: /trunk/xsl/extensions/xalan27/.cvsignore; A: /trunk/xsl/extensions/saxon65/nbproject; A: /trunk/xsl/extensions/saxon65/nbproject/project.properties; D: /trunk/xsl/extensions/prj.el; A: /trunk/xsl/extensions/saxon65/src; A: /trunk/xsl/extensions/xalan2/src/com; M: /trunk/xsl/extensions/xalan2/src/com/nwalsh/xalan/Text.java; A: /trunk/xsl/extensions/saxon65/nbproject/project.xml; D: /trunk/xsl/extensions/build.xml; A: /trunk/xsl/extensions/saxon65/build.xml; A: /trunk/xsl/extensions/xalan2/nbproject/genfiles.properties; A: /trunk/xsl/extensions/saxon65; D: /trunk/xsl/extensions/xalan2/com; M: /trunk/xsl/extensions/xalan2/src/com/nwalsh/xalan/Func.java; A: /trunk/xsl/extensions/xalan2/test; A: /trunk/xsl/extensions/saxon65/src/com; A: /trunk/xsl/extensions/xalan2/nbproject/build-impl.xml; A: /trunk/xsl/extensions/xalan2/nbproject; A: /trunk/xsl/extensions/xalan2/src; A: /trunk/xsl/extensions/xalan2/nbproject/project.properties; D: /trunk/xsl/extensions/.cvsignore; M: /trunk/xsl/extensions/Makefile; D: /trunk/xsl/extensions/saxon8; A: /trunk/xsl/extensions/saxon65/nbproject/genfiles.properties; A: /trunk/xsl/extensions/xalan2/nbproject/project.xml; A: /trunk/xsl/extensions/saxon65/test; M: /trunk/xsl/extensions/xalan2/src/com/nwalsh/xalan/Verbatim.java; A: /trunk/xsl/extensions/xalan2/build.xml; M: /trunk/xsl/extensions/xalan2; D: /trunk/xsl/extensions/saxon643; A: /trunk/xsl/extensions/saxon65/nbproject/build-impl.xml - Norman Walsh</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Extensions changes for 1.71.0-->
+</section><!--end of Extensions changes for 1.71.0-->
 
-<sect2 xml:id="V1.71.0_FO">
+<section xml:id="V1.71.0_FO">
 <title>FO</title>
 <para>The following changes have been made to the
             <filename>fo</filename> code
@@ -7225,9 +8237,9 @@ of the <tag>email</tag> element). If zero, the delimiters are suppressed.<alt>M:
 <literallayout><phrase role="commit-message"><tag>Chapter</tag> after <tag>preface</tag> should restart numbering of pages.<alt>M: /trunk/xsl/fo/pagesetup.xsl - Jirka Kosek</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for 1.71.0-->
+</section><!--end of FO changes for 1.71.0-->
 
-<sect2 xml:id="V1.71.0_HTML">
+<section xml:id="V1.71.0_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the
             <filename>html</filename> code
@@ -7339,9 +8351,9 @@ for FO output provided).<alt>M: /trunk/xsl/html/param.xweb; M: /trunk/xsl/html/p
 <literallayout><phrase role="commit-message">Support $keep.relative.image.uris also when chunking<alt>M: /trunk/xsl/html/chunk-code.xsl - Jirka Kosek</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for 1.71.0-->
+</section><!--end of HTML changes for 1.71.0-->
 
-<sect2 xml:id="V1.71.0_Highlighting">
+<section xml:id="V1.71.0_Highlighting">
 <title>Highlighting</title>
 <para>The following changes have been made to the
             <filename>highlighting</filename> code
@@ -7352,9 +8364,9 @@ for FO output provided).<alt>M: /trunk/xsl/html/param.xweb; M: /trunk/xsl/html/p
 <literallayout><phrase role="commit-message">Initial support of syntax highlighting of programlistings.<alt>A: /trunk/xsl/highlighting/php-hl.xml; A: /trunk/xsl/highlighting/common.xsl; A: /trunk/xsl/highlighting/delphi-hl.xml; A: /trunk/xsl/highlighting/myxml-hl.xml; A: /trunk/xsl/highlighting/m2-hl.xml; A: /trunk/xsl/highlighting/ini-hl.xml; A: /trunk/xsl/highlighting/xslthl-config.xml; A: /trunk/xsl/highlighting/java-hl.xml - Jirka Kosek</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Highlighting changes for 1.71.0-->
+</section><!--end of Highlighting changes for 1.71.0-->
 
-<sect2 xml:id="V1.71.0_Manpages">
+<section xml:id="V1.71.0_Manpages">
 <title>Manpages</title>
 <para>The following changes have been made to the
             <filename>manpages</filename> code
@@ -7397,9 +8409,9 @@ Leidert for providing a patch.<alt>M: /trunk/xsl/manpages/info.xsl - Michael(tm)
 </listitem>
 
 </itemizedlist>
-</sect2><!--end of Manpages changes for 1.71.0-->
+</section><!--end of Manpages changes for 1.71.0-->
 
-<sect2 xml:id="V1.71.0_Params">
+<section xml:id="V1.71.0_Params">
 <title>Params</title>
 <para>The following changes have been made to the
             <filename>params</filename> code
@@ -7457,9 +8469,9 @@ for FO output provided).<alt>A: /trunk/xsl/params/qanda.nested.in.toc.xml - Mich
 <literallayout><phrase role="commit-message">Initial support of syntax highlighting of programlistings.<alt>A: /trunk/xsl/params/highlight.source.xml; A: /trunk/xsl/params/highlight.default.language.xml - Jirka Kosek</alt></phrase></literallayout>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Params changes for 1.71.0-->
+</section><!--end of Params changes for 1.71.0-->
 
-<sect2 xml:id="V1.71.0_Tools">
+<section xml:id="V1.71.0_Tools">
 <title>Tools</title>
 <para>The following changes have been made to the
             <filename>tools</filename> code
@@ -7486,10 +8498,10 @@ XHTML is generated.<alt>M: /trunk/xsl/tools/make/Makefile.DocBook - Michael(tm) 
 </listitem>
 
 </itemizedlist>
-</sect2><!--end of Tools changes for 1.71.0-->
-</sect1>
+</section><!--end of Tools changes for 1.71.0-->
+</section>
 
-<sect1 xml:id="V1701">
+<section xml:id="V1701">
 <title>Release: 1.70.1</title>
 
 <para>This is a stable release of the 1.70 stylesheets. It includes only a
@@ -7498,7 +8510,7 @@ few small changes from 1.70.0.</para>
 <para>The following is a list of changes that have been made
         since the 1.70.0 release.</para>
 
-<sect2 xml:id="V1701_FO">
+<section xml:id="V1701_FO">
 <title>FO</title>
 <para>The following changes have been made to the
         <filename>fo</filename> code
@@ -7513,9 +8525,9 @@ few small changes from 1.70.0.</para>
 <para role="commit-changes">Modified: fo/block.xsl,1.33; fo/titlepage.xsl,1.40 - Jirka Kosek</para>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for 1.70.1-->
+</section><!--end of FO changes for 1.70.1-->
 
-<sect2 xml:id="V1701_HTML">
+<section xml:id="V1701_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the
         <filename>html</filename> code
@@ -7526,9 +8538,9 @@ few small changes from 1.70.0.</para>
 <para role="commit-changes">Modified: html/block.xsl,1.23; html/titlepage.xsl,1.34 - Jirka Kosek</para>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for 1.70.1-->
+</section><!--end of HTML changes for 1.70.1-->
 
-<sect2 xml:id="V1701_HTMLHelp">
+<section xml:id="V1701_HTMLHelp">
 <title>HTMLHelp</title>
 <para>The following changes have been made to the
         <filename>htmlhelp</filename> code
@@ -7543,9 +8555,9 @@ few small changes from 1.70.0.</para>
 <para role="commit-changes">Modified: htmlhelp/htmlhelp-common.xsl,1.37 - Jirka Kosek</para>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTMLHelp changes for 1.70.1-->
+</section><!--end of HTMLHelp changes for 1.70.1-->
 
-<sect2 xml:id="V1701_Params">
+<section xml:id="V1701_Params">
 <title>Params</title>
 <para>The following changes have been made to the
         <filename>params</filename> code
@@ -7556,11 +8568,11 @@ few small changes from 1.70.0.</para>
 <para role="commit-changes">Modified: fo/block.xsl,1.34; fo/param.ent,1.101; fo/param.xweb,1.114; fo/titlepage.xsl,1.41; params/revhistory.table.cell.properties.xml,1.1; params/revhistory.table.properties.xml,1.1; params/revhistory.title.properties.xml,1.1 - Jirka Kosek</para>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Params changes for 1.70.1-->
+</section><!--end of Params changes for 1.70.1-->
 
-</sect1>
+</section>
 
-<sect1 xml:id="V1700">
+<section xml:id="V1700">
 <title>Release: 1.70.0</title>
 <para>As with all DocBook Project <link linkend="dot0">dot-zero</link>
 releases, this is an experimental release. It will be followed shortly
@@ -7620,7 +8632,7 @@ including:</para>
     <para>The following is a detailed list of enhancements and API
     changes that have been made since the 1.69.1 release.</para>
 
-<sect2 xml:id="V1700_Common">
+<section xml:id="V1700_Common">
 <title>Common</title>
 <para>The following changes have been made to the
         <filename>common</filename> code
@@ -7747,9 +8759,9 @@ in DocBook 5.0)</para>
 Kosek</para>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Common changes for snapshot_2006-05-15_0803-->
+</section><!--end of Common changes for snapshot_2006-05-15_0803-->
 
-<sect2 xml:id="V1700_Extensions">
+<section xml:id="V1700_Extensions">
 <title>Extensions</title>
 <para>The following changes have been made to the
         <filename>extensions</filename> code
@@ -7788,9 +8800,9 @@ work.</para>
 - Norman Walsh</para>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Extensions changes for snapshot_2006-05-15_0803-->
+</section><!--end of Extensions changes for snapshot_2006-05-15_0803-->
 
-<sect2 xml:id="V1700_FO">
+<section xml:id="V1700_FO">
 <title>FO</title>
 <para>The following changes have been made to the
         <filename>fo</filename> code
@@ -8248,9 +9260,9 @@ params/crop.mark.width.xml,1.1; params/crop.marks.xml,1.1 - Jirka
 Kosek</para>
 </listitem>
 </itemizedlist>
-</sect2><!--end of FO changes for snapshot_2006-05-15_0803-->
+</section><!--end of FO changes for snapshot_2006-05-15_0803-->
 
-<sect2 xml:id="V1700_HTML">
+<section xml:id="V1700_HTML">
 <title>HTML</title>
 <para>The following changes have been made to the
         <filename>html</filename> code
@@ -8609,9 +9621,9 @@ the change.</para>
 Smith</para>
 </listitem>
 </itemizedlist>
-</sect2><!--end of HTML changes for snapshot_2006-05-15_0803-->
+</section><!--end of HTML changes for snapshot_2006-05-15_0803-->
 
-<sect2 xml:id="V1700_Manpages">
+<section xml:id="V1700_Manpages">
 <title>Manpages</title>
 <para>The following changes have been made to the
         <filename>manpages</filename> code
@@ -9029,9 +10041,9 @@ params/variablelist.term.separator.xml,1.1 - Michael(tm)
 Smith</para>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Manpages changes for snapshot_2006-05-15_0803-->
+</section><!--end of Manpages changes for snapshot_2006-05-15_0803-->
 
-<sect2 xml:id="V1700_Params">
+<section xml:id="V1700_Params">
 <title>Params</title>
 <para>The following changes have been made to the
         <filename>params</filename> code
@@ -9525,9 +10537,9 @@ params/preface.autolabel.xml,1.4 - Michael(tm)
 Smith</para>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Params changes for snapshot_2006-05-15_0803-->
+</section><!--end of Params changes for snapshot_2006-05-15_0803-->
 
-<sect2 xml:id="V1700_Profiling">
+<section xml:id="V1700_Profiling">
 <title>Profiling</title>
 <para>The following changes have been made to the
         <filename>profiling</filename> code
@@ -9555,9 +10567,9 @@ now.</para>
 Kosek</para>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Profiling changes for snapshot_2006-05-15_0803-->
+</section><!--end of Profiling changes for snapshot_2006-05-15_0803-->
 
-<sect2 xml:id="V1700_Tools">
+<section xml:id="V1700_Tools">
 <title>Tools</title>
 <para>The following changes have been made to the
         <filename>tools</filename> code
@@ -9571,9 +10583,9 @@ module.</para>
 Smith</para>
 </listitem>
 </itemizedlist>
-</sect2><!--end of Tools changes for snapshot_2006-05-15_0803-->
+</section><!--end of Tools changes for snapshot_2006-05-15_0803-->
 
-<sect2 xml:id="V1700_WordML">
+<section xml:id="V1700_WordML">
 <title>WordML</title>
 <para>The following changes have been made to the
         <filename>wordml</filename> code
@@ -9654,10 +10666,10 @@ support</para>
 Steve Ball</para>
 </listitem>
 </itemizedlist>
-</sect2><!--end of WordML changes for snapshot_2006-05-15_0803-->
-</sect1>
+</section><!--end of WordML changes for snapshot_2006-05-15_0803-->
+</section>
 
-  <sect1 xml:id="V1691">
+  <section xml:id="V1691">
     <title>Release 1.69.1</title>
     <para>This release is a minor bug-fix update to the 1.69.0
     release. Along with bug fixes, it includes one
@@ -9667,10 +10679,10 @@ Steve Ball</para>
     there have been reports that <tag>annotation</tag> handling is
     causing a significant performance degradation in processing of
     large documents with <command>xsltproc</command>.</para>
-  </sect1>
+  </section>
   <!-- end of notes for 1.69.1 release -->
 
-  <sect1 xml:id="V1690">
+  <section xml:id="V1690">
     <title>Release 1.69.0</title>
     <para>The release includes major feature changes,
     particularly in the <link linkend="V1690_MAN">manpages
@@ -9679,7 +10691,7 @@ Steve Ball</para>
     <para>As with all DocBook Project <quote>dot zero</quote> releases, this is an
     <link linkend="dot0">experimental release </link>.</para>
    
-    <sect2 xml:id="V1690_COMMON">
+    <section xml:id="V1690_COMMON">
       <title>Common</title>
       <itemizedlist>
         <listitem>
@@ -9777,8 +10789,8 @@ Steve Ball</para>
         <quote>ou</quote> instead of <quote>or</quote>.</para>
       </listitem>
       </itemizedlist>
-    </sect2>
-    <sect2 xml:id="V1690_FO">
+    </section>
+    <section xml:id="V1690_FO">
       <title>FO</title>
       <itemizedlist>
         <listitem>
@@ -9864,9 +10876,9 @@ Steve Ball</para>
           parameter.</para>
         </listitem>
       </itemizedlist>
-    </sect2>
+    </section>
     
-    <sect2 xml:id="V1690_HELP">
+    <section xml:id="V1690_HELP">
       <title>Help</title>
       <itemizedlist>
         <listitem>
@@ -9874,9 +10886,9 @@ Steve Ball</para>
           database.</para>
         </listitem>
       </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 xml:id="V1690_HTML">
+    <section xml:id="V1690_HTML">
       <title>HTML</title>
       <itemizedlist>
         <listitem>
@@ -10036,8 +11048,8 @@ Steve Ball</para>
           the language code will be left as-is.</para>
         </listitem>
       </itemizedlist>
-    </sect2>
-    <sect2 xml:id="V1690_MAN">
+    </section>
+    <section xml:id="V1690_MAN">
       <title>man</title>
       <para>This release closes out 44 manpages stylesheet bug reports
       and feature requests. It adds more than 35 new configuration
@@ -10664,11 +11676,11 @@ Steve Ball</para>
       </listitem>
     </itemizedlist>
     <!-- end of MAN changes for 1.69.0 release -->
-  </sect2>
-</sect1>
+  </section>
+</section>
   <!-- end of notes for 1.69.0 release -->
 
-  <sect1 xml:id="V1681">
+  <section xml:id="V1681">
     <title>Release 1.68.1</title>
     <para>The release adds localization support for Farsi (thanks to
     Sina Heshmati) and improved support for the XLink-based DocBook NG
@@ -10678,10 +11690,10 @@ Steve Ball</para>
     with the wrong package structure. Thanks to Jens Stavnstrup for
     quickly reporting the problem, and to Mauritz Jeanson for
     investigating and finding the cause.</para>
-  </sect1>
+  </section>
   <!-- end of notes for 1.68.1 release -->
 
-  <sect1 xml:id="V1680">
+  <section xml:id="V1680">
     <title>Release 1.68.0</title>
     <para>This release includes some features changes, particularly
     for FO/PDF output, and a number of bug fixes.
@@ -10825,15 +11837,15 @@ Steve Ball</para>
         </listitem>
       </itemizedlist>
     </para>
-  </sect1>
+  </section>
   <!-- end of notes for 1.68.0 release -->
 
-  <sect1 xml:id="V1672">
+  <section xml:id="V1672">
     <title>Release 1.67.2</title>
     <para>This release fixes a table bug introduced in the 1.67.1
     release.</para>
-  </sect1>
-  <sect1 xml:id="V1671">
+  </section>
+  <section xml:id="V1671">
     <title>Release 1.67.1</title>
     <para>This release includes a number of bug fixes.</para>
      <para>The following lists provide details about API and feature changes.
@@ -10981,8 +11993,8 @@ Steve Ball</para>
         </listitem>
       </itemizedlist>
     </para>
-  </sect1>
-<sect1 xml:id="V1670">
+  </section>
+<section xml:id="V1670">
   <title>Release 1.67.0</title>
   <itemizedlist>
   <listitem>
@@ -11062,8 +12074,8 @@ Steve Ball</para>
     package</para>
   </listitem>
 </itemizedlist>
-</sect1>
-<sect1 xml:id="V1661">
+</section>
+<section xml:id="V1661">
 <title>Release 1.66.1</title>
   <itemizedlist>
 <listitem>
@@ -11330,8 +12342,8 @@ Added Bosnian locale file as common/bs.xml.
 </para>
 </listitem> 
 </itemizedlist>
-</sect1>
-<sect1 xml:id="V1650">
+</section>
+<section xml:id="V1650">
 <title>Release 1.65.0</title> 
 <itemizedlist>
 <listitem>
@@ -11371,8 +12383,8 @@ with xsltproc 1.1.1 and later. Currently supported languages are
 English, Czech, German, French, Spanish and Danish.</para> 
 </listitem> 
 </itemizedlist> 
-</sect1>
-<sect1 xml:id="V1641">
+</section>
+<section xml:id="V1641">
 <title>Release 1.64.1</title> 
 <itemizedlist>
 <para>General bug fixes and improvements. Sorry about the failure to produce
@@ -11385,8 +12397,8 @@ will work with older Xalan 2 implementations, <filename>xalan25.jar</filename>
 works with Xalan 2.5.</para>
 </listitem>
 </itemizedlist> 
-</sect1>
-<sect1 xml:id="V1610">
+</section>
+<section xml:id="V1610">
 <title>Release 1.61.0</title> 
 <itemizedlist>
 <para>Lots of bug fixes and improvements.</para> 
@@ -11570,8 +12582,8 @@ and first varlistentry since DocBook 4.2 supports that now.
 </para>
 </listitem>
 </itemizedlist> 
-</sect1>
-<sect1 xml:id="V1601">
+</section>
+<section xml:id="V1601">
 <title>Release 1.60.1</title> 
 <itemizedlist>
 <para>Lots of bug fixes.</para> 
@@ -11715,8 +12727,8 @@ with the <quote>dbhtml</quote> PI.
 </para>
 </listitem> 
 </itemizedlist> 
-</sect1>
-<sect1 xml:id="V1592">
+</section>
+<section xml:id="V1592">
 <title>Release 1.59.2</title> 
 <itemizedlist>
 <para>The 1.59.2 fixes an FO bug in the page masters that causes FOP to fail.
@@ -11756,8 +12768,8 @@ the base font size, not a fixed "12pt".
 </para>
 </listitem>
 </itemizedlist> 
-</sect1>
-<sect1 xml:id="V1591">
+</section>
+<section xml:id="V1591">
 <title>Release 1.59.1</title> 
 <itemizedlist>
 <para>The 1.59.1 fixes a few bugs.
@@ -11810,8 +12822,8 @@ and <tag>procedure</tag>s.
 </para>
 </listitem>
 </itemizedlist> 
-</sect1>
-<sect1 xml:id="V1580">
+</section>
+<section xml:id="V1580">
 <title>Release 1.58.0</title> 
 <itemizedlist>
 <para>The 1.58.0 adds some initial support for extensions in xsltproc, adds
@@ -11859,8 +12871,8 @@ just a simple name.
 </para>
 </listitem>
 </itemizedlist> 
-</sect1>
-<sect1 xml:id="V1570">
+</section>
+<section xml:id="V1570">
 <title>Release 1.57.0</title>
 <itemizedlist>
 <listitem>
@@ -11868,8 +12880,8 @@ just a simple name.
 </para>
 </listitem>
 </itemizedlist> 
-</sect1>
-<sect1 xml:id="V1560">
+</section>
+<section xml:id="V1560">
 <title>Release 1.56.0</title> 
 <itemizedlist>
 <para>The 1.56.0 release fixes bugs.
@@ -12036,14 +13048,14 @@ XHTML chunker to output HTML instead of XHTML.
 </para>
 </listitem>
 </itemizedlist> 
-</sect1>
-<sect1 xml:id="VOlder">
+</section>
+<section xml:id="VOlder">
   <title>Older releases</title>
   <para>To view the release notes for older releases, see <uri xlink:href="http://cvs.sourceforge.net/viewcvs.py/docbook/xsl/RELEASE-NOTES.xml">http://cvs.sourceforge.net/viewcvs.py/docbook/xsl/RELEASE-NOTES.xml</uri>. Be
   aware that there were no release notes for releases prior to the
   1.50.0 release.</para>
-</sect1>
-<sect1 xml:id="dot0">
+</section>
+<section xml:id="dot0">
   <title>About dot-zero releases</title>
     <para>DocBook Project “dot zero” releases should be
     considered <emphasis>experimental</emphasis> and are always
@@ -12055,5 +13067,5 @@ XHTML chunker to output HTML instead of XHTML.
     <para>It is not recommended that you use a “dot zero”
     release in a production system. Instead, you should wait for
     the “dot one” or greater versions.</para>
-  </sect1>
+  </section>
 </article>

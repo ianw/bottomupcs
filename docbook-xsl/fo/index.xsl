@@ -3,10 +3,8 @@
 <!ENTITY % common.entities SYSTEM "../common/entities.ent">
 %common.entities;
 ]>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:fo="http://www.w3.org/1999/XSL/Format"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 xmlns:rx="http://www.renderx.com/XSL/Extensions"
                 version='1.0'>
 
@@ -22,7 +20,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:index">
+<xsl:template match="index">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -32,7 +30,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     <xsl:when test="$make.index.markup != 0">
       <fo:block>
         <xsl:call-template name="generate-index-markup">
-          <xsl:with-param name="scope" select="(ancestor::d:book|/)[last()]"/>
+          <xsl:with-param name="scope" select="(ancestor::book|/)[last()]"/>
         </xsl:call-template>
       </fo:block>
     </xsl:when>
@@ -41,9 +39,9 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
         <xsl:call-template name="index.titlepage"/>
       </fo:block>
       <xsl:apply-templates/>
-      <xsl:if test="count(d:indexentry) = 0 and count(d:indexdiv) = 0">
+      <xsl:if test="count(indexentry) = 0 and count(indexdiv) = 0">
         <xsl:call-template name="generate-index">
-          <xsl:with-param name="scope" select="(ancestor::d:book|/)[last()]"/>
+          <xsl:with-param name="scope" select="(ancestor::book|/)[last()]"/>
         </xsl:call-template>
       </xsl:if>
     </xsl:otherwise>
@@ -51,7 +49,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
  </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:book/d:index|d:part/d:index">
+<xsl:template match="book/index|part/index">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -122,7 +120,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
         <xsl:call-template name="index.titlepage"/>
       </fo:block>
       <xsl:apply-templates/>
-      <xsl:if test="count(d:indexentry) = 0 and count(d:indexdiv) = 0">
+      <xsl:if test="count(indexentry) = 0 and count(indexdiv) = 0">
 
         <xsl:choose>
           <xsl:when test="$make.index.markup != 0">
@@ -131,16 +129,16 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
                       xsl:use-attribute-sets="monospace.verbatim.properties"
                       linefeed-treatment="preserve">
               <xsl:call-template name="generate-index-markup">
-                <xsl:with-param name="scope" select="(ancestor::d:book|/)[last()]"/>
+                <xsl:with-param name="scope" select="(ancestor::book|/)[last()]"/>
               </xsl:call-template>
             </fo:block>
           </xsl:when>
-          <xsl:when test="d:indexentry|d:indexdiv/d:indexentry">
+          <xsl:when test="indexentry|indexdiv/indexentry">
             <xsl:apply-templates/>
           </xsl:when>
           <xsl:otherwise>
             <xsl:call-template name="generate-index">
-              <xsl:with-param name="scope" select="(ancestor::d:book|/)[last()]"/>
+              <xsl:with-param name="scope" select="(ancestor::book|/)[last()]"/>
             </xsl:call-template>
           </xsl:otherwise>
         </xsl:choose>
@@ -150,7 +148,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
  </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:setindex">
+<xsl:template match="setindex">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -223,7 +221,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
         <xsl:call-template name="setindex.titlepage"/>
       </fo:block>
       <xsl:apply-templates/>
-      <xsl:if test="count(d:indexentry) = 0 and count(d:indexdiv) = 0">
+      <xsl:if test="count(indexentry) = 0 and count(indexdiv) = 0">
 
         <xsl:choose>
           <xsl:when test="$make.index.markup != 0">
@@ -236,7 +234,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
               </xsl:call-template>
             </fo:block>
           </xsl:when>
-          <xsl:when test="d:indexentry|d:indexdiv/d:indexentry">
+          <xsl:when test="indexentry|indexdiv/indexentry">
             <xsl:apply-templates/>
           </xsl:when>
           <xsl:otherwise>
@@ -251,11 +249,11 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
  </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:index/d:indexinfo"></xsl:template>
-<xsl:template match="d:index/d:info"></xsl:template>
-<xsl:template match="d:index/d:title"></xsl:template>
-<xsl:template match="d:index/d:subtitle"></xsl:template>
-<xsl:template match="d:index/d:titleabbrev"></xsl:template>
+<xsl:template match="index/indexinfo"></xsl:template>
+<xsl:template match="index/info"></xsl:template>
+<xsl:template match="index/title"></xsl:template>
+<xsl:template match="index/subtitle"></xsl:template>
+<xsl:template match="index/titleabbrev"></xsl:template>
 
 <!-- ==================================================================== -->
 
@@ -277,23 +275,23 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:indexdiv">
+<xsl:template match="indexdiv">
   <fo:block>
     <xsl:call-template name="indexdiv.titlepage"/>
     <xsl:apply-templates/>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:indexdiv/d:title"/>
-<xsl:template match="d:indexdiv/d:subtitle"/>
-<xsl:template match="d:indexdiv/d:titleabbrev"/>
+<xsl:template match="indexdiv/title"/>
+<xsl:template match="indexdiv/subtitle"/>
+<xsl:template match="indexdiv/titleabbrev"/>
 
 <!-- ==================================================================== -->
 
 <!-- Text used for distiguishing between normal and significant entries -->
 <xsl:variable name="significant.flag">.tnacifingis</xsl:variable>
 
-<xsl:template match="d:indexterm" name="indexterm">
+<xsl:template match="indexterm" name="indexterm">
   <!-- Temporal workaround for bug in AXF -->
   <xsl:variable name="wrapper.name">
     <xsl:choose>
@@ -313,11 +311,11 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
         <xsl:attribute name="rx:key">
           <xsl:value-of select="&primary;"/>
           <xsl:if test="@significance='preferred'"><xsl:value-of select="$significant.flag"/></xsl:if>
-          <xsl:if test="d:secondary">
+          <xsl:if test="secondary">
             <xsl:text>, </xsl:text>
             <xsl:value-of select="&secondary;"/>
           </xsl:if>
-          <xsl:if test="d:tertiary">
+          <xsl:if test="tertiary">
             <xsl:text>, </xsl:text>
             <xsl:value-of select="&tertiary;"/>
           </xsl:if>
@@ -327,14 +325,14 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
         <xsl:comment>
           <xsl:call-template name="comment-escape-string">
             <xsl:with-param name="string">
-              <xsl:value-of select="d:primary"/>
-              <xsl:if test="d:secondary">
+              <xsl:value-of select="primary"/>
+              <xsl:if test="secondary">
                 <xsl:text>, </xsl:text>
-                <xsl:value-of select="d:secondary"/>
+                <xsl:value-of select="secondary"/>
               </xsl:if>
-              <xsl:if test="d:tertiary">
+              <xsl:if test="tertiary">
                 <xsl:text>, </xsl:text>
-                <xsl:value-of select="d:tertiary"/>
+                <xsl:value-of select="tertiary"/>
               </xsl:if>
             </xsl:with-param>
           </xsl:call-template>
@@ -344,7 +342,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:element>
 </xsl:template>
 
-<xsl:template match="d:indexterm[@class='startofrange']">
+<xsl:template match="indexterm[@class='startofrange']">
   <xsl:choose>
     <xsl:when test="$xep.extensions != 0">
       <rx:begin-index-range>
@@ -352,11 +350,11 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
         <xsl:attribute name="rx:key">
           <xsl:value-of select="&primary;"/>
           <xsl:if test="@significance='preferred'"><xsl:value-of select="$significant.flag"/></xsl:if>
-          <xsl:if test="d:secondary">
+          <xsl:if test="secondary">
             <xsl:text>, </xsl:text>
             <xsl:value-of select="&secondary;"/>
           </xsl:if>
-          <xsl:if test="d:tertiary">
+          <xsl:if test="tertiary">
             <xsl:text>, </xsl:text>
             <xsl:value-of select="&tertiary;"/>
           </xsl:if>
@@ -369,7 +367,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:indexterm[@class='endofrange']">
+<xsl:template match="indexterm[@class='endofrange']">
   <xsl:choose>
     <xsl:when test="$xep.extensions != 0">
       <rx:end-index-range>
@@ -386,74 +384,74 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:indexentry">
+<xsl:template match="indexentry">
   <fo:block>
     <!-- don't process 'seeie's from here -->
-    <xsl:apply-templates select="d:primaryie|d:secondaryie|d:tertiaryie|d:seealsoie"/>
+    <xsl:apply-templates select="primaryie|secondaryie|tertiaryie|seealsoie"/>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:primaryie">
+<xsl:template match="primaryie">
   <fo:block>
     <xsl:apply-templates/>
-    <xsl:if test="following-sibling::d:seeie">
+    <xsl:if test="following-sibling::seeie">
       <xsl:text> (</xsl:text>
       <xsl:call-template name="gentext">
         <xsl:with-param name="key" select="'see'"/>
       </xsl:call-template>
       <xsl:text> </xsl:text>
-      <xsl:apply-templates select="following-sibling::d:seeie"/>
+      <xsl:apply-templates select="following-sibling::seeie"/>
       <xsl:text>)</xsl:text>
     </xsl:if>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:secondaryie">
+<xsl:template match="secondaryie">
   <fo:block start-indent="1pc">
     <xsl:apply-templates/>
-    <xsl:if test="following-sibling::d:seeie">
+    <xsl:if test="following-sibling::seeie">
       <xsl:text> (</xsl:text>
       <xsl:call-template name="gentext">
         <xsl:with-param name="key" select="'see'"/>
       </xsl:call-template>
       <xsl:text> </xsl:text>
-      <xsl:apply-templates select="following-sibling::d:seeie"/>
+      <xsl:apply-templates select="following-sibling::seeie"/>
       <xsl:text>)</xsl:text>
     </xsl:if>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:tertiaryie">
+<xsl:template match="tertiaryie">
   <fo:block start-indent="2pc">
     <xsl:apply-templates/>
-    <xsl:if test="following-sibling::d:seeie">
+    <xsl:if test="following-sibling::seeie">
       <xsl:text> (</xsl:text>
       <xsl:call-template name="gentext">
         <xsl:with-param name="key" select="'see'"/>
       </xsl:call-template>
       <xsl:text> </xsl:text>
-      <xsl:apply-templates select="following-sibling::d:seeie"/>
+      <xsl:apply-templates select="following-sibling::seeie"/>
       <xsl:text>)</xsl:text>
     </xsl:if>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:seeie">
+<xsl:template match="seeie">
   <fo:inline>
     <xsl:apply-templates/>
   </fo:inline>
 </xsl:template>
 
-<xsl:template match="d:seealsoie">
+<xsl:template match="seealsoie">
   <fo:block>
     <xsl:attribute name="start-indent">
       <xsl:choose>
-        <xsl:when test="(preceding-sibling::d:tertiaryie |
-                         preceding-sibling::d:secondaryie)[last()]
-                         [self::d:tertiaryie]">3pc</xsl:when>
-        <xsl:when test="(preceding-sibling::d:tertiaryie |
-                         preceding-sibling::d:secondaryie)[last()]
-                         [self::d:secondaryie]">2pc</xsl:when>
+        <xsl:when test="(preceding-sibling::tertiaryie |
+                         preceding-sibling::secondaryie)[last()]
+                         [self::tertiaryie]">3pc</xsl:when>
+        <xsl:when test="(preceding-sibling::tertiaryie |
+                         preceding-sibling::secondaryie)[last()]
+                         [self::secondaryie]">2pc</xsl:when>
         <xsl:otherwise>1pc</xsl:otherwise>
       </xsl:choose>
     </xsl:attribute>

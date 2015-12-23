@@ -15,7 +15,12 @@
 
 <refsynopsisdiv>
 <src:fragment xml:id="table.frame.border.thickness.frag">
-<xsl:param name="table.frame.border.thickness">0.5pt</xsl:param>
+<xsl:param name="table.frame.border.thickness">
+  <xsl:choose>
+    <xsl:when test="contains($stylesheet.result.type,'html')">1px</xsl:when>
+    <xsl:otherwise>0.5pt</xsl:otherwise>
+  </xsl:choose>
+</xsl:param>
 </src:fragment>
 </refsynopsisdiv>
 

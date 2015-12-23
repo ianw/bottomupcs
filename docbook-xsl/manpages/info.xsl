@@ -1,13 +1,12 @@
 <?xml version='1.0'?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:date="http://exslt.org/dates-and-times"
+                xmlns:date="http://exslt.org/dates-and-times"
                 xmlns:exsl="http://exslt.org/common"
-                exclude-result-prefixes="date exsl d"
+                exclude-result-prefixes="date exsl"
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: info.xsl 7883 2008-03-08 17:59:39Z xmldoc $
+     $Id: info.xsl 9775 2013-05-25 22:13:23Z dleidert $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -84,44 +83,44 @@ xmlns:date="http://exslt.org/dates-and-times"
     <xsl:param name="info"/>
     <xsl:param name="refname"/>
     <xsl:choose>
-      <xsl:when test="$info//d:author">
+      <xsl:when test="$info//author">
         <xsl:apply-templates
-            select="(($info[//d:author])[last()]//d:author)[1]"
+            select="(($info[//author])[last()]//author)[1]"
             mode="metadata.author"/>
       </xsl:when>
-      <xsl:when test="$info//d:corpauthor">
+      <xsl:when test="$info//corpauthor">
         <xsl:apply-templates
-            select="(($info[//d:corpauthor])[last()]//d:corpauthor)[1]"
+            select="(($info[//corpauthor])[last()]//corpauthor)[1]"
             mode="metadata.author"/>
       </xsl:when>
-      <xsl:when test="$info//d:editor">
+      <xsl:when test="$info//editor">
         <xsl:apply-templates
-            select="(($info[//d:editor])[last()]//d:editor)[1]"
+            select="(($info[//editor])[last()]//editor)[1]"
             mode="metadata.author"/>
       </xsl:when>
-      <xsl:when test="$info//d:corpcredit">
+      <xsl:when test="$info//corpcredit">
         <xsl:apply-templates
-            select="(($info[//d:corpcredit])[last()]//d:corpcredit)[1]"
+            select="(($info[//corpcredit])[last()]//corpcredit)[1]"
             mode="metadata.author"/>
       </xsl:when>
-      <xsl:when test="$info//d:othercredit">
+      <xsl:when test="$info//othercredit">
         <xsl:apply-templates
-            select="(($info[//d:othercredit])[last()]//d:othercredit)[1]"
+            select="(($info[//othercredit])[last()]//othercredit)[1]"
             mode="metadata.author"/>
       </xsl:when>
-      <xsl:when test="$info//d:collab">
+      <xsl:when test="$info//collab">
         <xsl:apply-templates
-            select="(($info[//d:collab])[last()]//d:collab)[1]"
+            select="(($info[//collab])[last()]//collab)[1]"
             mode="metadata.author"/>
       </xsl:when>
-      <xsl:when test="$info//d:orgname">
+      <xsl:when test="$info//orgname">
         <xsl:apply-templates
-            select="(($info[//d:orgname])[last()]//d:orgname)[1]"
+            select="(($info[//orgname])[last()]//orgname)[1]"
             mode="metadata.author"/>
       </xsl:when>
-      <xsl:when test="$info//d:publishername">
+      <xsl:when test="$info//publishername">
         <xsl:apply-templates
-            select="(($info[//d:publishername])[last()]//d:publishername)[1]"
+            select="(($info[//publishername])[last()]//publishername)[1]"
             mode="metadata.author"/>
       </xsl:when>
       <xsl:otherwise>
@@ -159,13 +158,13 @@ xmlns:date="http://exslt.org/dates-and-times"
         <!-- * instances, delimit each with double quotes, and put them -->
         <!-- * into a single refsect1.titles string -->
         <xsl:variable name="refsect1.titles">
-          <xsl:for-each select="d:refsect1/d:title">
+          <xsl:for-each select="refsect1/title">
             <xsl:text>"</xsl:text>
             <xsl:value-of select="normalize-space(.)"/>
             <xsl:text>"</xsl:text>
             <xsl:text> </xsl:text>
           </xsl:for-each>
-          <xsl:for-each select="d:refsection/d:title">
+          <xsl:for-each select="refsection/title">
             <xsl:text>"</xsl:text>
             <xsl:value-of select="normalize-space(.)"/>
             <xsl:text>"</xsl:text>
@@ -246,13 +245,13 @@ xmlns:date="http://exslt.org/dates-and-times"
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="d:author|d:editor|d:othercredit|d:collab" mode="metadata.author">
+  <xsl:template match="author|editor|othercredit|collab" mode="metadata.author">
     <xsl:choose>
-      <xsl:when test="d:collabname">
+      <xsl:when test="collabname">
         <!-- * If this node is a Collab, then it should have a -->
         <!-- * Collabname child, so get that. -->
         <xsl:variable name="contents">
-          <xsl:apply-templates select="d:collabname"/>
+          <xsl:apply-templates select="collabname"/>
         </xsl:variable>
         <xsl:value-of select="normalize-space($contents)"/>
       </xsl:when>
@@ -263,25 +262,25 @@ xmlns:date="http://exslt.org/dates-and-times"
         <xsl:call-template name="person.name.normalized"/>
       </xsl:otherwise>
     </xsl:choose>
-    <xsl:if test=".//d:email|d:address/d:otheraddr/d:ulink">
+    <xsl:if test=".//email|address/otheraddr/ulink">
       <xsl:text> </xsl:text>
       <!-- * For each attribution found, use only the first e-mail -->
       <!-- * address or ulink value found -->
-      <xsl:apply-templates select="(.//d:email|d:address/d:otheraddr/d:ulink)[1]"
+      <xsl:apply-templates select="(.//email|address/otheraddr/ulink)[1]"
                            mode="metadata.author"/>
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="d:email|d:address/d:otheraddr/d:ulink" mode="metadata.author">
+  <xsl:template match="email|address/otheraddr/ulink" mode="metadata.author">
     <xsl:text>&lt;</xsl:text>
     <xsl:choose>
-      <xsl:when test="self::d:email">
+      <xsl:when test="self::email">
         <xsl:variable name="contents">
           <xsl:apply-templates/>
         </xsl:variable>
         <xsl:value-of select="normalize-space($contents)"/>
       </xsl:when>
-      <xsl:when test="self::d:ulink">
+      <xsl:when test="self::ulink">
         <xsl:variable name="contents">
           <xsl:apply-templates select="."/>
         </xsl:variable>
@@ -291,7 +290,7 @@ xmlns:date="http://exslt.org/dates-and-times"
     <xsl:text>&gt;</xsl:text>
   </xsl:template>
 
-  <xsl:template match="d:corpauthor|d:corpcredit|d:orgname|d:publishername" mode="metadata.author">
+  <xsl:template match="corpauthor|corpcredit|orgname|publishername" mode="metadata.author">
     <xsl:variable name="contents">
       <xsl:apply-templates/>
     </xsl:variable>
@@ -309,16 +308,16 @@ xmlns:date="http://exslt.org/dates-and-times"
     <!-- * Refentry, plus the entire contents of the *info children of -->
     <!-- * all ancestors of the current Refentry, in document order. -->
     <xsl:choose>
-      <xsl:when test="$info//d:author|$info//d:editor|$info//d:collab|
-                      $info//d:corpauthor|$info//d:corpcredit|
-                      $info//d:othercredit|$info/d:orgname|
-                      $info/d:publishername|$info/d:publisher">
+      <xsl:when test="$info//author|$info//editor|$info//collab|
+                      $info//corpauthor|$info//corpcredit|
+                      $info//othercredit|$info/orgname|
+                      $info/publishername|$info/publisher">
         <xsl:variable name="authorcount">
           <xsl:value-of
               select="count(
-                      $info//d:author|$info//d:editor|$info//d:collab|
-                      $info//d:corpauthor|$info//d:corpcredit|
-                      $info//d:othercredit)">
+                      $info//author|$info//editor|$info//collab|
+                      $info//corpauthor|$info//corpcredit|
+                      $info//othercredit)">
           </xsl:value-of>
         </xsl:variable>
         <xsl:call-template name="make.subheading">
@@ -330,10 +329,10 @@ xmlns:date="http://exslt.org/dates-and-times"
         </xsl:call-template>
         <!-- * Now output all the actual author, editor, etc. content -->
         <xsl:for-each
-          select="$info//d:author|$info//d:editor|$info//d:collab|
-          $info//d:corpauthor|$info//d:corpcredit|
-          $info//d:othercredit|$info/d:orgname|
-          $info/d:publishername|$info/d:publisher">
+          select="$info//author|$info//editor|$info//collab|
+          $info//corpauthor|$info//corpcredit|
+          $info//othercredit|$info/orgname|
+          $info/publishername|$info/publisher">
           <xsl:apply-templates select="." mode="authorsect"/>
         </xsl:for-each>
       </xsl:when>
@@ -360,14 +359,14 @@ xmlns:date="http://exslt.org/dates-and-times"
     </xsl:call-template>
   </xsl:template>
 
-  <xsl:template match="d:author|d:editor|d:othercredit" mode="authorsect">
+  <xsl:template match="author|editor|othercredit" mode="authorsect">
     <xsl:variable name="person-name">
       <xsl:call-template name="person.name.normalized"/>
     </xsl:variable>
     <!-- * If we have a person-name or email or ulink content, then -->
     <!-- * output name and email or ulink content on the same line -->
     <xsl:choose>
-      <xsl:when test="not($person-name = '') or .//d:email or d:address/d:otheraddr/d:ulink">
+      <xsl:when test="not($person-name = '') or .//email or address/otheraddr/ulink">
         <xsl:text>.PP&#10;</xsl:text>
         <!-- * Display person name in bold -->
         <xsl:call-template name="bold">
@@ -375,7 +374,7 @@ xmlns:date="http://exslt.org/dates-and-times"
           <xsl:with-param name="context" select="."/>
         </xsl:call-template>
         <!-- * Display e-mail address(es) and ulink(s) on same line as name -->
-        <xsl:apply-templates select=".//d:email|d:address/d:otheraddr/d:ulink" mode="authorsect"/>
+        <xsl:apply-templates select=".//email|address/otheraddr/ulink" mode="authorsect"/>
         <xsl:text>&#10;</xsl:text>
       </xsl:when>
       <xsl:otherwise>
@@ -383,51 +382,51 @@ xmlns:date="http://exslt.org/dates-and-times"
       </xsl:otherwise>
     </xsl:choose>
     <!-- * Display affiliation(s) on separate lines -->
-    <xsl:apply-templates select="d:affiliation" mode="authorsect"/>
+    <xsl:apply-templates select="affiliation" mode="authorsect"/>
     <!-- * Display direct-child addresses on separate lines -->
-    <xsl:apply-templates select="d:address" mode="authorsect"/>
+    <xsl:apply-templates select="address" mode="authorsect"/>
     <!-- * Call template for handling various attribution possibilities -->
     <xsl:call-template name="attribution">
       <xsl:with-param name="person-name" select="$person-name"/>
     </xsl:call-template>
   </xsl:template>
 
-  <xsl:template match="d:collab" mode="authorsect">
+  <xsl:template match="collab" mode="authorsect">
     <xsl:text>.PP&#10;</xsl:text>
     <xsl:call-template name="bold">
-      <xsl:with-param name="node" select="d:collabname"/>
+      <xsl:with-param name="node" select="collabname"/>
       <xsl:with-param name="context" select="."/>
     </xsl:call-template>
     <!-- * Display e-mail address(es) and ulink(s) on same line as name -->
-    <xsl:apply-templates select=".//d:email|d:address/d:otheraddr/d:ulink" mode="authorsect"/>
+    <xsl:apply-templates select=".//email|address/otheraddr/ulink" mode="authorsect"/>
     <xsl:text>&#10;</xsl:text>
     <!-- * Display affilition(s) on separate lines -->
-    <xsl:apply-templates select="d:affiliation" mode="authorsect"/>
+    <xsl:apply-templates select="affiliation" mode="authorsect"/>
   </xsl:template>
 
-  <xsl:template match="d:corpauthor|d:corpcredit|d:orgname|d:publishername" mode="authorsect">
+  <xsl:template match="corpauthor|corpcredit|orgname|publishername" mode="authorsect">
     <xsl:text>.PP&#10;</xsl:text>
     <xsl:call-template name="bold">
       <xsl:with-param name="node" select="."/>
       <xsl:with-param name="context" select="."/>
     </xsl:call-template>
     <xsl:text>&#10;</xsl:text>
-    <xsl:if test="self::d:publishername">
+    <xsl:if test="self::publishername">
       <!-- * Display localized "Publisher" gentext -->
       <xsl:call-template name="publisher.attribution"/>
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="d:publisher" mode="authorsect">
+  <xsl:template match="publisher" mode="authorsect">
     <xsl:text>.PP&#10;</xsl:text>
     <xsl:call-template name="bold">
-      <xsl:with-param name="node" select="d:publishername"/>
+      <xsl:with-param name="node" select="publishername"/>
       <xsl:with-param name="context" select="."/>
     </xsl:call-template>
     <!-- * Display e-mail address(es) and ulink(s) on same line as name -->
-    <xsl:apply-templates select=".//d:email|d:address/d:otheraddr/d:ulink" mode="authorsect"/>
+    <xsl:apply-templates select=".//email|address/otheraddr/ulink" mode="authorsect"/>
     <!-- * Display addresses on separate lines -->
-    <xsl:apply-templates select="d:address" mode="authorsect"/>
+    <xsl:apply-templates select="address" mode="authorsect"/>
     <!-- * Display localized "Publisher" literal -->
     <xsl:call-template name="publisher.attribution"/>
   </xsl:template>
@@ -447,12 +446,12 @@ xmlns:date="http://exslt.org/dates-and-times"
     <xsl:text>.RE&#10;</xsl:text> 
   </xsl:template>
 
-  <xsl:template match="d:email|d:address/d:otheraddr/d:ulink" mode="authorsect">
+  <xsl:template match="email|address/otheraddr/ulink" mode="authorsect">
     <xsl:choose>
-      <xsl:when test="preceding-sibling::*[descendant-or-self::d:email]
-                      or preceding-sibling::d:address/d:otheraddr/d:ulink
-                      or ancestor::d:address[preceding-sibling::*[descendant-or-self::d:email]]
-                      or ancestor::d:address[preceding-sibling::d:address/d:otheraddr/d:ulink]">
+      <xsl:when test="preceding-sibling::*[descendant-or-self::email]
+                      or preceding-sibling::address/otheraddr/ulink
+                      or ancestor::address[preceding-sibling::*[descendant-or-self::email]]
+                      or ancestor::address[preceding-sibling::address/otheraddr/ulink]">
         <!-- * This is not the first instance, so do nothing. -->
       </xsl:when>
       <xsl:otherwise>
@@ -467,13 +466,13 @@ xmlns:date="http://exslt.org/dates-and-times"
     <!-- * outputting a hyphen character where the break occurs -->
     <xsl:text>&lt;\&amp;</xsl:text>
     <xsl:choose>
-      <xsl:when test="self::d:email">
+      <xsl:when test="self::email">
         <xsl:variable name="contents">
           <xsl:apply-templates/>
         </xsl:variable>
         <xsl:value-of select="normalize-space($contents)"/>
       </xsl:when>
-      <xsl:when test="self::d:ulink">
+      <xsl:when test="self::ulink">
         <xsl:variable name="contents">
           <xsl:apply-templates select="."/>
         </xsl:variable>
@@ -482,10 +481,10 @@ xmlns:date="http://exslt.org/dates-and-times"
     </xsl:choose>
     <xsl:text>\&amp;&gt;</xsl:text>
     <xsl:choose>
-      <xsl:when test="not(following-sibling::*[descendant-or-self::d:email]
-                      or following-sibling::d:address/d:otheraddr/d:ulink
-                      or ancestor::d:address[following-sibling::*[descendant-or-self::d:email]]
-                      or ancestor::d:address[following-sibling::d:address/d:otheraddr/d:ulink])">
+      <xsl:when test="not(following-sibling::*[descendant-or-self::email]
+                      or following-sibling::address/otheraddr/ulink
+                      or ancestor::address[following-sibling::*[descendant-or-self::email]]
+                      or ancestor::address[following-sibling::address/otheraddr/ulink])">
         <!-- * This is the final instance, so do nothing. -->
       </xsl:when>
       <xsl:otherwise>
@@ -495,7 +494,7 @@ xmlns:date="http://exslt.org/dates-and-times"
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="d:affiliation" mode="authorsect">
+  <xsl:template match="affiliation" mode="authorsect">
     <!-- * Get the string value of the contents of this Affiliation. If the -->
     <!-- * affiliation only contains an Address child whose only content is -->
     <!-- * an email address or ulink, then these contents will end up empty. -->
@@ -506,15 +505,15 @@ xmlns:date="http://exslt.org/dates-and-times"
     <!-- * or ulink, then output nothing. -->
     <xsl:if test="$contents != ''">
       <xsl:text>.br&#10;</xsl:text>
-      <xsl:for-each select="d:shortaffil|d:jobtitle|d:orgname|d:orgdiv|d:address">
+      <xsl:for-each select="shortaffil|jobtitle|orgname|orgdiv|address">
         <!-- * only display output of nodes other than email or ulink -->
-        <xsl:apply-templates select="node()[not(self::d:email) and not(self::d:otheraddr/d:ulink)]"/>
+        <xsl:apply-templates select="node()[not(self::email) and not(self::otheraddr/ulink)]"/>
         <xsl:choose>
           <xsl:when test="position() = last()"/> <!-- do nothing -->
           <xsl:otherwise>
             <!-- * only add comma if the node has a child node other than -->
             <!-- * an email address or ulink -->
-            <xsl:if test="child::node()[not(self::d:email) and not(self::d:otheraddr/d:ulink)]">
+            <xsl:if test="child::node()[not(self::email) and not(self::otheraddr/ulink)]">
               <xsl:text>, </xsl:text>
             </xsl:if>
           </xsl:otherwise>
@@ -532,28 +531,28 @@ xmlns:date="http://exslt.org/dates-and-times"
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="d:address" mode="authorsect">
+  <xsl:template match="address" mode="authorsect">
     <xsl:variable name="contents"
-                  select="normalize-space(node()[not(self::d:email)
-                          and not(self::d:otheraddr/d:ulink)])"/>
+                  select="normalize-space(node()[not(self::email)
+                          and not(self::otheraddr/ulink)])"/>
     <!-- * If this contents of this Address do not contain anything except -->
     <!-- * an email address or ulink, then output nothing. -->
     <xsl:if test="$contents != ''">
       <xsl:text>&#10;</xsl:text>
       <xsl:text>.br&#10;</xsl:text>
       <!--* Skip email and ulink descendants of Address (rendered elsewhere) -->
-      <xsl:apply-templates select="node()[not(self::d:email) and not(self::d:otheraddr/d:ulink)]"/>
+      <xsl:apply-templates select="node()[not(self::email) and not(self::otheraddr/ulink)]"/>
     </xsl:if>
   </xsl:template>
 
   <xsl:template name="attribution">
     <xsl:param name="person-name"/>
-    <xsl:param name="refname" select="ancestor::d:refentry/d:refnamediv[1]/d:refname[1]"/>
+    <xsl:param name="refname" select="ancestor::refentry/refnamediv[1]/refname[1]"/>
     <!-- * Determine appropriate attribution for a particular person's role. -->
     <xsl:choose>
       <!-- * if we have a *blurb or contrib, just use that -->
-      <xsl:when test="d:contrib|d:personblurb|d:authorblurb">
-        <xsl:apply-templates select="d:contrib|d:personblurb|d:authorblurb" mode="authorsect"/>
+      <xsl:when test="contrib|personblurb|authorblurb">
+        <xsl:apply-templates select="contrib|personblurb|authorblurb" mode="authorsect"/>
         <xsl:text>&#10;</xsl:text>
       </xsl:when>
       <xsl:otherwise>
@@ -578,7 +577,7 @@ xmlns:date="http://exslt.org/dates-and-times"
               <xsl:with-param name="source" select="$refname"/>
               <xsl:with-param name="context-desc">AUTHOR sect.</xsl:with-param>
               <xsl:with-param name="message">
-                <xsl:text>see see http://docbook.sf.net/el/contrib</xsl:text>
+                <xsl:text>see http://docbook.sf.net/el/contrib</xsl:text>
               </xsl:with-param>
             </xsl:call-template>
             <xsl:call-template name="log.message">
@@ -586,7 +585,7 @@ xmlns:date="http://exslt.org/dates-and-times"
               <xsl:with-param name="source" select="$refname"/>
               <xsl:with-param name="context-desc">AUTHOR sect.</xsl:with-param>
               <xsl:with-param name="message">
-                <xsl:text>see see http://docbook.sf.net/el/personblurb</xsl:text>
+                <xsl:text>see http://docbook.sf.net/el/personblurb</xsl:text>
               </xsl:with-param>
             </xsl:call-template>
           </xsl:if>
@@ -594,7 +593,7 @@ xmlns:date="http://exslt.org/dates-and-times"
         <xsl:choose>
           <!-- * If we have no *blurb or contrib, but this is an Author or -->
           <!-- * Editor, then render the corresponding localized gentext -->
-          <xsl:when test="self::d:author">
+          <xsl:when test="self::author">
             <xsl:text>&#10;</xsl:text>
             <xsl:text>.RS</xsl:text> 
             <xsl:if test="not($blurb-indent = '')">
@@ -608,7 +607,7 @@ xmlns:date="http://exslt.org/dates-and-times"
             <xsl:text>.&#10;</xsl:text>
             <xsl:text>.RE&#10;</xsl:text> 
           </xsl:when>
-          <xsl:when test="self::d:editor">
+          <xsl:when test="self::editor">
             <xsl:text>&#10;</xsl:text>
             <xsl:text>.RS</xsl:text> 
             <xsl:if test="not($blurb-indent = '')">
@@ -624,7 +623,7 @@ xmlns:date="http://exslt.org/dates-and-times"
           </xsl:when>
           <!-- * If we have no *blurb or contrib, but this is an Othercredit, -->
           <!-- * check value of Class attribute and use corresponding gentext. -->
-          <xsl:when test="self::d:othercredit">
+          <xsl:when test="self::othercredit">
             <xsl:choose>
               <xsl:when test="@class and @class != 'other'">
                 <xsl:text>&#10;</xsl:text>
@@ -655,23 +654,23 @@ xmlns:date="http://exslt.org/dates-and-times"
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="d:personblurb|d:authorblurb" mode="authorsect">
+  <xsl:template match="personblurb|authorblurb" mode="authorsect">
     <xsl:call-template name="mark.up.blurb.or.contrib"/>
     <!-- * yeah, it's possible for a *blurb to have a "title" -->
-    <xsl:apply-templates select="d:title"/>
-    <xsl:apply-templates select="*[not(self::d:title)]"/>
+    <xsl:apply-templates select="title"/>
+    <xsl:apply-templates select="*[not(self::title)]"/>
     <!-- * If this *blurb has a sibling "name" element of some kind, then -->
     <!-- * the mark.up.blurb.or.contrib template will generated an "RS" -->
     <!-- * call that will cause it to be indented; so we need to call -->
     <!-- * "RE" to restore the previous indent level -->
-    <xsl:if test="../d:personname|../d:surname|../d:firstname
-      |../d:othername|../d:lineage|../d:honorific
-      |../d:affiliation|../d:email|../d:address">
+    <xsl:if test="../personname|../surname|../firstname
+      |../othername|../lineage|../honorific
+      |../affiliation|../email|../address">
       <xsl:text>.RE&#10;</xsl:text> 
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="d:personblurb/d:title|d:authorblurb/d:title">
+  <xsl:template match="personblurb/title|authorblurb/title">
     <!-- * always render period after title -->
     <xsl:variable name="contents">
       <xsl:apply-templates/>
@@ -685,16 +684,16 @@ xmlns:date="http://exslt.org/dates-and-times"
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="d:contrib" mode="authorsect">
+  <xsl:template match="contrib" mode="authorsect">
     <xsl:call-template name="mark.up.blurb.or.contrib"/>
     <xsl:variable name="contents">
       <xsl:apply-templates/>
     </xsl:variable>
     <xsl:value-of select="normalize-space($contents)"/>
     <xsl:text>&#10;</xsl:text>
-    <xsl:if test="../d:personname|../d:surname|../d:firstname
-      |../d:othername|../d:lineage|../d:honorific
-      |../d:affiliation|../d:email|../d:address">
+    <xsl:if test="../personname|../surname|../firstname
+      |../othername|../lineage|../honorific
+      |../affiliation|../email|../address">
       <xsl:text>.RE&#10;</xsl:text> 
     </xsl:if>
   </xsl:template>
@@ -705,9 +704,9 @@ xmlns:date="http://exslt.org/dates-and-times"
       <!-- * we are already outputting the name content, and we need to -->
       <!-- * indent the *blurb content after that. -->
       <xsl:when
-          test="../d:personname|../d:surname|../d:firstname
-                |../d:othername|../d:lineage|../d:honorific
-                |../d:affiliation|../d:email|../d:address">
+          test="../personname|../surname|../firstname
+                |../othername|../lineage|../honorific
+                |../affiliation|../email|../address">
         <xsl:text>&#10;</xsl:text>
         <xsl:text>.RS</xsl:text> 
         <xsl:if test="not($blurb-indent = '')">
@@ -744,7 +743,7 @@ xmlns:date="http://exslt.org/dates-and-times"
   <xsl:template name="copyright.section">
     <xsl:param name="info"/>
     <xsl:choose>
-      <xsl:when test="$info//d:copyright|$info//d:legalnotice">
+      <xsl:when test="$info//copyright|$info//legalnotice">
         <xsl:call-template name="make.subheading">
           <xsl:with-param name="title">
             <xsl:call-template name="gentext">
@@ -756,8 +755,8 @@ xmlns:date="http://exslt.org/dates-and-times"
         <!-- * the copyright mode="titlepage.mode" template is -->
         <!-- * imported from the HTML stylesheets -->
         <xsl:for-each select="
-          (($info[//d:copyright])[last()]//d:copyright)
-          | (($info[//d:legalnotice])[last()]//d:legalnotice)">
+          (($info[//copyright])[last()]//copyright)
+          | (($info[//legalnotice])[last()]//legalnotice)">
           <xsl:choose>
             <xsl:when test="local-name(.) = 'copyright'">
               <xsl:variable name="contents">
@@ -779,7 +778,7 @@ xmlns:date="http://exslt.org/dates-and-times"
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="d:legalnotice">
+  <xsl:template match="legalnotice">
     <xsl:apply-templates/>
   </xsl:template>
 
@@ -788,13 +787,13 @@ xmlns:date="http://exslt.org/dates-and-times"
   <!-- * suppress refmeta and all *info (we grab what we need from them -->
   <!-- * elsewhere) -->
 
-  <xsl:template match="d:refmeta"/>
+  <xsl:template match="refmeta"/>
 
-  <xsl:template match="d:info|d:refentryinfo|d:referenceinfo|d:refsynopsisdivinfo
-                       |d:refsectioninfo|d:refsect1info|d:refsect2info|d:refsect3info
-                       |d:setinfo|d:bookinfo|d:articleinfo|d:chapterinfo|d:sectioninfo
-                       |d:sect1info|d:sect2info|d:sect3info|d:sect4info|d:sect5info
-                       |d:partinfo|d:prefaceinfo|d:appendixinfo|d:docinfo"/>
+  <xsl:template match="info|refentryinfo|referenceinfo|refsynopsisdivinfo
+                       |refsectioninfo|refsect1info|refsect2info|refsect3info
+                       |setinfo|bookinfo|articleinfo|chapterinfo|sectioninfo
+                       |sect1info|sect2info|sect3info|sect4info|sect5info
+                       |partinfo|prefaceinfo|appendixinfo|docinfo"/>
 
   <!-- ============================================================== -->
   

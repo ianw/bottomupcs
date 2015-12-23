@@ -24,11 +24,11 @@
      If @sortas is not present, the first item is empty, and the added space
      is removed when normalize-space is applied, leaving just the entry -->
 
-<!ENTITY primary   'normalize-space(concat(d:primary/@sortas, " ", d:primary))'>
-<!ENTITY secondary 'normalize-space(concat(d:secondary/@sortas, " ", d:secondary))'>
-<!ENTITY tertiary  'normalize-space(concat(d:tertiary/@sortas, " ", d:tertiary))'>
+<!ENTITY primary   'normalize-space(concat(primary/@sortas, " ", primary))'>
+<!ENTITY secondary 'normalize-space(concat(secondary/@sortas, " ", secondary))'>
+<!ENTITY tertiary  'normalize-space(concat(tertiary/@sortas, " ", tertiary))'>
 
-<!ENTITY section   '(ancestor-or-self::d:set|ancestor-or-self::d:book|ancestor-or-self::d:part|ancestor-or-self::d:reference|ancestor-or-self::d:partintro|ancestor-or-self::d:chapter|ancestor-or-self::d:appendix|ancestor-or-self::d:preface|ancestor-or-self::d:article|ancestor-or-self::d:section|ancestor-or-self::d:sect1|ancestor-or-self::d:sect2|ancestor-or-self::d:sect3|ancestor-or-self::d:sect4|ancestor-or-self::d:sect5|ancestor-or-self::d:refentry|ancestor-or-self::d:refsect1|ancestor-or-self::d:refsect2|ancestor-or-self::d:refsect3|ancestor-or-self::d:simplesect|ancestor-or-self::d:bibliography|ancestor-or-self::d:glossary|ancestor-or-self::d:index|ancestor-or-self::d:webpage|ancestor-or-self::d:topic)[last()]'>
+<!ENTITY section   '(ancestor-or-self::set|ancestor-or-self::book|ancestor-or-self::part|ancestor-or-self::reference|ancestor-or-self::partintro|ancestor-or-self::chapter|ancestor-or-self::appendix|ancestor-or-self::preface|ancestor-or-self::article|ancestor-or-self::section|ancestor-or-self::sect1|ancestor-or-self::sect2|ancestor-or-self::sect3|ancestor-or-self::sect4|ancestor-or-self::sect5|ancestor-or-self::refentry|ancestor-or-self::refsect1|ancestor-or-self::refsect2|ancestor-or-self::refsect3|ancestor-or-self::simplesect|ancestor-or-self::bibliography|ancestor-or-self::glossary|ancestor-or-self::index|ancestor-or-self::webpage|ancestor-or-self::topic)[last()]'>
 
 <!ENTITY section.id 'generate-id(&section;)'>
 <!ENTITY sep '" "'>
@@ -54,14 +54,14 @@
 '>
 
 <!-- Entity used in html/inline.xsl and fo/inline.xsl -->
-<!ENTITY comment.block.parents "parent::d:answer|parent::d:appendix|parent::d:article|parent::d:bibliodiv|
-                                parent::d:bibliography|parent::d:blockquote|parent::d:caution|parent::d:chapter|
-                                parent::d:glossary|parent::d:glossdiv|parent::d:important|parent::d:index|
-                                parent::d:indexdiv|parent::d:listitem|parent::d:note|parent::d:orderedlist|
-                                parent::d:partintro|parent::d:preface|parent::d:procedure|parent::d:qandadiv|
-                                parent::d:qandaset|parent::d:question|parent::d:refentry|parent::d:refnamediv|
-                                parent::d:refsect1|parent::d:refsect2|parent::d:refsect3|parent::d:refsection|
-                                parent::d:refsynopsisdiv|parent::d:sect1|parent::d:sect2|parent::d:sect3|parent::d:sect4|
-                                parent::d:sect5|parent::d:section|parent::d:setindex|parent::d:sidebar|
-                                parent::d:simplesect|parent::d:taskprerequisites|parent::d:taskrelated|
-                                parent::d:tasksummary|parent::d:warning|parent::d:topic">
+<!ENTITY comment.block.parents "parent::answer|parent::appendix|parent::article|parent::bibliodiv|
+                                parent::bibliography|parent::blockquote|parent::caution|parent::chapter|
+                                parent::glossary|parent::glossdiv|parent::important|parent::index|
+                                parent::indexdiv|parent::listitem|parent::note|parent::orderedlist|
+                                parent::partintro|parent::preface|parent::procedure|parent::qandadiv|
+                                parent::qandaset|parent::question|parent::refentry|parent::refnamediv|
+                                parent::refsect1|parent::refsect2|parent::refsect3|parent::refsection|
+                                parent::refsynopsisdiv|parent::sect1|parent::sect2|parent::sect3|parent::sect4|
+                                parent::sect5|parent::section|parent::setindex|parent::sidebar|
+                                parent::simplesect|parent::taskprerequisites|parent::taskrelated|
+                                parent::tasksummary|parent::warning|parent::topic">

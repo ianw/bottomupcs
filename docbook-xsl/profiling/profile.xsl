@@ -1,13 +1,11 @@
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="1.0">
 
 <!-- Include common profiling stylesheet -->
 <xsl:import href="profile-mode.xsl"/>
 
 <!-- This file must be included, because profile-mode is using templates from it -->
-<xsl:import href="../common/addns.xsl"/>
+<xsl:import href="../common/stripns.xsl"/>
 
 <!-- In the two pass processing there is no need for base URI fixup -->
 <xsl:param name="profile.baseuri.fixup" select="false()"/>

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet 
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-  xmlns:d="http://docbook.org/ns/docbook"
-xmlns:exsl="http://exslt.org/common"
+  xmlns:exsl="http://exslt.org/common"
   xmlns="http://www.w3.org/1999/xhtml"
-  exclude-result-prefixes="exsl d"
+  exclude-result-prefixes="exsl"
   version="1.0">
 
 <!-- $Id: html5-chunk-mods.xsl,v 1.1 2011-09-16 21:44:00 bobs Exp $ -->
@@ -55,8 +54,8 @@ xmlns:exsl="http://exslt.org/common"
 
 <!-- Add HTML5 <header>  wrapper, and convert some attributes to styles -->
 <xsl:template name="html5.header.navigation">
-  <xsl:param name="prev" select="/d:foo"/>
-  <xsl:param name="next" select="/d:foo"/>
+  <xsl:param name="prev" select="/foo"/>
+  <xsl:param name="next" select="/foo"/>
   <xsl:param name="nav.context"/>
 
   <xsl:variable name="content">
@@ -83,8 +82,8 @@ xmlns:exsl="http://exslt.org/common"
 
 <!-- Add HTML5 <footer>  wrapper, and convert some attributes to styles -->
 <xsl:template name="html5.footer.navigation">
-  <xsl:param name="prev" select="/d:foo"/>
-  <xsl:param name="next" select="/d:foo"/>
+  <xsl:param name="prev" select="/foo"/>
+  <xsl:param name="next" select="/foo"/>
   <xsl:param name="nav.context"/>
 
   <xsl:variable name="content">

@@ -1,8 +1,7 @@
 <?xml version='1.0'?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 
-		xmlns:d="http://docbook.org/ns/docbook"
-xmlns:s6hl="http://net.sf.xslthl/ConnectorSaxon6" 
+		xmlns:s6hl="http://net.sf.xslthl/ConnectorSaxon6" 
 		xmlns:sbhl="http://net.sf.xslthl/ConnectorSaxonB" 
 		xmlns:xhl="http://net.sf.xslthl/ConnectorXalan"
 		xmlns:saxon6="http://icl.com/saxon" 
@@ -11,7 +10,7 @@ xmlns:s6hl="http://net.sf.xslthl/ConnectorSaxon6"
 		
 		xmlns:exsl="http://exslt.org/common"
 		xmlns:xslthl="http://xslthl.sf.net"
-		exclude-result-prefixes="exsl xslthl s6hl sbhl xhl d"
+		exclude-result-prefixes="exsl xslthl s6hl sbhl xhl"
 		version='1.0'>
 
 <!-- ********************************************************************

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <!--This file was created automatically by xsl2profile-->
 <!--from the DocBook XSL stylesheets.-->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:d="http://docbook.org/ns/docbook"
-xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:exsl="http://exslt.org/common" xmlns:set="http://exslt.org/sets" xmlns:h="urn:x-hex" xmlns:ng="http://docbook.org/docbook-ng" xmlns:db="http://docbook.org/ns/docbook" xmlns:exslt="http://exslt.org/common" exslt:dummy="dummy" ng:dummy="dummy" db:dummy="dummy" extension-element-prefixes="exslt" version="1.0" exclude-result-prefixes="doc exsl set h db ng exslt d">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:exsl="http://exslt.org/common" xmlns:set="http://exslt.org/sets" xmlns:h="urn:x-hex" xmlns:ng="http://docbook.org/docbook-ng" xmlns:db="http://docbook.org/ns/docbook" xmlns:exslt="http://exslt.org/common" exslt:dummy="dummy" ng:dummy="dummy" db:dummy="dummy" extension-element-prefixes="exslt" version="1.0" exclude-result-prefixes="doc exsl set h db ng exslt">
 
 <!-- ********************************************************************
-     $Id: htmlhelp-common.xsl 9151 2011-11-12 00:16:19Z bobstayton $
+     $Id: htmlhelp-common.xsl 9908 2014-02-24 19:02:52Z bobstayton $
      ******************************************************************** -->
 
 <!-- ==================================================================== -->
@@ -19,14 +18,24 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:exsl="http://exslt.org
 
 <!-- ==================================================================== -->
 
-<xsl:param name="htmlhelp.generate.index" select="//d:indexterm[1]|//db:indexterm[1]|//ng:indexterm[1]"/>
+<xsl:param name="htmlhelp.generate.index" select="//indexterm[1]|//db:indexterm[1]|//ng:indexterm[1]"/>
   
 <!-- Set up HTML Help flag -->
 <xsl:variable name="htmlhelp.output" select="1"/>
 
 <!-- ==================================================================== -->
 
-<xslo:include xmlns:xslo="http://www.w3.org/1999/XSL/Transform" href="../profiling/profile-mode.xsl"/><xslo:variable xmlns:xslo="http://www.w3.org/1999/XSL/Transform" name="profiled-content"> <xslo:choose> <xslo:when test="namespace-uri(*[1]) != 'http://docbook.org/ns/docbook'"> <xsl:message>Adding DocBook namespace to version 4 DocBook document</xsl:message> <xsl:variable name="addns"> <xsl:apply-templates mode="addNS" select="/"/> </xsl:variable> <xsl:apply-templates select="exsl:node-set($addns)" mode="profile"/> </xslo:when> <xslo:otherwise> <xslo:apply-templates select="/" mode="profile"/> </xslo:otherwise> </xslo:choose> </xslo:variable><xslo:variable xmlns:xslo="http://www.w3.org/1999/XSL/Transform" name="profiled-nodes" select="exslt:node-set($profiled-content)"/><xsl:template match="/">
+<!-- To use the same namespace-adjusted nodeset everywhere, it should
+be created as a global variable here.
+Used by docbook.xsl, chunk-common.xsl, chunktoc.xsl, and
+chunk-code.xsl; and in $chunk.hierarchy used in chunkfast.xsl -->
+<xsl:variable name="no.namespace">
+  <xsl:if test="$exsl.node.set.available != 0 and                  namespace-uri(/*) = 'http://docbook.org/ns/docbook'">
+      <xsl:apply-templates select="/*" mode="stripNS"/>
+  </xsl:if>
+</xsl:variable>
+
+<xslo:include xmlns:xslo="http://www.w3.org/1999/XSL/Transform" href="../profiling/profile-mode.xsl"/><xslo:variable xmlns:xslo="http://www.w3.org/1999/XSL/Transform" name="profiled-content"><xslo:choose><xslo:when test="$exsl.node.set.available != 0 and                      namespace-uri(/*) = 'http://docbook.org/ns/docbook'"><xslo:variable name="no.namespace"><xslo:apply-templates select="/*" mode="stripNS"/></xslo:variable><xslo:call-template name="log.message"><xslo:with-param name="level">Note</xslo:with-param><xslo:with-param name="source"><xslo:call-template name="get.doc.title"/></xslo:with-param><xslo:with-param name="context-desc"><xslo:text>namesp. cut</xslo:text></xslo:with-param><xslo:with-param name="message"><xslo:text>stripped namespace before processing</xslo:text></xslo:with-param></xslo:call-template><xslo:apply-templates select="exslt:node-set($no.namespace)" mode="profile"/></xslo:when><xslo:otherwise><xslo:apply-templates select="/" mode="profile"/></xslo:otherwise></xslo:choose></xslo:variable><xslo:variable xmlns:xslo="http://www.w3.org/1999/XSL/Transform" name="profiled-nodes" select="exslt:node-set($profiled-content)"/><xsl:template match="/">
 
   <!-- * Get a title for current doc so that we let the user -->
   <!-- * know what document we are processing at this point. -->
@@ -34,51 +43,54 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0" xmlns:exsl="http://exslt.org
     <xsl:call-template name="get.doc.title"/>
   </xsl:variable>
   <xsl:choose>
-    
+    <!-- fix namespace if necessary -->
     <xsl:when test="false()"/>
+    <!-- Can't process unless namespace fixed with exsl node-set()-->
+    <xsl:when test="false()"/>
+
     <xsl:otherwise>
-  <xsl:if test="$htmlhelp.only != 1">
-    <xsl:choose>
-      <xsl:when test="$rootid != ''">
+      <xsl:if test="$htmlhelp.only != 1">
         <xsl:choose>
-          <xsl:when test="count($profiled-nodes//*[@id=$rootid or @xml:id=$rootid]) = 0">
-            <xsl:message terminate="yes">
-              <xsl:text>ID '</xsl:text>
-              <xsl:value-of select="$rootid"/>
-              <xsl:text>' not found in document.</xsl:text>
-            </xsl:message>
+          <xsl:when test="$rootid != ''">
+            <xsl:choose>
+              <xsl:when test="count($profiled-nodes//*[@id=$rootid or @xml:id=$rootid]) = 0">
+                <xsl:message terminate="yes">
+                  <xsl:text>ID '</xsl:text>
+                  <xsl:value-of select="$rootid"/>
+                  <xsl:text>' not found in document.</xsl:text>
+                </xsl:message>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:message>Formatting from <xsl:value-of select="$rootid"/></xsl:message>
+                <xsl:apply-templates select="$profiled-nodes//*[@id=$rootid or @xml:id=$rootid]" mode="process.root"/>
+              </xsl:otherwise>
+            </xsl:choose>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:message>Formatting from <xsl:value-of select="$rootid"/></xsl:message>
-            <xsl:apply-templates select="$profiled-nodes//*[@id=$rootid or @xml:id=$rootid]" mode="process.root"/>
+            <xsl:if test="$collect.xref.targets = 'yes' or                           $collect.xref.targets = 'only'">
+              <xsl:apply-templates select="$profiled-nodes" mode="collect.targets"/>
+            </xsl:if>
+            <xsl:if test="$collect.xref.targets != 'only'">
+              <xsl:apply-templates select="$profiled-nodes" mode="process.root"/>
+            </xsl:if>
           </xsl:otherwise>
         </xsl:choose>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:if test="$collect.xref.targets = 'yes' or                       $collect.xref.targets = 'only'">
-          <xsl:apply-templates select="$profiled-nodes" mode="collect.targets"/>
+      </xsl:if>
+    
+    
+      <xsl:if test="$collect.xref.targets != 'only'">
+        <xsl:call-template name="hhp"/>
+        <xsl:call-template name="hhc"/>
+        <xsl:if test="($rootid = '' and //processing-instruction('dbhh')) or                       ($rootid != '' and $profiled-nodes//*[@id=$rootid or @xml:id=$rootid]//processing-instruction('dbhh'))">
+          <xsl:call-template name="hh-map"/>
+          <xsl:call-template name="hh-alias"/>
         </xsl:if>
-        <xsl:if test="$collect.xref.targets != 'only'">
-          <xsl:apply-templates select="$profiled-nodes" mode="process.root"/>
+        <xsl:if test="$htmlhelp.generate.index">
+          <xsl:call-template name="hhk"/>
         </xsl:if>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:if>
-
-
-  <xsl:if test="$collect.xref.targets != 'only'">
-    <xsl:call-template name="hhp"/>
-    <xsl:call-template name="hhc"/>
-    <xsl:if test="($rootid = '' and //processing-instruction('dbhh')) or                   ($rootid != '' and $profiled-nodes//*[@id=$rootid or @xml:id=$rootid]//processing-instruction('dbhh'))">
-      <xsl:call-template name="hh-map"/>
-      <xsl:call-template name="hh-alias"/>
-    </xsl:if>
-    <xsl:if test="$htmlhelp.generate.index">
-      <xsl:call-template name="hhk"/>
-    </xsl:if>
-  </xsl:if>
-</xsl:otherwise>
-</xsl:choose>
+      </xsl:if>
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 <!-- ==================================================================== -->
@@ -277,7 +289,7 @@ Enhanced decompilation=</xsl:text>
 <!-- 
   Needs more investigation to generate propetly all fields 
 <xsl:text>search="</xsl:text>
-<xsl:value-of select="normalize-space(//d:title[1])"/>
+<xsl:value-of select="normalize-space(//title[1])"/>
 <xsl:text>","toc.hhc","index.hhk","</xsl:text>
 <xsl:value-of select="$root.filename"/>
 <xsl:text>.html","</xsl:text>
@@ -324,7 +336,7 @@ Enhanced decompilation=</xsl:text>
   </xsl:variable>
   <xsl:choose>
     <xsl:when test="$exsl.node.set.available != 0                     and function-available('set:distinct')">
-      <xsl:for-each select="set:distinct(exsl:node-set($imagelist)/d:filename)">
+      <xsl:for-each select="set:distinct(exsl:node-set($imagelist)/filename)">
         <xsl:value-of select="."/>
         <xsl:text>
 </xsl:text>
@@ -351,7 +363,7 @@ Enhanced decompilation=</xsl:text>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:graphic|d:inlinegraphic[@format!='linespecific']" mode="enumerate-images">
+<xsl:template match="graphic|inlinegraphic[@format!='linespecific']" mode="enumerate-images">
   <xsl:call-template name="write.filename.enumerate-images">
     <xsl:with-param name="filename">
       <xsl:call-template name="mediaobject.filename.enumerate-images">
@@ -361,12 +373,12 @@ Enhanced decompilation=</xsl:text>
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:mediaobject|d:inlinemediaobject" mode="enumerate-images">
+<xsl:template match="mediaobject|inlinemediaobject" mode="enumerate-images">
   <xsl:call-template name="select.mediaobject.enumerate-images"/>
 </xsl:template>
 
 <xsl:template name="select.mediaobject.enumerate-images">
-  <xsl:param name="olist" select="d:imageobject|d:imageobjectco                      |d:videoobject|d:audioobject|d:textobject"/>
+  <xsl:param name="olist" select="imageobject|imageobjectco                      |videoobject|audioobject|textobject"/>
   <xsl:param name="count">1</xsl:param>
 
   <xsl:if test="$count &lt;= count($olist)">
@@ -375,7 +387,7 @@ Enhanced decompilation=</xsl:text>
     <xsl:variable name="useobject">
       <xsl:choose>
         <!-- The phrase is never used -->
-        <xsl:when test="name($object)='textobject' and $object/d:phrase">
+        <xsl:when test="name($object)='textobject' and $object/phrase">
           <xsl:text>0</xsl:text>
         </xsl:when>
         <!-- The first textobject is a reasonable fallback (but not for image in HH) -->
@@ -392,7 +404,7 @@ Enhanced decompilation=</xsl:text>
             <!-- peek inside imageobjectco to simplify the test -->
             <xsl:when test="local-name($object) = 'imageobjectco'">
               <xsl:call-template name="is.acceptable.mediaobject">
-                <xsl:with-param name="object" select="$object/d:imageobject"/>
+                <xsl:with-param name="object" select="$object/imageobject"/>
               </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
@@ -561,11 +573,11 @@ Enhanced decompilation=</xsl:text>
 </xsl:text>
 </xsl:template>
 
-<xsl:template match="d:set" mode="hhc">
+<xsl:template match="set" mode="hhc">
   <xsl:if test="$htmlhelp.hhc.show.root != 0">
     <xsl:call-template name="hhc.entry"/>
   </xsl:if>
-  <xsl:if test="d:book">
+  <xsl:if test="book">
     <xsl:variable name="toc.params">
       <xsl:call-template name="find.path.params">
         <xsl:with-param name="table" select="normalize-space($generate.toc)"/>
@@ -602,17 +614,17 @@ Enhanced decompilation=</xsl:text>
       </OBJECT></LI><xsl:text>
 </xsl:text>
       </xsl:if>
-      <xsl:apply-templates select="d:book" mode="hhc"/>
+      <xsl:apply-templates select="book" mode="hhc"/>
     </UL><xsl:text>
 </xsl:text>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:book" mode="hhc">
+<xsl:template match="book" mode="hhc">
   <xsl:if test="$htmlhelp.hhc.show.root != 0 or parent::*">
     <xsl:call-template name="hhc.entry"/>
   </xsl:if>
-  <xsl:if test="d:part|d:reference|d:preface|d:chapter|d:appendix|d:bibliography|d:article|d:colophon|d:glossary">
+  <xsl:if test="part|reference|preface|chapter|appendix|bibliography|article|colophon|glossary">
     <xsl:variable name="toc.params">
       <xsl:call-template name="find.path.params">
         <xsl:with-param name="table" select="normalize-space($generate.toc)"/>
@@ -649,128 +661,128 @@ Enhanced decompilation=</xsl:text>
         </OBJECT></LI><xsl:text>
 </xsl:text>
       </xsl:if>
-      <xsl:apply-templates select="d:part|d:reference|d:preface|d:chapter|d:bibliography|d:appendix|d:article|d:colophon|d:glossary" mode="hhc"/>
+      <xsl:apply-templates select="part|reference|preface|chapter|bibliography|appendix|article|colophon|glossary" mode="hhc"/>
     </UL><xsl:text>
 </xsl:text>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:part|d:reference|d:preface|d:chapter|d:bibliography|d:appendix|d:article|d:glossary" mode="hhc">
+<xsl:template match="part|reference|preface|chapter|bibliography|appendix|article|glossary" mode="hhc">
   <xsl:if test="$htmlhelp.hhc.show.root != 0 or parent::*">
     <xsl:call-template name="hhc.entry"/>
   </xsl:if>
-  <xsl:if test="d:article|d:reference|d:preface|d:chapter|d:appendix|d:refentry|d:section|d:sect1|d:bibliodiv">
+  <xsl:if test="article|reference|preface|chapter|appendix|refentry|section|sect1|bibliodiv">
     <UL><xsl:text>
 </xsl:text>
-      <xsl:apply-templates select="d:article|d:reference|d:preface|d:chapter|d:appendix|d:refentry|d:section|d:sect1|d:bibliodiv" mode="hhc"/>
+      <xsl:apply-templates select="article|reference|preface|chapter|appendix|refentry|section|sect1|bibliodiv" mode="hhc"/>
     </UL>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:section" mode="hhc">
+<xsl:template match="section" mode="hhc">
   <xsl:if test="$htmlhelp.hhc.show.root != 0 or parent::*">
     <xsl:call-template name="hhc.entry"/>
   </xsl:if>
-  <xsl:if test="d:section[count(ancestor::d:section) &lt; $htmlhelp.hhc.section.depth]|d:refentry">
+  <xsl:if test="section[count(ancestor::section) &lt; $htmlhelp.hhc.section.depth]|refentry">
     <UL><xsl:text>
 </xsl:text>
-      <xsl:apply-templates select="d:section|d:refentry" mode="hhc"/>
+      <xsl:apply-templates select="section|refentry" mode="hhc"/>
     </UL>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:sect1" mode="hhc">
+<xsl:template match="sect1" mode="hhc">
   <xsl:if test="$htmlhelp.hhc.show.root != 0 or parent::*">
     <xsl:call-template name="hhc.entry"/>
   </xsl:if>
-  <xsl:if test="d:sect2[$htmlhelp.hhc.section.depth &gt; 1]|d:refentry">
+  <xsl:if test="sect2[$htmlhelp.hhc.section.depth &gt; 1]|refentry">
     <UL><xsl:text>
 </xsl:text>
-      <xsl:apply-templates select="d:sect2|d:refentry" mode="hhc"/>
+      <xsl:apply-templates select="sect2|refentry" mode="hhc"/>
     </UL>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:sect2" mode="hhc">
+<xsl:template match="sect2" mode="hhc">
   <xsl:if test="$htmlhelp.hhc.show.root != 0 or parent::*">
     <xsl:call-template name="hhc.entry"/>
   </xsl:if>
-  <xsl:if test="d:sect3[$htmlhelp.hhc.section.depth &gt; 2]|d:refentry">
+  <xsl:if test="sect3[$htmlhelp.hhc.section.depth &gt; 2]|refentry">
     <UL><xsl:text>
 </xsl:text>
-      <xsl:apply-templates select="d:sect3|d:refentry" mode="hhc"/>
+      <xsl:apply-templates select="sect3|refentry" mode="hhc"/>
     </UL>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:sect3" mode="hhc">
+<xsl:template match="sect3" mode="hhc">
   <xsl:if test="$htmlhelp.hhc.show.root != 0 or parent::*">
     <xsl:call-template name="hhc.entry"/>
   </xsl:if>
-  <xsl:if test="d:sect4[$htmlhelp.hhc.section.depth &gt; 3]|d:refentry">
+  <xsl:if test="sect4[$htmlhelp.hhc.section.depth &gt; 3]|refentry">
     <UL><xsl:text>
 </xsl:text>
-      <xsl:apply-templates select="d:sect4|d:refentry" mode="hhc"/>
+      <xsl:apply-templates select="sect4|refentry" mode="hhc"/>
     </UL>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:sect4" mode="hhc">
+<xsl:template match="sect4" mode="hhc">
   <xsl:if test="$htmlhelp.hhc.show.root != 0 or parent::*">
     <xsl:call-template name="hhc.entry"/>
   </xsl:if>
-  <xsl:if test="d:sect5[$htmlhelp.hhc.section.depth &gt; 4]|d:refentry">
+  <xsl:if test="sect5[$htmlhelp.hhc.section.depth &gt; 4]|refentry">
     <UL><xsl:text>
 </xsl:text>
-      <xsl:apply-templates select="d:sect5|d:refentry" mode="hhc"/>
+      <xsl:apply-templates select="sect5|refentry" mode="hhc"/>
     </UL>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:sect5|d:refentry|d:colophon|d:bibliodiv" mode="hhc">
+<xsl:template match="sect5|refentry|colophon|bibliodiv" mode="hhc">
   <xsl:if test="$htmlhelp.hhc.show.root != 0 or parent::*">
     <xsl:call-template name="hhc.entry"/>
   </xsl:if>
-  <xsl:if test="d:refentry">
+  <xsl:if test="refentry">
     <UL><xsl:text>
 </xsl:text>
-      <xsl:apply-templates select="d:refentry" mode="hhc"/>
+      <xsl:apply-templates select="refentry" mode="hhc"/>
     </UL>
   </xsl:if>
 </xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:indexterm">
+<xsl:template match="indexterm">
   <xsl:choose>
     <xsl:when test="$htmlhelp.use.hhk = 0">
   
-      <xsl:variable name="primary" select="normalize-space(d:primary)"/>
-      <xsl:variable name="secondary" select="normalize-space(d:secondary)"/>
-      <xsl:variable name="tertiary" select="normalize-space(d:tertiary)"/>
+      <xsl:variable name="primary" select="normalize-space(primary)"/>
+      <xsl:variable name="secondary" select="normalize-space(secondary)"/>
+      <xsl:variable name="tertiary" select="normalize-space(tertiary)"/>
       
       <xsl:variable name="text">
         <xsl:value-of select="$primary"/>
-        <xsl:if test="d:secondary">
+        <xsl:if test="secondary">
           <xsl:text>, </xsl:text>
           <xsl:value-of select="$secondary"/>
         </xsl:if>
-        <xsl:if test="d:tertiary">
+        <xsl:if test="tertiary">
           <xsl:text>, </xsl:text>
           <xsl:value-of select="$tertiary"/>
         </xsl:if>
       </xsl:variable>
       
-      <xsl:if test="d:secondary">
-        <xsl:if test="not(//d:indexterm[normalize-space(d:primary)=$primary and not(d:secondary)])">
+      <xsl:if test="secondary">
+        <xsl:if test="not(//indexterm[normalize-space(primary)=$primary and not(secondary)])">
           <xsl:call-template name="write.indexterm">
             <xsl:with-param name="text" select="$primary"/>
           </xsl:call-template>
         </xsl:if>
       </xsl:if>
 
-      <xsl:if test="d:tertiary">
-        <xsl:if test="not(//d:indexterm[normalize-space(d:primary)=$primary and                                        normalize-space(d:secondary)=$secondary and not(d:tertiary)])">
+      <xsl:if test="tertiary">
+        <xsl:if test="not(//indexterm[normalize-space(primary)=$primary and                                        normalize-space(secondary)=$secondary and not(tertiary)])">
           <xsl:call-template name="write.indexterm">
             <xsl:with-param name="text" select="concat($primary, ', ', $secondary)"/>
           </xsl:call-template>
@@ -839,20 +851,20 @@ Enhanced decompilation=</xsl:text>
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:indexterm[@class='endofrange']" mode="hhk"/>
+<xsl:template match="indexterm[@class='endofrange']" mode="hhk"/>
 
-<xsl:template match="d:indexterm" mode="hhk">
-  <xsl:variable name="primary" select="normalize-space(d:primary)"/>
-  <xsl:variable name="secondary" select="normalize-space(d:secondary)"/>
-  <xsl:variable name="tertiary" select="normalize-space(d:tertiary)"/>
+<xsl:template match="indexterm" mode="hhk">
+  <xsl:variable name="primary" select="normalize-space(primary)"/>
+  <xsl:variable name="secondary" select="normalize-space(secondary)"/>
+  <xsl:variable name="tertiary" select="normalize-space(tertiary)"/>
 
   <xsl:call-template name="write.indexterm.hhk">
     <xsl:with-param name="text" select="$primary"/>
-    <xsl:with-param name="seealso" select="d:seealso"/>
+    <xsl:with-param name="seealso" select="seealso"/>
   </xsl:call-template>
 
-  <xsl:if test="d:secondary">
-    <xsl:if test="not(//d:indexterm[normalize-space(d:primary)=$primary and not(d:secondary)])">
+  <xsl:if test="secondary">
+    <xsl:if test="not(//indexterm[normalize-space(primary)=$primary and not(secondary)])">
       <xsl:call-template name="write.indexterm.hhk">
         <!-- We must create fake entry when there is secondary without primary --> 
         <xsl:with-param name="text" select="$primary"/>
@@ -862,14 +874,14 @@ Enhanced decompilation=</xsl:text>
     <UL>
     <xsl:call-template name="write.indexterm.hhk">
       <xsl:with-param name="text" select="$secondary"/>
-      <xsl:with-param name="seealso" select="d:secondary/d:seealso"/>
+      <xsl:with-param name="seealso" select="secondary/seealso"/>
     </xsl:call-template>
-    <xsl:if test="d:tertiary">
+    <xsl:if test="tertiary">
       <UL><xsl:text>
 </xsl:text>
       <xsl:call-template name="write.indexterm.hhk">
         <xsl:with-param name="text" select="$tertiary"/>
-        <xsl:with-param name="seealso" select="d:tertiary/d:seealso"/>
+        <xsl:with-param name="seealso" select="tertiary/seealso"/>
       </xsl:call-template>
       </UL>
     </xsl:if>
@@ -891,7 +903,7 @@ Enhanced decompilation=</xsl:text>
     </param><xsl:text>
 </xsl:text>
 
-      <xsl:if test="not(d:seealso)">
+      <xsl:if test="not(seealso)">
         <xsl:variable name="href">
           <xsl:call-template name="href.target.with.base.dir"/>
         </xsl:variable>
@@ -915,7 +927,7 @@ Enhanced decompilation=</xsl:text>
 </xsl:text>
       </xsl:if>
 
-      <xsl:if test="d:seealso">
+      <xsl:if test="seealso">
         <param name="See Also">
           <xsl:attribute name="value">
           <xsl:value-of select="$seealso"/>
@@ -930,7 +942,7 @@ Enhanced decompilation=</xsl:text>
 
 <xsl:template name="nearest.title">
   <xsl:param name="object"/>
-  <xsl:apply-templates select="$object/ancestor-or-self::*[d:title][1]" mode="title.markup"/>
+  <xsl:apply-templates select="$object/ancestor-or-self::*[title][1]" mode="title.markup"/>
 </xsl:template>
 
 <!-- ==================================================================== -->
@@ -1069,7 +1081,7 @@ Enhanced decompilation=</xsl:text>
 <!-- Modification to standard HTML stylesheets -->
 
 <!-- There are links from ToC pane to bibliodivs, so there must be anchor -->
-<xsl:template match="d:bibliodiv/d:title">
+<xsl:template match="bibliodiv/title">
   <h3 class="{name(.)}">
     <xsl:call-template name="anchor">
       <xsl:with-param name="node" select=".."/>

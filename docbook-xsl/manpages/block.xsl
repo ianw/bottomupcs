@@ -1,12 +1,11 @@
 <?xml version='1.0'?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:exsl="http://exslt.org/common"
-                exclude-result-prefixes="exsl d"
+                xmlns:exsl="http://exslt.org/common"
+                exclude-result-prefixes="exsl"
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: block.xsl 8703 2010-07-06 20:57:06Z nwalsh $
+     $Id: block.xsl 9980 2015-08-24 20:23:37Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -17,7 +16,7 @@ xmlns:exsl="http://exslt.org/common"
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:caution|d:important|d:note|d:tip|d:warning">
+<xsl:template match="caution|important|note|tip|warning">
   <xsl:call-template name="roff-if-start">
     <xsl:with-param name="condition">n</xsl:with-param>
   </xsl:call-template>
@@ -40,9 +39,9 @@ xmlns:exsl="http://exslt.org/common"
   <xsl:text>.RE&#10;</xsl:text>
 </xsl:template> 
 
-<xsl:template match="d:formalpara">
+<xsl:template match="formalpara">
   <xsl:variable name="title.wrapper">
-    <xsl:value-of select="normalize-space(d:title[1])"/>
+    <xsl:value-of select="normalize-space(title[1])"/>
   </xsl:variable>
   <xsl:text>.PP&#10;</xsl:text>
   <!-- * don't put linebreak after head; instead render it as a "run in" -->
@@ -55,12 +54,12 @@ xmlns:exsl="http://exslt.org/common"
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:formalpara/d:para">
+<xsl:template match="formalpara/para">
   <xsl:call-template name="mixed-block"/>
   <xsl:text>&#10;</xsl:text>
 </xsl:template>
 
-<xsl:template match="d:para">
+<xsl:template match="para">
   <!-- * FIXME: Need to extract the ancestor::footnote, etc. checking and -->
   <!-- * move to named template so that we can call it from templates for -->
   <!-- * other block elements also -->
@@ -70,11 +69,11 @@ xmlns:exsl="http://exslt.org/common"
     <!-- * anything at all to mark its start). -->
     <!-- * FIXME: *blurb checking should not be munged in here the way -->
     <!-- * it currently is; this probably breaks blurb indenting. -->
-    <xsl:when test="ancestor::d:footnote or
-                    ancestor::d:annotation or
-                    ancestor::d:authorblurb or
-                    ancestor::d:personblurb or
-                    ancestor::d:callout">
+    <xsl:when test="ancestor::footnote or
+                    ancestor::annotation or
+                    ancestor::authorblurb or
+                    ancestor::personblurb or
+                    ancestor::callout">
       <xsl:if test="preceding-sibling::*[not(name() ='')]">
         <xsl:text>.sp</xsl:text>
         <xsl:text>&#10;</xsl:text>
@@ -88,10 +87,10 @@ xmlns:exsl="http://exslt.org/common"
     </xsl:otherwise>
   </xsl:choose>
   <xsl:call-template name="mixed-block"/>
-    <xsl:if test="ancestor::d:footnote or
-                  ancestor::d:annotation or
-                  ancestor::d:authorblurb or
-                  ancestor::d:personblurb">
+    <xsl:if test="ancestor::footnote or
+                  ancestor::annotation or
+                  ancestor::authorblurb or
+                  ancestor::personblurb">
       <xsl:if test="preceding-sibling::*[not(name() ='')]">
         <xsl:text>&#10;</xsl:text>
         <xsl:text>.RE</xsl:text>
@@ -101,13 +100,13 @@ xmlns:exsl="http://exslt.org/common"
   <xsl:text>&#10;</xsl:text>
 </xsl:template>
 
-<xsl:template match="d:simpara">
+<xsl:template match="simpara">
   <xsl:choose>
-    <xsl:when test="ancestor::d:footnote or
-                    ancestor::d:annotation or
-                    ancestor::d:authorblurb or
-                    ancestor::d:personblurb or
-                    ancestor::d:callout">
+    <xsl:when test="ancestor::footnote or
+                    ancestor::annotation or
+                    ancestor::authorblurb or
+                    ancestor::personblurb or
+                    ancestor::callout">
       <xsl:if test="preceding-sibling::*[not(name() ='')]">
         <xsl:text>.sp</xsl:text>
         <xsl:text>&#10;</xsl:text>
@@ -130,8 +129,8 @@ xmlns:exsl="http://exslt.org/common"
 <!-- ==================================================================== -->
 
 <!-- * Yes, address, synopsis, and funcsynopsisinfo are verbatim environments. -->
-<xsl:template match="d:literallayout|d:programlisting|d:screen|
-                     d:address|d:synopsis|d:funcsynopsisinfo">
+<xsl:template match="literallayout|programlisting|screen|
+                     address|synopsis|funcsynopsisinfo">
   <xsl:param name="indent">
     <!-- * Only indent this verbatim if $man.indent.verbatims is -->
     <!-- * non-zero and it is not a child of a *synopsis element or a -->
@@ -140,6 +139,7 @@ xmlns:exsl="http://exslt.org/common"
       and not(substring(local-name(..),
       string-length(local-name(..))-7) = 'synopsis')
       and not(ancestor::*[local-name() = 'refsynopsisdiv'])
+      and not(ancestor::*[local-name() = 'term'])
       ">
       <xsl:text>Yes</xsl:text>
     </xsl:if>
@@ -166,8 +166,8 @@ xmlns:exsl="http://exslt.org/common"
     <!-- * -->
     <!-- * If it is not within a mixed-content parent, then we need to add a -->
     <!-- * line space before it. -->
-    <xsl:when test="parent::d:caption|parent::d:entry|parent::d:para|
-                    parent::d:td|parent::d:th" /> <!-- do nothing -->
+    <xsl:when test="parent::caption|parent::entry|parent::para|
+                    parent::td|parent::th" /> <!-- do nothing -->
     <xsl:otherwise>
       <xsl:text>&#10;</xsl:text>
       <xsl:text>.sp&#10;</xsl:text>
@@ -186,7 +186,7 @@ xmlns:exsl="http://exslt.org/common"
     <xsl:call-template name="roff-if-end"/>
   </xsl:if>
   <xsl:choose>
-    <xsl:when test="self::d:funcsynopsisinfo">
+    <xsl:when test="self::funcsynopsisinfo">
       <!-- * All Funcsynopsisinfo content is by default rendered in bold, -->
       <!-- * because the man(7) man page says this: -->
       <!-- * -->
@@ -220,7 +220,7 @@ xmlns:exsl="http://exslt.org/common"
       <xsl:call-template name="verbatim-block-start"/>
       <xsl:text>.nf&#10;</xsl:text>
       <xsl:choose>
-        <xsl:when test="self::d:literallayout|self::d:programlisting|self::d:screen
+        <xsl:when test="self::literallayout|self::programlisting|self::screen
           and not(ancestor::*[local-name() = 'refsynopsisdiv'])
           and not($man.output.better.ps.enabled = 0)
           ">
@@ -292,32 +292,32 @@ xmlns:exsl="http://exslt.org/common"
   <!-- * if this verbatim environment has a following sibling node, -->
   <!-- * output a line of space to separate the content -->
   <xsl:if test="following-sibling::text()
-    |following-sibling::d:para
-    |following-sibling::d:simpara">
+    |following-sibling::para
+    |following-sibling::simpara">
     <xsl:text>.sp&#10;</xsl:text>
   </xsl:if>
 </xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:table|d:informaltable">
+<xsl:template match="table|informaltable">
   <xsl:apply-templates select="." mode="to.tbl">
     <!--* we call the to.tbl mode with the "source" param so that we can -->
     <!--* preserve the context information and pass it down to the -->
     <!--* named templates that do the actual table processing -->
-    <xsl:with-param name="source" select="ancestor::d:refentry/d:refnamediv[1]/d:refname[1]"/>
+    <xsl:with-param name="source" select="ancestor::refentry/refnamediv[1]/refname[1]"/>
   </xsl:apply-templates>
 </xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:informalexample">
+<xsl:template match="informalexample">
   <xsl:apply-templates/>
 </xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:figure|d:example">
+<xsl:template match="figure|example">
   <xsl:variable name="param.placement"
                 select="substring-after(normalize-space($formal.title.placement),
                         concat(local-name(.), ' '))"/>
@@ -343,7 +343,7 @@ xmlns:exsl="http://exslt.org/common"
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:mediaobject">
+<xsl:template match="mediaobject">
   <xsl:text>.sp</xsl:text>
   <xsl:text>&#10;</xsl:text>
   <xsl:text>.RS</xsl:text> 
@@ -357,19 +357,19 @@ xmlns:exsl="http://exslt.org/common"
   <xsl:text>.RE&#10;</xsl:text>
 </xsl:template>
 
-<xsl:template match="d:imageobject">
+<xsl:template match="imageobject">
   <xsl:text>[IMAGE]</xsl:text>
   <xsl:apply-templates/>
   <xsl:text>&#10;</xsl:text>
 </xsl:template>
 
-<xsl:template match="d:textobject[parent::d:inlinemediaobject]">
+<xsl:template match="textobject[parent::inlinemediaobject]">
   <xsl:text>[</xsl:text>
   <xsl:value-of select="."/>
   <xsl:text>]</xsl:text>
 </xsl:template>
 
-<xsl:template match="d:textobject">
+<xsl:template match="textobject">
   <xsl:apply-templates/>
 </xsl:template>
 
@@ -407,6 +407,6 @@ xmlns:exsl="http://exslt.org/common"
 <!-- ==================================================================== -->
 
 <!-- * suppress abstract -->
-<xsl:template match="d:abstract"/>
+<xsl:template match="abstract"/>
 
 </xsl:stylesheet>

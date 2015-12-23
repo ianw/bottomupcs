@@ -1,8 +1,7 @@
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 
-  xmlns:d="http://docbook.org/ns/docbook"
-xmlns:sfa="http://developer.apple.com/namespaces/sfa"
+  xmlns:sfa="http://developer.apple.com/namespaces/sfa"
   xmlns:sf="http://developer.apple.com/namespaces/sf"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:appsl="http://developer.apple.com/namespaces/sl"
@@ -55,7 +54,7 @@ xmlns:sfa="http://developer.apple.com/namespaces/sfa"
             <xsl:call-template name='rnd:find-style'/>
           </xsl:variable>
           <xsl:if test='$style-name != "" and
-                        $style-name != "d:para"'>
+                        $style-name != "para"'>
             <xsl:attribute name='rnd:style'>
               <xsl:value-of select='$style-name'/>
             </xsl:attribute>
@@ -69,7 +68,7 @@ xmlns:sfa="http://developer.apple.com/namespaces/sfa"
 
   <xsl:template match='sf:span'>
     <xsl:variable name='style-name'
-		  select='key("d:styles", @sf:style)/self::sf:characterstyle/@sf:name'/>
+		  select='key("styles", @sf:style)/self::sf:characterstyle/@sf:name'/>
 
     <xsl:variable name='char-style'>
       <xsl:call-template name='rnd:find-style'>
@@ -90,8 +89,8 @@ xmlns:sfa="http://developer.apple.com/namespaces/sfa"
       <xsl:when test='$style-name = ""'>
         <xsl:apply-templates/>
       </xsl:when>
-      <xsl:when test='$char-style = "d:superscript" or
-                      $char-style = "d:subscript"'>
+      <xsl:when test='$char-style = "superscript" or
+                      $char-style = "subscript"'>
         <xsl:element name='{$char-style}'
           namespace='http://docbook.org/ns/docbook'>
           <xsl:apply-templates/>
@@ -105,7 +104,7 @@ xmlns:sfa="http://developer.apple.com/namespaces/sfa"
               <xsl:attribute name='role'>bold</xsl:attribute>
             </xsl:when>
             <xsl:when test='$char-style != "" and
-                            $char-style != "d:emphasis"'>
+                            $char-style != "emphasis"'>
               <xsl:attribute name='rnd:style'>
                 <xsl:value-of select='$char-style'/>
               </xsl:attribute>
@@ -120,7 +119,7 @@ xmlns:sfa="http://developer.apple.com/namespaces/sfa"
 
   <xsl:template match='*' mode='attribute'>
     <xsl:variable name='style-name'
-		  select='key("d:styles", @sf:style)/self::sf:characterstyle/@sf:name'/>
+		  select='key("styles", @sf:style)/self::sf:characterstyle/@sf:name'/>
 
     <xsl:if test='$style-name = "attribute-value"'>
       <xsl:apply-templates/>
@@ -142,13 +141,13 @@ xmlns:sfa="http://developer.apple.com/namespaces/sfa"
 
   <xsl:template match='sf:attachment-ref'>
     <xsl:if test='@sf:kind = "tabular-attachment"'>
-      <xsl:apply-templates select='key("d:ids", @sfa:IDREF)'/>
+      <xsl:apply-templates select='key("ids", @sfa:IDREF)'/>
     </xsl:if>
   </xsl:template>
 
   <xsl:template match='sf:attachment[@sf:kind = "tabular-attachment"]'>
     <xsl:variable name='model'
-      select='key("d:ids", sf:tabular-info/sf:tabular-model-ref/@sfa:IDREF)'/>
+      select='key("ids", sf:tabular-info/sf:tabular-model-ref/@sfa:IDREF)'/>
 
     <xsl:variable name='num-cols' select='$model/sf:grid/@sf:numcols'/>
     <xsl:variable name='num-rows' select='$model/sf:grid/@sf:numrows'/>
@@ -332,19 +331,19 @@ xmlns:sfa="http://developer.apple.com/namespaces/sfa"
   <xsl:template name='rnd:find-style'>
     <xsl:param name='ident' select='@sf:style'/>
     <xsl:param name='para-style-name'
-	       select='key("d:styles", $ident)/self::sf:paragraphstyle/@sf:name'/>
+	       select='key("styles", $ident)/self::sf:paragraphstyle/@sf:name'/>
     <xsl:param name='char-style-name'
-	       select='key("d:styles", $ident)/self::sf:characterstyle/@sf:name'/>
+	       select='key("styles", $ident)/self::sf:characterstyle/@sf:name'/>
 
     <xsl:choose>
       <xsl:when test='$ident = "paragraph-style-default"'/>
       <xsl:when test='$para-style-name != ""'>
 	<xsl:value-of select='$para-style-name'/>
       </xsl:when>
-      <xsl:when test='key("d:styles", $ident)/self::sf:characterstyle/sf:property-map/sf:superscript/sf:number/@sfa:number = "1"'>superscript</xsl:when>
-      <xsl:when test='key("d:styles", $ident)/self::sf:characterstyle/sf:property-map/sf:subscript/sf:number/@sfa:number = "1"'>subscript</xsl:when>
+      <xsl:when test='key("styles", $ident)/self::sf:characterstyle/sf:property-map/sf:superscript/sf:number/@sfa:number = "1"'>superscript</xsl:when>
+      <xsl:when test='key("styles", $ident)/self::sf:characterstyle/sf:property-map/sf:subscript/sf:number/@sfa:number = "1"'>subscript</xsl:when>
       <xsl:when test='$char-style-name != "" or
-		      key("d:styles", $ident)/self::sf:characterstyle/sf:property-map/*'>
+		      key("styles", $ident)/self::sf:characterstyle/sf:property-map/*'>
 	<xsl:value-of select='$char-style-name'/>
       </xsl:when>
     </xsl:choose>

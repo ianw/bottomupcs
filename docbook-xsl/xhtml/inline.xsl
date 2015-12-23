@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="ASCII"?>
 <!--This file was created automatically by html2xhtml-->
 <!--from the HTML stylesheets.-->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:d="http://docbook.org/ns/docbook"
-xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.UnwrapLinks" xmlns="http://www.w3.org/1999/xhtml" exclude-result-prefixes="xlink suwl d" version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.UnwrapLinks" xmlns="http://www.w3.org/1999/xhtml" exclude-result-prefixes="xlink suwl" version="1.0">
 
 <!-- ********************************************************************
-     $Id: inline.xsl 9663 2012-11-06 19:09:16Z bobstayton $
+     $Id: inline.xsl 9963 2015-05-20 18:37:42Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -14,8 +13,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
 
      ******************************************************************** -->
 
-<xsl:key name="glossentries" match="d:glossentry" use="normalize-space(d:glossterm)"/>
-<xsl:key name="glossentries" match="d:glossentry" use="normalize-space(d:glossterm/@baseform)"/>
+<xsl:key name="glossentries" match="glossentry" use="normalize-space(glossterm)"/>
+<xsl:key name="glossentries" match="glossentry" use="normalize-space(glossterm/@baseform)"/>
 
 <xsl:template name="simple.xlink">
   <xsl:param name="node" select="."/>
@@ -24,6 +23,30 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   </xsl:param>
   <xsl:param name="linkend" select="$node/@linkend"/>
   <xsl:param name="xhref" select="$node/@xlink:href"/>
+
+  <!-- check for nested links, which are undefined in the output -->
+  <xsl:if test="($linkend or $xhref) and $node/ancestor::*[@xlink:href or @linkend]">
+    <xsl:message>
+      <xsl:text>WARNING: nested link may be undefined in output: </xsl:text>
+      <xsl:text>&lt;</xsl:text>
+      <xsl:value-of select="name($node)"/>
+      <xsl:text> </xsl:text>
+      <xsl:choose>
+        <xsl:when test="$linkend">
+          <xsl:text>@linkend = '</xsl:text>
+          <xsl:value-of select="$linkend"/>
+          <xsl:text>'&gt;</xsl:text>
+        </xsl:when>
+        <xsl:when test="$xhref">
+          <xsl:text>@xlink:href = '</xsl:text>
+          <xsl:value-of select="$xhref"/>
+          <xsl:text>'&gt;</xsl:text>
+        </xsl:when>
+      </xsl:choose>
+      <xsl:text> nested inside parent element </xsl:text>
+      <xsl:value-of select="name($node/parent::*)"/>
+    </xsl:message>
+  </xsl:if>
 
   <!-- Support for @xlink:show -->
   <xsl:variable name="target.show">
@@ -92,7 +115,11 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
               <xsl:otherwise>
                 <a>
                   <xsl:apply-templates select="." mode="common.html.attributes"/>
+                  <!-- id attribute goes on the element calling
+                  simple.xlink, not on the anchor element, so
+                  this is commented out:
                   <xsl:call-template name="id.attribute"/>
+                  -->
 
                   <xsl:attribute name="href">
                     <xsl:call-template name="href.target">
@@ -199,53 +226,58 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
 
 <xsl:template name="inline.charseq">
   <xsl:param name="content">
+    <xsl:apply-templates/>
+  </xsl:param>
+
+  <xsl:param name="contentwithlink">
     <xsl:call-template name="anchor"/>
     <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:apply-templates/>
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$content"/>
     </xsl:call-template>
   </xsl:param>
+
   <!-- * if you want output from the inline.charseq template wrapped in -->
   <!-- * something other than a Span, call the template with some value -->
   <!-- * for the 'wrapper-name' param -->
   <xsl:param name="wrapper-name">span</xsl:param>
   <xsl:element name="{$wrapper-name}" namespace="http://www.w3.org/1999/xhtml">
-    <xsl:attribute name="class">
-      <xsl:value-of select="local-name(.)"/>
-    </xsl:attribute>
+    <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
-    <xsl:call-template name="dir"/>
     <xsl:call-template name="generate.html.title"/>
-    <xsl:copy-of select="$content"/>
+    <xsl:copy-of select="$contentwithlink"/>
     <xsl:call-template name="apply-annotations"/>
   </xsl:element>
 </xsl:template>
 
 <xsl:template name="inline.monoseq">
   <xsl:param name="content">
+    <xsl:apply-templates/>
+  </xsl:param>
+
+  <xsl:param name="contentwithlink">
     <xsl:call-template name="anchor"/>
     <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:apply-templates/>
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$content"/>
     </xsl:call-template>
   </xsl:param>
+
   <code>
     <xsl:apply-templates select="." mode="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
-    <xsl:copy-of select="$content"/>
+    <xsl:copy-of select="$contentwithlink"/>
     <xsl:call-template name="apply-annotations"/>
   </code>
 </xsl:template>
 
 <xsl:template name="inline.boldseq">
   <xsl:param name="content">
+    <xsl:apply-templates/>
+  </xsl:param>
+
+  <xsl:param name="contentwithlink">
     <xsl:call-template name="anchor"/>
     <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:apply-templates/>
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$content"/>
     </xsl:call-template>
   </xsl:param>
 
@@ -256,11 +288,11 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
     <!-- don't put <strong> inside figure, example, or table titles -->
     <xsl:choose>
       <xsl:when test="local-name(..) = 'title'                       and (local-name(../..) = 'figure'                       or local-name(../..) = 'example'                       or local-name(../..) = 'table')">
-        <xsl:copy-of select="$content"/>
+        <xsl:copy-of select="$contentwithlink"/>
       </xsl:when>
       <xsl:otherwise>
         <strong>
-          <xsl:copy-of select="$content"/>
+          <xsl:copy-of select="$contentwithlink"/>
         </strong>
       </xsl:otherwise>
     </xsl:choose>
@@ -270,30 +302,36 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
 
 <xsl:template name="inline.italicseq">
   <xsl:param name="content">
+    <xsl:apply-templates/>
+  </xsl:param>
+
+  <xsl:param name="contentwithlink">
     <xsl:call-template name="anchor"/>
     <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:apply-templates/>
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$content"/>
     </xsl:call-template>
   </xsl:param>
+
   <em>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
-    <xsl:copy-of select="$content"/>
+    <xsl:copy-of select="$contentwithlink"/>
     <xsl:call-template name="apply-annotations"/>
   </em>
 </xsl:template>
 
 <xsl:template name="inline.boldmonoseq">
   <xsl:param name="content">
+    <xsl:apply-templates/>
+  </xsl:param>
+
+  <xsl:param name="contentwithlink">
     <xsl:call-template name="anchor"/>
     <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:apply-templates/>
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$content"/>
     </xsl:call-template>
   </xsl:param>
+
   <!-- don't put <strong> inside figure, example, or table titles -->
   <!-- or other titles that may already be represented with <strong>'s. -->
   <xsl:choose>
@@ -301,7 +339,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
       <code>
         <xsl:call-template name="common.html.attributes"/>
         <xsl:call-template name="id.attribute"/>
-        <xsl:copy-of select="$content"/>
+        <xsl:copy-of select="$contentwithlink"/>
         <xsl:call-template name="apply-annotations"/>
       </code>
     </xsl:when>
@@ -312,7 +350,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
         <code>
           <xsl:call-template name="generate.html.title"/>
           <xsl:call-template name="dir"/>
-          <xsl:copy-of select="$content"/>
+          <xsl:copy-of select="$contentwithlink"/>
         </code>
         <xsl:call-template name="apply-annotations"/>
       </strong>
@@ -322,20 +360,23 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
 
 <xsl:template name="inline.italicmonoseq">
   <xsl:param name="content">
+    <xsl:apply-templates/>
+  </xsl:param>
+
+  <xsl:param name="contentwithlink">
     <xsl:call-template name="anchor"/>
     <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:apply-templates/>
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$content"/>
     </xsl:call-template>
   </xsl:param>
+
   <em>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
     <code>
       <xsl:call-template name="generate.html.title"/>
       <xsl:call-template name="dir"/>
-      <xsl:copy-of select="$content"/>
+      <xsl:copy-of select="$contentwithlink"/>
       <xsl:call-template name="apply-annotations"/>
     </code>
   </em>
@@ -343,36 +384,42 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
 
 <xsl:template name="inline.superscriptseq">
   <xsl:param name="content">
+    <xsl:apply-templates/>
+  </xsl:param>
+
+  <xsl:param name="contentwithlink">
     <xsl:call-template name="anchor"/>
     <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:apply-templates/>
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$content"/>
     </xsl:call-template>
   </xsl:param>
+
   <sup>
     <xsl:call-template name="generate.html.title"/>
     <xsl:call-template name="id.attribute"/>
     <xsl:call-template name="dir"/>
-    <xsl:copy-of select="$content"/>
+    <xsl:copy-of select="$contentwithlink"/>
     <xsl:call-template name="apply-annotations"/>
   </sup>
 </xsl:template>
 
 <xsl:template name="inline.subscriptseq">
   <xsl:param name="content">
+    <xsl:apply-templates/>
+  </xsl:param>
+
+  <xsl:param name="contentwithlink">
     <xsl:call-template name="anchor"/>
     <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:apply-templates/>
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$content"/>
     </xsl:call-template>
   </xsl:param>
+
   <sub>
     <xsl:call-template name="generate.html.title"/>
     <xsl:call-template name="id.attribute"/>
     <xsl:call-template name="dir"/>
-    <xsl:copy-of select="$content"/>
+    <xsl:copy-of select="$contentwithlink"/>
     <xsl:call-template name="apply-annotations"/>
   </sub>
 </xsl:template>
@@ -380,13 +427,15 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
 <!-- ==================================================================== -->
 <!-- some special cases -->
 
-<xsl:template match="d:author">
+<xsl:template match="author">
   <xsl:param name="content">
+    <xsl:call-template name="person.name"/>
+  </xsl:param>
+
+  <xsl:param name="contentwithlink">
     <xsl:call-template name="anchor"/>
     <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:call-template name="person.name"/>
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$content"/>
     </xsl:call-template>
     <xsl:call-template name="apply-annotations"/>
   </xsl:param>
@@ -394,17 +443,19 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   <span>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
-    <xsl:copy-of select="$content"/>
+    <xsl:copy-of select="$contentwithlink"/>
   </span>
 </xsl:template>
 
-<xsl:template match="d:editor">
+<xsl:template match="editor">
   <xsl:param name="content">
+    <xsl:call-template name="person.name"/>
+  </xsl:param>
+
+  <xsl:param name="contentwithlink">
     <xsl:call-template name="anchor"/>
     <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:call-template name="person.name"/>
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$content"/>
     </xsl:call-template>
     <xsl:call-template name="apply-annotations"/>
   </xsl:param>
@@ -412,17 +463,19 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   <span>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
-    <xsl:copy-of select="$content"/>
+    <xsl:copy-of select="$contentwithlink"/>
   </span>
 </xsl:template>
 
-<xsl:template match="d:othercredit">
+<xsl:template match="othercredit">
   <xsl:param name="content">
+    <xsl:call-template name="person.name"/>
+  </xsl:param>
+
+  <xsl:param name="contentwithlink">
     <xsl:call-template name="anchor"/>
     <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:call-template name="person.name"/>
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$content"/>
     </xsl:call-template>
     <xsl:call-template name="apply-annotations"/>
   </xsl:param>
@@ -430,92 +483,92 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   <span>
     <xsl:call-template name="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
-    <xsl:copy-of select="$content"/>
+    <xsl:copy-of select="$contentwithlink"/>
   </span>
 </xsl:template>
 
-<xsl:template match="d:authorinitials">
+<xsl:template match="authorinitials">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:accel">
+<xsl:template match="accel">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:action">
+<xsl:template match="action">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:application">
+<xsl:template match="application">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:classname">
+<xsl:template match="classname">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
-<xsl:template match="d:exceptionname">
+<xsl:template match="exceptionname">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
-<xsl:template match="d:interfacename">
+<xsl:template match="interfacename">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
-<xsl:template match="d:methodname">
+<xsl:template match="methodname">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
-<xsl:template match="d:command">
+<xsl:template match="command">
   <xsl:call-template name="inline.boldseq"/>
 </xsl:template>
 
-<xsl:template match="d:computeroutput">
+<xsl:template match="computeroutput">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
-<xsl:template match="d:constant">
+<xsl:template match="constant">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
-<xsl:template match="d:database">
+<xsl:template match="database">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:date">
+<xsl:template match="date">
   <!-- should this support locale-specific formatting? how? -->
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:errorcode">
+<xsl:template match="errorcode">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:errorname">
+<xsl:template match="errorname">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:errortype">
+<xsl:template match="errortype">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:errortext">
+<xsl:template match="errortext">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:envar">
+<xsl:template match="envar">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
-<xsl:template match="d:filename">
+<xsl:template match="filename">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
-<xsl:template match="d:function">
+<xsl:template match="function">
   <xsl:choose>
-    <xsl:when test="$function.parens != '0'                     and (d:parameter or d:function or d:replaceable)">
+    <xsl:when test="$function.parens != '0'                     and (parameter or function or replaceable)">
       <xsl:variable name="nodes" select="text()|*"/>
       <xsl:call-template name="inline.monoseq">
         <xsl:with-param name="content">
@@ -536,57 +589,57 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:function/d:parameter" priority="2">
+<xsl:template match="function/parameter" priority="2">
   <xsl:call-template name="inline.italicmonoseq"/>
   <xsl:if test="$function.parens != 0 and following-sibling::*">
     <xsl:text>, </xsl:text>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:function/d:replaceable" priority="2">
+<xsl:template match="function/replaceable" priority="2">
   <xsl:call-template name="inline.italicmonoseq"/>
   <xsl:if test="$function.parens != 0 and following-sibling::*">
     <xsl:text>, </xsl:text>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:guibutton">
+<xsl:template match="guibutton">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:guiicon">
+<xsl:template match="guiicon">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:guilabel">
+<xsl:template match="guilabel">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:guimenu">
+<xsl:template match="guimenu">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:guimenuitem">
+<xsl:template match="guimenuitem">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:guisubmenu">
+<xsl:template match="guisubmenu">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:hardware">
+<xsl:template match="hardware">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:interface">
+<xsl:template match="interface">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:interfacedefinition">
+<xsl:template match="interfacedefinition">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:keycap">
+<xsl:template match="keycap">
   <xsl:choose>
     <xsl:when test="@function and normalize-space(.) = ''">
       <xsl:call-template name="inline.boldseq">
@@ -604,103 +657,103 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:keycode">
+<xsl:template match="keycode">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:keysym">
+<xsl:template match="keysym">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:literal">
+<xsl:template match="literal">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
-<xsl:template match="d:code">
+<xsl:template match="code">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
-<xsl:template match="d:medialabel">
+<xsl:template match="medialabel">
   <xsl:call-template name="inline.italicseq"/>
 </xsl:template>
 
-<xsl:template match="d:shortcut">
+<xsl:template match="shortcut">
   <xsl:call-template name="inline.boldseq"/>
 </xsl:template>
 
-<xsl:template match="d:mousebutton">
+<xsl:template match="mousebutton">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:option">
+<xsl:template match="option">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
-<xsl:template match="d:package">
+<xsl:template match="package">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:parameter">
+<xsl:template match="parameter">
   <xsl:call-template name="inline.italicmonoseq"/>
 </xsl:template>
 
-<xsl:template match="d:property">
+<xsl:template match="property">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:prompt">
+<xsl:template match="prompt">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
-<xsl:template match="d:replaceable" priority="1">
+<xsl:template match="replaceable" priority="1">
   <xsl:call-template name="inline.italicmonoseq"/>
 </xsl:template>
 
-<xsl:template match="d:returnvalue">
+<xsl:template match="returnvalue">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:structfield">
+<xsl:template match="structfield">
   <xsl:call-template name="inline.italicmonoseq"/>
 </xsl:template>
 
-<xsl:template match="d:structname">
+<xsl:template match="structname">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:symbol">
+<xsl:template match="symbol">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:systemitem">
+<xsl:template match="systemitem">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
-<xsl:template match="d:token">
+<xsl:template match="token">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:type">
+<xsl:template match="type">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:userinput">
+<xsl:template match="userinput">
   <xsl:call-template name="inline.boldmonoseq"/>
 </xsl:template>
 
-<xsl:template match="d:abbrev">
+<xsl:template match="abbrev">
   <xsl:call-template name="inline.charseq">
     <xsl:with-param name="wrapper-name">abbr</xsl:with-param>
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:acronym">
+<xsl:template match="acronym">
   <xsl:call-template name="inline.charseq">
     <xsl:with-param name="wrapper-name">acronym</xsl:with-param>
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:citerefentry">
+<xsl:template match="citerefentry">
   <xsl:choose>
     <xsl:when test="$citerefentry.link != '0'">
       <a>
@@ -723,13 +776,13 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
 
 <xsl:template name="x.generate.citerefentry.link">
   <xsl:text>http://example.com/cgi-bin/man.cgi?</xsl:text>
-  <xsl:value-of select="d:refentrytitle"/>
+  <xsl:value-of select="refentrytitle"/>
   <xsl:text>(</xsl:text>
-  <xsl:value-of select="d:manvolnum"/>
+  <xsl:value-of select="manvolnum"/>
   <xsl:text>)</xsl:text>
 </xsl:template>
 
-<xsl:template match="d:citetitle">
+<xsl:template match="citetitle">
   <xsl:choose>
     <xsl:when test="@pubwork = 'article'">
       <xsl:call-template name="gentext.startquote"/>
@@ -742,7 +795,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:emphasis">
+<xsl:template match="emphasis">
   <span>
     <xsl:call-template name="id.attribute"/>
     <xsl:choose>
@@ -785,18 +838,18 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   </span>
 </xsl:template>
 
-<xsl:template match="d:foreignphrase">
+<xsl:template match="foreignphrase">
   <span>
     <xsl:apply-templates select="." mode="common.html.attributes"/>
     <xsl:call-template name="inline.italicseq"/>
   </span>
 </xsl:template>
 
-<xsl:template match="d:markup">
+<xsl:template match="markup">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:phrase">
+<xsl:template match="phrase">
   <span>
     <xsl:call-template name="id.attribute"/>
     <xsl:call-template name="locale.html.attributes"/>
@@ -822,7 +875,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   </span>
 </xsl:template>
 
-<xsl:template match="d:quote">
+<xsl:template match="quote">
   <xsl:variable name="depth">
     <xsl:call-template name="dot.count">
       <xsl:with-param name="string">
@@ -847,30 +900,30 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   </span>
 </xsl:template>
 
-<xsl:template match="d:varname">
+<xsl:template match="varname">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
-<xsl:template match="d:wordasword">
+<xsl:template match="wordasword">
   <xsl:call-template name="inline.italicseq"/>
 </xsl:template>
 
-<xsl:template match="d:lineannotation">
+<xsl:template match="lineannotation">
   <em>
     <xsl:apply-templates select="." mode="common.html.attributes"/>
     <xsl:call-template name="inline.charseq"/>
   </em>
 </xsl:template>
 
-<xsl:template match="d:superscript">
+<xsl:template match="superscript">
   <xsl:call-template name="inline.superscriptseq"/>
 </xsl:template>
 
-<xsl:template match="d:subscript">
+<xsl:template match="subscript">
   <xsl:call-template name="inline.subscriptseq"/>
 </xsl:template>
 
-<xsl:template match="d:trademark">
+<xsl:template match="trademark">
   <xsl:call-template name="inline.charseq"/>
   <xsl:choose>
     <xsl:when test="@class = 'copyright'                     or @class = 'registered'">
@@ -889,13 +942,13 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:firstterm">
+<xsl:template match="firstterm">
   <xsl:call-template name="glossterm">
     <xsl:with-param name="firstterm" select="1"/>
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:glossterm" name="glossterm">
+<xsl:template match="glossterm" name="glossterm">
   <xsl:param name="firstterm" select="0"/>
 
   <!-- To avoid extra <a name=""> anchor from inline.italicseq -->
@@ -916,11 +969,6 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
         <xsl:when test="$target">
           <a>
             <xsl:apply-templates select="." mode="common.html.attributes"/>
-            <xsl:if test="@id or @xml:id">
-              <xsl:attribute name="id">
-                <xsl:value-of select="(@id|@xml:id)[1]"/>
-              </xsl:attribute>
-            </xsl:if>
 
             <xsl:attribute name="href">
               <xsl:call-template name="href.target">
@@ -949,12 +997,12 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
         </xsl:choose>
       </xsl:variable>
 
-      <xsl:variable name="cterm" select="(document($glossary.collection,.)//d:glossentry[d:glossterm=$term])[1]"/>
+      <xsl:variable name="cterm" select="(document($glossary.collection,.)//glossentry[glossterm=$term])[1]"/>
 
       <!-- HACK HACK HACK! But it works... -->
       <!-- You'd need to do more work if you wanted to chunk on glossdiv, though -->
 
-      <xsl:variable name="glossary" select="//d:glossary[@role='auto']"/>
+      <xsl:variable name="glossary" select="//glossary[@role='auto']"/>
 
       <xsl:if test="count($glossary) != 1">
         <xsl:message>
@@ -1059,7 +1107,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:termdef">
+<xsl:template match="termdef">
   <span>
     <xsl:apply-templates select="." mode="common.html.attributes"/>
     <xsl:call-template name="gentext.template">
@@ -1074,7 +1122,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   </span>
 </xsl:template>
 
-<xsl:template match="d:sgmltag|d:tag">
+<xsl:template match="sgmltag|tag">
   <xsl:call-template name="format.sgmltag"/>
 </xsl:template>
 
@@ -1160,7 +1208,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   </code>
 </xsl:template>
 
-<xsl:template match="d:email">
+<xsl:template match="email">
   <xsl:call-template name="inline.monoseq">
     <xsl:with-param name="content">
       <xsl:if test="not($email.delimiters.enabled = 0)">
@@ -1182,7 +1230,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:keycombo">
+<xsl:template match="keycombo">
   <xsl:variable name="action" select="@action"/>
   <xsl:variable name="joinchar">
     <xsl:choose>
@@ -1201,14 +1249,14 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   </xsl:for-each>
 </xsl:template>
 
-<xsl:template match="d:uri">
+<xsl:template match="uri">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:menuchoice">
-  <xsl:variable name="shortcut" select="./d:shortcut"/>
+<xsl:template match="menuchoice">
+  <xsl:variable name="shortcut" select="./shortcut"/>
   <xsl:call-template name="process.menuchoice"/>
   <xsl:if test="$shortcut">
     <xsl:text> (</xsl:text>
@@ -1218,7 +1266,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
 </xsl:template>
 
 <xsl:template name="process.menuchoice">
-  <xsl:param name="nodelist" select="d:guibutton|d:guiicon|d:guilabel|d:guimenu|d:guimenuitem|d:guisubmenu|d:interface"/><!-- not(shortcut) -->
+  <xsl:param name="nodelist" select="guibutton|guiicon|guilabel|guimenu|guimenuitem|guisubmenu|interface"/><!-- not(shortcut) -->
   <xsl:param name="count" select="1"/>
 
   <xsl:choose>
@@ -1251,20 +1299,20 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:optional">
+<xsl:template match="optional">
   <xsl:value-of select="$arg.choice.opt.open.str"/>
   <xsl:call-template name="inline.charseq"/>
   <xsl:value-of select="$arg.choice.opt.close.str"/>
 </xsl:template>
 
-<xsl:template match="d:citation">
+<xsl:template match="citation">
   <!-- todo: integrate with bibliography collection -->
-  <xsl:variable name="targets" select="(//d:biblioentry | //d:bibliomixed)[d:abbrev = string(current())]"/>
+  <xsl:variable name="targets" select="(//biblioentry | //bibliomixed)[abbrev = string(current())]"/>
   <xsl:variable name="target" select="$targets[1]"/>
 
   <xsl:choose>
     <!-- try automatic linking based on match to abbrev -->
-    <xsl:when test="$target and not(d:xref) and not(d:link)">
+    <xsl:when test="$target and not(xref) and not(link)">
 
       <xsl:text>[</xsl:text>
       <a>
@@ -1296,13 +1344,13 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:citebiblioid">
-  <xsl:variable name="targets" select="//*[d:biblioid = string(current())]"/>
+<xsl:template match="citebiblioid">
+  <xsl:variable name="targets" select="//*[biblioid = string(current())]"/>
   <xsl:variable name="target" select="$targets[1]"/>
 
   <xsl:choose>
     <!-- try automatic linking based on match to parent of biblioid -->
-    <xsl:when test="$target and not(d:xref) and not(d:link)">
+    <xsl:when test="$target and not(xref) and not(link)">
 
       <xsl:text>[</xsl:text>
       <a>
@@ -1326,19 +1374,19 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:biblioentry|d:bibliomixed" mode="citation">
-  <xsl:number from="d:bibliography" count="d:biblioentry|d:bibliomixed" level="any" format="1"/>
+<xsl:template match="biblioentry|bibliomixed" mode="citation">
+  <xsl:number from="bibliography" count="biblioentry|bibliomixed" level="any" format="1"/>
 </xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:comment[parent::d:answer|parent::d:appendix|parent::d:article|parent::d:bibliodiv|                                 parent::d:bibliography|parent::d:blockquote|parent::d:caution|parent::d:chapter|                                 parent::d:glossary|parent::d:glossdiv|parent::d:important|parent::d:index|                                 parent::d:indexdiv|parent::d:listitem|parent::d:note|parent::d:orderedlist|                                 parent::d:partintro|parent::d:preface|parent::d:procedure|parent::d:qandadiv|                                 parent::d:qandaset|parent::d:question|parent::d:refentry|parent::d:refnamediv|                                 parent::d:refsect1|parent::d:refsect2|parent::d:refsect3|parent::d:refsection|                                 parent::d:refsynopsisdiv|parent::d:sect1|parent::d:sect2|parent::d:sect3|parent::d:sect4|                                 parent::d:sect5|parent::d:section|parent::d:setindex|parent::d:sidebar|                                 parent::d:simplesect|parent::d:taskprerequisites|parent::d:taskrelated|                                 parent::d:tasksummary|parent::d:warning|parent::d:topic]|d:remark[parent::d:answer|parent::d:appendix|parent::d:article|parent::d:bibliodiv|                                 parent::d:bibliography|parent::d:blockquote|parent::d:caution|parent::d:chapter|                                 parent::d:glossary|parent::d:glossdiv|parent::d:important|parent::d:index|                                 parent::d:indexdiv|parent::d:listitem|parent::d:note|parent::d:orderedlist|                                 parent::d:partintro|parent::d:preface|parent::d:procedure|parent::d:qandadiv|                                 parent::d:qandaset|parent::d:question|parent::d:refentry|parent::d:refnamediv|                                 parent::d:refsect1|parent::d:refsect2|parent::d:refsect3|parent::d:refsection|                                 parent::d:refsynopsisdiv|parent::d:sect1|parent::d:sect2|parent::d:sect3|parent::d:sect4|                                 parent::d:sect5|parent::d:section|parent::d:setindex|parent::d:sidebar|                                 parent::d:simplesect|parent::d:taskprerequisites|parent::d:taskrelated|                                 parent::d:tasksummary|parent::d:warning|parent::d:topic]">
+<xsl:template match="comment[parent::answer|parent::appendix|parent::article|parent::bibliodiv|                                 parent::bibliography|parent::blockquote|parent::caution|parent::chapter|                                 parent::glossary|parent::glossdiv|parent::important|parent::index|                                 parent::indexdiv|parent::listitem|parent::note|parent::orderedlist|                                 parent::partintro|parent::preface|parent::procedure|parent::qandadiv|                                 parent::qandaset|parent::question|parent::refentry|parent::refnamediv|                                 parent::refsect1|parent::refsect2|parent::refsect3|parent::refsection|                                 parent::refsynopsisdiv|parent::sect1|parent::sect2|parent::sect3|parent::sect4|                                 parent::sect5|parent::section|parent::setindex|parent::sidebar|                                 parent::simplesect|parent::taskprerequisites|parent::taskrelated|                                 parent::tasksummary|parent::warning|parent::topic]|remark[parent::answer|parent::appendix|parent::article|parent::bibliodiv|                                 parent::bibliography|parent::blockquote|parent::caution|parent::chapter|                                 parent::glossary|parent::glossdiv|parent::important|parent::index|                                 parent::indexdiv|parent::listitem|parent::note|parent::orderedlist|                                 parent::partintro|parent::preface|parent::procedure|parent::qandadiv|                                 parent::qandaset|parent::question|parent::refentry|parent::refnamediv|                                 parent::refsect1|parent::refsect2|parent::refsect3|parent::refsection|                                 parent::refsynopsisdiv|parent::sect1|parent::sect2|parent::sect3|parent::sect4|                                 parent::sect5|parent::section|parent::setindex|parent::sidebar|                                 parent::simplesect|parent::taskprerequisites|parent::taskrelated|                                 parent::tasksummary|parent::warning|parent::topic]">
   <xsl:if test="$show.comments != 0">
     <p class="remark"><em><xsl:call-template name="inline.charseq"/></em></p>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:comment|d:remark">
+<xsl:template match="comment|remark">
   <xsl:if test="$show.comments != 0">
     <em><xsl:call-template name="inline.charseq"/></em>
   </xsl:if>
@@ -1346,7 +1394,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:productname">
+<xsl:template match="productname">
   <xsl:call-template name="inline.charseq"/>
   <xsl:if test="@class">
     <xsl:call-template name="dingbat">
@@ -1355,34 +1403,36 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:productnumber">
+<xsl:template match="productnumber">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:pob|d:street|d:city|d:state|d:postcode|d:country|d:otheraddr">
+<xsl:template match="pob|street|city|state|postcode|country|otheraddr">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="d:phone|d:fax">
+<xsl:template match="phone|fax">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
 <!-- in Addresses, for example -->
-<xsl:template match="d:honorific|d:firstname|d:surname|d:lineage|d:othername">
+<xsl:template match="honorific|firstname|surname|lineage|othername">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:person">
+<xsl:template match="person">
   <xsl:param name="content">
+    <xsl:apply-templates select="personname"/>
+  </xsl:param>
+
+  <xsl:param name="contentwithlink">
     <xsl:call-template name="anchor"/>
     <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:apply-templates select="d:personname"/>
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$content"/>
     </xsl:call-template>
     <xsl:call-template name="apply-annotations"/>
   </xsl:param>
@@ -1390,17 +1440,19 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   <span>
     <xsl:apply-templates select="." mode="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
-    <xsl:copy-of select="$content"/>
+    <xsl:copy-of select="$contentwithlink"/>
   </span>
 </xsl:template>
 
-<xsl:template match="d:personname">
+<xsl:template match="personname">
   <xsl:param name="content">
+    <xsl:call-template name="person.name"/>
+  </xsl:param>
+
+  <xsl:param name="contentwithlink">
     <xsl:call-template name="anchor"/>
     <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:call-template name="person.name"/>
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$content"/>
     </xsl:call-template>
     <xsl:call-template name="apply-annotations"/>
   </xsl:param>
@@ -1408,19 +1460,21 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   <span>
     <xsl:apply-templates select="." mode="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
-    <xsl:copy-of select="$content"/>
+    <xsl:copy-of select="$contentwithlink"/>
   </span>
 </xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:org">
+<xsl:template match="org">
   <xsl:param name="content">
+    <xsl:apply-templates/>
+  </xsl:param>
+
+  <xsl:param name="contentwithlink">
     <xsl:call-template name="anchor"/>
     <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:apply-templates/>
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$content"/>
     </xsl:call-template>
     <xsl:call-template name="apply-annotations"/>
   </xsl:param>
@@ -1428,17 +1482,19 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   <span>
     <xsl:apply-templates select="." mode="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
-    <xsl:copy-of select="$content"/>
+    <xsl:copy-of select="$contentwithlink"/>
   </span>
 </xsl:template>
 
-<xsl:template match="d:orgname">
+<xsl:template match="orgname">
   <xsl:param name="content">
+    <xsl:apply-templates/>
+  </xsl:param>
+
+  <xsl:param name="contentwithlink">
     <xsl:call-template name="anchor"/>
     <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:apply-templates/>
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$content"/>
     </xsl:call-template>
     <xsl:call-template name="apply-annotations"/>
   </xsl:param>
@@ -1446,34 +1502,19 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   <span>
     <xsl:apply-templates select="." mode="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
-    <xsl:copy-of select="$content"/>
+    <xsl:copy-of select="$contentwithlink"/>
   </span>
 </xsl:template>
 
-<xsl:template match="d:orgdiv">
+<xsl:template match="orgdiv">
   <xsl:param name="content">
-    <xsl:call-template name="anchor"/>
-    <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:apply-templates/>
-      </xsl:with-param>
-    </xsl:call-template>
-    <xsl:call-template name="apply-annotations"/>
+    <xsl:apply-templates/>
   </xsl:param>
 
-  <span>
-    <xsl:apply-templates select="." mode="common.html.attributes"/>
-    <xsl:copy-of select="$content"/>
-  </span>
-</xsl:template>
-
-<xsl:template match="d:affiliation">
-  <xsl:param name="content">
+  <xsl:param name="contentwithlink">
     <xsl:call-template name="anchor"/>
     <xsl:call-template name="simple.xlink">
-      <xsl:with-param name="content">
-        <xsl:call-template name="person.name"/>
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$content"/>
     </xsl:call-template>
     <xsl:call-template name="apply-annotations"/>
   </xsl:param>
@@ -1481,13 +1522,33 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:suwl="http://nwalsh.com/xslt/ex
   <span>
     <xsl:apply-templates select="." mode="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
-    <xsl:copy-of select="$content"/>
+    <xsl:copy-of select="$contentwithlink"/>
+  </span>
+</xsl:template>
+
+<xsl:template match="affiliation">
+  <xsl:param name="content">
+    <xsl:call-template name="person.name"/>
+  </xsl:param>
+
+  <xsl:param name="contentwithlink">
+    <xsl:call-template name="anchor"/>
+    <xsl:call-template name="simple.xlink">
+      <xsl:with-param name="content" select="$content"/>
+    </xsl:call-template>
+    <xsl:call-template name="apply-annotations"/>
+  </xsl:param>
+
+  <span>
+    <xsl:apply-templates select="." mode="common.html.attributes"/>
+    <xsl:call-template name="id.attribute"/>
+    <xsl:copy-of select="$contentwithlink"/>
   </span>
 </xsl:template>
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:beginpage">
+<xsl:template match="beginpage">
   <!-- does nothing; this *is not* markup to force a page break. -->
 </xsl:template>
 

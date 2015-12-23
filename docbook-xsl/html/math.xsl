@@ -1,8 +1,7 @@
 <?xml version='1.0'?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:mml="http://www.w3.org/1998/Math/MathML"
-                exclude-result-prefixes="mml d"
+                xmlns:mml="http://www.w3.org/1998/Math/MathML"
+                exclude-result-prefixes="mml"
                 version='1.0'>
 
 <!-- ********************************************************************
@@ -15,14 +14,14 @@ xmlns:mml="http://www.w3.org/1998/Math/MathML"
 
      ******************************************************************** -->
 
-<xsl:template match="d:inlineequation">
+<xsl:template match="inlineequation">
   <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="d:alt">
+<xsl:template match="alt">
 </xsl:template>
 
-<xsl:template match="d:mathphrase">
+<xsl:template match="mathphrase">
   <span>
     <xsl:apply-templates select="." mode="common.html.attributes"/>
     <xsl:call-template name="id.attribute"/>
@@ -79,17 +78,17 @@ xmlns:mml="http://www.w3.org/1998/Math/MathML"
   <xsl:text>\bye &#xA;</xsl:text>
 </xsl:template>
 
-<xsl:template match="d:inlineequation" mode="collect.tex.math.plain">
+<xsl:template match="inlineequation" mode="collect.tex.math.plain">
   <xsl:variable name="filename">
     <xsl:choose>
-      <xsl:when test="d:graphic">
+      <xsl:when test="graphic">
         <xsl:call-template name="mediaobject.filename">
-          <xsl:with-param name="object" select="d:graphic"/>
+          <xsl:with-param name="object" select="graphic"/>
         </xsl:call-template>
       </xsl:when>
       <xsl:otherwise>
         <xsl:call-template name="select.mediaobject.filename">
-          <xsl:with-param name="olist" select="d:inlinemediaobject/*"/>
+          <xsl:with-param name="olist" select="inlinemediaobject/*"/>
         </xsl:call-template>
       </xsl:otherwise>
     </xsl:choose>
@@ -97,7 +96,7 @@ xmlns:mml="http://www.w3.org/1998/Math/MathML"
   <xsl:variable name="output.delims">
     <xsl:call-template name="tex.math.output.delims"/>
   </xsl:variable>
-  <xsl:variable name="tex" select="d:alt[@role='tex'] | d:inlinemediaobject/d:textobject[@role='tex']"/>
+  <xsl:variable name="tex" select="alt[@role='tex'] | inlinemediaobject/textobject[@role='tex']"/>
   <xsl:if test="$tex">
     <xsl:text>\special{dvi2bitmap outputfile </xsl:text>
     <xsl:value-of select="$filename"/>
@@ -113,17 +112,17 @@ xmlns:mml="http://www.w3.org/1998/Math/MathML"
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:equation|d:informalequation" mode="collect.tex.math.plain">
+<xsl:template match="equation|informalequation" mode="collect.tex.math.plain">
   <xsl:variable name="filename">
     <xsl:choose>
-      <xsl:when test="d:graphic">
+      <xsl:when test="graphic">
         <xsl:call-template name="mediaobject.filename">
-          <xsl:with-param name="object" select="d:graphic"/>
+          <xsl:with-param name="object" select="graphic"/>
         </xsl:call-template>
       </xsl:when>
       <xsl:otherwise>
         <xsl:call-template name="select.mediaobject.filename">
-          <xsl:with-param name="olist" select="d:mediaobject/*"/>
+          <xsl:with-param name="olist" select="mediaobject/*"/>
         </xsl:call-template>
       </xsl:otherwise>
     </xsl:choose>
@@ -131,7 +130,7 @@ xmlns:mml="http://www.w3.org/1998/Math/MathML"
   <xsl:variable name="output.delims">
     <xsl:call-template name="tex.math.output.delims"/>
   </xsl:variable>
-  <xsl:variable name="tex" select="d:alt[@role='tex'] | d:mediaobject/d:textobject[@role='tex']"/>
+  <xsl:variable name="tex" select="alt[@role='tex'] | mediaobject/textobject[@role='tex']"/>
   <xsl:if test="$tex">
     <xsl:text>\special{dvi2bitmap outputfile </xsl:text>
     <xsl:value-of select="$filename"/>
@@ -161,17 +160,17 @@ xmlns:mml="http://www.w3.org/1998/Math/MathML"
   <xsl:text>\end{document} &#xA;</xsl:text>
 </xsl:template>
 
-<xsl:template match="d:inlineequation" mode="collect.tex.math.latex">
+<xsl:template match="inlineequation" mode="collect.tex.math.latex">
   <xsl:variable name="filename">
     <xsl:choose>
-      <xsl:when test="d:graphic">
+      <xsl:when test="graphic">
         <xsl:call-template name="mediaobject.filename">
-          <xsl:with-param name="object" select="d:graphic"/>
+          <xsl:with-param name="object" select="graphic"/>
         </xsl:call-template>
       </xsl:when>
       <xsl:otherwise>
         <xsl:call-template name="select.mediaobject.filename">
-          <xsl:with-param name="olist" select="d:inlinemediaobject/*"/>
+          <xsl:with-param name="olist" select="inlinemediaobject/*"/>
         </xsl:call-template>
       </xsl:otherwise>
     </xsl:choose>
@@ -179,7 +178,7 @@ xmlns:mml="http://www.w3.org/1998/Math/MathML"
   <xsl:variable name="output.delims">
     <xsl:call-template name="tex.math.output.delims"/>
   </xsl:variable>
-  <xsl:variable name="tex" select="d:alt[@role='tex'] | d:inlinemediaobject/d:textobject[@role='tex']"/>
+  <xsl:variable name="tex" select="alt[@role='tex'] | inlinemediaobject/textobject[@role='tex']"/>
   <xsl:if test="$tex">
     <xsl:text>\special{dvi2bitmap outputfile </xsl:text>
     <xsl:value-of select="$filename"/>
@@ -195,17 +194,17 @@ xmlns:mml="http://www.w3.org/1998/Math/MathML"
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:equation|d:informalequation" mode="collect.tex.math.latex">
+<xsl:template match="equation|informalequation" mode="collect.tex.math.latex">
   <xsl:variable name="filename">
     <xsl:choose>
-      <xsl:when test="d:graphic">
+      <xsl:when test="graphic">
         <xsl:call-template name="mediaobject.filename">
-          <xsl:with-param name="object" select="d:graphic"/>
+          <xsl:with-param name="object" select="graphic"/>
         </xsl:call-template>
       </xsl:when>
       <xsl:otherwise>
         <xsl:call-template name="select.mediaobject.filename">
-          <xsl:with-param name="olist" select="d:mediaobject/*"/>
+          <xsl:with-param name="olist" select="mediaobject/*"/>
         </xsl:call-template>
       </xsl:otherwise>
     </xsl:choose>
@@ -213,7 +212,7 @@ xmlns:mml="http://www.w3.org/1998/Math/MathML"
   <xsl:variable name="output.delims">
     <xsl:call-template name="tex.math.output.delims"/>
   </xsl:variable>
-  <xsl:variable name="tex" select="d:alt[@role='tex'] | d:mediaobject/d:textobject[@role='tex']"/>
+  <xsl:variable name="tex" select="alt[@role='tex'] | mediaobject/textobject[@role='tex']"/>
   <xsl:if test="$tex">
     <xsl:text>\special{dvi2bitmap outputfile </xsl:text>
     <xsl:value-of select="$filename"/>
@@ -235,8 +234,8 @@ xmlns:mml="http://www.w3.org/1998/Math/MathML"
 
 <xsl:template name="select.mediaobject.filename">
   <xsl:param name="olist"
-             select="d:imageobject|d:imageobjectco
-                     |d:videoobject|d:audioobject|d:textobject"/>
+             select="imageobject|imageobjectco
+                     |videoobject|audioobject|textobject"/>
 
   <xsl:variable name="mediaobject.index">
     <xsl:call-template name="select.mediaobject.index">

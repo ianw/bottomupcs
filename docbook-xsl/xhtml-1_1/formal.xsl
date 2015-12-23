@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <!--This file was created automatically by html2xhtml-->
 <!--from the HTML stylesheets.-->
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:d="http://docbook.org/ns/docbook"
-xmlns="http://www.w3.org/1999/xhtml" version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" version="1.0">
 
 <!-- ********************************************************************
      $Id: formal.xsl 9501 2012-07-16 00:14:50Z bobstayton $
@@ -160,7 +158,7 @@ xmlns="http://www.w3.org/1999/xhtml" version="1.0">
   <xsl:param name="class" select="local-name(.)"/>
 
   <xsl:choose>
-    <xsl:when test="d:title or d:info/d:title">
+    <xsl:when test="title or info/title">
       <xsl:call-template name="formal.object">
         <xsl:with-param name="placement" select="$placement"/>
         <xsl:with-param name="class" select="$class"/>
@@ -174,7 +172,7 @@ xmlns="http://www.w3.org/1999/xhtml" version="1.0">
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:figure">
+<xsl:template match="figure">
   <xsl:variable name="param.placement" select="substring-after(normalize-space($formal.title.placement),                                         concat(local-name(.), ' '))"/>
 
   <xsl:variable name="placement">
@@ -195,12 +193,12 @@ xmlns="http://www.w3.org/1999/xhtml" version="1.0">
 
 </xsl:template>
 
-<xsl:template match="d:table">
+<xsl:template match="table">
   <xsl:choose>
-    <xsl:when test="d:tgroup|d:mediaobject|d:graphic">
+    <xsl:when test="tgroup|mediaobject|graphic">
       <xsl:call-template name="calsTable"/>
     </xsl:when>
-    <xsl:when test="d:caption">
+    <xsl:when test="caption">
       <xsl:call-template name="htmlTable.with.caption"/>
     </xsl:when>
     <xsl:otherwise>
@@ -300,7 +298,7 @@ xmlns="http://www.w3.org/1999/xhtml" version="1.0">
 </xsl:template>
 
 <xsl:template name="calsTable">
-  <xsl:if test="d:tgroup/d:tbody/d:tr                 |d:tgroup/d:thead/d:tr                 |d:tgroup/d:tfoot/d:tr">
+  <xsl:if test="tgroup/tbody/tr                 |tgroup/thead/tr                 |tgroup/tfoot/tr">
     <xsl:message terminate="yes">Broken table: tr descendent of CALS Table.</xsl:message>
   </xsl:if>
 
@@ -323,7 +321,7 @@ xmlns="http://www.w3.org/1999/xhtml" version="1.0">
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:table|d:informaltable" mode="class.value">
+<xsl:template match="table|informaltable" mode="class.value">
   <xsl:choose>
     <xsl:when test="@tabstyle">
       <xsl:value-of select="@tabstyle"/>
@@ -335,24 +333,24 @@ xmlns="http://www.w3.org/1999/xhtml" version="1.0">
 </xsl:template>
 
 <xsl:template name="htmlTable">
-  <xsl:if test="d:tgroup/d:tbody/d:row                 |d:tgroup/d:thead/d:row                 |d:tgroup/d:tfoot/d:row">
+  <xsl:if test="tgroup/tbody/row                 |tgroup/thead/row                 |tgroup/tfoot/row">
     <xsl:message terminate="yes">Broken table: row descendent of HTML table.</xsl:message>
   </xsl:if>
 
   <xsl:apply-templates mode="htmlTable"/>
 
-  <xsl:if test=".//d:footnote|../d:title//d:footnote">
+  <xsl:if test=".//footnote|../title//footnote">
     <tbody class="footnotes">
       <tr>
         <td colspan="50">
-          <xsl:apply-templates select=".//d:footnote|../d:title//d:footnote" mode="table.footnote.mode"/>
+          <xsl:apply-templates select=".//footnote|../title//footnote" mode="table.footnote.mode"/>
         </td>
       </tr>
     </tbody>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:example">
+<xsl:template match="example">
   <xsl:variable name="param.placement" select="substring-after(normalize-space($formal.title.placement),                      concat(local-name(.), ' '))"/>
 
   <xsl:variable name="placement">
@@ -373,7 +371,7 @@ xmlns="http://www.w3.org/1999/xhtml" version="1.0">
 
 </xsl:template>
 
-<xsl:template match="d:equation">
+<xsl:template match="equation">
   <xsl:variable name="param.placement" select="substring-after(normalize-space($formal.title.placement),                                       concat(local-name(.), ' '))"/>
 
   <xsl:variable name="placement">
@@ -394,27 +392,27 @@ xmlns="http://www.w3.org/1999/xhtml" version="1.0">
 
 </xsl:template>
 
-<xsl:template match="d:figure/d:title"/>
-<xsl:template match="d:figure/d:titleabbrev"/>
-<xsl:template match="d:table/d:title"/>
-<xsl:template match="d:table/d:titleabbrev"/>
-<xsl:template match="d:table/d:textobject"/>
-<xsl:template match="d:example/d:title"/>
-<xsl:template match="d:example/d:titleabbrev"/>
-<xsl:template match="d:equation/d:title"/>
-<xsl:template match="d:equation/d:titleabbrev"/>
+<xsl:template match="figure/title"/>
+<xsl:template match="figure/titleabbrev"/>
+<xsl:template match="table/title"/>
+<xsl:template match="table/titleabbrev"/>
+<xsl:template match="table/textobject"/>
+<xsl:template match="example/title"/>
+<xsl:template match="example/titleabbrev"/>
+<xsl:template match="equation/title"/>
+<xsl:template match="equation/titleabbrev"/>
 
-<xsl:template match="d:informalfigure">
+<xsl:template match="informalfigure">
   <xsl:call-template name="informal.object"/>
 </xsl:template>
 
-<xsl:template match="d:informalexample">
+<xsl:template match="informalexample">
   <xsl:call-template name="informal.object"/>
 </xsl:template>
 
-<xsl:template match="d:informaltable">
+<xsl:template match="informaltable">
   <xsl:choose>
-    <xsl:when test="d:tgroup|d:mediaobject|d:graphic">
+    <xsl:when test="tgroup|mediaobject|graphic">
       <xsl:call-template name="informal.object"/>
     </xsl:when>
     <xsl:otherwise>
@@ -431,7 +429,7 @@ xmlns="http://www.w3.org/1999/xhtml" version="1.0">
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:informaltable/d:textobject"/>
+<xsl:template match="informaltable/textobject"/>
 
 <xsl:template name="table.longdesc">
   <!-- HACK: This doesn't belong inside formal.objectt; it should be done by -->
@@ -449,14 +447,14 @@ xmlns="http://www.w3.org/1999/xhtml" version="1.0">
     </xsl:call-template>
   </xsl:variable>
 
-  <xsl:if test="$html.longdesc != 0 and $html.longdesc.link != 0                 and d:textobject[not(d:phrase)]">
+  <xsl:if test="$html.longdesc != 0 and $html.longdesc.link != 0                 and textobject[not(phrase)]">
     <xsl:call-template name="longdesc.link">
       <xsl:with-param name="longdesc.uri" select="$longdesc.uri"/>
     </xsl:call-template>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="d:informalequation">
+<xsl:template match="informalequation">
   <xsl:call-template name="informal.object"/>
 </xsl:template>
 

@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:d="http://docbook.org/ns/docbook"
-version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
   <xsl:output method="xml" omit-xml-declaration="no" doctype-public="-//OASIS//DTD DocBook XML V4.4//EN" doctype-system="http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd" indent="no"/>
   <xsl:template match="@*|*|comment()|processing-instruction()">
     <xsl:copy>

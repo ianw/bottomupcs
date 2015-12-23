@@ -1,7 +1,6 @@
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:d="http://docbook.org/ns/docbook"
-xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml"
+  xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml"
   xmlns:v="urn:schemas-microsoft-com:vml"
   xmlns:w10="urn:schemas-microsoft-com:office:word"
   xmlns:sl="http://schemas.microsoft.com/schemaLibrary/2003/core"
@@ -75,7 +74,7 @@ xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml"
             </xsl:attribute>
           </xsl:if>
 
-          <xsl:if test='w:r[1][w:rPr/w:rStyle/@w:val = "d:attributes"] and
+          <xsl:if test='w:r[1][w:rPr/w:rStyle/@w:val = "attributes"] and
                         w:r[2][w:rPr/w:rStyle/@w:val = "CommentReference"]'>
             <xsl:apply-templates select='w:r[2]//w:r[w:rPr/w:rStyle/@w:val = "attribute-name"]'
               mode='rnd:attributes'/>
@@ -122,7 +121,7 @@ xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml"
     </xsl:variable>
 
     <xsl:choose>
-      <xsl:when test='w:rPr/w:rStyle/@w:val = "d:attributes"'/>
+      <xsl:when test='w:rPr/w:rStyle/@w:val = "attributes"'/>
       <xsl:when test='w:rPr/w:rStyle/@w:val = "CommentReference"'/>
       <xsl:when test='w:pict'>
         <!-- "filename" is where the image data gets extracted to -->
@@ -159,7 +158,7 @@ xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml"
         </dbk:inlinemediaobject>
       </xsl:when>
       <xsl:when test='$do-vert-align and
-                      w:rPr/w:vertAlign/@w:val = "d:subscript"'>
+                      w:rPr/w:vertAlign/@w:val = "subscript"'>
         <dbk:subscript>
           <xsl:apply-templates select='.'>
             <xsl:with-param name='do-vert-align' select='false()'/>
@@ -167,7 +166,7 @@ xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml"
         </dbk:subscript>
       </xsl:when>
       <xsl:when test='$do-vert-align and
-                      w:rPr/w:vertAlign/@w:val = "d:superscript"'>
+                      w:rPr/w:vertAlign/@w:val = "superscript"'>
         <dbk:superscript>
           <xsl:apply-templates select='.'>
             <xsl:with-param name='do-vert-align' select='false()'/>
@@ -268,37 +267,37 @@ xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml"
 
   <xsl:template match='w:tbl'>
     <xsl:variable name='tbl.style'
-      select='key("d:style", w:tblPr/w:tblStyle/@w:val) | .'/>
+      select='key("style", w:tblPr/w:tblStyle/@w:val) | .'/>
 
     <xsl:variable name='border.top'>
       <xsl:choose>
-        <xsl:when test='$tbl.style/w:tblPr/w:tblBorders/w:top[not(@w:val = "d:nil" or @w:val = "d:none")]'>1</xsl:when>
-        <xsl:when test='$tbl.style/w:tblPr/w:tblBorders/w:top[@w:val = "d:nil" or @w:val = "d:none"]'>0</xsl:when>
-        <xsl:when test='w:tr[1]/w:tc[w:tcPr/w:tcBorders/w:top[not(@w:val = "d:nil" or @w:val = "d:none")]]'>1</xsl:when>
+        <xsl:when test='$tbl.style/w:tblPr/w:tblBorders/w:top[not(@w:val = "nil" or @w:val = "none")]'>1</xsl:when>
+        <xsl:when test='$tbl.style/w:tblPr/w:tblBorders/w:top[@w:val = "nil" or @w:val = "none"]'>0</xsl:when>
+        <xsl:when test='w:tr[1]/w:tc[w:tcPr/w:tcBorders/w:top[not(@w:val = "nil" or @w:val = "none")]]'>1</xsl:when>
         <xsl:otherwise>0</xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
     <xsl:variable name='border.bottom'>
       <xsl:choose>
-        <xsl:when test='$tbl.style/w:tblPr/w:tblBorders/w:bottom[not(@w:val = "d:nil" or @w:val = "d:none")]'>1</xsl:when>
-        <xsl:when test='$tbl.style/w:tblPr/w:tblBorders/w:bottom[@w:val = "d:nil" or @w:val = "d:none"]'>0</xsl:when>
-        <xsl:when test='w:tr[1]/w:tc[w:tcPr/w:tcBorders/w:bottom[not(@w:val = "d:nil" or @w:val = "d:none")]]'>1</xsl:when>
+        <xsl:when test='$tbl.style/w:tblPr/w:tblBorders/w:bottom[not(@w:val = "nil" or @w:val = "none")]'>1</xsl:when>
+        <xsl:when test='$tbl.style/w:tblPr/w:tblBorders/w:bottom[@w:val = "nil" or @w:val = "none"]'>0</xsl:when>
+        <xsl:when test='w:tr[1]/w:tc[w:tcPr/w:tcBorders/w:bottom[not(@w:val = "nil" or @w:val = "none")]]'>1</xsl:when>
         <xsl:otherwise>0</xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
     <xsl:variable name='border.left'>
       <xsl:choose>
-        <xsl:when test='$tbl.style/w:tblPr/w:tblBorders/w:left[not(@w:val = "d:nil" or @w:val = "d:none")]'>1</xsl:when>
-        <xsl:when test='$tbl.style/w:tblPr/w:tblBorders/w:left[@w:val = "d:nil" or @w:val = "d:none"]'>0</xsl:when>
-        <xsl:when test='w:tr[1]/w:tc[w:tcPr/w:tcBorders/w:left[not(@w:val = "d:nil" or @w:val = "d:none")]]'>1</xsl:when>
+        <xsl:when test='$tbl.style/w:tblPr/w:tblBorders/w:left[not(@w:val = "nil" or @w:val = "none")]'>1</xsl:when>
+        <xsl:when test='$tbl.style/w:tblPr/w:tblBorders/w:left[@w:val = "nil" or @w:val = "none"]'>0</xsl:when>
+        <xsl:when test='w:tr[1]/w:tc[w:tcPr/w:tcBorders/w:left[not(@w:val = "nil" or @w:val = "none")]]'>1</xsl:when>
         <xsl:otherwise>0</xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
     <xsl:variable name='border.right'>
       <xsl:choose>
-        <xsl:when test='$tbl.style/w:tblPr/w:tblBorders/w:right[not(@w:val = "d:nil" or @w:val = "d:none")]'>1</xsl:when>
-        <xsl:when test='$tbl.style/w:tblPr/w:tblBorders/w:right[@w:val = "d:nil" or @w:val = "d:none"]'>0</xsl:when>
-        <xsl:when test='w:tr[1]/w:tc[w:tcPr/w:tcBorders/w:rightt[not(@w:val = "d:nil" or @w:val = "d:none")]]'>1</xsl:when>
+        <xsl:when test='$tbl.style/w:tblPr/w:tblBorders/w:right[not(@w:val = "nil" or @w:val = "none")]'>1</xsl:when>
+        <xsl:when test='$tbl.style/w:tblPr/w:tblBorders/w:right[@w:val = "nil" or @w:val = "none"]'>0</xsl:when>
+        <xsl:when test='w:tr[1]/w:tc[w:tcPr/w:tcBorders/w:rightt[not(@w:val = "nil" or @w:val = "none")]]'>1</xsl:when>
         <xsl:otherwise>0</xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
@@ -358,15 +357,15 @@ xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml"
   <xsl:template match='w:tc'>
     <xsl:variable name='tbl.style'
       select='ancestor::w:tbl[1] |
-              key("d:style", ancestor::w:tbl[1]/w:tblPr/w:tblStyle/@w:val)'/>
+              key("style", ancestor::w:tbl[1]/w:tblPr/w:tblStyle/@w:val)'/>
 
     <dbk:entry>
-      <xsl:if test='$tbl.style/w:tblPr/w:tblBorders/w:insideH[not(@w:val = "d:nil" or @w:val = "d:none")] |
-                    w:tcPr/w:tcBorders/w:bottom[not(@w:val = "d:nil" or @w:val = "d:none")]'>
+      <xsl:if test='$tbl.style/w:tblPr/w:tblBorders/w:insideH[not(@w:val = "nil" or @w:val = "none")] |
+                    w:tcPr/w:tcBorders/w:bottom[not(@w:val = "nil" or @w:val = "none")]'>
         <xsl:attribute name='rowsep'>1</xsl:attribute>
       </xsl:if>
-      <xsl:if test='$tbl.style/w:tblPr/w:tblBorders/w:insideV[not(@w:val = "d:nil" or @w:val = "d:none")] |
-                    w:tcPr/w:tcBorders/w:right[not(@w:val = "d:nil" or @w:val = "d:none")]'>
+      <xsl:if test='$tbl.style/w:tblPr/w:tblBorders/w:insideV[not(@w:val = "nil" or @w:val = "none")] |
+                    w:tcPr/w:tcBorders/w:right[not(@w:val = "nil" or @w:val = "none")]'>
         <xsl:attribute name='colsep'>1</xsl:attribute>
       </xsl:if>
 
@@ -386,7 +385,7 @@ xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml"
         </xsl:attribute>
       </xsl:if>
 
-      <xsl:if test='w:tcPr/w:vmerge[@w:val = "d:restart"]'>
+      <xsl:if test='w:tcPr/w:vmerge[@w:val = "restart"]'>
         <xsl:attribute name='morerows'>
           <xsl:call-template name='rnd:count-rowspan'>
             <xsl:with-param name='row' select='../following-sibling::w:tr[1]'/>
@@ -418,7 +417,7 @@ xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml"
       <xsl:when test='not($cell)'>
         <xsl:text>0</xsl:text>
       </xsl:when>
-      <xsl:when test='$cell/w:tcPr/w:vmerge[not(@w:val = "d:restart")]'>
+      <xsl:when test='$cell/w:tcPr/w:vmerge[not(@w:val = "restart")]'>
         <xsl:variable name='remainder'>
           <xsl:call-template name='rnd:count-rowspan'>
             <xsl:with-param name='row'

@@ -1,8 +1,8 @@
 Release Notes for the DocBook XSL Stylesheets
 
-$Revision: 9401 $ $Date: 2012-06-04 21:47:26 +0000 (Mon, 04 Jun 2012) $
+$Revision: 10004 $ $Date: 2015-10-15 21:10:53 +0000 (Thu, 15 Oct 2015) $
 
-2013-03-17
+2015-10-15
 
 This release-notes document is available in the following formats: HTML, PDF,
 plain text; it provides a per-release list of enhancements and changes to the
@@ -13,12 +13,34 @@ NEWS (plain text) or NEWS.html files. Also available: An online hyperlinked
 change history (warning: big file) of all changes made over the entire history
 of the codebase.
 
-As with all DocBook Project “dot one plus” releases, this release aspires to be
-stable (in contrast to dot-zero releases, which are experimental).
+As with all DocBook Project dot-zero releases, this is a candidate release for
+testing by the DocBook community. It will be followed shortly by a stable
+release.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Table of Contents
+
+Release Notes: 1.79.0
+
+    Gentext
+    Common
+    FO
+    HTML
+    Manpages
+    Epub
+    HTMLHelp
+    Eclipse
+    JavaHelp
+    Slides
+    Website
+    Webhelp
+    Params
+    Profiling
+    Lib
+    Tools
+    Template
+    Extensions
 
 Release Notes: 1.78.1
 
@@ -266,6 +288,1192 @@ Release 1.57.0
 Release 1.56.0
 Older releases
 About dot-zero releases
+
+Release Notes: 1.79.0
+
+The following is a list of changes that have been made since the 1.78.1
+release.
+
+Gentext
+
+The following changes have been made to the gentext code since the 1.78.1
+release.
+
+  • Dongsheng Song: locale/zh.xml; locale/zh_cn.xml
+
+    Fix Auditlocale.pl warning.
+
+  • Robert Stayton: locale/en.xml
+
+    Add elements dialogue, drama, and poetry from DocBook Publishers.
+
+  • Robert Stayton: locale/pt.xml
+
+    updates from DocBook user.
+
+  • Robert Stayton: locale/en.xml
+
+    Fix wording.
+
+  • Robert Stayton: locale/en.xml
+
+    Fix line breaks.
+
+  • Robert Stayton: locale/en.xml
+
+    Add text message for unsupported video and audio.
+
+  • Jirka Kosek: xsl/xsl-primary-is-locale.xsl
+
+    Initial work on Ant build, common (L10N) directory handled so far
+
+  • Robert Stayton: locale/ur.xml
+
+    Add email address for contributor.
+
+  • Robert Stayton: locale/ur.xml
+
+    Check in contributed locale file from Wasif Hasan Baig,
+    contributed through SourceForge Patch # 187.
+
+  • kasunbg: locale/nl.xml
+
+    Committing Dutch translations of DocBook WebHelp. Patch provided by Marja van Waes.
+
+  • kasunbg: locale/ru.xml
+
+    Committing patch for Russian translations of webhelp. Patch provided by Alex Loginov and Yuri Chornoivan. Patch #1325
+
+  • kasunbg: locale/uk.xml
+
+    Committing Ukrainian translations for Webhelp. Patch by Yuri Chornoivan. Patch #1324
+
+  • tom_schr: locale/ca.xml; locale/da.xml; locale/cs.xml; locale/es.xml;
+    locale/fr.xml; local⋯
+
+    Added missing keycap context for ca, cs, da, es, et, eu, and fr
+
+  • tom_schr: locale/en.xml; locale/de.xml
+
+    Added option key for keycap context
+
+  • tom_schr: locale/de.xml
+
+    Added key="optional-step" as done in r9745
+
+  • Robert Stayton: locale/en.xml
+
+    Add key="optional-step".
+
+Common
+
+The following changes have been made to the common code since the 1.78.1
+release.
+
+  • tom_schr: common.xsl
+
+    Added quotes around linkend to make spaces visible
+
+  • Jirka Kosek: build.xml
+
+    Added ant build for HTML stylesheets
+
+  • Jirka Kosek: build.xml
+
+    Initial work on Ant build, common (L10N) directory handled so far
+
+  • Robert Stayton: titles.xsl
+
+    Replace hardcoded English text for question and answer elements
+    in mode="title.markup" with localized templates.
+
+  • Robert Stayton: addns.xsl
+
+    Move addns.xsl module from releasetools to common in preparation
+    for switching to ns as the base stylesheets.
+
+  • Robert Stayton: l10n.xml; Makefile
+
+    Add new locale file ur.xml for Urdu.
+
+  • Robert Stayton: titles.xsl
+
+    Add missing template with match="toc" mode="title.markup".
+
+  • tom_schr: titles.xsl
+
+    Fixed problem when referencing empty ulinks; use @url instead
+
+  • stilor: olink.xsl
+
+    Make olink errors/warnings overridable in customizations.
+
+  • stilor: labels.xsl
+
+    Pass the object referenced as a parameter to mode="intralabel.punctuation"
+    template.
+
+  • stilor: olink.xsl
+
+    1. Make page citations on <xref/> to paragraphs conditional on a new parameter,
+    $insert.xref.page.number.para, default to 'yes' (before, page citations were
+    added unconditionally). Remove similar special-casing for <link/>.
+
+    2. Disable page citations for @xrefstyle="template:..." (if needed, they
+    can be added with %p in the template - but they can't be disabled).
+
+  • Robert Stayton: olink.xsl; titles.xsl; common.xsl
+
+    Pass referrer and target params to mode="xrefstyle" to allow customizations
+    to be more specific.
+
+  • Robert Stayton: olink.xsl; titles.xsl; common.xsl
+
+    Add mode="xrefstyle" to replace many instances of redundant
+    code determining the xrefstyle with xsl:apply-templates
+    select="." mode="xrefstyle".  Also allows stylesheet
+    customization to specify an xrefstyle per element type.
+
+  • Robert Stayton: gentext.xsl; labels.xsl
+
+    Add support for procedure title contained in info or blockinfo.
+
+  • Robert Stayton: common.xsl
+
+    In person.name template, change 'style' variable to a param
+    so the name style can be selected by passing a param.
+
+  • Robert Stayton: gentext.xsl
+
+    Fix bug in collect.xref.targets that failed when $referrer template
+    param not set by olink's xref-to. Fixed using submitted patch.
+
+FO
+
+The following changes have been made to the fo code since the 1.78.1 release.
+
+  • Robert Stayton: lists.xsl
+
+    Fix bug #1368 "link to term with id does not work"
+
+  • Robert Stayton: block.xsl
+
+    Fix bug #1367 double attribution in epigraph.
+
+  • Robert Stayton: param.xweb; param.ent
+
+    Add missing profile.outputformat param.
+
+  • Robert Stayton: publishers.xsl
+
+    Fix namespace declarations.
+
+  • Robert Stayton: titlepage.xsl
+
+    Add default attribute-sets for new Publishers elements.
+
+  • Robert Stayton: param.ent
+
+    Fix typo
+
+  • Robert Stayton: titlepage.templates.xml
+
+    Add new DocBook Publishers elements.
+
+  • Robert Stayton: docbook.xsl
+
+    Add inclusion of new publishers.xsl module.
+
+  • Robert Stayton: publishers.xsl
+
+    Stylesheet module added to support new elements in DocBook Publishers.
+
+  • Robert Stayton: param.xweb; param.ent
+
+    Add the 9 new attribute sets for DocBook Publishers.
+
+  • Robert Stayton: xref.xsl
+
+    Fix bug #1355 glossseealso generates duplicate id in certain cases.
+
+  • Robert Stayton: xref.xsl
+
+    fix bug #1360 indexterm in varlistentry/term generates an error when xref to that term.
+
+  • Robert Stayton: inline.xsl
+
+    Fix bug #13598 inline.monoseq and other inline.*seq handle links incorrectly.
+
+  • Robert Stayton: pi.xsl
+
+    Fix bug in dbfo-need for admonitions, and get dbfo-need
+    working properly in FOP1.1.
+
+  • Robert Stayton: pagesetup.xsl
+
+    Remove obsolete hardcoded margin-left="0pt" for the block
+    containing header or footer.
+
+  • Robert Stayton: graphics.xsl
+
+    Fix bug #1336 to add support for recognizing
+    file:/ image URLs as absolute paths.
+
+  • Robert Stayton: autotoc.xsl
+
+    Add support in TOC for article as child of set.
+
+  • Robert Stayton: xref.xsl
+
+    Fix bug #1337 Elements with olink role do not behave as olink
+    elements.
+
+  • Jirka Kosek: build.xml
+
+    Added ant build for FO
+
+  • stilor: inline.xsl
+
+    Only count regular <emphasis> elements (without @role="bold", etc) when determining
+    whether nested emphasis needs to be displayed in italics or in regular; otherwise,
+    the order of nesting in <emphasis role="bold"> and <emphasis> affects the font
+    used.
+
+  • Robert Stayton: fop1.xsl; ptc.xsl
+
+    Apply patch #190 to include refsections in bookmarks for fop1 and
+    ptc.xsl.
+
+  • Robert Stayton: block.xsl
+
+    Change the epigraph template to support schema extensions
+    by processing all of its children instead of specific elements.
+
+  • tom_schr: pagesetup.xsl
+
+    Added "user.declarations" hook to implemented [#1330]
+
+    Added empty "user.declarations" template to make it easier for adding
+    custom fo:declaration elements. The template is empty by default.
+
+  • Robert Stayton: inline.xsl
+
+    Fix test for nested links.
+
+  • Robert Stayton: biblio.xsl
+
+    Now biblioset outputs its id if it has one.
+
+  • Robert Stayton: xref.xsl
+
+    pass xrefstyle param from link element to gentext.template so
+    optional page number can be formatted to a style.
+
+  • Robert Stayton: docbook.xsl
+
+    Streamline handling of namespace fixup in preparation for making
+    the namespaced version the source base.
+
+  • Robert Stayton: fo.xsl
+
+    FOP 1.1 now supports writing-mode="rl-tb", so add that change to the
+    $direction.mode parameter.
+
+  • Robert Stayton: autoidx.xsl
+
+    Add missing xlink namespace declaration to the root element.
+
+  • Robert Stayton: param.xweb; param.ent; autoidx.xsl
+
+    Add support for $autolink.index.see to automatically form links
+    between see and seealso index elements and primary elements
+    in the index.
+
+  • Robert Stayton: inline.xsl
+
+    Add element name to warning message for nested links.
+
+  • Robert Stayton: inline.xsl
+
+    Fix bug #1306: warn of nested links.
+
+  • Robert Stayton: component.xsl
+
+    Fix bug #1320 so template page.sequence tests $content to make
+    sure it is not empty.
+
+  • Robert Stayton: autotoc.xsl; refentry.xsl; param.xweb; docbook.xsl;
+    param.ent; component.x⋯
+
+    Add support for $show.bookmarks param to turn bookmarks on or
+    off.
+
+  • Robert Stayton: docbook.xsl
+
+    Add missing variable bookmarks.state.
+
+  • Robert Stayton: docbook.xsl
+
+    Add missing $document.element variable to new generate.bookmarks
+    template.
+
+  • Robert Stayton: autotoc.xsl; refentry.xsl; param.xweb; docbook.xsl;
+    param.ent; component.x⋯
+
+    Add support for standard XSL 1.1 bookmarks and parameter
+    $xsl1.1.bookmarks to turn them on or off.
+
+  • stilor: xref.xsl
+
+    Fix invalid href generated if $insert.olink.pdf.frag=0 and $fop1.extensions=1.
+
+  • stilor: autotoc.xsl; param.xweb; param.ent; toc.xsl
+
+    Replace literal space inserted next to fo:leader in ToC with a padding. This
+    works around a bug in FOP (see FOP-1444).
+    Make ToC fo:leader properties configurable via attribute set.
+
+  • stilor: titlepage.templates.xml
+
+    Remove autoguessing of the namespace for wrapper elements; determine namespace by prefix, if any.
+
+  • Mauritz Jeanson: table.xsl
+
+    Bug #1246: added missing with-param.
+
+  • stilor: xref.xsl
+
+    Make olink errors/warnings overridable in customizations.
+
+  • stilor: param.xweb; param.ent; xref.xsl
+
+    1. Make page citations on <xref/> to paragraphs conditional on a new parameter,
+    $insert.xref.page.number.para, default to 'yes' (before, page citations were
+    added unconditionally). Remove similar special-casing for <link/>.
+
+    2. Disable page citations for @xrefstyle="template:..." (if needed, they
+    can be added with %p in the template - but they can't be disabled).
+
+  • stilor: fop1.xsl
+
+    Skip generating fox:destination on a footnote - id attribute on footnotes is not
+    passed to generated FO, so FOP complains about unresolved ID in destination.
+
+  • Mauritz Jeanson: lists.xsl
+
+    Fixed typo.
+
+  • tom_schr: lists.xsl
+
+    Fixed bug#1311 and added missing para.properties
+
+  • Robert Stayton: xref.xsl
+
+    Pass referrer and target params to mode="xrefstyle" to allow customizations
+    to be more specific.
+
+  • Robert Stayton: xref.xsl
+
+    Add mode="xrefstyle" to replace many instances of redundant
+    code determining the xrefstyle with xsl:apply-templates
+    select="." mode="xrefstyle".  Also allows stylesheet
+    customization to specify an xrefstyle per element type.
+
+  • tom_schr: xref.xsl
+
+    Pass referrer and xrefstyle to "xref-to-suffix" and "xref-to-prefix"
+    modes (to use the same signature than "xref-to" mode) as discussed with
+    Bob on the mailinglist (2013-09-12)
+
+  • tom_schr: pi.xsl; verbatim.xsl
+
+    Fix for enhancement/bug#1312: Support font size in verbatim elements
+
+  • Robert Stayton: fop1.xsl
+
+    Unchanged, testing snapshot builds.
+
+  • Robert Stayton: docbook.xsl
+
+    No change, testing snapshot builds.
+
+  • Robert Stayton: block.xsl
+
+    No change, testing snapshot builds.
+
+  • Robert Stayton: block.xsl
+
+    No change, just checking snapshot build process.
+
+  • Robert Stayton: toc.xsl
+
+    Add missing template for tocdiv/title elements to fix bug #1310.
+
+  • Robert Stayton: docbook.xsl
+
+    Fix process.root template so document title can come from info as well.
+
+  • Robert Stayton: lists.xsl
+
+    Add support for procedure title when contained in blockinfo or info.
+
+  • Robert Stayton: fop1.xsl
+
+    Fix mode="fop1.foxdest" so only elements with id attribute get
+    a fox:destination in the output.
+
+  • Robert Stayton: fop1.xsl
+
+    Remove extraneous call from fop1.foxdest mode per patch submission.
+
+  • Robert Stayton: autotoc.xsl
+
+    Add toc.margin.properties attribute-set to list.of.titles so
+    it matches the TOC list.
+
+  • Robert Stayton: inline.xsl
+
+    Adjust exception for fop for menuchoice separator to
+    use the $symbol.font.family if it is set.
+
+  • Robert Stayton: division.xsl
+
+    Fix comment.
+
+  • Robert Stayton: param.ent
+
+    Fix typo that prevents param.xsl update.
+
+  • Robert Stayton: lists.xsl; param.xweb; param.ent
+
+    Add mark.optional.procedure.steps param.
+
+  • Robert Stayton: qandaset.xsl
+
+    Fix bug in question template that output empty list-item-label when
+    defaultlabel = 'none'.
+
+HTML
+
+The following changes have been made to the html code since the 1.78.1 release.
+
+  • Robert Stayton: block.xsl
+
+    Fix Bug #1367 epigraph attribution appears twice in html output.
+
+  • Robert Stayton: param.xweb; param.ent
+
+    Add missing profile.outputformat param.
+
+  • Robert Stayton: titlepage.xsl; docbook.xsl; titlepage.templates.xml
+
+    Add support for DocBook Publishers elements.
+
+  • Robert Stayton: publishers.xsl
+
+    New module to support new elements in DocBook Publishers schema.
+
+  • Robert Stayton: table.xsl
+
+    Fix bug #1348 where class of output table not being set correctly.
+
+  • Robert Stayton: table.xsl
+
+    A table emitted by tgroup template now calls "common.html.attributes"
+    to get the class attribute handled correctly.
+
+  • Robert Stayton: inline.xsl
+
+    Fix bug #13598 inline.monoseq and other inline.*seq handle links incorrectly.
+
+  • Robert Stayton: refentry.xsl
+
+    Add template for refpurpose in no.anchor.mode to generate
+    the dash separator in TOC line for the refentry when
+    the refpurpose contains a link or indexterm.
+
+  • Robert Stayton: inline.xsl
+
+    Add missing call to id.attribute template for orgdiv.
+
+  • Robert Stayton: xref.xsl
+
+    If a link or xref has an @id or @xml:id, then add a span to
+    include the id because simple.xlink no longer generates the
+    id attribute.
+
+  • Robert Stayton: inline.xsl
+
+    Remove call to id.attribute template in simple.xlink
+    because it produces duplicate ids in the output because
+    the element template calling simple.xlink generates the
+    id attribute.
+
+  • Robert Stayton: graphics.xsl
+
+    Check in fix for bug #1336 to support absolute file URLs
+    that start with file:/.  Also consolidate code that determines
+    whether an image file path is relative into a new template
+    variable $is.relative.
+
+  • Robert Stayton: chunk-code.xsl
+
+    Add support for set nested inside set to recursive-chunk-filename.
+
+  • Robert Stayton: autotoc.xsl
+
+    Add support for set TOC to contain nested set or article
+    elements.
+
+  • Jirka Kosek: build.xml
+
+    Added clean targets
+
+  • Jirka Kosek: build.xml
+
+    Added ant build for HTML stylesheets
+
+  • Robert Stayton: glossary.xsl
+
+    Move any indexterms in glossentry to be inside dt, instead of
+    after dt which is invalid.
+
+  • Robert Stayton: htmltbl.xsl
+
+    Fix bug #1334 to copy through HTML table attributes @scope and @id.
+
+  • Robert Stayton: block.xsl
+
+    Change the epigraph template to support schema extensions
+    by processing all of its children instead of specific elements.
+
+  • Robert Stayton: titlepage.xsl
+
+    Fix bug in handling of multiple editors and "edited by" label.
+
+  • Robert Stayton: titlepage.templates.xml
+
+    Fix misnamed attribute in sidebar template.
+
+  • Robert Stayton: inline.xsl
+
+    Fix check for nested links.
+
+  • Robert Stayton: chunk-common.xsl; chunktoc.xsl; chunk-code.xsl
+
+    Adjust handling of namespace fixup to streamline distro builds.
+
+  • Robert Stayton: docbook.xsl
+
+    Adjust handling of namespace conversion to streamline distro
+    build.
+
+  • Robert Stayton: table.xsl
+
+    Fix bug #1298 where @rowheader = 'firstcol' incorrectly assigns
+    <th> to cell that is first in a row but not the first column due
+    to row span above.
+
+  • Robert Stayton: param.xweb; param.ent; autoidx.xsl
+
+    Add support for autolink.index.see param to link from see and
+    seealso element to primary element in index.
+
+  • Robert Stayton: inline.xsl
+
+    Fix bug #1306 warn of nested links, since not supported in the output.
+
+  • Robert Stayton: pi.xsl
+
+    Fixes bug #1323 where <?dbhtml-include?> paths were not being
+    interpreted relative to the XML.
+
+  • Robert Stayton: param.xweb
+
+    Add missing frag for new linke.to.self.for.mediaobject param.
+
+  • Robert Stayton: table.xsl
+
+    Fix bug in entry template where rowsep was incorrectly set to zero
+    for cell with @morerows in thead.
+
+  • Robert Stayton: synop.xsl
+
+    Restore conditional named anchor in output if dbcmdlist PI is not used.
+
+  • tom_schr: graphics.xsl
+
+    Fixed [#1317]: process alt in inlinemediaobject
+
+  • tom_schr: param.xweb; graphics.xsl; param.ent
+
+    Fixed ticket [#1315]: Add possibility to add a link to mediaobjects
+
+  • stilor: titlepage.templates.xml
+
+    Remove autoguessing of the namespace for wrapper elements; determine namespace by prefix, if any.
+
+  • stilor: chunk-common.xsl; xref.xsl
+
+    Make olink errors/warnings overridable in customizations.
+
+  • stilor: param.xweb; param.ent
+
+    1. Make page citations on <xref/> to paragraphs conditional on a new parameter,
+    $insert.xref.page.number.para, default to 'yes' (before, page citations were
+    added unconditionally). Remove similar special-casing for <link/>.
+
+    2. Disable page citations for @xrefstyle="template:..." (if needed, they
+    can be added with %p in the template - but they can't be disabled).
+
+  • Mauritz Jeanson: index.xsl
+
+    Bug #1309: Added missing template for indexdiv/subtitle.
+
+  • Robert Stayton: xref.xsl
+
+    Pass referrer and target params to mode="xrefstyle" to allow customizations
+    to be more specific.
+
+  • Robert Stayton: xref.xsl
+
+    Add mode="xrefstyle" to replace many instances of redundant
+    code determining the xrefstyle with xsl:apply-templates
+    select="." mode="xrefstyle".  Also allows stylesheet
+    customization to specify an xrefstyle per element type.
+
+  • tom_schr: xref.xsl
+
+    Pass referrer and xrefstyle to "xref-to-suffix" and "xref-to-prefix"
+    modes (to use the same signature than "xref-to" mode) as discussed with
+    Bob on the mailinglist (2013-09-12)
+
+  • Robert Stayton: chunk.xsl
+
+    No change, testing snapshot builds.
+
+  • Robert Stayton: toc.xsl
+
+    Add missing template for tocdiv/title elements to fix bug #1310.
+
+  • Robert Stayton: docbook.xsl
+
+    Remove a comment to test checkins and snapshot builds.
+
+  • Robert Stayton: lists.xsl
+
+    Add support for procedure title when contained in info or blockinfo.
+
+  • Jirka Kosek: chunk-code.xsl
+
+    Enumarete separate file for revhistory if generate.revhistory.link=1
+
+  • Robert Stayton: inline.xsl
+
+    Update the inline.charseq template to also call 'common.html.attributes'
+    instead of using local-name for class value.
+
+  • Jirka Kosek: docbook.xsl; html.xsl
+
+    Enabling ITS processing again
+
+  • Robert Stayton: its.xsl
+
+    Change syntax for selecting @its:* attributes so it works
+    in xsltproc (which should work with the original, but doesn't).
+
+  • Robert Stayton: docbook.xsl; html.xsl
+
+    Turn off its.xsl update which is generating attribute insertion errors.
+
+  • Jirka Kosek: its.xsl; docbook.xsl; html.xsl
+
+    Added basic support for ITS 2.0 markup. It gets propagated into HTML
+    For more info about ITS see http://www.w3.org/TR/its20/
+
+  • Robert Stayton: docbook.xsl
+
+    Added a comment line to test checkin process.
+
+  • Robert Stayton: xref.xsl
+
+    Fix bug in mode=remove-ids that put link content outside the <a> element.
+
+  • tom_schr: chunktoc.xsl
+
+    Fixed SF ticket#3611689: added missing DocBook namespace declarations
+
+  • Robert Stayton: chunker.xsl
+
+    Change the internal chunk.base.dir from a param to a variable.
+
+  • Robert Stayton: inline.xsl
+
+    Turn off id attribute on glossterm anchor, because it is on the element itself.
+
+Manpages
+
+The following changes have been made to the manpages code since the 1.78.1
+release.
+
+  • Robert Stayton: block.xsl; lists.xsl
+
+    Fix bug #1363 synopsis in variablelist term mangles line breaks.
+
+  • Robert Stayton: other.xsl
+
+    Remove redundant and out-of-date xsl:strip-space element.
+    This is imported from common/common.xsl for all stylesheets.
+
+  • Jirka Kosek: build.xml
+
+    Added clean targets
+
+  • Jirka Kosek: build.xml
+
+    Added ant build for manpages
+
+  • Robert Stayton: inline.xsl
+
+    Fix bug #1340 by omitting indexterm and remark elements from the
+    output.  Trying to include them as nroff comments resulted in extra
+    whitespace in certain instances, so they are omitted.
+
+  • Robert Stayton: table.xsl; docbook.xsl; tbl.xsl
+
+    Adjust man stylesheet to better handle namespace fixup during
+    distro builds.
+
+  • Robert Stayton: lists.xsl
+
+    Resolve ambiguous template match for remark.
+
+  • Robert Stayton: endnotes.xsl
+
+    Put internally generated earmark elements into own namespace to
+    avoid complications with namespace stylesheet builds.  No change
+    of function.
+
+  • Robert Stayton: other.xsl
+
+    Fixed bug #1313 where write.stubs template mistakenly includes
+    $man.output.base.dir in the .so address.
+
+  • Robert Stayton: other.xsl
+
+    Escape text() nodes while also in no.anchor.mode for links.
+    Fixes bug #1322.
+
+  • Robert Stayton: utility.xsl
+
+    Fixed bug #1321, also taking into account fixing bug #1281.
+
+  • dleidert: info.xsl
+
+    Fix a typo (http://bugs.debian.org/698962).
+
+Epub
+
+The following changes have been made to the epub code since the 1.78.1 release.
+
+  • Robert Stayton: docbook.xsl
+
+    Fix bug #1341 Incorrect generation of content.opf for multiple
+    names in $html.stylesheet param.  Backported the template
+    named css.item from the epub3 stylesheet.
+
+  • Robert Stayton: docbook.xsl
+
+    Fix handling of base.dir, chunk.base.dir, and epub.oebps.dir
+    combinations.
+
+  • Robert Stayton: docbook.xsl
+
+    Improve the handling of $chunk.base.dir when $base.dir contains
+    the OEBPS directory in its value.
+
+  • Robert Stayton: docbook.xsl
+
+    Fix the namespace fixup step to match the other stylesheets.
+
+  • tom_schr: docbook.xsl
+
+    Extended date template in mode opf.metadata
+    If a PI dbtimestamp is available, call datetime.format(date, 'Y-m-d'),
+    otherwise use the normalized string content
+
+  • dleidert: bin/spec/files
+
+    Fix svn:externals defintion.
+
+  • tom_schr: docbook.xsl
+
+    Introduced  variable in opf.guide
+
+  • tom_schr: docbook.xsl
+
+    Improved modularization in opf.spine and created new spine.cover template
+
+  • tom_schr: docbook.xsl
+
+    Improved opf.spine with info variable
+
+  • tom_schr: docbook.xsl
+
+    Bugfix in opf.spine: removed double refentry entries
+
+  • tom_schr: docbook.xsl
+
+    * Template package-identifier: introduced $info variable to simplify
+      code (similar to the EPUB3 stylesheets)
+    * Template opf.calloutlist: only call opf.reference.callout if
+      callout.graphics is set
+
+  • tom_schr: docbook.xsl
+
+    Backported Bob's EPUB3 changes to EPUB2 from r9740 -> r9742 -> r9743:
+
+    * Implement base.dir/OEBPS using internal chunk.base.dir instead of
+      new param epub.base.dir.
+
+    * Additional changes, specific to this stylesheet:
+      - Construct parameter epub.metainf.dir from base.dir + 'META-INF/'
+      - Changed parameter epub.cover.filename epub.oebps.dir to
+        chunk.base.dir
+      - Template opf: concat base.dir with epub.opf.filename
+      - Replaced two subsequent xsl:value-of's with concat()
+
+  • Robert Stayton: docbook.xsl
+
+    Fix bug in author template generating a span element inside an attribute value.
+
+HTMLHelp
+
+The following changes have been made to the htmlhelp code since the 1.78.1
+release.
+
+  • Jirka Kosek: build.xml
+
+    Added clean targets
+
+  • Jirka Kosek: build.xml
+
+    Extensions and other builds ported to Ant
+
+  • Robert Stayton: htmlhelp-common.xsl
+
+    Adjust namespace fixup to conform to the namespace source
+    conversion.
+
+Eclipse
+
+The following changes have been made to the eclipse code since the 1.78.1
+release.
+
+  • Jirka Kosek: build.xml
+
+    Added clean targets
+
+  • Jirka Kosek: build.xml
+
+    Extensions and other builds ported to Ant
+
+  • Robert Stayton: eclipse.xsl
+
+    Adjust namespace fixup to conform to other conversions to
+    namespaced source.
+
+JavaHelp
+
+The following changes have been made to the javahelp code since the 1.78.1
+release.
+
+  • Jirka Kosek: build.xml
+
+    Added clean targets
+
+  • Jirka Kosek: build.xml
+
+    Extensions and other builds ported to Ant
+
+  • Robert Stayton: javahelp.xsl
+
+    Adjust the namespace fixup to conform to the other namespaced source
+    conversions.
+
+Slides
+
+The following changes have been made to the slides code since the 1.78.1
+release.
+
+  • Jirka Kosek: schema/relaxng/slides.rnc
+
+    Make speakernotes/handoutnotes optional as many presentations do not use them
+
+  • Robert Stayton: xhtml/plain.xsl; common/common.xsl; xhtml/slidy.xsl; xhtml/
+    s5.xsl; fo/plai⋯
+
+    Rename the docbook prefix in the declaration too.
+
+  • Robert Stayton: xhtml/plain.xsl; common/common.xsl; xhtml/slidy.xsl; xhtml/
+    s5.xsl; fo/plai⋯
+
+    Change the docbook db: prefix to d: prefix in preparation of svn update to namespaced
+    stylesheets.
+
+  • stilor: xhtml/plain-titlepage.xml; fo/plain-titlepage.xml
+
+    Remove autoguessing of the namespace for wrapper elements; determine namespace by prefix, if any.
+
+  • dleidert: images/callouts/gen.sh
+
+    Leave executable permissions for script.
+
+  • dleidert: s5/ui/default/pretty.css; slidy/graphics/w3c-logo-blue.gif; s5/ui
+    /default/notes.⋯
+
+    Drop executable permissions from files.
+
+  • Jirka Kosek: doc/Makefile
+
+    Corrected path
+
+Website
+
+The following changes have been made to the website code since the 1.78.1
+release.
+
+  • Jirka Kosek: build.xml
+
+    Added clean targets
+
+  • Jirka Kosek: build.xml
+
+    Extensions and other builds ported to Ant
+
+  • stilor: olink.xsl
+
+    Make olink errors/warnings overridable in customizations.
+
+Webhelp
+
+The following changes have been made to the webhelp code since the 1.78.1
+release.
+
+  • Robert Stayton: xsl/webhelp-common.xsl
+
+    Fix bug 1357 to avoid creating l10n.js file if only collecting olink data.
+
+  • Robert Stayton: docsrc/xinclude-test.xml; docsrc/readme.xml
+
+    Convert XML doc to DB5.
+
+  • Robert Stayton: xsl/webhelp-common.xsl
+
+    Fix error message for namespace fixup.
+
+  • Robert Stayton: xsl/webhelp-common.xsl
+
+    fix bug in namespace fixup syntax.
+
+  • Robert Stayton: xsl/webhelp-common.xsl
+
+    Adjust namespace fixup for namespace build process.
+
+  • stilor: xsl/titlepage.templates.xml
+
+    Remove autoguessing of the namespace for wrapper elements; determine namespace by prefix, if any.
+
+  • Jirka Kosek: template/common/main.js
+
+    Fix for bug #1301
+
+Params
+
+The following changes have been made to the params code since the 1.78.1
+release.
+
+  • Robert Stayton: dialogue.properties.xml
+
+    Fix typo.
+
+  • Robert Stayton: publishers.properties.xml
+
+    Fix typo.
+
+  • Robert Stayton: speaker.properties.xml; publishers.properties.xml;
+    inlinestagedir.properti⋯
+
+    New property sets for DocBook Publishers elements.
+
+  • Robert Stayton: table.frame.border.thickness.xml;
+    table.cell.border.thickness.xml
+
+    Fix bug #1291, make default values different for HTML and FO.
+
+  • tom_schr: profile.outputformat.xml
+
+    Added missing support for outputformat attribute
+
+    * Added missing parameter profile.outputformat in
+      params/profile.outputformat.xml
+    * Added missing lines to check for outputformat attribute in
+      profiling/profile-mode.xsl
+
+  • Jirka Kosek: table.frame.border.thickness.xml;
+    table.cell.border.thickness.xml
+
+    Changed default border thickness from 0.5pt to 1px. The reason is that Chrome rounds 0.5pt to 0px making borders invisible.
+
+  • Robert Stayton: list.block.spacing.xml
+
+    Fix typo in element name.
+
+  • Robert Stayton: autolink.index.see.xml
+
+    New param to control automatic links in index from see and
+    seealso to indexterm primary.
+
+  • Robert Stayton: show.bookmarks.xml
+
+    New param to turn off PDF bookmarks.
+
+  • Robert Stayton: xsl1.1.bookmarks.xml
+
+    Param to use standard XSL 1.1 bookmark elements.
+
+  • tom_schr: link.to.self.for.mediaobject.xml
+
+    Fixed ticket [#1315]: Add possibility to add a link to mediaobjects
+
+  • stilor: toc.leader.properties.xml
+
+    Replace literal space inserted next to fo:leader in ToC with a padding. This
+    works around a bug in FOP (see FOP-1444).
+    Make ToC fo:leader properties configurable via attribute set.
+
+  • Robert Stayton: list.block.spacing.xml; list.item.spacing.xml
+
+    Clarify that list.block.spacing is not used in nested lists.
+
+  • stilor: insert.xref.page.number.para.xml
+
+    Missed new file in previous checkin.
+
+  • Robert Stayton: mark.optional.procedure.steps.xml
+
+    New param to turn off Optional text for optional steps.
+
+Profiling
+
+The following changes have been made to the profiling code since the 1.78.1
+release.
+
+  • tom_schr: profile-mode.xsl
+
+    Added missing support for outputformat attribute
+
+    * Added missing parameter profile.outputformat in
+      params/profile.outputformat.xml
+    * Added missing lines to check for outputformat attribute in
+      profiling/profile-mode.xsl
+
+  • Robert Stayton: xsl2profile.xsl
+
+    Fix bug #1335 where profile-chunk.xsl was xsl:including
+    chunk-code.xsl instead of profile-chunk-code.xsl.
+
+  • Robert Stayton: xsl2profile.xsl
+
+    Fixed bug in handling of namespace fixup.
+
+  • Robert Stayton: xsl2profile.xsl
+
+    Adjust namespace fixup to match other templates.
+
+Lib
+
+The following changes have been made to the lib code since the 1.78.1 release.
+
+  • Jirka Kosek: build.xml
+
+    Added lib ant build support
+
+Tools
+
+The following changes have been made to the tools code since the 1.78.1
+release.
+
+  • Jirka Kosek: build-shared.xml
+
+    Added lib ant build support
+
+  • Jirka Kosek: build-shared.xml
+
+    Added clean targets
+
+  • Jirka Kosek: lib/xml-apis.jar; lib/xercesImpl.jar; build-shared.xml; lib/
+    xalan.jar
+
+    Extensions and other builds ported to Ant
+
+  • Jirka Kosek: build-shared.xml
+
+    Added ant build for HTML stylesheets
+
+  • Jirka Kosek: licenses/saxon/JAMESCLARK.txt; lib/jython.jar; lib/
+    xercesImpl.jar; licenses/j⋯
+
+    Initial work on Ant build, common (L10N) directory handled so far
+
+Template
+
+The following changes have been made to the template code since the 1.78.1
+release.
+
+  • Robert Stayton: titlepage.xsl
+
+    Remove the d: namespace declaration because it is
+    automatically added by the ns build process.
+
+  • Jirka Kosek: titlepage.xsl
+
+    Added missing namespace declaration
+
+  • Robert Stayton: titlepage.xsl
+
+    Remove d: namespace declaration from non namespaced version since
+    it is automatically added to build the namespaced version.
+
+  • Robert Stayton: titlepage.xsl
+
+    Set the db.prefix to blank until convert to ns build.
+
+  • Robert Stayton: titlepage.xsl
+
+    Fix handling of namespace declaration for conversion to NS sourcebase.
+
+  • Robert Stayton: titlepage.xsl
+
+    Modified to support roundtrip conversion between namespaced
+    version and non-namespaced version.
+
+  • stilor: titlepage.xsl
+
+    Remove autoguessing of the namespace for wrapper elements; determine namespace by prefix, if any.
+
+Extensions
+
+The following changes have been made to the extensions code since the 1.78.1
+release.
+
+  • Jirka Kosek: build.xml
+
+    Added clean targets
+
+  • Jirka Kosek: build.xml
+
+    Extensions and other builds ported to Ant
 
 Release Notes: 1.78.1
 

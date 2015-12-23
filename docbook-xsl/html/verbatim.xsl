@@ -1,11 +1,10 @@
 <?xml version='1.0'?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:sverb="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.Verbatim"
+                xmlns:sverb="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.Verbatim"
                 xmlns:xverb="xalan://com.nwalsh.xalan.Verbatim"
                 xmlns:lxslt="http://xml.apache.org/xslt"
                 xmlns:exsl="http://exslt.org/common"
-                exclude-result-prefixes="sverb xverb lxslt exsl d"
+                exclude-result-prefixes="sverb xverb lxslt exsl"
                 version='1.0'>
 
 <!-- ********************************************************************
@@ -27,7 +26,7 @@ xmlns:sverb="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.Verbatim"
 <lxslt:component prefix="xverb"
                  functions="numberLines"/>
 
-<xsl:template match="d:programlisting|d:screen|d:synopsis">
+<xsl:template match="programlisting|screen|synopsis">
   <xsl:param name="suppress-numbers" select="'0'"/>
 
   <xsl:call-template name="anchor"/>
@@ -96,7 +95,7 @@ xmlns:sverb="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.Verbatim"
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:literallayout">
+<xsl:template match="literallayout">
   <xsl:param name="suppress-numbers" select="'0'"/>
 
   <xsl:variable name="rtf">
@@ -168,7 +167,7 @@ xmlns:sverb="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.Verbatim"
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:address">
+<xsl:template match="address">
   <xsl:param name="suppress-numbers" select="'0'"/>
 
   <xsl:variable name="rtf">
@@ -280,34 +279,34 @@ xmlns:sverb="http://nwalsh.com/xslt/ext/com.nwalsh.saxon.Verbatim"
       <xsl:when test="$pi.context/@continuation='continues'">
         <xsl:variable name="lastLine">
           <xsl:choose>
-            <xsl:when test="$pi.context/self::d:programlisting">
+            <xsl:when test="$pi.context/self::programlisting">
               <xsl:call-template name="lastLineNumber">
                 <xsl:with-param name="listings"
-                     select="preceding::d:programlisting[@linenumbering='numbered']"/>
+                     select="preceding::programlisting[@linenumbering='numbered']"/>
               </xsl:call-template>
             </xsl:when>
-            <xsl:when test="$pi.context/self::d:screen">
+            <xsl:when test="$pi.context/self::screen">
               <xsl:call-template name="lastLineNumber">
                 <xsl:with-param name="listings"
-                     select="preceding::d:screen[@linenumbering='numbered']"/>
+                     select="preceding::screen[@linenumbering='numbered']"/>
               </xsl:call-template>
             </xsl:when>
-            <xsl:when test="$pi.context/self::d:literallayout">
+            <xsl:when test="$pi.context/self::literallayout">
               <xsl:call-template name="lastLineNumber">
                 <xsl:with-param name="listings"
-                     select="preceding::d:literallayout[@linenumbering='numbered']"/>
+                     select="preceding::literallayout[@linenumbering='numbered']"/>
               </xsl:call-template>
             </xsl:when>
-            <xsl:when test="$pi.context/self::d:address">
+            <xsl:when test="$pi.context/self::address">
               <xsl:call-template name="lastLineNumber">
                 <xsl:with-param name="listings"
-                     select="preceding::d:address[@linenumbering='numbered']"/>
+                     select="preceding::address[@linenumbering='numbered']"/>
               </xsl:call-template>
             </xsl:when>
-            <xsl:when test="$pi.context/self::d:synopsis">
+            <xsl:when test="$pi.context/self::synopsis">
               <xsl:call-template name="lastLineNumber">
                 <xsl:with-param name="listings"
-                     select="preceding::d:synopsis[@linenumbering='numbered']"/>
+                     select="preceding::synopsis[@linenumbering='numbered']"/>
               </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>

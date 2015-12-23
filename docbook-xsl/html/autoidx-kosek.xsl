@@ -4,14 +4,13 @@
 %common.entities;
 ]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:i="urn:cz-kosek:functions:index"
+                xmlns:i="urn:cz-kosek:functions:index"
                 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0"
                 xmlns:func="http://exslt.org/functions"
                 xmlns:k="http://www.isogen.com/functions/com.isogen.saxoni18n.Saxoni18nService"
                 xmlns:exslt="http://exslt.org/common"
                 extension-element-prefixes="func exslt"
-                exclude-result-prefixes="func exslt i l k d"
+                exclude-result-prefixes="func exslt i l k"
                 version="1.0">
 
 <!-- ********************************************************************
@@ -30,7 +29,7 @@ xmlns:i="urn:cz-kosek:functions:index"
 <xsl:include href="../common/autoidx-kosek.xsl"/>
 
 <xsl:template name="generate-kosek-index">
-  <xsl:param name="scope" select="(ancestor::d:book|/)[last()]"/>
+  <xsl:param name="scope" select="(ancestor::book|/)[last()]"/>
 
   <xsl:variable name="vendor" select="system-property('xsl:vendor')"/>
   <xsl:if test="contains($vendor, 'libxslt')">
@@ -76,7 +75,7 @@ xmlns:i="urn:cz-kosek:functions:index"
   </xsl:variable>
 
   <xsl:variable name="terms"
-                select="//d:indexterm[count(.|key('group-code', i:group-index(&primary;))[&scope;][1]) = 1 and not(@class = 'endofrange')]"/>
+                select="//indexterm[count(.|key('group-code', i:group-index(&primary;))[&scope;][1]) = 1 and not(@class = 'endofrange')]"/>
 
   <div class="index">
     <xsl:apply-templates select="$terms" mode="index-div-kosek">
@@ -88,7 +87,7 @@ xmlns:i="urn:cz-kosek:functions:index"
   </div>
 </xsl:template>
 
-<xsl:template match="d:indexterm" mode="index-div-kosek">
+<xsl:template match="indexterm" mode="index-div-kosek">
   <xsl:param name="scope" select="."/>
   <xsl:param name="role" select="''"/>
   <xsl:param name="type" select="''"/>

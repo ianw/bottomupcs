@@ -1,34 +1,25 @@
 <?xml version='1.0'?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:t="http://nwalsh.com/docbook/xsl/template/1.0"
+		xmlns:t="http://nwalsh.com/docbook/xsl/template/1.0"
                 xmlns:param="http://nwalsh.com/docbook/xsl/template/1.0/param"
                 xmlns:doc="http://nwalsh.com/xsl/documentation/1.0"
-                xmlns:d="http://docbook.org/ns/docbook"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 xmlns:exsl="http://exslt.org/common"
                 exclude-result-prefixes="doc t param exsl"
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: titlepage.xsl 9599 2012-09-11 12:11:26Z kosek $
+     $Id: titlepage.xsl 9940 2014-09-06 16:06:50Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
-     See ../README or http://nwalsh.com/docbook/xsl/ for copyright
-     and other information.
+     See ../README or http://docbook.sf.net/release/xsl/current/ for
+     copyright and other information.
 
      ******************************************************************** -->
 
 <!-- ==================================================================== -->
-
-<!-- Namespace for wrapper elements. Please set it for XHTML. -->
-<xsl:param name="ns">
-  <!-- Guess correct setting for cases where parameter is not supplied -->
-  <xsl:choose>
-    <xsl:when test="//*[namespace-uri() = 'http://www.w3.org/1999/XSL/Format']">http://www.w3.org/1999/XSL/Format</xsl:when>
-    <xsl:when test="//*[namespace-uri() = 'http://www.w3.org/1999/xhtml']">http://www.w3.org/1999/xhtml</xsl:when>
-  </xsl:choose>
-</xsl:param>
+<xsl:variable name="db.prefix"></xsl:variable>
 
 <xsl:template match="/">
   <xsl:text>&#x0a;</xsl:text>
@@ -36,35 +27,23 @@
   <xsl:text>&#x0a;</xsl:text>
 </xsl:template>
 
-<doc:reference xmlns="">
-<referenceinfo>
-<releaseinfo role="meta">
-$Id: titlepage.xsl 9599 2012-09-11 12:11:26Z kosek $
-</releaseinfo>
-<author><surname>Walsh</surname>
-<firstname>Norman</firstname></author>
-<copyright><year>1999</year><year>2000</year>
-<holder>Norman Walsh</holder>
-</copyright>
-</referenceinfo>
-<title>Template Stylesheet Reference</title>
-
-<partintro id="intro_partintro">
-<title>Introduction</title>
-
-<para>This is technical reference documentation for the DocBook XSL
-Stylesheets; it documents (some of) the parameters, templates, and
-other elements of the stylesheets.</para>
-
-<para>This is not intended to be <quote>user</quote> documentation.
-It is provided for developers writing customization layers for the
-stylesheets, and for anyone who's interested in <quote>how it
-works</quote>.</para>
-
-<para>Although I am trying to be thorough, this documentation is known
-to be incomplete. Don't forget to read the source, too :-)</para>
-</partintro>
-
+<doc:reference xmlns="" xml:id="template">
+  <?dbhtml dir="template"?>
+  <?dbhtml filename="index.html"?>
+  <info>
+    <title>Titlepage Template Stylesheet Reference</title>
+    <releaseinfo role="meta">
+      $Id: titlepage.xsl 9940 2014-09-06 16:06:50Z bobstayton $
+    </releaseinfo>
+  </info>
+  <partintro xml:id="intro_partintro">
+    <title>Introduction</title>
+    <para>This is technical reference documentation for the
+      “titlepage” templates in the DocBook XSL Stylesheets.</para>
+    <para>This is not intended to be user documentation.  It is
+      provided for developers writing customization layers for the
+      stylesheets.</para>
+  </partintro>
 </doc:reference>
 
 <!-- ==================================================================== -->
@@ -73,6 +52,102 @@ to be incomplete. Don't forget to read the source, too :-)</para>
 <xsl:strip-space elements="xsl:* t:*"/>
 
 <!-- ==================================================================== -->
+  
+<doc:template name="get.namespace.prefix">
+<refpurpose>Obtain namespace prefix for an element identified by a string containing qualified name</refpurpose>
+<refdescription>
+<para>This template interprets a string containing a qualified name of an element
+and returns the namespace prefix, if any.</para>
+<para>Element name could be an XPath expression starting with the element name; this
+template will first determine if the occurrence of a colon is preceded by a valid
+NCName, assuming only ASCII characters.</para>
+</refdescription>
+</doc:template>
+  
+<xsl:template name="get.namespace.prefix">
+  <xsl:param name="element.name"/>
+  
+  <xsl:if test="contains($element.name, ':') and
+    translate(substring-before($element.name, ':'),
+    'ABCDEFGGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789','') = ''">
+    <xsl:value-of select="substring-before($element.name, ':')"/>
+  </xsl:if>
+</xsl:template>
+  
+<doc:template name="get.namespace.uri">
+<refpurpose>Obtain URI for an element identified by a string containing qualified name</refpurpose>
+<refdescription>
+<para>This template interprets a string containing a qualified name of an element
+and returns the namespace URI for that element, looking for namespace prefixes
+starting from a reference node.</para>
+</refdescription>
+</doc:template>
+  
+<xsl:template name="get.namespace.uri">
+  <xsl:param name="element.name"/>
+  <xsl:param name="reference.node" select="."/>
+  <xsl:param name="missing.namespace.warning" select="not(/t:templates/@t:missing-namespace-ok = 'yes')"/>
+  
+  <xsl:variable name="ns.prefix">
+    <xsl:call-template name="get.namespace.prefix">
+      <xsl:with-param name="element.name" select="$element.name"/>
+    </xsl:call-template>
+  </xsl:variable>
+
+  <xsl:choose>
+    <xsl:when test="$reference.node/ancestor-or-self::*/namespace::*[local-name(.) = $ns.prefix]">
+      <xsl:value-of select="$reference.node/ancestor-or-self::*/namespace::*[local-name(.) = $ns.prefix]"/>
+    </xsl:when>
+    <xsl:when test="$missing.namespace.warning">
+      <xsl:message>
+        <xsl:text>WARNING: Namespace '</xsl:text>
+        <xsl:value-of select="$ns.prefix"/>
+        <xsl:text>' not defined for t:element="</xsl:text>
+        <xsl:value-of select="$element.name"/>
+        <xsl:text>"; if this is intentional (output has is not in a namespace), add </xsl:text>
+        <xsl:text>t:missing-namespace-ok="yes" attribute to t:templates to suppress this warning.</xsl:text>
+      </xsl:message>
+    </xsl:when>
+  </xsl:choose>
+</xsl:template>
+
+<doc:template name="output.wrapper">
+<refpurpose>Output the wrapper element</refpurpose>
+
+<refdescription>
+<para>This template locates the namespace for the defined wrapper element
+and output it within that namespace. The content of the element is passed
+via the content argument.</para>
+<para>The attribute sets to use for the wrapper element and the element to
+copy non-template attributes from are also passed as arguments.</para>
+</refdescription>
+</doc:template>
+
+<xsl:template name="output.wrapper">
+  <xsl:param name="wrapper" select="ancestor-or-self::t:titlepage[@t:wrapper]"/>
+  <xsl:param name="attr.copy.from" select="."/>
+  <xsl:param name="attr.sets" select="''"/>
+  <xsl:param name="content"/>
+  
+  <xsl:variable name="ns.uri">
+    <xsl:call-template name="get.namespace.uri">
+      <xsl:with-param name="element.name" select="$wrapper/@t:wrapper"/>
+      <xsl:with-param name="reference.node" select="$wrapper"></xsl:with-param>
+    </xsl:call-template>
+  </xsl:variable>
+  
+  <xsl:element name="{$wrapper/@t:wrapper}" namespace="{$ns.uri}">
+    <xsl:if test="$attr.sets != ''">
+      <xsl:attribute name="xsl:use-attribute-sets"><xsl:value-of select="$attr.sets"/></xsl:attribute>
+    </xsl:if>
+    <xsl:for-each select="$attr.copy.from/@*">
+      <xsl:if test="not(starts-with(namespace-uri(.), 'http://nwalsh.com/docbook/xsl/template/1.0'))">
+        <xsl:copy/>
+      </xsl:if>
+    </xsl:for-each>
+    <xsl:copy-of select="$content"/>
+  </xsl:element>
+</xsl:template>
 
 <doc:template match="t:templates" xmlns="" id="templates">
 <refpurpose>Construct a stylesheet for the templates provided</refpurpose>
@@ -85,28 +160,48 @@ set of templates. This template creates an appropriate
 <para>If the <literal>t:templates</literal> element has a
 <literal>base-stylesheet</literal> attribute, an
 <literal>xsl:import</literal> statement is constructed for it.</para>
+
+<para>If the <literal>t:templates</literal> element has a
+<literal>copy-namespaces</literal> attribute, it is interpreted as a
+space-separated list of namespace prefixes to be copied from the template
+to the resulting stylesheet. Default namespace is always copied.</para>
 </refdescription>
 </doc:template>
 
 <xsl:template match="t:templates">
   <xsl:element name="xsl:stylesheet">
 
+    <xsl:if test="$db.prefix = 'd:'">
+      <xsl:for-each select="document('')/xsl:stylesheet/namespace::d">
+        <xsl:copy/>
+      </xsl:for-each>
+    </xsl:if>
+
     <xsl:for-each select="document('')/xsl:stylesheet/namespace::exsl">
       <xsl:copy/>
     </xsl:for-each>
 
-    <xsl:for-each select="document('')/xsl:stylesheet/namespace::d">
-      <xsl:copy/>
+    <!-- Two spaces at the beginning of $copied.ns so that the default namespace will be copied -->
+    <xsl:variable name="copied.ns" select="concat('  ',@t:copy-namespaces,' ')"/>
+    <xsl:for-each select="namespace::*">
+      <xsl:if test="contains($copied.ns,concat(' ',local-name(.),' '))">
+        <xsl:copy/>
+      </xsl:if>
     </xsl:for-each>
 
     <xsl:attribute name="version">1.0</xsl:attribute>
-    <xsl:attribute name="exclude-result-prefixes">exsl d</xsl:attribute>
+
+    <xsl:attribute name="exclude-result-prefixes">
+      <xsl:choose>
+        <xsl:when test="$db.prefix = 'd:'">exsl d</xsl:when>
+        <xsl:otherwise>exsl</xsl:otherwise>
+      </xsl:choose>
+    </xsl:attribute>
 
     <xsl:text>&#xA;&#xA;</xsl:text>
     <xsl:comment>
       <xsl:text> This stylesheet was created by </xsl:text>
-      <xsl:text>template/titlepage.xsl; </xsl:text>
-      <xsl:text>do not edit it by hand. </xsl:text>
+      <xsl:text>template/titlepage.xsl</xsl:text>
     </xsl:comment>
 
     <xsl:if test="@t:base-stylesheet">
@@ -158,8 +253,8 @@ template that should be called to generate the title page.
 <varlistentry><term>element</term>
 <listitem><para>The name of the source document element for which
 these templates apply. In other words, to make a title page for the
-<sgmltag>article</sgmltag> element, set the
-<sgmltag class="attribute">element</sgmltag> attribute to
+<tag>article</tag> element, set the
+<tag class="attribute">element</tag> attribute to
 <quote><literal>article</literal></quote>. This attribute is required.
 </para></listitem>
 </varlistentry>
@@ -169,8 +264,8 @@ This attribute identifies that element.
 </para></listitem>
 </varlistentry>
 <varlistentry><term>class</term>
-<listitem><para>If the <sgmltag class="attribute">class</sgmltag> attribute
-is set, a <sgmltag class="attribute">class</sgmltag> attribute with this
+<listitem><para>If the <tag class="attribute">class</tag> attribute
+is set, a <tag class="attribute">class</tag> attribute with this
 value will be added to the wrapper element that surrounds the entire
 title page.
 </para></listitem>
@@ -205,139 +300,142 @@ and <quote>verso</quote> sides of the title page.</para>
       <xsl:text>.titlepage</xsl:text>
     </xsl:attribute>
     <xsl:text>&#xA;  </xsl:text>
-    <xsl:element name="{@t:wrapper}" namespace="{$ns}">
-      <xsl:apply-templates select="@*" mode="copy.literal.atts"/>
-      <xsl:text>&#xA;    </xsl:text>
-      <xsl:element name="xsl:variable">
-        <xsl:attribute name="name">recto.content</xsl:attribute>
-        <xsl:text>&#xA;      </xsl:text>
-        <xsl:element name="xsl:call-template">
-          <xsl:attribute name="name">
-            <xsl:value-of select="@t:element"/>
-            <xsl:text>.titlepage.before.recto</xsl:text>
-          </xsl:attribute>
-        </xsl:element>
-        <xsl:text>&#xA;      </xsl:text>
-        <xsl:element name="xsl:call-template">
-          <xsl:attribute name="name">
-            <xsl:value-of select="@t:element"/>
-            <xsl:text>.titlepage.recto</xsl:text>
-          </xsl:attribute>
-        </xsl:element>
+    <xsl:call-template name="output.wrapper">
+      <xsl:with-param name="content">
         <xsl:text>&#xA;    </xsl:text>
-      </xsl:element>
-      <xsl:text>&#xA;    </xsl:text>
-      <xsl:element name="xsl:variable">
-        <xsl:attribute name="name">recto.elements.count</xsl:attribute>
-        <xsl:text>&#xA;      </xsl:text>
-        <xsl:element name="xsl:choose">
-          <xsl:text>&#xA;        </xsl:text>
-          <xsl:element name="xsl:when">
-            <xsl:attribute name="test">function-available('exsl:node-set')</xsl:attribute>
-            <xsl:element name="xsl:value-of">
-              <xsl:attribute name="select">count(exsl:node-set($recto.content)/*)</xsl:attribute>
-            </xsl:element>
-          </xsl:element>
-          <xsl:text>&#xA;        </xsl:text>
-          <xsl:element name="xsl:when">
-            <xsl:attribute name="test">contains(system-property('xsl:vendor'), 'Apache Software Foundation')</xsl:attribute>
-            <xsl:text>&#xA;          </xsl:text>
-            <xsl:comment>Xalan quirk</xsl:comment>
-            <xsl:element name="xsl:value-of">
-              <xsl:attribute name="select">count(exsl:node-set($recto.content)/*)</xsl:attribute>
-            </xsl:element>
-          </xsl:element>
-          <xsl:text>&#xA;        </xsl:text>
-          <xsl:element name="xsl:otherwise">
-            <xsl:text>1</xsl:text>
+        <xsl:element name="xsl:variable">
+          <xsl:attribute name="name">recto.content</xsl:attribute>
+          <xsl:text>&#xA;      </xsl:text>
+          <xsl:element name="xsl:call-template">
+            <xsl:attribute name="name">
+              <xsl:value-of select="@t:element"/>
+              <xsl:text>.titlepage.before.recto</xsl:text>
+            </xsl:attribute>
           </xsl:element>
           <xsl:text>&#xA;      </xsl:text>
-        </xsl:element>
-        <xsl:text>&#xA;    </xsl:text>
-      </xsl:element>
-      <xsl:text>&#xA;    </xsl:text>
-      <xsl:element name="xsl:if">
-        <xsl:attribute name="test">(normalize-space($recto.content) != '') or ($recto.elements.count > 0)</xsl:attribute>
-        <xsl:text>&#xA;      </xsl:text>
-        <xsl:element name="{@t:wrapper}" namespace="{$ns}">
-          <xsl:apply-templates select="t:titlepage-content[@t:side='recto']/@*"
-                               mode="copy.literal.atts"/>
-          <xsl:element name="xsl:copy-of">
-            <xsl:attribute name="select">$recto.content</xsl:attribute>
+          <xsl:element name="xsl:call-template">
+            <xsl:attribute name="name">
+              <xsl:value-of select="@t:element"/>
+              <xsl:text>.titlepage.recto</xsl:text>
+            </xsl:attribute>
           </xsl:element>
+          <xsl:text>&#xA;    </xsl:text>
         </xsl:element>
         <xsl:text>&#xA;    </xsl:text>
-      </xsl:element>
-      <xsl:text>&#xA;    </xsl:text>
-      <xsl:element name="xsl:variable">
-        <xsl:attribute name="name">verso.content</xsl:attribute>
-        <xsl:text>&#xA;      </xsl:text>
-        <xsl:element name="xsl:call-template">
-          <xsl:attribute name="name">
-            <xsl:value-of select="@t:element"/>
-            <xsl:text>.titlepage.before.verso</xsl:text>
-          </xsl:attribute>
-        </xsl:element>
-        <xsl:text>&#xA;      </xsl:text>
-        <xsl:element name="xsl:call-template">
-          <xsl:attribute name="name">
-            <xsl:value-of select="@t:element"/>
-            <xsl:text>.titlepage.verso</xsl:text>
-          </xsl:attribute>
-        </xsl:element>
-        <xsl:text>&#xA;    </xsl:text>
-      </xsl:element>
-      <xsl:text>&#xA;    </xsl:text>
-      <xsl:element name="xsl:variable">
-        <xsl:attribute name="name">verso.elements.count</xsl:attribute>
-        <xsl:text>&#xA;      </xsl:text>
-        <xsl:element name="xsl:choose">
-          <xsl:text>&#xA;        </xsl:text>
-          <xsl:element name="xsl:when">
-            <xsl:attribute name="test">function-available('exsl:node-set')</xsl:attribute>
-            <xsl:element name="xsl:value-of">
-              <xsl:attribute name="select">count(exsl:node-set($verso.content)/*)</xsl:attribute>
+        <xsl:element name="xsl:variable">
+          <xsl:attribute name="name">recto.elements.count</xsl:attribute>
+          <xsl:text>&#xA;      </xsl:text>
+          <xsl:element name="xsl:choose">
+            <xsl:text>&#xA;        </xsl:text>
+            <xsl:element name="xsl:when">
+              <xsl:attribute name="test">function-available('exsl:node-set')</xsl:attribute>
+              <xsl:element name="xsl:value-of">
+                <xsl:attribute name="select">count(exsl:node-set($recto.content)/*)</xsl:attribute>
+              </xsl:element>
             </xsl:element>
-          </xsl:element>
-          <xsl:text>&#xA;        </xsl:text>
-          <xsl:element name="xsl:when">
-            <xsl:attribute name="test">contains(system-property('xsl:vendor'), 'Apache Software Foundation')</xsl:attribute>
-            <xsl:text>&#xA;          </xsl:text>
-            <xsl:comment>Xalan quirk</xsl:comment>
-            <xsl:element name="xsl:value-of">
-              <xsl:attribute name="select">count(exsl:node-set($verso.content)/*)</xsl:attribute>
+            <xsl:text>&#xA;        </xsl:text>
+            <xsl:element name="xsl:when">
+              <xsl:attribute name="test">contains(system-property('xsl:vendor'), 'Apache Software Foundation')</xsl:attribute>
+              <xsl:text>&#xA;          </xsl:text>
+              <xsl:comment>Xalan quirk</xsl:comment>
+              <xsl:element name="xsl:value-of">
+                <xsl:attribute name="select">count(exsl:node-set($recto.content)/*)</xsl:attribute>
+              </xsl:element>
             </xsl:element>
+            <xsl:text>&#xA;        </xsl:text>
+            <xsl:element name="xsl:otherwise">
+              <xsl:text>1</xsl:text>
+            </xsl:element>
+            <xsl:text>&#xA;      </xsl:text>
           </xsl:element>
-          <xsl:text>&#xA;        </xsl:text>
-          <xsl:element name="xsl:otherwise">
-            <xsl:text>1</xsl:text>
+          <xsl:text>&#xA;    </xsl:text>
+        </xsl:element>
+        <xsl:text>&#xA;    </xsl:text>
+        <xsl:element name="xsl:if">
+          <xsl:attribute name="test">(normalize-space($recto.content) != '') or ($recto.elements.count > 0)</xsl:attribute>
+          <xsl:text>&#xA;      </xsl:text>
+          <xsl:call-template name="output.wrapper">
+            <xsl:with-param name="attr.copy.from" select="t:titlepage-content[@t:side='recto']"/>
+            <xsl:with-param name="content">
+              <xsl:element name="xsl:copy-of">
+                <xsl:attribute name="select">$recto.content</xsl:attribute>
+              </xsl:element>
+            </xsl:with-param>
+          </xsl:call-template>
+          <xsl:text>&#xA;    </xsl:text>
+        </xsl:element>
+        <xsl:text>&#xA;    </xsl:text>
+        <xsl:element name="xsl:variable">
+          <xsl:attribute name="name">verso.content</xsl:attribute>
+          <xsl:text>&#xA;      </xsl:text>
+          <xsl:element name="xsl:call-template">
+            <xsl:attribute name="name">
+              <xsl:value-of select="@t:element"/>
+              <xsl:text>.titlepage.before.verso</xsl:text>
+            </xsl:attribute>
           </xsl:element>
           <xsl:text>&#xA;      </xsl:text>
-        </xsl:element>
-        <xsl:text>&#xA;    </xsl:text>
-      </xsl:element>
-      <xsl:text>&#xA;    </xsl:text>
-      <xsl:element name="xsl:if">
-        <xsl:attribute name="test">(normalize-space($verso.content) != '') or ($verso.elements.count > 0)</xsl:attribute>
-        <xsl:text>&#xA;      </xsl:text>
-        <xsl:element name="{@t:wrapper}" namespace="{$ns}">
-          <xsl:apply-templates select="t:titlepage-content[@t:side='verso']/@*"
-                               mode="copy.literal.atts"/>
-          <xsl:element name="xsl:copy-of">
-            <xsl:attribute name="select">$verso.content</xsl:attribute>
+          <xsl:element name="xsl:call-template">
+            <xsl:attribute name="name">
+              <xsl:value-of select="@t:element"/>
+              <xsl:text>.titlepage.verso</xsl:text>
+            </xsl:attribute>
           </xsl:element>
+          <xsl:text>&#xA;    </xsl:text>
         </xsl:element>
         <xsl:text>&#xA;    </xsl:text>
-      </xsl:element>
-      <xsl:text>&#xA;    </xsl:text>
-      <xsl:element name="xsl:call-template">
-        <xsl:attribute name="name">
-          <xsl:value-of select="@t:element"/>
-          <xsl:text>.titlepage.separator</xsl:text>
-        </xsl:attribute>
-      </xsl:element>
-      <xsl:text>&#xA;  </xsl:text>
-    </xsl:element>
+        <xsl:element name="xsl:variable">
+          <xsl:attribute name="name">verso.elements.count</xsl:attribute>
+          <xsl:text>&#xA;      </xsl:text>
+          <xsl:element name="xsl:choose">
+            <xsl:text>&#xA;        </xsl:text>
+            <xsl:element name="xsl:when">
+              <xsl:attribute name="test">function-available('exsl:node-set')</xsl:attribute>
+              <xsl:element name="xsl:value-of">
+                <xsl:attribute name="select">count(exsl:node-set($verso.content)/*)</xsl:attribute>
+              </xsl:element>
+            </xsl:element>
+            <xsl:text>&#xA;        </xsl:text>
+            <xsl:element name="xsl:when">
+              <xsl:attribute name="test">contains(system-property('xsl:vendor'), 'Apache Software Foundation')</xsl:attribute>
+              <xsl:text>&#xA;          </xsl:text>
+              <xsl:comment>Xalan quirk</xsl:comment>
+              <xsl:element name="xsl:value-of">
+                <xsl:attribute name="select">count(exsl:node-set($verso.content)/*)</xsl:attribute>
+              </xsl:element>
+            </xsl:element>
+            <xsl:text>&#xA;        </xsl:text>
+            <xsl:element name="xsl:otherwise">
+              <xsl:text>1</xsl:text>
+            </xsl:element>
+            <xsl:text>&#xA;      </xsl:text>
+          </xsl:element>
+          <xsl:text>&#xA;    </xsl:text>
+        </xsl:element>
+        <xsl:text>&#xA;    </xsl:text>
+        <xsl:element name="xsl:if">
+          <xsl:attribute name="test">(normalize-space($verso.content) != '') or ($verso.elements.count > 0)</xsl:attribute>
+          <xsl:text>&#xA;      </xsl:text>
+          <xsl:call-template name="output.wrapper">
+            <xsl:with-param name="attr.copy.from" select="t:titlepage-content[@t:side='verso']"/>
+            <xsl:with-param name="content">
+              <xsl:element name="xsl:copy-of">
+                <xsl:attribute name="select">$verso.content</xsl:attribute>
+              </xsl:element>
+            </xsl:with-param>
+          </xsl:call-template>
+          <xsl:text>&#xA;    </xsl:text>
+        </xsl:element>
+        <xsl:text>&#xA;    </xsl:text>
+        <xsl:element name="xsl:call-template">
+          <xsl:attribute name="name">
+            <xsl:value-of select="@t:element"/>
+            <xsl:text>.titlepage.separator</xsl:text>
+          </xsl:attribute>
+        </xsl:element>
+        <xsl:text>&#xA;  </xsl:text>
+      </xsl:with-param>
+    </xsl:call-template>
     <xsl:text>&#xA;</xsl:text>
   </xsl:element>
 
@@ -400,7 +498,8 @@ and <quote>verso</quote> sides of the title page.</para>
       <xsl:text>&#xA;&#xA;</xsl:text>
       <xsl:element name="xsl:template">
         <xsl:attribute name="match">
-          <xsl:value-of select="concat('d:', name(.))"/>
+          <xsl:value-of select="$db.prefix"/>
+          <xsl:value-of select="name(.)"/>
         </xsl:attribute>
         <xsl:attribute name="mode">
           <xsl:value-of select="../../@t:element"/>
@@ -409,84 +508,58 @@ and <quote>verso</quote> sides of the title page.</para>
           <xsl:text>.auto.mode</xsl:text>
         </xsl:attribute>
         <xsl:text>&#xA;</xsl:text>
-        <xsl:element name="{../../@t:wrapper}" namespace="{$ns}">
-          <xsl:attribute name="xsl:use-attribute-sets">
+        <xsl:call-template name="output.wrapper">
+          <xsl:with-param name="attr.sets">
             <xsl:value-of select="../../@t:element"/>
             <xsl:text>.titlepage.</xsl:text>
             <xsl:value-of select="../@t:side"/>
             <xsl:text>.style</xsl:text>
-          </xsl:attribute>
-          <xsl:for-each select="@*">
-            <xsl:if test="not(starts-with(namespace-uri(.),
-                                'http://nwalsh.com/docbook/xsl/template/1.0'))">
-              <xsl:attribute name="{name(.)}" namespace="{namespace-uri(.)}">
-                <xsl:value-of select="."/>
-              </xsl:attribute>
-            </xsl:if>
-          </xsl:for-each>
-          <xsl:text>&#xA;</xsl:text>
+          </xsl:with-param>
+          <xsl:with-param name="content">
+            <xsl:text>&#xA;</xsl:text>
 
-          <xsl:choose>
-            <xsl:when test="@t:named-template">
-              <xsl:element name="xsl:call-template">
-                <xsl:attribute name="name">
-                  <xsl:value-of select="@t:named-template"/>
-                </xsl:attribute>
-                <xsl:for-each select="@*">
-                  <xsl:if test="namespace-uri(.)='http://nwalsh.com/docbook/xsl/template/1.0/param'">
-                    <xsl:text>&#xA;</xsl:text>
-                    <xsl:element name="xsl:with-param">
-                      <xsl:attribute name="name">
-                        <xsl:value-of select="local-name(.)"/>
-                      </xsl:attribute>
-                      <xsl:attribute name="select">
-                        <xsl:call-template name="param.node"/>
-                      </xsl:attribute>
-                    </xsl:element>
-                  </xsl:if>
-                </xsl:for-each>
-                <xsl:text>&#xA;</xsl:text>
-              </xsl:element>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:element name="xsl:apply-templates">
-                <xsl:attribute name="select">.</xsl:attribute>
-                <xsl:attribute name="mode">
-                  <xsl:value-of select="../../@t:element"/>
-                  <xsl:text>.titlepage.</xsl:text>
-                  <xsl:value-of select="../@t:side"/>
-                  <xsl:text>.mode</xsl:text>
-                </xsl:attribute>
-              </xsl:element>
-            </xsl:otherwise>
-          </xsl:choose>
+            <xsl:choose>
+              <xsl:when test="@t:named-template">
+                <xsl:element name="xsl:call-template">
+                  <xsl:attribute name="name">
+                    <xsl:value-of select="@t:named-template"/>
+                  </xsl:attribute>
+                  <xsl:for-each select="@*">
+                    <xsl:if test="namespace-uri(.)='http://nwalsh.com/docbook/xsl/template/1.0/param'">
+                      <xsl:text>&#xA;</xsl:text>
+                      <xsl:element name="xsl:with-param">
+                        <xsl:attribute name="name">
+                          <xsl:value-of select="local-name(.)"/>
+                        </xsl:attribute>
+                        <xsl:attribute name="select">
+                          <xsl:call-template name="param.node"/>
+                        </xsl:attribute>
+                      </xsl:element>
+                    </xsl:if>
+                  </xsl:for-each>
+                  <xsl:text>&#xA;</xsl:text>
+                </xsl:element>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:element name="xsl:apply-templates">
+                  <xsl:attribute name="select">.</xsl:attribute>
+                  <xsl:attribute name="mode">
+                    <xsl:value-of select="../../@t:element"/>
+                    <xsl:text>.titlepage.</xsl:text>
+                    <xsl:value-of select="../@t:side"/>
+                    <xsl:text>.mode</xsl:text>
+                  </xsl:attribute>
+                </xsl:element>
+              </xsl:otherwise>
+            </xsl:choose>
 
-          <xsl:text>&#xA;</xsl:text>
-        </xsl:element>
+            <xsl:text>&#xA;</xsl:text>
+          </xsl:with-param>
+        </xsl:call-template>
         <xsl:text>&#xA;</xsl:text>
       </xsl:element>
     </xsl:if>
   </xsl:for-each>
-</xsl:template>
-
-<doc:template match="@*" mode="copy.literal.atts" xmlns=""
-              id="attr_star_in_copy.literal.atts">
-<refpurpose>Copy t:titlepage attributes</refpurpose>
-
-<refdescription>
-<para>This template copies all of the <quote>other</quote> attributes
-from a <literal>t:titlepage</literal> element onto the specified
-wrapper.</para>
-</refdescription>
-</doc:template>
-
-<xsl:template match="@*" mode="copy.literal.atts">
-  <xsl:if test="not(starts-with(namespace-uri(.),
-                                'http://nwalsh.com/docbook/xsl/template/1.0'))">
-    <xsl:attribute name="{name(.)}">
-      <xsl:value-of select="."/>
-    </xsl:attribute>
-  </xsl:if>
 </xsl:template>
 
 <!-- ==================================================================== -->
@@ -505,7 +578,7 @@ for the recto and verso sides of the title page.</para>
 <varlistentry><term>side</term>
 <listitem><para>Identifies the side of the page to which this title
 page content applies. The
-<sgmltag class="attribute">side</sgmltag> attribute is required and
+<tag class="attribute">side</tag> attribute is required and
 must be set to either 
 <quote><literal>recto</literal></quote> or
 <quote><literal>verso</literal></quote>. In addition, you must specify
@@ -516,10 +589,10 @@ within each <literal>t:titlepage</literal>.</para>
 <varlistentry><term>order</term>
 <listitem><para>Indicates how the order of the elements presented on
 the title page is determined. If the
-<sgmltag class="attribute">order</sgmltag> is
+<tag class="attribute">order</tag> is
 <quote><literal>document</literal></quote>, the elements are presented
 in document order. Otherwise (if the
-<sgmltag class="attribute">order</sgmltag> is
+<tag class="attribute">order</tag> is
 <quote><literal>stylesheet</literal></quote>), the elements are presented
 in the order that they appear in the template (and consequently in
 the stylesheet).</para>
@@ -534,7 +607,7 @@ the elements in the source document that should appear on the title page.
 </para>
 
 <para>Each element may have a single attribute:
-<sgmltag class="attribute">predicate</sgmltag>. The value of this
+<tag class="attribute">predicate</tag>. The value of this
 attribute is used as a predicate for the expression that matches
 the element on which it occurs.</para>
 
@@ -710,10 +783,20 @@ straight through into the result tree.</para>
 </doc:template>
 
 <xsl:template match="*" mode="copy">
-  <xsl:element name="{name(.)}">
-    <xsl:apply-templates select="@*" mode="copy"/>
-    <xsl:apply-templates mode="copy"/>
-  </xsl:element>
+  <xsl:choose>
+    <xsl:when test="(name(.) = local-name(.)) and namespace-uri(.) != ''">
+      <xsl:element name="{name(.)}" namespace="{namespace-uri(.)}">
+	<xsl:apply-templates select="@*" mode="copy"/>
+	<xsl:apply-templates mode="copy"/>
+      </xsl:element>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:element name="{name(.)}">
+	<xsl:apply-templates select="@*" mode="copy"/>
+	<xsl:apply-templates mode="copy"/>
+      </xsl:element>
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 <!-- ==================================================================== -->
@@ -728,9 +811,18 @@ straight through into the result tree.</para>
 </doc:template>
 
 <xsl:template match="@*" mode="copy">
-  <xsl:attribute name="{name(.)}">
-    <xsl:value-of select="."/>
-  </xsl:attribute>
+  <xsl:choose>
+    <xsl:when test="(name(.) = local-name(.)) and namespace-uri(.) != ''">
+      <xsl:attribute name="{name(.)}" namespace="{namespace-uri(.)}">
+	<xsl:value-of select="."/>
+      </xsl:attribute>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:attribute name="{name(.)}">
+	<xsl:value-of select="."/>
+      </xsl:attribute>
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 <!-- ==================================================================== -->
@@ -758,7 +850,6 @@ names.</para>
 
 <xsl:template match="*" mode="document.order">
   <xsl:variable name="docinfo">
-    <xsl:text>d:</xsl:text>
     <xsl:value-of select="ancestor::t:titlepage/@t:element"/>
     <xsl:text>info</xsl:text>
   </xsl:variable>
@@ -766,11 +857,9 @@ names.</para>
   <xsl:variable name="altinfo">
     <xsl:choose>
       <xsl:when test="ancestor::t:titlepage/@t:element='article'">
-        <xsl:text>d:</xsl:text>
         <xsl:text>artheader</xsl:text>
       </xsl:when>
       <xsl:when test="ancestor::t:titlepage/@t:element='qandaset'">
-        <xsl:text>d:</xsl:text>
         <xsl:text>blockinfo</xsl:text>
       </xsl:when>
       <xsl:when test="ancestor::t:titlepage/@t:element='section'"></xsl:when>
@@ -781,7 +870,8 @@ names.</para>
       <xsl:when test="ancestor::t:titlepage/@t:element='sect5'"></xsl:when>
       <xsl:when test="ancestor::t:titlepage/@t:element='book'"></xsl:when>
       <xsl:when test="ancestor::t:titlepage/@t:element='set'"></xsl:when>
-      <xsl:otherwise>d:docinfo</xsl:otherwise>
+      <xsl:when test="ancestor::t:titlepage/@t:element='topic'"></xsl:when>
+      <xsl:otherwise>docinfo</xsl:otherwise>
     </xsl:choose>
   </xsl:variable>
 
@@ -807,9 +897,10 @@ names.</para>
     <xsl:text>|</xsl:text>
   </xsl:if>
 
+  <xsl:value-of select="$db.prefix"/>
   <xsl:value-of select="$docinfo"/>
   <xsl:text>/</xsl:text>
-  <xsl:text>d:</xsl:text>
+  <xsl:value-of select="$db.prefix"/>
   <xsl:value-of select="name(.)"/>
   <xsl:if test="@t:predicate">
     <xsl:value-of select="@t:predicate"/>
@@ -817,9 +908,10 @@ names.</para>
 
   <xsl:if test="$altinfo != ''">
     <xsl:text>|</xsl:text>
+    <xsl:value-of select="$db.prefix"/>
     <xsl:value-of select="$altinfo"/>
     <xsl:text>/</xsl:text>
-    <xsl:text>d:</xsl:text>
+    <xsl:value-of select="$db.prefix"/>
     <xsl:value-of select="name(.)"/>
     <xsl:if test="@t:predicate">
       <xsl:value-of select="@t:predicate"/>
@@ -827,9 +919,11 @@ names.</para>
   </xsl:if>
 
   <!-- info -->
-  <xsl:text>|d:info</xsl:text>
+  <xsl:text>|</xsl:text>
+  <xsl:value-of select="$db.prefix"/>
+  <xsl:text>info</xsl:text>
   <xsl:text>/</xsl:text>
-  <xsl:text>d:</xsl:text>
+  <xsl:value-of select="$db.prefix"/>
   <xsl:value-of select="name(.)"/>
   <xsl:if test="@t:predicate">
     <xsl:value-of select="@t:predicate"/>
@@ -839,7 +933,7 @@ names.</para>
                 or local-name(.) = 'subtitle'
                 or local-name(.) = 'titleabbrev'">
     <xsl:text>|</xsl:text>
-    <xsl:text>d:</xsl:text>
+    <xsl:value-of select="$db.prefix"/>
     <xsl:value-of select="name(.)"/>
     <xsl:if test="@t:predicate">
       <xsl:value-of select="@t:predicate"/>
@@ -872,7 +966,6 @@ names.</para>
 
 <xsl:template match="*" mode="stylesheet.order">
   <xsl:variable name="docinfo">
-    <xsl:text>d:</xsl:text>
     <xsl:value-of select="ancestor::t:titlepage/@t:element"/>
     <xsl:text>info</xsl:text>
   </xsl:variable>
@@ -880,11 +973,9 @@ names.</para>
   <xsl:variable name="altinfo">
     <xsl:choose>
       <xsl:when test="ancestor::t:titlepage/@t:element='article'">
-        <xsl:text>d:</xsl:text>
         <xsl:text>artheader</xsl:text>
       </xsl:when>
       <xsl:when test="ancestor::t:titlepage/@t:element='qandaset'">
-        <xsl:text>d:</xsl:text>
         <xsl:text>blockinfo</xsl:text>
       </xsl:when>
       <xsl:when test="ancestor::t:titlepage/@t:element='section'"></xsl:when>
@@ -895,7 +986,8 @@ names.</para>
       <xsl:when test="ancestor::t:titlepage/@t:element='sect5'"></xsl:when>
       <xsl:when test="ancestor::t:titlepage/@t:element='book'"></xsl:when>
       <xsl:when test="ancestor::t:titlepage/@t:element='set'"></xsl:when>
-      <xsl:otherwise>d:docinfo</xsl:otherwise>
+      <xsl:when test="ancestor::t:titlepage/@t:element='topic'"></xsl:when>
+      <xsl:otherwise>docinfo</xsl:otherwise>
     </xsl:choose>
   </xsl:variable>
 
@@ -921,42 +1013,36 @@ names.</para>
     <xsl:when test="@t:force and @t:force != '0'">
       <xsl:choose>
         <xsl:when test="@t:named-template">
-          <xsl:element name="{../../@t:wrapper}" namespace="{$ns}">
-            <xsl:attribute name="xsl:use-attribute-sets">
+          <xsl:call-template name="output.wrapper">
+            <xsl:with-param name="attr.sets">
               <xsl:value-of select="../../@t:element"/>
               <xsl:text>.titlepage.</xsl:text>
               <xsl:value-of select="../@t:side"/>
               <xsl:text>.style</xsl:text>
-            </xsl:attribute>
-            <xsl:for-each select="@*">
-              <xsl:if test="not(starts-with(namespace-uri(.),
-                                  'http://nwalsh.com/docbook/xsl/template/1.0'))">
-                <xsl:attribute name="{name(.)}" namespace="{namespace-uri(.)}">
-                  <xsl:value-of select="."/>
-                </xsl:attribute>
-              </xsl:if>
-            </xsl:for-each>
-            <xsl:text>&#xA;</xsl:text>
-            <xsl:element name="xsl:call-template">
-              <xsl:attribute name="name">
-                <xsl:value-of select="@t:named-template"/>
-              </xsl:attribute>
-              <xsl:for-each select="@*">
-                <xsl:if test="namespace-uri(.)='http://nwalsh.com/docbook/xsl/template/1.0/param'">
-                  <xsl:text>&#xA;</xsl:text>
-                  <xsl:element name="xsl:with-param">
-                    <xsl:attribute name="name">
-                      <xsl:value-of select="local-name(.)"/>
-                    </xsl:attribute>
-                    <xsl:attribute name="select">
-                      <xsl:call-template name="param.node"/>
-                    </xsl:attribute>
-                  </xsl:element>
-                </xsl:if>
-              </xsl:for-each>
+            </xsl:with-param>
+            <xsl:with-param name="content">
               <xsl:text>&#xA;</xsl:text>
-            </xsl:element>
-          </xsl:element>
+              <xsl:element name="xsl:call-template">
+                <xsl:attribute name="name">
+                  <xsl:value-of select="@t:named-template"/>
+                </xsl:attribute>
+                <xsl:for-each select="@*">
+                  <xsl:if test="namespace-uri(.)='http://nwalsh.com/docbook/xsl/template/1.0/param'">
+                    <xsl:text>&#xA;</xsl:text>
+                    <xsl:element name="xsl:with-param">
+                      <xsl:attribute name="name">
+                        <xsl:value-of select="local-name(.)"/>
+                      </xsl:attribute>
+                      <xsl:attribute name="select">
+                        <xsl:call-template name="param.node"/>
+                      </xsl:attribute>
+                    </xsl:element>
+                  </xsl:if>
+                </xsl:for-each>
+                <xsl:text>&#xA;</xsl:text>
+              </xsl:element>
+            </xsl:with-param>
+          </xsl:call-template>
         </xsl:when>
         <xsl:otherwise>
           <xsl:message terminate="yes">
@@ -976,9 +1062,10 @@ names.</para>
             <xsl:text>&#xA;    </xsl:text>
             <xsl:element name="xsl:when">
               <xsl:attribute name="test">
+                <xsl:value-of select="$db.prefix"/>
                 <xsl:value-of select="$docinfo"/>
                 <xsl:text>/</xsl:text>
-                <xsl:text>d:</xsl:text>
+                <xsl:value-of select="$db.prefix"/>
                 <xsl:value-of select="name(.)"/>
               </xsl:attribute>
               <xsl:text>&#xA;      </xsl:text>
@@ -987,9 +1074,10 @@ names.</para>
                   <xsl:value-of select="$mode"/>
                 </xsl:attribute>
                 <xsl:attribute name="select">
+                  <xsl:value-of select="$db.prefix"/>
                   <xsl:value-of select="$docinfo"/>
                   <xsl:text>/</xsl:text>
-                  <xsl:text>d:</xsl:text>
+                  <xsl:value-of select="$db.prefix"/>
                   <xsl:value-of select="name(.)"/>
                   <xsl:if test="@t:predicate">
                     <xsl:value-of select="@t:predicate"/>
@@ -1003,9 +1091,10 @@ names.</para>
               <xsl:text>&#xA;    </xsl:text>
               <xsl:element name="xsl:when">
                 <xsl:attribute name="test">
+                  <xsl:value-of select="$db.prefix"/>
                   <xsl:value-of select="$altinfo"/>
                   <xsl:text>/</xsl:text>
-                  <xsl:text>d:</xsl:text>
+                  <xsl:value-of select="$db.prefix"/>
                   <xsl:value-of select="name(.)"/>
                 </xsl:attribute>
                 <xsl:text>&#xA;      </xsl:text>
@@ -1014,9 +1103,10 @@ names.</para>
                     <xsl:value-of select="$mode"/>
                   </xsl:attribute>
                   <xsl:attribute name="select">
+                    <xsl:value-of select="$db.prefix"/>
                     <xsl:value-of select="$altinfo"/>
                     <xsl:text>/</xsl:text>
-                    <xsl:text>d:</xsl:text>
+                    <xsl:value-of select="$db.prefix"/>
                     <xsl:value-of select="name(.)"/>
                     <xsl:if test="@t:predicate">
                       <xsl:value-of select="@t:predicate"/>
@@ -1031,9 +1121,10 @@ names.</para>
             <xsl:text>&#xA;    </xsl:text>
             <xsl:element name="xsl:when">
               <xsl:attribute name="test">
-                <xsl:value-of select="'d:info'"/>
+                <xsl:value-of select="$db.prefix"/>
+                <xsl:value-of select="'info'"/>
                 <xsl:text>/</xsl:text>
-                <xsl:text>d:</xsl:text>
+                <xsl:value-of select="$db.prefix"/>
                 <xsl:value-of select="name(.)"/>
               </xsl:attribute>
               <xsl:text>&#xA;      </xsl:text>
@@ -1042,9 +1133,10 @@ names.</para>
                   <xsl:value-of select="$mode"/>
                 </xsl:attribute>
                 <xsl:attribute name="select">
-                  <xsl:value-of select="'d:info'"/>
+                  <xsl:value-of select="$db.prefix"/>
+                  <xsl:value-of select="'info'"/>
                   <xsl:text>/</xsl:text>
-                  <xsl:text>d:</xsl:text>
+                  <xsl:value-of select="$db.prefix"/>
                   <xsl:value-of select="name(.)"/>
                   <xsl:if test="@t:predicate">
                     <xsl:value-of select="@t:predicate"/>
@@ -1057,7 +1149,7 @@ names.</para>
             <xsl:text>&#xA;    </xsl:text>
             <xsl:element name="xsl:when">
               <xsl:attribute name="test">
-                <xsl:text>d:</xsl:text>
+                <xsl:value-of select="$db.prefix"/>
                 <xsl:value-of select="name(.)"/>
               </xsl:attribute>
               <xsl:text>&#xA;      </xsl:text>
@@ -1066,7 +1158,7 @@ names.</para>
                   <xsl:value-of select="$mode"/>
                 </xsl:attribute>
                 <xsl:attribute name="select">
-                  <xsl:text>d:</xsl:text>
+                  <xsl:value-of select="$db.prefix"/>
                   <xsl:value-of select="name(.)"/>
                   <xsl:if test="@t:predicate">
                     <xsl:value-of select="@t:predicate"/>
@@ -1087,9 +1179,10 @@ names.</para>
               <xsl:value-of select="$mode"/>
             </xsl:attribute>
             <xsl:attribute name="select">
+              <xsl:value-of select="$db.prefix"/>
               <xsl:value-of select="$docinfo"/>
               <xsl:text>/</xsl:text>
-              <xsl:text>d:</xsl:text>
+              <xsl:value-of select="$db.prefix"/>
               <xsl:value-of select="name(.)"/>
               <xsl:if test="@t:predicate">
                 <xsl:value-of select="@t:predicate"/>
@@ -1105,9 +1198,10 @@ names.</para>
                 <xsl:value-of select="$mode"/>
               </xsl:attribute>
               <xsl:attribute name="select">
+                <xsl:value-of select="$db.prefix"/>
                 <xsl:value-of select="$altinfo"/>
                 <xsl:text>/</xsl:text>
-                <xsl:text>d:</xsl:text>
+                <xsl:value-of select="$db.prefix"/>
                 <xsl:value-of select="name(.)"/>
                 <xsl:if test="@t:predicate">
                   <xsl:value-of select="@t:predicate"/>
@@ -1123,9 +1217,10 @@ names.</para>
               <xsl:value-of select="$mode"/>
             </xsl:attribute>
             <xsl:attribute name="select">
-              <xsl:value-of select="'d:info'"/>
+              <xsl:value-of select="$db.prefix"/>
+              <xsl:value-of select="'info'"/>
               <xsl:text>/</xsl:text>
-              <xsl:text>d:</xsl:text>
+              <xsl:value-of select="$db.prefix"/>
               <xsl:value-of select="name(.)"/>
               <xsl:if test="@t:predicate">
                 <xsl:value-of select="@t:predicate"/>
@@ -1178,7 +1273,6 @@ processing. At present, that's just <literal>t:or</literal> elements.
       <xsl:text>&#xA;&#xA;</xsl:text>
         <xsl:element name="xsl:template">
           <xsl:attribute name="match">
-            <xsl:text>d:</xsl:text>
             <xsl:value-of select="name(.)"/>
           </xsl:attribute>
           <xsl:attribute name="mode">
@@ -1224,7 +1318,6 @@ template elements.
 
   <xsl:element name="xsl:apply-templates">
     <xsl:attribute name="select">
-      <xsl:text>d:</xsl:text>
       <xsl:value-of select="name(.)"/>
     </xsl:attribute>
     <xsl:attribute name="mode">
@@ -1318,12 +1411,14 @@ text of the select attribute.</para>
         <xsl:with-param name="orlist">
           <xsl:value-of select="$orlist"/>
           <xsl:if test="not($orlist='')">|</xsl:if>
-          <xsl:value-of select="concat('d:', name($elements[position()=$count]))"/>
+          <xsl:value-of select="name($elements[position()=$count])"/>
         </xsl:with-param>
       </xsl:call-template>
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
+
+<!-- ==================================================================== -->
 
 <xsl:template name="param.node">
   <xsl:param name="value" select="string(.)"/>
@@ -1332,7 +1427,7 @@ text of the select attribute.</para>
     <xsl:when test="local-name(.) = 'title'">
       <xsl:choose>
         <xsl:when test="$value = 'title'">
-          <xsl:text>d:title</xsl:text>
+          <xsl:text>title</xsl:text>
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="$value"/>
@@ -1343,7 +1438,8 @@ text of the select attribute.</para>
       <xsl:choose>
         <xsl:when test="starts-with($value, 'ancestor-or-self::')">
           <xsl:variable name="new">
-            <xsl:text>ancestor-or-self::d:</xsl:text>
+            <xsl:text>ancestor-or-self::</xsl:text>
+            <xsl:value-of select="$db.prefix"/>
             <xsl:value-of select="substring-after($value, 'ancestor-or-self::')"/>
           </xsl:variable>
           <xsl:value-of select="$new"/>
@@ -1358,7 +1454,5 @@ text of the select attribute.</para>
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
-
-<!-- ==================================================================== -->
 
 </xsl:stylesheet>

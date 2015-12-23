@@ -1,12 +1,10 @@
 <?xml version='1.0'?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:fo="http://www.w3.org/1999/XSL/Format"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: qandaset.xsl 8350 2009-03-17 07:24:29Z bobstayton $
+     $Id: qandaset.xsl 9738 2013-04-05 16:50:38Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -17,7 +15,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:qandaset" name="process.qandaset">
+<xsl:template match="qandaset" name="process.qandaset">
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
@@ -40,9 +38,9 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     <fo:block id="{$id}">
       <xsl:choose>
         <xsl:when test="parent::*">
-          <xsl:if test="d:blockinfo/d:title|d:info/d:title|d:title">
-            <xsl:apply-templates select="(d:blockinfo/d:title|
-                                          d:info/d:title|d:title)[1]"/>
+          <xsl:if test="blockinfo/title|info/title|title">
+            <xsl:apply-templates select="(blockinfo/title|
+                                          info/title|title)[1]"/>
           </xsl:if>
         </xsl:when>
         <!-- If it is the root element -->
@@ -65,9 +63,9 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
                                    and local-name(.) != 'titleabbrev'
                                    and local-name(.) != 'qandadiv'
                                    and local-name(.) != 'qandaentry']"/>
-      <xsl:apply-templates select="d:qandadiv"/>
+      <xsl:apply-templates select="qandadiv"/>
   
-      <xsl:if test="d:qandaentry">
+      <xsl:if test="qandaentry">
         <fo:list-block xsl:use-attribute-sets="list.block.spacing"
                        provisional-label-separation="0.2em">
           <xsl:attribute name="provisional-distance-between-starts">
@@ -78,7 +76,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
               <xsl:otherwise>2.5em</xsl:otherwise>
             </xsl:choose>
           </xsl:attribute>
-          <xsl:apply-templates select="d:qandaentry"/>
+          <xsl:apply-templates select="qandaentry"/>
         </fo:list-block>
       </xsl:if>
     </fo:block>
@@ -112,9 +110,9 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     <xsl:when test="$label-width != ''">
       <xsl:value-of select="$label-width"/>
     </xsl:when>
-    <xsl:when test="descendant::d:label">
+    <xsl:when test="descendant::label">
       <xsl:call-template name="longest.term">
-        <xsl:with-param name="terms" select="descendant::d:label"/>
+        <xsl:with-param name="terms" select="descendant::label"/>
         <xsl:with-param name="maxlength" select="20"/>
       </xsl:call-template>
       <xsl:text>em * 0.50</xsl:text>
@@ -136,17 +134,17 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:qandaset/d:blockinfo/d:title|d:qandset/d:info/d:title|d:qandaset/d:title">
-  <xsl:variable name="enclsect" select="(ancestor::d:section
-                                        | ancestor::d:simplesect
-                                        | ancestor::d:sect5
-                                        | ancestor::d:sect4
-                                        | ancestor::d:sect3
-                                        | ancestor::d:sect2
-                                        | ancestor::d:sect1
-                                        | ancestor::d:refsect3
-                                        | ancestor::d:refsect2
-                                        | ancestor::d:refsect1)[last()]"/>
+<xsl:template match="qandaset/blockinfo/title|qandset/info/title|qandaset/title">
+  <xsl:variable name="enclsect" select="(ancestor::section
+                                        | ancestor::simplesect
+                                        | ancestor::sect5
+                                        | ancestor::sect4
+                                        | ancestor::sect3
+                                        | ancestor::sect2
+                                        | ancestor::sect1
+                                        | ancestor::refsect3
+                                        | ancestor::refsect2
+                                        | ancestor::refsect1)[last()]"/>
   <xsl:variable name="sectlvl">
     <xsl:call-template name="section.level">
       <xsl:with-param name="node" select="$enclsect"/>
@@ -162,12 +160,12 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:qandaset/d:blockinfo|d:qandaset/d:info">
+<xsl:template match="qandaset/blockinfo|qandaset/info">
   <!-- what should this template really do? -->
-  <xsl:apply-templates select="d:legalnotice" mode="titlepage.mode"/>
+  <xsl:apply-templates select="legalnotice" mode="titlepage.mode"/>
 </xsl:template>
 
-<xsl:template match="d:qandadiv">
+<xsl:template match="qandadiv">
   <xsl:variable name="id"><xsl:call-template name="object.id"/></xsl:variable>
 
 
@@ -176,15 +174,15 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:variable>
   
   <fo:block id="{$id}">
-    <xsl:apply-templates select="(d:blockinfo/d:title|d:info/d:title|d:title)[1]"/>
+    <xsl:apply-templates select="(blockinfo/title|info/title|title)[1]"/>
     <xsl:apply-templates select="*[local-name(.) != 'title'
                                  and local-name(.) != 'titleabbrev'
                                  and local-name(.) != 'qandadiv'
                                  and local-name(.) != 'qandaentry']"/>
     <fo:block>
-      <xsl:apply-templates select="d:qandadiv"/>
+      <xsl:apply-templates select="qandadiv"/>
 
-      <xsl:if test="d:qandaentry">
+      <xsl:if test="qandaentry">
         <fo:list-block xsl:use-attribute-sets="list.block.spacing"
                        provisional-label-separation="0.2em">
           <xsl:attribute name="provisional-distance-between-starts">
@@ -195,24 +193,24 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
               <xsl:otherwise>2.5em</xsl:otherwise>
             </xsl:choose>
           </xsl:attribute>
-          <xsl:apply-templates select="d:qandaentry"/>
+          <xsl:apply-templates select="qandaentry"/>
         </fo:list-block>
       </xsl:if>
     </fo:block>
   </fo:block>
 </xsl:template>
 
-<xsl:template match="d:qandadiv/d:blockinfo/d:title|d:qandadiv/d:info/d:title|d:qandadiv/d:title">
-  <xsl:variable name="enclsect" select="(ancestor::d:section
-                                        | ancestor::d:simplesect
-                                        | ancestor::d:sect5
-                                        | ancestor::d:sect4
-                                        | ancestor::d:sect3
-                                        | ancestor::d:sect2
-                                        | ancestor::d:sect1
-                                        | ancestor::d:refsect3
-                                        | ancestor::d:refsect2
-                                        | ancestor::d:refsect1)[last()]"/>
+<xsl:template match="qandadiv/blockinfo/title|qandadiv/info/title|qandadiv/title">
+  <xsl:variable name="enclsect" select="(ancestor::section
+                                        | ancestor::simplesect
+                                        | ancestor::sect5
+                                        | ancestor::sect4
+                                        | ancestor::sect3
+                                        | ancestor::sect2
+                                        | ancestor::sect1
+                                        | ancestor::refsect3
+                                        | ancestor::refsect2
+                                        | ancestor::refsect1)[last()]"/>
   <xsl:variable name="sectlvl">
     <xsl:call-template name="section.level">
       <xsl:with-param name="node" select="$enclsect"/>
@@ -220,10 +218,10 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:variable>
 
   <xsl:call-template name="qanda.heading">
-    <xsl:with-param name="level"  select="$sectlvl + 1 + count(ancestor::d:qandadiv)"/>
+    <xsl:with-param name="level"  select="$sectlvl + 1 + count(ancestor::qandadiv)"/>
     <xsl:with-param name="marker" select="0"/>
     <xsl:with-param name="title">
-      <xsl:apply-templates select="parent::d:qandadiv" mode="label.markup"/>
+      <xsl:apply-templates select="parent::qandadiv" mode="label.markup"/>
       <xsl:if test="$qandadiv.autolabel != 0">
         <xsl:apply-templates select="." mode="intralabel.punctuation"/>
         <xsl:text> </xsl:text>
@@ -233,12 +231,12 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="d:qandaentry">
+<xsl:template match="qandaentry">
   <!-- Omit revhistory from fo:list-block because it is a table -->
-  <xsl:apply-templates select="d:question|d:answer"/>
+  <xsl:apply-templates select="question|answer"/>
 </xsl:template>
 
-<xsl:template match="d:question">
+<xsl:template match="question">
   <xsl:variable name="id"><xsl:call-template name="object.id"/></xsl:variable>
 
   <xsl:variable name="entry.id">
@@ -254,22 +252,27 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
 
   <xsl:variable name="label.content">
     <xsl:apply-templates select="." mode="label.markup"/>
-    <xsl:if test="contains($deflabel, 'number') and not(d:label)">
+    <xsl:if test="contains($deflabel, 'number') and not(label)">
       <xsl:apply-templates select="." mode="intralabel.punctuation"/>
     </xsl:if>
   </xsl:variable>
 
   <fo:list-item id="{$entry.id}" xsl:use-attribute-sets="list.item.spacing">
     <fo:list-item-label id="{$id}" end-indent="label-end()">
-        <xsl:if test="string-length($label.content) &gt; 0">
-			<fo:block font-weight="bold">
-			  <xsl:copy-of select="$label.content"/>          
-			</fo:block>
-        </xsl:if>
+      <xsl:choose>
+        <xsl:when test="string-length($label.content) &gt; 0">
+          <fo:block font-weight="bold">
+            <xsl:copy-of select="$label.content"/>          
+          </fo:block>
+        </xsl:when>
+        <xsl:otherwise>
+          <fo:block/>
+        </xsl:otherwise>
+      </xsl:choose>
     </fo:list-item-label>
     <fo:list-item-body start-indent="body-start()">
       <xsl:choose>
-        <xsl:when test="$deflabel = 'none' and not(d:label)">
+        <xsl:when test="$deflabel = 'none' and not(label)">
           <fo:block font-weight="bold">
             <xsl:apply-templates select="*[local-name(.)!='label']"/>
           </fo:block>
@@ -279,12 +282,12 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
         </xsl:otherwise>
       </xsl:choose>
       <!-- Uncomment this line to get revhistory output in the question -->
-      <!-- <xsl:apply-templates select="preceding-sibling::d:revhistory"/> -->
+      <!-- <xsl:apply-templates select="preceding-sibling::revhistory"/> -->
     </fo:list-item-body>
   </fo:list-item>
 </xsl:template>
 
-<xsl:template match="d:answer">
+<xsl:template match="answer">
   <xsl:variable name="id"><xsl:call-template name="object.id"/></xsl:variable>
   <xsl:variable name="entry.id">
     <xsl:call-template name="object.id">
@@ -304,12 +307,12 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     <fo:list-item-label id="{$id}" end-indent="label-end()">
       <xsl:choose>
         <xsl:when test="string-length($answer.label) &gt; 0">
-			<fo:block font-weight="bold">
-			  <xsl:copy-of select="$answer.label"/>
-			</fo:block>
+          <fo:block font-weight="bold">
+            <xsl:copy-of select="$answer.label"/>
+          </fo:block>
         </xsl:when>
         <xsl:otherwise>
-			<fo:block/>
+          <fo:block/>
         </xsl:otherwise>
       </xsl:choose>
     </fo:list-item-label>
@@ -317,7 +320,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
       <xsl:apply-templates select="*[local-name(.)!='label' and local-name(.) != 'qandaentry']"/>
       <!-- * handle nested answer/qandaentry instances -->
       <!-- * (bug 1509043 from Daniel Leidert) -->
-      <xsl:if test="descendant::d:question">
+      <xsl:if test="descendant::question">
         <xsl:call-template name="process.qandaset"/>
       </xsl:if>
     </fo:list-item-body>
@@ -336,7 +339,7 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="d:label">
+<xsl:template match="label">
   <xsl:apply-templates/>
 </xsl:template>
 

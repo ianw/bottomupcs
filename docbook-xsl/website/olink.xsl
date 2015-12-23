@@ -211,23 +211,27 @@
                           select="key('targetdoc-key', $current.docid)/parent::dir"/>
                       <xsl:with-param name="targetdoc" select="$targetdoc"/>
                     </xsl:call-template>
-                  </xsl:for-each >
+                  </xsl:for-each>
                 </xsl:when>
                 <xsl:otherwise>
-                  <xsl:message>
-                    <xsl:text>Olink error: cannot compute relative </xsl:text>
-                    <xsl:text>sitemap path because $current.docid '</xsl:text>
-                    <xsl:value-of select="$current.docid"/>
-                    <xsl:text>' not found in target database.</xsl:text>
-                  </xsl:message>
+                  <xsl:call-template name="olink.error">
+                    <xsl:with-param name="message">
+                      <xsl:text>cannot compute relative </xsl:text>
+                      <xsl:text>sitemap path because $current.docid '</xsl:text>
+                      <xsl:value-of select="$current.docid"/>
+                      <xsl:text>' not found in target database.</xsl:text>
+                    </xsl:with-param>
+                  </xsl:call-template>
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:message>
-                <xsl:text>Olink warning: cannot compute relative </xsl:text>
-                <xsl:text>sitemap path without $current.docid parameter</xsl:text>
-              </xsl:message>
+              <xsl:call-template name="olink.error">
+                <xsl:with-param name="message">
+                  <xsl:text>cannot compute relative </xsl:text>
+                  <xsl:text>sitemap path without $current.docid parameter</xsl:text>
+                </xsl:with-param>
+              </xsl:call-template>
             </xsl:otherwise>
           </xsl:choose> 
           <!-- In either case, add baseuri from its document entry-->

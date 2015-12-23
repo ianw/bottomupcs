@@ -1,12 +1,10 @@
 <?xml version='1.0'?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:fo="http://www.w3.org/1999/XSL/Format"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: fo.xsl 9720 2013-01-31 18:24:47Z bobstayton $
+     $Id: fo.xsl 9860 2014-01-21 22:37:57Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -50,8 +48,11 @@ xmlns:fo="http://www.w3.org/1999/XSL/Format"
     </xsl:when>
     <xsl:when test="$fop1.extensions != 0 and
                     starts-with($writing.mode, 'rl')">
-      <xsl:message>WARNING: FOP does not support right-to-left writing-mode</xsl:message>
-      <xsl:text>lr-tb</xsl:text>
+      <xsl:message>
+        <xsl:text>WARNING: FOP 1.0 does not support right-to-left writing-mode; </xsl:text>
+        <xsl:text>FOP 1.1 has limited support for right-to-left writing-mode.</xsl:text>
+      </xsl:message>
+      <xsl:text>rl-tb</xsl:text>
     </xsl:when>
     <xsl:when test="starts-with($writing.mode, 'lr')">lr-tb</xsl:when>
     <xsl:when test="starts-with($writing.mode, 'rl')">rl-tb</xsl:when>

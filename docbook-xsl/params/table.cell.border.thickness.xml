@@ -15,14 +15,19 @@
 
 <refsynopsisdiv>
 <src:fragment xml:id="table.cell.border.thickness.frag">
-<xsl:param name="table.cell.border.thickness">0.5pt</xsl:param>
+<xsl:param name="table.cell.border.thickness">
+  <xsl:choose>
+    <xsl:when test="contains($stylesheet.result.type,'html')">1px</xsl:when>
+    <xsl:otherwise>0.5pt</xsl:otherwise>
+  </xsl:choose>
+</xsl:param>
 </src:fragment>
 </refsynopsisdiv>
 
 <refsection><info><title>Description</title></info>
 
 <para>If non-zero, specifies the thickness of borders on table
-cells. The units are points. See <link
+cells. See <link
 xlink:href="http://www.w3.org/TR/CSS21/box.html#border-width-properties">
 CSS</link></para>
 

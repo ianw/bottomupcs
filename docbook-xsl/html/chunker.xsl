@@ -1,16 +1,15 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:saxon="http://icl.com/saxon"
+                xmlns:saxon="http://icl.com/saxon"
                 xmlns:lxslt="http://xml.apache.org/xslt"
                 xmlns:redirect="http://xml.apache.org/xalan/redirect"
                 xmlns:exsl="http://exslt.org/common"
                 xmlns:doc="http://nwalsh.com/xsl/documentation/1.0"
 		version="1.0"
-                exclude-result-prefixes="saxon lxslt redirect exsl doc d"
+                exclude-result-prefixes="saxon lxslt redirect exsl doc"
                 extension-element-prefixes="saxon redirect lxslt exsl">
 
 <!-- ********************************************************************
-     $Id: chunker.xsl 9656 2012-10-29 18:09:53Z bobstayton $
+     $Id: chunker.xsl 9741 2013-04-11 21:57:59Z bobstayton $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -35,8 +34,9 @@ xmlns:saxon="http://icl.com/saxon"
 <xsl:param name="chunker.output.media-type" select="''"/>
 <xsl:param name="chunker.output.cdata-section-elements" select="''"/>
 
-<!-- Make sure base.dir has a trailing slash now -->
-<xsl:param name="chunk.base.dir">
+<!-- Make sure base.dir has a trailing slash. -->
+<!-- This is an internal-only variable. Customize $base.dir instead. -->
+<xsl:variable name="chunk.base.dir">
   <xsl:choose>
     <xsl:when test="string-length($base.dir) = 0"></xsl:when>
     <!-- make sure to add trailing slash if omitted by user -->
@@ -47,7 +47,7 @@ xmlns:saxon="http://icl.com/saxon"
       <xsl:value-of select="concat($base.dir, '/')"/>
     </xsl:otherwise>
   </xsl:choose>
-</xsl:param>
+</xsl:variable>
 
 <xsl:param name="saxon.character.representation" select="'entity;decimal'"/>
 

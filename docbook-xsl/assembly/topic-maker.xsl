@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet 
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-  xmlns:d="http://docbook.org/ns/docbook"
-xmlns:exsl="http://exslt.org/common"
+  xmlns:exsl="http://exslt.org/common"
   xmlns="http://docbook.org/ns/docbook"
-  exclude-result-prefixes="exsl d"
+  exclude-result-prefixes="exsl"
   version="1.0">
 
 <!-- $Id: topic-maker.xsl,v 1.3 2012-04-16 00:29:35 bobs Exp $ -->
@@ -50,7 +49,7 @@ xmlns:exsl="http://exslt.org/common"
    </xsl:copy>
 </xsl:template>
 
-<xsl:template match="d:preface|d:chapter|d:appendix|d:section|d:article">
+<xsl:template match="preface|chapter|appendix|section|article">
   <xsl:variable name="element.name">
     <xsl:call-template name="element.name"/>
   </xsl:variable>

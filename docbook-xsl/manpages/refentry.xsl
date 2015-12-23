@@ -1,8 +1,6 @@
 <?xml version='1.0'?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-version='1.0'>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version='1.0'>
 
 <!-- ********************************************************************
      $Id: refentry.xsl 8235 2009-02-09 16:22:14Z xmldoc $
@@ -16,9 +14,9 @@ version='1.0'>
 
 <!-- ==================================================================== -->
 
-  <xsl:template match="d:refnamediv">
+  <xsl:template match="refnamediv">
     <xsl:choose>
-      <xsl:when test="preceding-sibling::d:refnamediv">
+      <xsl:when test="preceding-sibling::refnamediv">
         <!-- * No title on secondary refnamedivs! -->
         <!-- * Just put a single line break instead -->
         <xsl:text>.br&#10;</xsl:text>
@@ -34,7 +32,7 @@ version='1.0'>
     <xsl:call-template name="mark.subheading"/>
     <!-- * if we have multiple Refname instances, separate the names -->
     <!-- * with commas -->
-    <xsl:for-each select="d:refname">
+    <xsl:for-each select="refname">
       <xsl:if test="position()>1">
         <xsl:text>, </xsl:text>
       </xsl:if>
@@ -63,17 +61,17 @@ version='1.0'>
     <!-- *   command descriptions for the whatis(1) and apropos(1) -->
     <!-- *   commands. -->
     <!-- * -->
-    <xsl:if test="d:refpurpose/node()">
+    <xsl:if test="refpurpose/node()">
       <xsl:text> \- </xsl:text>
       <xsl:variable name="refpurpose">
-        <xsl:apply-templates select="d:refpurpose/node()"/>
+        <xsl:apply-templates select="refpurpose/node()"/>
       </xsl:variable>
       <xsl:value-of select="normalize-space($refpurpose)"/>
     </xsl:if>
     <xsl:text>&#10;</xsl:text>
   </xsl:template>
 
-  <xsl:template match="d:refsynopsisdiv">
+  <xsl:template match="refsynopsisdiv">
     <xsl:call-template name="make.subheading">
       <xsl:with-param name="title">
         <xsl:apply-templates select="." mode="subheading.markup"/>
@@ -82,7 +80,7 @@ version='1.0'>
     <xsl:apply-templates/>
   </xsl:template>
 
-  <xsl:template match="d:refsect1|d:refentry/d:refsection">
+  <xsl:template match="refsect1|refentry/refsection">
     <xsl:variable name="title">
       <xsl:apply-templates select="." mode="subheading.markup"/>
     </xsl:variable>
@@ -94,14 +92,14 @@ version='1.0'>
     <xsl:apply-templates/>
   </xsl:template>
 
-  <xsl:template match="d:refsect2|d:refentry/d:refsection/d:refsection">
+  <xsl:template match="refsect2|refentry/refsection/refsection">
     <xsl:call-template name="mark.subheading"/>
     <xsl:variable name="title">
       <xsl:apply-templates
-          select="(d:info/d:title
-                  |d:refsectioninfo/d:title
-                  |d:refsect1info/d:title
-                  |d:title)[1]/node()"/>
+          select="(info/title
+                  |refsectioninfo/title
+                  |refsect1info/title
+                  |title)[1]/node()"/>
     </xsl:variable>
     <xsl:text>.SS "</xsl:text>
     <xsl:value-of select="normalize-space($title)"/>
@@ -128,12 +126,12 @@ version='1.0'>
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="d:refsect3|d:refentry/d:refsection/d:refsection/d:refsection">
+  <xsl:template match="refsect3|refentry/refsection/refsection/refsection">
     <xsl:variable name="title">
-      <xsl:value-of select="(d:info/d:title
-                            |d:refsectioninfo/d:title
-                            |d:refsect1info/d:title
-                            |d:title)[1]"/>
+      <xsl:value-of select="(info/title
+                            |refsectioninfo/title
+                            |refsect1info/title
+                            |title)[1]"/>
     </xsl:variable>
     <xsl:choose>
       <!-- * If default-indentation adjustment is on, then indent the -->
@@ -164,16 +162,16 @@ version='1.0'>
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="d:refsection">
+  <xsl:template match="refsection">
     <!-- * This template is used for a nested Refsection that is -->
     <!-- * is a child of a Refsect3-level section (The numberd -->
     <!-- * Refsect hierarchy in DocBook ends with Refsect3, so -->
     <!-- * there is not actually a Refsect4 element.) -->
     <xsl:variable name="title">
-      <xsl:value-of select="(d:info/d:title
-                            |d:refsectioninfo/d:title
-                            |d:refsect1info/d:title
-                            |d:title)[1]"/>
+      <xsl:value-of select="(info/title
+                            |refsectioninfo/title
+                            |refsect1info/title
+                            |title)[1]"/>
     </xsl:variable>
     <xsl:variable name="indent-width">
       <xsl:if test="not($man.indent.refsect = 0)">
@@ -190,23 +188,23 @@ version='1.0'>
 
   <!-- ==================================================================== -->
 
-  <xsl:template match="d:refsect1|d:refentry/d:refsection"
+  <xsl:template match="refsect1|refentry/refsection"
                 mode="subheading.markup">
-    <xsl:variable name="title" select="(d:info/d:title
-      |d:refsectioninfo/d:title
-      |d:refsect1info/d:title
-      |d:title)[1]"/>
+    <xsl:variable name="title" select="(info/title
+      |refsectioninfo/title
+      |refsect1info/title
+      |title)[1]"/>
     <xsl:apply-templates select="$title" mode="title.markup"/>
   </xsl:template>
 
-  <xsl:template match="d:refsect1|d:refentry/d:refsection"
+  <xsl:template match="refsect1|refentry/refsection"
     mode="title.markup">
     <!-- * Note: This template is used just for generating the text for -->
     <!-- * cross-references to Refsect1 or top-level Refsection instances. -->
-    <xsl:variable name="title" select="(d:info/d:title
-      |d:refsectioninfo/d:title
-      |d:refsect1info/d:title
-      |d:title)[1]"/>
+    <xsl:variable name="title" select="(info/title
+      |refsectioninfo/title
+      |refsect1info/title
+      |title)[1]"/>
     <xsl:call-template name="process.SH.xref">
       <xsl:with-param name="title">
         <xsl:apply-templates select="$title" mode="title.markup"/>
@@ -216,9 +214,9 @@ version='1.0'>
 
   <!-- * Output of Titles from Xref with Endterm needs to be handled -->
   <!-- * separately from output for Endterm-less Xref -->
-  <xsl:template match="d:refsect1/d:title
-    |d:refentry/d:refsection/d:title
-    |d:refsynopsisdiv/d:title"
+  <xsl:template match="refsect1/title
+    |refentry/refsection/title
+    |refsynopsisdiv/title"
     mode="endterm">
     <xsl:call-template name="process.SH.xref">
       <xsl:with-param name="title">
@@ -227,7 +225,7 @@ version='1.0'>
     </xsl:call-template>
   </xsl:template>
 
-  <xsl:template match="d:refsynopsisdiv" mode="subheading.markup">
+  <xsl:template match="refsynopsisdiv" mode="subheading.markup">
     <xsl:param name="allow-anchors" select="0"/>
     <xsl:variable name="title">
       <xsl:call-template name="get.refsynopsisdiv.title">
@@ -237,7 +235,7 @@ version='1.0'>
     <xsl:value-of select="$title"/>
   </xsl:template>
 
-  <xsl:template match="d:refsynopsisdiv" mode="title.markup">
+  <xsl:template match="refsynopsisdiv" mode="title.markup">
     <!-- * Note: This template is used just for generating the text for -->
     <!-- * cross-references to Refsynopsisdiv instances. -->
     <xsl:param name="allow-anchors" select="0"/>
@@ -254,13 +252,13 @@ version='1.0'>
   <xsl:template name="get.refsynopsisdiv.title">
     <xsl:param name="allow-anchors"/>
     <xsl:choose>
-      <xsl:when test="d:info/d:title
-        |d:refsynopsisdivinfo/d:title
-        |d:title">
+      <xsl:when test="info/title
+        |refsynopsisdivinfo/title
+        |title">
         <xsl:apply-templates
-          select="(d:info/d:title
-          |d:refsynopsisdivinfo/d:title
-          |d:title)[1]" mode="title.markup">
+          select="(info/title
+          |refsynopsisdivinfo/title
+          |title)[1]" mode="title.markup">
           <xsl:with-param name="allow-anchors" select="$allow-anchors"/>
         </xsl:apply-templates>
       </xsl:when>
@@ -272,13 +270,13 @@ version='1.0'>
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="d:refnamediv" mode="subheading.markup">
+  <xsl:template match="refnamediv" mode="subheading.markup">
     <xsl:call-template name="gentext">
       <xsl:with-param name="key" select="'RefName'"/>
     </xsl:call-template>
   </xsl:template>
 
-  <xsl:template match="d:refnamediv" mode="title.markup">
+  <xsl:template match="refnamediv" mode="title.markup">
     <xsl:call-template name="process.SH.xref">
       <xsl:with-param name="title">
         <xsl:call-template name="gentext">
@@ -288,12 +286,12 @@ version='1.0'>
     </xsl:call-template>
   </xsl:template>
 
-  <xsl:template match="d:refnamediv" mode="xref-to">
+  <xsl:template match="refnamediv" mode="xref-to">
     <xsl:apply-templates select="." mode="title.markup"/>
   </xsl:template>
 
   <!-- * suppress any title we don't otherwise process elsewhere -->
-  <xsl:template match="d:title"/>
+  <xsl:template match="title"/>
 
   <!-- ==================================================================== -->
 

@@ -1,10 +1,9 @@
 <?xml version='1.0'?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:exsl="http://exslt.org/common"
+                xmlns:exsl="http://exslt.org/common"
                 xmlns:ng="http://docbook.org/docbook-ng"
                 xmlns:db="http://docbook.org/ns/docbook"
-                exclude-result-prefixes="exsl d"
+                exclude-result-prefixes="exsl"
                 version='1.0'>
 
   <xsl:import href="../html/docbook.xsl"/>
@@ -15,7 +14,7 @@ xmlns:exsl="http://exslt.org/common"
               encoding="UTF-8"
               indent="no"/>
   <!-- ********************************************************************
-       $Id: docbook.xsl 8841 2010-08-14 07:21:25Z mzjn $
+       $Id: docbook.xsl 9874 2014-01-29 19:19:48Z bobstayton $
        ********************************************************************
 
        This file is part of the XSL DocBook Stylesheet distribution.
@@ -51,106 +50,121 @@ xmlns:exsl="http://exslt.org/common"
 
   <!-- ==================================================================== -->
 
-  <xsl:template match="/">
-    <!-- * Get a title for current doc so that we let the user -->
-    <!-- * know what document we are processing at this point. -->
-    <xsl:variable name="doc.title">
-      <xsl:call-template name="get.doc.title"/>
-    </xsl:variable>
-    <xsl:choose>
-      <!-- * when we find a namespaced document, strip the -->
-      <!-- * namespace and then continue processing it. -->
-      <xsl:when test="namespace-uri(*[1]) != 'http://docbook.org/ns/docbook'">
- <xsl:call-template name="log.message">
- <xsl:with-param name="level">Note</xsl:with-param>
- <xsl:with-param name="source"><xsl:call-template name="get.doc.title"/></xsl:with-param>
- <xsl:with-param name="context-desc">
- <xsl:text>namesp. add</xsl:text>
- </xsl:with-param>
- <xsl:with-param name="message">
- <xsl:text>added namespace before processing</xsl:text>
- </xsl:with-param>
- </xsl:call-template>
- <xsl:variable name="addns">
-    <xsl:apply-templates mode="addNS"/>
+<xsl:template match="/">
+  <!-- * Get a title for current doc so that we let the user -->
+  <!-- * know what document we are processing at this point. -->
+  <xsl:variable name="doc.title">
+   <xsl:call-template name="get.doc.title"/>
   </xsl:variable>
-  <xsl:apply-templates select="exsl:node-set($addns)"/>
-</xsl:when>
-      <xsl:when test="//*[local-name() = 'refentry']">
-        <!-- * Check to see if we have any refentry children in this -->
-        <!-- * document; if so, process them. The reason we use -->
-        <!-- * local-name()=refentry (instead of just //refentry) to to -->
-        <!-- * check for refentry children is because this stylsheet is -->
-        <!-- * also post-processed by the stylesheet build to create the -->
-        <!-- * manpages/profile-docbook.xsl, and the refentry child check -->
-        <!-- * in the profile-docbook.xsl stylesheet won't work if we do -->
-        <!-- * a simple //refentry check. -->
-        <xsl:apply-templates select="//d:refentry"/>
-        <!-- * if $man.output.manifest.enabled is non-zero, -->
-        <!-- * generate a manifest file -->
-        <xsl:if test="not($man.output.manifest.enabled = 0)">
-          <xsl:call-template name="generate.manifest">
-            <xsl:with-param name="filename">
-              <xsl:choose>
-                <xsl:when test="not($man.output.manifest.filename = '')">
-                  <!-- * If a name for the manifest file is specified, -->
-                  <!-- * use that name. -->
-                  <xsl:value-of select="$man.output.manifest.filename"/>
-                </xsl:when>
-                <xsl:otherwise>
-                  <!-- * Otherwise, if user has unset -->
-                  <!-- * $man.output.manifest.filename, default to -->
-                  <!-- * using "MAN.MANIFEST" as the filename. Because -->
-                  <!-- * $man.output.manifest.enabled is non-zero and -->
-                  <!-- * so we must have a filename in order to -->
-                  <!-- * generate the manifest. -->
-                  <xsl:text>MAN.MANIFEST</xsl:text>
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:with-param>
-          </xsl:call-template>
-        </xsl:if>
-      </xsl:when>
-      <xsl:otherwise>
-        <!-- * Otherwise, the document does not contain any -->
-        <!-- * refentry elements, so log/emit message and stop. -->
-        <xsl:call-template name="log.message">
-          <xsl:with-param name="level">Erro</xsl:with-param>
-          <xsl:with-param name="source" select="$doc.title"/>
-          <xsl:with-param name="context-desc">
-            <xsl:text> no refentry</xsl:text>
-          </xsl:with-param>
-          <xsl:with-param name="message">
-            <xsl:text>No refentry elements found</xsl:text>
-            <xsl:if test="$doc.title != ''">
-            <xsl:text> in "</xsl:text>
-              <xsl:choose>
-                <xsl:when test="string-length($doc.title) &gt; 30">
-                  <xsl:value-of select="substring($doc.title,1,30)"/>
-                  <xsl:text>...</xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:value-of select="$doc.title"/>
-                </xsl:otherwise>
-              </xsl:choose>
-              <xsl:text>"</xsl:text>
-            </xsl:if>
-            <xsl:text>.</xsl:text>
+  <xsl:choose>
+    <!-- fix namespace if necessary -->
+    <xsl:when test="$exsl.node.set.available != 0 and 
+                  namespace-uri(/*) = 'http://docbook.org/ns/docbook'">
+      <xsl:call-template name="log.message">
+        <xsl:with-param name="level">Note</xsl:with-param>
+        <xsl:with-param name="source" select="$doc.title"/>
+        <xsl:with-param name="context-desc">
+          <xsl:text>namesp. cut</xsl:text>
+        </xsl:with-param>
+        <xsl:with-param name="message">
+          <xsl:text>stripped namespace before processing</xsl:text>
+        </xsl:with-param>
+      </xsl:call-template>
+      <!-- DEBUG: uncomment to save namespace-fixed document.
+      <xsl:message>Saving namespace-fixed document.</xsl:message>
+      <xsl:call-template name="write.chunk">
+        <xsl:with-param name="filename" select="'namespace-fixed.debug.xml'"/>
+        <xsl:with-param name="method" select="'xml'"/>
+        <xsl:with-param name="content">
+          <xsl:copy-of select="$no.namespace"/>
+        </xsl:with-param>
+      </xsl:call-template>
+      -->
+      <xsl:apply-templates select="exsl:node-set($no.namespace)"/>
+    </xsl:when>
+    <!-- Can't process unless namespace fixed with exsl node-set()-->
+    <xsl:when test="namespace-uri(/*) = 'http://docbook.org/ns/docbook'">
+      <xsl:message terminate="yes">
+        <xsl:text>Unable to strip the namespace from DB5 document,</xsl:text>
+        <xsl:text> cannot proceed.</xsl:text>
+      </xsl:message>
+    </xsl:when>
+
+    <xsl:when test="//*[local-name() = 'refentry']">
+      <!-- * Check to see if we have any refentry children in this -->
+      <!-- * document; if so, process them. The reason we use -->
+      <!-- * local-name()=refentry (instead of just //refentry) to to -->
+      <!-- * check for refentry children is because this stylsheet is -->
+      <!-- * also post-processed by the stylesheet build to create the -->
+      <!-- * manpages/profile-docbook.xsl, and the refentry child check -->
+      <!-- * in the profile-docbook.xsl stylesheet won't work if we do -->
+      <!-- * a simple //refentry check. -->
+      <xsl:apply-templates select="//refentry"/>
+      <!-- * if $man.output.manifest.enabled is non-zero, -->
+      <!-- * generate a manifest file -->
+      <xsl:if test="not($man.output.manifest.enabled = 0)">
+        <xsl:call-template name="generate.manifest">
+          <xsl:with-param name="filename">
+            <xsl:choose>
+              <xsl:when test="not($man.output.manifest.filename = '')">
+                <!-- * If a name for the manifest file is specified, -->
+                <!-- * use that name. -->
+                <xsl:value-of select="$man.output.manifest.filename"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <!-- * Otherwise, if user has unset -->
+                <!-- * $man.output.manifest.filename, default to -->
+                <!-- * using "MAN.MANIFEST" as the filename. Because -->
+                <!-- * $man.output.manifest.enabled is non-zero and -->
+                <!-- * so we must have a filename in order to -->
+                <!-- * generate the manifest. -->
+                <xsl:text>MAN.MANIFEST</xsl:text>
+              </xsl:otherwise>
+            </xsl:choose>
           </xsl:with-param>
         </xsl:call-template>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
+      </xsl:if>
+    </xsl:when>
+    <xsl:otherwise>
+      <!-- * Otherwise, the document does not contain any -->
+      <!-- * refentry elements, so log/emit message and stop. -->
+      <xsl:call-template name="log.message">
+        <xsl:with-param name="level">Erro</xsl:with-param>
+        <xsl:with-param name="source" select="$doc.title"/>
+        <xsl:with-param name="context-desc">
+          <xsl:text> no refentry</xsl:text>
+        </xsl:with-param>
+        <xsl:with-param name="message">
+          <xsl:text>No refentry elements found</xsl:text>
+          <xsl:if test="$doc.title != ''">
+          <xsl:text> in "</xsl:text>
+            <xsl:choose>
+              <xsl:when test="string-length($doc.title) &gt; 30">
+                <xsl:value-of select="substring($doc.title,1,30)"/>
+                <xsl:text>...</xsl:text>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:value-of select="$doc.title"/>
+              </xsl:otherwise>
+            </xsl:choose>
+            <xsl:text>"</xsl:text>
+          </xsl:if>
+          <xsl:text>.</xsl:text>
+        </xsl:with-param>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
 
   <!-- ============================================================== -->
 
-  <xsl:template match="d:refentry">
+  <xsl:template match="refentry">
     <xsl:param name="lang">
       <xsl:call-template name="l10n.language"/>
     </xsl:param>
     <!-- * Just use the first refname found as the "name" of the man -->
     <!-- * page (which may different from the "title"...) -->
-    <xsl:variable name="first.refname" select="d:refnamediv[1]/d:refname[1]"/>
+    <xsl:variable name="first.refname" select="refnamediv[1]/refname[1]"/>
 
     <xsl:call-template name="root.messages">
       <xsl:with-param name="refname" select="$first.refname"/>

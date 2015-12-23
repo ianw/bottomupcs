@@ -1,8 +1,6 @@
 <?xml version='1.0'?>
-<xsl:stylesheet exclude-result-prefixes="d"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:d="http://docbook.org/ns/docbook"
-xmlns:xi="http://www.w3.org/2001/XInclude"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:xi="http://www.w3.org/2001/XInclude"
                 version='1.0'>
 
 <!-- ********************************************************************
@@ -49,11 +47,11 @@ xmlns:xi="http://www.w3.org/2001/XInclude"
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:textobject[child::d:textdata[@entityref|@fileref]]">
-  <xsl:apply-templates select="d:textdata"/>
+<xsl:template match="textobject[child::textdata[@entityref|@fileref]]">
+  <xsl:apply-templates select="textdata"/>
 </xsl:template>
 
-<xsl:template match="d:textdata[@entityref|@fileref]">
+<xsl:template match="textdata[@entityref|@fileref]">
   <xsl:variable name="filename">
     <xsl:call-template name="get.external.filename"/>
   </xsl:variable>
@@ -73,15 +71,15 @@ xmlns:xi="http://www.w3.org/2001/XInclude"
 <!-- ==================================================================== -->
 
 <xsl:template
-    match="d:inlinemediaobject
-           [child::d:imageobject
-           [child::d:imagedata
+    match="inlinemediaobject
+           [child::imageobject
+           [child::imagedata
            [@format = 'linespecific' and
            (@entityref|@fileref)]]]">
-  <xsl:apply-templates select="d:imageobject/d:imagedata"/>
+  <xsl:apply-templates select="imageobject/imagedata"/>
 </xsl:template>
 
-<xsl:template match="d:imagedata
+<xsl:template match="imagedata
                      [@format = 'linespecific' and
                      (@entityref|@fileref)]">
   <xsl:variable name="filename">
@@ -92,7 +90,7 @@ xmlns:xi="http://www.w3.org/2001/XInclude"
 
 <!-- ==================================================================== -->
 
-<xsl:template match="d:inlinegraphic
+<xsl:template match="inlinegraphic
                      [@format = 'linespecific' and
                      (@entityref|@fileref)]">
   <xsl:variable name="filename">
