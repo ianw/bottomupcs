@@ -5,6 +5,9 @@
     xmlns:d="http://docbook.org/ns/docbook"
     version="1.0">
 
+<xsl:import href="docbook-xsl-ns-1.79.0/html/chunk.xsl"/>
+
+<xsl:param name="chunker.output.encoding" select="'UTF-8'"/>
 <xsl:param name="make.clean.html" select="1"></xsl:param>
 <xsl:param name="use.id.as.filename" select="1"></xsl:param>
 <xsl:param name="chunk.first.selection" select="1"></xsl:param>
