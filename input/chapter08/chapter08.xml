@@ -1,26 +1,23 @@
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0"
-         xmlns:xi="http://www.w3.org/2001/XInclude"
-         xml:id="chapter08">
-
-  <info><title>Dynamic Linking</title></info>
-
-  <section xml:id="code_sharing"><info><title>Code Sharing</title></info>
-
-    
-
+<?xml version="1.0"?>
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:id="chapter08">
+  <info>
+    <title>Dynamic Linking</title>
+  </info>
+  <section xml:id="code_sharing">
+    <info>
+      <title>Code Sharing</title>
+    </info>
     <para>We know that for the operating system code is considered
       read only, and separate from data.  It seems logical then that
       if programs can not modify code and have large amounts of common
       code, instead of replicating it for every executable it should
       be shared between many executables.</para>
-
     <para>With virtual memory this can be easily done.  The physical
       pages of memory the library code is loaded into can be easily
       referenced by any number of virtual pages in any number of
       address spaces.  So while you only have one physical copy of the
       library code in system memory, every process can have access to
       that library code at any virtual address it likes.</para>
-
     <para>Thus people quickly came up with the idea of a
       <emphasis>shared library</emphasis> which, as the name suggests,
       is shared by multiple executables.  Each executable contains a
@@ -30,51 +27,46 @@
       into memory, and thus share it by mapping pages into the
       executable for that physical memory, or otherwise load the
       library into memory for the executable.</para>
-
     <para>This process is called <emphasis>dynamic linking</emphasis>
     because it does part of the linking process "on the fly" as
     programs are executed in the system.</para>
-
-    <section><info><title>Dynamic Library Details</title></info>
-      
-
+    <section>
+      <info>
+        <title>Dynamic Library Details</title>
+      </info>
       <para>Libraries are very much like a program that never gets
       started.  They have code and data sections (functions and
       variables) just like every executable; but no where to start
       running.  They just provide a library of functions for
       developers to call.</para>
-
       <para>Thus ELF can represent a dynamic library just as it does
       an executable.  There are some fundamental differences, such as
       there is no pointer to where execution should start, but all
       shared libraries are just ELF objects like any other
       executable.</para>
-
       <para>The ELF header has two mutually exclusive flags,
       <computeroutput>ET_EXEC</computeroutput> and
       <computeroutput>ET_DYN</computeroutput> to mark an ELF file as
       either an executable or a shared object file.</para>
-
     </section>
-
-    <section><info><title>Including libraries in an executable</title></info>
-      
-
-      <section><info><title>Compilation</title></info>
-	
-
-	<para>When you compile your program that uses a dynamic
+    <section>
+      <info>
+        <title>Including libraries in an executable</title>
+      </info>
+      <section>
+        <info>
+          <title>Compilation</title>
+        </info>
+        <para>When you compile your program that uses a dynamic
 	library, object files are left with references to the library
 	functions just as for any other external reference.</para>
-
-	<para>You need to include the <emphasis>header</emphasis> for
+        <para>You need to include the <emphasis>header</emphasis> for
 	the library so that the compiler knows the specific types of
 	the functions you are calling.  Note the compiler only needs
 	to know the types associated with a function (such as, it
 	takes an <computeroutput>int</computeroutput> and returns a
 	<computeroutput>char *</computeroutput>) so that it can
-	correctly allocate space for the function call.<footnote>
-	<para>This has not always been the case with the C standard.
+	correctly allocate space for the function call.<footnote><para>This has not always been the case with the C standard.
 	Previously, compilers would assume that any function it did
 	not know about returned an
 	<computeroutput>int</computeroutput>.  On a 32 bit system, the
@@ -88,110 +80,96 @@
 	to valid memory.  The C99 standard has changed such that you
 	are required to specify the types of included
 	functions.</para></footnote></para>
-
       </section>
-
-      <section><info><title>Linking</title></info>
-	
-
-	<para>Even though the <emphasis>dynamic linker</emphasis> does
+      <section>
+        <info>
+          <title>Linking</title>
+        </info>
+        <para>Even though the <emphasis>dynamic linker</emphasis> does
 	a lot of the work for shared libraries, the traditional linker
 	still has a role to play in creating the executable.</para>
-
-	<para>The traditional linker needs to leave a pointer in the
+        <para>The traditional linker needs to leave a pointer in the
 	executable so that the dynamic linker knows what library will
 	satisfy the dependencies at runtime.</para>
-
-	<para>The <computeroutput>dynamic</computeroutput> section of
+        <para>The <computeroutput>dynamic</computeroutput> section of
 	the executable requires a
 	<computeroutput>NEEDED</computeroutput> entry for each shared
 	library that the executable depends on.</para>
-
-	<para>Again, we can inspect these fields with the
+        <para>Again, we can inspect these fields with the
 	<computeroutput>readelf</computeroutput> program.  Below we
 	have a look at a very standard binary,
 	<computeroutput>/bin/ls</computeroutput></para>
-
-	<example>
+        <example>
           <info>
             <title>Specifying Dynamic Libraries</title>
           </info>
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/dynamic-needed.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-
-	<para>You can see that it specifies three libraries.  The most
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/dynamic-needed.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>You can see that it specifies three libraries.  The most
 	common library shared by most, if not all, programs on the
 	system is <computeroutput>libc</computeroutput>.  There are
 	also some other libraries that the program needs to run
 	correctly.</para>
-
-	<para>Reading the ELF file directly is sometimes useful, but
+        <para>Reading the ELF file directly is sometimes useful, but
 	the usual way to inspect a dynamically linked executable is
 	via <computeroutput>ldd</computeroutput>.
 	<computeroutput>ldd</computeroutput> "walks" the dependencies
 	of libraries for you; that is if a library depends on another
 	library, it will show it to you.</para>
-
-	<example>
+        <example>
           <info>
             <title>Looking at dynamic libraries</title>
           </info>
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/ldd.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-
-	<para>We can see above that
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/ldd.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>We can see above that
 	<computeroutput>libpthread</computeroutput> has been required
 	from somewhere.  If we do a little digging, we can see that
 	the requirement comes from
 	<computeroutput>librt</computeroutput>.</para>
-
       </section>
     </section>
   </section>
-
-  <section xml:id="dynamic_linker"><info><title>The Dynamic Linker</title></info>
-    
-
+  <section xml:id="dynamic_linker">
+    <info>
+      <title>The Dynamic Linker</title>
+    </info>
     <para>The dynamic linker is the program that manages shared
     dynamic libraries on behalf of an executable.  It works to load
     libraries into memory and modify the program at runtime to call
     the functions in the library.</para>
-
     <para>ELF allows executables to specify an
     <emphasis>interpreter</emphasis>, which is a program that should
     be used to run the executable.  The compiler and static linker set
     the interpreter of executables that rely on dynamic libraries to
     be the dynamic linker.</para>
-
-    <example><info><title>Checking the program interpreter</title></info>
-      
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/interpreter.txt" parse="text"/>
-            </programlisting>
+    <example>
+      <info>
+        <title>Checking the program interpreter</title>
+      </info>
+      <programlisting linenumbering="numbered">
+        <xi:include href="code/interpreter.txt" parse="text"/>
+      </programlisting>
     </example>
-
     <para>You can see above that the interpreter is set to be
     <application>/lib/ld-linux-ia64.so.2</application>, which is the
     dynamic linker.  When the kernel loads the binary for execution,
     it will check if the <computeroutput>PT_INTERP</computeroutput>
     field is present, and if so load what it points to into memory and
     start it.</para>
-
     <para>We mentioned that dynamically linked executables leave
     behind references that need to be fixed with information that
     isn't available until runtime, such as the address of a function
     in a shared library.  The references that are left behind are
     called <emphasis>relocations</emphasis>.</para>
-
-    <section xml:id="dynamic_relocations"><info><title>Relocations</title></info>
-      
-
+    <section xml:id="dynamic_relocations">
+      <info>
+        <title>Relocations</title>
+      </info>
       <para>The essential part of the dynamic linker is fixing up
       addresses at runtime, which is the only time you can know for
       certain where you are loaded in memory.  A relocation can simply
@@ -199,41 +177,41 @@
       be fixed at load time.  Before the code is ready to run you will
       need to go through and read all the relocations and fix the
       addresses it refers to to point to the right place.</para>
-
-      <table><info><title>Relocation Example</title></info>
-	
-	<tgroup cols="2">
-	  <thead>
-	    <row>
-	      <entry>Address</entry>
-	      <entry>Action</entry>
-	    </row>
-	  </thead>
-	  <tbody>
-	    <row>
-	      <entry>0x123456</entry>
-	      <entry>Address of symbol "x"</entry>
-	    </row>
-	    <row>
-	      <entry>0x564773</entry>
-	      <entry>Function X</entry>
-	    </row>
-	  </tbody>
-	</tgroup>
+      <table>
+        <info>
+          <title>Relocation Example</title>
+        </info>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry>Address</entry>
+              <entry>Action</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>0x123456</entry>
+              <entry>Address of symbol "x"</entry>
+            </row>
+            <row>
+              <entry>0x564773</entry>
+              <entry>Function X</entry>
+            </row>
+          </tbody>
+        </tgroup>
       </table>
-
       <para>There are many types of relocation for each architecture,
       and each types exact behaviour is documented as part of the ABI
       for the system.  The definition of a relocation is quite
       straight forward.</para>
-
-      <example><info><title>Relocation as defined by ELF</title></info>
-	
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/elfrelocs.txt" parse="text"/>
-            </programlisting>
+      <example>
+        <info>
+          <title>Relocation as defined by ELF</title>
+        </info>
+        <programlisting linenumbering="numbered">
+          <xi:include href="code/elfrelocs.txt" parse="text"/>
+        </programlisting>
       </example>
-
       <para>The <computeroutput>r_offset</computeroutput> field refers
       to the offset in the file that needs to be fixed up.  The
       <computeroutput>r_info</computeroutput> field specifies the type
@@ -242,7 +220,6 @@
       architecture is simply the value of the symbol.  In this case
       you simply substitute the address of the symbol at the location
       specified, and the relocation has been "fixed-up".</para>
-
       <para>The two types, one with an addend and one without specify
       different ways for the relocation to operate.  An addend is
       simply something that should be added to the fixed up address to
@@ -252,7 +229,6 @@
       <computeroutput>i[8]</computeroutput> the addend will be set to
       8.  This means "find the address of
       <computeroutput>i</computeroutput>, and go 8 past it".</para>
-
       <para>That addend value needs to be stored somewhere.  The two
       solutions are covered by the two forms.  In the
       <computeroutput>REL</computeroutput> form the addend is actually
@@ -263,7 +239,6 @@
       the addend to it and then write it back (over the addend).  The
       <computeroutput>RELA</computeroutput> format specifies the
       addend right there in the relocation.</para>
-
       <para>The trade offs of each approach should be clear.  With
       <computeroutput>REL</computeroutput> you need to do an extra
       memory reference to find the addend before the fixup, but you
@@ -272,42 +247,40 @@
       keep the addend with the relocation, but waste that space in the
       on disk binary.  Most modern systems use
       <computeroutput>RELA</computeroutput> relocations.</para>
-
-      <section><info><title>Relocations in action</title></info>
-	
-
-	<para>The example below shows how relocations work.  We create
+      <section>
+        <info>
+          <title>Relocations in action</title>
+        </info>
+        <para>The example below shows how relocations work.  We create
 	two very simple shared libraries and reference one from in the
 	other.</para>
-
-	<example><info><title>Specifying Dynamic Libraries</title></info>
-	  
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/relocs.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-	<para>We thus have one relocation in
+        <example>
+          <info>
+            <title>Specifying Dynamic Libraries</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/relocs.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>We thus have one relocation in
 	<computeroutput>addendtest.so</computeroutput> of type
 	<computeroutput>R_IA64_DIR64LSB</computeroutput>.  If you look
 	this up in the IA64 ABI, the acronym can be broken down to
 	</para>
-
-	<orderedlist>
-	  <listitem>
-	    <para><emphasis>R_IA64</emphasis> : all relocations start with this prefix.</para>
-	  </listitem>
-	  <listitem>
-	    <para><emphasis>DIR64</emphasis> : a 64 bit direct type relocation</para>
-	  </listitem>
-	  <listitem>
-	    <para><emphasis>LSB</emphasis> : Since IA64 can operate in big and
+        <orderedlist>
+          <listitem>
+            <para><emphasis>R_IA64</emphasis> : all relocations start with this prefix.</para>
+          </listitem>
+          <listitem>
+            <para><emphasis>DIR64</emphasis> : a 64 bit direct type relocation</para>
+          </listitem>
+          <listitem>
+            <para><emphasis>LSB</emphasis> : Since IA64 can operate in big and
 	    little endian modes, this relocation is little endian
 	    (least significant byte).</para>
-	  </listitem>
-	</orderedlist>
-
-	<para>The ABI continues to say that that relocation means "the
+          </listitem>
+        </orderedlist>
+        <para>The ABI continues to say that that relocation means "the
 	value of the symbol pointed to by the relocation, plus any
 	addend".  We can see we have an addend of 8, since
 	<computeroutput>sizeof(int) == 4</computeroutput> and we have
@@ -316,46 +289,39 @@
 	you need to find the address of symbol
 	<computeroutput>i</computeroutput> and put it's value, plus 8
 	into <computeroutput>0x104f8</computeroutput>.</para>
-
       </section>
-
     </section>
-
-
-    <section><info><title>Position Independence</title></info>
-      
-
+    <section>
+      <info>
+        <title>Position Independence</title>
+      </info>
       <para>In an <emphasis>executable</emphasis> file, the code and
     data segment is given a specified base address in virtual memory.
     The executable code is not shared, and each executable gets its
     own fresh address space.  This means that the compiler knows
     exactly where the data section will be, and can reference it
     directly.</para>
-
       <para>Libraries have no such guarantee.  They can know that their
     data section will be a specified <emphasis>offset</emphasis> from
     the base address; but exactly where that base address is can only
     be known at runtime.</para>
-
       <para>Consequently all libraries must be produced with code that
     can execute no matter where it is put into memory, known as
     <emphasis>position independent code</emphasis> (or PIC for short).
     Note that the data section is still a fixed offset from the code
     section; but to actually find the address of data the offset needs
     to be added to the load address.</para>
-
     </section>
   </section>
-
-  <section xml:id="global_offset_tables"><info><title>Global Offset Tables</title></info>
-    
-
+  <section xml:id="global_offset_tables">
+    <info>
+      <title>Global Offset Tables</title>
+    </info>
     <para>You might have noticed a critical problem with relocations
       when thinking about the goals of a shared library.  We mentioned
       previously that the big advantage of a shared library with
       virtual memory is that multiple programs can use the code in
       memory by sharing of pages.</para>
-
     <para>The problem stems from the fact that libraries have no
     guarantee about where they will be put into memory.  The dynamic
     linker will find the most convenient place in virtual memory for
@@ -368,87 +334,81 @@
     library, not leaving enough space for other libraries!  And
     chances are, your program doesn't ever want to use that library
     anyway.</para>
-
     <para>Thus, if you modify the code of a shared library with a
       relocation, that code no longer becomes sharable.  We've lost
       the advantage of our shared library.</para>
-
     <para>Below we explain the mechanism for doing this.</para>
-
-    <section><info><title>The Global Offset Table</title></info>
-      
-
+    <section>
+      <info>
+        <title>The Global Offset Table</title>
+      </info>
       <para>So imagine the situation where we take the value of a
       symbol.  With only relocations, we would have the dynamic linker
       look up the memory address of that symbol and re-write the code
       to load that address.</para>
-
       <para>A fairly straight forward enhancement would be to set aside
       space in our binary to hold the address of that symbol, and have
       the dynamic linker put the address there rather than in the code
       directly.  This way we never need to touch the code part of the
       binary.</para>
-
       <para>The area that is set aside for these addresses is called
       the Global Offset Table, or GOT.  The GOT lives in a section of
       the ELF file called <computeroutput>.got</computeroutput>.
       </para>
-
-      <figure><info><title>Memory access via the GOT</title></info>
-	
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="chapter08/figures/got-plt.eps" format="EPS"/>
-	  </imageobject>
-	  <imageobject role="fo">
-	    <imagedata fileref="figures/got-plt.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
-	  </imageobject>
-	  <imageobject role="html">
-	    <imagedata fileref="chapter08/figures/got-plt.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>To keep code (green) sharable, we define process
+      <figure>
+        <info>
+          <title>Memory access via the GOT</title>
+        </info>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="chapter08/figures/got-plt.eps" format="EPS"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata fileref="figures/got-plt.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+          </imageobject>
+          <imageobject role="html">
+            <imagedata fileref="chapter08/figures/got-plt.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>To keep code (green) sharable, we define process
 	    private areas to which we can store the addresses of
 	    common variables.  This allows us to load the code
 	    anywhere in the process address space whilst still sharing
 	    the underlying physical pages.</phrase>
-	  </textobject>
-	</mediaobject>
+          </textobject>
+        </mediaobject>
       </figure>
-
       <para>The GOT is private to each process, and the process must
       have write permissions to it.  Conversely the library code is
       shared and the process should have only read and execute
       permissions on the code; it would be a serious security breach
       if the process could modify code.</para>
-
-      <section><info><title>The GOT in action</title></info>
-	
-
-	<example><info><title>Using the GOT</title></info>
-	  
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/got.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-	<para>Above we create a simple shared library which refers to
+      <section>
+        <info>
+          <title>The GOT in action</title>
+        </info>
+        <example>
+          <info>
+            <title>Using the GOT</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/got.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>Above we create a simple shared library which refers to
 	an external symbol.  We do not know the address of this symbol
 	at compile time, so we leave it for the dynamic linker to fix
 	up at runtime.</para>
-
-	<para>But we want our code to remain sharable, in case other
+        <para>But we want our code to remain sharable, in case other
 	processes want to use our code as well.</para>
-
-	<para>The disassembly reveals just how we do this with the
+        <para>The disassembly reveals just how we do this with the
 	<computeroutput>.got</computeroutput>.  On IA64 (the
 	architecture which the library was compiled for) the register
 	<computeroutput>r1</computeroutput> is known as the
 	<emphasis>global pointer</emphasis> and always points to where
 	the <computeroutput>.got</computeroutput> section is loaded
 	into memory.</para>
-
-	<para>If we have a look at the
+        <para>If we have a look at the
 	<computeroutput>readelf</computeroutput> output we can see
 	that the <computeroutput>.got</computeroutput> section starts
 	0x10570 bytes past where library was loaded into memory.  Thus
@@ -457,8 +417,7 @@
 	would be at 0x6000000000010570, and register
 	<computeroutput>r1</computeroutput> would always point to this
 	address.</para>
-
-	<para>Working backwards through the disassembly, we can see
+        <para>Working backwards through the disassembly, we can see
 	that we store the value 100 into the memory address held in
 	register <computeroutput>r15</computeroutput>.  If we look
 	back we can see that register 15 holds the value of the memory
@@ -469,151 +428,136 @@
 	the external variable <computeroutput>i</computeroutput> is
 	stored 24 bytes (that is 3 64 bit addresses).
 	</para>
-
-	<example><info><title>Relocations against the GOT</title></info>
-	  
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/got-relocs.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-	<para>We can also check out the relocation for this entry too.
+        <example>
+          <info>
+            <title>Relocations against the GOT</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/got-relocs.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>We can also check out the relocation for this entry too.
 	The relocation says "replace the value at offset 10588 with
 	the memory location that symbol i is stored at".</para>
-
-	<para>We know that the <computeroutput>.got</computeroutput>
+        <para>We know that the <computeroutput>.got</computeroutput>
 	starts at offset 0x10570 from the previous output.  We have
 	also seen how the code loads an address 0x18 (24 in decimal)
 	past this, giving us an address of 0x10570 + 0x18 =
 	0x10588 ... the address which the relocation is for!</para>
-
-	<para>So before the program begins, the dynamic linker will
+        <para>So before the program begins, the dynamic linker will
 	have fixed up the relocation to ensure that the value of the
 	memory at offset 0x10588 is the address of the global variable
 	<computeroutput>i</computeroutput>!</para>
-
       </section>
-
     </section>
-
-
   </section>
-
-  <section xml:id="dynamic_libraries"><info><title>Libraries</title></info>
-    
-
-    <section><info><title>The Procedure Lookup Table</title></info>
-      
-
+  <section xml:id="dynamic_libraries">
+    <info>
+      <title>Libraries</title>
+    </info>
+    <section>
+      <info>
+        <title>The Procedure Lookup Table</title>
+      </info>
       <para>Libraries may contain many functions, and a program may
       end up including many libraries to get its work done.  A program
       may only use one or two functions from each library of the many
       available, and depending on the run-time path through the code
       may use some functions and not others.</para>
-
       <para>As we have seen, the process of dynamic linking is a
       fairly computationally intensive one, since it involves looking
       up and searching through many tables.  Anything that can be done
       to reduce the overheads will increase performance.</para>
-
       <para>The Procedure Lookup Table (PLT) facilitates what is
       called <emphasis>lazy binding</emphasis> in programs.  Binding
       is synonymous with the fix-up process described above for
       variables located in the GOT.  When an entry has been "fixed-up"
       it is said to be "bound" to its real address.</para>
-
       <para>As we mentioned, sometimes a program will include a
       function from a library but never actually call that function,
       depending on user input.  The process of binding this function
       is quite intensive, involving loading code, searching through
       tables and writing memory.  To go through the process of binding
       a function that is not used is simply a waste of time.</para>
-
       <para>Lazy binding defers this expense until the actual function
       is called by using a PLT.</para>
-
       <para>Each library function has an entry in the PLT, which
       initially points to some special dummy code.  When the program
       calls the function, it actually calls the PLT entry (in the same
       was as variables are referenced through the GOT).</para>
-
       <para>This dummy function will load a few parameters that need
       to be passed to the dynamic linker for it to resolve the
       function and then call into a special lookup function of the
       dynamic linker.  The dynamic linker finds the real address of
       the function, and writes that location into the calling
       binary over the top of the dummy function call.</para>
-
       <para>Thus, the next time the function is called the address can
       be loaded without having to go back into the dynamic loader
       again.  If a function is never called, then the PLT entry will
       never be modified but there will be no runtime overhead.</para>
-
-      <section><info><title>The PLT in action</title></info>
-	
-
-	<para>Things start to get a bit hairy here!  If nothing else,
+      <section>
+        <info>
+          <title>The PLT in action</title>
+        </info>
+        <para>Things start to get a bit hairy here!  If nothing else,
 	you should begin to appreciate that there is a fair bit of
 	work in resolving a dynamic symbol!</para>
-
-	<para>Let us consider the simple "hello World" application.
+        <para>Let us consider the simple "hello World" application.
 	This will only make one library call to
 	<computeroutput>printf</computeroutput> to output the
 	string to the user.</para>
-
-	<example><info><title>Hello World PLT example</title></info>
-	  
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/hello.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-
-	<para>We can see above that we have a
+        <example>
+          <info>
+            <title>Hello World PLT example</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/hello.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>We can see above that we have a
 	<computeroutput>R_IA64_IPLTLSB</computeroutput> relocation for
 	our <computeroutput>printf</computeroutput> symbol.  This is
 	saying "put the address of symbol printf into memory address
 	0x6000000000000f10".  We have to start digging deeper to find
 	the exact procedure that gets us the function.</para>
-
-	<para>Below we have a look at the disassembly of the
+        <para>Below we have a look at the disassembly of the
 	<computeroutput>main()</computeroutput> function of the
 	program.</para>
-
-	<example><info><title>Hello world main()</title></info>
-	  
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/hello-main-dis.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-	<para>The call to 0x4000000000000520 must be us calling the
+        <example>
+          <info>
+            <title>Hello world main()</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/hello-main-dis.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>The call to 0x4000000000000520 must be us calling the
 	<computeroutput>printf</computeroutput> function.  We can find
 	out where this is by looking at the sections with
 	<computeroutput>readelf</computeroutput>.</para>
-
-	<example><info><title>Hello world sections</title></info>
-	  
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/hello-sections.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-	<para>That address is (unsurprisingly) in the
+        <example>
+          <info>
+            <title>Hello world sections</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/hello-sections.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>That address is (unsurprisingly) in the
 	<computeroutput>.plt</computeroutput> section.  So there we
 	have our call into the PLT! But we're not satisfied with that,
 	let's keep digging further to see what we can uncover.  We
 	disassemble the <computeroutput>.plt</computeroutput>
 	section to see what that call actually does.</para>
-
-	<example><info><title>Hello world PLT</title></info>
-	  
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/hello-plt.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-	<para>Let us step through the instructions.  Firstly, we add
+        <example>
+          <info>
+            <title>Hello world PLT</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/hello-plt.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>Let us step through the instructions.  Firstly, we add
 	80 to the value in r1, storing it in r15.  We know from before
 	that r1 will be pointing to the GOT, so this is saying "store
 	in r15 80 bytes into the GOT".  The next thing we do is load
@@ -621,31 +565,28 @@
 	post increment the value in r15 by 8 bytes.  We then store r1
 	(the location of the GOT) in r14 and set r1 to be the value in
 	the next 8 bytes after r15.  Then we branch to r16.</para>
-
-	<para>In the previous chapter we discussed how functions are
+        <para>In the previous chapter we discussed how functions are
 	actually called through a function descriptor which contains
 	the function address and the address of the global pointer.
 	Here we can see that the PLT entry is first loading the
 	function value, moving on 8 bytes to the second part of the
 	function descriptor and then loading that value into the gp
 	register before calling the function.</para>
-
-	<para>But what exactly are we loading?  We know that r1 will
+        <para>But what exactly are we loading?  We know that r1 will
 	be pointing to the GOT.  We go 80 bytes past the got
 	(0x50)</para>
-
-	<example><info><title>Hello world GOT</title></info>
-	  
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/hello-got.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-	<para>0x6000000000000ec0 + 0x50 = 0x6000000000000f10, or the
+        <example>
+          <info>
+            <title>Hello world GOT</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/hello-got.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>0x6000000000000ec0 + 0x50 = 0x6000000000000f10, or the
 	<computeroutput>.IA_64.pltoff</computeroutput> section.  Now
 	we're starting to get somewhere!</para>
-
-	<para>We can decode the <application>objdump</application>
+        <para>We can decode the <application>objdump</application>
 	output so we can see exactly what is being loaded here.
 	Swapping the byte order of the first 8 bytes
 	<computeroutput>f0 04 00 00 00 00 00 40</computeroutput> we
@@ -653,14 +594,12 @@
 	<computeroutput>0x4000000000004f0</computeroutput>.  Now that
 	address looks familiar!  Looking back up at the assemble
 	output of the PLT we see that address.</para>
-
-	<para>The code at
+        <para>The code at
 	<computeroutput>0x4000000000004f0</computeroutput> firstly
 	puts a zero value into r15, and then branches back to
 	<computeroutput>0x40000000000004c0</computeroutput>.  Wait a
 	minute!  That's the start of our PLT section.</para>
-
-	<para>We can trace this code through too.  Firstly we save the
+        <para>We can trace this code through too.  Firstly we save the
 	value of the global pointer
 	(<computeroutput>r2</computeroutput>) then we load three 8
 	byte values into <computeroutput>r16</computeroutput>,
@@ -668,45 +607,43 @@
 	<computeroutput>r1</computeroutput>.  We then branch to the
 	address in <computeroutput>r17</computeroutput>.  What we are
 	seeing here is the actual call into the dynamic linker!</para>
-
-	<para>We need to delve into the ABI to understand exactly what
+        <para>We need to delve into the ABI to understand exactly what
 	is being loaded at this point.  The ABI says two things --
 	dynamically linked programs must have a special section
 	(called the
 	<computeroutput>DT_IA_64_PLT_RESERVE</computeroutput> section)
 	that can hold three 8 byte values.  There is a pointer where
 	this reserved area in the dynamic segment of the binary.</para>
-
-	<example><info><title>Dynamic Segment</title></info>
-	  
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/hello-dynamic.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-	<para>Do you notice anything about it?  It's the same value as
+        <example>
+          <info>
+            <title>Dynamic Segment</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/hello-dynamic.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>Do you notice anything about it?  It's the same value as
 	the GOT.  This means that the first three 8 byte entries in
 	the GOT are actually the reserved area; thus will always be
 	pointed to by the global pointer.</para>
-
-	<para>When the dynamic linker starts it is its duty to fill
+        <para>When the dynamic linker starts it is its duty to fill
 	these values in.  The ABI says that the first value will be
 	filled in by the dynamic linker giving this
 	<emphasis>module</emphasis> a unique ID.  The second value is
 	the global pointer value for the dynamic linker, and the third
 	value is the address of the function that finds and fixes up
 	the symbol.</para>
-
-	<example><info><title>Code in the dynamic linker for setting up special
+        <example>
+          <info>
+            <title>Code in the dynamic linker for setting up special
 	  values
-	  (from libc <computeroutput>sysdeps/ia64/dl-machine.h</computeroutput>)</title></info>
-	  
-	  <programlisting linenumbering="numbered" language="c">
-              <xi:include href="code/runtime_setup.c" parse="text"/>
-            </programlisting>
-	</example>
-
-	<para>We can see how this gets setup by the dynamic linker by
+	  (from libc <computeroutput>sysdeps/ia64/dl-machine.h</computeroutput>)</title>
+          </info>
+          <programlisting linenumbering="numbered" language="c">
+            <xi:include href="code/runtime_setup.c" parse="text"/>
+          </programlisting>
+        </example>
+        <para>We can see how this gets setup by the dynamic linker by
 	looking at the function that does this for the binary.  The
 	<computeroutput>reserve</computeroutput> variable is set from
 	the PLT_RESERVE section pointer in the binary.  The unique
@@ -720,36 +657,31 @@
 	<computeroutput>reserve[2]</computeroutput> is finally set to
 	gp, which has been found from r2 with the
 	<computeroutput>__asm__</computeroutput> call.</para>
-
-	<para>Looking back at the ABI, we see that the
+        <para>Looking back at the ABI, we see that the
 	<computeroutput>relocation index</computeroutput> for the
 	entry must be placed in <computeroutput>r15</computeroutput>
 	and the unique identifier must be passed in
 	<computeroutput>r16</computeroutput>.</para>
-
-	<para><computeroutput>r15</computeroutput> has previously been
+        <para><computeroutput>r15</computeroutput> has previously been
 	set in the stub code, before we jumped back to the start of
 	the PLT.  Have a look down the entries, and notice how each
 	PLT entry loads <computeroutput>r15</computeroutput> with an
 	incremented value?  It should come as no surprise if you look
 	at the relocations the <computeroutput>printf</computeroutput>
 	relocation is number zero.</para>
-
-	<para><computeroutput>r16</computeroutput> we load up from the
+        <para><computeroutput>r16</computeroutput> we load up from the
 	values that have been initialised by the dynamic linker, as
 	previously discussed.  Once that is ready, we can load the
 	function address and global pointer and branch into the
 	function.</para>
-
-	<para>What happens at this point is the dynamic linker
+        <para>What happens at this point is the dynamic linker
 	function <computeroutput>_dl_runtime_resolve</computeroutput>
 	is run.  It finds the relocation; remember how the relocation
 	specified the name of the symbol?  It uses this name to find
 	the right function; this might involve loading the library
 	from disk if it is not already in memory, or otherwise sharing
 	the code.</para>
-
-	<para>The relocation record provides the dynamic linker with
+        <para>The relocation record provides the dynamic linker with
 	the address it needs to "fix up"; remember it was in the GOT
 	and loaded by the initial PLT stub?  This means that after the
 	first time the function is called, the
@@ -757,66 +689,59 @@
 	direct address of the function; short circuiting the dynamic
 	linker.</para>
       </section>
-
-      <section><info><title>Summary</title></info>
-	
-
-	<para>You've seen the <emphasis>exact</emphasis> mechanism
+      <section>
+        <info>
+          <title>Summary</title>
+        </info>
+        <para>You've seen the <emphasis>exact</emphasis> mechanism
 	behind the PLT, and consequently the inner workings of the
 	dynamic linker.  The important points to remember are</para>
         <itemizedlist>
-	    <listitem>
-	      <para>Library calls in your program actually call a stub
+          <listitem>
+            <para>Library calls in your program actually call a stub
 	      of code in the PLT of the binary.</para>
-	    </listitem>
-
-	    <listitem>
-	      <para>That stub code loads an address and jumps to
+          </listitem>
+          <listitem>
+            <para>That stub code loads an address and jumps to
 	      it.</para>
-	    </listitem>
-
-	    <listitem>
-	      <para>Initially, that address points to a function in
+          </listitem>
+          <listitem>
+            <para>Initially, that address points to a function in
 	      the dynamic linker which is capable of looking up the
 	      "real" function, given the information in the relocation
 	      entry for that function.</para>
-	    </listitem>
-
-	    <listitem>
-	      <para>The dynamic linker re-writes the address that the
+          </listitem>
+          <listitem>
+            <para>The dynamic linker re-writes the address that the
 	      stub code reads, so that the next time the function is
 	      called it will go straight to the right address.</para>
-	    </listitem>
-
-	  </itemizedlist>
-
+          </listitem>
+        </itemizedlist>
       </section>
     </section>
   </section>
-
-  <section xml:id="libraries_and_the_linker"><info><title>Working with libraries and the linker</title></info>
-    
-
+  <section xml:id="libraries_and_the_linker">
+    <info>
+      <title>Working with libraries and the linker</title>
+    </info>
     <para>The presence of the dynamic linker provides both some
     advantages we can utilise and some extra issues that need to be
     resolved to get a functional system.</para>
-
-    <section><info><title>Library versions</title></info>
-      
-
+    <section>
+      <info>
+        <title>Library versions</title>
+      </info>
       <para>One potential issue is different versions of libraries.
       With only static libraries there is much less potential for
       problems, as all library code is built directly into the binary
       of the application.  If you want to use a new version of the
       library you need to recompile it into a new binary, replacing
       the old one.</para>
-
       <para>This is obviously fairly impractical for common libraries,
       the most common of course being <application>libc</application>
       which is included in most all applications.  If it were only
       available as a static library any change would require every
       single application in the system be rebuilt.</para>
-
       <para>However, changes in the way the dynamic library work could
       cause multiple problems.  In the best case, the modifications
       are completely compatible and nothing externally visible is
@@ -830,20 +755,20 @@
       can use a debugger to isolate where the error occurs whilst data
       corruption or modification may only show up in seemingly
       unrelated parts of the application.</para>
-
       <para>The dynamic linker requires a way to determine the version
       of libraries within the system so that newer revisions can be
       identified.  There are a number of schemes a modern dynamic
       linker can use to find the right versions of libraries.</para>
-
-      <section><info><title><computeroutput>sonames</computeroutput></title></info>
-	
-
-	<para>Using <computeroutput>sonames</computeroutput> we can
+      <section>
+        <info>
+          <title>
+            <computeroutput>sonames</computeroutput>
+          </title>
+        </info>
+        <para>Using <computeroutput>sonames</computeroutput> we can
 	add some extra information to a library to help identify
 	versions.</para>
-
-	<para>As we have seen previously, an application lists the
+        <para>As we have seen previously, an application lists the
 	libraries it requires in
 	<computeroutput>DT_NEEDED</computeroutput> fields in the
 	dynamic section of the binary.  The actual library is held in
@@ -851,26 +776,22 @@
 	<computeroutput>/lib</computeroutput> for core system
 	libraries or <computeroutput>/usr/lib</computeroutput> for
 	optional libraries.</para>
-
-	<para>To allow multiple versions of the library to exist on
+        <para>To allow multiple versions of the library to exist on
 	disk, they obviously require differing file names.  The
 	<computeroutput>soname</computeroutput> scheme uses a
 	combination of names and file system links to build a
 	hierarchy of libraries.</para>
-
-	<para>This is done by introducing the concept of
+        <para>This is done by introducing the concept of
 	<emphasis>major</emphasis> and <emphasis>minor</emphasis>
 	library revisions.  A minor revision is one wholly backwards
 	compatible with a previous version of the library; this
 	usually consists of only bug fixes.  A major revision is
 	therefore any revision that is not compatible; e.g. changes
 	the inputs to functions or the way a function behaves.</para>
-
-	<para>As each library revision, major or minor, will need to
+        <para>As each library revision, major or minor, will need to
 	be kept in a separate file on disk, this forms the basis of
 	the library hierarchy.  The library name is by convention
-	<computeroutput>libNAME.so.MAJOR.MINOR</computeroutput><footnote>
-	<para>You can optionally have a <emphasis>release</emphasis>
+	<computeroutput>libNAME.so.MAJOR.MINOR</computeroutput><footnote><para>You can optionally have a <emphasis>release</emphasis>
 	as a final identifier after the minor number.  Generally this
 	is enough to distinguish all the various versions
 	library.</para></footnote>.  However, if every application
@@ -878,28 +799,24 @@
 	issue as with a static library; every time a minor change
 	happened we would need to rebuild the application to point to
 	the new library.</para>
-
-	<para>What we really want to refer to is the
+        <para>What we really want to refer to is the
 	<emphasis>major</emphasis> number of the library.  If this
 	changes, we reasonably are required to recompile our
 	application, since we need to make sure our program is still
 	compatible with the new library.</para>
-
-	<para>Thus the <computeroutput>soname</computeroutput> is the
+        <para>Thus the <computeroutput>soname</computeroutput> is the
 	<computeroutput>libNAME.so.MAJOR</computeroutput>.  The
 	<computeroutput>soname</computeroutput> should be set in the
 	<computeroutput>DT_SONAME</computeroutput> field of the
 	dynamic section in a shared library; the library author can
 	specify this version when they build the library.</para>
-
-	<para>Thus each minor version library file on disc can specify
+        <para>Thus each minor version library file on disc can specify
 	 the same major version number in it's
 	 <computeroutput>DT_SONAME</computeroutput> field, allowing
 	 the dynamic linker to know that this particular library file
 	 implements a particular major revision of the library API and
 	 ABI.</para>
-
-	<para>To keep track of this, an application called
+        <para>To keep track of this, an application called
 	<application>ldconfig</application> is commonly run to create
 	symbolic links named for the major version to the latest minor
 	version on the system.  <application>ldconfig</application>
@@ -909,10 +826,8 @@
 	link from <computeroutput>libNAME.so.MAJOR</computeroutput> to
 	the actual library file on disc,
 	i.e. <computeroutput>libNAME.so.MAJOR.MINOR</computeroutput>.</para>
-
-	<para>XXX : talk about libtool versions</para>
-
-	<para>The final piece of the hierarchy is the
+        <para>XXX : talk about libtool versions</para>
+        <para>The final piece of the hierarchy is the
 	<emphasis>compile name</emphasis> for the library.  When you
 	compile your program, to link against a library you use the
 	<computeroutput>-lNAME</computeroutput> flag, which goes off
@@ -930,45 +845,45 @@
 	system may not be the one you wish to always compile against;
 	for example if the latest installed library were a development
 	version not appropriate for general use.</para>
-
-	<para>The general process is illustrated below.</para>
-
-	<figure><info><title><computeroutput>sonames</computeroutput></title></info>
-	  
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="chapter08/figures/libs.eps" format="EPS"/>
-	  </imageobject>
-	  <imageobject role="fo">
-	    <imagedata fileref="figures/libs.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
-	  </imageobject>
-	  <imageobject role="html">
-	    <imagedata fileref="chapter08/figures/libs.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>Describing the soname system</phrase>
-	  </textobject>
-	</mediaobject>
-      </figure>
-
-	<section><info><title>How the dynamic linker looks up libraries</title></info>
-	  
-
-	  <para>When the application starts, the dynamic linker looks
+        <para>The general process is illustrated below.</para>
+        <figure>
+          <info>
+            <title>
+              <computeroutput>sonames</computeroutput>
+            </title>
+          </info>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="chapter08/figures/libs.eps" format="EPS"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata fileref="figures/libs.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            </imageobject>
+            <imageobject role="html">
+              <imagedata fileref="chapter08/figures/libs.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>Describing the soname system</phrase>
+            </textobject>
+          </mediaobject>
+        </figure>
+        <section>
+          <info>
+            <title>How the dynamic linker looks up libraries</title>
+          </info>
+          <para>When the application starts, the dynamic linker looks
 	  at the <computeroutput>DT_NEEDED</computeroutput> field to
 	  find the required libraries.  This field contains the
 	  <computeroutput>soname</computeroutput> of the library, so
 	  the next step is for the dynamic linker to walk through all
 	  the libraries in its search path looking for it.</para>
-
-	  <para>This process conceptually involves two steps.  Firstly
+          <para>This process conceptually involves two steps.  Firstly
 	  the dynamic linker needs to search through all the libraries
 	  to find those that implement the given
 	  <computeroutput>soname</computeroutput>.  Secondly the file
 	  names for the minor revisions need to be compared to find
 	  the latest version, which is then ready to be loaded.</para>
-
-	  <para>We mentioned previously that there is a symbolic link
+          <para>We mentioned previously that there is a symbolic link
 	  setup by <application>ldconfig</application> between the
 	  library <computeroutput>soname</computeroutput> and the
 	  latest minor revision.  Thus the dynamic linker should need
@@ -976,8 +891,7 @@
 	  rather than having to open all possible libraries and decide
 	  which one to go with each time the application is
 	  required.</para>
-
-	  <para>Since file system access is so slow,
+          <para>Since file system access is so slow,
 	  <application>ldconfig</application> also creates a
 	  <emphasis>cache</emphasis> of libraries installed in the
 	  system.  This cache is simply a list of
@@ -993,16 +907,13 @@
 	  system, thus it is important to re-run
 	  <application>ldconfig</application> when new libraries are
 	  installed.</para>
-
-	</section>
-
+        </section>
       </section>
-
     </section>
-
-    <section><info><title>Finding symbols</title></info>
-      
-
+    <section>
+      <info>
+        <title>Finding symbols</title>
+      </info>
       <para>We've already discussed how the dynamic linker gets the
       address of a library function and puts it in the PLT for the
       program to use.  But so far we haven't discussed just
@@ -1010,82 +921,90 @@
       the function.  The whole process is called
       <emphasis>binding</emphasis>, because the symbol name is bound
       to the address it represents.</para>
-
       <para>The dynamic linker has a few pieces of information;
       firstly the <emphasis>symbol</emphasis> that it is searching
       for, and secondly a list of libraries that that symbol might be
       in, as defined by the <computeroutput>DT_NEEDED</computeroutput>
       fields in the binary.</para>
-
       <para>Each shared object library has a section, marked
       <computeroutput>SHT_DYNSYM</computeroutput> and called
       <computeroutput>.dynsym</computeroutput> which is the minimal
       set of symbols required for dynamic linking -- that is any
       symbol in the library that may be called by an external
       program.</para>
-
-      <section><info><title>Dynamic Symbol Table</title></info>
-	
-
-	<para>In fact, there are three sections that all play a part
+      <section>
+        <info>
+          <title>Dynamic Symbol Table</title>
+        </info>
+        <para>In fact, there are three sections that all play a part
 	in describing the dynamic symbols.  Firstly, let us look at
 	the definition of a symbol from the ELF specification</para>
-
-	<example><info><title>Symbol definition from ELF</title></info>
-	  
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/symbol.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-	<table><info><title>ELF symbol fields</title></info>
-	  
-
-	  <tgroup cols="2">
-	    <thead>
-	      <row>
-		<entry>Field</entry>
-		<entry>Value</entry>
-	      </row>
-	    </thead>
-
-	    <tbody>
-	      <row>
-		<entry><computeroutput>st_name</computeroutput></entry>
-		<entry>An <emphasis>index to the string table</emphasis></entry>
-	      </row>
-	      <row>
-		<entry><computeroutput>st_value</computeroutput></entry>
-		<entry>Value - in a
+        <example>
+          <info>
+            <title>Symbol definition from ELF</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/symbol.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <table>
+          <info>
+            <title>ELF symbol fields</title>
+          </info>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>Field</entry>
+                <entry>Value</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <computeroutput>st_name</computeroutput>
+                </entry>
+                <entry>An <emphasis>index to the string table</emphasis></entry>
+              </row>
+              <row>
+                <entry>
+                  <computeroutput>st_value</computeroutput>
+                </entry>
+                <entry>Value - in a
 		relocatable shared object this holds the offset from
 		the section of index given in
 		<computeroutput>st_shndx</computeroutput></entry>
-	      </row>
-	      <row>
-		<entry><computeroutput>st_size</computeroutput></entry>
-		<entry>Any associated size of the symbol</entry>
-	      </row>
-	      <row>
-		<entry><computeroutput>st_info</computeroutput></entry>
-		<entry>Information on the binding of the symbol
+              </row>
+              <row>
+                <entry>
+                  <computeroutput>st_size</computeroutput>
+                </entry>
+                <entry>Any associated size of the symbol</entry>
+              </row>
+              <row>
+                <entry>
+                  <computeroutput>st_info</computeroutput>
+                </entry>
+                <entry>Information on the binding of the symbol
 		(described below) and what type of symbol this is (a
 		function, object, etc).</entry>
-	      </row>
-	      <row>
-		<entry><computeroutput>st_other</computeroutput></entry>
-		<entry>Not currently used</entry>
-	      </row>
-	      <row>
-		<entry><computeroutput>st_shndx</computeroutput></entry>
-		<entry>Index of the section this symbol resides in
+              </row>
+              <row>
+                <entry>
+                  <computeroutput>st_other</computeroutput>
+                </entry>
+                <entry>Not currently used</entry>
+              </row>
+              <row>
+                <entry>
+                  <computeroutput>st_shndx</computeroutput>
+                </entry>
+                <entry>Index of the section this symbol resides in
 		(see <computeroutput>st_value</computeroutput></entry>
-	      </row>
-	    </tbody>
-	  </tgroup>
-
-	</table>
-
-	<para>As you can see, the actual string of the symbol name is
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para>As you can see, the actual string of the symbol name is
 	held in a separate section
 	(<computeroutput>.dynstr</computeroutput>; the entry in the
 	<computeroutput>.dynsym</computeroutput> section only holds an
@@ -1096,87 +1015,78 @@
 	follow the index pointer to find the symbol name for
 	comparison.
 	</para>
-
-	<para>To speed this process up, a third section called
+        <para>To speed this process up, a third section called
 	<computeroutput>.hash</computeroutput> is introduced,
 	containing a <emphasis>hash table</emphasis> of symbol names
 	to symbol table entries.  This hash table is pre-computed when
 	the library is built and allows the dynamic linker to find the
 	symbol entry much faster, generally with only one or two
 	lookups.</para>
-
       </section>
-
-
-      <section><info><title>Symbol Binding</title></info>
-	
-
-	<para>Whilst we usually say the process of finding the address
+      <section>
+        <info>
+          <title>Symbol Binding</title>
+        </info>
+        <para>Whilst we usually say the process of finding the address
 	of a symbol refers is the process of binding that symbol, the
 	<emphasis>symbol binding</emphasis> has a separate
 	meaning.</para>
-
-	<para>The binding of a symbol dictates its external visibility
+        <para>The binding of a symbol dictates its external visibility
 	during the dynamic linking process.  A
 	<emphasis>local</emphasis> symbol is not visible outside the
 	object file it is defined in.  A <emphasis>global</emphasis>
 	symbol is visible to other object files, and can satisfy
 	undefined references in other objects.</para>
-
-	<para>A <emphasis>weak</emphasis> reference is a special type
+        <para>A <emphasis>weak</emphasis> reference is a special type
 	of lower priority global reference.  This means it is designed
 	to be overridden, as we will see shortly.</para>
-
-	<para>Below we have an example C program which we analyse to
+        <para>Below we have an example C program which we analyse to
 	inspect the symbol bindings.</para>
-
-	<example><info><title>Examples of symbol bindings</title></info>
-	  
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/bindings.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-	<para>Notice the use of
+        <example>
+          <info>
+            <title>Examples of symbol bindings</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/bindings.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>Notice the use of
 	<computeroutput>#pragma</computeroutput> to define the weak
 	symbol.  A <computeroutput>pragma</computeroutput> is a way of
 	communicating extra information to the compiler; its use is
 	not common but occasionally is required to get the compiler to
 	do out of the ordinary operations.x</para>
-
-	<para>We inspect the symbols with two different tools; in both
+        <para>We inspect the symbols with two different tools; in both
 	cases the binding is shown in the second column; the codes
 	should be quite straight forward (are are documented in the
 	tools <application>man</application> page).</para>
-
-	<section><info><title>Overriding symbols</title></info>
-	  
-
-	  <para>It is often very useful for a programmer to be able to
+        <section>
+          <info>
+            <title>Overriding symbols</title>
+          </info>
+          <para>It is often very useful for a programmer to be able to
 	  <emphasis>override</emphasis> a symbol in a library; that is
 	  to subvert the normal symbol with a different
 	  definition.</para>
-
-	  <para>We mentioned that the order that libraries is searched
+          <para>We mentioned that the order that libraries is searched
 	  is given by the order of the
 	  <computeroutput>DT_NEEDED</computeroutput> fields within the
 	  library.  However, it is possible to insert libraries as the
 	  <emphasis>last</emphasis> libraries to be searched; this
 	  means that any symbols within them will be found as the
 	  final reference.</para>
-
-	  <para>This is done via an environment variable called
+          <para>This is done via an environment variable called
 	  <computeroutput>LD_PRELOAD</computeroutput> which specifies
 	  libraries that the linker should load last.</para>
-
-	  <example><info><title>Example of <computeroutput>LD_PRELOAD</computeroutput></title></info>
-	    
-	  <programlisting linenumbering="numbered">
+          <example>
+            <info>
+              <title>Example of <computeroutput>LD_PRELOAD</computeroutput></title>
+            </info>
+            <programlisting linenumbering="numbered">
               <xi:include href="code/ld_preload.txt" parse="text"/>
             </programlisting>
-	  </example>
-
-	  <para>In the above example we override the
+          </example>
+          <para>In the above example we override the
 	  <computeroutput>getpid</computeroutput> function to print
 	  out a small statement when it is called.  We use the
 	  <computeroutput>dlysm</computeroutput> function provided by
@@ -1184,60 +1094,54 @@
 	  telling it to continue on and find the
 	  <emphasis>next</emphasis> symbol called
 	  <computeroutput>getpid</computeroutput>.</para>
-
-	  <section><info><title>Weak symbols over time</title></info>
-	    
-
-	    <para>The concept of the <emphasis>weak</emphasis> symbol
+          <section>
+            <info>
+              <title>Weak symbols over time</title>
+            </info>
+            <para>The concept of the <emphasis>weak</emphasis> symbol
 	  is that the symbol is marked as a lower priority and can be
 	  overridden by another symbol.  Only if no other
 	  implementation is found will the weak symbol be the one that
 	  it used.</para>
-
-	    <para>The logical extension of this for the dynamic loader
+            <para>The logical extension of this for the dynamic loader
 	    is that all libraries should be loaded, and any weak
 	    symbols in those libraries should be ignored for normal
 	    symbols in any other library.  This was indeed how weak
 	    symbol handling was originally implemented in Linux by
 	    <application>glibc</application>.</para>
-
-	    <para>However, this was actually incorrect to the letter
+            <para>However, this was actually incorrect to the letter
 	    of the Unix standard at the time
 	    (<emphasis>SysVr4</emphasis>).  The standard actually
 	    dictates that weak symbols should only be handled by the
 	    <emphasis>static</emphasis> linker; they should remain
 	    irrelevant to the dynamic linker (see the section on
 	    binding order below).</para>
-
-	    <para>At the time, the Linux implementation of making the
+            <para>At the time, the Linux implementation of making the
 	    dynamic linker override weak symbols matched with SGI's
 	    IRIX platform, but differed to others such as Solaris and
 	    AIX.  When the developers realised this behaviour
 	    violated the standard it was reversed, and the old
 	    behaviour relegated to requiring a special environment
 	    flag (<emphasis>LD_DYNAMIC_WEAK</emphasis>) be set.</para>
-
-	  </section>
-	</section>
-
-	<section><info><title>Specifying binding order</title></info>
-	  
-
-	  <para>We have seen how we can override a function in another
+          </section>
+        </section>
+        <section>
+          <info>
+            <title>Specifying binding order</title>
+          </info>
+          <para>We have seen how we can override a function in another
 	  library by <emphasis>preloading</emphasis> another shared
 	  library with the same symbol defined.  The symbol that gets
 	  resolved as the final one is the last one in the order that
 	  the dynamic loader loads the libraries.</para>
-
-	  <para>Libraries are loaded in the order they are specified
+          <para>Libraries are loaded in the order they are specified
 	  in the <computeroutput>DT_NEEDED</computeroutput> flag of
 	  the binary.  This in turn is decided from the order that
 	  libraries are passed in on the command line when the object
 	  is built.  When symbols are to be located, the dynamic
 	  linker starts at the last loaded library and works backwards
 	  until the symbol is found.</para>
-
-	  <para>Some shared libraries, however, need a way to override
+          <para>Some shared libraries, however, need a way to override
 	  this behaviour.  They need to say to the dynamic linker
 	  "look first inside me for these symbols, rather than working
 	  backwards from the last loaded library".  Libraries can set
@@ -1247,35 +1151,32 @@
 	  <computeroutput>-Bsymbolic</computeroutput> flag on the
 	  static linkers command line when building the shared
 	  library).</para>
-
-	  <para>What this flag is doing is controlling <emphasis>symbol
+          <para>What this flag is doing is controlling <emphasis>symbol
 	  visibility</emphasis>.  The symbols in the library can not
 	  be overridden so could be considered private to the library
 	  that is being loaded.</para>
-
-	  <para>However, this loses a lot of granularity since the
+          <para>However, this loses a lot of granularity since the
 	  library is either flagged for this behaviour, or it is not.
 	  A better system would allow us to make some symbols private
 	  and some symbols public.</para>
-
-	</section>
-
-	<section><info><title>Symbol Versioning</title></info>
-	  
-
-	  <para>That better system comes from symbol versioning.  With
+        </section>
+        <section>
+          <info>
+            <title>Symbol Versioning</title>
+          </info>
+          <para>That better system comes from symbol versioning.  With
 	  symbol versioning we specify some extra input to the static
 	  linker to give it some more information about the symbols in
 	  our shared library.</para>
-
-	  <example><info><title>Example of symbol versioning</title></info>
-	    
-	  <programlisting linenumbering="numbered">
+          <example>
+            <info>
+              <title>Example of symbol versioning</title>
+            </info>
+            <programlisting linenumbering="numbered">
               <xi:include href="code/symbolver.txt" parse="text"/>
             </programlisting>
-	  </example>
-
-	  <para>In the simplest case as above, we simply state if the
+          </example>
+          <para>In the simplest case as above, we simply state if the
 	  symbol is <emphasis>global</emphasis> or
 	  <emphasis>local</emphasis>.  Thus in the case above the
 	  <computeroutput>foo</computeroutput> function is most likely
@@ -1286,8 +1187,7 @@
 	  overridden, if we do use the shared library version it needs
 	  to have unaltered access nobody should modify the support
 	  function.</para>
-
-	  <para>This allows us to keep our
+          <para>This allows us to keep our
 	  <emphasis>namespace</emphasis> better organised.  Many
 	  libraries might want to implement something that could be
 	  named like a common function like
@@ -1299,15 +1199,13 @@
 	  that nothing will conflict with that internal name, and
 	  conversely the name he chose will not influence any other
 	  program.</para>
-
-	  <para>An extension of this scheme is <emphasis>symbol
+          <para>An extension of this scheme is <emphasis>symbol
 	  versioning</emphasis>.  With this you can specify multiple
 	  versions of the same symbol in the same library.  The static
 	  linker appends some version information after the symbol
 	  name (something like <computeroutput>@VER</computeroutput>)
 	  describing what version the symbol is given.</para>
-
-	  <para>If the developer implements a function that has the
+          <para>If the developer implements a function that has the
 	  same name but possibly a binary or programatically different
 	  implementation he can increase the version number.  When new
 	  applications are built against the shared library, they will
@@ -1317,13 +1215,8 @@
 	  older <computeroutput>@VER</computeroutput> strings in the
 	  symbol name they request) and thus get the original
 	  implementation. XXX : example</para>
-
-	</section>
-
+        </section>
       </section>
-
     </section>
-
   </section>
-
 </chapter>

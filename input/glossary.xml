@@ -1,91 +1,94 @@
+<?xml version="1.0"?>
 <!-- Converted by db4-upgrade version 1.0 -->
-<glossary xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glossary"><info><title>Glossary</title></info>
-
-    
-<!-- glossary -->
-
-    <glossdiv><info><title>A</title></info>
-            
-      <glossentry xml:id="API"><glossterm>Application Programming Interface</glossterm>
-	<acronym>API</acronym>
-	<glossdef>
-	  <para>The set of variables and functions used to communicate between different parts of programs.</para>
-	  <glossseealso otherterm="ABI"/></glossdef>
-      </glossentry>
-
-      <glossentry xml:id="ABI"><glossterm>Application Binary Interface</glossterm>
-	<acronym>ABI</acronym>
-	<glossdef>
-	  <para>A technical description of how the operating system should interface with hardware.</para>
-	  <glossseealso otherterm="API"/></glossdef>
-      </glossentry>
-      
-    </glossdiv>
-
-
-    <glossdiv><info><title>E</title></info>
-            
-      <glossentry xml:id="xml"><glossterm>Extensible Markup Language</glossterm>
-	<acronym>XML</acronym>
-	<glossdef>
-	  <para>Some reasonable definition here.</para>
-	  <glossseealso otherterm="sgml"/></glossdef>
-      </glossentry>
-      
-      <glossentry xml:id="sgml">
-	<glossterm>Standardised Generalised Markup Language</glossterm><acronym>SGML</acronym>
-	<glossdef><para>The grand daddy of all documents</para><glossseealso otherterm="xml"/></glossdef>
-      </glossentry>
-    </glossdiv>
-    
-
-    <glossdiv><info><title>M</title></info>
-      
-
-      <glossentry xml:id="mutuallyexclusive">
-	<glossterm>Mutually Exclusive</glossterm>
-	<glossdef>
-
-	  <para>When a number of things are mutually exclusive, only
+<glossary xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="glossary">
+  <info>
+    <title>Glossary</title>
+  </info>
+  <!-- glossary -->
+  <glossdiv>
+    <info>
+      <title>A</title>
+    </info>
+    <glossentry xml:id="API">
+      <glossterm>Application Programming Interface</glossterm>
+      <acronym>API</acronym>
+      <glossdef>
+        <para>The set of variables and functions used to communicate between different parts of programs.</para>
+        <glossseealso otherterm="ABI"/>
+      </glossdef>
+    </glossentry>
+    <glossentry xml:id="ABI">
+      <glossterm>Application Binary Interface</glossterm>
+      <acronym>ABI</acronym>
+      <glossdef>
+        <para>A technical description of how the operating system should interface with hardware.</para>
+        <glossseealso otherterm="API"/>
+      </glossdef>
+    </glossentry>
+  </glossdiv>
+  <glossdiv>
+    <info>
+      <title>E</title>
+    </info>
+    <glossentry xml:id="xml">
+      <glossterm>Extensible Markup Language</glossterm>
+      <acronym>XML</acronym>
+      <glossdef>
+        <para>Some reasonable definition here.</para>
+        <glossseealso otherterm="sgml"/>
+      </glossdef>
+    </glossentry>
+    <glossentry xml:id="sgml">
+      <glossterm>Standardised Generalised Markup Language</glossterm>
+      <acronym>SGML</acronym>
+      <glossdef>
+        <para>The grand daddy of all documents</para>
+        <glossseealso otherterm="xml"/>
+      </glossdef>
+    </glossentry>
+  </glossdiv>
+  <glossdiv>
+    <info>
+      <title>M</title>
+    </info>
+    <glossentry xml:id="mutuallyexclusive">
+      <glossterm>Mutually Exclusive</glossterm>
+      <glossdef>
+        <para>When a number of things are mutually exclusive, only
 	  one can be valid at a time.  The fact that one of the things
 	  is valid makes the others invalid. </para>
-
-	</glossdef>
-      </glossentry>
-
-      <glossentry>
-	<glossterm>MMU</glossterm>
-	<glossdef>
-
-	  <para>The <emphasis>memory managment unit</emphasis>
+      </glossdef>
+    </glossentry>
+    <glossentry>
+      <glossterm>MMU</glossterm>
+      <glossdef>
+        <para>The <emphasis>memory managment unit</emphasis>
 	  component of the hardware architecture.</para>
-
-	</glossdef>
-      </glossentry>
-
-
-    </glossdiv>
-    
-
-    <glossdiv><info><title>O</title></info>
-      
-      <glossentry xml:id="opensource">
-	<glossterm>Open Source</glossterm>
-	<glossdef>
-	  <para>Software
+      </glossdef>
+    </glossentry>
+  </glossdiv>
+  <glossdiv>
+    <info>
+      <title>O</title>
+    </info>
+    <glossentry xml:id="opensource">
+      <glossterm>Open Source</glossterm>
+      <glossdef>
+        <para>Software
       distributed in source form under licenses guaranteeing anybody
       rights to freely use, modify, and redistribute the code.</para>
-	</glossdef>
-      </glossentry>
-    </glossdiv>
-
-    <glossdiv><info><title>S</title></info>
-      
-      <glossentry xml:id="shell">
-	<glossterm>Shell</glossterm>
-	<glossdef>
-	  <para>The interface used to interact with the operating system.</para>
-	</glossdef>
-      </glossentry>
-    </glossdiv>
-  </glossary>
+      </glossdef>
+    </glossentry>
+  </glossdiv>
+  <glossdiv>
+    <info>
+      <title>S</title>
+    </info>
+    <glossentry xml:id="shell">
+      <glossterm>Shell</glossterm>
+      <glossdef>
+        <para>The interface used to interact with the operating system.</para>
+      </glossdef>
+    </glossentry>
+  </glossdiv>
+</glossary>

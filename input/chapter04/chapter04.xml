@@ -1,68 +1,66 @@
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0"
-         xmlns:xi="http://www.w3.org/2001/XInclude"
-         xml:id="chapter04">
-
-  <info><title>The Process</title></info>
-
-  <section xml:id="process"><info><title>What is a process?</title></info>
-    
-
+<?xml version="1.0"?>
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:id="chapter04">
+  <info>
+    <title>The Process</title>
+  </info>
+  <section xml:id="process">
+    <info>
+      <title>What is a process?</title>
+    </info>
     <para>We are all familiar with the modern operating system running
     many tasks all at once or <emphasis>multitasking</emphasis>.  
     </para>
-
     <para>We can think of each process as a bundle of elements kept by
     the kernel to keep track of all these running tasks.</para>
-
   </section>
-
-  <section xml:id="elements_of_a_process"><info><title>Elements of a process</title></info>
-    
-
-    <figure><info><title>The Elements of a Process</title></info>
-      
+  <section xml:id="elements_of_a_process">
+    <info>
+      <title>Elements of a process</title>
+    </info>
+    <figure>
+      <info>
+        <title>The Elements of a Process</title>
+      </info>
       <mediaobject>
-	<imageobject>
-	  <imagedata fileref="chapter04/figures/theprocess.eps" format="EPS"/>
-	</imageobject>
-	<imageobject role="fo">
-	  <imagedata fileref="figures/theprocess.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
-	</imageobject>
-	<imageobject role="html">
-	  <imagedata fileref="chapter04/figures/theprocess.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	  <phrase>The essential elements of a process; the process ID,
+        <imageobject>
+          <imagedata fileref="chapter04/figures/theprocess.eps" format="EPS"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="figures/theprocess.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+        </imageobject>
+        <imageobject role="html">
+          <imagedata fileref="chapter04/figures/theprocess.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase>The essential elements of a process; the process ID,
 	  memory, files and registers.</phrase>
-	</textobject>
+        </textobject>
       </mediaobject>
     </figure>
-
-    <section><info><title>Process ID</title></info>
-      
-
+    <section>
+      <info>
+        <title>Process ID</title>
+      </info>
       <para>The <emphasis>process ID</emphasis> (or the PID) is
       assigned by the operating system and is unique to each running
       process.</para>
-
     </section>
-
-    <section><info><title>Memory</title></info>
-       <para>We will learn exactly how a process
+    <section>
+      <info>
+        <title>Memory</title>
+      </info>
+      <para>We will learn exactly how a process
       gets it's memory in the following weeks -- it is one of the most
       fundamental parts of how the operating system works.  However,
       for now it is sufficient to know that each process gets it's own
       section of memory.</para>
-
       <para>In this memory all the program code is stored, along with
       variables and any other allocated storage.</para>
-
       <para>Parts of the memory can be shared between process (called,
       not surprisingly <emphasis>shared memory</emphasis>).  You will
       often see this called <emphasis>System Five Shared
       Memory</emphasis> (or SysV SHM) after the original
       implementation in an older operating system.</para>
-
       <para>Another important concept a process may utilise is that of
       <emphasis>mmap</emphasis>ing a file on disk to memory.  This
       means that instead of having to open the file and use commands
@@ -75,11 +73,11 @@
       system to maintain security and stability, so it needs to check
       if a process tries to write to a read only area and return an
       error.</para>
-
-      <section><info><title>Code and Data</title></info>
-	
-
-	<para>A process can be further divided into
+      <section>
+        <info>
+          <title>Code and Data</title>
+        </info>
+        <para>A process can be further divided into
 	<emphasis>code</emphasis> and
 	<computeroutput>data</computeroutput> sections.  Program code
 	and data should be kept separately since they require
@@ -88,129 +86,117 @@
 	system needs to give program code permission to be read and
 	executed, but generally not written to.  On the other hand
 	data (variables) require read and write permissions but should
-	not be executable<footnote> <para>Not all architectures
+	not be executable<footnote><para>Not all architectures
 	support this, however.  This has lead to a wide range of
 	security problems on many architectures.</para></footnote>.
 	</para>
       </section>
-
-      <section><info><title>The Stack</title></info>
-	
-
-	<para>One other very important part of a process is an area of
+      <section>
+        <info>
+          <title>The Stack</title>
+        </info>
+        <para>One other very important part of a process is an area of
 	memory called <emphasis>the stack</emphasis>.  This can be
 	considered part of the data section of a process, and is
 	intimately involved in the execution of any program.</para>
-
-	<para> A stack is generic data structure that works exactly
+        <para> A stack is generic data structure that works exactly
 	like a stack of plates; you can <emphasis>push</emphasis> an
 	item (put a plate on top of a stack of plates), which then
 	becomes the top item, or you can <emphasis>pop</emphasis> an
 	item (take a plate off, exposing the previous plate).</para>
-
-	<para>Stacks are fundamental to function calls.  Each time a
+        <para>Stacks are fundamental to function calls.  Each time a
 	function is called it gets a new <computeroutput>stack
 	frame</computeroutput>.  This is an area of memory which
 	usually contains, at a minimum, the address to return to when
 	complete, the input arguments to the function and space for
 	local variables.</para>
-
-	<para>By convention, stacks usually <emphasis>grow
-	down</emphasis><footnote> <para>Some architectures, such as
+        <para>By convention, stacks usually <emphasis>grow
+	down</emphasis><footnote><para>Some architectures, such as
 	PA-RISC from HP, have stacks that grow upwards.  On some other
 	architectures, such as IA64, there are other storage areas
 	(the register backing store) that grow from the bottom toward
 	the stack.</para></footnote> .  This means that the stack
 	starts at a high address in memory and progressively gets
 	lower.</para>
-
-	<figure><info><title>The Stack</title></info>
-	  
-	  <mediaobject>
-	    <imageobject>
-	      <imagedata fileref="chapter04/figures/stack.eps" format="EPS"/>
-	    </imageobject>
-	    <imageobject role="fo">
-	      <imagedata fileref="figures/stack.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
-	    </imageobject>
-	    <imageobject role="html">
-	      <imagedata fileref="chapter04/figures/stack.png" format="PNG"/>
-	    </imageobject>
-	    <textobject>
-	      <phrase>How the stack works with function calls.  Note
+        <figure>
+          <info>
+            <title>The Stack</title>
+          </info>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="chapter04/figures/stack.eps" format="EPS"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata fileref="figures/stack.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            </imageobject>
+            <imageobject role="html">
+              <imagedata fileref="chapter04/figures/stack.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>How the stack works with function calls.  Note
 	      that the stack grows downwards, from high addresses in
 	      memory to low addresses.</phrase>
-	    </textobject>
-	  </mediaobject>
-	</figure>
-
-	<para>We can see how having a stack brings about many of the
+            </textobject>
+          </mediaobject>
+        </figure>
+        <para>We can see how having a stack brings about many of the
 	features of functions.</para>
-
-	<itemizedlist>
-	  <listitem>
-	    <para>Each function has its own copy of its input
+        <itemizedlist>
+          <listitem>
+            <para>Each function has its own copy of its input
 	    arguments.  This is because each function is allocated a
 	    new stack frame with its arguments in a fresh area of
 	    memory.</para>
-	  </listitem>
-
-	  <listitem>
-	    <para>This is the reason why a variable defined inside a
+          </listitem>
+          <listitem>
+            <para>This is the reason why a variable defined inside a
 	    function can not be seen by other functions.  Global
 	    variables (which can be seen by any function) are
 	    kept in a separate area of data memory.</para>
-	  </listitem>
-
-	  <listitem>
-  	    <para>This facilitates <emphasis>recursive</emphasis>
+          </listitem>
+          <listitem>
+            <para>This facilitates <emphasis>recursive</emphasis>
 	    calls.  This means a function is free to call its self
 	    again, because a new stack frame will be created for all
 	    its local variables.</para>
-	  </listitem>
-
-	  <listitem>
-	    <para>Each frame contains the address to return to.  C
+          </listitem>
+          <listitem>
+            <para>Each frame contains the address to return to.  C
 	    only allows a single value to be returned from a function,
 	    so by convention this value is returned to the calling
 	    function in a specified register, rather than on the
 	    stack.</para>
-	  </listitem>
-
-	  <listitem>
-	    <para>Because each frame has a reference to the one before
+          </listitem>
+          <listitem>
+            <para>Because each frame has a reference to the one before
 	    it, a debugger can "walk" backwards, following the
 	    pointers up the stack.  From this it can produce a
 	    <emphasis>stack trace</emphasis> which shows you all
 	    functions that were called leading into this function.
 	    This is extremely useful for debugging.</para>
-
-	    <para>You can see how the way functions works fits exactly
+            <para>You can see how the way functions works fits exactly
 	    into the nature of a stack.  Any function can call any
 	    other function, which then becomes the up most function
 	    (put on top of the stack).  Eventually that function will
 	    return to the function that called it (takes itself off
 	    the stack).</para>
-	  </listitem>
-
-	  <listitem>
-	    <para>Stacks do make calling functions slower, because
+          </listitem>
+          <listitem>
+            <para>Stacks do make calling functions slower, because
 	    values must be moved out of registers and into memory.
 	    Some architectures allow arguments to be passed in
 	    registers directly; however to keep the semantics that
 	    each function gets a unique copy of each argument the
 	    registers must <emphasis>rotate</emphasis>.</para>
-	  </listitem>
-
-	  <listitem>
-	    <para>You may have heard of the term a <emphasis>stack
+          </listitem>
+          <listitem>
+            <para>You may have heard of the term a <emphasis>stack
 	    overflow</emphasis>.  This is a common way of hacking a
 	    system by passing bogus values.  If you as a programmer
 	    accept arbitrary input into a stack variable (say, reading
 	    from the keyboard or over the network) you need to
 	    explicitly say how big that data is going to be.</para>
-
-	    <para>Allowing any amount of data unchecked will simply
+            <para>Allowing any amount of data unchecked will simply
 	    overwrite memory.  Generally this leads to a crash, but
 	    some people realised that if they overwrote just enough
 	    memory to place a specific value in the return address
@@ -221,12 +207,10 @@
 	    that hacks the system (e.g. starts a terminal for the user
 	    with root privileges) then your computer has been
 	    compromised.</para>
-
-	    <para>This happens because the stack grows downwards, but
+            <para>This happens because the stack grows downwards, but
 	    data is read in "upwards" (i.e. from lower address to
 	    higher addresses).</para>
-
-	    <para>There are several ways around this; firstly as a
+            <para>There are several ways around this; firstly as a
 	    programmer you must ensure that you always check the
 	    amount of data you are receiving into a variable.  The
 	    operating system can help to avoid this on behalf of the
@@ -236,34 +220,30 @@
 	    tries to pass some into your program.  Modern
 	    architectures and operating systems support this
 	    functionality.</para>
-	  </listitem>
-
-	  <listitem>
-	    <para>Stacks are ultimately managed by the compiler, as it
+          </listitem>
+          <listitem>
+            <para>Stacks are ultimately managed by the compiler, as it
 	    is responsible for generating the program code.  To the
 	    operating system the stack just looks like any other area
 	    of memory for the process.</para>
-	  </listitem>
-
-	</itemizedlist>
-
-	<para>To keep track of the current growth of the stack, the
+          </listitem>
+        </itemizedlist>
+        <para>To keep track of the current growth of the stack, the
 	hardware defines a register as the <emphasis>stack
 	pointer</emphasis>.  The compiler (or the programmer, when
 	writing in assembler) uses this register to keep track of the
 	current top of the stack.</para>
-
-	<example xml:id="stack-pointer"><info><title>Stack pointer example</title></info>
-	  
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/sp.txt" parse="text"/>
-            </programlisting>
-	</example>    
-	
-	<para>Above we show a simple function allocating three
+        <example xml:id="stack-pointer">
+          <info>
+            <title>Stack pointer example</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/sp.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>Above we show a simple function allocating three
 	variables on the stack.  The disassembly illustrates the use
-	of the stack pointer on the x86 architecture<footnote>
-	<para>Note we used the special flag to gcc
+	of the stack pointer on the x86 architecture<footnote><para>Note we used the special flag to gcc
 	<computeroutput>-fomit-frame-pointer</computeroutput> which
 	specifies that an extra register should
 	<emphasis>not</emphasis> be used to keep a pointer to the
@@ -279,30 +259,26 @@
 	values we really only need 12 bytes, not 16) to keep alignment
 	of the stack in memory on certain boundaries as the compiler
 	requires. </para>
-
-	<para>Then we move the values into the stack memory (and in a
+        <para>Then we move the values into the stack memory (and in a
 	real function, use them).  Finally, before returning to our
 	parent function we "pop" the values off the stack by moving
 	the stack pointer back to where it was before we started.</para>
-
       </section>
-
-      <section><info><title>The Heap</title></info>
-	
-
-	<para>The heap is an area of memory that is managed by the
+      <section>
+        <info>
+          <title>The Heap</title>
+        </info>
+        <para>The heap is an area of memory that is managed by the
 	process for on the fly memory allocation.  This is for
 	variables whose memory requirements are not known at compile
 	time.</para>
-
-	<para>The bottom of the heap is known as the
+        <para>The bottom of the heap is known as the
 	<emphasis>brk</emphasis>, so called for the system call which
 	modifies it.  By using the
 	<computeroutput>brk</computeroutput> call to grow the area
 	downwards the process can request the kernel allocate
 	more memory for it to use.</para>
-
-	<para>The heap is most commonly managed by the
+        <para>The heap is most commonly managed by the
 	<computeroutput>malloc</computeroutput> library call.  This
 	makes managing the heap easy for the programmer by allowing
 	them to simply allocate and free (via the
@@ -318,80 +294,72 @@
 	managing memory correctly, it is very uncommon for any modern
 	program to have a reason to call
 	<computeroutput>brk</computeroutput> directly.</para>
-
       </section>
-
-      <section><info><title>Memory Layout</title></info>
-	
-
-	<figure><info><title>Process memory layout</title></info>
-	  
-	  <mediaobject>
-	    <imageobject>
-	      <imagedata fileref="chapter04/figures/memory-layout.eps" format="EPS"/>
-	    </imageobject>
-	    <imageobject role="fo">
-	      <imagedata fileref="figures/memory-layout.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
-	    </imageobject>
-	    <imageobject role="html">
-	      <imagedata fileref="chapter04/figures/memory-layout.png" format="PNG"/>
-	    </imageobject>
-	    <textobject>
-	      <phrase>A sample of how process memory is allocated.</phrase>
-	    </textobject>
-	  </mediaobject>
-	</figure>
-
-
-	<para>As we have seen a process has smaller areas of memory
+      <section>
+        <info>
+          <title>Memory Layout</title>
+        </info>
+        <figure>
+          <info>
+            <title>Process memory layout</title>
+          </info>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="chapter04/figures/memory-layout.eps" format="EPS"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata fileref="figures/memory-layout.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            </imageobject>
+            <imageobject role="html">
+              <imagedata fileref="chapter04/figures/memory-layout.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>A sample of how process memory is allocated.</phrase>
+            </textobject>
+          </mediaobject>
+        </figure>
+        <para>As we have seen a process has smaller areas of memory
 	allocated to it, each with a specific purpose.</para>
-
-	<para>An example of how the process is laid out in memory by
+        <para>An example of how the process is laid out in memory by
 	the kernel is given above.  Starting from the top, the kernel
 	reserves its self some memory at the top of the process (we
 	see with virtual memory how this memory is actually shared
 	between all processes).</para>
-
-	<para>Underneath that is room for
+        <para>Underneath that is room for
 	<computeroutput>mmaped</computeroutput> files and libraries.
 	Underneath that is the stack, and below that the heap.</para>
-
-	<para>At the bottom is the program image, as loaded from the
+        <para>At the bottom is the program image, as loaded from the
 	executable file on disk.  We take a closer look at the
 	process of loading this data in later chapters.</para>
-
       </section>
-
     </section>
-
-    <section><info><title>File Descriptors</title></info>
-       
+    <section>
+      <info>
+        <title>File Descriptors</title>
+      </info>
       <para>In the first week we learnt about
       <computeroutput>stdin</computeroutput>,
       <computeroutput>stdout</computeroutput> and
       <computeroutput>stderr</computeroutput>; the default files given
       to each process.  You will remember that these files always have
       the same file descriptor number (0,1,2 respectively).</para>
-
       <para>Thus, file descriptors are kept by the kernel individually
       for each process.</para>
-
       <para>File descriptors also have permissions.  For example, you
       may be able to read from a file but not write to it.  When the
       file is opened, the operating system keeps a record of the
       processes permissions to that file in the file descriptor and
       doesn't allow the process to do anything it shouldn't.</para>
     </section>
-
-    <section><info><title>Registers</title></info>
-      
-
+    <section>
+      <info>
+        <title>Registers</title>
+      </info>
       <para>We know from the previous chapter that the processor
       essentially performs generally simple operations on values in
       registers.  These values are read (and written) to memory -- we
       mentioned above that each process is allocated memory which the
       kernel keeps track of.</para>
-
       <para>So the other side of the equation is keeping track of the
       registers.  When it comes time for the currently running process
       to give up the processor so another process can run, it needs to
@@ -404,22 +372,21 @@
       right back where it left off.
       </para>
     </section>
-
-    <section><info><title>Kernel State</title></info>
-      
-
+    <section>
+      <info>
+        <title>Kernel State</title>
+      </info>
       <para>Internally, the kernel needs to keep track of a number of
       elements for each process.</para>
-
-      <section><info><title>Process State</title></info>
-	
-
-	<para>Another important element for the operating system to keep
+      <section>
+        <info>
+          <title>Process State</title>
+        </info>
+        <para>Another important element for the operating system to keep
       track of is the process state.  If the process is currently
       running it makes sense to have it in a
       <emphasis>running</emphasis> state.</para>
-
-	<para>However, if the process has requested to read a file from
+        <para>However, if the process has requested to read a file from
       disk we know from our memory hierarchy that this may take a
       significant amount of time.  The process should give up it's
       current execution to allow another process to run, but the
@@ -427,325 +394,300 @@
       the disk is available in memory.  Thus it can mark the process
       as <emphasis>disk wait</emphasis> (or similar) until the data is
       ready.</para>
-
       </section>
-
-      <section><info><title>Priority</title></info>
-	 
-	<para>Some processes are more important than others, and get a higher
+      <section>
+        <info>
+          <title>Priority</title>
+        </info>
+        <para>Some processes are more important than others, and get a higher
 	priority.  See the discussion on the scheduler below.</para>
       </section>
-
-      <section><info><title>Statistics</title></info>
-	
-	<para>The kernel can keep statistics on each processes
+      <section>
+        <info>
+          <title>Statistics</title>
+        </info>
+        <para>The kernel can keep statistics on each processes
 	behaviour which can help it make decisions about how the
 	process behaves; for example does it mostly read from disk or
 	does it mostly do CPU intensive operations?</para>
       </section>
-
     </section>
-
   </section>
-
-  <section xml:id="process_hierarchy"><info><title>Process Hierarchy</title></info>
-    
- 
+  <section xml:id="process_hierarchy">
+    <info>
+      <title>Process Hierarchy</title>
+    </info>
     <para>Whilst the operating system can run many processes at the
     same time, in fact it only ever directly starts one process called
     the <emphasis>init</emphasis> (short for initial) process.  This
     isn't a particularly special process except that it's PID is
     always 0 and it will <emphasis>always</emphasis> be
     running.</para>
-
     <para>All other processes can be considered
     <emphasis>children</emphasis> of this initial process.  Processes
     have a family tree just like any other; each process has a
     <emphasis>parent</emphasis> and can have many
     <emphasis>siblings</emphasis>, which are processes
-    created<footnote> <para>The term <emphasis>spawn</emphasis> is
+    created<footnote><para>The term <emphasis>spawn</emphasis> is
     often used when talking about parent processes creating children;
     as in "the process spawned a child".</para></footnote> by the same
     parent.</para>
-
     <para>Certainly children can create more children and so on and so
     forth.</para>
-
-    <example xml:id="pstree"><info><title><command>pstree</command> example</title></info>
-      
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/pstree.txt" parse="text"/>
-            </programlisting>
-    </example>    
-
+    <example xml:id="pstree">
+      <info>
+        <title><command>pstree</command> example</title>
+      </info>
+      <programlisting linenumbering="numbered">
+        <xi:include href="code/pstree.txt" parse="text"/>
+      </programlisting>
+    </example>
   </section>
-
-
-  <section xml:id="fork_and_exec"><info><title>Fork and Exec</title></info>
-    
-
+  <section xml:id="fork_and_exec">
+    <info>
+      <title>Fork and Exec</title>
+    </info>
     <para>New processes are created by the two related interfaces
     <computeroutput>fork</computeroutput> and
     <computeroutput>exec</computeroutput>.</para>
-
-    <section><info><title>Fork</title></info>
-      
-
+    <section>
+      <info>
+        <title>Fork</title>
+      </info>
       <para>When you come to metaphorical "fork in the road" you
       generally have two options to take, and your decision effects
       your future.  Computer programs reach this fork in the road when
       they hit the <computeroutput>fork()</computeroutput> system
       call. </para>
-
       <para>At this point, the operating system will create a new
       process that is exactly the same as the parent process.  This
       means all the state that was talked about previously is copied,
       including open files, register state and all memory
       allocations, which includes the program code.</para>
-
       <para>The return value from the system call is the only way the
       process can determine if it was the existing process or a new
       one.  The return value to the parent process will be the Process
       ID (PID) of the child, whilst the child will get a return value
       of 0.</para>
-
       <para>At this point, we say the process has
       <computeroutput>forked</computeroutput> and we have the
       parent-child relationship as described above.</para>
-
     </section>
-
-    <section><info><title>Exec</title></info>
-      
-
+    <section>
+      <info>
+        <title>Exec</title>
+      </info>
       <para>Forking provides a way for an existing process to start a
       new one, but what about the case where the new process is not
       part of the same program as parent process?  This is the case in
       the shell; when a user starts a command it needs to run in a new
       process, but it is unrelated to the shell.</para>
-
       <para>This is where the <computeroutput>exec</computeroutput>
       system call comes into
       play. <computeroutput>exec</computeroutput> will
       <emphasis>replace</emphasis> the contents of the currently
       running process with the information from a program
       binary.</para>
-
       <para>Thus the process the shell follows when launching a new
       program is to firstly <computeroutput>fork</computeroutput>,
       creating a new process, and then
       <computeroutput>exec</computeroutput> (i.e. load into memory and
       execute) the program binary it is supposed to run.</para>
-
     </section>
-
-    <section><info><title>How Linux actually handles fork and exec</title></info>
-      
-      <section xml:id="linux_clone"><info><title><computeroutput>clone</computeroutput></title></info>
-	
-
-	<para>In the kernel, fork is actually implemented by a
+    <section>
+      <info>
+        <title>How Linux actually handles fork and exec</title>
+      </info>
+      <section xml:id="linux_clone">
+        <info>
+          <title>
+            <computeroutput>clone</computeroutput>
+          </title>
+        </info>
+        <para>In the kernel, fork is actually implemented by a
 	<computeroutput>clone</computeroutput> system call.  This
 	<computeroutput>clone</computeroutput> interfaces effectively
 	provides a level of abstraction in how the Linux kernel can
 	create processes.</para>
-
-	<para><computeroutput>clone</computeroutput> allows you to
+        <para><computeroutput>clone</computeroutput> allows you to
 	explicitly specify which parts of the new process are copied
 	into the new process, and which parts are shared between the
 	two processes.  This may seem a bit strange at first, but
 	allows us to easily implement <emphasis>threads</emphasis>
 	with one very simple interface.</para>
-
-	<section xml:id="threads"><info><title>Threads</title></info>
-	   <para>While
+        <section xml:id="threads">
+          <info>
+            <title>Threads</title>
+          </info>
+          <para>While
 	  <computeroutput>fork</computeroutput> copies all of the
 	  attributes we mentioned above, imagine if everything was
 	  copied for the new process <emphasis>except</emphasis> for
 	  the memory.  This means the parent and child share the same
 	  memory, which includes program code and data.</para>
-
-	  <figure><info><title>Threads</title></info>
-	    
-	    <mediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter04/figures/threads.eps" format="EPS"/>
-	      </imageobject>
-	      <imageobject role="fo">
-		<imagedata fileref="figures/threads.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
-	      </imageobject>
-	      <imageobject role="html">
-		<imagedata fileref="chapter04/figures/threads.png" format="PNG"/>
-	      </imageobject>
-	      <textobject>
-		<phrase>The memory (including program code and
+          <figure>
+            <info>
+              <title>Threads</title>
+            </info>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="chapter04/figures/threads.eps" format="EPS"/>
+              </imageobject>
+              <imageobject role="fo">
+                <imagedata fileref="figures/threads.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+              </imageobject>
+              <imageobject role="html">
+                <imagedata fileref="chapter04/figures/threads.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase>The memory (including program code and
 		variables) of the process are shared by the threads,
 		but each has it's own kernel state, so they can be
 		running different parts of the code at the same
 		time.</phrase>
-	      </textobject>
-	    </mediaobject>
-	  </figure>
-
-	  <para>This hybrid child is called a
+              </textobject>
+            </mediaobject>
+          </figure>
+          <para>This hybrid child is called a
 	  <emphasis>thread</emphasis>.  Threads have a number of
 	  advantages over where you might use <emphasis>fork</emphasis></para>
-
-	  <orderedlist>
-
-	    <listitem>
-	      <para>Separate processes can not see each others memory.
+          <orderedlist>
+            <listitem>
+              <para>Separate processes can not see each others memory.
 	      They can only communicate with each other via other
 	      system calls.</para>
-
-	      <para>Threads however, share the same memory.  So you
+              <para>Threads however, share the same memory.  So you
 	      have the advantage of multiple processes, with the
 	      expense of having to use system calls to communicate
 	      between them.</para>
-
-	      <para>The problem that this raises is that threads can
+              <para>The problem that this raises is that threads can
 	      very easily step on each others toes.  One thread might
 	      increment a variable, and another may decrease it
 	      without informing the first thread.  These type of
 	      problems are called <emphasis>concurrency
 	      problems</emphasis> and they are many and varied.</para>
-
-	      <para>To help with this, there are userspace libraries
+              <para>To help with this, there are userspace libraries
 	      that help programmers work with threads properly.  The
 	      most common one is called <computeroutput>POSIX
 	      threads</computeroutput> or, as it more commonly
 	      referred to
 	      <computeroutput>pthreads</computeroutput></para>
-	    </listitem>
-
-	    <listitem>
-	      <para>Switching processes is quite expensive, and one of
+            </listitem>
+            <listitem>
+              <para>Switching processes is quite expensive, and one of
 	      the major expenses is keeping track of what memory each
 	      process is using.  By sharing the memory this overhead
 	      is avoided and performance can be significantly
 	      increased.</para>
-	    </listitem>
-
-	  </orderedlist>
-
-	  <para>There are many different ways to implement threads.
+            </listitem>
+          </orderedlist>
+          <para>There are many different ways to implement threads.
 	  On the one hand, a userspace implementation could implement
 	  threads within a process without the kernel having any idea
 	  about it.  The threads all look like they are running in a
 	  single process to the kernel.</para>
-
-	  <para>This is suboptimal mainly because the kernel is being
+          <para>This is suboptimal mainly because the kernel is being
 	  withheld information about what is running in the system.
 	  It is the kernels job to make sure that the system resources
 	  are utilised in the best way possible, and if what the kernel
 	  thinks is a single process is actually running multiple
 	  threads it may make suboptimal decisions.</para>
-
-	  <para>Thus the other method is that the kernel has full
+          <para>Thus the other method is that the kernel has full
 	  knowledge of the thread.  Under Linux, this is established
 	  by making all processes able to share resources via the
 	  <computeroutput>clone</computeroutput> system call.  Each
 	  thread still has associated kernel resources, so the kernel
 	  can take it into account when doing resource
 	  allocations.</para>
-
-	  <para>Other operating systems have a hybrid method, where some
+          <para>Other operating systems have a hybrid method, where some
 	  threads can be specified to run in userspace only ("hidden"
 	  from the kernel) and others might be a <emphasis>light
 	  weight process</emphasis>, a similar indication to the
 	  kernel that the processes is part of a thread group.</para>
-
-	</section>
-
-	<section><info><title>Copy on write</title></info>
-	   <para>As we mentioned, copying
+        </section>
+        <section>
+          <info>
+            <title>Copy on write</title>
+          </info>
+          <para>As we mentioned, copying
 	  the entire memory of one process to another when
 	  <computeroutput>fork</computeroutput> is called is an
 	  expensive operation.</para>
-
-	  <para>One optimisation is called <emphasis>copy on
+          <para>One optimisation is called <emphasis>copy on
 	  write</emphasis>.  This means that similar to threads above,
 	  the memory is actually shared, rather than copied, between
 	  the two processes when fork is called.  If the processes are
 	  only going to be reading the memory, then actually
 	  copying the data is unnecessary.</para>
-
-	  <para>However, when a process writes to it's memory, it
+          <para>However, when a process writes to it's memory, it
 	  needs to be a private copy that is not shared.  As the name
 	  suggests, copy on write optimises this by only doing the
 	  actual copy of the memory at the point when it is written
 	  to.</para>
-
-	  <para>Copy on write also has a big advantage for
+          <para>Copy on write also has a big advantage for
 	  <computeroutput>exec</computeroutput>.  Since
 	  <computeroutput>exec</computeroutput> will simply be
 	  overwriting all the memory with the new program, actually
 	  copying the memory would waste a lot of time.  Copy on write
 	  saves us actually doing the copy.</para>
-	</section>
-
+        </section>
       </section>
     </section>
-
-    <section><info><title>The <application>init</application> process</title></info>
-      
-
+    <section>
+      <info>
+        <title>The <application>init</application> process</title>
+      </info>
       <para>We discussed the overall goal of the init process
       previously, and we are now in a position to understand how it
       works.</para>
-
       <para>On boot the kernel starts the init process, which then
       forks and execs the systems boot scripts.  These fork and exec
       more programs, eventually ending up forking a login
       process.</para>
-
       <para>The other job of the <computeroutput>init</computeroutput>
       process is "reaping".  When a process calls
       <computeroutput>exit</computeroutput> with a return code, the
       parent usually wants to check this code to see if the child
       exited correctly or not.</para>
-
       <para>However, this exit code is part of the process which has
       just called <computeroutput>exit</computeroutput>.  So the
       process is "dead" (e.g. not running) but still needs to stay
       around until the return code is collected.  A process in this
       state is called a <emphasis>zombie</emphasis> (the traits of
       which you can contrast with a mystical zombie!)</para>
-
       <para>A process stays as a zombie until the parent collects the
       return code with the <computeroutput>wait</computeroutput> call.
       However, if the parent exits before collecting this return code,
       the zombie process is still around, waiting aimlessly to give
       it's status to someone.</para>
-
       <para>In this case, the zombie child will be
       <emphasis>reparented</emphasis> to the init process which has a
       special handler that <emphasis>reaps</emphasis> the return
       value.  Thus the process is finally free and can the descriptor
       can be removed from the kernels process table.</para>
-
-      <section><info><title>Zombie example</title></info>
-	
-
-	<example xml:id="zombie-example"><info><title>Zombie example process</title></info>
-	  
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/zombie.txt" parse="text"/>
-            </programlisting>
-	</example>    
-
-	<para>Above we create a zombie process.  The parent process
+      <section>
+        <info>
+          <title>Zombie example</title>
+        </info>
+        <example xml:id="zombie-example">
+          <info>
+            <title>Zombie example process</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/zombie.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>Above we create a zombie process.  The parent process
 	will sleep forever, whilst the child will exit after a few
 	seconds.</para>
-
-	<para>Below the code you can see the results of running the
+        <para>Below the code you can see the results of running the
 	program.  The parent process (16168) is in state
 	<computeroutput>S</computeroutput> for sleep (as we expect)
 	and the child is in state <computeroutput>Z</computeroutput>
 	for zombie.  The <application>ps</application> output also
 	tells us that the process is
 	<computeroutput>defunct</computeroutput> in the process
-	description.<footnote> <para>The square brackets around the
+	description.<footnote><para>The square brackets around the
 	"z" of "zombie" are a little trick to remove the grep
 	processes its self from the ps output.
 	<application>grep</application> interprets everything between
@@ -753,26 +695,23 @@
 	process name will be "grep [z]ombie" (with the brackets) this
 	will not match!</para></footnote></para>
       </section>
-
     </section>
   </section>
-
-  <section xml:id="context_switching"><info><title>Context Switching</title></info>
-    
-
+  <section xml:id="context_switching">
+    <info>
+      <title>Context Switching</title>
+    </info>
     <para>Context switching refers to the process the kernel
     undertakes to switch from one process to another. XXX ?</para>
-
   </section>
-
-  <section xml:id="scheduling"><info><title>Scheduling</title></info>
-    
-
+  <section xml:id="scheduling">
+    <info>
+      <title>Scheduling</title>
+    </info>
     <para>A running system has many processes, maybe even into the
     hundreds or thousands.  The part of the kernel that keeps track of
     all these processes is called the <emphasis>scheduler</emphasis>
     because it schedules which process should be run next.</para>
-
     <para>Scheduling algorithms are many and varied.  Most users have
     different goals relating to what they want their computer to do,
     so this affects scheduling decisions.  For example, for a desktop
@@ -782,62 +721,54 @@
     user feels, as their actions will have more immediate responses.
     For a server, you might want your web server application to be
     given priority.</para>
-
     <para>People are always coming up with new algorithms, and you can
     probably think of your own fairly easily.  But there are a number
     of different components of scheduling.</para>
-
-    <section><info><title>Preemptive v co-operative scheduling</title></info>
-      
+    <section>
+      <info>
+        <title>Preemptive v co-operative scheduling</title>
+      </info>
       <para>Scheduling strategies can broadly fall into two categories</para>
       <orderedlist>
-	<listitem>
-
-	  <para><emphasis>Co-operative</emphasis> scheduling is where
+        <listitem>
+          <para><emphasis>Co-operative</emphasis> scheduling is where
 	  the currently running process voluntarily gives up executing
 	  to allow another process to run.  The obvious disadvantage
 	  of this is that the process may decide to never give up
 	  execution, probably because of a bug causing some form of
 	  infinite loop, and consequently nothing else can ever
 	  run.</para>
-
-	</listitem>
-
-	<listitem>
-	  <para><emphasis>Preemptive</emphasis> scheduling is where the
+        </listitem>
+        <listitem>
+          <para><emphasis>Preemptive</emphasis> scheduling is where the
 	  process is interrupted to stop it an allow another process
 	  to run.  Each process gets a <emphasis>timeslice</emphasis>
 	  to run in; at the point of each context switch a timer will
 	  be reset and will deliver and interrupt when the timeslice
 	  is over.</para>
-
-	  <para>We know that the hardware handles the interrupt
+          <para>We know that the hardware handles the interrupt
 	  independently of the running process, and so at this point
 	  control will return to the operating system.  At this point,
 	  the scheduler can decide which process to run next.</para>
-
-	  <para>This is the type of scheduling used by all modern
+          <para>This is the type of scheduling used by all modern
 	  operating systems.</para>
-	</listitem>
+        </listitem>
       </orderedlist>
-
     </section>
-
-    <section><info><title>Realtime</title></info>
-      
-
+    <section>
+      <info>
+        <title>Realtime</title>
+      </info>
       <para>Some processes need to know exactly how long their
       timeslice will be, and how long it will be before they get
       another timeslice to run.  Say you have a system running a
       heart-lung machine; you don't want the next pulse to be delayed
       because something else decided to run in the system!</para>
-
       <para>Hard realtime systems make guarantees about scheduling
       decisions like the maximum amount of time a process will be
       interrupted before it can run again.  They are often used in
       life critical applications like medical, aircraft and military
       applications.</para>
-
       <para>Soft realtime is a variation on this, where guarantees
       aren't as strict but general system behaviour is predictable.
       Linux can be used like this, and it is often used in systems
@@ -845,26 +776,23 @@
       stream, you don't want to be interrupted for long periods of
       time as you will loose audio data which can not be
       retrieved.</para>
-
     </section>
-
-    <section><info><title>Nice value</title></info>
-      
-
+    <section>
+      <info>
+        <title>Nice value</title>
+      </info>
       <para>UNIX systems assign each process a
       <emphasis>nice</emphasis> value.  The scheduler looks at the
       nice value and can give priority to those processes that have a
       higher "niceness".</para>
-
     </section>
-
-    <section><info><title>A brief look at the Linux Scheduler</title></info>
-      
-
+    <section>
+      <info>
+        <title>A brief look at the Linux Scheduler</title>
+      </info>
       <para>The Linux scheduler has and is constantly undergoing many
       changes as new developers attempt to improve its
       behaviour.</para>
-
       <para>The current scheduler is known as the O(1) scheduler,
 which refers to the property that no many how many processes the
 scheduler has to choose from, it will choose the next one to run in a
@@ -878,7 +806,6 @@ amount of time now matter how much input, then the algorithm runs in
 constant time.  Intuitively you can see that the slower the algorithm
 grows for more input, the better it is.  Computer science text books
 deal with algorithm analysis in more detail.</para></footnote>.</para>
-
       <para>Previous incarnations of the Linux scheduler used the
 concept of <emphasis>goodness</emphasis> to determine which process to
 run next.  All possible tasks are kept on a
@@ -889,26 +816,26 @@ that to calculate the next process to run, every possible runnable
 process must have its goodness calculated and the one with the highest
 goodness ``wins''.  You can see that for more tasks, it will take
 longer and longer to decide which processes will run next.</para>
-
-    <figure><info><title>The O(1) scheduler</title></info>
-      
-      <mediaobject>
-	<imageobject>
-	  <imagedata fileref="chapter04/figures/o1queue.eps" format="EPS"/>
-	</imageobject>
-	<imageobject role="fo">
-	  <imagedata fileref="figures/o1queue.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
-	</imageobject>
-	<imageobject role="html">
-	  <imagedata fileref="chapter04/figures/o1queue.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	  <phrase>A view of how the Linux scheduler manages
+      <figure>
+        <info>
+          <title>The O(1) scheduler</title>
+        </info>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="chapter04/figures/o1queue.eps" format="EPS"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata fileref="figures/o1queue.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+          </imageobject>
+          <imageobject role="html">
+            <imagedata fileref="chapter04/figures/o1queue.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>A view of how the Linux scheduler manages
 	  processes.</phrase>
-	</textobject>
-      </mediaobject>
-    </figure>
-
+          </textobject>
+        </mediaobject>
+      </figure>
       <para>In contrast, the O(1) scheduler uses a run queue structure
 as shown above.  The run queue has a number of
 <emphasis>buckets</emphasis> in priority order and a bitmap that flags
@@ -920,7 +847,6 @@ The scheduler keeps two such structures, an
 processes that are runnable and those which have utilised their entire
 time slice respectively.  These can be swapped by simply modifying
 pointers when all processes have had some CPU time.</para>
-
       <para>The really interesting part, however, is how it is decided
 where in the run queue a process should go.  Some of the things that
 need to be taken into account are the nice level, processor affinity
@@ -929,55 +855,48 @@ moving a process to another CPU in a SMP system can be an expensive
 operation) and better support for identifying interactive programs
 (applications such as a GUI which may spend much time sleeping,
 waiting for user input, but when the user <emphasis>does</emphasis>
-get around to interacting with it wants a fast response).</para></section>
-
+get around to interacting with it wants a fast response).</para>
+    </section>
   </section>
-
-  <section xml:id="the_shell"><info><title>The Shell</title></info>
-    
-
+  <section xml:id="the_shell">
+    <info>
+      <title>The Shell</title>
+    </info>
     <para>On a UNIX system, the shell is the standard interface to
     handling processes on your system.  Once the shell was the primary
     interface, however modern Linux systems have a GUI and provide a
     shell via a "terminal application" or similar.  The primary job of
     the shell is to help the user handle starting, stopping and
     otherwise controlling processes running in the system.</para>
-
     <para>When you type a command at the prompt of the shell, it will
     <computeroutput>fork</computeroutput> a copy of it's self and
     <computeroutput>exec</computeroutput> the command that you have
     specified.</para>
-
     <para>The shell then, by default, waits for that process to finish
     running before returning to a prompt to start the whole process
     over again.</para>
-
     <para>As an enhancement, the shell also allows you to
     <emphasis>background</emphasis> a job, usually by placing an
     <computeroutput>&amp;</computeroutput> after the command name.
     This is simply a signal that the shell should fork and execute the
     command, but <emphasis>not</emphasis> wait for the command to
     complete before showing you the prompt again.</para>
-
     <para>The new process runs in the background, and the shell is
     ready waiting to start a new process should you desire.  You can
     usually tell the shell to <emphasis>foreground</emphasis> a
     process, which means we do actually want to wait for it to
     finish.</para>
-
     <para>XXX : a bit of history about bourne shell</para>
-
   </section>
-
-  <section xml:id="signals"><info><title>Signals</title></info>
-    
-
+  <section xml:id="signals">
+    <info>
+      <title>Signals</title>
+    </info>
     <para>Processes running in the system require a way to be told
     about events that influence them.  On UNIX there is
     infrastructure between the kernel and processes called
     <emphasis>signals</emphasis> which allows a process to receive
     notification about events important to it.</para>
-
     <para>When a signal is sent to a process, the kernel invokes a
     <emphasis>handler</emphasis> which the process must register with
     the kernel to deal with that signal.  A handler is simply a
@@ -989,13 +908,11 @@ get around to interacting with it wants a fast response).</para></section>
     handler gets called <emphasis>asynchronously</emphasis>; that is
     the currently running program is interrupted from what it is doing
     to process the signal event.</para>
-
     <para>For example, one type of signal is an
     <emphasis>interrupt</emphasis> (defined in system headers as
     <computeroutput>SIGINT</computeroutput>) is delivered to the
     process when the <computeroutput>ctrl-c</computeroutput>
     combination is pressed.</para>
-
     <para>As a process uses the <computeroutput>read</computeroutput>
     system call to read input from the keyboard, the kernel will be
     watching the input stream looking for special characters.  Should
@@ -1008,7 +925,6 @@ get around to interacting with it wants a fast response).</para></section>
     will take some default action.  With
     <computeroutput>ctrl-c</computeroutput> the default action is to
     terminate the process.</para>
-
     <para>A process can choose to ignore some signals, but other
     signals are not allowed to be ignored.  For example,
     <computeroutput>SIGKILL</computeroutput> is the signal sent when a
@@ -1037,7 +953,6 @@ get around to interacting with it wants a fast response).</para></section>
     from days of serial terminals and modems) which will reload the
     program, perhaps to pick up changes in a configuration file or
     similar.</para>
-
     <para>If you have programmed on a Unix system you would be
     familiar with <computeroutput>segmentation faults</computeroutput>
     when you try to read or write to memory that has not been
@@ -1048,25 +963,24 @@ get around to interacting with it wants a fast response).</para></section>
     program ensues (hence your program "crashes").  In some cases a
     program may install a handler for segmentation faults, although
     reasons for doing this are limited.</para>
-
     <para>This raises the question of what happens after the signal is
     received.  Once the signal handler has finished running, control
     is returned to the process which continues on from where it left
     off.</para>
-
-    <section><info><title>Example</title></info>
-      
-
+    <section>
+      <info>
+        <title>Example</title>
+      </info>
       <para>The following simple program introduces a lot of signals
       to run!</para>
-
-      <example xml:id="signal-example"><info><title>Signals Example</title></info>
-	
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/signal.txt" parse="text"/>
-            </programlisting>
+      <example xml:id="signal-example">
+        <info>
+          <title>Signals Example</title>
+        </info>
+        <programlisting linenumbering="numbered">
+          <xi:include href="code/signal.txt" parse="text"/>
+        </programlisting>
       </example>
-
       <para>We have simple program that simply defines a handler for
       the <computeroutput>SIGINT</computeroutput> signal, which is
       sent when the user presses
@@ -1075,19 +989,16 @@ get around to interacting with it wants a fast response).</para></section>
       <computeroutput>signal.h</computeroutput>, including the
       <computeroutput>signal</computeroutput> function which allows us
       to register the handling function.</para>
-
       <para>The program simply sits in a tight loop doing nothing
       until it quits.  When we start the program, we try pressing
       <computeroutput>ctrl-c</computeroutput> to make it quit.  Rather
       than taking the default action, or handler is invoked and we get
       the output as expected.</para>
-
       <para>We then press <computeroutput>ctrl-z</computeroutput>
       which sends a <computeroutput>SIGSTOP</computeroutput> which by
       default puts the process to sleep.  This means it is not put in
       the queue for the scheduler to run and is thus dormant in the
       system.</para>
-
       <para>As an illustration, we use the
       <application>kill</application> program to send the same signal
       from another terminal window.  This is actually implemented with
@@ -1100,7 +1011,6 @@ get around to interacting with it wants a fast response).</para></section>
       signal gets <emphasis>queued</emphasis> for the process.  This
       means the kernel takes note of the signal and will deliver it
       when appropriate.</para>
-
       <para>At this point we wake the process up by using the command
       <computeroutput>fg</computeroutput>.  This actually sends a
       <computeroutput>SIGCONT</computeroutput> signal to the process,
@@ -1108,13 +1018,11 @@ get around to interacting with it wants a fast response).</para></section>
       knows to put the process on the run queue and give it CPU time
       again.  We see at this point the queued signal is
       delivered.</para>
-
       <para>In desperation to get rid of the program, we finally try
       <computeroutput>ctrl-\</computeroutput> which sends a
       <computeroutput>SIGABRT</computeroutput> (abort) to the process.
       But if the process has aborted, where did the
       <computeroutput>Quit</computeroutput> output come from?</para>
-
       <para>You guessed it, more signals!  When a parent child has a
       process that dies, it gets a
       <computeroutput>SIGCHLD</computeroutput> signal back.  In this
@@ -1128,7 +1036,6 @@ get around to interacting with it wants a fast response).</para></section>
       service prints as much for the user (the same process happens to
       print out "Segmentation Fault" when the child process dies from a
       <computeroutput>SIGSEGV</computeroutput>).</para>
-
       <para>You can see how in even a simple program, around 5
       different signals were used to communicate between processes and
       the kernel and keep things running.  There are many other
@@ -1136,9 +1043,6 @@ get around to interacting with it wants a fast response).</para></section>
       have system functions defined by the kernel, but there are a few
       signals reserved for users to use for their own purposes within
       their programs (<computeroutput>SIGUSR</computeroutput>).</para>
-
     </section>
-
   </section>
-
 </chapter>

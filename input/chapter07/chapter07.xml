@@ -1,12 +1,12 @@
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0"
-         xmlns:xi="http://www.w3.org/2001/XInclude"
-         xml:id="chapter07">
-
-  <info><title>Behind the process</title></info>
-
-  <section xml:id="executable_files"><info><title>Review of executable files</title></info>
-    
-
+<?xml version="1.0"?>
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:id="chapter07">
+  <info>
+    <title>Behind the process</title>
+  </info>
+  <section xml:id="executable_files">
+    <info>
+      <title>Review of executable files</title>
+    </info>
     <para>We know that a program running in memory has two major
     components in <emphasis>code</emphasis> (also commonly known as a
     <emphasis>text</emphasis> for historical reasons) and
@@ -15,18 +15,17 @@
     file on a disk.  This file is in what is referred to as a binary
     format, since the bits and bytes of the file are to be interpreted
     directly by processor hardware.</para>
-
   </section>
-
-  <section xml:id="representing_executables"><info><title>Representing executable files</title></info>
-    
-
-    <section><info><title>Three Standard Sections</title></info>
-      
-
+  <section xml:id="representing_executables">
+    <info>
+      <title>Representing executable files</title>
+    </info>
+    <section>
+      <info>
+        <title>Three Standard Sections</title>
+      </info>
       <para>Any executable file format will need to specify where the
       code and data are in the binary file.</para>
-
       <para>One additional component we have not mentioned until now
       is storage space of uninitialised global variables.  If we
       declare a variable and give it an initial value this obviously
@@ -38,14 +37,14 @@
       executable file size.  Thus each executable file can define a
       BSS section which simply gives a size for the uninitialised data;
       on program load the extra memory can be allocated (and set to
-      zero!).<footnote> <para>BSS probably stands for Block Started by
+      zero!).<footnote><para>BSS probably stands for Block Started by
       Symbol, an assembly command for a old IBM
       computer.</para></footnote></para>
     </section>
-
-    <section><info><title>Binary Format</title></info>
-      
-
+    <section>
+      <info>
+        <title>Binary Format</title>
+      </info>
       <para>The executable is created by the toolchain from the source
     code.  This file needs to be in a format explicitly defined such
     that the compiler can create it and the operating system can
@@ -56,153 +55,143 @@
     compiled for one system will execute on another (for example, you
     don't expect your Windows programs to run on Linux, or your Linux
     programs to run on OS X).</para>
-
       <para>However, the common thread between all executable file
     formats is that they include a predefined, standardised header
     which describes how program code and data are stored in the rest
     of the file.  In words, it would generally describe "the program
     code starts 20 bytes into this file, and is 50 kilobytes long.
     The program data follows it and is 20 kilobytes long".</para>
-
-    <para>In recent times one particular format has become the defacto
+      <para>In recent times one particular format has become the defacto
       standard for executable representation for modern UNIX type
       systems.  It is called the <computeroutput>Executable and Linker
       Format</computeroutput>, or ELF for short; we'll be looking at
       it in more detail soon.</para>
-
     </section>
-
-    <section><info><title>Binary Format History</title></info>
-      
-
-      <section><info><title>a.out</title></info>
-	
-
-	<para>ELF was not always the standard; original UNIX systems
+    <section>
+      <info>
+        <title>Binary Format History</title>
+      </info>
+      <section>
+        <info>
+          <title>a.out</title>
+        </info>
+        <para>ELF was not always the standard; original UNIX systems
       used a file format called
       <computeroutput>a.out</computeroutput>.  We can see the
       vestiges of this if you compile a program without the
       <option>-o</option> option to specify an output file name; the
       executable will be created with a default name of
-      <computeroutput>a.out</computeroutput><footnote> <para>In fact,
+      <computeroutput>a.out</computeroutput><footnote><para>In fact,
       <computeroutput>a.out</computeroutput> is the default output
       filename from the <emphasis>linker</emphasis>.  The compiler
       generally uses randomly generated file names as intermediate
       files for assembly and object code.</para></footnote>.</para>
-
-	<para><computeroutput>a.out</computeroutput> is a very simple
+        <para><computeroutput>a.out</computeroutput> is a very simple
 	header format that only allows a single data, code and bss
 	section.  As you will come to see, this is insufficient for
 	modern systems with dynamic libraries.</para>
-
       </section>
-
-      <section><info><title>COFF</title></info>
-	
-
-	<para>The Common Object File Format, or COFF, was the
+      <section>
+        <info>
+          <title>COFF</title>
+        </info>
+        <para>The Common Object File Format, or COFF, was the
 	precursor to ELF.  It's header format was more flexible,
 	allowing an more (but limited) sections in the file.</para>
-
-	<para>COFF also has difficulties with elegant support of
+        <para>COFF also has difficulties with elegant support of
 	shared libraries, and ELF was selected as an alternative
 	implementation on Linux.</para>
-
-	<para>However, COFF lives on in Microsoft Windows as the
+        <para>However, COFF lives on in Microsoft Windows as the
 	<computeroutput>Portable Executable</computeroutput> or PE
 	format.  PE is to Windows as ELF is to Linux.</para>
-
       </section>
-
     </section>
   </section>
-
-  <section xml:id="elf"><info><title>ELF</title></info>
-    
-
+  <section xml:id="elf">
+    <info>
+      <title>ELF</title>
+    </info>
     <para>ELF is an extremely flexible format for representing binary
     code in a system.  By following the ELF standard you can represent
     a kernel binary just as easily as a normal executable or a system
     library.  The same tools can be used to inspect and operate on all
     ELF files and developers who understand the ELF file format can
     translate their skills to most modern UNIX systems.</para>
-
-    <section><info><title>ELF in depth</title></info>
-      
-
+    <section>
+      <info>
+        <title>ELF in depth</title>
+      </info>
       <para>ELF extends on COFF and gives the header sufficient
     flexibility to define an arbitrary number of sections, each with
     it's own properties.  This facilitates easier dynamic linking and
     debugging.</para>
-
-      <figure><info><title>ELF Overview</title></info>
-	
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="chapter07/figures/elf-overview.eps" format="EPS"/>
-	  </imageobject>
-	  <imageobject role="fo">
-	    <imagedata fileref="figures/elf-overview.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
-	  </imageobject>
-	  <imageobject role="html">
-	    <imagedata fileref="chapter07/figures/elf-overview.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>ELF Overview</phrase>
-	  </textobject>
-	</mediaobject>
+      <figure>
+        <info>
+          <title>ELF Overview</title>
+        </info>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="chapter07/figures/elf-overview.eps" format="EPS"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata fileref="figures/elf-overview.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+          </imageobject>
+          <imageobject role="html">
+            <imagedata fileref="chapter07/figures/elf-overview.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>ELF Overview</phrase>
+          </textobject>
+        </mediaobject>
       </figure>
-
-      <section><info><title>ELF File Header</title></info>
-
-	
-
-	<para>Overall, the file has a <emphasis>file
+      <section>
+        <info>
+          <title>ELF File Header</title>
+        </info>
+        <para>Overall, the file has a <emphasis>file
 	  header</emphasis> which describes the file in general and
 	  then has pointers to each of the individual sections that
 	  make up the file.</para>
-
-	<example xml:id="elf-header"><info><title>The ELF Header</title></info>
-	  
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/elf-header.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-	<para>Above is the description as given in the API
+        <example xml:id="elf-header">
+          <info>
+            <title>The ELF Header</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/elf-header.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>Above is the description as given in the API
 	documentation.  This is the layout of the C structure which
 	defines a ELF header.</para>
-
-	<example xml:id="readelf-elf-header"><info><title>The ELF Header, as shown by <application>readelf</application></title></info>
-	  
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/readelf-elf-header.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-	<para>Above is a more human readable form as present by the
+        <example xml:id="readelf-elf-header">
+          <info>
+            <title>The ELF Header, as shown by <application>readelf</application></title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/readelf-elf-header.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>Above is a more human readable form as present by the
 	<application>readelf</application> program, which is part of
 	<application>GNU binutils</application>.</para>
-
-	<para>The <computeroutput>e_ident</computeroutput> array is
+        <para>The <computeroutput>e_ident</computeroutput> array is
 	the first thing at the start of any ELF file, and always
 	starts with a few "magic" bytes.  The first byte is 0x7F and
 	then the next three bytes are "ELF".  You can inspect an ELF
 	binary to see this for yourself with something like the
 	<command>hexdump</command> command.</para>
-
-	    <example xml:id="elf-magic"><info><title>Inspecting the ELF magic number</title></info>
-	      
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/elf-magic.txt" parse="text"/>
-            </programlisting>
-	    </example>
-
-	<para>Note the 0x7F to start, then the ASCII encoded "ELF"
+        <example xml:id="elf-magic">
+          <info>
+            <title>Inspecting the ELF magic number</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/elf-magic.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>Note the 0x7F to start, then the ASCII encoded "ELF"
 	string.  Have a look at the standard and see what the rest of
 	the array defines and what the values are in a binary.</para>
-
-	<para>Next we have some flags for the type of machine this
+        <para>Next we have some flags for the type of machine this
 	binary is created for.  The first thing we can see is that ELF
 	defines different type sized versions, one for 32 bit and one
 	for 64 bit versions; here we inspect the 32 bit version.  The
@@ -213,40 +202,36 @@
 	down a bit we can see the
 	<computeroutput>Machine</computeroutput> tells us this is a
 	PowerPC binary.</para>
-
-	<para>The apparently innocuous entry point address seems
+        <para>The apparently innocuous entry point address seems
 	  straight forward enough; this is the address in memory that
 	  the program code starts at.</para>
-
-	<para>Beginning C programmers are told that
+        <para>Beginning C programmers are told that
 	  <emphasis>main()</emphasis> is the first program called in
 	  your program.  Using the entry point address we can actually
 	  verify that it <emphasis>isn't</emphasis>.</para>
-
-	<example xml:id="entry-point"><info><title>Investigating the entry point</title></info>
-	  
-	  <programlisting linenumbering="numbered" >
-              <xi:include href="code/entry-point.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-	<para>Above we can see that the entry point is actually a
+        <example xml:id="entry-point">
+          <info>
+            <title>Investigating the entry point</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/entry-point.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>Above we can see that the entry point is actually a
 	  function called <computeroutput>_start</computeroutput>.
 	  Our program didn't define this at all, and the leading
 	  underscore suggests that it is in a separate
 	  <emphasis>namespace</emphasis>.  We examine how a program
 	  starts up below.</para>
-
-	<para>After that the header contians pointers to where in the
+        <para>After that the header contians pointers to where in the
 	file other important parts of the ELF file start, like a table
 	of contents.</para>
-
       </section>
-
-      <section xml:id="symbols_and_relocations"><info><title>Symbols and Relocations</title></info>
-	
-
-	<para>The ELF specification provides for <emphasis>symbol
+      <section xml:id="symbols_and_relocations">
+        <info>
+          <title>Symbols and Relocations</title>
+        </info>
+        <para>The ELF specification provides for <emphasis>symbol
 	tables</emphasis> which are simply mappings of strings
 	(symbols) to locations in the file.  Symbols are required for
 	linking; for example assigning a value to a variable
@@ -256,8 +241,7 @@
 	<computeroutput>foo</computeroutput>, which would involve
 	looking up "foo" in the symbol table and finding the
 	address.</para>
-
-	<para>Closely related to symbols are
+        <para>Closely related to symbols are
 	<emphasis>relocations</emphasis>.  A relocation is simply a
 	blank space left to be patched up later.  In the previous
 	example, until the address of
@@ -273,31 +257,27 @@
 	<xref linkend="dynamic_relocations"/> contains further
 	information on relocations.
 	</para>
-
       </section>
-
-      <section><info><title>Sections and Segments</title></info>
-
-	
-
-	<para>The ELF format specifies two "views" of an ELF file --
+      <section>
+        <info>
+          <title>Sections and Segments</title>
+        </info>
+        <para>The ELF format specifies two "views" of an ELF file --
 	that which is used for linking and that which is used for
 	execution.  This affords significant flexibility for systems
 	designers.</para>
-
-	<para>We talk about <emphasis>sections</emphasis> in object
+        <para>We talk about <emphasis>sections</emphasis> in object
 	code waiting to be linked into an executable.  One or more
 	sections map to a <emphasis>segment</emphasis> in the
 	executable.</para>
-
-	<section><info><title>Segments</title></info>
-	  
-
-	  <para>As we have done before, it is sometimes easier to look
+        <section>
+          <info>
+            <title>Segments</title>
+          </info>
+          <para>As we have done before, it is sometimes easier to look
 	  at the higher level of abstraction (segments) before
 	  inspecting the lower layers.</para>
-
-	  <para>As we mentioned the ELF file has an header that
+          <para>As we mentioned the ELF file has an header that
 	  describes the overall layout of the file.  The ELF header
 	  actually points to another group of headers called the
 	  <emphasis>program headers</emphasis>.  These headers
@@ -306,16 +286,15 @@
 	  it.  Segments are described by program headers, but so are
 	  some other things reuquired to get the executable
 	  running.</para>
-
-	  <example xml:id="program-header"><info><title>The Program Header</title></info>
-	    
-	  <programlisting linenumbering="numbered" >
+          <example xml:id="program-header">
+            <info>
+              <title>The Program Header</title>
+            </info>
+            <programlisting linenumbering="numbered">
               <xi:include href="code/program-header.txt" parse="text"/>
             </programlisting>
-
-	  </example>
-
-	  <para>The definition of the program header is seen above.
+          </example>
+          <para>The definition of the program header is seen above.
 	  You might have noticed from the ELF header definition above
 	  how there were fields
 	  <computeroutput>e_phoff</computeroutput>,
@@ -325,8 +304,7 @@
 	  start, how many program headers there are and how big each
 	  program header is.  With these three bits of information you
 	  can easily find and read the program headers.</para>
-
-	  <para>As we mentioned, program headers more than just
+          <para>As we mentioned, program headers more than just
 	  segments.  The <computeroutput>p_type</computeroutput> field
 	  defines just what the program header is defining.  For
 	  example, if this field is
@@ -349,8 +327,7 @@
 	  takes the final steps to complete loading of the exectable
 	  and prepare the binary image for running.
 	  </para>
-
-	  <para>Segments are described with a value of
+          <para>Segments are described with a value of
 	  <computeroutput>PT_LOAD</computeroutput> in the
 	  <computeroutput>p_type</computeroutput> field.  Each segment
 	  is then described by the other fields in the program header.
@@ -374,36 +351,32 @@
 	  code segements should be marked as read and execute only,
 	  data sections as read and write with no exectue.
 	  </para>
-
-	  <para>There are a few other segment types defined in the
+          <para>There are a few other segment types defined in the
 	  program headers, they are described more fully in the
 	  standards specification (XXX).</para>
-
-	</section>
-
-	<section><info><title>Sections</title></info>
-	  
-
-	  <para>As we have mentioned, sections make up segments.
+        </section>
+        <section>
+          <info>
+            <title>Sections</title>
+          </info>
+          <para>As we have mentioned, sections make up segments.
 	  Sections are a way to organise the binary into logical areas
 	  to communicate information between the compiler and the
 	  linker.  In some special binaries, such as the linux kernel,
 	  sections are used in more specific ways.</para>
-
-	  <para>We've seen how segments utimatley come down to a blob
+          <para>We've seen how segments utimatley come down to a blob
 	  of data in a file on disk with some descriptions about where
 	  it should be loaded and what permissions it has. (XXX)</para>
-
-	  <para>Sections have a similar header to segments.</para>
-
-	  <example xml:id="section-header"><info><title>Sections </title></info>
-	    
-	  <programlisting linenumbering="numbered" >
+          <para>Sections have a similar header to segments.</para>
+          <example xml:id="section-header">
+            <info>
+              <title>Sections </title>
+            </info>
+            <programlisting linenumbering="numbered">
               <xi:include href="code/section-header.txt" parse="text"/>
             </programlisting>
-	  </example>
-
-	  <para>Sections have a few more types defined for the
+          </example>
+          <para>Sections have a few more types defined for the
 	  <computeroutput>sh_type</computeroutput> field; for example
 	  a section of type
 	  <computeroutput>SH_PROGBITS</computeroutput> is defined as a
@@ -411,37 +384,33 @@
 	  flags say if this section is a symbol table (used by the
 	  linker or debugger for example) or maybe something for the
 	  dynamic loader.</para>
-
-	  <para>There are also more attributes, such as the
+          <para>There are also more attributes, such as the
 	  <emphasis>allocate</emphasis> attribute which flags that
 	  this section will need memory allocated for it.</para>
-
-	  <para>It is probably best to examine sections through an
+          <para>It is probably best to examine sections through an
 	  example of them in use.  Consier the following
 	  program.</para>
-
-	  <example xml:id="section"><info><title>Sections </title></info>
-	    
-
-	  <programlisting linenumbering="numbered" language="c">
+          <example xml:id="section">
+            <info>
+              <title>Sections </title>
+            </info>
+            <programlisting linenumbering="numbered" language="c">
               <xi:include href="code/sections.c" parse="text"/>
             </programlisting>
-	  </example>
-
-	  <example xml:id="section-readelf"><info><title>Sections readelf output </title></info>
-
-
-	  <programlisting linenumbering="numbered">
+          </example>
+          <example xml:id="section-readelf">
+            <info>
+              <title>Sections readelf output </title>
+            </info>
+            <programlisting linenumbering="numbered">
               <xi:include href="code/sections.txt" parse="text"/>
             </programlisting>
           </example>
-
-	  <para>Above we have stripped some parts of the
+          <para>Above we have stripped some parts of the
 	  <application>readelf</application> output for clarity.  We
 	  can analyse each part of our simple program and see what
 	  happens to it.</para>
-
-	  <para>Firstly, let us look at the variable
+          <para>Firstly, let us look at the variable
 	  <computeroutput>big_big_array</computeroutput>, which as the
 	  name suggests is a fairly large global array.  If we skip
 	  down to the symbol table we can see that the variable is at
@@ -457,8 +426,7 @@
 	  Note that this section has a type of
 	  <computeroutput>NOBITS</computeroutput> meaning that it does
 	  not have any bytes on disk.</para>
-
-	  <para>Thus the <computeroutput>.bss</computeroutput> section
+          <para>Thus the <computeroutput>.bss</computeroutput> section
 	  is defined for global variables whose value should be zero
 	  when the program starts.  We have seen how the memory size
 	  can be different to the on disk size in our discussion of
@@ -466,8 +434,7 @@
 	  <computeroutput>.bss</computeroutput> section are an
 	  indication that they will be given zero value on program
 	  start.</para>
-
-	  <para>The <computeroutput>a_string</computeroutput> variable
+          <para>The <computeroutput>a_string</computeroutput> variable
 	  lives in the <computeroutput>.sdata</computeroutput>
 	  section, which stands for <emphasis>small data</emphasis>.
 	  Small data (and the corresponding
@@ -484,35 +451,30 @@
 	  thus only offset a certain "small" distance from an address
 	  (XXX).
 	  </para>
-
-	  <para>We can also see that our
+          <para>We can also see that our
 	  <computeroutput>a_var_with_value</computeroutput> lives in
 	  the same place.</para>
-
-	  <para><computeroutput>main</computeroutput> however lives in
+          <para><computeroutput>main</computeroutput> however lives in
 	  the <computeroutput>.text</computeroutput> section, as we
 	  expect (remeber the name "text" and "code" are used
 	  interchanably to refer to a program in memory.</para>
-
-	</section>
-
-	<section><info><title>Sections and Segments together</title></info>
-	  
-
-	  <example xml:id="sections-segments"><info><title>Sections and Segments</title></info>
-	    
-
-	  <programlisting linenumbering="numbered">
+        </section>
+        <section>
+          <info>
+            <title>Sections and Segments together</title>
+          </info>
+          <example xml:id="sections-segments">
+            <info>
+              <title>Sections and Segments</title>
+            </info>
+            <programlisting linenumbering="numbered">
               <xi:include href="code/sections-segments.txt" parse="text"/>
             </programlisting>
-
-	  </example>    
-
-	  <para><computeroutput>readelf</computeroutput> shows us the
+          </example>
+          <para><computeroutput>readelf</computeroutput> shows us the
 	  segments and section mappings in the ELF file for the binary
 	  <computeroutput>/bin/ls</computeroutput>. </para>
-
-	  <para>Skipping to the bottom of the output, we can see what
+          <para>Skipping to the bottom of the output, we can see what
 	  sections have been moved into what segments.  So, for
 	  example the <computeroutput>.interp</computeroutput> section
 	  is placed into an <computeroutput>INTERP</computeroutput>
@@ -521,21 +483,19 @@
 	  <computeroutput>/lib/ld.so.1</computeroutput>; this is the
 	  dynamic linker which is run to prepare the binary for
 	  execution.</para>
-
-	  <para>Looking at the two
+          <para>Looking at the two
 	  <computeroutput>LOAD</computeroutput> segments we can see
 	  the distinction between text and data.  Notice how the first
 	  one has only "read" and "execute" permissions, whilst the
 	  next one has read, write and execute permissions?  These
 	  describe the code (r/w) and data (r/w/e) segments.</para>
-
-	  <para>But data should not need to be executable!  Indeed, on
+          <para>But data should not need to be executable!  Indeed, on
 	  most architectures (for example, the most common x86) the
 	  data section will not be marked as having the data section
 	  executable.  However, the example output above was taken
 	  from a PowerPC machine which has a slightly different
 	  programming model (ABI, see below) requiring that the data
-	  section be executable <footnote> <para>For those that are
+	  section be executable <footnote><para>For those that are
 	  curious, the PowerPC ABI calls stubs for functions in
 	  dynamic libraries directly in the GOT, rather than having
 	  them bounce through a seperate PLT entry.  Thus the
@@ -544,27 +504,24 @@
 	  should make sense after reading the dyanmic linking
 	  chapter!</para></footnote>.  Such is the life of a systems
 	  programmer, where rules were made to be broken!</para>
-
-	  <para>The other intereseting thing to note is that the file
+          <para>The other intereseting thing to note is that the file
 	  size is the same as the memory size for the code segment,
 	  however memory size is greater than the file size for the
 	  data segment.  This comes from the BSS section which holds
 	  zeroed global variables.</para>
-	</section>
-
+        </section>
       </section>
     </section>
-
-    <section xml:id="elf_debugging"><info><title>Debugging</title></info>
-      
-
+    <section xml:id="elf_debugging">
+      <info>
+        <title>Debugging</title>
+      </info>
       <para>Tradionally the primary method of post mortem debugging is
 	referred to as the <emphasis>core dump</emphasis>.  The term
 	<emphasis>core</emphasis> comes from the original physical
 	characteristics of magnetic core memory, which uses the
 	orientation of small magnetic rings to store state.
       </para>
-
       <para>Thus a core dump is simply a complete snapshot of the
 	program as it was running at a particular time.  A
 	<emphasis>debugger</emphasis> can then be used to examine this
@@ -572,18 +529,19 @@
 	writes to a random memory location in order to force a crash.
 	At this point the processes will be halted and a dump of the
 	current state is recorded.</para>
-
-      <example xml:id="coredump_gdb"><info><title>Example of creating a core dump and using it with <productname>gdb</productname></title></info>
-	
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/core-gdb.txt" parse="text"/>
-            </programlisting>
+      <example xml:id="coredump_gdb">
+        <info>
+          <title>Example of creating a core dump and using it with <productname>gdb</productname></title>
+        </info>
+        <programlisting linenumbering="numbered">
+          <xi:include href="code/core-gdb.txt" parse="text"/>
+        </programlisting>
       </example>
-
-      <section><info><title>Symbols and Debugging Information</title></info>
-	
-
-	<para>As the example shows, the debugger
+      <section>
+        <info>
+          <title>Symbols and Debugging Information</title>
+        </info>
+        <para>As the example shows, the debugger
 	  <productname>gdb</productname> requires the original
 	  executable and the core dump to provide the debugging session.
 	  Note that the original executable was built with the
@@ -596,8 +554,7 @@
 	  length of arrays, etc.  It is generally in the standard
 	  <emphasis>DWARF</emphasis> format (a pun on the homonym ELF).
 	</para>
-
-	<para>Including debugging information can make executable
+        <para>Including debugging information can make executable
 	  files and libraries very large; although this data is not
 	  required resident in memory for actually running it can
 	  still take up considerable disk space.  Thus the usual
@@ -618,18 +575,17 @@
 	  that when a debugging sessions starts the debugger can be
 	  sure it associates the right debugging information with the
 	  right executable.</para>
-
-	  <example xml:id="strip_debug"><info><title>Example of stripping debugging information into
+        <example xml:id="strip_debug">
+          <info>
+            <title>Example of stripping debugging information into
 	    separate files using
-	    <productname>objcopy</productname></title></info>
-	    
-
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/debuglink.txt" parse="text"/>
-            </programlisting>
-	  </example>
-
-	<para>Symbols take up much less space, but are also targets
+	    <productname>objcopy</productname></title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/debuglink.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>Symbols take up much less space, but are also targets
 	for removal from final output.  Once the individual object
 	files of an executable are linked into the single final image
 	there is generally no need for most symbols to remain.  As
@@ -643,27 +599,24 @@
 	linking</emphasis>, the focus of <xref linkend="chapter08"/>) but these are put in separate
 	<emphasis>dynamic</emphasis> symbol tables so they will not be
 	removed and render the final output useless.</para>
-
       </section>
-
-      <section><info><title>Inside coredumps</title></info>
-	
-
-	<para>A coredump is really just another ELF file; this
+      <section>
+        <info>
+          <title>Inside coredumps</title>
+        </info>
+        <para>A coredump is really just another ELF file; this
 	illustrates the flexibility of ELF as a binary format.</para>
-
-	<example xml:id="coredump_internal"><info><title>Example of using <productname>readelf</productname>
+        <example xml:id="coredump_internal">
+          <info>
+            <title>Example of using <productname>readelf</productname>
 	  and <productname>eu-readelf</productname> to examine a
-	  coredump.</title></info>
-	  
-
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/core-internal.txt" parse="text"/>
-            </programlisting>
-
-	</example>
-
-	<para>In <xref linkend="coredump_internal"/> we can see
+	  coredump.</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/core-internal.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>In <xref linkend="coredump_internal"/> we can see
 	an examination of the core file produced by <xref linkend="coredump_gdb"/> using firstly the
 	<productname>readelf</productname> tool.  There are no
 	sections, relocations or other extraneous information in the
@@ -673,16 +626,14 @@
 	These segments are raw data dumps, created by the kernel, of
 	the current memory allocations.
 	</para>
-
-	<para>The other component of the core dump is the
+        <para>The other component of the core dump is the
 	<computeroutput>NOTE</computeroutput> sections which contain
 	data necessary for debugging but not necessarily captured in
 	straight snapshot of the memory allocations.  The
 	<productname>eu-readelf</productname> program used in the
 	second part of the figure provides a more complete view of the
 	data by decoding it.</para>
-
-	<para>The <computeroutput>PRSTATUS</computeroutput> note gives
+        <para>The <computeroutput>PRSTATUS</computeroutput> note gives
 	a range of interesting information about the process as it was
 	running; for example we can see from
 	<computeroutput>cursig</computeroutput> that the program
@@ -694,8 +645,7 @@
 	with the symbol and debugging information from the original
 	binary the debugger can show exactly how you reached the
 	current point of execution.</para>
-
-	<para>Another interesting output is the current
+        <para>Another interesting output is the current
 	  <emphasis>auxiliary vector</emphasis>
 	  (<computeroutput>AUXV</computeroutput>), discussed in <xref linkend="auxv"/>.  The
 	  <computeroutput>386_TLS</computeroutput> describes
@@ -703,18 +653,16 @@
 	  for the x86 implementation of <emphasis>thread-local
 	  storage</emphasis> (see <xref linkend="fast_system_calls"/> for more information on
 	  use of segmentation, and <xref linkend="threads"/> for
-	  information on threads<footnote> <para>For a multi-threaded
+	  information on threads<footnote><para>For a multi-threaded
 	  application, there would be duplicate entries for each
 	  thread running.  The debugger will understand this, and it
 	  is how <productname>gdb</productname> implements the
 	  <computeroutput>thread</computeroutput> command to show and
-	  switch between threads.</para>
-	  </footnote>).
+	  switch between threads.</para></footnote>).
 	  </para>
-
-	<para>The kernel creates the core dump file within the bounds
+        <para>The kernel creates the core dump file within the bounds
 	  of the current <computeroutput>ulimit</computeroutput>
-	  settings — since a program using a lot of memory could
+	  settings &#x2014; since a program using a lot of memory could
 	  result in a very large dump, potentially filling up disk and
 	  making problems even worse, generally the
 	  <computeroutput>ulimit</computeroutput> is set low or even
@@ -722,20 +670,17 @@
 	  core dump file.  However the core dump remains the single
 	  most useful way to debug an unexpected situation in a
 	  postmortem fashion.</para>
-
       </section>
     </section>
-
   </section>
-
-  <section xml:id="executables"><info><title>ELF Executables</title></info>
-    
-
+  <section xml:id="executables">
+    <info>
+      <title>ELF Executables</title>
+    </info>
     <para>Executables are of course one of the primary uses of the ELF
       format.  Contained within the <emphasis>binary</emphasis> is
       everything required for the operating system to execute the
       code as intended.</para>
-
     <para>Since an executable is designed to be run in a process with
     a unique address space (see <xref linkend="chapter05"/>) the
     code can make assumptions about where the various parts of the
@@ -744,43 +689,40 @@
     an executable file.  We can see the virtual addresses at which the
     <computeroutput>LOAD</computeroutput> segments are required to be
     placed at.  We can further see that one segment is for code
-    — it has read and execute permissions only — and one
+    &#x2014; it has read and execute permissions only &#x2014; and one
     is for data, unsurprisingly with read and write permissions, but
     importantly no execute permissions (without execute permissions,
     even if a bug allowed an attacker to introduce arbitrary data the
     pages backing it would not be marked with execute permissions, and
     most processors will hence disallow any execution of code in those
     pages).</para>
-
-    <example xml:id="elf_executable"><info><title>Segments of an executable file</title></info>
-      
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/executable.txt" parse="text"/>
-            </programlisting>
+    <example xml:id="elf_executable">
+      <info>
+        <title>Segments of an executable file</title>
+      </info>
+      <programlisting linenumbering="numbered">
+        <xi:include href="code/executable.txt" parse="text"/>
+      </programlisting>
     </example>
-
     <para>The program segments must be loaded at these addresses; the
     last step of the linker is to resolve most relocations (<xref linkend="symbols_and_relocations"/>) and patch them with the
-    assumed absolute addresses — the data describing the
+    assumed absolute addresses &#x2014; the data describing the
     relocation is then discarded in the final binary and there is no
     longer a way to find this information.
     </para>
-
     <para>In reality, executables generally have external dependencies
       on <emphasis>shared libraries</emphasis>, or pieces of common
-      code abstracted and shared among the entire system —
+      code abstracted and shared among the entire system &#x2014;
       almost all of the confusing parts of <xref linkend="elf_executable"/> relate to the use of shared
       libraries.  Libraries are discussed in <xref linkend="libraries"/>, dynamic libraries in <xref linkend="chapter08"/>.</para>
-
   </section>
-
-  <section xml:id="libraries"><info><title>Libraries</title></info>
-    
-
+  <section xml:id="libraries">
+    <info>
+      <title>Libraries</title>
+    </info>
     <para>Developers soon tired of having to write everything from
       scratch, so one of the first inventions of computer science was
       <emphasis>libraries</emphasis>.</para>
-
     <para>A library is simply a collection of functions which you
       can call from your program.  Obviously a library has many
       advantages, not least of which is that you can save much time by
@@ -791,45 +733,41 @@
       executable, except instead of running directly the library
       functions are invoked with parameters from your
       executable.</para>
-
-
-  <section><info><title>Static Libraries</title></info>
-    
-
-    <para>The most straight forward way of using a library function is
+    <section>
+      <info>
+        <title>Static Libraries</title>
+      </info>
+      <para>The most straight forward way of using a library function is
       to have the object files from the library linked directly into
       your final executable, just as with those you have compiled
       yourself.  When linked like this the library is called a
       <emphasis>static</emphasis> library, because the library will
       remain unchanged unless the program is recompiled.</para>
-
       <para>This is the most straight forward way of using a library
       as the final result is a simple executable with no
       dependencies.</para>
-
-      <section><info><title>Inside static libraries</title></info>
-	
-
-	<para>A static library is simply a group of object files.  The
+      <section>
+        <info>
+          <title>Inside static libraries</title>
+        </info>
+        <para>A static library is simply a group of object files.  The
 	object files are kept in an <emphasis>archive</emphasis>,
 	which leads to their usual <computeroutput>.a</computeroutput>
 	suffix extension.  You can think of archives as similar to a
 	<command>zip</command> file, but without compression.</para>
-
-	<para>Below we show the creation of basic static library and
+        <para>Below we show the creation of basic static library and
 	introduce some common tools for working with libraries.</para>
-
-	<example><info><title>Creating and using a static library</title></info>
-	  
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/static.txt" parse="text"/>
-            </programlisting>
-	</example>
-
-	<para>Firstly we compile or library to an object file, just as
+        <example>
+          <info>
+            <title>Creating and using a static library</title>
+          </info>
+          <programlisting linenumbering="numbered">
+            <xi:include href="code/static.txt" parse="text"/>
+          </programlisting>
+        </example>
+        <para>Firstly we compile or library to an object file, just as
 	we have seen in the previous chapter.</para>
-
-	<para>Notice that we define the library API in the header
+        <para>Notice that we define the library API in the header
 	file.  The API consists of function definitions for the
 	functions in the library; this is so that the compiler knows
 	what types the functions take when building object files that
@@ -837,8 +775,7 @@
 	(e.g. <computeroutput>program.c</computeroutput>, which
 	<computeroutput>#include</computeroutput>s the header
 	file).</para>
-
-	<para>We create the library <application>ar</application>
+        <para>We create the library <application>ar</application>
 	(short for "archive") command.  By convention static library
 	file names are prefixed with
 	<computeroutput>lib</computeroutput> and have the extension
@@ -859,8 +796,7 @@
 	canonical application for keeping files together is the
 	<computeroutput>tar</computeroutput> file, which is a common
 	format to distribute source code.</para></footnote></para>
-
-	<para>Next we use the <application>ranlib</application>
+        <para>Next we use the <application>ranlib</application>
 	application to make a header in the library with the symbols
 	of the object file contents.  This helps the compiler to
 	quickly reference symbols; in the case where we just have one
@@ -871,101 +807,90 @@
 	We see the <computeroutput>function</computeroutput> symbol
 	for the <computeroutput>function()</computeroutput> function
 	at offset zero, as we expect.</para>
-
-	<para>You then specify the library to the compiler with
+        <para>You then specify the library to the compiler with
 	<option>-lname</option> where name is the filename of the
 	library without the prefix
 	<computeroutput>lib</computeroutput>.  We also provide an
 	extra search directory for libraries, namely the current
 	directory (<option>-L .</option>), since by default the
 	current directory is not searched for libraries.</para>
-
-	<para>The final result is a single executable with our new
+        <para>The final result is a single executable with our new
 	library included.</para>
-
       </section>
-
-      <section><info><title>Static Linking Drawbacks</title></info>
-	
-
-	<para>Static linking is very straight forward, but has a number
+      <section>
+        <info>
+          <title>Static Linking Drawbacks</title>
+        </info>
+        <para>Static linking is very straight forward, but has a number
       of drawbacks.</para>
-
-	<para>There are two main disadvantages; firstly if the library
+        <para>There are two main disadvantages; firstly if the library
       code is updated (to fix a bug, say) you have to recompile your
       program into a new executable and secondly, every program in the
       system that uses that library contains a copy in it's
       executable.  This is very inefficient (and a pain if you find a
       bug and have to recompile, as per point one).</para>
-
-	<para>For example, the C library
+        <para>For example, the C library
       (<application>glibc</application>) is included in all programs,
       and provides all the common functions such as
       <computeroutput>printf</computeroutput>.</para>
-
       </section>
-
     </section>
-
-    <section><info><title>Shared Libraries</title></info>
-      
-
+    <section>
+      <info>
+        <title>Shared Libraries</title>
+      </info>
       <para>Shared libraries are an elegant way around the problems
       posed by a static library.  A shared library is a library that
       is loaded dynamically at runtime for each application that
       requires it.</para>
-
       <para>The application simply leaves pointers that it will
       require a certain library, and when the function call is made
       the library is loaded into memory and executed.  If the library
       is already loaded for another application, the code can be
       shared between the two, saving considerable resources with
       commonly used libraries.</para>
-
       <para>This process, called dynamic linking, is one of the more
       intricate parts of a modern operating system.  As such, we
       dedicate the next chapter to investigating the dynamic linking
       process.</para>
     </section>
-
-
   </section>
-
-  <section xml:id="abi"><info><title>ABI's</title></info>
-    
-
+  <section xml:id="abi">
+    <info>
+      <title>ABI's</title>
+    </info>
     <para>An ABI is a term you will hear a lot about when working with
     systems programming.  We have talked extensively about
     <emphasis>API</emphasis>, which are interfaces the programmer sees
     to your code.</para>
-
     <para>ABI's refer to lower level interfaces which the compiler,
     operating system and, to some extent, processor, must agree on to
     communicate together.  Below we introduce a number of concepts
     which are important to understanding ABI considerations.</para>
-
-    <section><info><title>Byte Order</title></info>
-      
-
+    <section>
+      <info>
+        <title>Byte Order</title>
+      </info>
       <para>Endianess</para>
     </section>
-
-    <section><info><title>Calling Conventions</title></info>
-      
-
-      <section><info><title>Passing parameters</title></info>
-	
-	<para>registers or stack?</para>
+    <section>
+      <info>
+        <title>Calling Conventions</title>
+      </info>
+      <section>
+        <info>
+          <title>Passing parameters</title>
+        </info>
+        <para>registers or stack?</para>
       </section>
-
-      <section><info><title>Function Descriptors</title></info>
-	
-
-	<para>On many architectures you must call a function through a
+      <section>
+        <info>
+          <title>Function Descriptors</title>
+        </info>
+        <para>On many architectures you must call a function through a
 	<emphasis>function descriptor</emphasis>, rather than
 	directly.</para>
-
-	<para>For example, on IA64 a function descriptor consists of
+        <para>For example, on IA64 a function descriptor consists of
 	two components; the address of the function (that being a 64
 	bit, or 8 byte value) and the address of the <emphasis>global
 	pointer</emphasis> (gp).  The ABI specifies that r1 should
@@ -975,8 +900,7 @@
 	value, set r1 to be the new value (from the function
 	descriptor) and <computeroutput>then</computeroutput> call the
 	function.</para>
-
-	<para>This may seem like a strange way to do things, but it
+        <para>This may seem like a strange way to do things, but it
 	has very useful practical implications as you will see in the
 	next chapter about global offset tables.  On IA64 an
 	<computeroutput>add</computeroutput> instruction can only take
@@ -988,43 +912,36 @@
 	immediate value is one that is specified directly, rather than
 	in a register (e.g. in <computeroutput>add r1 +
 	100</computeroutput> 100 is the immediate value).</para>
-
-	<para>You might recognise 22 bits as being able to represent
+        <para>You might recognise 22 bits as being able to represent
 	4194304 bytes, or 4MB.  Thus each function can directly offset
 	into an area of memory 4MB big without having to take the
 	penalty of loading any values into a register.  If the
 	compiler, linker and loader all agree on what the global
 	pointer is pointing to (as specified in the ABI) performance
 	can be improved by less loading.</para>
-
       </section>
-
     </section>
-
   </section>
-
-  <section xml:id="starting_a_process"><info><title>Starting a process</title></info>
-    
-
+  <section xml:id="starting_a_process">
+    <info>
+      <title>Starting a process</title>
+    </info>
     <para>We mentioned before that simply saying the program starts
     with the <computeroutput>main()</computeroutput> function is not
     quite true.  Below we exaime what happens to a typical dynamically
     linked program when it is loaded and run (statically linked
     programs are similar but different XXX should we go into
     this?).</para>
-
     <para>Firstly, in response to an
     <computeroutput>exec</computeroutput> system call the kernel
     allocates the structures for a new process and reads the ELF file
     specified from disk.</para>
-
     <para>We mentioned that ELF has a program interpreter field,
     <computeroutput>PT_INTERP</computeroutput>, which can be set to
     'interpret' the program.  For dynamically linked applications that
     interpreter is the dynamic linker, namely
     <application>ld.so</application>, which allows some of the linking
     process to be done on the fly before the program starts.</para>
-
     <para>In this case, the kernel <emphasis>also</emphasis> reads in
     the dynamic linker code, and starts the program from the entry
     point address as specified by it.  We examine the role of the
@@ -1034,10 +951,10 @@
     and then starts execution of the program binary at it's entry
     point address (i.e. the <computeroutput>_init</computeroutput>
     function).</para>
-
-    <section xml:id="auxv"><info><title>Kernel communication to programs</title></info>
-      
-
+    <section xml:id="auxv">
+      <info>
+        <title>Kernel communication to programs</title>
+      </info>
       <para>The kernel needs to communicate some things to programs
       when they start up; namely the arguments to the program, the
       current environment variables and a special structure called the
@@ -1047,17 +964,14 @@
       <computeroutput>auxv</computeroutput> by specifying the
       environment value
       <computeroutput>LD_SHOW_AUXV=1</computeroutput>).</para>
-
       <para>The arguments and environment at fairly straight forward,
       and the various incarnations of the
       <computeroutput>exec</computeroutput> system call allow you to
       specify these for the program.</para>
-
       <para>The kernel communicates this by putting all the required
       information on the stack for the newly created program to pick
       up.  Thus when the program starts it can use it's stack pointer
       to find the all the startup information required.</para>
-
       <para>The auxiliary vector is a special structure that is for
       passing information directly from the kernel to the newly
       running program.  It contains system specific information that
@@ -1066,15 +980,14 @@
       capabilities</emphasis>; that is specific features that the
       kernel has identified the underlying hardware has that userspace
       programs can take advantage of.</para>
-
-      <section xml:id="kernel_library"><info><title>Kernel Library</title></info>
-	
-
-	<para>We mentioned previously that system calls are slow, and
+      <section xml:id="kernel_library">
+        <info>
+          <title>Kernel Library</title>
+        </info>
+        <para>We mentioned previously that system calls are slow, and
 	modern systems have mechanisms to avoid the overheads of
 	calling a trap to the processor.</para>
-
-	<para>In Linux, this is implemented by a neat trick between
+        <para>In Linux, this is implemented by a neat trick between
 	the dyanmic loader and the kernel, all communicated with the
 	AUXV structure.  The kernel actually adds a small shared
 	library into the address space of every newly created process
@@ -1086,8 +999,7 @@
 	<computeroutput>linux-gate.so.1</computeroutput>, so called
 	because it is a <emphasis>gateway</emphasis> to the inner
 	workings of the kernel.</para>
-
-	<para>When the kernel starts the dynamic linker it adds an
+        <para>When the kernel starts the dynamic linker it adds an
 	entry to the auxv called
 	<computeroutput>AT_SYSINFO_EHDR</computeroutput>, which is the
 	address in memory that the special kernel library lives in.
@@ -1096,8 +1008,7 @@
 	if found load that library for the program.  The program has
 	no idea this library exists; this is a private arrangement
 	between the dynamic linker and the kernel.</para>
-
-	<para>We mentioned that programmers make system calls
+        <para>We mentioned that programmers make system calls
 	indirectly through calling functions in the system libraries,
 	namely <application>libc</application>.
 	<application>libc</application> can check to see if the
@@ -1105,28 +1016,25 @@
 	within that to make system calls.  As we mentioned, if the
 	kernel determines the hardware is capable, this will use the
 	fast sytem call method.</para>
-
       </section>
-
     </section>
-
-    <section><info><title>Starting the program</title></info>
-      
-
+    <section>
+      <info>
+        <title>Starting the program</title>
+      </info>
       <para>Once the kernel has loaded the interpreter it passes it to
       the entry point as given in the interpreter file (note will not
       examine how the dynamic linker starts at this stage; see <xref linkend="chapter08"/> for a full discussion of dyanmic
       linking).  The dynamic linker will jump to the entry point
       address as given in the ELF binary.</para>
-
-      <example xml:id="program-startup"><info><title>Disassembley of program startup</title></info>
-	
-
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/startup.txt" parse="text"/>
-            </programlisting>
+      <example xml:id="program-startup">
+        <info>
+          <title>Disassembley of program startup</title>
+        </info>
+        <programlisting linenumbering="numbered">
+          <xi:include href="code/startup.txt" parse="text"/>
+        </programlisting>
       </example>
-
       <para>Above we investigate the very simplest program.  Using
       <application>readelf</application> we can see that the entry
       point is the <computeroutput>_start</computeroutput> function in
@@ -1140,7 +1048,6 @@
       <computeroutput>main()</computeroutput> function.  After this
       the value <computeroutput>__libc_start_main</computeroutput>
       function is called.</para>
-
       <para><computeroutput>__libc_start_main</computeroutput> is
       defined in the glibc sources
       <computeroutput>sysdeps/generic/libc-start.c</computeroutput>.
@@ -1152,7 +1059,6 @@
       worry about.  The next point where the library calls back into
       the program is to handle <computeroutput>init</computeroutput>
       code.</para>
-
       <para><computeroutput>init</computeroutput> and
       <computeroutput>fini</computeroutput> are two special concepts
       that call parts of code in shared libraries that may need to be
@@ -1167,7 +1073,6 @@
       how the
       <computeroutput>init</computeroutput>/<computeroutput>fini</computeroutput>
       process works.</para>
-
       <para>At this stage we can see that the
       <computeroutput>__libc_start_main</computeroutput> function will
       receive quite a few input paramaters on the stack.  Firstly it
@@ -1177,7 +1082,6 @@
       to handle <computeroutput>init</computeroutput>,
       <computeroutput>fini</computeroutput>, and finally the address
       of the main function it's self.</para>
-
       <para>We need some way to indicate in the source code that a
       function should be called by
       <computeroutput>init</computeroutput> or
@@ -1188,14 +1092,14 @@
       <emphasis>destructors</emphasis> in our main program.  These
       terms are more commonly used with object orientent langauges to
       describe object lifecycles.</para>
-
-      <example xml:id="constructor-destructor"><info><title>Constructors and Destructors</title></info>
-	
-	  <programlisting linenumbering="numbered">
-              <xi:include href="code/construct-destruct.txt" parse="text"/>
-            </programlisting>
+      <example xml:id="constructor-destructor">
+        <info>
+          <title>Constructors and Destructors</title>
+        </info>
+        <programlisting linenumbering="numbered">
+          <xi:include href="code/construct-destruct.txt" parse="text"/>
+        </programlisting>
       </example>
-
       <para>The last value pushed onto the stack for the
       <computeroutput>__libc_start_main</computeroutput> was the
       initalisation function
@@ -1215,7 +1119,6 @@
       we have a look inside this we see that it contains the first
       value <computeroutput>-1</computeroutput>, a function address
       (in big endian format) and the value zero.</para>
-
       <para>The address in big endian format is
       <computeroutput>0x08048398</computeroutput>, or the address of
       <computeroutput>program_init</computeroutput> function!  So the
@@ -1224,7 +1127,6 @@
       initalisation, and finally a zero to indicate the list is
       complete.  Each entry will be called (in this case we only have
       the one funtion).</para>
-
       <para>Once <computeroutput>__libc_start_main</computeroutput>
       has completed with the <computeroutput>_init</computeroutput>
       call it <emphasis>finally</emphasis> calls the
@@ -1233,19 +1135,14 @@
       environment pointers from the kernel; this is how main gets it's
       <computeroutput>argc, argv[], envp[]</computeroutput> arguments.
       The process now runs and the setup phase is complete.</para>
-
       <para>A similar process is enacted with the
       <computeroutput>.dtors</computeroutput> for destructors when the
       program exits.
       <computeroutput>__libc_start_main</computeroutput> calls these
       when the <computeroutput>main()</computeroutput> function
       completes.</para>
-
       <para>As you can see, a lot is done before the program gets to
       start, and even a little after you think it is finished!</para>
-
     </section>
-
   </section>
-
 </chapter>

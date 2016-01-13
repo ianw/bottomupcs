@@ -1,34 +1,43 @@
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0"
-         xmlns:xi="http://www.w3.org/2001/XInclude"
-         xml:id="chapter00">
+<?xml version="1.0"?>
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:id="chapter00">
   <info>
     <title>General Unix and Advanced C</title>
   </info>
-
-  <section xml:id="everything_is_a_file"><info><title><emphasis>Everything is a file!</emphasis></title></info>
-
+  <section xml:id="everything_is_a_file">
+    <info>
+      <title>
+        <emphasis>Everything is a file!</emphasis>
+      </title>
+    </info>
     <para>An often quoted tenet of UNIX-like systems such as Linux or
     BSD is <emphasis>everything is a file</emphasis>.</para>
-
     <para>Imagine a file in the context something familiar like a word
     processor.  There are two fundamental operations we could use on
     this imaginary word processing file:</para>
-
     <orderedlist>
-      <listitem><para>Read it (existing saved data from the word processor).</para></listitem>
-      <listitem><para>Write to it (new data from the user).</para></listitem>
+      <listitem>
+        <para>Read it (existing saved data from the word processor).</para>
+      </listitem>
+      <listitem>
+        <para>Write to it (new data from the user).</para>
+      </listitem>
     </orderedlist>
-
     <para>Consider some of the common things attached to a computer
     and how they relate to our fundamental file operations:</para>
-
     <orderedlist>
-      <listitem><para>The screen</para></listitem>
-      <listitem><para>The keyboard</para></listitem>
-      <listitem><para>A printer</para></listitem>
-      <listitem><para>A CDROM</para></listitem>
+      <listitem>
+        <para>The screen</para>
+      </listitem>
+      <listitem>
+        <para>The keyboard</para>
+      </listitem>
+      <listitem>
+        <para>A printer</para>
+      </listitem>
+      <listitem>
+        <para>A CDROM</para>
+      </listitem>
     </orderedlist>
-
     <para>The screen and printer are both like a write-only file, but
     instead of being stored as bits on a disk the information is
     displayed as dots on a screen or lines on a page. The keyboard is
@@ -36,7 +45,6 @@
     provided by the user.  The CDROM is similar, but rather than
     randomly coming from the user the data is stored directly on the
     disk.</para>
-
     <para>Thus the concept of a file is a good
     <emphasis>abstraction</emphasis> of either a a sink for, or source
     of, data.  As such it is an excellent abstraction of all the
@@ -45,7 +53,6 @@
     platform.  It is one of the fundamental roles of the operating
     system to provide this abstraction of the hardware to the
     programmer.</para>
-
     <para>It is probably not too much of a strech to say abstraction
     is <emphasis>the</emphasis> primary concept that underpins all
     modern computing.  No one person can understand everythinig from
@@ -53,7 +60,6 @@
     modern CPU, much less build it all themselves.  To programmers,
     abstractions are the <emphasis>lingua franca</emphasis> that
     allows us to collaborate and invent.</para>
-
     <para>Learning to navigate across abstractions gives one greater
       insight into how to <emphasis>use</emphasis> the abstractions in
       the best and most innovative ways.  In this book, we are
@@ -63,54 +69,51 @@
       their own books.  As these chapters progress, you will hopefully
       gain some insight into the abstractions presented by a modern
       operating-system.</para>
-
-    <figure><info><title>Abstraction</title></info>
-      
+    <figure>
+      <info>
+        <title>Abstraction</title>
+      </info>
       <mediaobject>
-	<imageobject>
-	  <imagedata fileref="chapter00/figures/abstraction.eps" format="EPS"/>
-	</imageobject>
-	<imageobject role="fo">
-	  <imagedata fileref="figures/abstraction.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
-	</imageobject>
-	<imageobject role="html">
-	  <imagedata fileref="chapter00/figures/abstraction.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	  <phrase>Can you spot the difference between a CDROM and a keyboard?  As an application programmer, you should not be able to.</phrase>
-	</textobject>
+        <imageobject>
+          <imagedata fileref="chapter00/figures/abstraction.eps" format="EPS"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="figures/abstraction.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+        </imageobject>
+        <imageobject role="html">
+          <imagedata fileref="chapter00/figures/abstraction.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase>Can you spot the difference between a CDROM and a keyboard?  As an application programmer, you should not be able to.</phrase>
+        </textobject>
       </mediaobject>
     </figure>
-
-
   </section>
-
-  <section xml:id="abstration"><info><title>Implementing abstraction</title></info>
-    
-
-      <para>In general, abstraction is implemented by what is
+  <section xml:id="abstration">
+    <info>
+      <title>Implementing abstraction</title>
+    </info>
+    <para>In general, abstraction is implemented by what is
     generically termed an <emphasis>Application Programming
     Interface</emphasis> (API).  API is a somewhat nebulous term that
     means different things in the context of various programming
     endavours.  Fundamentally, a programmer designs a set of functions
     and documents their interface and functionality with the principle
     that the actual implementation providing the API is opaque.</para>
-
-      <para>For example, many large web-applications provide an API
+    <para>For example, many large web-applications provide an API
       accessible via HTTP.  Accessing data via this method surely
       triggers many complicated series of remote-procedure calls,
       database queries and data transfer; all of which is opaque to
       the end user who simply receives the contracted data.</para>
-
-      <para>Those familiar with <emphasis>object-oriented</emphasis>
+    <para>Those familiar with <emphasis>object-oriented</emphasis>
       languages such as Java, Python or C++ would be familiar with the
       abstraction provided by <emphasis>classes</emphasis>.  Methods
       provide the interface to the class, but abstract the
       implementation.</para>
-
-    <section><info><title>Implementing abstraction with C</title></info>
-      
-
+    <section>
+      <info>
+        <title>Implementing abstraction with C</title>
+      </info>
       <para>A common method used in the Linux Kernel and other large C
       code bases, which lacks a built-in concept of
       object-orientation, is <emphasis>function pointers</emphasis>.
@@ -118,18 +121,17 @@
       code-bases.  By understanding how to read the abstractions
       provided within the code an understanding of internal API
       designs can be built.</para>
-
-      <example xml:id="abstraction-code"><info><title>Abstraction with function pointers</title></info>
-	
+      <example xml:id="abstraction-code">
+        <info>
+          <title>Abstraction with function pointers</title>
+        </info>
         <programlisting language="c">
           <xi:include href="code/abstraction.c" parse="text"/>
         </programlisting>
       </example>
-
       <para>Code such as the above is the simplest example of
     constructs used repeatedly through the Linux Kernel and other C
     programs.  Lets have a look at some specific elements.</para>
-
       <para>We start out with a structure that defines the API
     (<computeroutput>struct greet_api</computeroutput>).  The
     functions whose names are encased in parenthesis with a pointer
@@ -143,12 +145,11 @@
     pointing it at a function without the correct return type or
     parameters will generate a compiler warning at least; if left in
     code will likely lead to incorrect operation or crashes.</para>
-
       <para>We then have our implementation of the API.  Often for
     more complex functionality you will see an idiom where API
     implementation functions will only be a wrapper around another
     function that is conventionally prepended with one or or two
-    underscores<footnote> <para>A double-underscore function
+    underscores<footnote><para>A double-underscore function
     <computeroutput>__foo</computeroutput> may conversationally be
     referred to as "dunder foo".</para></footnote>
     (i.e. <computeroutput>say_hello_fn()</computeroutput> would call
@@ -164,29 +165,26 @@
     function prefixes will mean different things, but universally it
     is a visual warning that the function is not supposed to be called
     directly from "beyond" the API.</para>
-
       <para>Second to last, we fill out the function pointers in
     <computeroutput>struct greet_api greet_api</computeroutput>.  The
     name of the function is a pointer, therefore there is no need to
     take the address of the function
     (i.e. <computeroutput>&amp;say_hello_fn</computeroutput>).</para>
-
       <para>Finally we can call the API functions through the
     structure in <computeroutput>main</computeroutput>.</para>
-
       <para>You will see this idiom constantly when navigating the
         souce code.  The tiny example below is taken from
         <computeroutput>include/linux/virtio.h</computeroutput> in the
         Linux kernel source to illustrate:</para>
-
-      <example xml:id="virtio-abstraction"><info><title>Abstraction in
-	<computeroutput>include/linux/virtio.h</computeroutput></title></info>
-	
-	<programlisting language="c">
+      <example xml:id="virtio-abstraction">
+        <info>
+          <title>Abstraction in
+	<computeroutput>include/linux/virtio.h</computeroutput></title>
+        </info>
+        <programlisting language="c">
           <xi:include href="code/virtio.h" parse="text"/>
         </programlisting>
       </example>
-
       <para> It's only necessary to vaguely understand that this
         structure is a description of a virtual I/O device.  We can
         see the user of this API (the device driver author) is
@@ -195,28 +193,24 @@
         for new hardware, when hardware is removed, etc).  It also
         contains a range of data; structures which should be filled
         with relevant data.</para>
-
       <para>Starting with descriptors like this is usually the easiest
       way into understanding the various layers of kernel code.</para>
-
     </section>
-
-    <section><info><title>Libraries</title></info>
-      
-
+    <section>
+      <info>
+        <title>Libraries</title>
+      </info>
       <para>Libraries have two roles which illustrate
 	abstraction.</para>
-
       <itemizedlist>
-	<listitem>
-	  <para>Allow programmers to reuse commonly accessed code.</para>
-	</listitem>
-	<listitem>
-	  <para>Act as a <emphasis>black box</emphasis> implementing
+        <listitem>
+          <para>Allow programmers to reuse commonly accessed code.</para>
+        </listitem>
+        <listitem>
+          <para>Act as a <emphasis>black box</emphasis> implementing
 	    functionality for the programmer.</para>
-	</listitem>
+        </listitem>
       </itemizedlist>
-
       <para>For example, a library implementing access to the raw data
         in JPEG files has both the advantage that the many programs
         who wish to access image files can all use the same library
@@ -224,7 +218,6 @@
         worry about the exact details of the JPEG file format, but can
         concentrate their efforts on what their program wants to do
         with the image.</para>
-
       <para>The standard library of a UNIX platform is generically
         referred to as <computeroutput>libc</computeroutput>.  It
         provides the basic interface to the system: fundamental calls
@@ -235,7 +228,6 @@
         <computeroutput>POSIX</computeroutput>.  It is freely
         available online and describes the many calls that make up the
         standard UNIX API.</para>
-
       <para>Most UNIX platforms broadly follow the POSIX standard,
       though often differ small but sometimes important ways (hence
       the complexity of the various GNU autotools, which often tries
@@ -243,94 +235,94 @@
       interfaces that are not specified by POSIX; writing applications
       that use them exclusively will make your application less
       portable.</para>
-
       <para>Libraries are a fundamental abstraction with many details.
       Later chapters will describe how libraries work in much greater
       detail.</para>
-
     </section>
-
   </section>
-
-  <section xml:id="file_descriptors"><info><title>File Descriptors</title></info>
-    
-
+  <section xml:id="file_descriptors">
+    <info>
+      <title>File Descriptors</title>
+    </info>
     <para>One of the first things a UNIX programmer learns is that
     every running program starts with three files already
     opened:</para>
-
-    <table><info><title>Standard Files Provided by Unix</title></info>
-      
+    <table>
+      <info>
+        <title>Standard Files Provided by Unix</title>
+      </info>
       <tgroup cols="3">
-	<thead>
-	  <row>
-	    <entry>Descriptive Name</entry>
-	    <entry>File Number</entry>
-	    <entry>Description</entry>
-	  </row>
-	</thead>
-	<tbody>
-	  <row>
-	    <entry>Standard In</entry>
-	    <entry>0</entry>
-	    <entry>Input from the keyboard</entry>
-	  </row>
-	  <row>
-	    <entry>Standard Out</entry>
-	    <entry>1</entry>
-	    <entry>Output to the console</entry>
-	  </row>
-	  <row>
-	    <entry>Standard Error</entry>
-	    <entry>2</entry>
-	    <entry>Error output to the console</entry>
-	  </row>
-	</tbody>
+        <thead>
+          <row>
+            <entry>Descriptive Name</entry>
+            <entry>File Number</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>Standard In</entry>
+            <entry>0</entry>
+            <entry>Input from the keyboard</entry>
+          </row>
+          <row>
+            <entry>Standard Out</entry>
+            <entry>1</entry>
+            <entry>Output to the console</entry>
+          </row>
+          <row>
+            <entry>Standard Error</entry>
+            <entry>2</entry>
+            <entry>Error output to the console</entry>
+          </row>
+        </tbody>
       </tgroup>
     </table>
-
-    <figure><info><title>Default Unix Files</title></info>
-      
+    <figure>
+      <info>
+        <title>Default Unix Files</title>
+      </info>
       <mediaobject>
-	<imageobject>
-	  <imagedata fileref="chapter00/figures/stdfds.eps" format="EPS"/>
-	</imageobject>
-	<imageobject role="fo">
-	  <imagedata fileref="figures/stdfds.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
-	</imageobject>
-	<imageobject role="html">
-	  <imagedata fileref="chapter00/figures/stdfds.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	  <phrase>The standard files opened with any UNIX program.</phrase>
-	</textobject>
+        <imageobject>
+          <imagedata fileref="chapter00/figures/stdfds.eps" format="EPS"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="figures/stdfds.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+        </imageobject>
+        <imageobject role="html">
+          <imagedata fileref="chapter00/figures/stdfds.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase>The standard files opened with any UNIX program.</phrase>
+        </textobject>
       </mediaobject>
     </figure>
-
     <para>This raises the question what an <emphasis>open
         file</emphasis> represents.  The value returned by an
         <computeroutput>open</computeroutput> call is termed a
         <emphasis>file descriptor</emphasis> and is essentially an
         index into an array of open files kept by the kernel.</para>
-
-    <figure xml:id="fd_abstraction"><info><title>Abstraction</title></info>
-      
+    <figure xml:id="fd_abstraction">
+      <info>
+        <title>Abstraction</title>
+      </info>
       <mediaobject>
-	<imageobject>
-	  <imagedata fileref="chapter00/figures/file-descriptors.eps" format="EPS"/>
-	</imageobject>
-	<imageobject role="fo">
-	  <imagedata fileref="figures/file-descriptors.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
-	</imageobject>
-	<imageobject role="html">
-	  <imagedata fileref="chapter00/figures/file-descriptors.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	  <phrase>File descriptors associate the abstraction provided
+        <imageobject>
+          <imagedata fileref="chapter00/figures/file-descriptors.eps" format="EPS"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="figures/file-descriptors.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+        </imageobject>
+        <imageobject role="html">
+          <imagedata fileref="chapter00/figures/file-descriptors.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase>File descriptors associate the abstraction provided
 	  by device-drivers with a file interface provided to a user.</phrase>
-	</textobject>
+        </textobject>
       </mediaobject>
-      <caption><para>File descriptors are an index into a
+      <caption>
+        <para>File descriptors are an index into a
       file-descriptor table stored by the kernel.  The kernel
         creates a file-descriptor in response to an
         <computeroutput>open</computeroutput> call and associates the
@@ -340,14 +332,12 @@
         processes <computeroutput>read</computeroutput> or
         <computeroutput>write</computeroutput> calls that reference
         that file-descriptor are routed to the correct place by the
-      kernel to ultimately do something useful.</para></caption>
+      kernel to ultimately do something useful.</para>
+      </caption>
     </figure>
-
-
     <para>In short, the file-descriptor is the gateway into the
     kernel's abstractions of underlying hardware.  An overall view of
     the abstraction for physical-devices is shown in <xref linkend="fd_abstraction"/>.</para>
-
     <para>Starting at the lowest level, the operating system requires
     a programmer to create a <emphasis>device-driver</emphasis> to be
     able to communicate with a hardware device.  This device-driver is
@@ -360,7 +350,6 @@
     file-descriptor. The device-driver knows how to convert these
     generic requests into specific requests or commands for a
     particular device.</para>
-
     <para>To provide the abstraction to user-space, the kernel
       provides a file-interface via what is generically termed a
       <emphasis>device layer</emphasis>.  Physical devices on the host
@@ -371,14 +360,14 @@
       number which allows the kernel to associate particular nodes
       with their underlying driver.  These can be identified via
       <computeroutput>ls</computeroutput> as illustrated in <xref linkend="major-minor-numbers"/>.</para>
-
-      <example xml:id="major-minor-numbers"><info><title>Example of major and minor numbers</title></info>
-      
+    <example xml:id="major-minor-numbers">
+      <info>
+        <title>Example of major and minor numbers</title>
+      </info>
       <programlisting>
         <xi:include href="code/major-minor.txt" parse="text"/>
       </programlisting>
-      </example>
-
+    </example>
     <para>This brings us to the file-descriptor, which is the handle
     user-space uses to talk to the underlying device.  In a
     broad-sense, what happens when a file is
@@ -394,7 +383,6 @@
     the mapping.  The kernel will then know how to route further calls
     such as <computeroutput>read</computeroutput> to the underlying
     functions provided by the device-driver.</para>
-
     <para>A non-device file operates similarly, although there are
       more layers in-between.  The abstraction here is the
       <emphasis>mount-point</emphasis>; mounting a file-system has the
@@ -405,7 +393,6 @@
       file-systems are written to a particular generic file-system API
       provided by the kernel.
     </para>
-
     <para>There are indeed many other layers that complicate the
     picture in real-life.  For example, the kernel will go to great
     efforts to cache as much data from disks as possible in otherwise
@@ -419,28 +406,27 @@
     than writing directly to devices, file-systems will go through
     these many layers.  Understanding the kernel is to understand how
     these many APIs interrelate and coexist.</para>
-
-    <section><info><title>The Shell</title></info>
-      
-
+    <section>
+      <info>
+        <title>The Shell</title>
+      </info>
       <para>The shell is the gateway to interacting with the operating
         system.  Be it <computeroutput>bash</computeroutput>,
         <computeroutput>zsh</computeroutput>,
         <computeroutput>csh</computeroutput> or any of the many other
-        shells, they all fundamentally have only one major task — to
+        shells, they all fundamentally have only one major task &#x2014; to
         allow you to execute programs (you will begin to understand
         how the shell actually does this when we talk about some of
         the internals of the operating system later).</para>
-
       <para>But shells do much more than allow you to simply execute a
       program.  They have powerful abilities to redirect files, allow
       you to execute multiple programs simultaneously and script
       complete programs.  These all come back to the
       <emphasis>everything is a file</emphasis> idiom.</para>
-
-      <section><info><title>Redirection</title></info>
-      
-
+      <section>
+        <info>
+          <title>Redirection</title>
+        </info>
         <para>Often we do not want the
         standard file descriptors mentioned in <xref linkend="file_descriptors"/> to point to their default places.
         For example, you may wish to capture all the output of a
@@ -449,52 +435,63 @@
         task might like to pass the output of one program to the input
         of another.  With the operating system, the shell facilitates
         all this and more.</para>
-
-    <table><info><title>Standard Shell Redirection Facilities</title></info>
-      
-      <tgroup cols="4">
-	<thead>
-	  <row>
-	    <entry>Name</entry>
-	    <entry>Command</entry>
-	    <entry>Description</entry>
-	    <entry>Example</entry>
-	  </row>
-	</thead>
-	<tbody>
-	  <row>
-	    <entry>Redirect to a file</entry>
-	    <entry><computeroutput>&gt; filename</computeroutput></entry>
-	    <entry>Take all output from standard out and place it into
+        <table>
+          <info>
+            <title>Standard Shell Redirection Facilities</title>
+          </info>
+          <tgroup cols="4">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Command</entry>
+                <entry>Description</entry>
+                <entry>Example</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>Redirect to a file</entry>
+                <entry>
+                  <computeroutput>&gt; filename</computeroutput>
+                </entry>
+                <entry>Take all output from standard out and place it into
 	    <computeroutput>filename</computeroutput>.  Note using
 	    <computeroutput>&gt;&gt;</computeroutput> will append to
 	    the file, rather than overwrite it.</entry>
-	    <entry><computeroutput>ls &gt; filename</computeroutput></entry>
-	  </row>
-	  <row>
-	    <entry>Read from a file</entry>
-	    <entry>&lt; <computeroutput>filename</computeroutput></entry>
-	    <entry>Copy all data from the file to the standard input of the program</entry>
-	    <entry><computeroutput>echo &lt; filename</computeroutput></entry>
-	  </row>
-	  <row>
-	    <entry>Pipe</entry>
-	    <entry><computeroutput>program1 | program2</computeroutput></entry>
-	    <entry>Take everything from standard out of
+                <entry>
+                  <computeroutput>ls &gt; filename</computeroutput>
+                </entry>
+              </row>
+              <row>
+                <entry>Read from a file</entry>
+                <entry>&lt; <computeroutput>filename</computeroutput></entry>
+                <entry>Copy all data from the file to the standard input of the program</entry>
+                <entry>
+                  <computeroutput>echo &lt; filename</computeroutput>
+                </entry>
+              </row>
+              <row>
+                <entry>Pipe</entry>
+                <entry>
+                  <computeroutput>program1 | program2</computeroutput>
+                </entry>
+                <entry>Take everything from standard out of
 	    <computeroutput>program1</computeroutput> and pass it to
 	    standard input of
 	    <computeroutput>program2</computeroutput></entry>
-	    <entry><computeroutput>ls | more</computeroutput></entry>
-	  </row>
-	</tbody>
-      </tgroup>
-    </table>
+                <entry>
+                  <computeroutput>ls | more</computeroutput>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
       </section>
-
-      <section><info><title>Implementing
-        <computeroutput>pipe</computeroutput></title></info>
-        
-
+      <section>
+        <info>
+          <title>Implementing
+        <computeroutput>pipe</computeroutput></title>
+        </info>
         <para>The implementation of <computeroutput>ls |
         more</computeroutput> is just another example of the power of
         abstraction.  What fundamentally happens here is that instead
@@ -507,33 +504,35 @@
         <emphasis>input</emphasis> with the other-side of this same
         buffer and effectively consume the output of the other
         process.  This is illustrated in <xref linkend="process_pipe"/></para>
-
-    <figure xml:id="process_pipe"><info><title>A pipe in action</title></info>
-      
-      <mediaobject>
-	<imageobject>
-	  <imagedata fileref="chapter00/figures/pipe.eps" format="EPS"/>
-	</imageobject>
-	<imageobject role="fo">
-	  <imagedata fileref="figures/pipe.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
-	</imageobject>
-	<imageobject role="html">
-	  <imagedata fileref="chapter00/figures/pipe.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	  <phrase>The pipe is an in-memory buffer provided by the
+        <figure xml:id="process_pipe">
+          <info>
+            <title>A pipe in action</title>
+          </info>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="chapter00/figures/pipe.eps" format="EPS"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata fileref="figures/pipe.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            </imageobject>
+            <imageobject role="html">
+              <imagedata fileref="chapter00/figures/pipe.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>The pipe is an in-memory buffer provided by the
 	  kernel which allows the output of one process to be consumed
 	  as the input to another.</phrase>
-	</textobject>
-      </mediaobject>
-      <caption><para>The pipe is an in-memory buffer that
+            </textobject>
+          </mediaobject>
+          <caption>
+            <para>The pipe is an in-memory buffer that
       connects two processes together.  File-descriptors point
       to the pipe object, which buffers data sent to it (via a
       <computeroutput>write</computeroutput>) to be
       <emphasis>drained</emphasis> (via a
-      <computeroutput>read</computeroutput>)</para></caption>
-    </figure>
-
+      <computeroutput>read</computeroutput>)</para>
+          </caption>
+        </figure>
         <para>Writes to the pipe are stored by the kernel until a
           corresponding read from the other side
           <emphasis>drains</emphasis> the buffer.  This is a very
@@ -557,15 +556,12 @@
           continue.  Once the print is done, the other process can
           write a message into the pipe, which effectively wakes up
           the requesting process and signals the work is done.</para>
-
         <para>Allowing processes to pass
           data between each other like this springs another common
           UNIX idiom of small tools doing one particular thing.
           Chaining these small tools gives a flexibility that a single
           monolithic tool often can not.</para>
-
       </section>
     </section>
   </section>
-
 </chapter>

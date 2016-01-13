@@ -1,13 +1,17 @@
+<?xml version="1.0"?>
 <preface xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="intro">
-
-  <info><title>Introduction</title></info>
-
-  <section xml:id="welcome"><info><title>Welcome</title></info>
-    
+  <info>
+    <title>Introduction</title>
+  </info>
+  <section xml:id="welcome">
+    <info>
+      <title>Welcome</title>
+    </info>
     <para>Welcome to Computer Science from the Bottom Up</para>
-    <section><info><title>Philosophy</title></info>
-      
-
+    <section>
+      <info>
+        <title>Philosophy</title>
+      </info>
       <para>In a nutshell, what you are reading is intended to be a
       shop class for computer science.  Young computer science
       students are taught to "drive" the computer; but where do you go
@@ -22,7 +26,6 @@
       maybe, you might be able to figure out where to <emphasis>start
       looking</emphasis> to make sense of it all.
       </para>
-
       <para>To keep with the car analogy, the prospective student is
       starting out trying to work on a Forumla One engine without ever
       knowing how a two stroke motor operates.  During their shop
@@ -31,11 +34,11 @@
       good framework for understanding just how the Formula One engine
       works.  Nobody will expect them to be a Formula One engineer,
       but they are well on their way!</para>
-
     </section>
-    <section><info><title>Why <emphasis>from the bottom up</emphasis>?</title></info>
-      
-
+    <section>
+      <info>
+        <title>Why <emphasis>from the bottom up</emphasis>?</title>
+      </info>
       <para>Not everyone wants to attend shop class.  Most people only
       want to drive the car, not know how to build one from scratch.
       Obviously any general computing curriculum has to take this into
@@ -46,15 +49,14 @@
       hopefully binary logic, possibly even some low level concepts
       such as registers, opcodes and the like at a superficial
       level.</para>
-
       <para>This book aims to move in completely the opposite
       direction, working from operating systems fundamentals through
       to how those applications are complied and executed.  </para>
     </section>
-
-    <section><info><title>Enabling technologies</title></info>
-       
-
+    <section>
+      <info>
+        <title>Enabling technologies</title>
+      </info>
       <para>This book is only possible thanks to the development of
       <glossterm linkend="opensource">Open Source</glossterm>
       technologies.  Before Linux it was like taking a shop course
@@ -63,7 +65,5 @@
       better still, take that engine and use it to do whatever we
       want.</para>
     </section>
-
   </section>
-
 </preface>

@@ -1,8 +1,6 @@
-<book xmlns="http://docbook.org/ns/docbook" version="5.0"
-      xmlns:xi="http://www.w3.org/2001/XInclude">
-
+<?xml version="1.0"?>
+<book xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0">
   <title>Computer Science from the Bottom Up</title>
-
   <info>
     <author>
       <personname>
@@ -10,10 +8,11 @@
         <surname>Wienand</surname>
       </personname>
       <affiliation>
-        <address><email>ian@wienand.org</email></address>
+        <address>
+          <email>ian@wienand.org</email>
+        </address>
       </affiliation>
     </author>
-
     <copyright>
       <year>2004</year>
       <year>2005</year>
@@ -29,28 +28,22 @@
       <year>2015</year>
       <holder role="mailto:ian@wienand.org">Ian Wienand</holder>
     </copyright>
-
     <legalnotice xml:id="legal">
-
       <para>This work is licensed under the Creative Commons
       Attribution-ShareAlike License. To view a copy of this license,
       visit <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://creativecommons.org/licenses/by-sa/3.0/">http://creativecommons.org/licenses/by-sa/3.0/</link>
       or send a letter to Creative Commons, 559 Nathan Abbott Way,
       Stanford, California 94305, USA.
       </para>
-
     </legalnotice>
-
     <releaseinfo>
 
       A PDF version is available at <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.bottomupcs.com/csbu.pdf"><citetitle>http://www.bottomupcs.com/csbu.pdf</citetitle></link>.
       The original souces are available at <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://github.com/ianw/bottomupcs"><citetitle>https://github.com/ianw/bottomupcs</citetitle></link>
 
     </releaseinfo>
-
   </info>
-
-  <xi:include href="intro.xml" />
+  <xi:include href="intro.xml"/>
   <xi:include href="chapter00/chapter00.xml"/>
   <xi:include href="chapter01/chapter01.xml"/>
   <xi:include href="chapter02/chapter02.xml"/>
@@ -61,7 +54,5 @@
   <xi:include href="chapter07/chapter07.xml"/>
   <xi:include href="chapter08/chapter08.xml"/>
   <xi:include href="chapter09/chapter09.xml"/>
-
-  <xi:include href= "glossary.xml"/>
-
+  <xi:include href="glossary.xml"/>
 </book>
