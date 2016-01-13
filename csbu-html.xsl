@@ -1,7 +1,9 @@
 <?xml version='1.0'?>
-<xsl:stylesheet  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 
-<xsl:import href="docbook-xsl-ns-1.79.0/xhtml5/chunk.xsl"/>
+<xsl:stylesheet
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:d="http://docbook.org/ns/docbook"
+    version="1.0">
 
 <xsl:param name="make.clean.html" select="1"></xsl:param>
 <xsl:param name="use.id.as.filename" select="1"></xsl:param>

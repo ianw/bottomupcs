@@ -1,6 +1,9 @@
 <?xml version='1.0'?>
-<xsl:stylesheet  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0"
->
+<xsl:stylesheet
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:d="http://docbook.org/ns/docbook"
+    version="1.0">
+
 <xsl:import href="docbook-xsl-ns-1.79.0/fo/docbook.xsl"/>
 
 <xsl:param name="body.font.family">Helvetica</xsl:param>
