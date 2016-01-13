@@ -20,9 +20,11 @@ svgs := $(gen_svgs) $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.svg))
 html.output=html.output
 html.css=css/csbu.css
 
-saxon.classpath="../saxon65/saxon.jar:../docbook-xsl/extensions/saxon65.jar"
+docbook.xsl=docbook-xsl-ns-1.79.0
+
+saxon.classpath="../saxon65/saxon.jar:../$(docbook.xsl)/extensions/saxon65.jar"
 pdf.output=pdf.output
-fop=fop-1.1/fop
+fop=fop-2.0/fop
 
 #rules to convert xfigs to png/eps
 %.png : %.xfig
@@ -49,13 +51,14 @@ $(pdf.output)/csbu.pdf : $(pdf.output)/csbu.fo
 #
 #  use saxon to apply xsl and get final output
 
-$(pdf.output)/csbu.fo: input/csbu.xml $(sources)
+$(pdf.output)/csbu.fo: input/csbu.xml csbu-pdf.xsl $(sources)
 	rm -rf ./pdf.output
 	mkdir -p ./pdf.output
 	#a bit hacky; copy all svg to be alongside .fo for fop to find
 	#as image references are like "chapterXX/foo.svg"
 	cd input ; cp -r --parents $(svgs:input/%=%) ../$(pdf.output)
 	xmllint --xinclude --noent ./input/csbu.xml > $(pdf.output)/csbu.xml
+	jing ./docbook-5.0/rng/docbookxi.rng $(pdf.output)/csbu.xml
 	cd $(pdf.output) ; java -classpath $(saxon.classpath) \
 		com.icl.saxon.StyleSheet \
 		-o csbu.fo \
@@ -64,7 +67,7 @@ $(pdf.output)/csbu.fo: input/csbu.xml $(sources)
 		textinsert.extension=1
 
 #html depends on having png figures around.
-html: input/csbu.xml $(html.css) $(sources) $(pngs)
+html: input/csbu.xml csbu-html.xsl $(html.css) $(sources) $(pngs)
 	rm -rf ./html.output
 	mkdir -p ./html.output
 
@@ -76,11 +79,11 @@ html: input/csbu.xml $(html.css) $(sources) $(pngs)
 		cp -r --parents $$dir/images/*.png ../$(html.output); \
 	done
 	xmllint --xinclude --noent ./input/csbu.xml > $(html.output)/csbu.xml
+	jing ./docbook-5.0/rng/docbookxi.rng $(html.output)/csbu.xml
 	cd $(html.output); java -classpath $(saxon.classpath) \
 		com.icl.saxon.StyleSheet \
 		./csbu.xml ../csbu-html.xsl \
 		base.dir=. \
-		html.stylesheet='csbu.css' \
 		use.extensions=1 \
 		textinsert.extension=1 \
 		tablecolumns.extension=1

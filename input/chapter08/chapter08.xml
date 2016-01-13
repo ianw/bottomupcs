@@ -1,10 +1,11 @@
-<chapter id="chapter08">
+<!-- Converted by db4-upgrade version 1.0 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter08"><info><title>Dynamic Linking</title></info>
 
-  <title>Dynamic Linking</title>
+  
 
-  <sect1 id="code_sharing">
+  <section xml:id="code_sharing"><info><title>Code Sharing</title></info>
 
-    <title>Code Sharing</title>
+    
 
     <para>We know that for the operating system code is considered
       read only, and separate from data.  It seems logical then that
@@ -33,8 +34,8 @@
     because it does part of the linking process "on the fly" as
     programs are executed in the system.</para>
 
-    <sect2>
-      <title>Dynamic Library Details</title>
+    <section><info><title>Dynamic Library Details</title></info>
+      
 
       <para>Libraries are very much like a program that never gets
       started.  They have code and data sections (functions and
@@ -53,13 +54,13 @@
       <computeroutput>ET_DYN</computeroutput> to mark an ELF file as
       either an executable or a shared object file.</para>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Including libraries in an executable</title>
+    <section><info><title>Including libraries in an executable</title></info>
+      
 
-      <sect3>
-	<title>Compilation</title>
+      <section><info><title>Compilation</title></info>
+	
 
 	<para>When you compile your program that uses a dynamic
 	library, object files are left with references to the library
@@ -87,10 +88,10 @@
 	are required to specify the types of included
 	functions.</para></footnote></para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Linking</title>
+      <section><info><title>Linking</title></info>
+	
 
 	<para>Even though the <emphasis>dynamic linker</emphasis> does
 	a lot of the work for shared libraries, the traditional linker
@@ -111,11 +112,11 @@
 	<computeroutput>/bin/ls</computeroutput></para>
 
 	<example>
-	  <title>Specifying Dynamic Libraries</title>
-	<title>Signals Example</title>
+          <info>
+            <title>Specifying Dynamic Libraries</title>
+          </info>
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/dynamic-needed.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/dynamic-needed.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -134,11 +135,11 @@
 	library, it will show it to you.</para>
 
 	<example>
-	  <title>Looking at dynamic libraries</title>
-	<title>Signals Example</title>
+          <info>
+            <title>Looking at dynamic libraries</title>
+          </info>
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/ldd.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/ldd.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -149,12 +150,12 @@
 	the requirement comes from
 	<computeroutput>librt</computeroutput>.</para>
 
-      </sect3>
-    </sect2>
-  </sect1>
+      </section>
+    </section>
+  </section>
 
-  <sect1 id="dynamic_linker">
-    <title>The Dynamic Linker</title>
+  <section xml:id="dynamic_linker"><info><title>The Dynamic Linker</title></info>
+    
 
     <para>The dynamic linker is the program that manages shared
     dynamic libraries on behalf of an executable.  It works to load
@@ -167,11 +168,10 @@
     the interpreter of executables that rely on dynamic libraries to
     be the dynamic linker.</para>
 
-    <example>
-      <title>Checking the program interpreter</title>
+    <example><info><title>Checking the program interpreter</title></info>
+      
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/interpreter.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/interpreter.txt" parse="text"/>
             </programlisting>
     </example>
 
@@ -188,8 +188,8 @@
     in a shared library.  The references that are left behind are
     called <emphasis>relocations</emphasis>.</para>
 
-    <sect2 id="dynamic_relocations">
-      <title>Relocations</title>
+    <section xml:id="dynamic_relocations"><info><title>Relocations</title></info>
+      
 
       <para>The essential part of the dynamic linker is fixing up
       addresses at runtime, which is the only time you can know for
@@ -199,8 +199,8 @@
       need to go through and read all the relocations and fix the
       addresses it refers to to point to the right place.</para>
 
-      <table>
-	<title>Relocation Example</title>
+      <table><info><title>Relocation Example</title></info>
+	
 	<tgroup cols="2">
 	  <thead>
 	    <row>
@@ -226,11 +226,10 @@
       for the system.  The definition of a relocation is quite
       straight forward.</para>
 
-      <example>
-	<title>Relocation as defined by ELF</title>
+      <example><info><title>Relocation as defined by ELF</title></info>
+	
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/elfrelocs.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/elfrelocs.txt" parse="text"/>
             </programlisting>
       </example>
 
@@ -273,18 +272,17 @@
       on disk binary.  Most modern systems use
       <computeroutput>RELA</computeroutput> relocations.</para>
 
-      <sect3>
-	<title>Relocations in action</title>
+      <section><info><title>Relocations in action</title></info>
+	
 
 	<para>The example below shows how relocations work.  We create
 	two very simple shared libraries and reference one from in the
 	other.</para>
 
-	<example>
-	  <title>Specifying Dynamic Libraries</title>
+	<example><info><title>Specifying Dynamic Libraries</title></info>
+	  
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/relocs.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/relocs.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -318,13 +316,13 @@
 	<computeroutput>i</computeroutput> and put it's value, plus 8
 	into <computeroutput>0x104f8</computeroutput>.</para>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
 
-    <sect2>
-      <title>Position Independence</title>
+    <section><info><title>Position Independence</title></info>
+      
 
       <para>In an <emphasis>executable</emphasis> file, the code and
     data segment is given a specified base address in virtual memory.
@@ -345,11 +343,11 @@
     section; but to actually find the address of data the offset needs
     to be added to the load address.</para>
 
-    </sect2>
-  </sect1>
+    </section>
+  </section>
 
-  <sect1 id="global_offset_tables">
-    <title>Global Offset Tables</title>
+  <section xml:id="global_offset_tables"><info><title>Global Offset Tables</title></info>
+    
 
     <para>You might have noticed a critical problem with relocations
       when thinking about the goals of a shared library.  We mentioned
@@ -376,8 +374,8 @@
 
     <para>Below we explain the mechanism for doing this.</para>
 
-    <sect2>
-      <title>The Global Offset Table</title>
+    <section><info><title>The Global Offset Table</title></info>
+      
 
       <para>So imagine the situation where we take the value of a
       symbol.  With only relocations, we would have the dynamic linker
@@ -395,19 +393,17 @@
       the ELF file called <computeroutput>.got</computeroutput>.
       </para>
 
-      <figure>
-	<title>Memory access via the GOT</title>
+      <figure><info><title>Memory access via the GOT</title></info>
+	
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="chapter08/figures/got-plt.eps" format="EPS" />
+	    <imagedata fileref="chapter08/figures/got-plt.eps" format="EPS"/>
 	  </imageobject>
 	  <imageobject role="fo">
-	    <imagedata fileref="chapter08/figures/got-plt.svg"
-	    format="SVG" scalefit="1" width="100%" contentdept="100%"
-	    />
+	    <imagedata fileref="figures/got-plt.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	  </imageobject>
 	  <imageobject role="html">
-	    <imagedata fileref="chapter08/figures/got-plt.png" format="PNG" />
+	    <imagedata fileref="chapter08/figures/got-plt.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>To keep code (green) sharable, we define process
@@ -425,14 +421,13 @@
       permissions on the code; it would be a serious security breach
       if the process could modify code.</para>
 
-      <sect3>
-	<title>The GOT in action</title>
+      <section><info><title>The GOT in action</title></info>
+	
 
-	<example>
-	  <title>Using the GOT</title>
+	<example><info><title>Using the GOT</title></info>
+	  
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/got.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/got.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -474,11 +469,10 @@
 	stored 24 bytes (that is 3 64 bit addresses).
 	</para>
 
-	<example>
-	  <title>Relocations against the GOT</title>
+	<example><info><title>Relocations against the GOT</title></info>
+	  
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/got-relocs.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/got-relocs.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -497,18 +491,18 @@
 	memory at offset 0x10588 is the address of the global variable
 	<computeroutput>i</computeroutput>!</para>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
 
-  </sect1>
+  </section>
 
-  <sect1 id="dynamic_libraries">
-    <title>Libraries</title>
+  <section xml:id="dynamic_libraries"><info><title>Libraries</title></info>
+    
 
-    <sect2>
-      <title>The Procedure Lookup Table</title>
+    <section><info><title>The Procedure Lookup Table</title></info>
+      
 
       <para>Libraries may contain many functions, and a program may
       end up including many libraries to get its work done.  A program
@@ -554,8 +548,8 @@
       again.  If a function is never called, then the PLT entry will
       never be modified but there will be no runtime overhead.</para>
 
-      <sect3>
-	<title>The PLT in action</title>
+      <section><info><title>The PLT in action</title></info>
+	
 
 	<para>Things start to get a bit hairy here!  If nothing else,
 	you should begin to appreciate that there is a fair bit of
@@ -566,11 +560,10 @@
 	<computeroutput>printf</computeroutput> to output the
 	string to the user.</para>
 
-	<example>
-	  <title>Hello World PLT example</title>
+	<example><info><title>Hello World PLT example</title></info>
+	  
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/hello.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/hello.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -586,11 +579,10 @@
 	<computeroutput>main()</computeroutput> function of the
 	program.</para>
 
-	<example>
-	  <title>Hello world main()</title>
+	<example><info><title>Hello world main()</title></info>
+	  
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/hello-main-dis.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/hello-main-dis.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -599,11 +591,10 @@
 	out where this is by looking at the sections with
 	<computeroutput>readelf</computeroutput>.</para>
 
-	<example>
-	  <title>Hello world sections</title>
+	<example><info><title>Hello world sections</title></info>
+	  
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/hello-sections.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/hello-sections.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -614,11 +605,10 @@
 	disassemble the <computeroutput>.plt</computeroutput>
 	section to see what that call actually does.</para>
 
-	<example>
-	  <title>Hello world PLT</title>
+	<example><info><title>Hello world PLT</title></info>
+	  
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/hello-plt.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/hello-plt.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -643,11 +633,10 @@
 	be pointing to the GOT.  We go 80 bytes past the got
 	(0x50)</para>
 
-	<example>
-	  <title>Hello world GOT</title>
+	<example><info><title>Hello world GOT</title></info>
+	  
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/hello-got.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/hello-got.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -687,11 +676,10 @@
 	that can hold three 8 byte values.  There is a pointer where
 	this reserved area in the dynamic segment of the binary.</para>
 
-	<example>
-	  <title>Dynamic Segment</title>
+	<example><info><title>Dynamic Segment</title></info>
+	  
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/hello-dynamic.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/hello-dynamic.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -708,13 +696,12 @@
 	value is the address of the function that finds and fixes up
 	the symbol.</para>
 
-	<example>
-	  <title>Code in the dynamic linker for setting up special
+	<example><info><title>Code in the dynamic linker for setting up special
 	  values
-	  (from libc <computeroutput>sysdeps/ia64/dl-machine.h</computeroutput>)</title>
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter08/code/runtime_setup.c" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+	  (from libc <computeroutput>sysdeps/ia64/dl-machine.h</computeroutput>)</title></info>
+	  
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/runtime_setup.c" parse="text"/>
             </programlisting>
 	</example>
 
@@ -768,10 +755,10 @@
 	<emphasis>second</emphasis> time it is loaded it will get the
 	direct address of the function; short circuiting the dynamic
 	linker.</para>
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Summary</title>
+      <section><info><title>Summary</title></info>
+	
 
 	<para>You've seen the <emphasis>exact</emphasis> mechanism
 	behind the PLT, and consequently the inner workings of the
@@ -802,19 +789,19 @@
 
 	  </itemizedlist>
 
-      </sect3>
-    </sect2>
-  </sect1>
+      </section>
+    </section>
+  </section>
 
-  <sect1 id="libraries_and_the_linker">
-    <title>Working with libraries and the linker</title>
+  <section xml:id="libraries_and_the_linker"><info><title>Working with libraries and the linker</title></info>
+    
 
     <para>The presence of the dynamic linker provides both some
     advantages we can utilise and some extra issues that need to be
     resolved to get a functional system.</para>
 
-    <sect2>
-      <title>Library versions</title>
+    <section><info><title>Library versions</title></info>
+      
 
       <para>One potential issue is different versions of libraries.
       With only static libraries there is much less potential for
@@ -848,8 +835,8 @@
       identified.  There are a number of schemes a modern dynamic
       linker can use to find the right versions of libraries.</para>
 
-      <sect3>
-	<title><computeroutput>sonames</computeroutput></title>
+      <section><info><title><computeroutput>sonames</computeroutput></title></info>
+	
 
 	<para>Using <computeroutput>sonames</computeroutput> we can
 	add some extra information to a library to help identify
@@ -945,19 +932,17 @@
 
 	<para>The general process is illustrated below.</para>
 
-	<figure>
-	  <title><computeroutput>sonames</computeroutput></title>
+	<figure><info><title><computeroutput>sonames</computeroutput></title></info>
+	  
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="chapter08/figures/libs.eps" format="EPS" />
+	    <imagedata fileref="chapter08/figures/libs.eps" format="EPS"/>
 	  </imageobject>
 	  <imageobject role="fo">
-	    <imagedata fileref="chapter08/figures/libs.svg"
-	    format="SVG" scalefit="1" width="100%" contentdept="100%"
-	    />
+	    <imagedata fileref="figures/libs.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	  </imageobject>
 	  <imageobject role="html">
-	    <imagedata fileref="chapter08/figures/libs.png" format="PNG" />
+	    <imagedata fileref="chapter08/figures/libs.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Describing the soname system</phrase>
@@ -965,8 +950,8 @@
 	</mediaobject>
       </figure>
 
-	<sect4>
-	  <title>How the dynamic linker looks up libraries</title>
+	<section><info><title>How the dynamic linker looks up libraries</title></info>
+	  
 
 	  <para>When the application starts, the dynamic linker looks
 	  at the <computeroutput>DT_NEEDED</computeroutput> field to
@@ -1008,14 +993,14 @@
 	  <application>ldconfig</application> when new libraries are
 	  installed.</para>
 
-	</sect4>
+	</section>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Finding symbols</title>
+    <section><info><title>Finding symbols</title></info>
+      
 
       <para>We've already discussed how the dynamic linker gets the
       address of a library function and puts it in the PLT for the
@@ -1038,23 +1023,22 @@
       symbol in the library that may be called by an external
       program.</para>
 
-      <sect3>
-	<title>Dynamic Symbol Table</title>
+      <section><info><title>Dynamic Symbol Table</title></info>
+	
 
 	<para>In fact, there are three sections that all play a part
 	in describing the dynamic symbols.  Firstly, let us look at
 	the definition of a symbol from the ELF specification</para>
 
-	<example>
-	  <title>Symbol definition from ELF</title>
+	<example><info><title>Symbol definition from ELF</title></info>
+	  
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/symbol.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/symbol.txt" parse="text"/>
             </programlisting>
 	</example>
 
-	<table>
-	  <title>ELF symbol fields</title>
+	<table><info><title>ELF symbol fields</title></info>
+	  
 
 	  <tgroup cols="2">
 	    <thead>
@@ -1120,11 +1104,11 @@
 	symbol entry much faster, generally with only one or two
 	lookups.</para>
 
-      </sect3>
+      </section>
 
 
-      <sect3>
-	<title>Symbol Binding</title>
+      <section><info><title>Symbol Binding</title></info>
+	
 
 	<para>Whilst we usually say the process of finding the address
 	of a symbol refers is the process of binding that symbol, the
@@ -1145,11 +1129,10 @@
 	<para>Below we have an example C program which we analyse to
 	inspect the symbol bindings.</para>
 
-	<example>
-	  <title>Examples of symbol bindings</title>
+	<example><info><title>Examples of symbol bindings</title></info>
+	  
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/bindings.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/bindings.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -1165,8 +1148,8 @@
 	should be quite straight forward (are are documented in the
 	tools <application>man</application> page).</para>
 
-	<sect4>
-	  <title>Overriding symbols</title>
+	<section><info><title>Overriding symbols</title></info>
+	  
 
 	  <para>It is often very useful for a programmer to be able to
 	  <emphasis>override</emphasis> a symbol in a library; that is
@@ -1185,11 +1168,10 @@
 	  <computeroutput>LD_PRELOAD</computeroutput> which specifies
 	  libraries that the linker should load last.</para>
 
-	  <example>
-	    <title>Example of <computeroutput>LD_PRELOAD</computeroutput></title>
+	  <example><info><title>Example of <computeroutput>LD_PRELOAD</computeroutput></title></info>
+	    
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/ld_preload.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/ld_preload.txt" parse="text"/>
             </programlisting>
 	  </example>
 
@@ -1202,8 +1184,8 @@
 	  <emphasis>next</emphasis> symbol called
 	  <computeroutput>getpid</computeroutput>.</para>
 
-	  <sect5>
-	    <title>Weak symbols over time</title>
+	  <section><info><title>Weak symbols over time</title></info>
+	    
 
 	    <para>The concept of the <emphasis>weak</emphasis> symbol
 	  is that the symbol is marked as a lower priority and can be
@@ -1234,11 +1216,11 @@
 	    behaviour relegated to requiring a special environment
 	    flag (<emphasis>LD_DYNAMIC_WEAK</emphasis>) be set.</para>
 
-	  </sect5>
-	</sect4>
+	  </section>
+	</section>
 
-	<sect4>
-	  <title>Specifying binding order</title>
+	<section><info><title>Specifying binding order</title></info>
+	  
 
 	  <para>We have seen how we can override a function in another
 	  library by <emphasis>preloading</emphasis> another shared
@@ -1275,21 +1257,20 @@
 	  A better system would allow us to make some symbols private
 	  and some symbols public.</para>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>Symbol Versioning</title>
+	<section><info><title>Symbol Versioning</title></info>
+	  
 
 	  <para>That better system comes from symbol versioning.  With
 	  symbol versioning we specify some extra input to the static
 	  linker to give it some more information about the symbols in
 	  our shared library.</para>
 
-	  <example>
-	    <title>Example of symbol versioning</title>
+	  <example><info><title>Example of symbol versioning</title></info>
+	    
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter08/code/symbolver.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/symbolver.txt" parse="text"/>
             </programlisting>
 	  </example>
 
@@ -1336,19 +1317,12 @@
 	  symbol name they request) and thus get the original
 	  implementation. XXX : example</para>
 
-	</sect4>
+	</section>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-  </sect1>
+  </section>
 
 </chapter>
-
-<!--
-Local Variables:
-mode: sgml
-sgml-parent-document: ("../csbu.sgml" "book" "chapter")
-End:
--->

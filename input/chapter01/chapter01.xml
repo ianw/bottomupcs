@@ -1,15 +1,16 @@
-<chapter id="chapter01">
+<!-- Converted by db4-upgrade version 1.0 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter01"><info><title>Binary and Number Representation</title></info>
 
-  <title>Binary and Number Representation</title>
+  
 
-  <sect1 id="binary">
-    <title>Binary — the basis of computing</title>
+  <section xml:id="binary"><info><title>Binary — the basis of computing</title></info>
+    
 
-    <sect2>
-      <title>Binary Theory</title>
+    <section><info><title>Binary Theory</title></info>
+      
 
-      <sect3>
-	<title>Introduction</title>
+      <section><info><title>Introduction</title></info>
+	
 
 	<para>Binary is a base-2 number system that uses two mutually
 	exclusive states to represent information.  A binary number is
@@ -29,8 +30,8 @@
 	column, and so on, as illustrated below.
 	</para>
 
-	<table>
-	  <title>Binary</title>
+	<table><info><title>Binary</title></info>
+	  
 	  <tgroup cols="8">
 	    <tbody>
 	      <row>
@@ -66,8 +67,8 @@
 	<computeroutput>100's</computeroutput> column.  This is
 	expressed with exponents in the table below.</para>
 
-	<table>
-	  <title>203 in base 10</title>
+	<table><info><title>203 in base 10</title></info>
+	  
 	  <tgroup cols="3">
 	    <tbody>
 	      <row>
@@ -90,8 +91,8 @@
 	203.  To represent the same thing in binary, we would have the
 	following table.</para>
 
-	<table>
-	  <title>203 in base 2</title>
+	<table><info><title>203 in base 2</title></info>
+	  
 	  <tgroup cols="8">
 	    <tbody>
 	      <row>
@@ -124,10 +125,10 @@
 	+ 2<superscript>0</superscript> = 128 + 64
 	+ 8 + 2 + 1 = 203.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-        <title>The basis of computing</title>
+      <section><info><title>The basis of computing</title></info>
+        
 
         <para>You may be wondering how a simple number is the basis of
         all the amazing things a computer can do.  Believe it or not,
@@ -141,7 +142,7 @@
         operation <computeroutput>2</computeroutput> is addition, then
         <computeroutput>252</computeroutput> could mean "add 5 and 2
         and store the output somewhere".  The reality is of course
-        much more complicated (see <xref linkend="chapter02" />) but,
+        much more complicated (see <xref linkend="chapter02"/>) but,
         in a nutshell, this is what a computer is.
         </para>
 
@@ -175,10 +176,10 @@
             <emphasis>from the bottom-up</emphasis> if you
             will!</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Bits and Bytes</title>
+      <section><info><title>Bits and Bytes</title></info>
+	
 
 	<para>As discussed above, we can essentially choose to
 	represent anything by a number, which can be converted to
@@ -205,8 +206,8 @@
 	<computeroutput>char</computeroutput> variable is?  One
 	byte.</para>
 
-	<sect4>
-	  <title>ASCII</title>
+	<section><info><title>ASCII</title></info>
+	  
 
 	  <para>Given that a byte can represent any of the values 0
 	  through 256, anyone could arbitrarily make up a mapping
@@ -246,10 +247,10 @@
 	  bytes to represent a character, giving
 	  <emphasis>much</emphasis> more room!</para>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>Parity</title>
+	<section><info><title>Parity</title></info>
+	  
 
 	  <para>ASCII, being only a 7-bit code, leaves one bit of the
 	  byte spare.  This can be used to implement
@@ -275,10 +276,10 @@
 
 	  <para>XXX more about error correcting</para>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>16, 32 and 64 bit computers</title>
+	<section><info><title>16, 32 and 64 bit computers</title></info>
+	  
 
 	  <para>Numbers do not fit into bytes; hopefully your bank
 	  balance in dollars will need more range than can fit into
@@ -292,11 +293,11 @@
 	  variable is 32 bits.  Newer architectures are 64 bits, which
 	  doubles the size the processor works with (8 bytes).</para>
 
-	</sect4>
+	</section>
 
 
-	<sect4>
-	  <title>Kilo, Mega and Giga Bytes</title>
+	<section><info><title>Kilo, Mega and Giga Bytes</title></info>
+	  
 
 	  <para>Computers deal with a lot of bytes; that's what makes
 	  them so powerful!</para>
@@ -333,8 +334,8 @@
 	  <para>The units keep increasing by powers of 10; each
 	  time it diverges further from the base SI meaning.</para>
 
-	  <table>
-	    <title>Bytes</title>
+	  <table><info><title>Bytes</title></info>
+	    
 	    <tgroup cols="2">
 	      <tbody>
 		<row>
@@ -375,10 +376,10 @@
 	  <computeroutput>2<superscript>64</superscript></computeroutput>
 	  if you incremented once per second.</para>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>Kilo, Mega and Giga Bits</title>
+	<section><info><title>Kilo, Mega and Giga Bits</title></info>
+	  
 
 	  <para>Apart from the confusion related to the overloading of
 	  SI units between binary and base 10, capacities will often
@@ -402,10 +403,10 @@
 	  example).  Tradition largely prevents use of these terms,
 	  but you may seem them in some literature.</para>
 
-	</sect4>
+	</section>
 
-        <sect4>
-	  <title>Conversion</title>
+        <section><info><title>Conversion</title></info>
+	  
 
 	  <para>The easiest way to convert between bases is to use a
 	  computer, after all, that's what they're good at!  However,
@@ -421,15 +422,15 @@
 	  should illustrate; since we are converting to binary we use
 	  a base of 2.</para>
 
-	  <table>
-	    <title>Convert 203 to binary</title>
+	  <table><info><title>Convert 203 to binary</title></info>
+	    
 	    <tgroup cols="4">
 	  <thead>
 	    <row>
 	      <entry>Quotient</entry>
-	      <entry></entry>
+	      <entry/>
 	      <entry>Remainder</entry>
-	      <entry></entry>
+	      <entry/>
 	    </row>
 	  </thead>
 	      <tbody>
@@ -437,7 +438,7 @@
 		  <entry>203<subscript>10</subscript> ÷ 2 =</entry>
 		  <entry>101</entry>
 		  <entry>1</entry>
-		  <entry></entry>
+		  <entry/>
 		</row>
 		<row>
 		  <entry>101<subscript>10</subscript> ÷ 2 =</entry>
@@ -489,13 +490,13 @@
 	  each time gives <computeroutput>11001011</computeroutput>,
 	  which we saw from the previous example was 203.</para>
 
-	</sect4>
+	</section>
 
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Boolean Operations</title>
+      <section><info><title>Boolean Operations</title></info>
+	
 
 	<para>George Boole was a mathematician who discovered a whole
 	area of mathematics called <emphasis>Boolean
@@ -518,8 +519,8 @@
 	<emphasis>true</emphasis> simply reflects
 	<computeroutput>1</computeroutput> in binary.</para>
 
-	<sect4>
-	  <title>Not</title> <para>Usually represented by
+	<section><info><title>Not</title></info>
+	   <para>Usually represented by
 	  <computeroutput>!</computeroutput>,
 	  <computeroutput>not</computeroutput> simply inverts the
 	  value, so <computeroutput>0</computeroutput> becomes
@@ -527,8 +528,8 @@
 	  <computeroutput>1</computeroutput> becomes
 	  <computeroutput>0</computeroutput></para>
 
-	  <table>
-	    <title>Truth table for <emphasis>not</emphasis></title>
+	  <table><info><title>Truth table for <emphasis>not</emphasis></title></info>
+	    
 	    <tgroup cols="2">
 	      <thead>
 		<row>
@@ -548,15 +549,15 @@
 	      </tbody>
 	    </tgroup>
 	  </table>
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>And</title> <para>To remember how the and operation
+	<section><info><title>And</title></info>
+	   <para>To remember how the and operation
 	  works think of it as "if one input <emphasis>and</emphasis>
 	  the other are true, result is true</para>
 
-	  <table>
-	    <title>Truth table for <emphasis>and</emphasis></title>
+	  <table><info><title>Truth table for <emphasis>and</emphasis></title></info>
+	    
 	    <tgroup cols="3">
 	      <thead>
 		<row>
@@ -589,19 +590,19 @@
 	      </tbody>
 	    </tgroup>
 	  </table>
-	</sect4>
+	</section>
 
 
-	<sect4>
-	  <title>Or</title>
+	<section><info><title>Or</title></info>
+	  
 
 	  <para>To remember how the
 	  <computeroutput>or</computeroutput> operation works think of
 	  it as "if one input <emphasis>or</emphasis> the other input
 	  is true, the result is true</para>
 
-	  <table>
-	    <title>Truth table for <emphasis>or</emphasis></title>
+	  <table><info><title>Truth table for <emphasis>or</emphasis></title></info>
+	    
 	    <tgroup cols="3">
 	      <thead>
 		<row>
@@ -634,11 +635,11 @@
 	      </tbody>
 	    </tgroup>
 	  </table>
-	</sect4>
+	</section>
 
 
-	<sect4>
-	  <title>Exclusive Or (xor)</title>
+	<section><info><title>Exclusive Or (xor)</title></info>
+	  
 
 	  <para>Exclusive or, written as
 	  <computeroutput>xor</computeroutput> is a special case of
@@ -648,8 +649,8 @@
 	  tricks, but you will not see a lot of it in the
 	  kernel.</para>
 
-	  <table>
-	    <title>Truth table for <emphasis>xor</emphasis></title>
+	  <table><info><title>Truth table for <emphasis>xor</emphasis></title></info>
+	    
 	    <tgroup cols="3">
 	      <thead>
 		<row>
@@ -682,13 +683,13 @@
 	      </tbody>
 	    </tgroup>
 	  </table>
-	</sect4>
+	</section>
 
-      </sect3>
+      </section>
 
 
-      <sect3>
-	<title>How computers use boolean operations</title>
+      <section><info><title>How computers use boolean operations</title></info>
+	
 
 	<para>Believe it or not, essentially everything your computer
 	does comes back to the above operations.  For example, the
@@ -710,17 +711,17 @@
 	latest Itanium processors have around 460 million
 	transistors.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Working with binary in C</title>
+      <section><info><title>Working with binary in C</title></info>
+	
 
 	<para>In C we have a direct interface to all of the above
 	operations.  The following table describes the
 	operators</para>
 
-	<table>
-	  <title>Boolean operations in C</title>
+	<table><info><title>Boolean operations in C</title></info>
+	  
 	  <tgroup cols="2">
 	    <thead>
 	      <row>
@@ -753,12 +754,12 @@
 	within the variable.  Before we see examples of this, first we
 	must divert to describe hexadecimal notation.</para>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Hexadecimal</title>
+    <section><info><title>Hexadecimal</title></info>
+      
 
       <para>Hexadecimal refers to a base 16 number system.  We use
       this in computer science for only one reason, it makes it easy
@@ -790,8 +791,8 @@
       consider it an exercise to learn the following table off by
       heart.</para>
 
-    <table>
-      <title>Hexadecimal, Binary and Decimal</title>
+    <table><info><title>Hexadecimal, Binary and Decimal</title></info>
+      
       <tgroup cols="3">
 	<thead>
 	  <row>
@@ -903,15 +904,15 @@
       change the base of a number.  For example, to find 203 in
       hexadecimal</para>
 
-      <table>
-	<title>Convert 203 to hexadecimal</title>
+      <table><info><title>Convert 203 to hexadecimal</title></info>
+	
 	<tgroup cols="4">
 	  <thead>
 	    <row>
 	      <entry>Quotient</entry>
-	      <entry></entry>
+	      <entry/>
 	      <entry>Remainder</entry>
-	      <entry></entry>
+	      <entry/>
 	    </row>
 	  </thead>
 	  <tbody>
@@ -919,7 +920,7 @@
 	      <entry>203<subscript>10</subscript> ÷ 16 =</entry>
 	      <entry>12</entry>
 	      <entry>11 (0xB)</entry>
-	      <entry></entry>
+	      <entry/>
 	    </row>
 	    <row>
 	      <entry>12<subscript>10</subscript> ÷ 16 =</entry>
@@ -933,12 +934,12 @@
 
       <para>Hence 203 in hexadecimal is
       <computeroutput>0xCB</computeroutput>.</para>
-    </sect2>
+    </section>
 
-  <sect2>
-    <title>Practical Implications</title>
-    <sect3>
-      <title>Use of binary in code</title>
+  <section><info><title>Practical Implications</title></info>
+    
+    <section><info><title>Use of binary in code</title></info>
+      
 
       <para>Whilst binary is the underlying language of every
       computer, it is entirely practical to program a computer in high
@@ -946,13 +947,13 @@
       However, for the low level code we are interested in a few
       fundamental binary principles are used repeatedly.</para>
 
-    </sect3>
+    </section>
 
-    <sect3>
-      <title>Masking and Flags</title>
+    <section><info><title>Masking and Flags</title></info>
+      
 
-      <sect4>
-	<title>Masking</title>
+      <section><info><title>Masking</title></info>
+	
 
 	<para>In low level code, it is often important to keep your
 	structures and variables as space efficient as possible.  In
@@ -981,19 +982,17 @@
 	to <computeroutput>0</computeroutput> effectively hide the bits
 	we are not interested in.</para>
 
-	  <figure>
-	    <title>Masking</title>
+	  <figure><info><title>Masking</title></info>
+	    
 	    <mediaobject>
 	      <imageobject>
-		<imagedata fileref="chapter01/figures/masking.eps" format="EPS" />
+		<imagedata fileref="chapter01/figures/masking.eps" format="EPS"/>
 	      </imageobject>
 	      <imageobject role="fo">
-		<imagedata fileref="chapter01/figures/masking.svg"
-		format="SVG" scalefit="1" width="100%"
-		contentdept="100%" />
+		<imagedata fileref="figures/masking.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	      </imageobject>
 	      <imageobject role="html">
-		<imagedata fileref="chapter01/figures/masking.png" format="PNG" />
+		<imagedata fileref="chapter01/figures/masking.png" format="PNG"/>
 	      </imageobject>
 	      <textobject>
 
@@ -1023,10 +1022,10 @@
 	bits with the <computeroutput>logical
 	or</computeroutput> operation.</para>
 
-      </sect4>
+      </section>
 
-      <sect4>
-	<title>Flags</title>
+      <section><info><title>Flags</title></info>
+	
 
 	<para>Often a program will have a large number of variables
 	that only exist as <emphasis>flags</emphasis> to some
@@ -1046,25 +1045,24 @@
 	variations on this basic code very often.
 	</para>
 
-	<example id="flag-code">
-	  <title>Using flags</title>
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter01/code/flags.c" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<example xml:id="flag-code"><info><title>Using flags</title></info>
+	  
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/flags.c" parse="text"/>
             </programlisting>
 	</example>
 
-	</sect4>
-      </sect3>
-    </sect2>
-  </sect1>
+	</section>
+      </section>
+    </section>
+  </section>
 
-  <sect1 id="types">
-    <title>Types and Number Representation</title>
+  <section xml:id="types"><info><title>Types and Number Representation</title></info>
+    
 
-    <sect2>
+    <section><info><title>C Standards</title></info>
 
-      <title>C Standards</title>
+      
 
       <para>Although a slight divergence, it is important to
       understand a bit of history about the C language.</para>
@@ -1102,8 +1100,8 @@
       dependent result.  Obviously the programmer can not depend on
       these outcomes if they are to write portable code.</para>
 
-      <sect3>
-	<title>GNU C</title>
+      <section><info><title>GNU C</title></info>
+	
 
 	<para>The GNU C Compiler, more commonly referred to as
 	<application>gcc</application>, almost completely implements
@@ -1126,12 +1124,12 @@
 	need to ensure that you can move your code easily to another
 	compiler.</para>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Types</title>
+    <section><info><title>Types</title></info>
+      
 
       <para>As programmers, we are familiar with using variables to
       represent an area of memory to hold a value.  In a
@@ -1143,19 +1141,17 @@
       of the type.  In the example below, we see an example of the
       space allocated for some common types of variables.</para>
 
-	  <figure>
-	    <title>Types</title>
+	  <figure><info><title>Types</title></info>
+	    
 	    <mediaobject>
 	      <imageobject>
-		<imagedata fileref="chapter01/figures/types.eps" format="EPS" />
+		<imagedata fileref="chapter01/figures/types.eps" format="EPS"/>
 	      </imageobject>
 	      <imageobject role="fo">
-		<imagedata fileref="chapter01/figures/types.svg"
-		format="SVG" scalefit="1" width="100%"
-		contentdept="100%" />
+		<imagedata fileref="figures/types.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	      </imageobject>
 	      <imageobject role="html">
-		<imagedata fileref="chapter01/figures/types.png" format="PNG" />
+		<imagedata fileref="chapter01/figures/types.png" format="PNG"/>
 	      </imageobject>
 	      <textobject>
 
@@ -1184,8 +1180,8 @@
       underlying hardware and operating system.  An ABI is written for
       a specific processor and operating system combination.</para>
 
-      <table>
-	<title>Standard Integer Types and Sizes</title>
+      <table><info><title>Standard Integer Types and Sizes</title></info>
+	
 
 	<tgroup cols="3">
 	  <thead>
@@ -1241,14 +1237,13 @@
       a pointer needs to be sufficient in size to be able to address
       any memory in the system.</para>
 
-      <sect3>
-	<title>64 bit</title>
+      <section><info><title>64 bit</title></info>
+	
 
 	<para>One area that causes confusion is the introduction of 64
 	bit computing.  This means that the processor can handle
 	addresses 64 bits in length (specifically the registers are 64
-	bits wide; a topic we discuss in <xref
-	linkend="chapter02"></xref>).</para>
+	bits wide; a topic we discuss in <xref linkend="chapter02"/>).</para>
 
 	<para>This firstly means that all pointers are required to be
 	a 64 bits wide so they can represent any possible address in
@@ -1256,8 +1251,8 @@
 	decisions about the size of the other types.  Two common
 	models are widely used, as shown below.</para>
 
-	<table>
-	  <title>Standard Scalar Types and Sizes</title>
+	<table><info><title>Standard Scalar Types and Sizes</title></info>
+	  
 
 	  <tgroup cols="4">
 	    <thead>
@@ -1340,8 +1335,7 @@
 	will be wasting at least the top 32 bits (if not more).  Not
 	only this, but the size of an integer array has now doubled
 	too.  This means programs take up more system memory (and thus
-	more cache; discussed in detail in <xref
-	linkend="chapter02"></xref>) for no real improvement.  For
+	more cache; discussed in detail in <xref linkend="chapter02"/>) for no real improvement.  For
 	the same reason Windows elected to keep their long values as
 	32 bits; since much of the Windows API was originally written
 	to use long variables on a 32 bit system and hence does not
@@ -1361,10 +1355,10 @@
 	they know they will be needed strikes a balance with respect
 	to portability concerns and wasting space in binaries.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Type qualifiers</title>
+      <section><info><title>Type qualifiers</title></info>
+	
 
 	<para>The C standard also talks about some qualifiers for
 	variable types.  For example
@@ -1389,10 +1383,10 @@
 	optimisations based upon the extra knowledge (examined in
 	later chapters).</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Standard Types</title>
+      <section><info><title>Standard Types</title></info>
+	
 
 	<para>C99 realises that all these rules, sizes and portability
 	concerns can become very confusing very quickly.  To help, it
@@ -1423,10 +1417,10 @@
 	sized types on the target system; on Linux these headers are
 	provided by the system libraries.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Types in action</title>
+      <section><info><title>Types in action</title></info>
+	
 
 	<para>Below we see an example of how types place restrictions
       on what operations are valid for a variable, and how the
@@ -1450,23 +1444,22 @@
       information from the pointer and we end up with an invalid
       address.</para>
 
-	<example id="type-warnings">
-	  <title>Example of warnings when types are not matched</title>
+	<example xml:id="type-warnings"><info><title>Example of warnings when types are not matched</title></info>
+	  
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter01/code/type-warnings.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/type-warnings.txt" parse="text"/>
             </programlisting>
 	</example>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Number Representation</title>
+    <section><info><title>Number Representation</title></info>
+      
 
-      <sect3>
-	<title>Negative Values</title>
+      <section><info><title>Negative Values</title></info>
+	
 
 	<para>With our modern base 10 numeral system we indicate a
 	negative number by placing a minus
@@ -1478,8 +1471,8 @@
 	hardware, but C99 defines three acceptable methods for
 	negative value representation.</para>
 
-	<sect4>
-	  <title>Sign Bit</title>
+	<section><info><title>Sign Bit</title></info>
+	  
 
 	  <para>The most straight forward method is to simply say that
 	  one bit of the number indicates either a negative or
@@ -1500,10 +1493,10 @@
 	  <computeroutput>+0</computeroutput> and
 	  <computeroutput>-0</computeroutput> respectively.</para>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>One's Complement</title>
+	<section><info><title>One's Complement</title></info>
+	  
 
 	  <para>One's complement simply applies the
 	  <emphasis>not</emphasis> operation to the positive number to
@@ -1521,8 +1514,8 @@
 	  required, except that any additional carry left over must be
 	  added back to the final value.  Consider</para>
 
-	  <table>
-	    <title>One's Complement Addition</title>
+	  <table><info><title>One's Complement Addition</title></info>
+	    
 	    <tgroup cols="3">
 	      <thead>
 		<row>
@@ -1540,12 +1533,12 @@
 		<row>
 		  <entry>100</entry>
 		  <entry>01100100</entry>
-		  <entry></entry>
+		  <entry/>
 		</row>
 		<row>
 		  <entry>---</entry>
 		  <entry>--------</entry>
-		  <entry></entry>
+		  <entry/>
 		</row>
 		<row>
 		  <entry>10</entry>
@@ -1553,7 +1546,7 @@
 		  <entry>9</entry>
 		</row>
 		<row>
-		  <entry></entry>
+		  <entry/>
 		  <entry>00001010</entry>
 		  <entry>10</entry>
 		</row>
@@ -1570,10 +1563,10 @@
 	  represented.  Again no modern computer uses one's
 	  complement, mostly because there is a better scheme.</para>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>Two's Complement</title>
+	<section><info><title>Two's Complement</title></info>
+	  
 
 	  <para>Two's complement is just like one's complement, except
 	  the negative representation has <emphasis>one</emphasis>
@@ -1595,8 +1588,8 @@
 	 +1)=(11111111+1)=00000000</computeroutput> (note
 	  discarded carry bit).</para>
 
-	  <table>
-	    <title>Two's Complement Addition</title>
+	  <table><info><title>Two's Complement Addition</title></info>
+	    
 	    <tgroup cols="3">
 	      <thead>
 		<row>
@@ -1614,17 +1607,17 @@
 		<row>
 		  <entry>100</entry>
 		  <entry>01100100</entry>
-		  <entry></entry>
+		  <entry/>
 		</row>
 		<row>
 		  <entry>---</entry>
 		  <entry>--------</entry>
-		  <entry></entry>
+		  <entry/>
 		</row>
 		<row>
 		  <entry>10</entry>
 		  <entry>00001010</entry>
-		  <entry></entry>
+		  <entry/>
 		</row>
 	      </tbody>
 	    </tgroup>
@@ -1644,8 +1637,8 @@
 	  <para>All modern computers use two's complement
 	  representation.</para>
 
-	  <sect5 id="sign_extension">
-	    <title>Sign-extension</title>
+	  <section xml:id="sign_extension"><info><title>Sign-extension</title></info>
+	    
 
 	    <para>Becuase of two's complement format, when increasing
 	      the size of signed value, it is important that the
@@ -1673,14 +1666,14 @@
 	    instructions to take a value an sign-extended it to some
 	    larger value.</para>
 
-	  </sect5>
+	  </section>
 
-	</sect4>
+	</section>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Floating Point</title>
+      <section><info><title>Floating Point</title></info>
+	
 
 	<para>So far we have only discussed integer or whole numbers;
 	the class of numbers that can represent decimal values is
@@ -1723,8 +1716,8 @@
 	we examine below at only a 32 bit value.  More bits allows
 	greater precision.</para>
 
-	<table>
-	  <title>IEEE Floating Point</title>
+	<table><info><title>IEEE Floating Point</title></info>
+	  
 
 	  <tgroup cols="3">
 	    <thead>
@@ -1764,8 +1757,8 @@
 	<computeroutput>1.98765x10<superscript>6</superscript></computeroutput>,
 	which corresponds to a representation below</para>
 
-	<table>
-	  <title>Scientific Notation for 1.98765x10^6</title>
+	<table><info><title>Scientific Notation for 1.98765x10^6</title></info>
+	  
 	  <tgroup cols="7">
 	    <thead>
 	      <row>
@@ -1807,8 +1800,8 @@
 	in a straight-forward manner to a decimal
 	representation.</para>
 
-	<table>
-	  <title>Significands in binary</title>
+	<table><info><title>Significands in binary</title></info>
+	  
 	  <tgroup cols="7">
 	    <thead>
 	      <row>
@@ -1873,13 +1866,11 @@
 	most demanding of applications (XXX is this sufficient to
 	represent a length to less than the size of an atom?)</para>
 
-	<example id="float-v-double">
-	  <title>Floats versus Doubles</title>
+	<example xml:id="float-v-double"><info><title>Floats versus Doubles</title></info>
+	  
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter01/code/floatvdouble.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/floatvdouble.txt" parse="text"/>
             </programlisting>
-
 	</example>
 
 	<para>A practical example is illustrated above.  Notice that
@@ -1895,8 +1886,8 @@
 	<computeroutput>float</computeroutput> values still have
 	problems with precision of variables!</para>
 
-	<sect4>
-	  <title>Normalised Values</title>
+	<section><info><title>Normalised Values</title></info>
+	  
 
 	  <para>In scientific notation, we can represent a value in
 	  many different ways.  For example,
@@ -1911,8 +1902,8 @@
 	  precision by having the standard say that the leftmost bit
 	  being one is implied.</para>
 
-	  <table>
-	    <title>Example of normalising 0.375</title>
+	  <table><info><title>Example of normalising 0.375</title></info>
+	    
 	    <tgroup cols="9">
 	      <thead>
 		<row>
@@ -1969,8 +1960,8 @@
 	  by moving the bits upwards as long as we compensate by
 	  increasing the exponent.</para>
 
-	  <sect5>
-	    <title>Normalisation Tricks</title>
+	  <section><info><title>Normalisation Tricks</title></info>
+	    
 
 	    <para>A common problem programmers face is finding the
 	    first set bit in a bitfield.  Consider the bitfield
@@ -2006,20 +1997,19 @@
 	    (minus the 16 bit bias) we can see how far it was
 	    shifted.</para>
 
-	    <example id="ffs">
-	    <title>Program to find first set bit</title>
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter01/code/ffs.c" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+	    <example xml:id="ffs"><info><title>Program to find first set bit</title></info>
+	    
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/ffs.c" parse="text"/>
             </programlisting>
 	  </example>
 
-	  </sect5>
+	  </section>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>Bringing it together</title>
+	<section><info><title>Bringing it together</title></info>
+	  
 
 	  <para>In the example code below we extract the components of
 	  a floating point number and print out the value it
@@ -2028,11 +2018,10 @@
 	  architectures with the
 	  <computeroutput>float</computeroutput> type.</para>
 
-	  <example id="float-examine">
-	    <title>Examining Floats</title>
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter01/code/float.c" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+	  <example xml:id="float-examine"><info><title>Examining Floats</title></info>
+	    
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/float.c" parse="text"/>
             </programlisting>
 
 	  </example>
@@ -2041,8 +2030,8 @@
 	  <computeroutput>8.45</computeroutput>, which we previously
 	  examined, is shown below.</para>
 
-	  <example id="float-examine-example">
-	    <title>Analysis of <computeroutput>8.45</computeroutput></title>
+	  <example xml:id="float-examine-example"><info><title>Analysis of <computeroutput>8.45</computeroutput></title></info>
+	    
 	    <programlisting>
 $ ./float 8.45
 8.450000 = 1 * (1/2^0 + 1/2^5 + 1/2^6 + 1/2^7 + 1/2^10 + 1/2^11 + 1/2^14 + 1/2^15 + 1/2^18 + 1/2^19 + 1/2^22 + 1/2^23) * 2^3
@@ -2055,18 +2044,11 @@ $ ./float 8.45
 	  <para>From this example, we get some idea of how the
 	  inaccuracies creep into our floating point numbers.</para>
 
-	</sect4>
-      </sect3>
+	</section>
+      </section>
 
-    </sect2>
+    </section>
 
-  </sect1>
+  </section>
 
 </chapter>
-
-<!--
-Local Variables:
-mode: sgml
-sgml-parent-document: ("../csbu.xml" "book" "chapter")
-End:
--->

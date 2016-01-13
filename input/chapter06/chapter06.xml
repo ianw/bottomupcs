@@ -1,12 +1,13 @@
-<chapter id="chapter06">
+<!-- Converted by db4-upgrade version 1.0 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter06"><info><title>The Toolchain</title></info>
   
-  <title>The Toolchain</title>
+  
 
-  <sect1 id="compiled_v_interpreted">
-    <title>Compiled v Interpreted Programs</title>
+  <section xml:id="compiled_v_interpreted"><info><title>Compiled v Interpreted Programs</title></info>
+    
 
-    <sect2>
-      <title>Compiled Programs</title>
+    <section><info><title>Compiled Programs</title></info>
+      
 
       <para>So far we have discussed how a program is loaded into
     virtual memory, started as a process kept track of by the
@@ -21,10 +22,10 @@
     example being <productname>gcc</productname>.
     </para>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Interpreted programs</title>
+    <section><info><title>Interpreted programs</title></info>
+      
 
       <para>Compiled programs have some disadvantages for modern
       software development.  Every time a developer makes a change,
@@ -53,8 +54,8 @@
       languages that implement a virtual machine that interpreted code
       runs on.</para>
 
-      <sect3>
-	<title>Virtual Machines</title>
+      <section><info><title>Virtual Machines</title></info>
+	
 	
 	<para>A compiled program is completely dependent on the
 	hardware of the machine it is compiled for, since it must be
@@ -69,15 +70,15 @@
       JVM written for it; so called <emphasis>write one, run
       anywhere</emphasis>.</para>
 
-      </sect3>
+      </section>
 
 
-    </sect2>
+    </section>
 
-  </sect1>
+  </section>
 
-  <sect1 id="building_an_executable">
-    <title>Building an executable</title>
+  <section xml:id="building_an_executable"><info><title>Building an executable</title></info>
+    
 
     <para>When we talk about the compiler, there are actually three
     separate steps involved in creating the executable file.</para>
@@ -102,13 +103,13 @@
     <para>Each link in the chain takes the source code progressively
     closer to being binary code suitable for execution.</para>
 
-  </sect1>
+  </section>
 
-  <sect1 id="compiling">
-    <title>Compiling</title>
+  <section xml:id="compiling"><info><title>Compiling</title></info>
+    
 
-    <sect2>
-      <title>The process of compiling</title>
+    <section><info><title>The process of compiling</title></info>
+      
 
     <para>The first step of compiling a source file to an executable
     file is converting the code from the high level, human
@@ -125,8 +126,8 @@
     human-written source code to its internal representation is called
     <emphasis>parsing</emphasis>.</para>
 
-      <sect3>
-	<title>C code</title>
+      <section><info><title>C code</title></info>
+	
 
 	<para>With C code, there is actually a step
 	<emphasis>before</emphasis> parsing the source code called the
@@ -138,12 +139,12 @@
 	<computeroutput>text</computeroutput>.  This preprocessed code
 	is then passed into the compiler.</para>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Syntax</title>
+    <section><info><title>Syntax</title></info>
+      
       
       <para>Any computing language has a particular
       <emphasis>syntax</emphasis> that describes the rules of the
@@ -162,9 +163,9 @@
       languages.</para></footnote> which is a language with which you
       can describe languages!</para>
 
-    </sect2>
-    <sect2>
-      <title>Assembly Generation</title>
+    </section>
+    <section><info><title>Assembly Generation</title></info>
+      
 
       <para>The job of the compiler is to translate the higher level
       language into assembely code suitable for the target being
@@ -172,22 +173,20 @@
       different instruction set, different numbers of registers and
       different rules for correct operation.</para>
 
-      <sect3>
-	<title>Alignment</title>
+      <section><info><title>Alignment</title></info>
 	
-	<figure>
-	  <title>Alignment</title>
+	
+	<figure><info><title>Alignment</title></info>
+	  
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="chapter06/figures/alignment.eps" format="EPS" />
+	      <imagedata fileref="chapter06/figures/alignment.eps" format="EPS"/>
 	    </imageobject>
 	    <imageobject role="fo">
-	      <imagedata fileref="chapter06/figures/alignment.svg"
-	      format="SVG" scalefit="1" width="100%"
-	      contentdept="100%"/>
+	      <imagedata fileref="figures/alignment.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	    </imageobject>
 	    <imageobject role="html">
-	      <imagedata fileref="chapter06/figures/alignment.png" format="PNG" />
+	      <imagedata fileref="chapter06/figures/alignment.png" format="PNG"/>
 	    </imageobject>
 	    <textobject>
 	      
@@ -228,8 +227,8 @@
 	manually load the register in parts, causing even more
 	overheads.</para>
 
-	<sect4>
-	  <title>Structure Padding</title>
+	<section><info><title>Structure Padding</title></info>
+	  
 
 	  <para>Programmers need to consider alignment especially when
 	creating <computeroutput>struct</computeroutput>s.  Whilst the
@@ -242,11 +241,10 @@
 	  the declaration, and that in an array of structures all
 	  elements will be the same size.</para>
 
-	  <example id="struct-padding">
-	    <title>Struct padding example</title>
+	  <example xml:id="struct-padding"><info><title>Struct padding example</title></info>
+	    
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter06/code/struct-padding.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/struct-padding.txt" parse="text"/>
             </programlisting>
 	  </example>
 
@@ -255,19 +253,14 @@
 	  by a 4 byte integer.  The compiler pads the structure as
 	  below.</para>
 
-	  <figure>
-	    <title>Alignment</title>
+	  <figure><info><title>Alignment</title></info>
+	    
 	    <mediaobject>
-	      <imageobject>
-		<imagedata fileref="chapter06/figures/padding.eps" format="EPS" />
-	      </imageobject>
 	      <imageobject role="fo">
-		<imagedata fileref="chapter06/figures/padding.svg"
-		format="SVG" scalefit="1" width="100%"
-		contentdept="100%"/>
+		<imagedata fileref="figures/padding.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	      </imageobject>
 	      <imageobject role="html">
-		<imagedata fileref="chapter06/figures/padding.png" format="PNG" />
+		<imagedata fileref="chapter06/figures/padding.png" format="PNG"/>
 	      </imageobject>
 	      <textobject>
 		<phrase>The compiler pads the structure to align the
@@ -281,10 +274,10 @@
 	  correspondingly we can see that the integer starts directly
 	  after the two <computeroutput>chars</computeroutput>.</para>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>Cache line alignment</title>
+	<section><info><title>Cache line alignment</title></info>
+	  
 
 	  <para>We talked previously about aliasing in the cache, and
 	  how several addresses may map to the same cache line.
@@ -318,10 +311,10 @@
 	  else?)
 	  </para>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>Space - Speed Trade off</title>
+	<section><info><title>Space - Speed Trade off</title></info>
+	  
 
 	  <para>What the compiler has done above is traded off using
 	  some extra memory to gain a speed improvement in running our
@@ -337,10 +330,10 @@
 	  compiler may make different decisions based on expicit
 	  commands or optimisation levels.</para>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>Making Assumptions</title>
+	<section><info><title>Making Assumptions</title></info>
+	  
 
 	  <para>Thus, as a C programmer you need to be familiar with
 	  what you can assume about what the compiler will do and what
@@ -350,11 +343,10 @@
 	  becoming familiar with the rules to avoid writing
 	  non-portable or buggy code.</para>
 
-	  <example id="stack-padding">
-	    <title>Stack alignment example</title>
-	  <programlisting linenumbering="numbered" >
-              <xi:include href="chapter06/code/stack-align.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+	  <example xml:id="stack-padding"><info><title>Stack alignment example</title></info>
+	    
+	  <programlisting linenumbering="numbered">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/stack-align.txt" parse="text"/>
             </programlisting>
 	  </example>
 
@@ -368,10 +360,10 @@
 	  assumptions about the size of types or alignment
 	  rules.</para>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>C Idioms with alignment</title>
+	<section><info><title>C Idioms with alignment</title></info>
+	  
 
 	  <para>There are a few common sequences of code that deal
 	  with alignment; generally most programs will consider it in
@@ -384,11 +376,10 @@
 	  often has to deal with alignment of pages of memory within
 	  the system.</para>
 
-	  <example id="page-alignment">
-	    <title>Page alignment manipulations</title>
+	  <example xml:id="page-alignment"><info><title>Page alignment manipulations</title></info>
+	    
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter06/code/page.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/page.txt" parse="text"/>
             </programlisting>
 	  </example>
 
@@ -413,14 +404,14 @@
 	  within its page.</para>
 
 	  <para>XXX continue short discussion</para>
-	</sect4>
+	</section>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Optimisation</title> 
+    <section><info><title>Optimisation</title></info>
+       
 
       <para>Once the compiler has an internal representation of the
       code, the <emphasis>really</emphasis> interesting part of the
@@ -436,18 +427,18 @@
       for generating the best code, and it is always an active
       research area.</para>
 
-      <sect3>
-	<title>General Optimising</title>
+      <section><info><title>General Optimising</title></info>
+	
 
 	<para>The compiler can often see that a particular piece of
 	code can not be used and so leave it out optimise a particular
 	language construct into something smaller with the same
 	outcome.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Unrolling loops</title>
+      <section><info><title>Unrolling loops</title></info>
+	
 
 	<para>If code contains a loop, such as a
 	<computeroutput>for</computeroutput> or
@@ -464,10 +455,10 @@
 	efficiently as branches can cause inefficiencies in the
 	pipeline of instructions coming into the processor.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Inlining functions</title>
+      <section><info><title>Inlining functions</title></info>
+	
 
 	<para>Similar to unrolling loops, it is possible to put embed
 	called functions within the callee.  The programmer can
@@ -475,10 +466,10 @@
 	the function as <computeroutput>inline</computeroutput> in the
 	function definition.  Once again, you may trade code size for
 	sequentiality in the code by doing this.</para>
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Branch Prediction</title>
+      <section><info><title>Branch Prediction</title></info>
+	
 
 	<para>Any time the computer comes across an
 	<computeroutput>if</computeroutput> statement there are two
@@ -500,14 +491,14 @@
 	under real conditions.  It can then re-compile it based on
 	what it has seen.</para>
 
-      </sect3>
-    </sect2>
+      </section>
+    </section>
 
 
-  </sect1>
+  </section>
 
-  <sect1 id="assembler">
-    <title>Assembler</title>
+  <section xml:id="assembler"><info><title>Assembler</title></info>
+    
 
     <para>The assembly code outputted by the compiler is still in a
     human readable form, should you know the specifics of the assembly
@@ -531,10 +522,10 @@
     all the eggs in one basket" by placing all your source code in one
     file.</para>
 
-  </sect1>
+  </section>
 
-  <sect1 id="linker">
-    <title>Linker</title>
+  <section xml:id="linker"><info><title>Linker</title></info>
+    
 
     <para>Often in a large program, you will separate out code into
       multiple files to keep related functions together.  Each of
@@ -555,11 +546,11 @@
     <para>In the following sections we explain some terms essential to
     understanding linking.</para>
 
-    <sect2>
-      <title>Symbols</title>
+    <section><info><title>Symbols</title></info>
+      
 
-      <sect3>
-      <title>Symbols</title>
+      <section><info><title>Symbols</title></info>
+      
 
       <para>Variables and functions all have names in source code
       which we refer to them by.  One way of thinking of a statement
@@ -586,10 +577,10 @@
       compilation process needs to convert <computeroutput>a +=
       2</computeroutput> to something like "increment the value in
       memory at <computeroutput>0xABCDE</computeroutput> by 2.</para>
-    </sect3>
+    </section>
 
-      <sect3>
-	<title>Symbol Visibility</title>
+      <section><info><title>Symbol Visibility</title></info>
+	
 
 	<para>In some C programs, you may have seen the terms
       <computeroutput>static</computeroutput> and
@@ -642,12 +633,12 @@
       <computeroutput>static</computeroutput>) which can be seen by
       the linker.</para>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>The linking process</title>
+    <section><info><title>The linking process</title></info>
+      
 
       <para>Thus the linking process is really two steps; combining
       all object files into one exectuable file and then going through
@@ -663,12 +654,12 @@
       at executable runtime, and is described a little later
       on.</para></footnote></para>
 
-    </sect2>
+    </section>
 
-  </sect1>
+  </section>
 
-  <sect1 id="compilation_example">
-    <title>A practical example</title>
+  <section xml:id="compilation_example"><info><title>A practical example</title></info>
+    
 
     <para>We can walk through the steps taken to build a simple
     application step by step.</para>
@@ -686,25 +677,23 @@
     program entry point, and another declares a helper type function.
     There is one global variable too, just for illustration.</para>
 
-    <example id="c-hello">
-      <title>Hello World</title>
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter06/code/hello.c" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+    <example xml:id="c-hello"><info><title>Hello World</title></info>
+      
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/hello.c" parse="text"/>
             </programlisting>
     </example>    
 
-    <example>
-      <title>Function Example</title>
+    <example><info><title>Function Example</title></info>
+      
 
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter06/code/function.c" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/function.c" parse="text"/>
             </programlisting>
     </example>
 
-    <sect2>
-      <title>Compiling</title>
+    <section><info><title>Compiling</title></info>
+      
 
       <para>All compilers have an option to only execute the first
       step of compilation.  Usually this is something like
@@ -716,11 +705,10 @@
       <para>Thus we can show the first step with <computeroutput>gcc
       -S</computeroutput> as illustrated in the example below.</para>
 
-      <example>
-	<title>Compilation Example</title>
+      <example><info><title>Compilation Example</title></info>
+	
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter06/code/compiled.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/compiled.txt" parse="text"/>
             </programlisting>
       </example>
 
@@ -735,21 +723,20 @@
       <para>We now have two assembly files ready to be assembled into
       machine code!</para>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Assembly</title>
+    <section><info><title>Assembly</title></info>
+      
 
       <para>Assembly is a fairly straight forward process.  The
       assembler is usually called <computeroutput>as</computeroutput>
       and takes arguments in a similar fasion to
       <computeroutput>gcc</computeroutput></para>
 
-      <example>
-	<title>Assembly Example</title>
+      <example><info><title>Assembly Example</title></info>
+	
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter06/code/assembly.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/assembly.txt" parse="text"/>
             </programlisting>
       </example>
 
@@ -768,11 +755,10 @@
       --symbols</computeroutput> will show us symbols in the object
       file.</para>
 
-      <example>
-	<title>Readelf Example</title>
+      <example><info><title>Readelf Example</title></info>
+	
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter06/code/readelf.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/readelf.txt" parse="text"/>
             </programlisting>
       </example>
 
@@ -818,10 +804,10 @@
 
       </itemizedlist>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Linking</title>
+    <section><info><title>Linking</title></info>
+      
 
       <para>Actually invoking the linker, called
       <computeroutput>ld</computeroutput>, is a very complicated
@@ -835,11 +821,10 @@
       flag.</para>
 
 
-      <example>
-	<title>Linking Example</title>
+      <example><info><title>Linking Example</title></info>
+	
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter06/code/linking.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/linking.txt" parse="text"/>
             </programlisting>
       </example>
 
@@ -898,20 +883,19 @@
       straight forward.  All the object files will be linked together
       into a single executable file, ready to run!</para>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>The Executable</title>
+    <section><info><title>The Executable</title></info>
+      
 
       <para>We will go into more details about the executable in the
       short future, but we can do some inspection in a similar fashion
       to the object files to see what has happened.</para>
 
-      <example>
-	<title>Executable Example</title>
+      <example><info><title>Executable Example</title></info>
+	
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter06/code/executable.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/executable.txt" parse="text"/>
             </programlisting>
       </example>
 
@@ -943,15 +927,8 @@
 
       </itemizedlist>
 
-    </sect2>
+    </section>
 
-  </sect1>
+  </section>
 
 </chapter>
-
-<!--
-Local Variables:
-mode: sgml
-sgml-parent-document: ("../csbu.xml" "book" "chapter")
-End:
--->

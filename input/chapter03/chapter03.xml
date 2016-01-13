@@ -1,15 +1,16 @@
-<chapter id="chapter03">
+<!-- Converted by db4-upgrade version 1.0 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter03"><info><title>The Operating System</title></info>
 
-  <title>The Operating System</title>
+  
 
-  <sect1 id="role_of_operating_system">
-    <title>The role of the operating system</title>
+  <section xml:id="role_of_operating_system"><info><title>The role of the operating system</title></info>
+    
 
     <para>The operating system underpins the entire operation of the
     modern computer.</para>
 
-    <sect2>
-      <title>Abstraction of hardware</title>
+    <section><info><title>Abstraction of hardware</title></info>
+      
 
       <para>The fundamental operation of the operating system (OS) is
       to abstract the hardware to the programmer and user.  The
@@ -22,10 +23,10 @@
       would not run on other hardware, even if that hardware has only
       slight differences.</para>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Multitasking</title>
+    <section><info><title>Multitasking</title></info>
+      
 
       <para>We expect modern computers to do many different things at
       once, and we need some way to arbitrate between all the
@@ -41,10 +42,10 @@
       probably experienced when this <emphasis>fails</emphasis> as it
       usually ends up with your computer crashing (the famous "blue
       screen of death" for example).</para>
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Standardised Interfaces</title>
+    <section><info><title>Standardised Interfaces</title></info>
+      
 
       <para>Programmers want to write programs that will run on as
       many different hardware platforms as possible.  By having
@@ -84,10 +85,10 @@
  a very important standard implemented by UNIX type operating systems.
  Microsoft Windows has similar proprietary standards. </para>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Security</title>
+    <section><info><title>Security</title></info>
+      
 
       <para>On multi-user systems, security is very important.  As the
       arbitrator of access to the system the operating system is
@@ -106,10 +107,10 @@
       fight them you must install <emphasis>patches</emphasis> or
       updates provided by your operating system vendor.</para>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Performance</title>
+    <section><info><title>Performance</title></info>
+      
 
       <para>As the operating system provides so many services to the
       computer, it's performance is critical.  Many parts of the
@@ -130,28 +131,27 @@
       Systems programmers need to understand all these trade offs when
       they are building their operating system.</para>
 
-    </sect2>
+    </section>
 
-  </sect1>
+  </section>
 
-  <sect1 id="organisation_of_os">
-    <title>Operating System Organisation</title>
+  <section xml:id="organisation_of_os"><info><title>Operating System Organisation</title></info>
+    
 
     <para>The operating system is roughly organised as in the figure
     below.</para>
 
-    <figure>
-      <title>The Operating System</title>
+    <figure><info><title>The Operating System</title></info>
+      
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="chapter03/figures/kernel.eps" format="EPS" />
+	  <imagedata fileref="chapter03/figures/kernel.eps" format="EPS"/>
 	</imageobject>
 	<imageobject role="fo">
-	  <imagedata fileref="chapter03/figures/kernel.svg"
-	  format="SVG" scalefit="1" width="100%" contentdept="100%" />
+	  <imagedata fileref="figures/kernel.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	</imageobject>
 	<imageobject role="html">
-	  <imagedata fileref="chapter03/figures/kernel.png" format="PNG" />
+	  <imagedata fileref="chapter03/figures/kernel.png" format="PNG"/>
 	</imageobject>
 	<caption>
 	  <para>The organisation of the kernel.  Processes the
@@ -163,8 +163,8 @@
       </mediaobject>
     </figure>
 
-    <sect2>
-      <title>The Kernel</title>
+    <section><info><title>The Kernel</title></info>
+      
 
       <para>The kernel <emphasis>is</emphasis> the operating system.
       As the figure illustrates, the kernel communicates to hardware
@@ -192,8 +192,8 @@
       of the kernel; at that point they can access any part of the
       system completely unchecked.</para>
 
-      <sect3>
-	<title>Monolithic v Microkernels</title>
+      <section><info><title>Monolithic v Microkernels</title></info>
+	
 
 	<para>One debate that is often comes up surrounding operating
 	systems is whether the kernel should be a
@@ -267,8 +267,8 @@
 	more about operating systems you will be able to make up your
 	own mind!</para>
 
-	<sect4>
-	  <title>Modules</title>
+	<section><info><title>Modules</title></info>
+	  
 
 	  <para>The Linux kernel implements a module system, where
 	  drivers can loaded into the running kernel "on the fly" as
@@ -285,12 +285,12 @@
 	  the rest of the kernel, so the system is still considered a
 	  monolithic kernel.</para>
 
-	</sect4>
+	</section>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Virtualisation</title>
+      <section><info><title>Virtualisation</title></info>
+	
 
 	<para>Closely related to kernel is the concept of
 	virtualisation of hardware.  Modern computers are very
@@ -301,19 +301,17 @@
 	machine, although physically they are all in the same box, in
 	the same place.</para>
 
-	<figure>
-	  <title>The Operating System</title>
+	<figure><info><title>The Operating System</title></info>
+	  
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="chapter03/figures/virtual.eps" format="EPS" />
+	      <imagedata fileref="chapter03/figures/virtual.eps" format="EPS"/>
 	    </imageobject>
 	    <imageobject role="fo">
-	      <imagedata fileref="chapter03/figures/virtual.svg"
-	      format="SVG" scalefit="1" width="100%"
-	      contentdept="100%" />
+	      <imagedata fileref="figures/virtual.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	    </imageobject>
 	    <imageobject role="html">
-	      <imagedata fileref="chapter03/figures/virtual.png" format="PNG" />
+	      <imagedata fileref="chapter03/figures/virtual.png" format="PNG"/>
 	    </imageobject>
 	    <caption>
 	  <para>Some different virtualisation methods.</para>
@@ -392,8 +390,8 @@
 	that something <emphasis>unsafe</emphasis> has
 	happened.</para>
 
-	<sect4>
-	  <title>Covert Channels</title>
+	<section><info><title>Covert Channels</title></info>
+	  
 
 	  <para>This is a digression, but an interesting security flaw
 	  relating to virtualised machines.  If the partitioning of
@@ -434,14 +432,14 @@
 	  of security breaches from such mechanisms.  It just goes to
 	  show that the life of a systems programmer is never simple!</para>
 
-	</sect4>
+	</section>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Userspace</title>
+    <section><info><title>Userspace</title></info>
+      
 
       <para>We call the theoretical place where programs run by the
       user <emphasis>userspace</emphasis>.  Each program runs in
@@ -453,23 +451,23 @@
       limited range of things, and should never be able to crash other
       programs, even if they crash themselves.</para>
 
-    </sect2>
+    </section>
 
-  </sect1>
+  </section>
 
 
-  <sect1 id="system_calls">
-    <title>System Calls</title>
+  <section xml:id="system_calls"><info><title>System Calls</title></info>
+    
 
-    <sect2>
-      <title>Overview</title>
+    <section><info><title>Overview</title></info>
+      
 
       <para>System calls are how userspace programs interact with the
     kernel.  The general principle behind how they work is described
     below.</para>
 
-    <sect3>
-      <title>System call numbers</title>
+    <section><info><title>System call numbers</title></info>
+      
 
 	<para>Each and every system call has a <emphasis>system call
 	number</emphasis> which is known by both the userspace and the
@@ -483,20 +481,20 @@
 	the system call number should be put in so the kernel can find
 	it when it is asked to do the system call.</para>
 
-    </sect3>
+    </section>
 
-    <sect3>
-      <title>Arguments</title>
+    <section><info><title>Arguments</title></info>
+      
 
       <para>System calls are no good without arguments; for example
       <computeroutput>open()</computeroutput> needs to tell the kernel
       exactly <emphasis>what</emphasis> file to open.  Once again the
       ABI will define which registers arguments should be put into for
       the system call.</para>
-    </sect3>
+    </section>
 
-    <sect3>
-      <title>The trap</title>
+    <section><info><title>The trap</title></info>
+      
 
       <para>To actually perform the system call, there needs to be
       some way to communicate to the kernel we wish to make a system
@@ -528,10 +526,10 @@
       <para>Although the details of the process can get quite hairy,
       this is basically all their is to a system call.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>libc</title>
+      <section><info><title>libc</title></info>
+	
 	
 	<para>Although you can do all of the above by hand for each
 	system call, system libraries usually do most of the work for
@@ -539,13 +537,13 @@
 	UNIX like systems is <computeroutput>libc</computeroutput>; we
 	will learn more about it's roles in future weeks.</para>
 	
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
 
-    <sect2>
-      <title>Analysing a system call</title>
+    <section><info><title>Analysing a system call</title></info>
+      
 
       <para>As the system libraries usually deal with making systems
       call for you, we need to do some low level hacking to
@@ -557,11 +555,10 @@
       running program (or process; we'll look more at the process in
       later weeks).</para>
 
-      <example>
-	<title>getpid() example</title>
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter03/code/getpid.c" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+      <example><info><title>getpid() example</title></info>
+	
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/getpid.c" parse="text"/>
             </programlisting>
       </example>
 
@@ -600,18 +597,17 @@
       things can get quite hairy.  But stick with it -- this is
       <emphasis>exactly</emphasis> how your system works!</para>
 
-      <sect3>
-	<title>PowerPC</title>
+      <section><info><title>PowerPC</title></info>
+	
 
 	<para>PowerPC is a RISC architecture common in older Apple
 	computers, and the core of devices such as the latest
 	version of the Xbox.</para>
 
-	<example>
-	  <title>PowerPC system call example</title>
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter03/code/unistd-powerpc.h" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<example><info><title>PowerPC system call example</title></info>
+	  
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/unistd-powerpc.h" parse="text"/>
             </programlisting>
 	</example>
 	
@@ -740,19 +736,18 @@
 
 	<para>And that is an entire system call on a PowerPC!</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>x86 system calls</title>
+      <section><info><title>x86 system calls</title></info>
+	
 
 	<para>Below we have the same interface as implemented for the
 	x86 processor.</para>
 
-	<example>
-	  <title>x86 system call example</title>
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter03/code/unistd-x86.h" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<example><info><title>x86 system call example</title></info>
+	  
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/unistd-x86.h" parse="text"/>
             </programlisting>
 	</example>
 
@@ -827,16 +822,16 @@
 	up to the userspace to realise this and subtract this constant
 	value to get back to the "real" value.</para>
 
-      </sect3>
+      </section>
 
-    </sect2>
-  </sect1>
+    </section>
+  </section>
 
-  <sect1 id="privileges">
-    <title>Privileges</title>
+  <section xml:id="privileges"><info><title>Privileges</title></info>
+    
 
-    <sect2>
-      <title>Hardware</title>
+    <section><info><title>Hardware</title></info>
+      
 
 	<para>We mentioned how one of the major tasks of the operating
       system is to implement security; that is to not allow one
@@ -864,25 +859,23 @@
 	allow or deny access.</para>
   
 
-      <sect3>
-	<title>Privilege Levels</title>
+      <section><info><title>Privilege Levels</title></info>
+	
 
 	<para>Hardware protection can usually be seen as a set of
 	concentric rings around a core set of operations.</para>
 
-	<figure>
-	  <title>Rings</title>
+	<figure><info><title>Rings</title></info>
+	  
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="chapter03/figures/priv.eps" format="EPS" />
+	      <imagedata fileref="chapter03/figures/priv.eps" format="EPS"/>
 	    </imageobject>
 	    <imageobject role="fo">
-	      <imagedata fileref="chapter03/figures/priv.svg"
-	      format="SVG" scalefit="1" width="100%"
-	      contentdept="100%"/>
+	      <imagedata fileref="figures/priv.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	    </imageobject>
 	    <imageobject role="html">
-	      <imagedata fileref="chapter03/figures/priv.png" format="PNG" />
+	      <imagedata fileref="chapter03/figures/priv.png" format="PNG"/>
 	    </imageobject>
 	    <caption>
 	      <para>Privilege levels on x86</para>
@@ -911,8 +904,8 @@
 	but most will either provide for at least a "kernel" and
 	"user" level.</para>
 
-	<sect4 id="x86_protection">
-	  <title>386 protection model</title>
+	<section xml:id="x86_protection"><info><title>386 protection model</title></info>
+	  
 
 	  <para>The 386 protection model has four rings, though most
 	  operating systems (such as Linux and Windows) only use two
@@ -931,10 +924,10 @@
 	  disallowed by the hardware (and the application will crash).
 	  </para>
 
-	</sect4>
+	</section>
 
-	<sect4 id="raising_privilege">
-	  <title>Raising Privilege</title>
+	<section xml:id="raising_privilege"><info><title>Raising Privilege</title></info>
+	  
 
 	  <para>Applications may only raise their privilege level by
 	specific calls that allow it, such as the instruction to
@@ -953,10 +946,10 @@
 	return control back to the application which will again be
 	running with it's lower privilege level.</para>
 
-	</sect4>
+	</section>
 
-	<sect4 id="fast_system_calls">
-	  <title>Fast System Calls</title>
+	<section xml:id="fast_system_calls"><info><title>Fast System Calls</title></info>
+	  
 
 	  <para>One problem with traps as described above is that they
 	  are very expensive for the processor to implement.  There is
@@ -969,23 +962,19 @@
           segmentation scheme used by the processor.  The original
           reason for segmentation was to be able to use more than the
           16 bits available in a register for an address, as
-          illustrated in <xref
-          linkend="x86_segmentation"></xref>.</para>
+          illustrated in <xref linkend="x86_segmentation"/>.</para>
 
-	  <figure id="x86_segmentation">
-	    <title>x86 Segmentation Adressing</title>
+	  <figure xml:id="x86_segmentation"><info><title>x86 Segmentation Adressing</title></info>
+	    
 	    <mediaobject>
 	      <imageobject>
-		<imagedata fileref="chapter03/figures/ia32-segmentation.eps" format="EPS" />
+		<imagedata fileref="chapter03/figures/ia32-segmentation.eps" format="EPS"/>
 	      </imageobject>
 	      <imageobject role="fo">
-		<imagedata
-		fileref="chapter03/figures/ia32-segmentation.svg"
-		format="SVG" scalefit="1" width="100%"
-		contentdept="100%"/>
+		<imagedata fileref="figures/ia32-segmentation.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	      </imageobject>
 	      <imageobject role="html">
-		<imagedata fileref="chapter03/figures/ia32-segmentation.png" format="PNG" />
+		<imagedata fileref="chapter03/figures/ia32-segmentation.png" format="PNG"/>
 	      </imageobject>
 	      <caption>
 		<para>Segmentation expanding the address space of a
@@ -1012,23 +1001,19 @@
 	    (there are also <emphasis>local</emphasis> descriptor
 	    tables, and it all interacts with task state segments, but
 	    that's not important now).  The overall situation is
-	    illustrated in <xref
-	    linkend="x86_segments"></xref>.</para>
+	    illustrated in <xref linkend="x86_segments"/>.</para>
 
-	  <figure id="x86_segments">
-	    <title>x86 segments</title>
+	  <figure xml:id="x86_segments"><info><title>x86 segments</title></info>
+	    
 	    <mediaobject>
 	      <imageobject>
-		<imagedata fileref="chapter03/figures/ia32-segments.eps" format="EPS" />
+		<imagedata fileref="chapter03/figures/ia32-segments.eps" format="EPS"/>
 	      </imageobject>
 	      <imageobject role="fo">
-		<imagedata
-		fileref="chapter03/figures/ia32-segments.svg"
-		format="SVG" scalefit="1" width="100%"
-		contentdept="100%"/>
+		<imagedata fileref="figures/ia32-segments.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	      </imageobject>
 	      <imageobject role="html">
-		<imagedata fileref="chapter03/figures/ia32-segments.png" format="PNG" />
+		<imagedata fileref="chapter03/figures/ia32-segments.png" format="PNG"/>
 	      </imageobject>
 	      <caption>
 		<para>x86 segments in action.  Notice how a "far-call"
@@ -1057,13 +1042,12 @@
 	  <para>The picture becomes more interesting when running code
 	    needs to make calls into code that resides in
 	    <emphasis>another</emphasis> segment.  As discussed in
-	    <xref linkend="x86_protection"></xref>, x86 does this with
+	    <xref linkend="x86_protection"/>, x86 does this with
 	    <emphasis>rings</emphasis>, where ring 0 is the highest
 	    permission, ring 3 is the lowest, and inner rings can
 	    access outer rings but not vice-versa.</para>
 
-	  <para>As discussed in <xref
-	    linkend="raising_privilege"></xref>, when ring 3 code
+	  <para>As discussed in <xref linkend="raising_privilege"/>, when ring 3 code
 	    wants to jump into ring 0 code, it is essentially
 	    modifying its code segment selector to point to a
 	    different segment.  To do this, it must use a special
@@ -1097,7 +1081,7 @@
 
 	  <para>On a modern x86 system segmentation and the four-level
 	    ring system is not used thanks to virtual memory,
-	    discussed fully in <xref linkend="chapter05"></xref>.  The
+	    discussed fully in <xref linkend="chapter05"/>.  The
 	    only thing that really happens with segmentation switching
 	    is system calls, which essentially switch from mode 3
 	    (userspace) to mode 0 and jump to the system call handler
@@ -1126,36 +1110,28 @@
 	    processors.</para>
 
 	  <para>For more information on how this is implemented in the
-	    Linux kernel, see <xref
-	    linkend="kernel_library"></xref>.</para>
+	    Linux kernel, see <xref linkend="kernel_library"/>.</para>
 
-	</sect4>
+	</section>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Other ways of communicating with the kernel</title>
+    <section><info><title>Other ways of communicating with the kernel</title></info>
+      
 
 
-      <sect3>
-	<title>ioctl</title>
+      <section><info><title>ioctl</title></info>
+	
 	<para>about ioctls</para>
-      </sect3>
-    </sect2>
+      </section>
+    </section>
 
-    <sect2>
-      <title>File Systems</title>
+    <section><info><title>File Systems</title></info>
+      
       <para>about proc, sysfs, debugfs, etc</para>
-    </sect2>
-  </sect1>
+    </section>
+  </section>
 
 </chapter>
-
-<!--
-Local Variables:
-mode: sgml
-sgml-parent-document: ("../csbu.sgml" "book" "chapter")
-End:
--->

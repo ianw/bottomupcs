@@ -1,9 +1,10 @@
-<chapter id="chapter00">
+<!-- Converted by db4-upgrade version 1.0 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter00"><info><title>General Unix and Advanced C</title></info>
 
-  <title>General Unix and Advanced C</title>
+  
 
-  <sect1 id="everything_is_a_file">
-    <title><emphasis>Everything is a file!</emphasis></title>
+  <section xml:id="everything_is_a_file"><info><title><emphasis>Everything is a file!</emphasis></title></info>
+    
 
     <para>An often quoted tenet of UNIX-like systems such as Linux or
     BSD is <emphasis>everything is a file</emphasis>.</para>
@@ -62,18 +63,17 @@
       gain some insight into the abstractions presented by a modern
       operating-system.</para>
 
-    <figure>
-      <title>Abstraction</title>
+    <figure><info><title>Abstraction</title></info>
+      
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="chapter00/figures/abstraction.eps" format="EPS" />
+	  <imagedata fileref="chapter00/figures/abstraction.eps" format="EPS"/>
 	</imageobject>
 	<imageobject role="fo">
-	  <imagedata fileref="chapter00/figures/abstraction.svg"
-	  format="SVG" scalefit="1" width="100%" contentdept="100%" />
+	  <imagedata fileref="figures/abstraction.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	</imageobject>
 	<imageobject role="html">
-	  <imagedata fileref="chapter00/figures/abstraction.png" format="PNG" />
+	  <imagedata fileref="chapter00/figures/abstraction.png" format="PNG"/>
 	</imageobject>
 	<textobject>
 	  <phrase>Can you spot the difference between a CDROM and a keyboard?  As an application programmer, you should not be able to.</phrase>
@@ -82,10 +82,10 @@
     </figure>
 
 
-  </sect1>
+  </section>
 
-  <sect1 id="abstration">
-    <title>Implementing abstraction</title>
+  <section xml:id="abstration"><info><title>Implementing abstraction</title></info>
+    
 
       <para>In general, abstraction is implemented by what is
     generically termed an <emphasis>Application Programming
@@ -107,8 +107,8 @@
       provide the interface to the class, but abstract the
       implementation.</para>
 
-    <sect2>
-      <title>Implementing abstraction with C</title>
+    <section><info><title>Implementing abstraction with C</title></info>
+      
 
       <para>A common method used in the Linux Kernel and other large C
       code bases, which lacks a built-in concept of
@@ -118,9 +118,11 @@
       provided within the code an understanding of internal API
       designs can be built.</para>
 
-      <example id="abstraction-code">
-	<title>Abstraction with function pointers</title>
-	<programlisting language="c"><xi:include href="chapter00/code/abstraction.c" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude"/></programlisting>
+      <example xml:id="abstraction-code"><info><title>Abstraction with function pointers</title></info>
+	
+        <programlisting language="c">
+          <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/abstraction.c" parse="text"/>
+        </programlisting>
       </example>
 
       <para>Code such as the above is the simplest example of
@@ -176,12 +178,12 @@
         <computeroutput>include/linux/virtio.h</computeroutput> in the
         Linux kernel source to illustrate:</para>
 
-      <example id="virtio-abstraction">
-	<title>Abstraction in
-	<computeroutput>include/linux/virtio.h</computeroutput></title>
-	<programlisting language="c"><xi:include
-	href="chapter00/code/virtio.h" parse="text"
-	xmlns:xi="http://www.w3.org/2001/XInclude"/></programlisting>
+      <example xml:id="virtio-abstraction"><info><title>Abstraction in
+	<computeroutput>include/linux/virtio.h</computeroutput></title></info>
+	
+	<programlisting language="c">
+          <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/virtio.h" parse="text"/>
+        </programlisting>
       </example>
 
       <para> It's only necessary to vaguely understand that this
@@ -196,10 +198,10 @@
       <para>Starting with descriptors like this is usually the easiest
       way into understanding the various layers of kernel code.</para>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Libraries</title>
+    <section><info><title>Libraries</title></info>
+      
 
       <para>Libraries have two roles which illustrate
 	abstraction.</para>
@@ -245,19 +247,19 @@
       Later chapters will describe how libraries work in much greater
       detail.</para>
 
-    </sect2>
+    </section>
 
-  </sect1>
+  </section>
 
-  <sect1 id="file_descriptors">
-    <title>File Descriptors</title>
+  <section xml:id="file_descriptors"><info><title>File Descriptors</title></info>
+    
 
     <para>One of the first things a UNIX programmer learns is that
     every running program starts with three files already
     opened:</para>
 
-    <table>
-      <title>Standard Files Provided by Unix</title>
+    <table><info><title>Standard Files Provided by Unix</title></info>
+      
       <tgroup cols="3">
 	<thead>
 	  <row>
@@ -286,19 +288,17 @@
       </tgroup>
     </table>
 
-    <figure>
-      <title>Default Unix Files</title>
+    <figure><info><title>Default Unix Files</title></info>
+      
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="chapter00/figures/stdfds.eps" format="EPS"></imagedata>
+	  <imagedata fileref="chapter00/figures/stdfds.eps" format="EPS"/>
 	</imageobject>
 	<imageobject role="fo">
-	  <imagedata fileref="chapter00/figures/stdfds.svg"
-	  format="SVG" scalefit="1" width="100%"
-	  contentdept="100%"></imagedata>
+	  <imagedata fileref="figures/stdfds.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	</imageobject>
 	<imageobject role="html">
-	  <imagedata fileref="chapter00/figures/stdfds.png" format="PNG"></imagedata>
+	  <imagedata fileref="chapter00/figures/stdfds.png" format="PNG"/>
 	</imageobject>
 	<textobject>
 	  <phrase>The standard files opened with any UNIX program.</phrase>
@@ -312,25 +312,25 @@
         <emphasis>file descriptor</emphasis> and is essentially an
         index into an array of open files kept by the kernel.</para>
 
-    <figure id="fd_abstraction">
-      <title>Abstraction</title>
+    <figure xml:id="fd_abstraction"><info><title>Abstraction</title></info>
+      
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="chapter00/figures/file-descriptors.eps" format="EPS" />
+	  <imagedata fileref="chapter00/figures/file-descriptors.eps" format="EPS"/>
 	</imageobject>
 	<imageobject role="fo">
-	  <imagedata fileref="chapter00/figures/file-descriptors.svg"
-	  format="SVG" scalefit="1" width="100%" contentdept="100%" />
+	  <imagedata fileref="figures/file-descriptors.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	</imageobject>
 	<imageobject role="html">
-	  <imagedata fileref="chapter00/figures/file-descriptors.png" format="PNG" />
+	  <imagedata fileref="chapter00/figures/file-descriptors.png" format="PNG"/>
 	</imageobject>
 	<textobject>
 	  <phrase>File descriptors associate the abstraction provided
 	  by device-drivers with a file interface provided to a user.</phrase>
 	</textobject>
-        <caption><para>File descriptors are an index into a
-        file-descriptor table stored by the kernel.  The kernel
+      </mediaobject>
+      <caption><para>File descriptors are an index into a
+      file-descriptor table stored by the kernel.  The kernel
         creates a file-descriptor in response to an
         <computeroutput>open</computeroutput> call and associates the
         file-descriptor with some abstraction of an underlying
@@ -339,21 +339,18 @@
         processes <computeroutput>read</computeroutput> or
         <computeroutput>write</computeroutput> calls that reference
         that file-descriptor are routed to the correct place by the
-        kernel to ultimately do something useful.</para></caption>
-      </mediaobject>
+      kernel to ultimately do something useful.</para></caption>
     </figure>
 
 
     <para>In short, the file-descriptor is the gateway into the
     kernel's abstractions of underlying hardware.  An overall view of
-    the abstraction for physical-devices is shown in <xref
-    linkend="fd_abstraction" />.</para>
+    the abstraction for physical-devices is shown in <xref linkend="fd_abstraction"/>.</para>
 
     <para>Starting at the lowest level, the operating system requires
     a programmer to create a <emphasis>device-driver</emphasis> to be
     able to communicate with a hardware device.  This device-driver is
-    written to an API provided by the kernel just like in <xref
-    linkend="virtio-abstraction" />; the device-driver will provide a
+    written to an API provided by the kernel just like in <xref linkend="virtio-abstraction"/>; the device-driver will provide a
     range of functions which are called by the kernel in response to
     various requirements.  In the simplified example above, we can see
     the drivers provide a <computeroutput>read</computeroutput> and
@@ -372,14 +369,13 @@
       <emphasis>major</emphasis> and a <emphasis>minor</emphasis>
       number which allows the kernel to associate particular nodes
       with their underlying driver.  These can be identified via
-      <computeroutput>ls</computeroutput> as illustrated in <xref
-      linkend="major-minor-numbers" />.</para>
+      <computeroutput>ls</computeroutput> as illustrated in <xref linkend="major-minor-numbers"/>.</para>
 
-      <example id="major-minor-numbers">
-	<title>Example of major and minor numbers</title>
-	<programlisting language="c"><xi:include
-	href="chapter00/code/major-minor.txt" parse="text"
-	xmlns:xi="http://www.w3.org/2001/XInclude"/></programlisting>
+      <example xml:id="major-minor-numbers"><info><title>Example of major and minor numbers</title></info>
+      
+      <programlisting language="c">
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/major-minor.txt" parse="text"/>
+      </programlisting>
       </example>
 
     <para>This brings us to the file-descriptor, which is the handle
@@ -423,8 +419,8 @@
     these many layers.  Understanding the kernel is to understand how
     these many APIs interrelate and coexist.</para>
 
-    <sect2>
-      <title>The Shell</title>
+    <section><info><title>The Shell</title></info>
+      
 
       <para>The shell is the gateway to interacting with the operating
         system.  Be it <computeroutput>bash</computeroutput>,
@@ -441,12 +437,11 @@
       complete programs.  These all come back to the
       <emphasis>everything is a file</emphasis> idiom.</para>
 
-      <sect3>
-      <title>Redirection</title>
+      <section><info><title>Redirection</title></info>
+      
 
         <para>Often we do not want the
-        standard file descriptors mentioned in <xref
-        linkend="file_descriptors" /> to point to their default places.
+        standard file descriptors mentioned in <xref linkend="file_descriptors"/> to point to their default places.
         For example, you may wish to capture all the output of a
         program into a file on disk, or, alternatively have it read
         its commands from a file you prepared earlier.  Another useful
@@ -454,8 +449,8 @@
         of another.  With the operating system, the shell facilitates
         all this and more.</para>
 
-    <table>
-      <title>Standard Shell Redirection Facilities</title>
+    <table><info><title>Standard Shell Redirection Facilities</title></info>
+      
       <tgroup cols="4">
 	<thead>
 	  <row>
@@ -493,11 +488,11 @@
 	</tbody>
       </tgroup>
     </table>
-      </sect3>
+      </section>
 
-      <sect3>
-        <title>Implementing
-        <computeroutput>pipe</computeroutput></title>
+      <section><info><title>Implementing
+        <computeroutput>pipe</computeroutput></title></info>
+        
 
         <para>The implementation of <computeroutput>ls |
         more</computeroutput> is just another example of the power of
@@ -510,34 +505,32 @@
         another process can associate its standard
         <emphasis>input</emphasis> with the other-side of this same
         buffer and effectively consume the output of the other
-        process.  This is illustrated in <xref
-        linkend="process_pipe"/></para>
+        process.  This is illustrated in <xref linkend="process_pipe"/></para>
 
-    <figure id="process_pipe">
-      <title>A pipe in action</title>
+    <figure xml:id="process_pipe"><info><title>A pipe in action</title></info>
+      
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="chapter00/figures/pipe.eps" format="EPS" />
+	  <imagedata fileref="chapter00/figures/pipe.eps" format="EPS"/>
 	</imageobject>
 	<imageobject role="fo">
-	  <imagedata fileref="chapter00/figures/pipe.svg"
-	  format="SVG" scalefit="1" width="100%" contentdept="100%" />
+	  <imagedata fileref="figures/pipe.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	</imageobject>
 	<imageobject role="html">
-	  <imagedata fileref="chapter00/figures/pipe.png" format="PNG" />
+	  <imagedata fileref="chapter00/figures/pipe.png" format="PNG"/>
 	</imageobject>
 	<textobject>
 	  <phrase>The pipe is an in-memory buffer provided by the
 	  kernel which allows the output of one process to be consumed
 	  as the input to another.</phrase>
 	</textobject>
-            <caption><para>The pipe is an in-memory buffer that
-            connects two processes together.  File-descriptors point
-            to the pipe object, which buffers data sent to it (via a
-            <computeroutput>write</computeroutput>) to be
-            <emphasis>drained</emphasis> (via a
-            <computeroutput>read</computeroutput>)</para></caption>
       </mediaobject>
+      <caption><para>The pipe is an in-memory buffer that
+      connects two processes together.  File-descriptors point
+      to the pipe object, which buffers data sent to it (via a
+      <computeroutput>write</computeroutput>) to be
+      <emphasis>drained</emphasis> (via a
+      <computeroutput>read</computeroutput>)</para></caption>
     </figure>
 
         <para>Writes to the pipe are stored by the kernel until a
@@ -550,8 +543,7 @@
           process <computeroutput>read</computeroutput>s an empty
           pipe, it will by default <emphasis>block</emphasis> or be
           put into hibernation until there is some data available
-          (this is discussed in much greater depth in <xref
-          linkend="chapter04"/>.  Thus two processes may use a pipe to
+          (this is discussed in much greater depth in <xref linkend="chapter04"/>.  Thus two processes may use a pipe to
           communicate that some action has been taken just by writing
           a byte of data; rather than the actual data being important,
           the mere presence of <emphasis>any</emphasis> data in the
@@ -571,15 +563,8 @@
           Chaining these small tools gives a flexibility that a single
           monolithic tool often can not.</para>
 
-      </sect3>
-    </sect2>
-  </sect1>
+      </section>
+    </section>
+  </section>
 
 </chapter>
-
-<!--
-Local Variables:
-mode: sgml
-sgml-parent-document: ("../csbu.xml" "book" "chapter")
-End:
--->

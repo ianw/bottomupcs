@@ -1,0 +1,254 @@
+#! /bin/sh
+#
+#   Licensed to the Apache Software Foundation (ASF) under one or more
+#   contributor license agreements.  See the NOTICE file distributed with
+#   this work for additional information regarding copyright ownership.
+#   The ASF licenses this file to You under the Apache License, Version 2.0
+#   (the "License"); you may not use this file except in compliance with
+#   the License.  You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+# Shell script to run FOP, adapted from the Jakarta-Ant project.
+
+rpm_mode=true
+fop_exec_args=
+no_config=false
+fop_exec_debug=false
+show_help=false
+for arg in "$@" ; do
+  if [ "$arg" = "--noconfig" ] ; then
+    no_config=true
+  elif [ "$arg" = "--execdebug" ] ; then
+    fop_exec_debug=true
+  elif [ my"$arg" = my"--h"  -o my"$arg" = my"--help"  ] ; then
+    show_help=true
+    fop_exec_args="$fop_exec_args -h"
+  else
+    if [  my"$arg" = my"-h"  -o  my"$arg" = my"-help" ] ; then
+      show_help=true
+    fi
+    fop_exec_args="$fop_exec_args \"$arg\""
+  fi
+done
+
+# Source/default fop configuration
+if $no_config ; then
+  rpm_mode=false
+else
+  # load system-wide fop configuration
+  if [ -f "/etc/fop.conf" ] ; then
+    . /etc/fop.conf
+  fi
+
+  # load user fop configuration
+  if [ -f "$HOME/.fop/fop.conf" ] ; then
+    . $HOME/.fop/fop.conf
+  fi
+  if [ -f "$HOME/.foprc" ] ; then
+    . "$HOME/.foprc"
+  fi
+
+  # provide default configuration values
+  if [ -z "$rpm_mode" ] ; then
+    rpm_mode=false
+  fi
+  if [ -z "$usejikes" ] ; then
+    usejikes=$use_jikes_default
+  fi
+fi
+
+# Setup Java environment in rpm mode
+if $rpm_mode ; then
+  if [ -f /usr/share/java-utils/java-functions ] ; then
+    . /usr/share/java-utils/java-functions
+    set_jvm
+    set_javacmd
+  fi
+fi
+
+# OS specific support.  $var _must_ be set to either true or false.
+cygwin=false;
+darwin=false;
+case "`uname`" in
+  CYGWIN*) cygwin=true ;;
+  Darwin*) darwin=true
+           if [ -z "$JAVA_HOME" ] ; then
+             JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
+           fi
+           ;;
+esac
+
+if [ -z "$FOP_HOME" -o ! -d "$FOP_HOME" ] ; then
+  ## resolve links - $0 may be a link to fop's home
+  PRG="$0"
+  progname=`basename "$0"`
+
+  # need this for relative symlinks
+  while [ -h "$PRG" ] ; do
+    ls=`ls -ld "$PRG"`
+    link=`expr "$ls" : '.*-> \(.*\)$'`
+    if expr "$link" : '/.*' > /dev/null; then
+      PRG="$link"
+    else
+      PRG=`dirname "$PRG"`"/$link"
+    fi
+  done
+
+  FOP_HOME=`dirname "$PRG"`
+
+  # make it fully qualified
+  FOP_HOME=`cd "$FOP_HOME" && pwd`
+fi
+
+# For Cygwin, ensure paths are in UNIX format before anything is touched
+if $cygwin ; then
+  [ -n "$FOP_HOME" ] &&
+    FOP_HOME=`cygpath --unix "$FOP_HOME"`
+  [ -n "$JAVA_HOME" ] &&
+    JAVA_HOME=`cygpath --unix "$JAVA_HOME"`
+fi
+
+if [ "$OS" = "Windows_NT" ] ; then
+    pathSepChar=";"
+else
+    pathSepChar=":"
+fi
+
+if [ -z "$JAVACMD" ] ; then
+  if [ -n "$JAVA_HOME"  ] ; then
+    if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
+      # IBM's JDK on AIX uses strange locations for the executables
+      JAVACMD="$JAVA_HOME/jre/sh/java"
+    else
+      JAVACMD="$JAVA_HOME/bin/java"
+    fi
+  else
+    JAVACMD=`which java 2> /dev/null `
+    if [ -z "$JAVACMD" ] ; then
+        JAVACMD=java
+    fi
+  fi
+fi
+
+if [ ! -x "$JAVACMD" ] ; then
+  echo "Error: JAVA_HOME is not defined correctly."
+  echo "  We cannot execute $JAVACMD"
+  exit 1
+fi
+
+if [ -n "$CLASSPATH" ] ; then
+  LOCALCLASSPATH=$CLASSPATH
+fi
+
+# add fop.jar, fop-sandbox and fop-hyph.jar, which reside in $FOP_HOME/build
+LOCALCLASSPATH=${FOP_HOME}/build/fop.jar${pathSepChar}${FOP_HOME}/build/fop-sandbox.jar${pathSepChar}${FOP_HOME}/build/fop-hyph.jar${pathSepChar}$LOCALCLASSPATH
+
+# add in the dependency .jar files, which reside in $FOP_HOME/lib
+OLD_IFS=$IFS
+IFS="
+"
+DIRLIBS=${FOP_HOME}/lib/*.jar
+for i in ${DIRLIBS}
+do
+    # if the directory is empty, then it will return the input string
+    # this is stupid, so case for it
+    if [ "$i" != "${DIRLIBS}" ] ; then
+      if [ -z "$LOCALCLASSPATH" ] ; then
+        LOCALCLASSPATH=$i
+      else
+        LOCALCLASSPATH="$i"${pathSepChar}$LOCALCLASSPATH
+      fi
+    fi
+done
+IFS=$OLD_IFS
+
+# add in user-defined hyphenation JARs
+if [ -n "$FOP_HYPHENATION_PATH" ] ; then
+  LOCALCLASSPATH=$LOCALCLASSPATH${pathSepChar}$FOP_HYPHENATION_PATH
+fi
+
+# For Cygwin, switch paths to appropriate format before running java
+# For PATHs convert to unix format first, then to windows format to ensure
+# both formats are supported. Probably this will fail on directories with ;
+# in the name in the path. Let's assume that paths containing ; are more
+# rare than windows style paths on cygwin.
+if $cygwin; then
+  if [ "$OS" = "Windows_NT" ] && cygpath -m .>/dev/null 2>/dev/null ; then
+    format=mixed
+  else
+    format=windows
+  fi
+  FOP_HOME=`cygpath --$format "$FOP_HOME"`
+  LCP_TEMP=`cygpath --path --unix "$LOCALCLASSPATH"`
+  LOCALCLASSPATH=`cygpath --path --$format "$LCP_TEMP"`
+  if [ -n "$CLASSPATH" ] ; then
+    CP_TEMP=`cygpath --path --unix "$CLASSPATH"`
+    CLASSPATH=`cygpath --path --$format "$CP_TEMP"`
+  fi
+  CYGHOME=`cygpath --$format "$HOME"`
+fi
+
+# Show script help if requested
+if $show_help ; then
+  fop_exec_args=""
+  echo $0 '[script options] [FOP options]'
+  echo 'Script Options:'
+  echo '  --help, -h             print this message and FOP help'
+  echo '  --noconfig             suppress sourcing of /etc/fop.conf,'
+  echo '                         $HOME/.fop/fop.conf, and $HOME/.foprc'
+  echo '                         configuration files'
+  echo '  --execdebug            print FOP exec line generated by this'
+  echo '                         launch script'
+fi
+
+# add a second backslash to variables terminated by a backslash under cygwin
+if $cygwin; then
+  case "$FOP_HOME" in
+    *\\ )
+    FOP_HOME="$FOP_HOME\\"
+    ;;
+  esac
+  case "$CYGHOME" in
+    *\\ )
+    CYGHOME="$CYGHOME\\"
+    ;;
+  esac
+  case "$LOCALCLASSPATH" in
+    *\\ )
+    LOCALCLASSPATH="$LOCALCLASSPATH\\"
+    ;;
+  esac
+  case "$CLASSPATH" in
+    *\\ )
+    CLASSPATH="$CLASSPATH\\"
+    ;;
+  esac
+fi
+
+# The default commons logger for JDK1.4 is JDK1.4Logger.
+# To use a different logger, uncomment the one desired below
+# LOGCHOICE=-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.NoOpLog
+# LOGCHOICE=-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog
+# LOGCHOICE=-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger
+
+# Logging levels
+# Below option is only if you are using SimpleLog instead of the default JDK1.4 Logger.
+# To set logging levels for JDK 1.4 Logger, edit the %JAVA_HOME%/JRE/LIB/logging.properties 
+# file instead.
+# Possible SimpleLog values:  "trace", "debug", "info" (default), "warn", "error", or "fatal".
+# LOGLEVEL=-Dorg.apache.commons.logging.simplelog.defaultlog=INFO
+
+# Execute FOP using eval/exec to preserve spaces in paths,
+# java options, and FOP args
+fop_exec_command="exec \"$JAVACMD\" $LOGCHOICE $LOGLEVEL -classpath \"$LOCALCLASSPATH\" $FOP_OPTS org.apache.fop.cli.Main $fop_exec_args"
+if $fop_exec_debug ; then
+    echo $fop_exec_command
+fi
+eval $fop_exec_command

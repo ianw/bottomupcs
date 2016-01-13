@@ -1,9 +1,10 @@
-<chapter id="chapter04">
+<!-- Converted by db4-upgrade version 1.0 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter04"><info><title>The Process</title></info>
 
-  <title>The Process</title>
+  
 
-  <sect1 id="process">
-    <title>What is a process?</title>
+  <section xml:id="process"><info><title>What is a process?</title></info>
+    
 
     <para>We are all familiar with the modern operating system running
     many tasks all at once or <emphasis>multitasking</emphasis>.  
@@ -12,23 +13,22 @@
     <para>We can think of each process as a bundle of elements kept by
     the kernel to keep track of all these running tasks.</para>
 
-  </sect1>
+  </section>
 
-  <sect1 id="elements_of_a_process">
-    <title>Elements of a process</title>
+  <section xml:id="elements_of_a_process"><info><title>Elements of a process</title></info>
+    
 
-    <figure>
-      <title>The Elements of a Process</title>
+    <figure><info><title>The Elements of a Process</title></info>
+      
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="chapter04/figures/theprocess.eps" format="EPS" />
+	  <imagedata fileref="chapter04/figures/theprocess.eps" format="EPS"/>
 	</imageobject>
 	<imageobject role="fo">
-	  <imagedata fileref="chapter04/figures/theprocess.svg"
-	  format="SVG" scalefit="1" width="100%" contentdept="100%"/>
+	  <imagedata fileref="figures/theprocess.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	</imageobject>
 	<imageobject role="html">
-	  <imagedata fileref="chapter04/figures/theprocess.png" format="PNG" />
+	  <imagedata fileref="chapter04/figures/theprocess.png" format="PNG"/>
 	</imageobject>
 	<textobject>
 	  <phrase>The essential elements of a process; the process ID,
@@ -37,17 +37,17 @@
       </mediaobject>
     </figure>
 
-    <sect2>
-      <title>Process ID</title>
+    <section><info><title>Process ID</title></info>
+      
 
       <para>The <emphasis>process ID</emphasis> (or the PID) is
       assigned by the operating system and is unique to each running
       process.</para>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Memory</title> <para>We will learn exactly how a process
+    <section><info><title>Memory</title></info>
+       <para>We will learn exactly how a process
       gets it's memory in the following weeks -- it is one of the most
       fundamental parts of how the operating system works.  However,
       for now it is sufficient to know that each process gets it's own
@@ -75,8 +75,8 @@
       if a process tries to write to a read only area and return an
       error.</para>
 
-      <sect3>
-	<title>Code and Data</title>
+      <section><info><title>Code and Data</title></info>
+	
 
 	<para>A process can be further divided into
 	<emphasis>code</emphasis> and
@@ -91,10 +91,10 @@
 	support this, however.  This has lead to a wide range of
 	security problems on many architectures.</para></footnote>.
 	</para>
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>The Stack</title>
+      <section><info><title>The Stack</title></info>
+	
 
 	<para>One other very important part of a process is an area of
 	memory called <emphasis>the stack</emphasis>.  This can be
@@ -123,19 +123,17 @@
 	starts at a high address in memory and progressively gets
 	lower.</para>
 
-	<figure>
-	  <title>The Stack</title>
+	<figure><info><title>The Stack</title></info>
+	  
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="chapter04/figures/stack.eps" format="EPS" />
+	      <imagedata fileref="chapter04/figures/stack.eps" format="EPS"/>
 	    </imageobject>
 	    <imageobject role="fo">
-	      <imagedata fileref="chapter04/figures/stack.svg"
-	      format="SVG" scalefit="1" width="100%"
-	      contentdept="100%" />
+	      <imagedata fileref="figures/stack.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	    </imageobject>
 	    <imageobject role="html">
-	      <imagedata fileref="chapter04/figures/stack.png" format="PNG" />
+	      <imagedata fileref="chapter04/figures/stack.png" format="PNG"/>
 	    </imageobject>
 	    <textobject>
 	      <phrase>How the stack works with function calls.  Note
@@ -254,11 +252,10 @@
 	writing in assembler) uses this register to keep track of the
 	current top of the stack.</para>
 
-	<example id="stack-pointer">
-	  <title>Stack pointer example</title>
+	<example xml:id="stack-pointer"><info><title>Stack pointer example</title></info>
+	  
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter04/code/sp.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/sp.txt" parse="text"/>
             </programlisting>
 	</example>    
 	
@@ -287,10 +284,10 @@
 	parent function we "pop" the values off the stack by moving
 	the stack pointer back to where it was before we started.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>The Heap</title>
+      <section><info><title>The Heap</title></info>
+	
 
 	<para>The heap is an area of memory that is managed by the
 	process for on the fly memory allocation.  This is for
@@ -321,24 +318,22 @@
 	program to have a reason to call
 	<computeroutput>brk</computeroutput> directly.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Memory Layout</title>
+      <section><info><title>Memory Layout</title></info>
+	
 
-	<figure>
-	  <title>Process memory layout</title>
+	<figure><info><title>Process memory layout</title></info>
+	  
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="chapter04/figures/memory-layout.eps" format="EPS" />
+	      <imagedata fileref="chapter04/figures/memory-layout.eps" format="EPS"/>
 	    </imageobject>
 	    <imageobject role="fo">
-	      <imagedata fileref="chapter04/figures/memory-layout.svg"
-	      format="SVG" scalefit="1" width="100%"
-	      contentdept="100%" />
+	      <imagedata fileref="figures/memory-layout.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	    </imageobject>
 	    <imageobject role="html">
-	      <imagedata fileref="chapter04/figures/memory-layout.png" format="PNG" />
+	      <imagedata fileref="chapter04/figures/memory-layout.png" format="PNG"/>
 	    </imageobject>
 	    <textobject>
 	      <phrase>A sample of how process memory is allocated.</phrase>
@@ -364,12 +359,12 @@
 	executable file on disk.  We take a closer look at the
 	process of loading this data in later chapters.</para>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>File Descriptors</title> 
+    <section><info><title>File Descriptors</title></info>
+       
       <para>In the first week we learnt about
       <computeroutput>stdin</computeroutput>,
       <computeroutput>stdout</computeroutput> and
@@ -385,10 +380,10 @@
       file is opened, the operating system keeps a record of the
       processes permissions to that file in the file descriptor and
       doesn't allow the process to do anything it shouldn't.</para>
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Registers</title>
+    <section><info><title>Registers</title></info>
+      
 
       <para>We know from the previous chapter that the processor
       essentially performs generally simple operations on values in
@@ -407,16 +402,16 @@
       back from memory to the CPU registers and the process will be
       right back where it left off.
       </para>
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Kernel State</title>
+    <section><info><title>Kernel State</title></info>
+      
 
       <para>Internally, the kernel needs to keep track of a number of
       elements for each process.</para>
 
-      <sect3>
-	<title>Process State</title>
+      <section><info><title>Process State</title></info>
+	
 
 	<para>Another important element for the operating system to keep
       track of is the process state.  If the process is currently
@@ -432,28 +427,28 @@
       as <emphasis>disk wait</emphasis> (or similar) until the data is
       ready.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Priority</title> 
+      <section><info><title>Priority</title></info>
+	 
 	<para>Some processes are more important than others, and get a higher
 	priority.  See the discussion on the scheduler below.</para>
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Statistics</title>
+      <section><info><title>Statistics</title></info>
+	
 	<para>The kernel can keep statistics on each processes
 	behaviour which can help it make decisions about how the
 	process behaves; for example does it mostly read from disk or
 	does it mostly do CPU intensive operations?</para>
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-  </sect1>
+  </section>
 
-  <sect1 id="process_hierarchy">
-    <title>Process Hierarchy</title>
+  <section xml:id="process_hierarchy"><info><title>Process Hierarchy</title></info>
+    
  
     <para>Whilst the operating system can run many processes at the
     same time, in fact it only ever directly starts one process called
@@ -475,26 +470,25 @@
     <para>Certainly children can create more children and so on and so
     forth.</para>
 
-    <example id="pstree">
-      <title><command>pstree</command> example</title>
-	  <programlisting linenumbering="numbered" >
-              <xi:include href="chapter04/code/pstree.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+    <example xml:id="pstree"><info><title><command>pstree</command> example</title></info>
+      
+	  <programlisting linenumbering="numbered">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/pstree.txt" parse="text"/>
             </programlisting>
     </example>    
 
-  </sect1>
+  </section>
 
 
-  <sect1 id="fork_and_exec">
-    <title>Fork and Exec</title>
+  <section xml:id="fork_and_exec"><info><title>Fork and Exec</title></info>
+    
 
     <para>New processes are created by the two related interfaces
     <computeroutput>fork</computeroutput> and
     <computeroutput>exec</computeroutput>.</para>
 
-    <sect2>
-      <title>Fork</title>
+    <section><info><title>Fork</title></info>
+      
 
       <para>When you come to metaphorical "fork in the road" you
       generally have two options to take, and your decision effects
@@ -518,10 +512,10 @@
       <computeroutput>forked</computeroutput> and we have the
       parent-child relationship as described above.</para>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Exec</title>
+    <section><info><title>Exec</title></info>
+      
 
       <para>Forking provides a way for an existing process to start a
       new one, but what about the case where the new process is not
@@ -542,12 +536,12 @@
       <computeroutput>exec</computeroutput> (i.e. load into memory and
       execute) the program binary it is supposed to run.</para>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>How Linux actually handles fork and exec</title>
-      <sect3 id="linux_clone">
-	<title><computeroutput>clone</computeroutput></title>
+    <section><info><title>How Linux actually handles fork and exec</title></info>
+      
+      <section xml:id="linux_clone"><info><title><computeroutput>clone</computeroutput></title></info>
+	
 
 	<para>In the kernel, fork is actually implemented by a
 	<computeroutput>clone</computeroutput> system call.  This
@@ -562,27 +556,25 @@
 	allows us to easily implement <emphasis>threads</emphasis>
 	with one very simple interface.</para>
 
-	<sect4 id="threads">
-	  <title>Threads</title> <para>While
+	<section xml:id="threads"><info><title>Threads</title></info>
+	   <para>While
 	  <computeroutput>fork</computeroutput> copies all of the
 	  attributes we mentioned above, imagine if everything was
 	  copied for the new process <emphasis>except</emphasis> for
 	  the memory.  This means the parent and child share the same
 	  memory, which includes program code and data.</para>
 
-	  <figure>
-	    <title>Threads</title>
+	  <figure><info><title>Threads</title></info>
+	    
 	    <mediaobject>
 	      <imageobject>
-		<imagedata fileref="chapter04/figures/threads.eps" format="EPS" />
+		<imagedata fileref="chapter04/figures/threads.eps" format="EPS"/>
 	      </imageobject>
 	      <imageobject role="fo">
-		<imagedata fileref="chapter04/figures/threads.svg"
-		format="SVG" scalefit="1" width="100%"
-		contentdept="100%"/>
+		<imagedata fileref="figures/threads.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	      </imageobject>
 	      <imageobject role="html">
-		<imagedata fileref="chapter04/figures/threads.png" format="PNG" />
+		<imagedata fileref="chapter04/figures/threads.png" format="PNG"/>
 	      </imageobject>
 	      <textobject>
 		<phrase>The memory (including program code and
@@ -662,10 +654,10 @@
 	  weight process</emphasis>, a similar indication to the
 	  kernel that the processes is part of a thread group.</para>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>Copy on write</title> <para>As we mentioned, copying
+	<section><info><title>Copy on write</title></info>
+	   <para>As we mentioned, copying
 	  the entire memory of one process to another when
 	  <computeroutput>fork</computeroutput> is called is an
 	  expensive operation.</para>
@@ -689,13 +681,13 @@
 	  overwriting all the memory with the new program, actually
 	  copying the memory would waste a lot of time.  Copy on write
 	  saves us actually doing the copy.</para>
-	</sect4>
+	</section>
 
-      </sect3>
-    </sect2>
+      </section>
+    </section>
 
-    <sect2>
-      <title>The <application>init</application> process</title>
+    <section><info><title>The <application>init</application> process</title></info>
+      
 
       <para>We discussed the overall goal of the init process
       previously, and we are now in a position to understand how it
@@ -731,14 +723,13 @@
       value.  Thus the process is finally free and can the descriptor
       can be removed from the kernels process table.</para>
 
-      <sect3>
-	<title>Zombie example</title>
+      <section><info><title>Zombie example</title></info>
+	
 
-	<example id="zombie-example">
-	  <title>Zombie example process</title>
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter04/code/zombie.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<example xml:id="zombie-example"><info><title>Zombie example process</title></info>
+	  
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/zombie.txt" parse="text"/>
             </programlisting>
 	</example>    
 
@@ -760,21 +751,21 @@
 	the square brackets as a character class, but because the
 	process name will be "grep [z]ombie" (with the brackets) this
 	will not match!</para></footnote></para>
-      </sect3>
+      </section>
 
-    </sect2>
-  </sect1>
+    </section>
+  </section>
 
-  <sect1 id="context_switching">
-    <title>Context Switching</title>
+  <section xml:id="context_switching"><info><title>Context Switching</title></info>
+    
 
     <para>Context switching refers to the process the kernel
     undertakes to switch from one process to another. XXX ?</para>
 
-  </sect1>
+  </section>
 
-  <sect1 id="scheduling">
-    <title>Scheduling</title>
+  <section xml:id="scheduling"><info><title>Scheduling</title></info>
+    
 
     <para>A running system has many processes, maybe even into the
     hundreds or thousands.  The part of the kernel that keeps track of
@@ -795,8 +786,8 @@
     probably think of your own fairly easily.  But there are a number
     of different components of scheduling.</para>
 
-    <sect2>
-      <title>Preemptive v co-operative scheduling</title>
+    <section><info><title>Preemptive v co-operative scheduling</title></info>
+      
       <para>Scheduling strategies can broadly fall into two categories</para>
       <orderedlist>
 	<listitem>
@@ -829,10 +820,10 @@
 	</listitem>
       </orderedlist>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Realtime</title>
+    <section><info><title>Realtime</title></info>
+      
 
       <para>Some processes need to know exactly how long their
       timeslice will be, and how long it will be before they get
@@ -854,20 +845,20 @@
       time as you will loose audio data which can not be
       retrieved.</para>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Nice value</title>
+    <section><info><title>Nice value</title></info>
+      
 
       <para>UNIX systems assign each process a
       <emphasis>nice</emphasis> value.  The scheduler looks at the
       nice value and can give priority to those processes that have a
       higher "niceness".</para>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>A brief look at the Linux Scheduler</title>
+    <section><info><title>A brief look at the Linux Scheduler</title></info>
+      
 
       <para>The Linux scheduler has and is constantly undergoing many
       changes as new developers attempt to improve its
@@ -898,18 +889,17 @@ process must have its goodness calculated and the one with the highest
 goodness ``wins''.  You can see that for more tasks, it will take
 longer and longer to decide which processes will run next.</para>
 
-    <figure>
-      <title>The O(1) scheduler</title>
+    <figure><info><title>The O(1) scheduler</title></info>
+      
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="chapter04/figures/o1queue.eps" format="EPS" />
+	  <imagedata fileref="chapter04/figures/o1queue.eps" format="EPS"/>
 	</imageobject>
 	<imageobject role="fo">
-	  <imagedata fileref="chapter04/figures/o1queue.svg"
-	  format="SVG" scalefit="1" width="100%" contentdept="100%" />
+	  <imagedata fileref="figures/o1queue.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	</imageobject>
 	<imageobject role="html">
-	  <imagedata fileref="chapter04/figures/o1queue.png" format="PNG" />
+	  <imagedata fileref="chapter04/figures/o1queue.png" format="PNG"/>
 	</imageobject>
 	<textobject>
 	  <phrase>A view of how the Linux scheduler manages
@@ -938,12 +928,12 @@ moving a process to another CPU in a SMP system can be an expensive
 operation) and better support for identifying interactive programs
 (applications such as a GUI which may spend much time sleeping,
 waiting for user input, but when the user <emphasis>does</emphasis>
-get around to interacting with it wants a fast response).</para></sect2>
+get around to interacting with it wants a fast response).</para></section>
 
-  </sect1>
+  </section>
 
-  <sect1 id="the_shell">
-    <title>The Shell</title>
+  <section xml:id="the_shell"><info><title>The Shell</title></info>
+    
 
     <para>On a UNIX system, the shell is the standard interface to
     handling processes on your system.  Once the shell was the primary
@@ -976,10 +966,10 @@ get around to interacting with it wants a fast response).</para></sect2>
 
     <para>XXX : a bit of history about bourne shell</para>
 
-  </sect1>
+  </section>
 
-  <sect1 id="signals">
-    <title>Signals</title>
+  <section xml:id="signals"><info><title>Signals</title></info>
+    
 
     <para>Processes running in the system require a way to be told
     about events that influence them.  On UNIX there is
@@ -1063,17 +1053,16 @@ get around to interacting with it wants a fast response).</para></sect2>
     is returned to the process which continues on from where it left
     off.</para>
 
-    <sect2>
-      <title>Example</title>
+    <section><info><title>Example</title></info>
+      
 
       <para>The following simple program introduces a lot of signals
       to run!</para>
 
-      <example id="signal-example">
-	<title>Signals Example</title>
+      <example xml:id="signal-example"><info><title>Signals Example</title></info>
+	
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter04/code/signal.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/signal.txt" parse="text"/>
             </programlisting>
       </example>
 
@@ -1147,15 +1136,8 @@ get around to interacting with it wants a fast response).</para></sect2>
       signals reserved for users to use for their own purposes within
       their programs (<computeroutput>SIGUSR</computeroutput>).</para>
 
-    </sect2>
+    </section>
 
-  </sect1>
+  </section>
 
 </chapter>
-
-<!--
-Local Variables:
-mode: sgml
-sgml-parent-document: ("../csbu.sgml" "book" "chapter")
-End:
--->

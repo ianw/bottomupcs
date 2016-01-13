@@ -1,12 +1,13 @@
-<preface id="intro">
+<!-- Converted by db4-upgrade version 1.0 -->
+<preface xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="intro"><info><title>Introduction</title></info>
   
-  <title>Introduction</title>
   
-  <sect1 id="welcome">
-    <title>Welcome</title>
-    <para>Welcome to &csbu;</para>
-    <sect2>
-      <title>Philosophy</title>
+  
+  <section xml:id="welcome"><info><title>Welcome</title></info>
+    
+    <para>Welcome to Computer Science from the Bottom Up</para>
+    <section><info><title>Philosophy</title></info>
+      
 
       <para>In a nutshell, what you are reading is intended to be a
       shop class for computer science.  Young computer science
@@ -32,9 +33,9 @@
       works.  Nobody will expect them to be a Formula One engineer,
       but they are well on their way!</para>
 
-    </sect2>
-    <sect2>
-      <title>Why <emphasis>from the bottom up</emphasis>?</title>
+    </section>
+    <section><info><title>Why <emphasis>from the bottom up</emphasis>?</title></info>
+      
 
       <para>Not everyone wants to attend shop class.  Most people only
       want to drive the car, not know how to build one from scratch.
@@ -50,10 +51,10 @@
       <para>This book aims to move in completely the opposite
       direction, working from operating systems fundamentals through
       to how those applications are complied and executed.  </para>
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Enabling technologies</title> 
+    <section><info><title>Enabling technologies</title></info>
+       
 
       <para>This book is only possible thanks to the development of
       <glossterm linkend="opensource">Open Source</glossterm>
@@ -62,15 +63,8 @@
       position to open that bonnet, poke around with the insides and,
       better still, take that engine and use it to do whatever we
       want.</para>
-    </sect2>
+    </section>
 
-  </sect1>
+  </section>
 
 </preface>
-
-<!--
-Local Variables:
-mode: sgml
-sgml-parent-document: ("csbu.sgml" "book" "preface")
-End:
--->

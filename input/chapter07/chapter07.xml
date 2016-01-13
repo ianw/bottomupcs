@@ -1,9 +1,10 @@
-<chapter id="chapter07">
+<!-- Converted by db4-upgrade version 1.0 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter07"><info><title>Behind the process</title></info>
 
-  <title>Behind the process</title>
+  
 
-  <sect1 id="executable_files">
-    <title>Review of executable files</title>
+  <section xml:id="executable_files"><info><title>Review of executable files</title></info>
+    
 
     <para>We know that a program running in memory has two major
     components in <emphasis>code</emphasis> (also commonly known as a
@@ -14,13 +15,13 @@
     format, since the bits and bytes of the file are to be interpreted
     directly by processor hardware.</para>
 
-  </sect1>
+  </section>
 
-  <sect1 id="representing_executables">
-    <title>Representing executable files</title>
+  <section xml:id="representing_executables"><info><title>Representing executable files</title></info>
+    
 
-    <sect2>
-      <title>Three Standard Sections</title>
+    <section><info><title>Three Standard Sections</title></info>
+      
 
       <para>Any executable file format will need to specify where the
       code and data are in the binary file.</para>
@@ -39,10 +40,10 @@
       zero!).<footnote> <para>BSS probably stands for Block Started by
       Symbol, an assembly command for a old IBM
       computer.</para></footnote></para>
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Binary Format</title>
+    <section><info><title>Binary Format</title></info>
+      
 
       <para>The executable is created by the toolchain from the source
     code.  This file needs to be in a format explicitly defined such
@@ -68,13 +69,13 @@
       Format</computeroutput>, or ELF for short; we'll be looking at
       it in more detail soon.</para>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Binary Format History</title>
+    <section><info><title>Binary Format History</title></info>
+      
 
-      <sect3>
-	<title>a.out</title>
+      <section><info><title>a.out</title></info>
+	
 
 	<para>ELF was not always the standard; original UNIX systems
       used a file format called
@@ -93,10 +94,10 @@
 	section.  As you will come to see, this is insufficient for
 	modern systems with dynamic libraries.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>COFF</title>
+      <section><info><title>COFF</title></info>
+	
 
 	<para>The Common Object File Format, or COFF, was the
 	precursor to ELF.  It's header format was more flexible,
@@ -110,13 +111,13 @@
 	<computeroutput>Portable Executable</computeroutput> or PE
 	format.  PE is to Windows as ELF is to Linux.</para>
 
-      </sect3>
+      </section>
 
-    </sect2>
-  </sect1>
+    </section>
+  </section>
 
-  <sect1 id="elf">
-    <title>ELF</title>
+  <section xml:id="elf"><info><title>ELF</title></info>
+    
 
     <para>ELF is an extremely flexible format for representing binary
     code in a system.  By following the ELF standard you can represent
@@ -125,27 +126,25 @@
     ELF files and developers who understand the ELF file format can
     translate their skills to most modern UNIX systems.</para>
 
-    <sect2>
-      <title>ELF in depth</title>
+    <section><info><title>ELF in depth</title></info>
+      
 
       <para>ELF extends on COFF and gives the header sufficient
     flexibility to define an arbitrary number of sections, each with
     it's own properties.  This facilitates easier dynamic linking and
     debugging.</para>
 
-      <figure>
-	<title>ELF Overview</title>
+      <figure><info><title>ELF Overview</title></info>
+	
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="chapter07/figures/elf-overview.eps" format="EPS" />
+	    <imagedata fileref="chapter07/figures/elf-overview.eps" format="EPS"/>
 	  </imageobject>
 	  <imageobject role="fo">
-	    <imagedata fileref="chapter07/figures/elf-overview.svg"
-	    format="SVG" scalefit="1" width="100%"
-	    contentdept="100%"/>
+	    <imagedata fileref="figures/elf-overview.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	  </imageobject>
 	  <imageobject role="html">
-	    <imagedata fileref="chapter07/figures/elf-overview.png" format="PNG" />
+	    <imagedata fileref="chapter07/figures/elf-overview.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>ELF Overview</phrase>
@@ -153,20 +152,19 @@
 	</mediaobject>
       </figure>
 
-      <sect3>
+      <section><info><title>ELF File Header</title></info>
 
-	<title>ELF File Header</title>
+	
 
 	<para>Overall, the file has a <emphasis>file
 	  header</emphasis> which describes the file in general and
 	  then has pointers to each of the individual sections that
 	  make up the file.</para>
 
-	<example id="elf-header">
-	  <title>The ELF Header</title>
+	<example xml:id="elf-header"><info><title>The ELF Header</title></info>
+	  
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter07/code/elf-header.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/elf-header.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -174,11 +172,10 @@
 	documentation.  This is the layout of the C structure which
 	defines a ELF header.</para>
 
-	<example id="readelf-elf-header">
-	  <title>The ELF Header, as shown by <application>readelf</application></title>
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter07/code/readelf-elf-header.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<example xml:id="readelf-elf-header"><info><title>The ELF Header, as shown by <application>readelf</application></title></info>
+	  
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/readelf-elf-header.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -193,11 +190,10 @@
 	binary to see this for yourself with something like the
 	<command>hexdump</command> command.</para>
 
-	    <example id="elf-magic">
-	      <title>Inspecting the ELF magic number</title>
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter07/code/elf-magic.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+	    <example xml:id="elf-magic"><info><title>Inspecting the ELF magic number</title></info>
+	      
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/elf-magic.txt" parse="text"/>
             </programlisting>
 	    </example>
 
@@ -226,11 +222,10 @@
 	  your program.  Using the entry point address we can actually
 	  verify that it <emphasis>isn't</emphasis>.</para>
 
-	<example id="entry-point">
-	  <title>Investigating the entry point</title>
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter07/code/entry-point.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<example xml:id="entry-point"><info><title>Investigating the entry point</title></info>
+	  
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/entry-point.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -245,10 +240,10 @@
 	file other important parts of the ELF file start, like a table
 	of contents.</para>
 
-      </sect3>
+      </section>
 
-      <sect3 id="symbols_and_relocations">
-	<title>Symbols and Relocations</title>
+      <section xml:id="symbols_and_relocations"><info><title>Symbols and Relocations</title></info>
+	
 
 	<para>The ELF specification provides for <emphasis>symbol
 	tables</emphasis> which are simply mappings of strings
@@ -274,15 +269,15 @@
 	keep a relocation that essentially says to the linker "place
 	the real value of "foo" into the 4 bytes at this address".  As
 	mentioned, this requires the symbol "foo" to be resolved.
-	<xref linkend="dynamic_relocations"></xref> contains further
+	<xref linkend="dynamic_relocations"/> contains further
 	information on relocations.
 	</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
+      <section><info><title>Sections and Segments</title></info>
 
-	<title>Sections and Segments</title>
+	
 
 	<para>The ELF format specifies two "views" of an ELF file --
 	that which is used for linking and that which is used for
@@ -294,8 +289,8 @@
 	sections map to a <emphasis>segment</emphasis> in the
 	executable.</para>
 
-	<sect4>
-	  <title>Segments</title>
+	<section><info><title>Segments</title></info>
+	  
 
 	  <para>As we have done before, it is sometimes easier to look
 	  at the higher level of abstraction (segments) before
@@ -311,11 +306,10 @@
 	  some other things reuquired to get the executable
 	  running.</para>
 
-	  <example id="program-header">
-	    <title>The Program Header</title>
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter07/code/program-header.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+	  <example xml:id="program-header"><info><title>The Program Header</title></info>
+	    
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/program-header.txt" parse="text"/>
             </programlisting>
 
 	  </example>
@@ -384,10 +378,10 @@
 	  program headers, they are described more fully in the
 	  standards specification (XXX).</para>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>Sections</title>
+	<section><info><title>Sections</title></info>
+	  
 
 	  <para>As we have mentioned, sections make up segments.
 	  Sections are a way to organise the binary into logical areas
@@ -401,11 +395,10 @@
 
 	  <para>Sections have a similar header to segments.</para>
 
-	  <example id="section-header">
-	    <title>Sections </title>
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter07/code/section-header.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+	  <example xml:id="section-header"><info><title>Sections </title></info>
+	    
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/section-header.txt" parse="text"/>
             </programlisting>
 	  </example>
 
@@ -426,21 +419,19 @@
 	  example of them in use.  Consier the following
 	  program.</para>
 
-	  <example id="section">
-	    <title>Sections </title>
+	  <example xml:id="section"><info><title>Sections </title></info>
+	    
 
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter07/code/sections.c" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/sections.c" parse="text"/>
             </programlisting>
 	  </example>
 
-	  <example id="section-readelf">
-	    <title>Sections readelf output </title>
+	  <example xml:id="section-readelf"><info><title>Sections readelf output </title></info>
+	    
 
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter07/code/sections.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/sections.txt" parse="text"/>
             </programlisting>
           </example>
 
@@ -502,17 +493,16 @@
 	  expect (remeber the name "text" and "code" are used
 	  interchanably to refer to a program in memory.</para>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>Sections and Segments together</title>
+	<section><info><title>Sections and Segments together</title></info>
+	  
 
-	  <example id="sections-segments">
-	    <title>Sections and Segments</title>
+	  <example xml:id="sections-segments"><info><title>Sections and Segments</title></info>
+	    
 
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter07/code/sections-segments.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/sections-segments.txt" parse="text"/>
             </programlisting>
 
 	  </example>    
@@ -559,13 +549,13 @@
 	  however memory size is greater than the file size for the
 	  data segment.  This comes from the BSS section which holds
 	  zeroed global variables.</para>
-	</sect4>
+	</section>
 
-      </sect3>
-    </sect2>
+      </section>
+    </section>
 
-    <sect2 id="elf_debugging">
-      <title>Debugging</title>
+    <section xml:id="elf_debugging"><info><title>Debugging</title></info>
+      
 
       <para>Tradionally the primary method of post mortem debugging is
 	referred to as the <emphasis>core dump</emphasis>.  The term
@@ -577,22 +567,20 @@
       <para>Thus a core dump is simply a complete snapshot of the
 	program as it was running at a particular time.  A
 	<emphasis>debugger</emphasis> can then be used to examine this
-	dump and reconstruct the program state.  <xref
-	linkend="coredump_gdb"></xref> shows a sample program that
+	dump and reconstruct the program state.  <xref linkend="coredump_gdb"/> shows a sample program that
 	writes to a random memory location in order to force a crash.
 	At this point the processes will be halted and a dump of the
 	current state is recorded.</para>
 
-      <example id="coredump_gdb">
-	<title>Example of creating a core dump and using it with <productname>gdb</productname></title>
-	  <programlisting linenumbering="numbered" >
-              <xi:include href="chapter07/code/core-gdb.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+      <example xml:id="coredump_gdb"><info><title>Example of creating a core dump and using it with <productname>gdb</productname></title></info>
+	
+	  <programlisting linenumbering="numbered">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/core-gdb.txt" parse="text"/>
             </programlisting>
       </example>
 
-      <sect3>
-	<title>Symbols and Debugging Information</title>
+      <section><info><title>Symbols and Debugging Information</title></info>
+	
 
 	<para>As the example shows, the debugger
 	  <productname>gdb</productname> requires the original
@@ -630,14 +618,13 @@
 	  sure it associates the right debugging information with the
 	  right executable.</para>
 
-	  <example id="strip_debug">
-	    <title>Example of stripping debugging information into
+	  <example xml:id="strip_debug"><info><title>Example of stripping debugging information into
 	    separate files using
-	    <productname>objcopy</productname></title>
+	    <productname>objcopy</productname></title></info>
+	    
 
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter07/code/debuglink.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/debuglink.txt" parse="text"/>
             </programlisting>
 	  </example>
 
@@ -645,41 +632,38 @@
 	for removal from final output.  Once the individual object
 	files of an executable are linked into the single final image
 	there is generally no need for most symbols to remain.  As
-	discussed in <xref linkend="symbols_and_relocations"></xref>
+	discussed in <xref linkend="symbols_and_relocations"/>
 	symbols are required to fix up relocation entries, but once
 	this is done the symbols are not strictly necessary for
 	running the final program.  On Linux the GNU toolchain
 	<productname>strip</productname> program provides options to
 	remove symbols.  Note that some symbols are required to be
 	resolved at run-time (for <emphasis>dynamic
-	linking</emphasis>, the focus of <xref
-	linkend="chapter08"></xref>) but these are put in separate
+	linking</emphasis>, the focus of <xref linkend="chapter08"/>) but these are put in separate
 	<emphasis>dynamic</emphasis> symbol tables so they will not be
 	removed and render the final output useless.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Inside coredumps</title>
+      <section><info><title>Inside coredumps</title></info>
+	
 
 	<para>A coredump is really just another ELF file; this
 	illustrates the flexibility of ELF as a binary format.</para>
 
-	<example id="coredump_internal">
-	  <title>Example of using <productname>readelf</productname>
+	<example xml:id="coredump_internal"><info><title>Example of using <productname>readelf</productname>
 	  and <productname>eu-readelf</productname> to examine a
-	  coredump.</title>
+	  coredump.</title></info>
+	  
 
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter07/code/core-internal.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/core-internal.txt" parse="text"/>
             </programlisting>
 
 	</example>
 
-	<para>In <xref linkend="coredump_internal"></xref> we can see
-	an examination of the core file produced by <xref
-	linkend="coredump_gdb"></xref> using firstly the
+	<para>In <xref linkend="coredump_internal"/> we can see
+	an examination of the core file produced by <xref linkend="coredump_gdb"/> using firstly the
 	<productname>readelf</productname> tool.  There are no
 	sections, relocations or other extraneous information in the
 	file that may be required for loading an executable or
@@ -712,14 +696,12 @@
 
 	<para>Another interesting output is the current
 	  <emphasis>auxiliary vector</emphasis>
-	  (<computeroutput>AUXV</computeroutput>), discussed in <xref
-	  linkend="auxv"></xref>.  The
+	  (<computeroutput>AUXV</computeroutput>), discussed in <xref linkend="auxv"/>.  The
 	  <computeroutput>386_TLS</computeroutput> describes
 	  <emphasis>global descriptor table</emphasis> entries used
 	  for the x86 implementation of <emphasis>thread-local
-	  storage</emphasis> (see <xref
-	  linkend="fast_system_calls"></xref> for more information on
-	  use of segmentation, and <xref linkend="threads"></xref> for
+	  storage</emphasis> (see <xref linkend="fast_system_calls"/> for more information on
+	  use of segmentation, and <xref linkend="threads"/> for
 	  information on threads<footnote> <para>For a multi-threaded
 	  application, there would be duplicate entries for each
 	  thread running.  The debugger will understand this, and it
@@ -740,13 +722,13 @@
 	  most useful way to debug an unexpected situation in a
 	  postmortem fashion.</para>
 
-      </sect3>
-    </sect2>
+      </section>
+    </section>
 
-  </sect1>
+  </section>
 
-  <sect1 id="executables">
-    <title>ELF Executables</title>
+  <section xml:id="executables"><info><title>ELF Executables</title></info>
+    
 
     <para>Executables are of course one of the primary uses of the ELF
       format.  Contained within the <emphasis>binary</emphasis> is
@@ -754,10 +736,9 @@
       code as intended.</para>
 
     <para>Since an executable is designed to be run in a process with
-    a unique address space (see <xref linkend="chapter05"></xref>) the
+    a unique address space (see <xref linkend="chapter05"/>) the
     code can make assumptions about where the various parts of the
-    program will be loaded in memory.  <xref
-    linkend="elf_executable"></xref> shows an example using the
+    program will be loaded in memory.  <xref linkend="elf_executable"/> shows an example using the
     <productname>readelf</productname> tool to examine the segments of
     an executable file.  We can see the virtual addresses at which the
     <computeroutput>LOAD</computeroutput> segments are required to be
@@ -770,17 +751,15 @@
     most processors will hence disallow any execution of code in those
     pages).</para>
 
-    <example id="elf_executable">
-      <title>Segments of an executable file</title>
+    <example xml:id="elf_executable"><info><title>Segments of an executable file</title></info>
+      
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter07/code/executable.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/executable.txt" parse="text"/>
             </programlisting>
     </example>
 
     <para>The program segments must be loaded at these addresses; the
-    last step of the linker is to resolve most relocations (<xref
-    linkend="symbols_and_relocations"></xref>) and patch them with the
+    last step of the linker is to resolve most relocations (<xref linkend="symbols_and_relocations"/>) and patch them with the
     assumed absolute addresses — the data describing the
     relocation is then discarded in the final binary and there is no
     longer a way to find this information.
@@ -789,16 +768,13 @@
     <para>In reality, executables generally have external dependencies
       on <emphasis>shared libraries</emphasis>, or pieces of common
       code abstracted and shared among the entire system —
-      almost all of the confusing parts of <xref
-      linkend="elf_executable"></xref> relate to the use of shared
-      libraries.  Libraries are discussed in <xref
-      linkend="libraries"></xref>, dynamic libraries in <xref
-      linkend="chapter08"></xref>.</para>
+      almost all of the confusing parts of <xref linkend="elf_executable"/> relate to the use of shared
+      libraries.  Libraries are discussed in <xref linkend="libraries"/>, dynamic libraries in <xref linkend="chapter08"/>.</para>
 
-  </sect1>
+  </section>
 
-  <sect1 id="libraries">
-    <title>Libraries</title>
+  <section xml:id="libraries"><info><title>Libraries</title></info>
+    
 
     <para>Developers soon tired of having to write everything from
       scratch, so one of the first inventions of computer science was
@@ -816,8 +792,8 @@
       executable.</para>
 
 
-  <sect2>
-    <title>Static Libraries</title>
+  <section><info><title>Static Libraries</title></info>
+    
 
     <para>The most straight forward way of using a library function is
       to have the object files from the library linked directly into
@@ -830,8 +806,8 @@
       as the final result is a simple executable with no
       dependencies.</para>
 
-      <sect3>
-	<title>Inside static libraries</title>
+      <section><info><title>Inside static libraries</title></info>
+	
 
 	<para>A static library is simply a group of object files.  The
 	object files are kept in an <emphasis>archive</emphasis>,
@@ -842,11 +818,10 @@
 	<para>Below we show the creation of basic static library and
 	introduce some common tools for working with libraries.</para>
 
-	<example>
-	  <title>Creating and using a static library</title>
+	<example><info><title>Creating and using a static library</title></info>
+	  
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter07/code/static.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/static.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -907,10 +882,10 @@
 	<para>The final result is a single executable with our new
 	library included.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Static Linking Drawbacks</title>
+      <section><info><title>Static Linking Drawbacks</title></info>
+	
 
 	<para>Static linking is very straight forward, but has a number
       of drawbacks.</para>
@@ -927,12 +902,12 @@
       and provides all the common functions such as
       <computeroutput>printf</computeroutput>.</para>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Shared Libraries</title>
+    <section><info><title>Shared Libraries</title></info>
+      
 
       <para>Shared libraries are an elegant way around the problems
       posed by a static library.  A shared library is a library that
@@ -950,13 +925,13 @@
       intricate parts of a modern operating system.  As such, we
       dedicate the next chapter to investigating the dynamic linking
       process.</para>
-    </sect2>
+    </section>
 
 
-  </sect1>
+  </section>
 
-  <sect1 id="abi">
-    <title>ABI's</title>
+  <section xml:id="abi"><info><title>ABI's</title></info>
+    
 
     <para>An ABI is a term you will hear a lot about when working with
     systems programming.  We have talked extensively about
@@ -968,22 +943,22 @@
     communicate together.  Below we introduce a number of concepts
     which are important to understanding ABI considerations.</para>
 
-    <sect2>
-      <title>Byte Order</title>
+    <section><info><title>Byte Order</title></info>
+      
 
       <para>Endianess</para>
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Calling Conventions</title>
+    <section><info><title>Calling Conventions</title></info>
+      
 
-      <sect3>
-	<title>Passing parameters</title>
+      <section><info><title>Passing parameters</title></info>
+	
 	<para>registers or stack?</para>
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Function Descriptors</title>
+      <section><info><title>Function Descriptors</title></info>
+	
 
 	<para>On many architectures you must call a function through a
 	<emphasis>function descriptor</emphasis>, rather than
@@ -1021,14 +996,14 @@
 	pointer is pointing to (as specified in the ABI) performance
 	can be improved by less loading.</para>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-  </sect1>
+  </section>
 
-  <sect1 id="starting_a_process">
-    <title>Starting a process</title>
+  <section xml:id="starting_a_process"><info><title>Starting a process</title></info>
+    
 
     <para>We mentioned before that simply saying the program starts
     with the <computeroutput>main()</computeroutput> function is not
@@ -1059,8 +1034,8 @@
     point address (i.e. the <computeroutput>_init</computeroutput>
     function).</para>
 
-    <sect2 id="auxv">
-      <title>Kernel communication to programs</title>
+    <section xml:id="auxv"><info><title>Kernel communication to programs</title></info>
+      
 
       <para>The kernel needs to communicate some things to programs
       when they start up; namely the arguments to the program, the
@@ -1091,8 +1066,8 @@
       kernel has identified the underlying hardware has that userspace
       programs can take advantage of.</para>
 
-      <sect3 id="kernel_library">
-	<title>Kernel Library</title>
+      <section xml:id="kernel_library"><info><title>Kernel Library</title></info>
+	
 
 	<para>We mentioned previously that system calls are slow, and
 	modern systems have mechanisms to avoid the overheads of
@@ -1130,26 +1105,24 @@
 	kernel determines the hardware is capable, this will use the
 	fast sytem call method.</para>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Starting the program</title>
+    <section><info><title>Starting the program</title></info>
+      
 
       <para>Once the kernel has loaded the interpreter it passes it to
       the entry point as given in the interpreter file (note will not
-      examine how the dynamic linker starts at this stage; see <xref
-      linkend="chapter08"></xref> for a full discussion of dyanmic
+      examine how the dynamic linker starts at this stage; see <xref linkend="chapter08"/> for a full discussion of dyanmic
       linking).  The dynamic linker will jump to the entry point
       address as given in the ELF binary.</para>
 
-      <example id="program-startup">
-	<title>Disassembley of program startup</title>
+      <example xml:id="program-startup"><info><title>Disassembley of program startup</title></info>
+	
 
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter07/code/startup.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/startup.txt" parse="text"/>
             </programlisting>
       </example>
 
@@ -1215,11 +1188,10 @@
       terms are more commonly used with object orientent langauges to
       describe object lifecycles.</para>
 
-      <example id="constructor-destructor">
-	<title>Constructors and Destructors</title>
+      <example xml:id="constructor-destructor"><info><title>Constructors and Destructors</title></info>
+	
 	  <programlisting linenumbering="numbered">
-              <xi:include href="chapter07/code/construct-destruct.txt" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/construct-destruct.txt" parse="text"/>
             </programlisting>
       </example>
 
@@ -1271,15 +1243,8 @@
       <para>As you can see, a lot is done before the program gets to
       start, and even a little after you think it is finished!</para>
 
-    </sect2>
+    </section>
 
-  </sect1>
+  </section>
 
 </chapter>
-
-<!--
-Local Variables:
-mode: sgml
-sgml-parent-document: ("../csbu.sgml" "book" "chapter")
-End:
--->

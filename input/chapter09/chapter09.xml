@@ -1,22 +1,16 @@
-<chapter id="chapter09">
+<!-- Converted by db4-upgrade version 1.0 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter09"><info><title>I/O Fundamentals</title></info>
   
-  <title>I/O Fundamentals</title>
+  
 
-  <sect1 id="filesystem_fundamentals">
-    <title>File System Fundamentals</title>
+  <section xml:id="filesystem_fundamentals"><info><title>File System Fundamentals</title></info>
+    
     <para>File System Funamentals</para>
-  </sect1>
+  </section>
 
-  <sect1 id="networking_fundamentals">
-    <title>Networking Fundamentals</title>
+  <section xml:id="networking_fundamentals"><info><title>Networking Fundamentals</title></info>
+    
     <para>Networking Fundamentals</para>
-  </sect1>
+  </section>
 
 </chapter>
-
-<!--
-Local Variables:
-mode: sgml
-sgml-parent-document: ("../csbu.xml" "book" "chapter")
-End:
--->

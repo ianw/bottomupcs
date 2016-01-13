@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules xmlns="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"
+       startMode="docbook">
+
+<mode name="docbook">
+  <namespace ns="http://docbook.org/ns/docbook">
+    <validate schema="rng/docbook.rng" useMode="attach"/>
+    <validate schema="sch/docbook.sch" useMode="attach"/>
+  </namespace>
+</mode>
+
+<mode name="attach">
+  <anyNamespace>
+    <attach/>
+  </anyNamespace>
+</mode>
+
+</rules>

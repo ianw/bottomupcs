@@ -1,29 +1,30 @@
-<chapter id="chapter02">
+<!-- Converted by db4-upgrade version 1.0 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter02"><info><title>Computer Architecture</title></info>
 
-  <title>Computer Architecture</title>
+  
 
-  <sect1 id="the_cpu">
-    <title>The CPU</title>
+  <section xml:id="the_cpu"><info><title>The CPU</title></info>
+    
 
-    <figure>
-      <title>The CPU</title>
+    <figure><info><title>The CPU</title></info>
+      
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="chapter02/figures/computer.eps" format="EPS" />
+	  <imagedata fileref="chapter02/figures/computer.eps" format="EPS"/>
 	</imageobject>
 	<imageobject role="fo">
-	  <imagedata fileref="chapter02/figures/computer.svg"
-	  format="SVG" scalefit="1" width="100%" contentdept="100%"/>
+	  <imagedata fileref="figures/computer.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	</imageobject>
 	<imageobject role="html">
-	  <imagedata fileref="chapter02/figures/computer.png" format="PNG" />
+	  <imagedata fileref="chapter02/figures/computer.png" format="PNG"/>
 	</imageobject>
-	  <caption>The CPU performs instructions on values held in
+        <caption><para>The CPU performs instructions on values held in
 	      registers.  This example shows firstly setting the value
 	      of R1 to 100, loading the value from memory location
 	      0x100 into R2, adding the two values together and
 	      placing the result in R3 and finally storing the new
-	      value (110) to R4 (for further use). </caption>
+	      value (110) to R4 (for further use).</para></caption>
+
       </mediaobject>
 
     </figure>
@@ -54,8 +55,8 @@
     <para>So in the example we are simply adding 100 to a value stored
     in memory, and storing this new result back into memory.</para>
 
-    <sect2>
-      <title>Branching</title>
+    <section><info><title>Branching</title></info>
+      
 
       <para>Apart from loading or storing, the other important
 	operation of a CPU is <emphasis>branching</emphasis>.
@@ -78,10 +79,10 @@
       the statement should be taken, otherwise branch past the body
       code.</para>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Cycles</title>
+    <section><info><title>Cycles</title></info>
+      
 
       <para>We are all familiar with the speed of the computer, given
 	in Megahertz or Gigahertz (millions or thousands of millions
@@ -94,10 +95,10 @@
       operation can be started; think of the clock like the person
       beating the drum to keep the rower's oars in sync. </para>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>Fetch, Decode, Execute, Store</title>
+    <section><info><title>Fetch, Decode, Execute, Store</title></info>
+      
 
       <para>Executing a single instruction consists of a particular
 	cycle of events; fetching, decoding, executing and
@@ -127,8 +128,8 @@
 	</listitem>
       </orderedlist>
 
-      <sect3>
-	<title>Looking inside a CPU</title>
+      <section><info><title>Looking inside a CPU</title></info>
+	
 
       <para>Internally the CPU has many different sub components that
 	perform each of the above steps, and generally they can all
@@ -138,26 +139,24 @@
 	pass the results to the next station and take a new input to
 	work on.</para>
 
-	<figure id="inside_the_cpu">
-	  <title>Inside the CPU</title>
+	<figure xml:id="inside_the_cpu"><info><title>Inside the CPU</title></info>
+	  
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="chapter02/figures/block.eps" format="EPS" />
+	      <imagedata fileref="chapter02/figures/block.eps" format="EPS"/>
 	    </imageobject>
 	    <imageobject role="fo">
-	      <imagedata fileref="chapter02/figures/block.svg"
-	      format="SVG" scalefit="1" width="100%"
-	      contentdept="100%"/>
+	      <imagedata fileref="figures/block.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	    </imageobject>
 	    <imageobject role="html">
-	      <imagedata fileref="chapter02/figures/block.png" format="PNG" />
+	      <imagedata fileref="chapter02/figures/block.png" format="PNG"/>
 	    </imageobject>
-	      <caption>The CPU is made up of many different
-	      sub-components, each doing a dedicated task.</caption>
 	  </mediaobject>
+          <caption><para>The CPU is made up of many different
+	  sub-components, each doing a dedicated task.</para></caption>
 	</figure>
 
-	<para><xref linkend="inside_the_cpu"></xref> shows a very
+	<para><xref linkend="inside_the_cpu"/> shows a very
 	      simple block diagram illustrating some of the main parts
 	      of a modern CPU.</para>
 
@@ -199,10 +198,10 @@
 	<para>Floating point registers have the same concepts, but use
 	slightly different terminology for their components.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Pipelining</title>
+      <section><info><title>Pipelining</title></info>
+	
 
 	<para>As we can see above, whilst the ALU is adding registers
 	together is completely separate to the AGU writing values back
@@ -250,19 +249,19 @@
       <emphasis>pipeline flush</emphasis> and is analogous to having
       to stop and empty out all your marbles from your hose!</para>
 
-	<sect4>
-	  <title>Branch Prediction</title>
+	<section><info><title>Branch Prediction</title></info>
+	  
 
 	  <para>pipeline flush, predict taken, predict not taken,
 	  branch delay slots</para>
 
-	</sect4>
-      </sect3>
+	</section>
+      </section>
 
 
 
-      <sect3>
-	<title>Reordering</title>
+      <section><info><title>Reordering</title></info>
+	
 
 	<para>This bit is crap</para>
 
@@ -272,8 +271,8 @@
 	<emphasis>program order</emphasis> since this is the order
 	that instructions are given in the computer program.</para>
 
-	<figure id="reorder_buffer">
-	  <title>Reorder buffer example</title>
+	<figure xml:id="reorder_buffer"><info><title>Reorder buffer example</title></info>
+	  
 	  <mediaobject>
 	    <textobject>
 	      <programlisting>
@@ -287,7 +286,7 @@
 	</figure>
 
 	<para>Consider an instruction stream such as that shown in
-	<xref linkend="reorder_buffer"></xref>
+	<xref linkend="reorder_buffer"/>
 	  Instruction 2 needs to wait for instruction 1 to
 	complete fully before it can start.  This means that the
 	pipeline has to <emphasis>stall</emphasis> as it waits for the
@@ -319,12 +318,12 @@
 	explicitly.  Most programmers do not need to worry directly
 	about them, although you may see the terms.</para>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>CISC v RISC</title>
+    <section><info><title>CISC v RISC</title></info>
+      
 
       <para>A common way to divide computer architectures is into
       <emphasis>Complex Instruction Set Computer</emphasis> (CISC) and
@@ -382,8 +381,8 @@
 	</listitem>
       </itemizedlist>
 
-      <sect3>
-	<title>EPIC</title>
+      <section><info><title>EPIC</title></info>
+	
 
 	<para>The Itanium processor, which is used in many example
 	through this book, is an example of a modified architecture
@@ -434,17 +433,17 @@
 	simplified view with a few core units like memory, integer and
 	floating point.</para></footnote></para>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-  </sect1>
+  </section>
 
-  <sect1 id="memory">
-    <title>Memory</title>
+  <section xml:id="memory"><info><title>Memory</title></info>
+    
 
-    <sect2>
-      <title>Memory Hierarchy</title>
+    <section><info><title>Memory Hierarchy</title></info>
+      
 
       <para>The CPU can only directly fetch instructions and data
 	from cache memory, located directly on the processor chip.
@@ -456,8 +455,8 @@
       <para>We call these layers of memory the <emphasis>memory
       hierarchy</emphasis></para>
 
-      <table>
-	<title>Memory Hierarchy</title>
+      <table><info><title>Memory Hierarchy</title></info>
+	
 	<tgroup cols="3">
 	  <thead>
 	    <row>
@@ -480,7 +479,7 @@
 	    </row>
 
 	    <row>
-	      <entry></entry> 
+	      <entry/> 
 	      <entry>RAM</entry> 
 	      <entry>All instructions and storage addresses for the
 		processor must come from RAM.  Although RAM is very
@@ -514,7 +513,7 @@
 	change this equation, you'll end up a billionaire!</para>
 
         <para>The reason caches are effective is becuase computer code
-        generally exhibits two forms of locality<indexterm id="locality">
+        generally exhibits two forms of locality<indexterm xml:id="locality">
 	  <primary>locality</primary>
 	</indexterm>
 	<orderedlist>
@@ -532,10 +531,10 @@
 	quickly accessible memory (temporal) storing small blocks of
 	relevant information (spatial) as practically possible.
         </para>
-    </sect2>
+    </section>
 
-      <sect2 id="cache_in_depth">
-	<title>Cache in depth</title>
+      <section xml:id="cache_in_depth"><info><title>Cache in depth</title></info>
+	
 
 	<para>Cache is one of the most important elements of the CPU
 	  architecture.  To write efficient code developers need to
@@ -579,25 +578,24 @@
 	  reads because the instruction stream generally uses more
 	  regular sized accesses.</para>
 
-	<figure id="cache_associativity">
-	  <title>Cache Associativity</title>
+	<figure xml:id="cache_associativity"><info><title>Cache Associativity</title></info>
+	  
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="chapter02/figures/sets.eps" format="EPS" />
+	      <imagedata fileref="chapter02/figures/sets.eps" format="EPS"/>
 	    </imageobject>
 	    <imageobject role="fo">
-	      <imagedata fileref="chapter02/figures/sets.svg"
-	      format="SVG" scalefit="1" width="100%"
-	      contentdept="100%"/>
+	      <imagedata fileref="figures/sets.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	    </imageobject>
 	    <imageobject role="html">
-	      <imagedata fileref="chapter02/figures/sets.png" format="PNG" />
+	      <imagedata fileref="chapter02/figures/sets.png" format="PNG"/>
 	    </imageobject>
-	     <caption>
-	      A given cache line may find a valid home in one
-	      of the shaded entries.
-	    </caption>
 	  </mediaobject>
+          <caption><para>
+	    A given cache line may find a valid home in one
+	    of the shaded entries.</para>
+	  </caption>
+
 	</figure>
 
 	<para>During normal operation the processor is constantly
@@ -618,8 +616,7 @@
 	      which alias each other are being constantly updated they
 	      are said to <emphasis>fight</emphasis> over the cache
 	      line.  Thus we can categorise caches into three general
-	      types, illustrated in <xref
-	      linkend="cache_associativity"></xref>.
+	      types, illustrated in <xref linkend="cache_associativity"/>.
 
 	  <itemizedlist>
 	    <listitem>
@@ -627,8 +624,7 @@
 		<emphasis>Direct mapped</emphasis> caches will allow a
 	      cache line to exist only in a singe entry in the
 	      cache. This is the simplest to implement in hardware,
-	      but as illustrated in <xref
-	      linkend="cache_associativity"></xref> there is no
+	      but as illustrated in <xref linkend="cache_associativity"/> there is no
 	      potential to avoid aliasing because the two shaded
 	      addresses must share the same cache line.
 	      </para>
@@ -654,8 +650,7 @@
 	      particular address could be located in any way. Thus an
 	      <emphasis>n</emphasis>-way set associative cache will
 	      allow a cache line to exist in any entry of a set sized
-	      total blocks mod n — <xref
-	      linkend="cache_associativity"></xref> shows a sample
+	      total blocks mod n — <xref linkend="cache_associativity"/> shows a sample
 	      8-element, 4-way set associative cache; in this case the
 	      two addresses have four possible locations, meaning only
 	      half the cache must be searched upon lookup.  The more
@@ -697,12 +692,11 @@
 	higher-level cache having a line removes the possibility of a
 	lower level cache having that line, we say it is
 	<emphasis>exclusive</emphasis>.  This choice is discussed
-	further in <xref
-	linkend="cache_exclusivity_in_smp"></xref>.
+	further in <xref linkend="cache_exclusivity_in_smp"/>.
       </para>
 
-      <sect3>
-	<title>Cache Addressing</title>
+      <section><info><title>Cache Addressing</title></info>
+	
 
 	<para>So far we have not discussed how a cache decides if a
 	  given address resides in the cache or not.  Clearly, caches
@@ -717,19 +711,17 @@
 	  cache on-core.
 	</para>
 
-	<figure id="cache_tags">
-	  <title>Cache tags</title>
+	<figure xml:id="cache_tags"><info><title>Cache tags</title></info>
+	  
 	  <mediaobject>
 	  <imageobject>
-	    <imagedata fileref="chapter02/figures/tags.eps" format="EPS" />
+	    <imagedata fileref="chapter02/figures/tags.eps" format="EPS"/>
 	  </imageobject>
 	  <imageobject role="fo">
-	    <imagedata fileref="chapter02/figures/tags.svg"
-	    format="SVG" scalefit="1" width="100%"
-	    contentdept="100%"/>
+	    <imagedata fileref="figures/tags.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	  </imageobject>
 	  <imageobject role="html">
-	    <imagedata fileref="chapter02/figures/tags.png" format="PNG" />
+	    <imagedata fileref="chapter02/figures/tags.png" format="PNG"/>
 	  </imageobject>
 	  <caption><para>Tags need to be checked in parallel to keep
 latency times low; more tag bits (i.e. less set associativity)
@@ -770,8 +762,7 @@ multiplex the output of the many sets, which can also add latency.
 	interested in.  Thus the remaining bits of the address are the
 	<emphasis>tag</emphasis> bits which the cache directory checks
 	against the incoming address tag bits to determine if there is
-	a cache hit or not.  This relationship is illustrated in <xref
-	linkend="cache_tags"></xref>.</para>
+	a cache hit or not.  This relationship is illustrated in <xref linkend="cache_tags"/>.</para>
 
 	<para>When there are multiple ways, this check must happen in
 	parallel within each way, which then passes its result into a
@@ -784,14 +775,14 @@ multiplex the output of the many sets, which can also add latency.
 	of cache design and generally the limiting factor on how many
 	lines (i.e, how big) a cache may grow.</para>
 
-      </sect3>
+      </section>
 
-      </sect2>
+      </section>
 
-    </sect1>
+    </section>
 
-  <sect1 id="peripherals">
-    <title>Peripherals and busses</title>
+  <section xml:id="peripherals"><info><title>Peripherals and busses</title></info>
+    
 
     <para>Peripherals are any of the many external devices that
       connect to your computer.  Obviously, the processor must have
@@ -801,15 +792,15 @@ multiplex the output of the many sets, which can also add latency.
     <para>The communication channel between the processor and the
       peripherals is called a <emphasis>bus</emphasis>.</para>
     
-    <sect2>
-      <title>Peripheral Bus concepts</title>
+    <section><info><title>Peripheral Bus concepts</title></info>
+      
 
       <para>A device requires both input and output to be useful.
       There are a number of common concepts required for useful
       communication with peripherals.</para>
 
-      <sect3>
-	<title>Interrupts</title>
+      <section><info><title>Interrupts</title></info>
+	
 
 	<para>An interrupt allows the device to literally interrupt
 	  the processor to flag some information.  For example, when a
@@ -834,34 +825,31 @@ multiplex the output of the many sets, which can also add latency.
 	operating system has configured an <emphasis>interrupt
 	descriptor table</emphasis> which pairs each of the possible
 	interrupts with a code address to jump to when the interrupt
-	is received.  This is illustrated in <xref
-	linkend="interrupt_handling"></xref>.</para>
+	is received.  This is illustrated in <xref linkend="interrupt_handling"/>.</para>
 
 	<para>Writing this <emphasis>interrupt handler</emphasis> is
 	the job of the device driver author in conjunction with the
 	operating system.</para>
 
-	<figure id="interrupt_handling">
-	  <title>Overview of handling an interrupt</title>
+	<figure xml:id="interrupt_handling"><info><title>Overview of handling an interrupt</title></info>
+	  
 	  <mediaobject>
 	    <imageobject>
-	      <imagedata fileref="chapter02/figures/interrupt.eps" format="EPS" />
+	      <imagedata fileref="chapter02/figures/interrupt.eps" format="EPS"/>
 	    </imageobject>
 	    <imageobject role="fo">
-	      <imagedata fileref="chapter02/figures/interrupt.svg"
-	      format="SVG" scalefit="1" width="100%"
-	      contentdept="100%"/>
+	      <imagedata fileref="figures/interrupt.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	    </imageobject>
 	    <imageobject role="html">
-	      <imagedata fileref="chapter02/figures/interrupt.png" format="PNG" />
+	      <imagedata fileref="chapter02/figures/interrupt.png" format="PNG"/>
 	    </imageobject>
-	    <caption>A generic overview of handling an interrupt.  The
+	  </mediaobject>
+          <caption><para>A generic overview of handling an interrupt.  The
 	    device raises the interrupt to the interrupt controller,
 	    which passes the information onto the processor.  The
 	    processor looks at its descriptor table, filled out by the
 	    operating system, to find the code to handle the
-	    fault.</caption>
-	  </mediaobject>
+	    fault.</para></caption>
 	</figure>
 
 	<para>Most drivers will spilt up handling of interrupts into
@@ -872,8 +860,8 @@ multiplex the output of the many sets, which can also add latency.
 	is free and do the more intensive processing.  This is to stop
 	an interrupt hogging the entire CPU.</para>
 
-	<sect4>
-	  <title>Saving state</title>
+	<section><info><title>Saving state</title></info>
+	  
 
 	  <para>Since an interrupt can happen at any time, it is
 	  important that you can return to the running operation when
@@ -885,10 +873,10 @@ multiplex the output of the many sets, which can also add latency.
 	  the interrupt is completely transparent to whatever happens
 	  to be running at the time.</para>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>Interrupts v traps and exceptions</title>
+	<section><info><title>Interrupts v traps and exceptions</title></info>
+	  
 
 	  <para>While an interrupt is generally associated with an
 	  external event from a physical device, the same mechanism is
@@ -899,17 +887,16 @@ multiplex the output of the many sets, which can also add latency.
 	  <emphasis>exception</emphasis> to be handled by the
 	  operating system.  It is also the mechanism used to trap
 	  into the operating system for <emphasis>system
-	  calls</emphasis>, as discussed in <xref
-	  linkend="system_calls"></xref> and to implement virtual
-	  memory, as discussed in <xref linkend="chapter05"></xref>.
+	  calls</emphasis>, as discussed in <xref linkend="system_calls"/> and to implement virtual
+	  memory, as discussed in <xref linkend="chapter05"/>.
 	  Although generated internally rather than from an external
 	  source, the principles of asynchronously interrupting the
 	  running code remains the same.</para>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>Types of interrupts</title>
+	<section><info><title>Types of interrupts</title></info>
+	  
 
 	  <para>There are two main ways of signalling interrupts on a
 	    line — <emphasis>level</emphasis> and
@@ -953,10 +940,10 @@ multiplex the output of the many sets, which can also add latency.
 	  <emphasis>spurious</emphasis> interrupt which should be
 	  ignored.</para>
 
-	</sect4>
+	</section>
 
-	<sect4>
-	  <title>Non-maskable interrupts</title>
+	<section><info><title>Non-maskable interrupts</title></info>
+	  
 
 	  <para>It is important for the system to be able to
 	  <emphasis>mask</emphasis> or prevent interrupts at certain
@@ -977,12 +964,12 @@ multiplex the output of the many sets, which can also add latency.
 	  profile of what code is being run and create a very useful
 	  insight into system performance.</para>
 
-	</sect4>
+	</section>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>IO Space</title>
+      <section><info><title>IO Space</title></info>
+	
 
 	<para>Obviously the processor will need to communicate with
 	the peripheral device, and it does this via IO operations.
@@ -994,12 +981,12 @@ multiplex the output of the many sets, which can also add latency.
 	simply read or write to a specific address in memory.  TODO:
 	expand</para>
 
-      </sect3>
+      </section>
 
-    </sect2>
+    </section>
 
-    <sect2>
-      <title>DMA</title>
+    <section><info><title>DMA</title></info>
+      
 
       <para>Since the speed of devices is far below the speed of processors,
     there needs to be some way to avoid making the CPU wait around
@@ -1019,17 +1006,17 @@ multiplex the output of the many sets, which can also add latency.
 	frames from a video capture card) is in memory and ready to be
 	used.</para>
 
-    </sect2>
+    </section>
 
 
-    <sect2>
-      <title>Other Busses</title>
+    <section><info><title>Other Busses</title></info>
+      
 
       <para>Other buses connect between the PCI bus and external
 	devices.</para>
 
-      <sect3>
-	<title>USB</title>
+      <section><info><title>USB</title></info>
+	
 
 	<para>From an operating system point of view, a USB device is
 	a group of end-points grouped together into an interface. An
@@ -1068,27 +1055,25 @@ multiplex the output of the many sets, which can also add latency.
 	<emphasis>configurations</emphasis>.  However Most devices
 	only have a single configuration.</para>
 
-      <figure id="uhci">
-      <title>Overview of a UHCI controller operation</title>
+      <figure xml:id="uhci"><info><title>Overview of a UHCI controller operation</title></info>
+      
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="chapter02/images/uhci.eps" format="EPS" />
+	  <imagedata fileref="chapter02/images/uhci.eps" format="EPS"/>
 	</imageobject>
 	<imageobject role="fo">
-	  <imagedata fileref="chapter02/images/uhci.svg" format="SVG"
-	  scalefit="1" width="100%" contentdept="100%"/>
+	  <imagedata fileref="images/uhci.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	</imageobject>
 	<imageobject role="html">
-	  <imagedata fileref="chapter02/images/uhci.png" format="PNG" />
+	  <imagedata fileref="chapter02/images/uhci.png" format="PNG"/>
 	</imageobject>
 	    <caption><para>An overview of a UCHI controller, taken
-  from <ulink
-  url="http://download.intel.com/technology/usb/UHCI11D.pdf">Intel
-  documentation</ulink>.</para></caption>
+  from <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://download.intel.com/technology/usb/UHCI11D.pdf">Intel
+  documentation</link>.</para></caption>
 	  </mediaobject>
 	</figure>
 
-	<para><xref linkend="uhci"></xref> shows an overview of a
+	<para><xref linkend="uhci"/> shows an overview of a
 	universal host controller interface, or UHCI.  It provides an
 	overview of how USB data is moved out of the system by a
 	combination of hardware and software.  Essentially, the
@@ -1127,13 +1112,13 @@ multiplex the output of the many sets, which can also add latency.
 	gets sent off to the USB device by the USB core, and when its
 	done your call-back is triggered.</para>
 
-      </sect3>
+      </section>
 
-  </sect2>
-  </sect1>
+  </section>
+  </section>
 
-  <sect1 id="small_to_big_systems">
-    <title>Small to big systems</title>
+  <section xml:id="small_to_big_systems"><info><title>Small to big systems</title></info>
+    
 
     <para>As Moore's law has predicted, computing power has been
     growing at a furious pace and shows no signs of slowing down.  It
@@ -1141,8 +1126,8 @@ multiplex the output of the many sets, which can also add latency.
     single CPU.  This is achieved in a number of different
     fashions.</para>
 
-    <sect2 id="symmetric_multi_processing">
-      <title>Symmetric Multi-Processing</title>
+    <section xml:id="symmetric_multi_processing"><info><title>Symmetric Multi-Processing</title></info>
+      
 
       <para>Symmetric Multi-Processing, commonly shortened to
       <emphasis>SMP</emphasis>, is currently the most common
@@ -1154,8 +1139,8 @@ multiplex the output of the many sets, which can also add latency.
       SMP system there are multiple processors that share other all
       other system resources (memory, disk, etc).</para>
 
-      <sect3>
-	<title>Cache Coherency</title>
+      <section><info><title>Cache Coherency</title></info>
+	
 
 	<para>For the most part, the CPUs in the system work
       independently; each has its own set of registers, program
@@ -1253,10 +1238,10 @@ multiplex the output of the many sets, which can also add latency.
 	hardware is doing underneath in response to the programs they
 	design to maximise performance.</para>
 
-	<sect4 id="cache_exclusivity_in_smp">
-	  <title>Cache exclusivity in SMP systems</title>
+	<section xml:id="cache_exclusivity_in_smp"><info><title>Cache exclusivity in SMP systems</title></info>
+	  
 
-	  <para>In <xref linkend="cache_in_depth"></xref> we described
+	  <para>In <xref linkend="cache_in_depth"/> we described
 	    <emphasis>inclusive</emphasis> v
 	    <emphasis>exclusive</emphasis> caches.  In general, L1
 	    caches are usually inclusive — that is all data in
@@ -1283,12 +1268,12 @@ multiplex the output of the many sets, which can also add latency.
 	    the extra coherency logic to the L2 (which, as we
 	    mentioned, already has a larger part to play in cache
 	    coherency).</para>
-	</sect4>
+	</section>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Hyperthreading</title>
+      <section><info><title>Hyperthreading</title></info>
+	
 
 	<para>Much of the time of a modern processor is spent waiting
 	for much slower devices in the memory hierarchy to deliver
@@ -1309,10 +1294,10 @@ multiplex the output of the many sets, which can also add latency.
 	20% (XXX check), however it can be drastically better or worse
 	depending on the workloads.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Multi Core</title>
+      <section><info><title>Multi Core</title></info>
+	
 
 	<para>With increased ability to fit more and more transistors
 	on a chip, it became possible to put two or more processors in
@@ -1344,11 +1329,11 @@ multiplex the output of the many sets, which can also add latency.
 	considerably cheaper to only have to produce one chip rather
 	than two.</para>
 
-      </sect3>
-    </sect2>
+      </section>
+    </section>
 
-      <sect2>
-	<title>Clusters</title>
+      <section><info><title>Clusters</title></info>
+	
 
 	<para>Many applications require systems much larger than the
 	number of processors a SMP system can scale to.  One way of
@@ -1402,10 +1387,10 @@ multiplex the output of the many sets, which can also add latency.
 	had their special effects rendered on a huge cluster running
 	Linux.</para>
 
-      </sect2>
+      </section>
 
-      <sect2>
-	<title>Non-Uniform Memory Access</title>
+      <section><info><title>Non-Uniform Memory Access</title></info>
+	
 
 	<para>Non-Uniform Memory Access, more commonly abbreviated to
 	NUMA, is almost the opposite of a cluster system mentioned
@@ -1425,8 +1410,8 @@ multiplex the output of the many sets, which can also add latency.
       processor or SMP system where RAM is directly attached and
       always takes a constant (uniform) time to access.</para>
 
-      <sect3>
-	<title>NUMA Machine Layout</title>
+      <section><info><title>NUMA Machine Layout</title></info>
+	
 
       <para>With so many nodes talking to each other in a system,
       minimising the distance between each node is of paramount
@@ -1450,22 +1435,21 @@ multiplex the output of the many sets, which can also add latency.
       counterpart of a square, so a hypercube is a 4 dimensional
       counterpart of a cube.</para>
 
-      <figure>
-      <title>A Hypercube</title>
+      <figure><info><title>A Hypercube</title></info>
+      
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="chapter02/figures/hypercube.eps" format="EPS" />
+	  <imagedata fileref="chapter02/figures/hypercube.eps" format="EPS"/>
 	</imageobject>
 	<imageobject role="fo">
-	  <imagedata fileref="chapter02/figures/hypercube.svg"
-	  format="SVG" scalefit="1" width="100%" contentdept="100%"/>
+	  <imagedata fileref="figures/hypercube.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	</imageobject>
 	<imageobject role="html">
-	  <imagedata fileref="chapter02/figures/hypercube.png" format="PNG" />
+	  <imagedata fileref="chapter02/figures/hypercube.png" format="PNG"/>
 	</imageobject>
-	  <caption>An example of a hypercube.  Hypercubes provide a
+	  <caption><para>An example of a hypercube.  Hypercubes provide a
 	  good trade off between distance between nodes and number of
-	  interconnections required.</caption>
+	  interconnections required.</para></caption>
       </mediaobject>
 
     </figure>
@@ -1478,10 +1462,10 @@ multiplex the output of the many sets, which can also add latency.
       number of processors grow by 2<superscript>n</superscript> the
       maximum path cost grows only linearly.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Cache Coherency</title>
+      <section><info><title>Cache Coherency</title></info>
+	
 
       <para>Cache coherency can still be maintained in a NUMA system
       (this is referred to as a cache-coherent NUMA system, or
@@ -1530,10 +1514,10 @@ multiplex the output of the many sets, which can also add latency.
 	network to talk between each other, rather than a CPU bus,
 	allowing scaling to much larger systems.</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>NUMA Applications</title>
+      <section><info><title>NUMA Applications</title></info>
+	
 
       <para>NUMA systems are best suited to the types of problems that
       require much interaction between processor and memory.  For
@@ -1561,13 +1545,13 @@ multiplex the output of the many sets, which can also add latency.
       and what consequences their code is causing for the system to
       extract best performance.</para>
 
-      </sect3>
+      </section>
 
-      </sect2>
+      </section>
 
 
-    <sect2>
-      <title>Memory ordering, locking and atomic operations</title>
+    <section><info><title>Memory ordering, locking and atomic operations</title></info>
+      
 
       <para>The multi-level cache, superscalar multi-processor
       architecture brings with it some insteresting issues relating to
@@ -1596,11 +1580,10 @@ multiplex the output of the many sets, which can also add latency.
 
       <para>Take, for example, the following situation.</para>
 
-      <example>
-	<title>Memory Ordering</title>
-	  <programlisting linenumbering="numbered" lang="C">
-              <xi:include href="chapter02/code/memorder.c" parse="text"
-              xmlns:xi="http://www.w3.org/2001/XInclude" />
+      <example><info><title>Memory Ordering</title></info>
+	
+	  <programlisting linenumbering="numbered" xml:lang="C">
+              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/memorder.c" parse="text"/>
             </programlisting>
 	</example>
 
@@ -1634,21 +1617,20 @@ multiplex the output of the many sets, which can also add latency.
       processed, you can be store that any earlier load or stores will
       have been complete.</para>
 
-    <figure>
-	<title>Acquire and Release semantics</title>
+    <figure><info><title>Acquire and Release semantics</title></info>
+	
 	<mediaobject>
 	<imageobject>
-	  <imagedata fileref="chapter02/figures/memorder.eps" format="EPS" />
+	  <imagedata fileref="chapter02/figures/memorder.eps" format="EPS"/>
 	</imageobject>
 	<imageobject role="fo">
-	  <imagedata fileref="chapter02/figures/memorder.svg"
-	  format="SVG" scalefit="1" width="100%" contentdept="100%"/>
+	  <imagedata fileref="figures/memorder.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
 	</imageobject>
 	<imageobject role="html">
-	  <imagedata fileref="chapter02/figures/memorder.png" format="PNG" />
+	  <imagedata fileref="chapter02/figures/memorder.png" format="PNG"/>
 	</imageobject>
-	  <caption>An illustration of valid reorderings around
-	  operations with acquire and release semantics. </caption>
+	  <caption><para>An illustration of valid reorderings around
+	  operations with acquire and release semantics.</para> </caption>
       </mediaobject>
     </figure>
 
@@ -1660,8 +1642,8 @@ multiplex the output of the many sets, which can also add latency.
       for every operation.  The weakest model would leave every load
       and store as a normal re-orderable instruction.</para>
 
-      <sect3>
-	<title>Processors and memory models</title>
+      <section><info><title>Processors and memory models</title></info>
+	
 
 	<para>Different processors implement different memory
 	models.</para>
@@ -1675,10 +1657,10 @@ multiplex the output of the many sets, which can also add latency.
 	<para>Itanium allows all load and stores to be normal, unless
 	explicitly told. XXX</para>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Locking</title>
+      <section><info><title>Locking</title></info>
+	
 
 	<para>Knowing the memory ordering requirements of each
 	architecture is no practical for all programmers, and would
@@ -1712,8 +1694,8 @@ multiplex the output of the many sets, which can also add latency.
 	<computeroutput>lock()</computeroutput> and
 	<computeroutput>unlock()</computeroutput>.</para>
 
-	<sect4>
-	  <title>Locking difficulties</title>
+	<section><info><title>Locking difficulties</title></info>
+	  
 
 	  <para>Locking schemes make programming more complicated, as
 	  it is possible to <emphasis>deadlock</emphasis> programs.
@@ -1750,11 +1732,11 @@ multiplex the output of the many sets, which can also add latency.
 	  ends up going through the door!).
 	  </para>
 
-	</sect4>
+	</section>
 
 
-	<sect4>
-	  <title>Locking strategies</title>
+	<section><info><title>Locking strategies</title></info>
+	  
 
 	  <para>Underneath, there are many different strategies for
 	  implementing the behaviour of locks.</para>
@@ -1802,26 +1784,19 @@ multiplex the output of the many sets, which can also add latency.
 	  done because everyone is waiting to obtain the same lock for
 	  some data.  </para>
 
-	</sect4>
+	</section>
 
-      </sect3>
+      </section>
 
-      <sect3>
-	<title>Atomic Operations</title>
+      <section><info><title>Atomic Operations</title></info>
+	
 
 	<para>Explain what it is.</para>
 
-      </sect3>
-    </sect2>
+      </section>
+    </section>
 
 
-  </sect1>
+  </section>
 
 </chapter>
-
-<!--
-Local Variables:
-mode: sgml
-sgml-parent-document: ("../csbu.xml" "book" "chapter")
-End:
--->

@@ -1,4 +1,6 @@
 .gitignore
+*~
+*.bak
 input/chapter*/figures/*.png
 input/chapter*/figures/*.svg
 html.output/*
