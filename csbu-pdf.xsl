@@ -4,7 +4,10 @@
     xmlns:d="http://docbook.org/ns/docbook"
     version="1.0">
 
-<xsl:import href="docbook-xsl-ns-1.79.0/fo/docbook.xsl"/>
+<xsl:import href="docbook-xsl-ns-1.79.1/fo/docbook.xsl"/>
+<xsl:import href="docbook-xsl-ns-1.79.1/fo/highlight.xsl"/>
+
+<xsl:param name="highlight.source" select="1" />
 
 <xsl:param name="body.font.family">Helvetica</xsl:param>
 <xsl:param name="body.font.size">11pt</xsl:param>

@@ -1,8 +1,7 @@
-<!-- Converted by db4-upgrade version 1.0 -->
-<preface xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="intro"><info><title>Introduction</title></info>
-  
-  
-  
+<preface xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="intro">
+
+  <info><title>Introduction</title></info>
+
   <section xml:id="welcome"><info><title>Welcome</title></info>
     
     <para>Welcome to Computer Science from the Bottom Up</para>

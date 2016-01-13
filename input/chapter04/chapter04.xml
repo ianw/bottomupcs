@@ -1,7 +1,8 @@
-<!-- Converted by db4-upgrade version 1.0 -->
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter04"><info><title>The Process</title></info>
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xml:id="chapter04">
 
-  
+  <info><title>The Process</title></info>
 
   <section xml:id="process"><info><title>What is a process?</title></info>
     
@@ -255,7 +256,7 @@
 	<example xml:id="stack-pointer"><info><title>Stack pointer example</title></info>
 	  
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/sp.txt" parse="text"/>
+              <xi:include href="code/sp.txt" parse="text"/>
             </programlisting>
 	</example>    
 	
@@ -473,7 +474,7 @@
     <example xml:id="pstree"><info><title><command>pstree</command> example</title></info>
       
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/pstree.txt" parse="text"/>
+              <xi:include href="code/pstree.txt" parse="text"/>
             </programlisting>
     </example>    
 
@@ -728,8 +729,8 @@
 
 	<example xml:id="zombie-example"><info><title>Zombie example process</title></info>
 	  
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/zombie.txt" parse="text"/>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="code/zombie.txt" parse="text"/>
             </programlisting>
 	</example>    
 
@@ -1062,7 +1063,7 @@ get around to interacting with it wants a fast response).</para></section>
       <example xml:id="signal-example"><info><title>Signals Example</title></info>
 	
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/signal.txt" parse="text"/>
+              <xi:include href="code/signal.txt" parse="text"/>
             </programlisting>
       </example>
 

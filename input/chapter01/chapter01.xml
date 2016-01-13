@@ -1,7 +1,10 @@
-<!-- Converted by db4-upgrade version 1.0 -->
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter01"><info><title>Binary and Number Representation</title></info>
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xml:id="chapter01">
 
-  
+  <info>
+    <title>Binary and Number Representation</title>
+  </info>
 
   <section xml:id="binary"><info><title>Binary — the basis of computing</title></info>
     
@@ -1045,10 +1048,10 @@
 	variations on this basic code very often.
 	</para>
 
-	<example xml:id="flag-code"><info><title>Using flags</title></info>
-	  
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/flags.c" parse="text"/>
+	<example xml:id="flag-code">
+          <info><title>Using flags</title></info>
+	  <programlisting language="c" linenumbering="numbered">
+              <xi:include href="code/flags.c" parse="text"/>
             </programlisting>
 	</example>
 
@@ -1447,7 +1450,7 @@
 	<example xml:id="type-warnings"><info><title>Example of warnings when types are not matched</title></info>
 	  
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/type-warnings.txt" parse="text"/>
+              <xi:include  href="code/type-warnings.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -1869,7 +1872,7 @@
 	<example xml:id="float-v-double"><info><title>Floats versus Doubles</title></info>
 	  
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/floatvdouble.txt" parse="text"/>
+              <xi:include href="code/floatvdouble.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -1999,8 +2002,8 @@
 
 	    <example xml:id="ffs"><info><title>Program to find first set bit</title></info>
 	    
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/ffs.c" parse="text"/>
+	  <programlisting linenumbering="numbered" language="c">
+              <xi:include href="code/ffs.c" parse="text"/>
             </programlisting>
 	  </example>
 
@@ -2020,8 +2023,8 @@
 
 	  <example xml:id="float-examine"><info><title>Examining Floats</title></info>
 	    
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/float.c" parse="text"/>
+	  <programlisting linenumbering="numbered" language="c">
+              <xi:include href="code/float.c" parse="text"/>
             </programlisting>
 
 	  </example>

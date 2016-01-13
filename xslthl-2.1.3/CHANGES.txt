@@ -1,0 +1,44 @@
+2.1.3
+
+* Added support for Saxon 9.6
+* Restored Wiki documentation
+
+2.1.0
+
+* Bug fixes (NPE, IOB)
+* Added support for SaxonEE connector
+* Added new syntax highlighter for HTML
+  Basicaly same as for XML, but handles better some edge cases
+* New syntax configurations for:
+  - bourne (Bourne shell)
+  - css21/css (Cascading Stylesheets version 2.1)
+  - cmake
+  - upc (Unified Parallel C)
+  - lua
+  - sql92
+  - sql1999 (SQL:1999)
+  - sql2003/sql (SQL:2003)
+* New option for the Number highlighter: letterNoFollow
+  If set, numbers may not contain a letter at the end. For example: 123kg will 
+  not be seen as a number. This was the default before version 2.1
+* New option for the Heredoc highlighter: flag
+  Flags that can be put after the start. This parameter can be used more than 
+  once. For example in the Bourne shell the following is valid start of a 
+  heredoc section: <<-FOO. In this case '-' would be a flag.
+* New options for the Keyword highlighter:
+  - beginChars: a string of characters which should also be considered as 
+    beginning part of an identifier. Together with partChars this will allow 
+    you to extend the range of characters which make up an identifier in the 
+    language. By default the Java functions Character.isJavaIdentifierStart
+    and Character.isJavaIdentifierPart are used to find identifiers.
+  - partChars: a string of characters which should also be considered as 
+    part of an identifier.
+  - exclusiveChars: this is a switch, if present only the characters defined 
+    by beginChars and partChars will be considered as part of the identifiers. 
+* Updated keywords for PHP 5.3 
+* Added LINQ keywords to C# configuration
+* Additional keywords added to Delphi configuration
+* Basic plugin support to load additional highlighter implementations in Java.
+  See the following wiki page for some additional info:
+  https://sourceforge.net/apps/mediawiki/xslthl/index.php?title=Syntax_Highlighters#Plugin_highlighter 
+    

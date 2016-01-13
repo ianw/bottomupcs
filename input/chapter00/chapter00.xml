@@ -1,10 +1,11 @@
-<!-- Converted by db4-upgrade version 1.0 -->
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter00"><info><title>General Unix and Advanced C</title></info>
-
-  
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xml:id="chapter00">
+  <info>
+    <title>General Unix and Advanced C</title>
+  </info>
 
   <section xml:id="everything_is_a_file"><info><title><emphasis>Everything is a file!</emphasis></title></info>
-    
 
     <para>An often quoted tenet of UNIX-like systems such as Linux or
     BSD is <emphasis>everything is a file</emphasis>.</para>
@@ -121,7 +122,7 @@
       <example xml:id="abstraction-code"><info><title>Abstraction with function pointers</title></info>
 	
         <programlisting language="c">
-          <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/abstraction.c" parse="text"/>
+          <xi:include href="code/abstraction.c" parse="text"/>
         </programlisting>
       </example>
 
@@ -182,7 +183,7 @@
 	<computeroutput>include/linux/virtio.h</computeroutput></title></info>
 	
 	<programlisting language="c">
-          <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/virtio.h" parse="text"/>
+          <xi:include href="code/virtio.h" parse="text"/>
         </programlisting>
       </example>
 
@@ -373,8 +374,8 @@
 
       <example xml:id="major-minor-numbers"><info><title>Example of major and minor numbers</title></info>
       
-      <programlisting language="c">
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/major-minor.txt" parse="text"/>
+      <programlisting>
+        <xi:include href="code/major-minor.txt" parse="text"/>
       </programlisting>
       </example>
 

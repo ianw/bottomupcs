@@ -1,7 +1,8 @@
-<!-- Converted by db4-upgrade version 1.0 -->
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter06"><info><title>The Toolchain</title></info>
-  
-  
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xml:id="chapter06">
+
+<info><title>The Toolchain</title></info>
 
   <section xml:id="compiled_v_interpreted"><info><title>Compiled v Interpreted Programs</title></info>
     
@@ -244,7 +245,7 @@
 	  <example xml:id="struct-padding"><info><title>Struct padding example</title></info>
 	    
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/struct-padding.txt" parse="text"/>
+              <xi:include href="code/struct-padding.txt" parse="text"/>
             </programlisting>
 	  </example>
 
@@ -346,7 +347,7 @@
 	  <example xml:id="stack-padding"><info><title>Stack alignment example</title></info>
 	    
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/stack-align.txt" parse="text"/>
+              <xi:include href="code/stack-align.txt" parse="text"/>
             </programlisting>
 	  </example>
 
@@ -379,7 +380,7 @@
 	  <example xml:id="page-alignment"><info><title>Page alignment manipulations</title></info>
 	    
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/page.txt" parse="text"/>
+              <xi:include href="code/page.txt" parse="text"/>
             </programlisting>
 	  </example>
 
@@ -679,16 +680,16 @@
 
     <example xml:id="c-hello"><info><title>Hello World</title></info>
       
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/hello.c" parse="text"/>
+	  <programlisting linenumbering="numbered" language="c">
+              <xi:include href="code/hello.c" parse="text"/>
             </programlisting>
     </example>    
 
     <example><info><title>Function Example</title></info>
       
 
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/function.c" parse="text"/>
+	  <programlisting linenumbering="numbered" language="c">
+              <xi:include href="code/function.c" parse="text"/>
             </programlisting>
     </example>
 
@@ -708,7 +709,7 @@
       <example><info><title>Compilation Example</title></info>
 	
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/compiled.txt" parse="text"/>
+              <xi:include href="code/compiled.txt" parse="text"/>
             </programlisting>
       </example>
 
@@ -736,7 +737,7 @@
       <example><info><title>Assembly Example</title></info>
 	
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/assembly.txt" parse="text"/>
+              <xi:include href="code/assembly.txt" parse="text"/>
             </programlisting>
       </example>
 
@@ -758,7 +759,7 @@
       <example><info><title>Readelf Example</title></info>
 	
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/readelf.txt" parse="text"/>
+              <xi:include href="code/readelf.txt" parse="text"/>
             </programlisting>
       </example>
 
@@ -824,7 +825,7 @@
       <example><info><title>Linking Example</title></info>
 	
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/linking.txt" parse="text"/>
+              <xi:include href="code/linking.txt" parse="text"/>
             </programlisting>
       </example>
 
@@ -895,7 +896,7 @@
       <example><info><title>Executable Example</title></info>
 	
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/executable.txt" parse="text"/>
+              <xi:include  href="code/executable.txt" parse="text"/>
             </programlisting>
       </example>
 

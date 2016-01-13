@@ -1,5 +1,8 @@
-<!-- Converted by db4-upgrade version 1.0 -->
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter02"><info><title>Computer Architecture</title></info>
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xml:id="chapter02">
+
+  <info><title>Computer Architecture</title></info>
 
   
 
@@ -1582,8 +1585,8 @@ multiplex the output of the many sets, which can also add latency.
 
       <example><info><title>Memory Ordering</title></info>
 	
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/memorder.c" parse="text"/>
+	  <programlisting linenumbering="numbered" language="c">
+              <xi:include href="code/memorder.c" parse="text"/>
             </programlisting>
 	</example>
 

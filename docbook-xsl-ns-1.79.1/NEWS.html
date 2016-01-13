@@ -1,0 +1,786 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Changes since the 1.78.1 release</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><meta name="description" content="Note: This document lists changes only since the 1.78.1 release. If you instead want a record of the complete list of changes for the codebase over its entire history, you can obtain one by running the following commands: svn checkout svn://svn.code.sf.net/p/docbook/code/trunk/xsl svn log --xml --verbose xsl &gt; ChangeHistory.xml"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="article"><div class="titlepage"><div><div><h2 class="title"><a name="idp7456"></a>Changes since the 1.78.1 release</h2></div><div><div class="abstract">
+<p><span class="strong"><strong>Note:</strong></span> This
+            document lists changes only since the 1.78.1 release.
+            If you instead want a record of the complete list of
+            changes for the codebase over its entire history, you
+            can obtain one by running the following commands:
+            
+</p><pre class="screen">  <code class="code">svn checkout svn://svn.code.sf.net/p/docbook/code/trunk/xsl</code>
+  <code class="code">svn log --xml --verbose xsl &gt; ChangeHistory.xml</code></pre>
+</div></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl class="toc"><dt><span class="section"><a href="#V1.79.1">Release Notes: 1.79.1</a></span></dt><dd><dl><dt><span class="section"><a href="#V1.79.1_Gentext">Gentext</a></span></dt><dt><span class="section"><a href="#V1.79.1_Common">Common</a></span></dt><dt><span class="section"><a href="#V1.79.1_FO">FO</a></span></dt><dt><span class="section"><a href="#V1.79.1_HTML">HTML</a></span></dt><dt><span class="section"><a href="#V1.79.1_Manpages">Manpages</a></span></dt><dt><span class="section"><a href="#V1.79.1_Epub">Epub</a></span></dt><dt><span class="section"><a href="#V1.79.1_HTMLHelp">HTMLHelp</a></span></dt><dt><span class="section"><a href="#V1.79.1_Eclipse">Eclipse</a></span></dt><dt><span class="section"><a href="#V1.79.1_JavaHelp">JavaHelp</a></span></dt><dt><span class="section"><a href="#V1.79.1_Slides">Slides</a></span></dt><dt><span class="section"><a href="#V1.79.1_Website">Website</a></span></dt><dt><span class="section"><a href="#V1.79.1_Webhelp">Webhelp</a></span></dt><dt><span class="section"><a href="#V1.79.1_Params">Params</a></span></dt><dt><span class="section"><a href="#V1.79.1_Profiling">Profiling</a></span></dt><dt><span class="section"><a href="#V1.79.1_Lib">Lib</a></span></dt><dt><span class="section"><a href="#V1.79.1_Tools">Tools</a></span></dt><dt><span class="section"><a href="#V1.79.1_Template">Template</a></span></dt><dt><span class="section"><a href="#V1.79.1_Extensions">Extensions</a></span></dt></dl></dd></dl></div>
+
+
+<div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="V1.79.1"></a>Release Notes: 1.79.1</h2></div></div></div>
+
+<p>The following is a list of changes that have been made
+        since the 1.78.1 release.</p>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_Gentext"></a>Gentext</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">gentext</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Robert Stayton: locale/hu.xml</code></p><pre class="screen"><span class="commit-message">Check in <a href="http://docbook.org/tdg5/en/html/pubdate.html"><code class="sgmltag-element">PubDate</code></a> fixes from bug #1372</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Dongsheng Song: locale/zh.xml; locale/zh_cn.xml</code></p><pre class="screen"><span class="commit-message">Fix Auditlocale.pl warning.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: locale/en.xml</code></p><pre class="screen"><span class="commit-message">Add elements dialogue, drama, and poetry from DocBook Publishers.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: locale/pt.xml</code></p><pre class="screen"><span class="commit-message">updates from DocBook user.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: locale/en.xml</code></p><pre class="screen"><span class="commit-message">Fix wording.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: locale/en.xml</code></p><pre class="screen"><span class="commit-message">Fix line breaks.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: locale/en.xml</code></p><pre class="screen"><span class="commit-message">Add text message for unsupported video and audio.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: xsl/xsl-primary-is-locale.xsl</code></p><pre class="screen"><span class="commit-message">Initial work on Ant build, common (L10N) directory handled so far</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: locale/ur.xml</code></p><pre class="screen"><span class="commit-message">Add <a href="http://docbook.org/tdg5/en/html/email.html"><code class="sgmltag-element">email</code></a> <a href="http://docbook.org/tdg5/en/html/address.html"><code class="sgmltag-element">address</code></a> for contributor.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: locale/ur.xml</code></p><pre class="screen"><span class="commit-message">Check in contributed locale file from Wasif Hasan Baig,
+contributed through SourceForge Patch # 187.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">kasunbg: locale/nl.xml</code></p><pre class="screen"><span class="commit-message">Committing Dutch translations of DocBook WebHelp. Patch provided by Marja van Waes.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">kasunbg: locale/ru.xml</code></p><pre class="screen"><span class="commit-message">Committing patch for Russian translations of webhelp. Patch provided by Alex Loginov and Yuri Chornoivan. Patch #1325</span></pre>
+</li><li class="listitem">
+<p><code class="literal">kasunbg: locale/uk.xml</code></p><pre class="screen"><span class="commit-message">Committing Ukrainian translations for Webhelp. Patch by Yuri Chornoivan. Patch #1324</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: locale/ca.xml; locale/da.xml; locale/cs.xml; locale/es.xml; locale/fr.xml; local&#8943;</code></p><pre class="screen"><span class="commit-message">Added missing <a href="http://docbook.org/tdg5/en/html/keycap.html"><code class="sgmltag-element">keycap</code></a> context for ca, cs, da, es, et, eu, and fr</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: locale/en.xml; locale/de.xml</code></p><pre class="screen"><span class="commit-message">Added option key for <a href="http://docbook.org/tdg5/en/html/keycap.html"><code class="sgmltag-element">keycap</code></a> context</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: locale/de.xml</code></p><pre class="screen"><span class="commit-message">Added key="optional-step" as done in r9745</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: locale/en.xml</code></p><pre class="screen"><span class="commit-message">Add key="optional-step".</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_Common"></a>Common</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">common</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">tom_schr: common.xsl</code></p><pre class="screen"><span class="commit-message">Added quotes around linkend to make spaces visible</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Added ant build for HTML stylesheets</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Initial work on Ant build, common (L10N) directory handled so far</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: titles.xsl</code></p><pre class="screen"><span class="commit-message">Replace hardcoded English text for <a href="http://docbook.org/tdg5/en/html/question.html"><code class="sgmltag-element">question</code></a> and <a href="http://docbook.org/tdg5/en/html/answer.html"><code class="sgmltag-element">answer</code></a> elements 
+in mode="title.markup" with localized templates.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: addns.xsl</code></p><pre class="screen"><span class="commit-message">Move addns.xsl module from releasetools to common in preparation
+for switching to ns as the base stylesheets.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: l10n.xml; Makefile</code></p><pre class="screen"><span class="commit-message">Add new locale file ur.xml for Urdu.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: titles.xsl</code></p><pre class="screen"><span class="commit-message">Add missing template with match="<a href="http://docbook.org/tdg5/en/html/toc.html"><code class="sgmltag-element">toc</code></a>" mode="title.markup".</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: titles.xsl</code></p><pre class="screen"><span class="commit-message">Fixed problem when referencing empty ulinks; use @url instead</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: olink.xsl</code></p><pre class="screen"><span class="commit-message">Make <a href="http://docbook.org/tdg5/en/html/olink.html"><code class="sgmltag-element">olink</code></a> errors/warnings overridable in customizations.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: labels.xsl</code></p><pre class="screen"><span class="commit-message">Pass the object referenced as a parameter to mode="intralabel.punctuation"
+template.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: olink.xsl</code></p><pre class="screen"><span class="commit-message">1. Make page citations on &lt;<a href="http://docbook.org/tdg5/en/html/xref.html"><code class="sgmltag-element">xref</code></a>/&gt; to paragraphs conditional on a new parameter,
+$insert.xref.page.number.para, default to 'yes' (before, page citations were
+added unconditionally). Remove similar special-casing for &lt;<a href="http://docbook.org/tdg5/en/html/link.html"><code class="sgmltag-element">link</code></a>/&gt;.
+
+2. Disable page citations for @xrefstyle="template:..." (if needed, they
+can be added with %p in the template - but they can't be disabled).</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: olink.xsl; titles.xsl; common.xsl</code></p><pre class="screen"><span class="commit-message">Pass referrer and target params to mode="xrefstyle" to allow customizations
+to be more specific.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: olink.xsl; titles.xsl; common.xsl</code></p><pre class="screen"><span class="commit-message">Add mode="xrefstyle" to replace many instances of redundant
+code determining the xrefstyle with xsl:apply-templates
+select="." mode="xrefstyle".  Also allows stylesheet
+customization to specify an xrefstyle per element type.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: gentext.xsl; labels.xsl</code></p><pre class="screen"><span class="commit-message">Add support for <a href="http://docbook.org/tdg5/en/html/procedure.html"><code class="sgmltag-element">procedure</code></a> <a href="http://docbook.org/tdg5/en/html/title.html"><code class="sgmltag-element">title</code></a> contained in <a href="http://docbook.org/tdg5/en/html/info.html"><code class="sgmltag-element">info</code></a> or blockinfo.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: common.xsl</code></p><pre class="screen"><span class="commit-message">In person.name template, change 'style' variable to a param
+so the name style can be selected by passing a param.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: gentext.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug in <a href="http://docbook.sourceforge.net/release/xsl/current/doc/html/collect.xref.targets.html"><em class="parameter"><code>collect.xref.targets</code></em></a> that failed when $referrer template
+param not set by <a href="http://docbook.org/tdg5/en/html/olink.html"><code class="sgmltag-element">olink</code></a>'s xref-to. Fixed using submitted patch.</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_FO"></a>FO</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">fo</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Robert Stayton: lists.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #1368 "<a href="http://docbook.org/tdg5/en/html/link.html"><code class="sgmltag-element">link</code></a> to <a href="http://docbook.org/tdg5/en/html/term.html"><code class="sgmltag-element">term</code></a> with id does not work"</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: block.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #1367 double <a href="http://docbook.org/tdg5/en/html/attribution.html"><code class="sgmltag-element">attribution</code></a> in <a href="http://docbook.org/tdg5/en/html/epigraph.html"><code class="sgmltag-element">epigraph</code></a>.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: param.xweb; param.ent</code></p><pre class="screen"><span class="commit-message">Add missing <a href="http://docbook.sourceforge.net/release/xsl/current/doc/html/profile.outputformat.html"><em class="parameter"><code>profile.outputformat</code></em></a> param.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: publishers.xsl</code></p><pre class="screen"><span class="commit-message">Fix namespace declarations.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: titlepage.xsl</code></p><pre class="screen"><span class="commit-message">Add default attribute-sets for new Publishers elements.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: param.ent</code></p><pre class="screen"><span class="commit-message">Fix typo</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: titlepage.templates.xml</code></p><pre class="screen"><span class="commit-message">Add new DocBook Publishers elements.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Add inclusion of new publishers.xsl module.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: publishers.xsl</code></p><pre class="screen"><span class="commit-message">Stylesheet module added to support new elements in DocBook Publishers.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: param.xweb; param.ent</code></p><pre class="screen"><span class="commit-message">Add the 9 new attribute sets for DocBook Publishers.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xref.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #1355 <a href="http://docbook.org/tdg5/en/html/glossseealso.html"><code class="sgmltag-element">glossseealso</code></a> generates duplicate id in certain cases.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xref.xsl</code></p><pre class="screen"><span class="commit-message">fix bug #1360 <a href="http://docbook.org/tdg5/en/html/indexterm.html"><code class="sgmltag-element">indexterm</code></a> in <a href="http://docbook.org/tdg5/en/html/varlistentry.html"><code class="sgmltag-element">varlistentry</code></a>/<a href="http://docbook.org/tdg5/en/html/term.html"><code class="sgmltag-element">term</code></a> generates an error when <a href="http://docbook.org/tdg5/en/html/xref.html"><code class="sgmltag-element">xref</code></a> to that <a href="http://docbook.org/tdg5/en/html/term.html"><code class="sgmltag-element">term</code></a>.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: inline.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #13598 inline.monoseq and other inline.*seq handle links incorrectly.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: pi.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug in dbfo-need for admonitions, and get dbfo-need
+working properly in FOP1.1.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: pagesetup.xsl</code></p><pre class="screen"><span class="commit-message">Remove obsolete hardcoded margin-left="0pt" for the block
+containing header or footer.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: graphics.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #1336 to add support for recognizing
+file:/ image URLs as absolute paths.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: autotoc.xsl</code></p><pre class="screen"><span class="commit-message">Add support in <a href="http://docbook.org/tdg5/en/html/toc.html"><code class="sgmltag-element">TOC</code></a> for <a href="http://docbook.org/tdg5/en/html/article.html"><code class="sgmltag-element">article</code></a> as child of set.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xref.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #1337 Elements with <a href="http://docbook.org/tdg5/en/html/olink.html"><code class="sgmltag-element">olink</code></a> role do not behave as <a href="http://docbook.org/tdg5/en/html/olink.html"><code class="sgmltag-element">olink</code></a>
+elements.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Added ant build for FO</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: inline.xsl</code></p><pre class="screen"><span class="commit-message">Only count regular &lt;<a href="http://docbook.org/tdg5/en/html/emphasis.html"><code class="sgmltag-element">emphasis</code></a>&gt; elements (without @role="bold", etc) when determining
+whether nested <a href="http://docbook.org/tdg5/en/html/emphasis.html"><code class="sgmltag-element">emphasis</code></a> needs to be displayed in italics or in regular; otherwise,
+the order of nesting in &lt;<a href="http://docbook.org/tdg5/en/html/emphasis.html"><code class="sgmltag-element">emphasis</code></a> role="bold"&gt; and &lt;<a href="http://docbook.org/tdg5/en/html/emphasis.html"><code class="sgmltag-element">emphasis</code></a>&gt; affects the font
+used.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: fop1.xsl; ptc.xsl</code></p><pre class="screen"><span class="commit-message">Apply patch #190 to include refsections in bookmarks for fop1 and
+ptc.xsl.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: block.xsl</code></p><pre class="screen"><span class="commit-message">Change the <a href="http://docbook.org/tdg5/en/html/epigraph.html"><code class="sgmltag-element">epigraph</code></a> template to support schema extensions
+by processing all of its children instead of specific elements.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: pagesetup.xsl</code></p><pre class="screen"><span class="commit-message">Added "user.declarations" hook to implemented [#1330] 
+
+Added empty "user.declarations" template to make it easier for adding
+custom fo:declaration elements. The template is empty by default.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: inline.xsl</code></p><pre class="screen"><span class="commit-message">Fix test for nested links.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: biblio.xsl</code></p><pre class="screen"><span class="commit-message">Now <a href="http://docbook.org/tdg5/en/html/biblioset.html"><code class="sgmltag-element">biblioset</code></a> outputs its id if it has one.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xref.xsl</code></p><pre class="screen"><span class="commit-message">pass xrefstyle param from <a href="http://docbook.org/tdg5/en/html/link.html"><code class="sgmltag-element">link</code></a> element to gentext.template so
+optional page number can be formatted to a style.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Streamline handling of namespace fixup in preparation for making
+the namespaced version the source base.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: fo.xsl</code></p><pre class="screen"><span class="commit-message">FOP 1.1 now supports writing-mode="rl-tb", so add that change to the
+$direction.mode parameter.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: autoidx.xsl</code></p><pre class="screen"><span class="commit-message">Add missing xlink namespace declaration to the root element.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: param.xweb; param.ent; autoidx.xsl</code></p><pre class="screen"><span class="commit-message">Add support for $autolink.index.see to automatically form links
+between see and <a href="http://docbook.org/tdg5/en/html/seealso.html"><code class="sgmltag-element">seealso</code></a> <a href="http://docbook.org/tdg5/en/html/index.html"><code class="sgmltag-element">index</code></a> elements and <a href="http://docbook.org/tdg5/en/html/primary.html"><code class="sgmltag-element">primary</code></a> elements
+in the <a href="http://docbook.org/tdg5/en/html/index.html"><code class="sgmltag-element">index</code></a>.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: inline.xsl</code></p><pre class="screen"><span class="commit-message">Add element name to warning message for nested links.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: inline.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #1306: warn of nested links.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: component.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #1320 so template page.sequence tests $content to make
+sure it is not empty.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: autotoc.xsl; refentry.xsl; param.xweb; docbook.xsl; param.ent; component.x&#8943;</code></p><pre class="screen"><span class="commit-message">Add support for $show.bookmarks param to turn bookmarks on or
+off.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Add missing variable bookmarks.state.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Add missing $document.element variable to new generate.bookmarks
+template.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: autotoc.xsl; refentry.xsl; param.xweb; docbook.xsl; param.ent; component.x&#8943;</code></p><pre class="screen"><span class="commit-message">Add support for standard XSL 1.1 bookmarks and parameter
+$xsl1.1.bookmarks to turn them on or off.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: xref.xsl</code></p><pre class="screen"><span class="commit-message">Fix invalid href generated if $insert.olink.pdf.frag=0 and $fop1.extensions=1.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: autotoc.xsl; param.xweb; param.ent; toc.xsl</code></p><pre class="screen"><span class="commit-message">Replace <a href="http://docbook.org/tdg5/en/html/literal.html"><code class="sgmltag-element">literal</code></a> space inserted next to fo:leader in <a href="http://docbook.org/tdg5/en/html/toc.html"><code class="sgmltag-element">ToC</code></a> with a padding. This
+works around a bug in FOP (see FOP-1444).
+Make <a href="http://docbook.org/tdg5/en/html/toc.html"><code class="sgmltag-element">ToC</code></a> fo:leader properties configurable via attribute set.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: titlepage.templates.xml</code></p><pre class="screen"><span class="commit-message">Remove autoguessing of the namespace for wrapper elements; determine namespace by prefix, if any.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Mauritz Jeanson: table.xsl</code></p><pre class="screen"><span class="commit-message">Bug #1246: added missing with-param.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: xref.xsl</code></p><pre class="screen"><span class="commit-message">Make <a href="http://docbook.org/tdg5/en/html/olink.html"><code class="sgmltag-element">olink</code></a> errors/warnings overridable in customizations.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: param.xweb; param.ent; xref.xsl</code></p><pre class="screen"><span class="commit-message">1. Make page citations on &lt;<a href="http://docbook.org/tdg5/en/html/xref.html"><code class="sgmltag-element">xref</code></a>/&gt; to paragraphs conditional on a new parameter,
+$insert.xref.page.number.para, default to 'yes' (before, page citations were
+added unconditionally). Remove similar special-casing for &lt;<a href="http://docbook.org/tdg5/en/html/link.html"><code class="sgmltag-element">link</code></a>/&gt;.
+
+2. Disable page citations for @xrefstyle="template:..." (if needed, they
+can be added with %p in the template - but they can't be disabled).</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: fop1.xsl</code></p><pre class="screen"><span class="commit-message">Skip generating fox:destination on a <a href="http://docbook.org/tdg5/en/html/footnote.html"><code class="sgmltag-element">footnote</code></a> - id attribute on footnotes is not
+passed to generated FO, so FOP complains about unresolved ID in destination.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Mauritz Jeanson: lists.xsl</code></p><pre class="screen"><span class="commit-message">Fixed typo.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: lists.xsl</code></p><pre class="screen"><span class="commit-message">Fixed bug#1311 and added missing <a href="http://docbook.sourceforge.net/release/xsl/current/doc/fo/para.properties.html"><em class="parameter"><code>para.properties</code></em></a></span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xref.xsl</code></p><pre class="screen"><span class="commit-message">Pass referrer and target params to mode="xrefstyle" to allow customizations
+to be more specific.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xref.xsl</code></p><pre class="screen"><span class="commit-message">Add mode="xrefstyle" to replace many instances of redundant
+code determining the xrefstyle with xsl:apply-templates
+select="." mode="xrefstyle".  Also allows stylesheet
+customization to specify an xrefstyle per element type.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: xref.xsl</code></p><pre class="screen"><span class="commit-message">Pass referrer and xrefstyle to "xref-to-suffix" and "xref-to-prefix"
+modes (to use the same signature than "xref-to" mode) as discussed with
+Bob on the mailinglist (2013-09-12)</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: pi.xsl; verbatim.xsl</code></p><pre class="screen"><span class="commit-message">Fix for enhancement/bug#1312: Support font size in verbatim elements</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: fop1.xsl</code></p><pre class="screen"><span class="commit-message">Unchanged, testing snapshot builds.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: docbook.xsl</code></p><pre class="screen"><span class="commit-message">No change, testing snapshot builds.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: block.xsl</code></p><pre class="screen"><span class="commit-message">No change, testing snapshot builds.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: block.xsl</code></p><pre class="screen"><span class="commit-message">No change, just checking snapshot build process.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: toc.xsl</code></p><pre class="screen"><span class="commit-message">Add missing template for <a href="http://docbook.org/tdg5/en/html/tocdiv.html"><code class="sgmltag-element">tocdiv</code></a>/<a href="http://docbook.org/tdg5/en/html/title.html"><code class="sgmltag-element">title</code></a> elements to fix bug #1310.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Fix process.root template so document <a href="http://docbook.org/tdg5/en/html/title.html"><code class="sgmltag-element">title</code></a> can come from <a href="http://docbook.org/tdg5/en/html/info.html"><code class="sgmltag-element">info</code></a> as well.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: lists.xsl</code></p><pre class="screen"><span class="commit-message">Add support for <a href="http://docbook.org/tdg5/en/html/procedure.html"><code class="sgmltag-element">procedure</code></a> <a href="http://docbook.org/tdg5/en/html/title.html"><code class="sgmltag-element">title</code></a> when contained in blockinfo or <a href="http://docbook.org/tdg5/en/html/info.html"><code class="sgmltag-element">info</code></a>.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: fop1.xsl</code></p><pre class="screen"><span class="commit-message">Fix mode="fop1.foxdest" so only elements with id attribute get
+a fox:destination in the output.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: fop1.xsl</code></p><pre class="screen"><span class="commit-message">Remove extraneous call from fop1.foxdest mode per patch submission.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: autotoc.xsl</code></p><pre class="screen"><span class="commit-message">Add <a href="http://docbook.sourceforge.net/release/xsl/current/doc/fo/toc.margin.properties.html"><em class="parameter"><code>toc.margin.properties</code></em></a> attribute-set to list.of.titles so
+it matches the <a href="http://docbook.org/tdg5/en/html/toc.html"><code class="sgmltag-element">TOC</code></a> list.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: inline.xsl</code></p><pre class="screen"><span class="commit-message">Adjust exception for fop for <a href="http://docbook.org/tdg5/en/html/menuchoice.html"><code class="sgmltag-element">menuchoice</code></a> separator to
+use the $symbol.font.family if it is set.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: division.xsl</code></p><pre class="screen"><span class="commit-message">Fix comment.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: param.ent</code></p><pre class="screen"><span class="commit-message">Fix typo that prevents param.xsl update.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: lists.xsl; param.xweb; param.ent</code></p><pre class="screen"><span class="commit-message">Add <a href="http://docbook.sourceforge.net/release/xsl/current/doc/fo/mark.optional.procedure.steps.html"><em class="parameter"><code>mark.optional.procedure.steps</code></em></a> param.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: qandaset.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug in <a href="http://docbook.org/tdg5/en/html/question.html"><code class="sgmltag-element">question</code></a> template that output empty list-item-label when
+defaultlabel = 'none'.</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_HTML"></a>HTML</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">html</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Robert Stayton: block.xsl</code></p><pre class="screen"><span class="commit-message">Fix Bug #1367 <a href="http://docbook.org/tdg5/en/html/epigraph.html"><code class="sgmltag-element">epigraph</code></a> <a href="http://docbook.org/tdg5/en/html/attribution.html"><code class="sgmltag-element">attribution</code></a> appears twice in html output.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: param.xweb; param.ent</code></p><pre class="screen"><span class="commit-message">Add missing <a href="http://docbook.sourceforge.net/release/xsl/current/doc/html/profile.outputformat.html"><em class="parameter"><code>profile.outputformat</code></em></a> param.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: titlepage.xsl; docbook.xsl; titlepage.templates.xml</code></p><pre class="screen"><span class="commit-message">Add support for DocBook Publishers elements.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: publishers.xsl</code></p><pre class="screen"><span class="commit-message">New module to support new elements in DocBook Publishers schema.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: table.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #1348 where class of output <a href="http://docbook.org/tdg5/en/html/table.html"><code class="sgmltag-element">table</code></a> not being set correctly.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: table.xsl</code></p><pre class="screen"><span class="commit-message">A <a href="http://docbook.org/tdg5/en/html/table.html"><code class="sgmltag-element">table</code></a> emitted by <a href="http://docbook.org/tdg5/en/html/tgroup.html"><code class="sgmltag-element">tgroup</code></a> template now calls "common.html.attributes"
+to get the class attribute handled correctly.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: inline.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #13598 inline.monoseq and other inline.*seq handle links incorrectly.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: refentry.xsl</code></p><pre class="screen"><span class="commit-message">Add template for <a href="http://docbook.org/tdg5/en/html/refpurpose.html"><code class="sgmltag-element">refpurpose</code></a> in no.anchor.mode to generate
+the dash separator in <a href="http://docbook.org/tdg5/en/html/toc.html"><code class="sgmltag-element">TOC</code></a> line for the <a href="http://docbook.org/tdg5/en/html/refentry.html"><code class="sgmltag-element">refentry</code></a> when
+the <a href="http://docbook.org/tdg5/en/html/refpurpose.html"><code class="sgmltag-element">refpurpose</code></a> contains a <a href="http://docbook.org/tdg5/en/html/link.html"><code class="sgmltag-element">link</code></a> or <a href="http://docbook.org/tdg5/en/html/indexterm.html"><code class="sgmltag-element">indexterm</code></a>.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: inline.xsl</code></p><pre class="screen"><span class="commit-message">Add missing call to id.attribute template for <a href="http://docbook.org/tdg5/en/html/orgdiv.html"><code class="sgmltag-element">orgdiv</code></a>.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xref.xsl</code></p><pre class="screen"><span class="commit-message">If a <a href="http://docbook.org/tdg5/en/html/link.html"><code class="sgmltag-element">link</code></a> or <a href="http://docbook.org/tdg5/en/html/xref.html"><code class="sgmltag-element">xref</code></a> has an @id or @xml:id, then add a span to
+include the id because simple.xlink no longer generates the
+id attribute.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: inline.xsl</code></p><pre class="screen"><span class="commit-message">Remove call to id.attribute template in simple.xlink
+because it produces duplicate ids in the output because
+the element template calling simple.xlink generates the
+id attribute.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: graphics.xsl</code></p><pre class="screen"><span class="commit-message">Check in fix for bug #1336 to support absolute file URLs
+that start with file:/.  Also consolidate code that determines
+whether an image file path is relative into a new template
+variable $is.relative.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: chunk-code.xsl</code></p><pre class="screen"><span class="commit-message">Add support for set nested inside set to recursive-chunk-filename.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: autotoc.xsl</code></p><pre class="screen"><span class="commit-message">Add support for set <a href="http://docbook.org/tdg5/en/html/toc.html"><code class="sgmltag-element">TOC</code></a> to contain nested set or <a href="http://docbook.org/tdg5/en/html/article.html"><code class="sgmltag-element">article</code></a>
+elements.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Added clean targets</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Added ant build for HTML stylesheets</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: glossary.xsl</code></p><pre class="screen"><span class="commit-message">Move any indexterms in <a href="http://docbook.org/tdg5/en/html/glossentry.html"><code class="sgmltag-element">glossentry</code></a> to be inside dt, instead of
+after dt which is invalid.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: htmltbl.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #1334 to copy through HTML <a href="http://docbook.org/tdg5/en/html/table.html"><code class="sgmltag-element">table</code></a> attributes @scope and @id.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: block.xsl</code></p><pre class="screen"><span class="commit-message">Change the <a href="http://docbook.org/tdg5/en/html/epigraph.html"><code class="sgmltag-element">epigraph</code></a> template to support schema extensions
+by processing all of its children instead of specific elements.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: titlepage.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug in handling of multiple editors and "edited by" <a href="http://docbook.org/tdg5/en/html/label.html"><code class="sgmltag-element">label</code></a>.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: titlepage.templates.xml</code></p><pre class="screen"><span class="commit-message">Fix misnamed attribute in <a href="http://docbook.org/tdg5/en/html/sidebar.html"><code class="sgmltag-element">sidebar</code></a> template.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: inline.xsl</code></p><pre class="screen"><span class="commit-message">Fix check for nested links.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: chunk-common.xsl; chunktoc.xsl; chunk-code.xsl</code></p><pre class="screen"><span class="commit-message">Adjust handling of namespace fixup to streamline distro builds.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Adjust handling of namespace conversion to streamline distro
+build.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: table.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #1298 where @rowheader = 'firstcol' incorrectly assigns
+&lt;<a href="http://docbook.org/tdg5/en/html/th.html"><code class="sgmltag-element">th</code></a>&gt; to cell that is first in a <a href="http://docbook.org/tdg5/en/html/row.html"><code class="sgmltag-element">row</code></a> but not the first column due
+to <a href="http://docbook.org/tdg5/en/html/row.html"><code class="sgmltag-element">row</code></a> span above.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: param.xweb; param.ent; autoidx.xsl</code></p><pre class="screen"><span class="commit-message">Add support for <a href="http://docbook.sourceforge.net/release/xsl/current/doc/html/autolink.index.see.html"><em class="parameter"><code>autolink.index.see</code></em></a> param to <a href="http://docbook.org/tdg5/en/html/link.html"><code class="sgmltag-element">link</code></a> from see and
+<a href="http://docbook.org/tdg5/en/html/seealso.html"><code class="sgmltag-element">seealso</code></a> element to <a href="http://docbook.org/tdg5/en/html/primary.html"><code class="sgmltag-element">primary</code></a> element in <a href="http://docbook.org/tdg5/en/html/index.html"><code class="sgmltag-element">index</code></a>.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: inline.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #1306 warn of nested links, since not supported in the output.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: pi.xsl</code></p><pre class="screen"><span class="commit-message">Fixes bug #1323 where &lt;?dbhtml-include?&gt; paths were not being
+interpreted relative to the XML.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: param.xweb</code></p><pre class="screen"><span class="commit-message">Add missing frag for new linke.to.self.for.mediaobject param.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: table.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug in <a href="http://docbook.org/tdg5/en/html/entry.html"><code class="sgmltag-element">entry</code></a> template where rowsep was incorrectly set to zero
+for cell with @morerows in <a href="http://docbook.org/tdg5/en/html/thead.html"><code class="sgmltag-element">thead</code></a>.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: synop.xsl</code></p><pre class="screen"><span class="commit-message">Restore conditional named <a href="http://docbook.org/tdg5/en/html/anchor.html"><code class="sgmltag-element">anchor</code></a> in output if dbcmdlist PI is not used.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: graphics.xsl</code></p><pre class="screen"><span class="commit-message">Fixed [#1317]: process <a href="http://docbook.org/tdg5/en/html/alt.html"><code class="sgmltag-element">alt</code></a> in <a href="http://docbook.org/tdg5/en/html/inlinemediaobject.html"><code class="sgmltag-element">inlinemediaobject</code></a></span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: param.xweb; graphics.xsl; param.ent</code></p><pre class="screen"><span class="commit-message">Fixed ticket [#1315]: Add possibility to add a <a href="http://docbook.org/tdg5/en/html/link.html"><code class="sgmltag-element">link</code></a> to mediaobjects</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: titlepage.templates.xml</code></p><pre class="screen"><span class="commit-message">Remove autoguessing of the namespace for wrapper elements; determine namespace by prefix, if any.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: chunk-common.xsl; xref.xsl</code></p><pre class="screen"><span class="commit-message">Make <a href="http://docbook.org/tdg5/en/html/olink.html"><code class="sgmltag-element">olink</code></a> errors/warnings overridable in customizations.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: param.xweb; param.ent</code></p><pre class="screen"><span class="commit-message">1. Make page citations on &lt;<a href="http://docbook.org/tdg5/en/html/xref.html"><code class="sgmltag-element">xref</code></a>/&gt; to paragraphs conditional on a new parameter,
+$insert.xref.page.number.para, default to 'yes' (before, page citations were
+added unconditionally). Remove similar special-casing for &lt;<a href="http://docbook.org/tdg5/en/html/link.html"><code class="sgmltag-element">link</code></a>/&gt;.
+
+2. Disable page citations for @xrefstyle="template:..." (if needed, they
+can be added with %p in the template - but they can't be disabled).</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Mauritz Jeanson: index.xsl</code></p><pre class="screen"><span class="commit-message">Bug #1309: Added missing template for <a href="http://docbook.org/tdg5/en/html/indexdiv.html"><code class="sgmltag-element">indexdiv</code></a>/<a href="http://docbook.org/tdg5/en/html/subtitle.html"><code class="sgmltag-element">subtitle</code></a>.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xref.xsl</code></p><pre class="screen"><span class="commit-message">Pass referrer and target params to mode="xrefstyle" to allow customizations
+to be more specific.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xref.xsl</code></p><pre class="screen"><span class="commit-message">Add mode="xrefstyle" to replace many instances of redundant
+code determining the xrefstyle with xsl:apply-templates
+select="." mode="xrefstyle".  Also allows stylesheet
+customization to specify an xrefstyle per element type.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: xref.xsl</code></p><pre class="screen"><span class="commit-message">Pass referrer and xrefstyle to "xref-to-suffix" and "xref-to-prefix"
+modes (to use the same signature than "xref-to" mode) as discussed with
+Bob on the mailinglist (2013-09-12)</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: chunk.xsl</code></p><pre class="screen"><span class="commit-message">No change, testing snapshot builds.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: toc.xsl</code></p><pre class="screen"><span class="commit-message">Add missing template for <a href="http://docbook.org/tdg5/en/html/tocdiv.html"><code class="sgmltag-element">tocdiv</code></a>/<a href="http://docbook.org/tdg5/en/html/title.html"><code class="sgmltag-element">title</code></a> elements to fix bug #1310.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Remove a comment to test checkins and snapshot builds.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: lists.xsl</code></p><pre class="screen"><span class="commit-message">Add support for <a href="http://docbook.org/tdg5/en/html/procedure.html"><code class="sgmltag-element">procedure</code></a> <a href="http://docbook.org/tdg5/en/html/title.html"><code class="sgmltag-element">title</code></a> when contained in <a href="http://docbook.org/tdg5/en/html/info.html"><code class="sgmltag-element">info</code></a> or blockinfo.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: chunk-code.xsl</code></p><pre class="screen"><span class="commit-message">Enumarete separate file for <a href="http://docbook.org/tdg5/en/html/revhistory.html"><code class="sgmltag-element">revhistory</code></a> if <a href="http://docbook.sourceforge.net/release/xsl/current/doc/html/generate.revhistory.link.html"><em class="parameter"><code>generate.revhistory.link</code></em></a>=1</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: inline.xsl</code></p><pre class="screen"><span class="commit-message">Update the inline.charseq template to also call 'common.html.attributes'
+instead of using local-name for class value.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: docbook.xsl; html.xsl</code></p><pre class="screen"><span class="commit-message">Enabling ITS processing again</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: its.xsl</code></p><pre class="screen"><span class="commit-message">Change syntax for selecting @its:* attributes so it works
+in xsltproc (which should work with the original, but doesn't).</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: docbook.xsl; html.xsl</code></p><pre class="screen"><span class="commit-message">Turn off its.xsl update which is generating attribute insertion errors.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: its.xsl; docbook.xsl; html.xsl</code></p><pre class="screen"><span class="commit-message">Added basic support for ITS 2.0 markup. It gets propagated into HTML
+For more <a href="http://docbook.org/tdg5/en/html/info.html"><code class="sgmltag-element">info</code></a> about ITS see http://www.w3.org/<a href="http://docbook.org/tdg5/en/html/tr.html"><code class="sgmltag-element">TR</code></a>/its20/</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Added a comment line to test checkin process.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xref.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug in mode=remove-ids that put <a href="http://docbook.org/tdg5/en/html/link.html"><code class="sgmltag-element">link</code></a> content outside the &lt;a&gt; element.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: chunktoc.xsl</code></p><pre class="screen"><span class="commit-message">Fixed SF ticket#3611689: added missing DocBook namespace declarations</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: chunker.xsl</code></p><pre class="screen"><span class="commit-message">Change the internal chunk.base.dir from a param to a variable.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: inline.xsl</code></p><pre class="screen"><span class="commit-message">Turn off id attribute on <a href="http://docbook.org/tdg5/en/html/glossterm.html"><code class="sgmltag-element">glossterm</code></a> <a href="http://docbook.org/tdg5/en/html/anchor.html"><code class="sgmltag-element">anchor</code></a>, because it is on the element itself.</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_Manpages"></a>Manpages</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">manpages</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Robert Stayton: block.xsl; lists.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #1363 <a href="http://docbook.org/tdg5/en/html/synopsis.html"><code class="sgmltag-element">synopsis</code></a> in <a href="http://docbook.org/tdg5/en/html/variablelist.html"><code class="sgmltag-element">variablelist</code></a> <a href="http://docbook.org/tdg5/en/html/term.html"><code class="sgmltag-element">term</code></a> mangles line breaks.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: other.xsl</code></p><pre class="screen"><span class="commit-message">Remove redundant and out-of-date xsl:strip-space element.
+This is imported from common/common.xsl for all stylesheets.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Added clean targets</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Added ant build for manpages</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: inline.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #1340 by omitting <a href="http://docbook.org/tdg5/en/html/indexterm.html"><code class="sgmltag-element">indexterm</code></a> and <a href="http://docbook.org/tdg5/en/html/remark.html"><code class="sgmltag-element">remark</code></a> elements from the
+output.  Trying to include them as nroff comments resulted in extra
+whitespace in certain instances, so they are omitted.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: table.xsl; docbook.xsl; tbl.xsl</code></p><pre class="screen"><span class="commit-message">Adjust man stylesheet to better handle namespace fixup during
+distro builds.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: lists.xsl</code></p><pre class="screen"><span class="commit-message">Resolve ambiguous template match for <a href="http://docbook.org/tdg5/en/html/remark.html"><code class="sgmltag-element">remark</code></a>.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: endnotes.xsl</code></p><pre class="screen"><span class="commit-message">Put internally generated earmark elements into own namespace to
+avoid complications with namespace stylesheet builds.  No change
+of <a href="http://docbook.org/tdg5/en/html/function.html"><code class="sgmltag-element">function</code></a>.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: other.xsl</code></p><pre class="screen"><span class="commit-message">Fixed bug #1313 where write.stubs template mistakenly includes
+$man.output.base.dir in the .so <a href="http://docbook.org/tdg5/en/html/address.html"><code class="sgmltag-element">address</code></a>.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: other.xsl</code></p><pre class="screen"><span class="commit-message">Escape text() nodes while also in no.anchor.mode for links.
+Fixes bug #1322.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: utility.xsl</code></p><pre class="screen"><span class="commit-message">Fixed bug #1321, also taking into account fixing bug #1281.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">dleidert: info.xsl</code></p><pre class="screen"><span class="commit-message">Fix a typo (http://bugs.debian.org/698962).</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_Epub"></a>Epub</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">epub</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Robert Stayton: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #1341 Incorrect generation of content.opf for multiple
+names in $html.stylesheet param.  Backported the template
+named css.item from the epub3 stylesheet.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Fix handling of <a href="http://docbook.sourceforge.net/release/xsl/current/doc/html/base.dir.html"><em class="parameter"><code>base.dir</code></em></a>, chunk.base.dir, and epub.oebps.dir
+combinations.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Improve the handling of $chunk.base.dir when $base.dir contains
+the OEBPS directory in its value.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Fix the namespace fixup step to match the other stylesheets.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Extended <a href="http://docbook.org/tdg5/en/html/date.html"><code class="sgmltag-element">date</code></a> template in mode opf.metadata
+If a PI dbtimestamp is available, call datetime.format(<a href="http://docbook.org/tdg5/en/html/date.html"><code class="sgmltag-element">date</code></a>, 'Y-m-d'),
+otherwise use the normalized string content</span></pre>
+</li><li class="listitem">
+<p><code class="literal">dleidert: bin/spec/files</code></p><pre class="screen"><span class="commit-message">Fix svn:externals defintion.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Introduced  variable in opf.guide</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Improved modularization in opf.spine and created new spine.cover template</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Improved opf.spine with <a href="http://docbook.org/tdg5/en/html/info.html"><code class="sgmltag-element">info</code></a> variable</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Bugfix in opf.spine: removed double <a href="http://docbook.org/tdg5/en/html/refentry.html"><code class="sgmltag-element">refentry</code></a> entries</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: docbook.xsl</code></p><pre class="screen"><span class="commit-message">* Template package-identifier: introduced $info variable to simplify
+  code (similar to the EPUB3 stylesheets) 
+* Template opf.calloutlist: only call opf.reference.callout if
+  <a href="http://docbook.sourceforge.net/release/xsl/current/doc/html/callout.graphics.html"><em class="parameter"><code>callout.graphics</code></em></a> is set</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Backported Bob's EPUB3 changes to EPUB2 from r9740 -&gt; r9742 -&gt; r9743:
+
+* Implement <a href="http://docbook.sourceforge.net/release/xsl/current/doc/html/base.dir.html"><em class="parameter"><code>base.dir</code></em></a>/OEBPS using internal chunk.base.dir instead of
+  new param epub.base.dir.
+
+* Additional changes, specific to this stylesheet:
+  - Construct parameter epub.metainf.dir from <a href="http://docbook.sourceforge.net/release/xsl/current/doc/html/base.dir.html"><em class="parameter"><code>base.dir</code></em></a> + 'META-INF/'
+  - Changed parameter epub.cover.filename epub.oebps.dir to
+    chunk.base.dir
+  - Template opf: concat <a href="http://docbook.sourceforge.net/release/xsl/current/doc/html/base.dir.html"><em class="parameter"><code>base.dir</code></em></a> with epub.opf.filename
+  - Replaced two subsequent xsl:value-of's with concat()</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: docbook.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug in <a href="http://docbook.org/tdg5/en/html/author.html"><code class="sgmltag-element">author</code></a> template generating a span element inside an attribute value.</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_HTMLHelp"></a>HTMLHelp</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">htmlhelp</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Added clean targets</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Extensions and other builds ported to Ant</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: htmlhelp-common.xsl</code></p><pre class="screen"><span class="commit-message">Adjust namespace fixup to conform to the namespace source
+conversion.</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_Eclipse"></a>Eclipse</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">eclipse</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Added clean targets</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Extensions and other builds ported to Ant</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: eclipse.xsl</code></p><pre class="screen"><span class="commit-message">Adjust namespace fixup to conform to other conversions to
+namespaced source.</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_JavaHelp"></a>JavaHelp</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">javahelp</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Added clean targets</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Extensions and other builds ported to Ant</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: javahelp.xsl</code></p><pre class="screen"><span class="commit-message">Adjust the namespace fixup to conform to the other namespaced source
+conversions.</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_Slides"></a>Slides</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">slides</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Jirka Kosek: schema/relaxng/slides.rnc</code></p><pre class="screen"><span class="commit-message">Make speakernotes/handoutnotes optional as many presentations do not use them</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xhtml/plain.xsl; common/common.xsl; xhtml/slidy.xsl; xhtml/s5.xsl; fo/plai&#8943;</code></p><pre class="screen"><span class="commit-message">Rename the docbook prefix in the declaration too.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xhtml/plain.xsl; common/common.xsl; xhtml/slidy.xsl; xhtml/s5.xsl; fo/plai&#8943;</code></p><pre class="screen"><span class="commit-message">Change the docbook db: prefix to d: prefix in preparation of svn update to namespaced 
+stylesheets.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: xhtml/plain-titlepage.xml; fo/plain-titlepage.xml</code></p><pre class="screen"><span class="commit-message">Remove autoguessing of the namespace for wrapper elements; determine namespace by prefix, if any.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">dleidert: images/callouts/gen.sh</code></p><pre class="screen"><span class="commit-message">Leave executable permissions for script.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">dleidert: s5/ui/default/pretty.css; slidy/graphics/w3c-logo-blue.gif; s5/ui/default/notes.&#8943;</code></p><pre class="screen"><span class="commit-message">Drop executable permissions from files.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: doc/Makefile</code></p><pre class="screen"><span class="commit-message">Corrected path</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_Website"></a>Website</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">website</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Added clean targets</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Extensions and other builds ported to Ant</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: olink.xsl</code></p><pre class="screen"><span class="commit-message">Make <a href="http://docbook.org/tdg5/en/html/olink.html"><code class="sgmltag-element">olink</code></a> errors/warnings overridable in customizations.</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_Webhelp"></a>Webhelp</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">webhelp</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Robert Stayton: xsl/titlepage.templates.xsl</code></p><pre class="screen"><span class="commit-message">Fix typo.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xsl/titlepage.templates.xsl</code></p><pre class="screen"><span class="commit-message">Add XHTML missing default namespace.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xsl/webhelp-common.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug 1357 to avoid creating l10n.js file if only collecting <a href="http://docbook.org/tdg5/en/html/olink.html"><code class="sgmltag-element">olink</code></a> data.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: docsrc/xinclude-test.xml; docsrc/readme.xml</code></p><pre class="screen"><span class="commit-message">Convert XML doc to DB5.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xsl/webhelp-common.xsl</code></p><pre class="screen"><span class="commit-message">Fix error message for namespace fixup.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xsl/webhelp-common.xsl</code></p><pre class="screen"><span class="commit-message">fix bug in namespace fixup syntax.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xsl/webhelp-common.xsl</code></p><pre class="screen"><span class="commit-message">Adjust namespace fixup for namespace build process.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: xsl/titlepage.templates.xml</code></p><pre class="screen"><span class="commit-message">Remove autoguessing of the namespace for wrapper elements; determine namespace by prefix, if any.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: template/common/main.js</code></p><pre class="screen"><span class="commit-message">Fix for bug #1301</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_Params"></a>Params</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">params</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Robert Stayton: autolink.index.see.xml</code></p><pre class="screen"><span class="commit-message">Improve the description for linking in <a href="http://docbook.org/tdg5/en/html/index.html"><code class="sgmltag-element">index</code></a>.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: prefer.internal.olink.xml</code></p><pre class="screen"><span class="commit-message">Fix bug in description</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: dialogue.properties.xml</code></p><pre class="screen"><span class="commit-message">Fix typo.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: publishers.properties.xml</code></p><pre class="screen"><span class="commit-message">Fix typo.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: speaker.properties.xml; publishers.properties.xml; inlinestagedir.properti&#8943;</code></p><pre class="screen"><span class="commit-message">New property sets for DocBook Publishers elements.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: table.frame.border.thickness.xml; table.cell.border.thickness.xml</code></p><pre class="screen"><span class="commit-message">Fix bug #1291, make default values different for HTML and FO.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: profile.outputformat.xml</code></p><pre class="screen"><span class="commit-message">Added missing support for outputformat attribute
+
+* Added missing parameter <a href="http://docbook.sourceforge.net/release/xsl/current/doc/html/profile.outputformat.html"><em class="parameter"><code>profile.outputformat</code></em></a> in
+  params/profile.outputformat.xml
+* Added missing lines to check for outputformat attribute in
+  profiling/profile-mode.xsl</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: table.frame.border.thickness.xml; table.cell.border.thickness.xml</code></p><pre class="screen"><span class="commit-message">Changed default border thickness from 0.5pt to 1px. The reason is that Chrome rounds 0.5pt to 0px making borders invisible.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: list.block.spacing.xml</code></p><pre class="screen"><span class="commit-message">Fix typo in element name.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: autolink.index.see.xml</code></p><pre class="screen"><span class="commit-message">New param to control automatic links in <a href="http://docbook.org/tdg5/en/html/index.html"><code class="sgmltag-element">index</code></a> from see and
+<a href="http://docbook.org/tdg5/en/html/seealso.html"><code class="sgmltag-element">seealso</code></a> to <a href="http://docbook.org/tdg5/en/html/indexterm.html"><code class="sgmltag-element">indexterm</code></a> <a href="http://docbook.org/tdg5/en/html/primary.html"><code class="sgmltag-element">primary</code></a>.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: show.bookmarks.xml</code></p><pre class="screen"><span class="commit-message">New param to turn off PDF bookmarks.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xsl1.1.bookmarks.xml</code></p><pre class="screen"><span class="commit-message">Param to use standard XSL 1.1 bookmark elements.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: link.to.self.for.mediaobject.xml</code></p><pre class="screen"><span class="commit-message">Fixed ticket [#1315]: Add possibility to add a <a href="http://docbook.org/tdg5/en/html/link.html"><code class="sgmltag-element">link</code></a> to mediaobjects</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: toc.leader.properties.xml</code></p><pre class="screen"><span class="commit-message">Replace <a href="http://docbook.org/tdg5/en/html/literal.html"><code class="sgmltag-element">literal</code></a> space inserted next to fo:leader in <a href="http://docbook.org/tdg5/en/html/toc.html"><code class="sgmltag-element">ToC</code></a> with a padding. This
+works around a bug in FOP (see FOP-1444).
+Make <a href="http://docbook.org/tdg5/en/html/toc.html"><code class="sgmltag-element">ToC</code></a> fo:leader properties configurable via attribute set.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: list.block.spacing.xml; list.item.spacing.xml</code></p><pre class="screen"><span class="commit-message">Clarify that <a href="http://docbook.sourceforge.net/release/xsl/current/doc/fo/list.block.spacing.html"><em class="parameter"><code>list.block.spacing</code></em></a> is not used in nested lists.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: insert.xref.page.number.para.xml</code></p><pre class="screen"><span class="commit-message">Missed new file in previous checkin.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: mark.optional.procedure.steps.xml</code></p><pre class="screen"><span class="commit-message">New param to turn off Optional text for optional steps.</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_Profiling"></a>Profiling</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">profiling</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Robert Stayton: profile.xsl</code></p><pre class="screen"><span class="commit-message">Add missing <a href="http://docbook.sourceforge.net/release/xsl/current/doc/html/profile.outputformat.html"><em class="parameter"><code>profile.outputformat</code></em></a> param declaration.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">tom_schr: profile-mode.xsl</code></p><pre class="screen"><span class="commit-message">Added missing support for outputformat attribute
+
+* Added missing parameter <a href="http://docbook.sourceforge.net/release/xsl/current/doc/html/profile.outputformat.html"><em class="parameter"><code>profile.outputformat</code></em></a> in
+  params/profile.outputformat.xml
+* Added missing lines to check for outputformat attribute in
+  profiling/profile-mode.xsl</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xsl2profile.xsl</code></p><pre class="screen"><span class="commit-message">Fix bug #1335 where profile-chunk.xsl was xsl:including
+chunk-code.xsl instead of profile-chunk-code.xsl.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xsl2profile.xsl</code></p><pre class="screen"><span class="commit-message">Fixed bug in handling of namespace fixup.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: xsl2profile.xsl</code></p><pre class="screen"><span class="commit-message">Adjust namespace fixup to match other templates.</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_Lib"></a>Lib</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">lib</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Added lib ant build support</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_Tools"></a>Tools</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">tools</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Jirka Kosek: build-shared.xml</code></p><pre class="screen"><span class="commit-message">Added lib ant build support</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: build-shared.xml</code></p><pre class="screen"><span class="commit-message">Added clean targets</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: lib/xml-apis.jar; lib/xercesImpl.jar; build-shared.xml; lib/xalan.jar</code></p><pre class="screen"><span class="commit-message">Extensions and other builds ported to Ant</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: build-shared.xml</code></p><pre class="screen"><span class="commit-message">Added ant build for HTML stylesheets</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: licenses/saxon/JAMESCLARK.txt; lib/jython.jar; lib/xercesImpl.jar; licenses/j&#8943;</code></p><pre class="screen"><span class="commit-message">Initial work on Ant build, common (L10N) directory handled so far</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_Template"></a>Template</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">template</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Robert Stayton: titlepage.xsl</code></p><pre class="screen"><span class="commit-message">Remove the d: namespace declaration because it is
+automatically added by the ns build process.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: titlepage.xsl</code></p><pre class="screen"><span class="commit-message">Added missing namespace declaration</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: titlepage.xsl</code></p><pre class="screen"><span class="commit-message">Remove d: namespace declaration from non namespaced version since
+it is automatically added to build the namespaced version.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: titlepage.xsl</code></p><pre class="screen"><span class="commit-message">Set the db.prefix to blank until convert to ns build.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: titlepage.xsl</code></p><pre class="screen"><span class="commit-message">Fix handling of namespace declaration for conversion to NS sourcebase.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Robert Stayton: titlepage.xsl</code></p><pre class="screen"><span class="commit-message">Modified to support roundtrip conversion between namespaced
+version and non-namespaced version.</span></pre>
+</li><li class="listitem">
+<p><code class="literal">stilor: titlepage.xsl</code></p><pre class="screen"><span class="commit-message">Remove autoguessing of the namespace for wrapper elements; determine namespace by prefix, if any.</span></pre>
+</li></ul></div>
+</div>
+
+<div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="V1.79.1_Extensions"></a>Extensions</h3></div></div></div>
+
+<p>The following changes have been made to the
+            <code class="filename">extensions</code> code
+            since the 1.78.1 release.</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Added clean targets</span></pre>
+</li><li class="listitem">
+<p><code class="literal">Jirka Kosek: build.xml</code></p><pre class="screen"><span class="commit-message">Extensions and other builds ported to Ant</span></pre>
+</li></ul></div>
+</div>
+
+</div>
+</div></body></html>
+

@@ -1,7 +1,8 @@
-<!-- Converted by db4-upgrade version 1.0 -->
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter07"><info><title>Behind the process</title></info>
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xml:id="chapter07">
 
-  
+  <info><title>Behind the process</title></info>
 
   <section xml:id="executable_files"><info><title>Review of executable files</title></info>
     
@@ -164,7 +165,7 @@
 	<example xml:id="elf-header"><info><title>The ELF Header</title></info>
 	  
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/elf-header.txt" parse="text"/>
+              <xi:include href="code/elf-header.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -174,8 +175,8 @@
 
 	<example xml:id="readelf-elf-header"><info><title>The ELF Header, as shown by <application>readelf</application></title></info>
 	  
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/readelf-elf-header.txt" parse="text"/>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="code/readelf-elf-header.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -192,8 +193,8 @@
 
 	    <example xml:id="elf-magic"><info><title>Inspecting the ELF magic number</title></info>
 	      
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/elf-magic.txt" parse="text"/>
+	  <programlisting linenumbering="numbered">
+              <xi:include href="code/elf-magic.txt" parse="text"/>
             </programlisting>
 	    </example>
 
@@ -224,8 +225,8 @@
 
 	<example xml:id="entry-point"><info><title>Investigating the entry point</title></info>
 	  
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/entry-point.txt" parse="text"/>
+	  <programlisting linenumbering="numbered" >
+              <xi:include href="code/entry-point.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -308,8 +309,8 @@
 
 	  <example xml:id="program-header"><info><title>The Program Header</title></info>
 	    
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/program-header.txt" parse="text"/>
+	  <programlisting linenumbering="numbered" >
+              <xi:include href="code/program-header.txt" parse="text"/>
             </programlisting>
 
 	  </example>
@@ -397,8 +398,8 @@
 
 	  <example xml:id="section-header"><info><title>Sections </title></info>
 	    
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/section-header.txt" parse="text"/>
+	  <programlisting linenumbering="numbered" >
+              <xi:include href="code/section-header.txt" parse="text"/>
             </programlisting>
 	  </example>
 
@@ -422,16 +423,16 @@
 	  <example xml:id="section"><info><title>Sections </title></info>
 	    
 
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/sections.c" parse="text"/>
+	  <programlisting linenumbering="numbered" language="c">
+              <xi:include href="code/sections.c" parse="text"/>
             </programlisting>
 	  </example>
 
 	  <example xml:id="section-readelf"><info><title>Sections readelf output </title></info>
-	    
+
 
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/sections.txt" parse="text"/>
+              <xi:include href="code/sections.txt" parse="text"/>
             </programlisting>
           </example>
 
@@ -502,7 +503,7 @@
 	    
 
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/sections-segments.txt" parse="text"/>
+              <xi:include href="code/sections-segments.txt" parse="text"/>
             </programlisting>
 
 	  </example>    
@@ -575,7 +576,7 @@
       <example xml:id="coredump_gdb"><info><title>Example of creating a core dump and using it with <productname>gdb</productname></title></info>
 	
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/core-gdb.txt" parse="text"/>
+              <xi:include href="code/core-gdb.txt" parse="text"/>
             </programlisting>
       </example>
 
@@ -624,7 +625,7 @@
 	    
 
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/debuglink.txt" parse="text"/>
+              <xi:include href="code/debuglink.txt" parse="text"/>
             </programlisting>
 	  </example>
 
@@ -657,7 +658,7 @@
 	  
 
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/core-internal.txt" parse="text"/>
+              <xi:include href="code/core-internal.txt" parse="text"/>
             </programlisting>
 
 	</example>
@@ -754,7 +755,7 @@
     <example xml:id="elf_executable"><info><title>Segments of an executable file</title></info>
       
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/executable.txt" parse="text"/>
+              <xi:include href="code/executable.txt" parse="text"/>
             </programlisting>
     </example>
 
@@ -821,7 +822,7 @@
 	<example><info><title>Creating and using a static library</title></info>
 	  
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/static.txt" parse="text"/>
+              <xi:include href="code/static.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -1122,7 +1123,7 @@
 	
 
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/startup.txt" parse="text"/>
+              <xi:include href="code/startup.txt" parse="text"/>
             </programlisting>
       </example>
 
@@ -1191,7 +1192,7 @@
       <example xml:id="constructor-destructor"><info><title>Constructors and Destructors</title></info>
 	
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/construct-destruct.txt" parse="text"/>
+              <xi:include href="code/construct-destruct.txt" parse="text"/>
             </programlisting>
       </example>
 

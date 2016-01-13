@@ -1,7 +1,8 @@
-<!-- Converted by db4-upgrade version 1.0 -->
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter03"><info><title>The Operating System</title></info>
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xml:id="chapter03">
 
-  
+<info><title>The Operating System</title></info>
 
   <section xml:id="role_of_operating_system"><info><title>The role of the operating system</title></info>
     
@@ -557,8 +558,8 @@
 
       <example><info><title>getpid() example</title></info>
 	
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/getpid.c" parse="text"/>
+	  <programlisting linenumbering="numbered" language="c">
+              <xi:include href="code/getpid.c" parse="text"/>
             </programlisting>
       </example>
 
@@ -606,8 +607,8 @@
 
 	<example><info><title>PowerPC system call example</title></info>
 	  
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/unistd-powerpc.h" parse="text"/>
+	  <programlisting linenumbering="numbered" language="c">
+              <xi:include href="code/unistd-powerpc.h" parse="text"/>
             </programlisting>
 	</example>
 	
@@ -746,8 +747,8 @@
 
 	<example><info><title>x86 system call example</title></info>
 	  
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/unistd-x86.h" parse="text"/>
+	  <programlisting linenumbering="numbered" language="c">
+              <xi:include href="code/unistd-x86.h" parse="text"/>
             </programlisting>
 	</example>
 

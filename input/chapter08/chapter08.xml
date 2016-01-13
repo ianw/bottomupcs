@@ -1,7 +1,8 @@
-<!-- Converted by db4-upgrade version 1.0 -->
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter08"><info><title>Dynamic Linking</title></info>
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xml:id="chapter08">
 
-  
+  <info><title>Dynamic Linking</title></info>
 
   <section xml:id="code_sharing"><info><title>Code Sharing</title></info>
 
@@ -116,7 +117,7 @@
             <title>Specifying Dynamic Libraries</title>
           </info>
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/dynamic-needed.txt" parse="text"/>
+              <xi:include href="code/dynamic-needed.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -139,7 +140,7 @@
             <title>Looking at dynamic libraries</title>
           </info>
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/ldd.txt" parse="text"/>
+              <xi:include href="code/ldd.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -171,7 +172,7 @@
     <example><info><title>Checking the program interpreter</title></info>
       
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/interpreter.txt" parse="text"/>
+              <xi:include href="code/interpreter.txt" parse="text"/>
             </programlisting>
     </example>
 
@@ -229,7 +230,7 @@
       <example><info><title>Relocation as defined by ELF</title></info>
 	
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/elfrelocs.txt" parse="text"/>
+              <xi:include href="code/elfrelocs.txt" parse="text"/>
             </programlisting>
       </example>
 
@@ -282,7 +283,7 @@
 	<example><info><title>Specifying Dynamic Libraries</title></info>
 	  
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/relocs.txt" parse="text"/>
+              <xi:include href="code/relocs.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -427,7 +428,7 @@
 	<example><info><title>Using the GOT</title></info>
 	  
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/got.txt" parse="text"/>
+              <xi:include href="code/got.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -472,7 +473,7 @@
 	<example><info><title>Relocations against the GOT</title></info>
 	  
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/got-relocs.txt" parse="text"/>
+              <xi:include href="code/got-relocs.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -563,7 +564,7 @@
 	<example><info><title>Hello World PLT example</title></info>
 	  
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/hello.txt" parse="text"/>
+              <xi:include href="code/hello.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -582,7 +583,7 @@
 	<example><info><title>Hello world main()</title></info>
 	  
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/hello-main-dis.txt" parse="text"/>
+              <xi:include href="code/hello-main-dis.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -594,7 +595,7 @@
 	<example><info><title>Hello world sections</title></info>
 	  
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/hello-sections.txt" parse="text"/>
+              <xi:include href="code/hello-sections.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -608,7 +609,7 @@
 	<example><info><title>Hello world PLT</title></info>
 	  
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/hello-plt.txt" parse="text"/>
+              <xi:include href="code/hello-plt.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -636,7 +637,7 @@
 	<example><info><title>Hello world GOT</title></info>
 	  
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/hello-got.txt" parse="text"/>
+              <xi:include href="code/hello-got.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -679,7 +680,7 @@
 	<example><info><title>Dynamic Segment</title></info>
 	  
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/hello-dynamic.txt" parse="text"/>
+              <xi:include href="code/hello-dynamic.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -700,8 +701,8 @@
 	  values
 	  (from libc <computeroutput>sysdeps/ia64/dl-machine.h</computeroutput>)</title></info>
 	  
-	  <programlisting linenumbering="numbered" xml:lang="C">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/runtime_setup.c" parse="text"/>
+	  <programlisting linenumbering="numbered" language="c">
+              <xi:include href="code/runtime_setup.c" parse="text"/>
             </programlisting>
 	</example>
 
@@ -1033,7 +1034,7 @@
 	<example><info><title>Symbol definition from ELF</title></info>
 	  
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/symbol.txt" parse="text"/>
+              <xi:include href="code/symbol.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -1132,7 +1133,7 @@
 	<example><info><title>Examples of symbol bindings</title></info>
 	  
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/bindings.txt" parse="text"/>
+              <xi:include href="code/bindings.txt" parse="text"/>
             </programlisting>
 	</example>
 
@@ -1171,7 +1172,7 @@
 	  <example><info><title>Example of <computeroutput>LD_PRELOAD</computeroutput></title></info>
 	    
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/ld_preload.txt" parse="text"/>
+              <xi:include href="code/ld_preload.txt" parse="text"/>
             </programlisting>
 	  </example>
 
@@ -1270,7 +1271,7 @@
 	  <example><info><title>Example of symbol versioning</title></info>
 	    
 	  <programlisting linenumbering="numbered">
-              <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="code/symbolver.txt" parse="text"/>
+              <xi:include href="code/symbolver.txt" parse="text"/>
             </programlisting>
 	  </example>
 

@@ -20,9 +20,9 @@ svgs := $(gen_svgs) $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.svg))
 html.output=html.output
 html.css=css/csbu.css
 
-docbook.xsl=docbook-xsl-ns-1.79.0
+docbook.xsl=docbook-xsl-ns-1.79.1
 
-saxon.classpath="../saxon65/saxon.jar:../$(docbook.xsl)/extensions/saxon65.jar"
+saxon.classpath="../saxon65/saxon.jar:../$(docbook.xsl)/extensions/saxon65.jar:../xslthl-2.1.3/xslthl-2.1.3.jar"
 pdf.output=pdf.output
 fop=fop-2.0/fop
 
@@ -60,11 +60,11 @@ $(pdf.output)/csbu.fo: input/csbu.xml csbu-pdf.xsl $(sources)
 	xmllint --xinclude --noent ./input/csbu.xml > $(pdf.output)/csbu.xml
 	jing ./docbook-5.0/rng/docbookxi.rng $(pdf.output)/csbu.xml
 	cd $(pdf.output) ; java -classpath $(saxon.classpath) \
+		-Dxslthl.config="file://$(CURDIR)/$(docbook.xsl)/highlighting/xslthl-config.xml" \
 		com.icl.saxon.StyleSheet \
 		-o csbu.fo \
 		csbu.xml ../csbu-pdf.xsl \
-                use.extensions=1 \
-		textinsert.extension=1
+                use.extensions=1
 
 #html depends on having png figures around.
 html: input/csbu.xml csbu-html.xsl $(html.css) $(sources) $(pngs)
@@ -81,11 +81,11 @@ html: input/csbu.xml csbu-html.xsl $(html.css) $(sources) $(pngs)
 	xmllint --xinclude --noent ./input/csbu.xml > $(html.output)/csbu.xml
 	jing ./docbook-5.0/rng/docbookxi.rng $(html.output)/csbu.xml
 	cd $(html.output); java -classpath $(saxon.classpath) \
+		-Dxslthl.config="file://$(CURDIR)/$(docbook.xsl)/highlighting/xslthl-config.xml" \
 		com.icl.saxon.StyleSheet \
 		./csbu.xml ../csbu-html.xsl \
 		base.dir=. \
 		use.extensions=1 \
-		textinsert.extension=1 \
 		tablecolumns.extension=1
 
 	cp $(html.css) draft.png $(html.output)
