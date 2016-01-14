@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<book xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0">
+<book xmlns="http://docbook.org/ns/docbook" 
+      xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0"
+      xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>Computer Science from the Bottom Up</title>
   <info>
     <author>
@@ -26,21 +28,21 @@
       <year>2013</year>
       <year>2014</year>
       <year>2015</year>
+      <year>2016</year>
       <holder role="mailto:ian@wienand.org">Ian Wienand</holder>
     </copyright>
     <legalnotice xml:id="legal">
       <para>This work is licensed under the Creative Commons
       Attribution-ShareAlike License. To view a copy of this license,
-      visit <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://creativecommons.org/licenses/by-sa/3.0/">http://creativecommons.org/licenses/by-sa/3.0/</link>
+      visit <link xlink:href="http://creativecommons.org/licenses/by-sa/3.0/">http://creativecommons.org/licenses/by-sa/3.0/</link>
       or send a letter to Creative Commons, 559 Nathan Abbott Way,
       Stanford, California 94305, USA.
       </para>
     </legalnotice>
     <releaseinfo>
-
-      A PDF version is available at <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.bottomupcs.com/csbu.pdf"><citetitle>http://www.bottomupcs.com/csbu.pdf</citetitle></link>.
-      The original souces are available at <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://github.com/ianw/bottomupcs"><citetitle>https://github.com/ianw/bottomupcs</citetitle></link>
-
+      A PDF version is available at <link xlink:href="https://www.bottomupcs.com/csbu.pdf">https://www.bottomupcs.com/csbu.pdf</link>.
+      A EPUB version is available at <link xlink:href="https://www.bottomupcs.com/csbu.epub">https://www.bottomupcs.com/csbu.epub</link>
+      The original souces are available at <link xlink:href="https://github.com/ianw/bottomupcs">https://github.com/ianw/bottomupcs</link>
     </releaseinfo>
   </info>
   <xi:include href="intro.xml"/>

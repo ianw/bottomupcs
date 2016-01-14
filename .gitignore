@@ -5,3 +5,4 @@ input/chapter*/figures/*.png
 input/chapter*/figures/*.svg
 html.output/*
 pdf.output/*
+epub.output/*

@@ -26,6 +26,8 @@ saxon.classpath="../saxon65/saxon.jar:../$(docbook.xsl)/extensions/saxon65.jar:.
 pdf.output=pdf.output
 fop=fop-2.0/fop
 
+epub.output=epub.output
+
 #rules to convert xfigs to png/eps
 %.png : %.xfig
 	fig2dev -L png $< $@
@@ -36,13 +38,6 @@ fop=fop-2.0/fop
 %.svg : %.xfig
 	fig2dev -L svg $< $@
 
-#pdf depends on having eps figures around.
-.PHONY: pdf
-pdf: $(svgs) $(pdf.output)/csbu.pdf
-
-$(pdf.output)/csbu.pdf : $(pdf.output)/csbu.fo
-	$(fop) $< $@
-
 # general overview
 #
 #  use xmllint to build a .xml file (xmllint has xincludes support,
@@ -50,6 +45,13 @@ $(pdf.output)/csbu.pdf : $(pdf.output)/csbu.fo
 #  files for .txt or .c examples)
 #
 #  use saxon to apply xsl and get final output
+
+#pdf depends on having eps figures around.
+.PHONY: pdf
+pdf: $(svgs) $(pdf.output)/csbu.pdf
+
+$(pdf.output)/csbu.pdf : $(pdf.output)/csbu.fo
+	$(fop) $< $@
 
 $(pdf.output)/csbu.fo: input/csbu.xml csbu-pdf.xsl $(sources)
 	rm -rf ./pdf.output
@@ -65,6 +67,35 @@ $(pdf.output)/csbu.fo: input/csbu.xml csbu-pdf.xsl $(sources)
 		-o csbu.fo \
 		csbu.xml ../csbu-pdf.xsl \
                 use.extensions=1
+
+epub: input/csbu.xml csbu-epub.xsl $(sources) $(pngs)
+	rm -rf $(epub.output)
+	mkdir -p $(epub.output) $(epub.output)/OEBPS
+	# copy once for the epub build process to read the images, it
+	# puts the output into $(epub.output)/OEBPS.  Copy again so
+	# the images are in the OEBPS directory for packaging.
+	-cd input; \
+	 for dir in $(sourcedirs:input/%=%); do \
+		cp -r --parents $$dir/figures/*.png ../$(epub.output); \
+		cp -r --parents $$dir/images/*.png ../$(epub.output); \
+	 done
+	-cd input; \
+	 for dir in $(sourcedirs:input/%=%); do \
+		cp -r --parents $$dir/figures/*.png ../$(epub.output)/OEBPS; \
+		cp -r --parents $$dir/images/*.png ../$(epub.output)/OEBPS; \
+	 done
+	xmllint --xinclude --noent ./input/csbu.xml > $(epub.output)/csbu.xml
+	jing ./docbook-5.0/rng/docbookxi.rng $(epub.output)/csbu.xml
+	cd $(epub.output) ; java -classpath $(saxon.classpath) \
+		-Dxslthl.config="file://$(CURDIR)/$(docbook.xsl)/highlighting/xslthl-config.xml" \
+		com.icl.saxon.StyleSheet \
+		csbu.xml ../csbu-epub.xsl \
+	        base.dir=OEBPS \
+                use.extensions=1
+	cd $(epub.output); \
+	zip -X0 csbu.epub mimetype; \
+	zip -r -X9 csbu.epub META-INF OEBPS
+
 
 #html depends on having png figures around.
 html: input/csbu.xml csbu-html.xsl $(html.css) $(sources) $(pngs)
@@ -93,4 +124,4 @@ html: input/csbu.xml csbu-html.xsl $(html.css) $(sources) $(pngs)
 
 .PHONY: clean
 clean:
-	rm -rf $(html.output) $(pdf.output) $(gen_pngs) $(gen_epss) $(gen_svgs)
+	rm -rf $(html.output) $(pdf.output) $(epub.output) $(gen_pngs) $(gen_epss) $(gen_svgs)
