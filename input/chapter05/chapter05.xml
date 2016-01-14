@@ -1084,15 +1084,15 @@
             </info>
             <mediaobject>
               <imageobject>
-                <imagedata fileref="chapter05/figures/hierarchial-pt.eps" format="EPS"/>
+                <imagedata fileref="chapter05/figures/hierarchical-pt.eps" format="EPS"/>
               </imageobject>
               <imageobject role="fo">
-                <imagedata fileref="figures/hierarchial-pt.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+                <imagedata fileref="figures/hierarchical-pt.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
               </imageobject>
-              <imageobject>
-                <imagedata fileref="chapter05/figures/hierarchial-pt.png" format="PNG"/>
+              <imageobject role="html">
+                <imagedata fileref="chapter05/figures/hierarchical-pt.png" format="PNG"/>
               </imageobject>
-              <textobject role="html">
+              <textobject>
                 <phrase>The hierarchical page-table</phrase>
               </textobject>
             </mediaobject>
