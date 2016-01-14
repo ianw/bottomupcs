@@ -742,9 +742,9 @@
         <listitem>
           <para><emphasis>Preemptive</emphasis> scheduling is where the
 	  process is interrupted to stop it an allow another process
-	  to run.  Each process gets a <emphasis>timeslice</emphasis>
+	  to run.  Each process gets a <emphasis>time-slice</emphasis>
 	  to run in; at the point of each context switch a timer will
-	  be reset and will deliver and interrupt when the timeslice
+	  be reset and will deliver and interrupt when the time-slice
 	  is over.</para>
           <para>We know that the hardware handles the interrupt
 	  independently of the running process, and so at this point
@@ -760,8 +760,8 @@
         <title>Realtime</title>
       </info>
       <para>Some processes need to know exactly how long their
-      timeslice will be, and how long it will be before they get
-      another timeslice to run.  Say you have a system running a
+      time-slice will be, and how long it will be before they get
+      another time-slice to run.  Say you have a system running a
       heart-lung machine; you don't want the next pulse to be delayed
       because something else decided to run in the system!</para>
       <para>Hard realtime systems make guarantees about scheduling

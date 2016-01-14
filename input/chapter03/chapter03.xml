@@ -871,7 +871,7 @@
           illustrated in <xref linkend="x86_segmentation"/>.</para>
           <figure xml:id="x86_segmentation">
             <info>
-              <title>x86 Segmentation Adressing</title>
+              <title>x86 Segmentation Addressing</title>
             </info>
             <mediaobject>
               <imageobject>

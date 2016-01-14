@@ -53,9 +53,9 @@
     platform.  It is one of the fundamental roles of the operating
     system to provide this abstraction of the hardware to the
     programmer.</para>
-    <para>It is probably not too much of a strech to say abstraction
+    <para>It is probably not too much of a stretch to say abstraction
     is <emphasis>the</emphasis> primary concept that underpins all
-    modern computing.  No one person can understand everythinig from
+    modern computing.  No one person can understand everything from
     designing a modern user-interface to the internal workings of a
     modern CPU, much less build it all themselves.  To programmers,
     abstractions are the <emphasis>lingua franca</emphasis> that
@@ -63,7 +63,7 @@
     <para>Learning to navigate across abstractions gives one greater
       insight into how to <emphasis>use</emphasis> the abstractions in
       the best and most innovative ways.  In this book, we are
-      concerned with abstractions at the lowest layers; bewteen
+      concerned with abstractions at the lowest layers; between
       applications and the operating-system and the operating-system
       and hardware.  Above this lies many more layers, each worthy of
       their own books.  As these chapters progress, you will hopefully
@@ -117,7 +117,7 @@
       <para>A common method used in the Linux Kernel and other large C
       code bases, which lacks a built-in concept of
       object-orientation, is <emphasis>function pointers</emphasis>.
-      Learning to read this idom is key to navigating most large C
+      Learning to read this idiom is key to navigating most large C
       code-bases.  By understanding how to read the abstractions
       provided within the code an understanding of internal API
       designs can be built.</para>
@@ -157,7 +157,7 @@
     <computeroutput>_say_hello_function()</computeroutput>).  This has
     several uses; generally it relates to having simpler and smaller
     parts of the API (marshalling or checking arguments, for example)
-    separate to more complex implemenation, which often eases the path
+    separate to more complex implementation, which often eases the path
     to significant changes in the internal workings whilst ensuring
     the API remains constant.  Our implementation is very simple
     however, and doesn't even need it's own support functions.  In
@@ -173,7 +173,7 @@
       <para>Finally we can call the API functions through the
     structure in <computeroutput>main</computeroutput>.</para>
       <para>You will see this idiom constantly when navigating the
-        souce code.  The tiny example below is taken from
+        source code.  The tiny example below is taken from
         <computeroutput>include/linux/virtio.h</computeroutput> in the
         Linux kernel source to illustrate:</para>
       <example xml:id="virtio-abstraction">

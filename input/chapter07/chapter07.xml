@@ -61,7 +61,7 @@
     of the file.  In words, it would generally describe "the program
     code starts 20 bytes into this file, and is 50 kilobytes long.
     The program data follows it and is 20 kilobytes long".</para>
-      <para>In recent times one particular format has become the defacto
+      <para>In recent times one particular format has become the de facto
       standard for executable representation for modern UNIX type
       systems.  It is called the <computeroutput>Executable and Linker
       Format</computeroutput>, or ELF for short; we'll be looking at
@@ -87,7 +87,7 @@
       generally uses randomly generated file names as intermediate
       files for assembly and object code.</para></footnote>.</para>
         <para><computeroutput>a.out</computeroutput> is a very simple
-	header format that only allows a single data, code and bss
+	header format that only allows a single data, code and BSS
 	section.  As you will come to see, this is insufficient for
 	modern systems with dynamic libraries.</para>
       </section>
@@ -223,7 +223,7 @@
 	  underscore suggests that it is in a separate
 	  <emphasis>namespace</emphasis>.  We examine how a program
 	  starts up below.</para>
-        <para>After that the header contians pointers to where in the
+        <para>After that the header contains pointers to where in the
 	file other important parts of the ELF file start, like a table
 	of contents.</para>
       </section>
@@ -284,7 +284,7 @@
 	  describe to the operating system anything that might be
 	  required for it to load the binary into memory and execute
 	  it.  Segments are described by program headers, but so are
-	  some other things reuquired to get the executable
+	  some other things required to get the executable
 	  running.</para>
           <example xml:id="program-header">
             <info>
@@ -323,8 +323,8 @@
 	  dynamic linking.  Consequently some minor changes might need
 	  to be made to the binary to allow it to work properly at
 	  runtime.  Thus the usual interpreter of a binary file is the
-	  <emphasis>dyanmic loader</emphasis>, so called because it
-	  takes the final steps to complete loading of the exectable
+	  <emphasis>dynamic loader</emphasis>, so called because it
+	  takes the final steps to complete loading of the executable
 	  and prepare the binary image for running.
 	  </para>
           <para>Segments are described with a value of
@@ -347,9 +347,9 @@
 	  having to waste space for empty global variables.  Finally
 	  <computeroutput>p_flags</computeroutput> indicates the
 	  permissions on the segment.  Execute, read and write
-	  permissions can be specified in any combiation; for example
-	  code segements should be marked as read and execute only,
-	  data sections as read and write with no exectue.
+	  permissions can be specified in any combination; for example
+	  code segments should be marked as read and execute only,
+	  data sections as read and write with no execute.
 	  </para>
           <para>There are a few other segment types defined in the
 	  program headers, they are described more fully in the
@@ -362,9 +362,9 @@
           <para>As we have mentioned, sections make up segments.
 	  Sections are a way to organise the binary into logical areas
 	  to communicate information between the compiler and the
-	  linker.  In some special binaries, such as the linux kernel,
+	  linker.  In some special binaries, such as the Linux kernel,
 	  sections are used in more specific ways.</para>
-          <para>We've seen how segments utimatley come down to a blob
+          <para>We've seen how segments ultimately come down to a blob
 	  of data in a file on disk with some descriptions about where
 	  it should be loaded and what permissions it has. (XXX)</para>
           <para>Sections have a similar header to segments.</para>
@@ -388,7 +388,7 @@
 	  <emphasis>allocate</emphasis> attribute which flags that
 	  this section will need memory allocated for it.</para>
           <para>It is probably best to examine sections through an
-	  example of them in use.  Consier the following
+	  example of them in use.  Consider the following
 	  program.</para>
           <example xml:id="section">
             <info>
@@ -456,8 +456,8 @@
 	  the same place.</para>
           <para><computeroutput>main</computeroutput> however lives in
 	  the <computeroutput>.text</computeroutput> section, as we
-	  expect (remeber the name "text" and "code" are used
-	  interchanably to refer to a program in memory.</para>
+	  expect (remember the name "text" and "code" are used
+	  interchangeably to refer to a program in memory.</para>
         </section>
         <section>
           <info>
@@ -498,13 +498,13 @@
 	  section be executable <footnote><para>For those that are
 	  curious, the PowerPC ABI calls stubs for functions in
 	  dynamic libraries directly in the GOT, rather than having
-	  them bounce through a seperate PLT entry.  Thus the
-	  processor needs exectute permissions for the GOT section,
+	  them bounce through a separate PLT entry.  Thus the
+	  processor needs execute permissions for the GOT section,
 	  which you can see is embedded in the data segment.  This
-	  should make sense after reading the dyanmic linking
+	  should make sense after reading the dynamic linking
 	  chapter!</para></footnote>.  Such is the life of a systems
 	  programmer, where rules were made to be broken!</para>
-          <para>The other intereseting thing to note is that the file
+          <para>The other interesting thing to note is that the file
 	  size is the same as the memory size for the code segment,
 	  however memory size is greater than the file size for the
 	  data segment.  This comes from the BSS section which holds
@@ -516,7 +516,7 @@
       <info>
         <title>Debugging</title>
       </info>
-      <para>Tradionally the primary method of post mortem debugging is
+      <para>Traditionally the primary method of post mortem debugging is
 	referred to as the <emphasis>core dump</emphasis>.  The term
 	<emphasis>core</emphasis> comes from the original physical
 	characteristics of magnetic core memory, which uses the
@@ -791,7 +791,7 @@
 	with Debian, Ubuntu and some other Linux systems is one
 	example.  <computeroutput>debs</computeroutput> use archives
 	to keep all the application files together in the one package
-	file.  Redhat RPM packages use an alternate but similar format
+	file.  RedHat RPM packages use an alternate but similar format
 	called <application>cpio</application>.  Of course the
 	canonical application for keeping files together is the
 	<computeroutput>tar</computeroutput> file, which is a common
@@ -928,7 +928,7 @@
     </info>
     <para>We mentioned before that simply saying the program starts
     with the <computeroutput>main()</computeroutput> function is not
-    quite true.  Below we exaime what happens to a typical dynamically
+    quite true.  Below we examine what happens to a typical dynamically
     linked program when it is loaded and run (statically linked
     programs are similar but different XXX should we go into
     this?).</para>
@@ -988,13 +988,13 @@
 	modern systems have mechanisms to avoid the overheads of
 	calling a trap to the processor.</para>
         <para>In Linux, this is implemented by a neat trick between
-	the dyanmic loader and the kernel, all communicated with the
+	the dynamic loader and the kernel, all communicated with the
 	AUXV structure.  The kernel actually adds a small shared
 	library into the address space of every newly created process
 	which contains a function that makes system calls for you.
 	The beauty of this system is that if the underlying hardware
 	supports a fast system call mechanism the kernel (being the
-	creater of the library) can use it, otherwise it can use the
+	creator of the library) can use it, otherwise it can use the
 	old scheme of generating a trap.  This library is named
 	<computeroutput>linux-gate.so.1</computeroutput>, so called
 	because it is a <emphasis>gateway</emphasis> to the inner
@@ -1015,7 +1015,7 @@
 	special kernel binary is loaded, and if so use the functions
 	within that to make system calls.  As we mentioned, if the
 	kernel determines the hardware is capable, this will use the
-	fast sytem call method.</para>
+	fast system call method.</para>
       </section>
     </section>
     <section>
@@ -1024,7 +1024,7 @@
       </info>
       <para>Once the kernel has loaded the interpreter it passes it to
       the entry point as given in the interpreter file (note will not
-      examine how the dynamic linker starts at this stage; see <xref linkend="chapter08"/> for a full discussion of dyanmic
+      examine how the dynamic linker starts at this stage; see <xref linkend="chapter08"/> for a full discussion of dynamic
       linking).  The dynamic linker will jump to the entry point
       address as given in the ELF binary.</para>
       <example xml:id="program-startup">
@@ -1063,7 +1063,7 @@
       <computeroutput>fini</computeroutput> are two special concepts
       that call parts of code in shared libraries that may need to be
       called before the library starts or if the library is unloaded
-      respectivley.  You can see how this might be useful for library
+      respectively.  You can see how this might be useful for library
       programmers to setup variables when the library is started, or
       to clean up at the end.  Originally the functions
       <computeroutput>_init</computeroutput> and
@@ -1090,8 +1090,8 @@
       <emphasis>attributes</emphasis> to label two functions as
       <emphasis>constructors</emphasis> and
       <emphasis>destructors</emphasis> in our main program.  These
-      terms are more commonly used with object orientent langauges to
-      describe object lifecycles.</para>
+      terms are more commonly used with object oriented languages to
+      describe object life cycles.</para>
       <example xml:id="constructor-destructor">
         <info>
           <title>Constructors and Destructors</title>
@@ -1102,7 +1102,7 @@
       </example>
       <para>The last value pushed onto the stack for the
       <computeroutput>__libc_start_main</computeroutput> was the
-      initalisation function
+      initialisation function
       <computeroutput>__libc_csu_init</computeroutput>.  If we follow
       the call chain through from
       <computeroutput>__libc_csu_init</computeroutput> we can see it
@@ -1124,9 +1124,9 @@
       <computeroutput>program_init</computeroutput> function!  So the
       format of the <computeroutput>.ctors</computeroutput> section is
       firstly a -1, and then the address of functions to be called on
-      initalisation, and finally a zero to indicate the list is
+      initialisation, and finally a zero to indicate the list is
       complete.  Each entry will be called (in this case we only have
-      the one funtion).</para>
+      the one function).</para>
       <para>Once <computeroutput>__libc_start_main</computeroutput>
       has completed with the <computeroutput>_init</computeroutput>
       call it <emphasis>finally</emphasis> calls the

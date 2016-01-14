@@ -755,7 +755,7 @@
         <para>Electronically, the boolean operations are implemented
 	in <emphasis>gates</emphasis> made by
 	<emphasis>transistors</emphasis>.  This is why you might have
-	heard about transistor counts and things like Moores Law.  The
+	heard about transistor counts and things like Moore's Law.  The
 	more transistors, the more gates, the more things you can add
 	together.  To create the modern computer, there are an awful
 	lot of gates, and an awful lot of transistors.  Some of the
@@ -1393,7 +1393,7 @@
 	bits wide; a topic we discuss in <xref linkend="chapter02"/>).</para>
         <para>This firstly means that all pointers are required to be
 	a 64 bits wide so they can represent any possible address in
-	the system.  However, system implementors must then make
+	the system.  However, system implementers must then make
 	decisions about the size of the other types.  Two common
 	models are widely used, as shown below.</para>
         <table>
@@ -1772,7 +1772,7 @@
             <info>
               <title>Sign-extension</title>
             </info>
-            <para>Becuase of two's complement format, when increasing
+            <para>Because of two's complement format, when increasing
 	      the size of signed value, it is important that the
 	      additional bits be <emphasis>sign-extended</emphasis>;
 	      that is, copied from the top-bit of the existing
@@ -2092,7 +2092,7 @@
 	    <computeroutput>1</computeroutput> and either terminate or
 	    repeat.  This is a slow process; if the bitfield is 64
 	    bits long and only the very last bit is set, you must go
-	    through all the preceeding 63 bits!</para>
+	    through all the preceding 63 bits!</para>
             <para>However, if this bitfield value were the signficand
 	    of a floating point number and we were to normalise it,
 	    the value of the exponent would tell us how many times it

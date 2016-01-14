@@ -49,7 +49,7 @@
         smaller bit-width processors.  Every program compiled in
         64-bit mode requires 8-byte pointers, which can increase code
         and data size, and hence impact both instruction and data
-        cache performance.  However, 64-bit processers tend to have
+        cache performance.  However, 64-bit processors tend to have
         more registers, which means less need to save temporary
         variables to memory when the compiler is under register
         pressure.</para>
@@ -215,7 +215,7 @@
     virtual page to a physical page.</para>
     <para>Page tables can have many different structures and are
     highly optimised, as the process of finding a page in the page
-    table can be a lengthly process.  We will examine page-tables in
+    table can be a lengthy process.  We will examine page-tables in
     more depth later.</para>
     <para>The page-table for a process is under the exclusive control
     of the operating system.  When a process requests memory, the
@@ -353,8 +353,8 @@
         a serious limit to programmers.  For example, if you
         <computeroutput>malloc</computeroutput> 8 KiB of memory;
         requiring the backing of two 4 KiB frames, it would be a huge
-        inconvience if those frames had to be contiguous (i.e.,
-        physically next to each other).  Using virutal-addresses it
+        unconvinced if those frames had to be contiguous (i.e.,
+        physically next to each other).  Using virtual-addresses it
         does not matter; as far as the process is concerned it has 8
         KiB of contiguous memory, even if those pages are backed by
         frames very far apart.  By assigning a virtual address space
@@ -649,7 +649,7 @@
 	  operating system finds the memory that has the page
 	  table.</para>
           <para>The base of the page table will be kept in a register
-	  associated with each process.  This is usally called the
+	  associated with each process.  This is usually called the
 	  page-table base-register or similar.  By taking the address
 	  in this register and adding the page number to it, the
 	  correct entry can be located.</para>
@@ -769,7 +769,7 @@
           defines a particular layout of page-table information (<xref linkend="page_tables"/> which must be followed for virtual
           address translation to proceed.  In response to access to a
           virtual-address that is not present in the TLB, the processor
-          will atomatically walk the page-tables to load the correct
+          will automatically walk the page-tables to load the correct
           translation entry.  Only if the translation entry does not exist
           will the processor raise an exception to be handled by the
           operating system.
@@ -780,7 +780,7 @@
           who might like to implement alternative schemes for
           page-tables.</para>
         <para>All architectures can be broadly categorised into these
-          two methodlogies.  Later, we will examine some common
+          two methodologies.  Later, we will examine some common
           architectures and their virtual-memory support.</para>
       </section>
     </section>
@@ -799,7 +799,7 @@
       <para>Linux divides the available address space up into a shared
       kernel component and private user space addresses.  This means
       that addresses in the kernel port of the address space map to
-      the same physical memory for each process, whilst userspace
+      the same physical memory for each process, whilst user-space
       addresses are private to the process.  On Linux, the shared
       kernel space is at the very top of the available address space.
       On the most common processor, the 32 bit x86, this split happens
@@ -825,7 +825,7 @@
           </imageobject>
           <textobject>
             <phrase>The Linux address space layout.  Note that pages
-	    in the userspace address space are private, whilst the
+	    in the user-space address space are private, whilst the
 	    kernel pages are shared.</phrase>
           </textobject>
         </mediaobject>
@@ -838,12 +838,12 @@
       <para>There are many different ways for an operating system to
       organise the page tables but Linux chooses to use a
       <emphasis>hierarchical</emphasis> system.</para>
-      <para>As the page tables use a heirarchy that is three levels
+      <para>As the page tables use a hierarchy that is three levels
       deep, the Linux scheme is most commonly referred to as the
       <emphasis>three level page table</emphasis>.  The three level
       page table has proven to be robust choice, although it is not
       without it's criticism.  The details of the virtual memory
-      implementation of each processor vary widley meaning that the
+      implementation of each processor vary Whitley meaning that the
       generic page table Linux chooses must be portable and relatively
       generic.</para>
       <para>The concept of the three level page table is not
@@ -915,7 +915,7 @@
     ways to manage the TLB with various advantages and
     disadvantages.</para>
     <para>The part of the processor that deals with virtual memory is
-      generally referred to as the <emphasis>Memory Managment
+      generally referred to as the <emphasis>Memory Management
         Unit</emphasis> or MMU<indexterm xml:id="mmu"/>
     </para>
     <section>
@@ -1170,7 +1170,7 @@
             Overall, this will be an advantage if the cost of the
             initial nested fault is amortised over subsequent HPW
             hits.</para>
-          <para>Themajor drawback is that the VLPT now requires TLB
+          <para>The major drawback is that the VLPT now requires TLB
             entries which causes an increase on TLB pressure.  Since
             each address space requires its own page table the
             overheads become greater as the system becomes more
@@ -1208,7 +1208,7 @@
           </info>
           <para>Using TLB entries in an effort to reduce TLB refill
             costs, as done with the SF-VHPT, may or may not be an
-            effective tradeoff.  Itanium also implements a
+            effective trade-off.  Itanium also implements a
             <emphasis>hashed page-table</emphasis> with the potential
             to lower TLB overheads.  In this scheme, the processor
             <emphasis>hashes</emphasis> a virtual address to find an
@@ -1217,7 +1217,7 @@
             can be considered a hash page-table with a
             <emphasis>perfect</emphasis> hash function which will
             never produce a collision.  However, as explained, this
-            requires an impractical tradeoff of huge areas of
+            requires an impractical trade-off of huge areas of
             contiguous physical memory.  However, constraining the
             memory requirements of the page table raises the
             possibility of collisions when two virtual addresses hash
@@ -1249,7 +1249,7 @@
             primary source of translation entries or otherwise keep
             the hash table as a cache of its own translation
             information.  Keeping the LF-VHPT hash table as a cache is
-            somewhat suboptimal because of increased overheads on time
+            somewhat sub-optimal because of increased overheads on time
             critical fault paths, however advantages are gained from
             the table requiring only a single TLB entry.</para>
         </section>

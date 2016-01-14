@@ -570,7 +570,7 @@
 	the function address and the address of the global pointer.
 	Here we can see that the PLT entry is first loading the
 	function value, moving on 8 bytes to the second part of the
-	function descriptor and then loading that value into the gp
+	function descriptor and then loading that value into the op
 	register before calling the function.</para>
         <para>But what exactly are we loading?  We know that r1 will
 	be pointing to the GOT.  We go 80 bytes past the got

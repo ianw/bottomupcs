@@ -471,7 +471,7 @@
 	is the trade offs between speed an size -- the faster the
 	memory the smaller it is.  Of course, if you can find a way to
 	change this equation, you'll end up a billionaire!</para>
-      <para>The reason caches are effective is becuase computer code
+      <para>The reason caches are effective is because computer code
         generally exhibits two forms of locality<indexterm xml:id="locality"><primary>locality</primary></indexterm>
 	<orderedlist><listitem><para><emphasis>Spatial</emphasis> locality suggests that
 	    data within blocks is likely to be accessed together.</para></listitem><listitem><para><emphasis>Temporal</emphasis> locality suggests that
@@ -499,7 +499,7 @@
 	cram more and more transistors onto a chip cache sizes grow
 	considerably, but even the largest caches are tens of
 	megabytes, rather than the gigabytes of main memory or
-	terrabytes of hard disk otherwise common.</para>
+	terabytes of hard disk otherwise common.</para>
       <para>The cache is made up of small chunks of mirrored main
 	memory.  The size of these chunks is called the <emphasis>line
 	size</emphasis>, and is typically something like 32 or 64
@@ -706,7 +706,7 @@ multiplex the output of the many sets, which can also add latency.
   </section>
   <section xml:id="peripherals">
     <info>
-      <title>Peripherals and busses</title>
+      <title>Peripherals and buses</title>
     </info>
     <para>Peripherals are any of the many external devices that
       connect to your computer.  Obviously, the processor must have
@@ -774,7 +774,7 @@ multiplex the output of the many sets, which can also add latency.
 	    fault.</para>
           </caption>
         </figure>
-        <para>Most drivers will spilt up handling of interrupts into
+        <para>Most drivers will split up handling of interrupts into
 	<emphasis>bottom</emphasis> and <emphasis>top</emphasis>
 	halves.  The bottom half will acknowledge the interrupt, queue
 	actions for processing and return the processor to what it was
@@ -913,7 +913,7 @@ multiplex the output of the many sets, which can also add latency.
     </section>
     <section>
       <info>
-        <title>Other Busses</title>
+        <title>Other Buses</title>
       </info>
       <para>Other buses connect between the PCI bus and external
 	devices.</para>
@@ -1194,7 +1194,7 @@ multiplex the output of the many sets, which can also add latency.
 	additional enhancement).</para>
         <para>Multi core processors also have some advantages not
 	performance related.  As we mentioned, external physical
-	busses between processors have physical limits; by containing
+	buses between processors have physical limits; by containing
 	the processors on the same piece of silicon extremely close to
 	each other some of these problems can be worked around.  The
 	power requirements for multi core processors are much less
@@ -1231,7 +1231,7 @@ multiplex the output of the many sets, which can also add latency.
 	could make each computer do 250 loops each.</para>
       <para>The interconnect between the computers varies, and may
 	be as slow as an internet link or as fast as dedicated,
-	special busses (Infiniband).  Whatever the interconnect,
+	special buses (Infiniband).  Whatever the interconnect,
 	however, it is still going to be further down the memory
 	hierarchy and much, much slower than RAM.  Thus a cluster will
 	not perform well in a situation when each CPU requires access
@@ -1414,7 +1414,7 @@ multiplex the output of the many sets, which can also add latency.
         <title>Memory ordering, locking and atomic operations</title>
       </info>
       <para>The multi-level cache, superscalar multi-processor
-      architecture brings with it some insteresting issues relating to
+      architecture brings with it some interesting issues relating to
       how a programmer sees the processor running code.</para>
       <para>Imagine program code is running on two processors
       simultaneously, both processors sharing effectively one large
@@ -1460,7 +1460,7 @@ multiplex the output of the many sets, which can also add latency.
       <para><emphasis>Acquire</emphasis> semantics is like a fence
       that only allows load and stores to move downwards through it.
       That is, when this load or store is complete you can be
-      gaurnteed that any later load or stores will see the value
+      guaranteed that any later load or stores will see the value
       (since they can not be moved above it).</para>
       <para><emphasis>Release</emphasis> semantics is the opposite,
       that is a fence that allows any load or stores to be done before
@@ -1529,7 +1529,7 @@ multiplex the output of the many sets, which can also add latency.
 	ensure that before we <emphasis>acquire</emphasis> a lock, no
 	operations that should be protected by the lock are re-ordered
 	before it.  This is how acquire semantics works.</para>
-        <para>Conversly, when we <emphasis>release</emphasis> the
+        <para>Conversely, when we <emphasis>release</emphasis> the
 	lock, we must be sure that every operation we have done whilst
 	we held the lock is complete (remember the example of updating
 	the pointer previously?).  This is release semantics.</para>
@@ -1555,7 +1555,7 @@ multiplex the output of the many sets, which can also add latency.
 	  <emphasis>race condition</emphasis>; one of the hardest bugs
 	  to track down.  If two processors are relying on operations
 	  happening in a specific order in time, there is always the
-	  possiblity of a race condition occuring.  A gamma ray from
+	  possibility of a race condition occurring.  A gamma ray from
 	  an exploding star in a different galaxy might hit one of the
 	  processors, making it skip a beat, throwing the ordering of
 	  operations out.  What will often happen is a deadlock
@@ -1563,7 +1563,7 @@ multiplex the output of the many sets, which can also add latency.
 	  ordering needs to be ensured by semantics, and not by
 	  relying on one time specific behaviours. (XXX not sure how i
 	  can better word that).</para>
-          <para>A similar situation is the oppostie of deadlock,
+          <para>A similar situation is the opposite of deadlock,
 	  called <emphasis>livelock</emphasis>.  One strategy to avoid
 	  deadlock might be to have a "polite" lock; one that you give
 	  up to anyone who asks.  This politeness might cause two
@@ -1582,17 +1582,17 @@ multiplex the output of the many sets, which can also add latency.
           <para>Underneath, there are many different strategies for
 	  implementing the behaviour of locks.</para>
           <para>A simple lock that simply has two states - locked or
-	  unlocked, is refered to as a <emphasis>mutex</emphasis>
+	  unlocked, is referred to as a <emphasis>mutex</emphasis>
 	  (short for mutual exclusion; that is if one person has it
 	  the other can not have it).</para>
           <para>There are, however, a number of ways to implement a
 	  mutex lock.  In the simplest case, we have what its commonly
 	  called a <emphasis>spinlock</emphasis>.  With this type of
 	  lock, the processor sits in a tight loop waiting to take the
-	  lock; equivalent to it saying "can I have it now" constanly
+	  lock; equivalent to it saying "can I have it now" constantly
 	  much as a young child might ask of a parent.</para>
           <para>The problem with this strategy is that it essentially
-	  wastes time.  Whilst the processor is sitting constanly
+	  wastes time.  Whilst the processor is sitting constantly
 	  asking for the lock, it is not doing any useful work.  For
 	  locks that are likely to be only held locked for a very
 	  short amount of time this may be appropriate, but in many
@@ -1603,14 +1603,14 @@ multiplex the output of the many sets, which can also add latency.
 	  lock it will start doing some other work, waiting for
 	  notification that the lock is available for use (we see in
 	  future chapters how the operating system can switch
-	  processes and give the processsor more work to do).</para>
+	  processes and give the processor more work to do).</para>
           <para>A mutex is however just a special case of a
 	  <emphasis>semaphore</emphasis>, famously invented by the
 	  Dutch computer scientist Dijkstra.  In a case where there
 	  are multiple resources available, a semaphore can be set to
 	  count accesses to the resources.  In the case where the
 	  number of resources is one, you have a mutex.  The operation
-	  of semaphores can be detailed in any agorithms book.</para>
+	  of semaphores can be detailed in any algorithms book.</para>
           <para>These locking schemes still have some problems
 	  however.  In many cases, most people only want to read data
 	  which is updated only rarely.  Having all the processors

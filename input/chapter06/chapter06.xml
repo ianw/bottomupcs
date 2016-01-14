@@ -153,7 +153,7 @@
         <title>Assembly Generation</title>
       </info>
       <para>The job of the compiler is to translate the higher level
-      language into assembely code suitable for the target being
+      language into assembly code suitable for the target being
       compiled for.  Obviously each different architecture has a
       different instruction set, different numbers of registers and
       different rules for correct operation.</para>
@@ -179,16 +179,16 @@
               <phrase>CPU's can generally only load values into
 		registers from memory on specific alignments.
 		Unaligned loads lead to, at best, performance
-		degredation.</phrase>
+		degradation.</phrase>
             </textobject>
           </mediaobject>
         </figure>
         <para>Alignment of variables in memory is an important
 	consideration for the compiler. Systems programmers need to be
-	aware of alignment constratins to help the compiler create the
+	aware of alignment constraints to help the compiler create the
 	most efficient code it can.</para>
         <para>CPUs can generally not load a value into a register from
-	an aribtrary memory location.  It requires that variables be
+	an arbitrary memory location.  It requires that variables be
 	<emphasis>aligned</emphasis> on certain boundaries.  In the
 	example above, we can see how a 32 bit (4 byte) value is
 	loaded into a register on a machine that requires 4 byte
@@ -214,7 +214,7 @@
           <para>Programmers need to consider alignment especially when
 	creating <computeroutput>struct</computeroutput>s.  Whilst the
 	compiler knows the alignment rules for the architecture it is
-	building for, at times programmers can cause suboptimal
+	building for, at times programmers can cause sub-optimal
 	behaviour.</para>
           <para>The C99 standard only says that structures will be
 	  ordered in memory in the same order as they are specified in
@@ -271,7 +271,7 @@
 	  cache.</para>
           <para>Obviously if this situation repeats the performance
 	  will be significantly reduced.  The situation would be
-	  releaved if the confilicting data were organised in slightly
+	  relieved if the conflicting data were organised in slightly
 	  different ways to avoid the cache line conflict.</para>
           <para>One possible way to detect this sort of situation is
 	  <emphasis>profiling</emphasis>.  When you profile your code
@@ -298,10 +298,10 @@
 	  possibly by trading off small amounts of wasted memory for
 	  increased (or perhaps even just correct) performance.</para>
           <para>Consequently as a programmer you should never make
-	  assumptions about the way variables and data will be layed
+	  assumptions about the way variables and data will be laid
 	  out by the compiler.  To do so is not portable, as a
 	  different architecture may have different rules and the
-	  compiler may make different decisions based on expicit
+	  compiler may make different decisions based on explicit
 	  commands or optimisation levels.</para>
         </section>
         <section>
@@ -324,7 +324,7 @@
             </programlisting>
           </example>
           <para>In the example above, taken from an Itanium machine,
-	  we can see that the padding and aligment of the stack has
+	  we can see that the padding and alignment of the stack has
 	  changed considerably between <application>gcc</application>
 	  versions.  This type of thing is to be expected and must be
 	  considered by the programmer.</para>
@@ -426,7 +426,7 @@
 	specify that the compiler should try to do this by specifying
 	the function as <computeroutput>inline</computeroutput> in the
 	function definition.  Once again, you may trade code size for
-	sequentiality in the code by doing this.</para>
+	sequentially in the code by doing this.</para>
       </section>
       <section>
         <info>
@@ -491,7 +491,7 @@
     correctly.  For example, the
     <computeroutput>printf</computeroutput> call is kept in a library
     which must be combined with your executable to work.  So although
-    you do not explicilty have to worry about linking in this case,
+    you do not explicitly have to worry about linking in this case,
     there is most certainly still a linking process happening to
     create your executable.</para>
     <para>In the following sections we explain some terms essential to
@@ -563,7 +563,7 @@
       first file.</para>
         <para><computeroutput>static</computeroutput> is almost the
       opposite of <computeroutput>extern</computeroutput>.  It places
-      restrictions on the visiblity of the symbol it modifies.  If you
+      restrictions on the visibility of the symbol it modifies.  If you
       declare a variable with <computeroutput>static</computeroutput>
       that says to the compiler "don't leave any symbols for this in
       the object code".  This means that when the linker is linking
@@ -573,7 +573,7 @@
       and reducing conflicts -- by declaring a variable
       <computeroutput>static</computeroutput> you can reuse the
       variable name in other files and not end up with symbol clashes.
-      We say we are <emphasis>restricting the visiblity</emphasis> of
+      We say we are <emphasis>restricting the visibility</emphasis> of
       the symbol, because we are not allowing the linker to see it.
       Contrast this with a more visible symbol (one not declared with
       <computeroutput>static</computeroutput>) which can be seen by
@@ -585,7 +585,7 @@
         <title>The linking process</title>
       </info>
       <para>Thus the linking process is really two steps; combining
-      all object files into one exectuable file and then going through
+      all object files into one executable file and then going through
       each object file to <emphasis>resolve</emphasis> any symbols.
       This usually requires two passes; one to read all the symbol
       definitions and take note of unresolved symbols and a second to
@@ -610,9 +610,9 @@
     want, because the exact commands and options to get a real life
     working executable on a real system can be quite complicated and
     architecture specific.</para>
-    <para>We will show the compliation process with the two following
+    <para>We will show the compilation process with the two following
     examples.  Both are C source files, one defined the
-    <computeroutput>main()</computeroutput> function for the inital
+    <computeroutput>main()</computeroutput> function for the initial
     program entry point, and another declares a helper type function.
     There is one global variable too, just for illustration.</para>
     <example xml:id="c-hello">
@@ -667,7 +667,7 @@
       </info>
       <para>Assembly is a fairly straight forward process.  The
       assembler is usually called <computeroutput>as</computeroutput>
-      and takes arguments in a similar fasion to
+      and takes arguments in a similar fashion to
       <computeroutput>gcc</computeroutput></para>
       <example>
         <info>
@@ -716,7 +716,7 @@
 	  as a <computeroutput>GLOBAL</computeroutput>, meaning that
 	  it is visible outside this file.  Similarly the
 	  <computeroutput>main()</computeroutput> function is
-	  externally visable.
+	  externally visible.
 	  </para>
         </listitem>
         <listitem>
@@ -770,7 +770,7 @@
       <computeroutput>crt</computeroutput> object files.  This
       function does some generic setup which application programmers
       do not need to worry about.</para>
-      <para>The path heirarchy is quite complicated, but in
+      <para>The path hierarchy is quite complicated, but in
 	  essence we can see that the final step is to link in some
 	  extra object files, namely </para>
       <itemizedlist>
