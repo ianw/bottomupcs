@@ -1,0 +1,31 @@
+$ gcc -Wl,--verbose -o test test.c
+GNU ld (GNU Binutils for Debian) 2.26
+...
+using internal linker script:
+==================================================
+OUTPUT_FORMAT("elf64-x86-64", "elf64-x86-64",
+	      "elf64-x86-64")
+OUTPUT_ARCH(i386:x86-64)
+ENTRY(_start)
+SEARCH_DIR("=/usr/local/lib/x86_64-linux-gnu"); ...
+SECTIONS
+{
+  /* Read-only sections, merged into text segment: */
+  PROVIDE (__executable_start = SEGMENT_START("text-segment", 0x400000)); . = SEGMENT_START("text-segment", 0x400000) + SIZEOF_HEADERS;
+  .interp         : { *(.interp) }
+  .note.gnu.build-id : { *(.note.gnu.build-id) }
+  .hash           : { *(.hash) }
+  .gnu.hash       : { *(.gnu.hash) }
+  .dynsym         : { *(.dynsym) }
+  .dynstr         : { *(.dynstr) }
+  .gnu.version    : { *(.gnu.version) }
+  .gnu.version_d  : { *(.gnu.version_d) }
+  .gnu.version_r  : { *(.gnu.version_r) }
+  .rela.dyn       :
+    {
+    ...
+    }
+  PROVIDE (etext = .);
+  .rodata         : { *(.rodata .rodata.* .gnu.linkonce.r.*) }
+  .rodata1        : { *(.rodata1) }
+...

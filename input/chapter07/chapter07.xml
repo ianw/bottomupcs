@@ -117,15 +117,13 @@
     library.  The same tools can be used to inspect and operate on all
     ELF files and developers who understand the ELF file format can
     translate their skills to most modern UNIX systems.</para>
-    <section>
-      <info>
-        <title>ELF in depth</title>
-      </info>
-      <para>ELF extends on COFF and gives the header sufficient
+
+    <para>ELF extends on COFF and gives the header sufficient
     flexibility to define an arbitrary number of sections, each with
     it's own properties.  This facilitates easier dynamic linking and
     debugging.</para>
-      <figure>
+
+    <figure>
         <info>
           <title>ELF Overview</title>
         </info>
@@ -148,34 +146,36 @@
         <info>
           <title>ELF File Header</title>
         </info>
-        <para>Overall, the file has a <emphasis>file
-	  header</emphasis> which describes the file in general and
-	  then has pointers to each of the individual sections that
-	  make up the file.</para>
+        <para>Overall, the file has a <emphasis>file header</emphasis>
+        which describes the file in general and then has pointers to
+        each of the individual sections that make up the file.  <xref
+        linkend="elf-header" /> shows the description as given in the
+        API documentation for ELF32 (the 32-bit form of ELF).  This is
+        the layout of the C structure which defines a ELF
+        header.</para>
+
         <example xml:id="elf-header">
           <info>
             <title>The ELF Header</title>
           </info>
           <programlisting linenumbering="numbered"><xi:include href="code/elf-header.txt" parse="text"/></programlisting>
         </example>
-        <para>Above is the description as given in the API
-	documentation.  This is the layout of the C structure which
-	defines a ELF header.</para>
         <example xml:id="readelf-elf-header">
           <info>
             <title>The ELF Header, as shown by <application>readelf</application></title>
           </info>
           <programlisting linenumbering="numbered"><xi:include href="code/readelf-elf-header.txt" parse="text"/></programlisting>
         </example>
-        <para>Above is a more human readable form as present by the
-	<application>readelf</application> program, which is part of
-	<application>GNU binutils</application>.</para>
+        <para><xref linkend="readelf-elf-header" /> shows a human
+        readable form as present by the
+        <application>readelf</application> program, which is part of
+        <application>GNU binutils</application>.</para>
         <para>The <computeroutput>e_ident</computeroutput> array is
-	the first thing at the start of any ELF file, and always
-	starts with a few "magic" bytes.  The first byte is 0x7F and
-	then the next three bytes are "ELF".  You can inspect an ELF
-	binary to see this for yourself with something like the
-	<command>hexdump</command> command.</para>
+        the first thing at the start of any ELF file, and always
+        starts with a few "magic" bytes.  The first byte is 0x7F and
+        then the next three bytes are "ELF".  You can inspect an ELF
+        binary to see this for yourself with something like the
+        <command>hexdump</command> command.</para>
         <example xml:id="elf-magic">
           <info>
             <title>Inspecting the ELF magic number</title>
@@ -183,181 +183,182 @@
           <programlisting linenumbering="numbered"><xi:include href="code/elf-magic.txt" parse="text"/></programlisting>
         </example>
         <para>Note the 0x7F to start, then the ASCII encoded "ELF"
-	string.  Have a look at the standard and see what the rest of
-	the array defines and what the values are in a binary.</para>
+        string.  Have a look at the standard and see what the rest of
+        the array defines and what the values are in a binary.</para>
         <para>Next we have some flags for the type of machine this
-	binary is created for.  The first thing we can see is that ELF
-	defines different type sized versions, one for 32 bit and one
-	for 64 bit versions; here we inspect the 32 bit version.  The
-	difference is mostly that on 64 bit machines addresses
-	obviously required to be held in 64 bit variables.  We can see
-	that the binary has been created for a big endian machine that
-	uses 2's complement to represent negative numbers.  Skipping
-	down a bit we can see the
-	<computeroutput>Machine</computeroutput> tells us this is a
-	PowerPC binary.</para>
+        binary is created for.  The first thing we can see is that ELF
+        defines different type sized versions, one for 32 bit and one
+        for 64 bit versions; here we inspect the 32 bit version.  The
+        difference is mostly that on 64 bit machines addresses
+        obviously required to be held in 64 bit variables.  We can see
+        that the binary has been created for a big endian machine that
+        uses 2's complement to represent negative numbers.  Skipping
+        down a bit we can see the
+        <computeroutput>Machine</computeroutput> tells us this is a
+        PowerPC binary.</para>
         <para>The apparently innocuous entry point address seems
-	  straight forward enough; this is the address in memory that
-	  the program code starts at.</para>
-        <para>Beginning C programmers are told that
-	  <emphasis>main()</emphasis> is the first program called in
-	  your program.  Using the entry point address we can actually
-	  verify that it <emphasis>isn't</emphasis>.</para>
+        straight forward enough; this is the address in memory that
+        the program code starts at.  Beginning C programmers are told
+        that <emphasis>main()</emphasis> is the first program called
+        in your program.  Using the entry point address we can
+        actually verify that it <emphasis>isn't</emphasis>.</para>
         <example xml:id="entry-point">
           <info>
             <title>Investigating the entry point</title>
           </info>
           <programlisting linenumbering="numbered"><xi:include href="code/entry-point.txt" parse="text"/></programlisting>
         </example>
-        <para>Above we can see that the entry point is actually a
-	  function called <computeroutput>_start</computeroutput>.
-	  Our program didn't define this at all, and the leading
-	  underscore suggests that it is in a separate
-	  <emphasis>namespace</emphasis>.  We examine how a program
-	  starts up below.</para>
+        <para>In <xref linkend="entry-point" /> we can see that the
+        entry point is actually a function called
+        <computeroutput>_start</computeroutput>.  Our program didn't
+        define this at all, and the leading underscore suggests that
+        it is in a separate <emphasis>namespace</emphasis>.  We
+        examine how a program starts up in detail in <xref
+        linkend="startup" />.</para>
         <para>After that the header contains pointers to where in the
-	file other important parts of the ELF file start, like a table
-	of contents.</para>
+        file other important parts of the ELF file start, like a table
+        of contents.</para>
       </section>
       <section xml:id="symbols_and_relocations">
         <info>
           <title>Symbols and Relocations</title>
         </info>
         <para>The ELF specification provides for <emphasis>symbol
-	tables</emphasis> which are simply mappings of strings
-	(symbols) to locations in the file.  Symbols are required for
-	linking; for example assigning a value to a variable
-	<computeroutput>foo</computeroutput> declared as
-	<computeroutput>extern int foo;</computeroutput> would require
-	the linker to find the address of
-	<computeroutput>foo</computeroutput>, which would involve
-	looking up "foo" in the symbol table and finding the
-	address.</para>
+        tables</emphasis> which are simply mappings of strings
+        (symbols) to locations in the file.  Symbols are required for
+        linking; for example assigning a value to a variable
+        <computeroutput>foo</computeroutput> declared as
+        <computeroutput>extern int foo;</computeroutput> would require
+        the linker to find the address of
+        <computeroutput>foo</computeroutput>, which would involve
+        looking up "foo" in the symbol table and finding the
+        address.</para>
         <para>Closely related to symbols are
-	<emphasis>relocations</emphasis>.  A relocation is simply a
-	blank space left to be patched up later.  In the previous
-	example, until the address of
-	<computeroutput>foo</computeroutput> is known it can not be
-	used.  However, on a 32-bit system, we know the
-	<emphasis>address</emphasis> of
-	<computeroutput>foo</computeroutput> must be a 4-byte value,
-	so any time the compiler needs to use that address (to say,
-	assign a value) it can simply leave 4-byes of blank space and
-	keep a relocation that essentially says to the linker "place
-	the real value of "foo" into the 4 bytes at this address".  As
-	mentioned, this requires the symbol "foo" to be resolved.
-	<xref linkend="dynamic_relocations"/> contains further
-	information on relocations.
+        <emphasis>relocations</emphasis>.  A relocation is simply a
+        blank space left to be patched up later.  In the previous
+        example, until the address of
+        <computeroutput>foo</computeroutput> is known it can not be
+        used.  However, on a 32-bit system, we know the
+        <emphasis>address</emphasis> of
+        <computeroutput>foo</computeroutput> must be a 4-byte value,
+        so any time the compiler needs to use that address (to say,
+        assign a value) it can simply leave 4-byes of blank space and
+        keep a relocation that essentially says to the linker "place
+        the real value of "foo" into the 4 bytes at this address".  As
+        mentioned, this requires the symbol "foo" to be resolved.
+        <xref linkend="dynamic_relocations"/> contains further
+        information on relocations.
 	</para>
       </section>
       <section>
         <info>
           <title>Sections and Segments</title>
         </info>
-        <para>The ELF format specifies two "views" of an ELF file --
-	that which is used for linking and that which is used for
-	execution.  This affords significant flexibility for systems
-	designers.</para>
+        <para>The ELF format specifies two "views" of an ELF file —
+        that which is used for linking and that which is used for
+        execution.  This affords significant flexibility for systems
+        designers.</para>
         <para>We talk about <emphasis>sections</emphasis> in object
-	code waiting to be linked into an executable.  One or more
-	sections map to a <emphasis>segment</emphasis> in the
-	executable.</para>
+        code waiting to be linked into an executable.  One or more
+        sections map to a <emphasis>segment</emphasis> in the
+        executable.</para>
         <section>
           <info>
             <title>Segments</title>
           </info>
           <para>As we have done before, it is sometimes easier to look
-	  at the higher level of abstraction (segments) before
-	  inspecting the lower layers.</para>
+          at the higher level of abstraction (segments) before
+          inspecting the lower layers.</para>
           <para>As we mentioned the ELF file has an header that
-	  describes the overall layout of the file.  The ELF header
-	  actually points to another group of headers called the
-	  <emphasis>program headers</emphasis>.  These headers
-	  describe to the operating system anything that might be
-	  required for it to load the binary into memory and execute
-	  it.  Segments are described by program headers, but so are
-	  some other things required to get the executable
-	  running.</para>
+          describes the overall layout of the file.  The ELF header
+          actually points to another group of headers called the
+          <emphasis>program headers</emphasis>.  These headers
+          describe to the operating system anything that might be
+          required for it to load the binary into memory and execute
+          it.  Segments are described by program headers, but so are
+          some other things required to get the executable
+          running.</para>
           <example xml:id="program-header">
             <info>
               <title>The Program Header</title>
             </info>
             <programlisting linenumbering="numbered"><xi:include href="code/program-header.txt" parse="text"/></programlisting>
           </example>
-          <para>The definition of the program header is seen above.
-	  You might have noticed from the ELF header definition above
-	  how there were fields
-	  <computeroutput>e_phoff</computeroutput>,
-	  <computeroutput>e_phnum</computeroutput> and
-	  <computeroutput>e_phentsize</computeroutput>; these are
-	  simply the offset in the file where the program headers
-	  start, how many program headers there are and how big each
-	  program header is.  With these three bits of information you
-	  can easily find and read the program headers.</para>
-          <para>As we mentioned, program headers more than just
-	  segments.  The <computeroutput>p_type</computeroutput> field
-	  defines just what the program header is defining.  For
-	  example, if this field is
-	  <computeroutput>PT_INTERP</computeroutput> the header is
-	  defined as meaning a string pointer to an
-	  <emphasis>interpreter</emphasis> for the binary file.  We
-	  discussed compiled versus interpreted languages previously
-	  and made the distinction that a compiler builds a binary
-	  which can be run in a stand alone fashion.  Why should it
-	  need an interpreter?  As always, the true picture is a
-	  little more complicated.  There are several reasons why a
-	  modern system wants flexibility when loading executable
-	  files, and to do this some information can only be
-	  adequately acquired at the actual time the program is set up
-	  to run.  We see this in future chapters where we look into
-	  dynamic linking.  Consequently some minor changes might need
-	  to be made to the binary to allow it to work properly at
-	  runtime.  Thus the usual interpreter of a binary file is the
-	  <emphasis>dynamic loader</emphasis>, so called because it
-	  takes the final steps to complete loading of the executable
-	  and prepare the binary image for running.
+          <para>The definition of the program header is seen in <xref
+          linkend="program-header" />.  You might have noticed from
+          the ELF header definition above how there were fields
+          <computeroutput>e_phoff</computeroutput>,
+          <computeroutput>e_phnum</computeroutput> and
+          <computeroutput>e_phentsize</computeroutput>; these are
+          simply the offset in the file where the program headers
+          start, how many program headers there are and how big each
+          program header is.  With these three bits of information you
+          can easily find and read the program headers.</para>
+          <para>Program headers more than just segments.  The
+          <computeroutput>p_type</computeroutput> field defines just
+          what the program header is defining.  For example, if this
+          field is <computeroutput>PT_INTERP</computeroutput> the
+          header is defined as meaning a string pointer to an
+          <emphasis>interpreter</emphasis> for the binary file.  We
+          discussed compiled versus interpreted languages previously
+          and made the distinction that a compiler builds a binary
+          which can be run in a stand alone fashion.  Why should it
+          need an interpreter?  As always, the true picture is a
+          little more complicated.  There are several reasons why a
+          modern system wants flexibility when loading executable
+          files, and to do this some information can only be
+          adequately acquired at the actual time the program is set up
+          to run.  We see this in future chapters where we look into
+          dynamic linking.  Consequently some minor changes might need
+          to be made to the binary to allow it to work properly at
+          runtime.  Thus the usual interpreter of a binary file is the
+          <emphasis>dynamic loader</emphasis>, so called because it
+          takes the final steps to complete loading of the executable
+          and prepare the binary image for running.
 	  </para>
           <para>Segments are described with a value of
-	  <computeroutput>PT_LOAD</computeroutput> in the
-	  <computeroutput>p_type</computeroutput> field.  Each segment
-	  is then described by the other fields in the program header.
-	  The <computeroutput>p_offset</computeroutput> field tells
-	  you how far into the file on disk the data for the segment
-	  is.  The <computeroutput>p_vaddr</computeroutput> field
-	  tells you what address that data is to live at in virtual
-	  memory (<computeroutput>p_addr</computeroutput> describes
-	  the physical address, which is only really useful for small
-	  embedded systems that do not implement virtual memory).  The
-	  two flags <computeroutput>p_filesz</computeroutput> and
-	  <computeroutput>p_memsz</computeroutput> work to tell you
-	  how big the segment is on disk and how big it should be in
-	  memory.  If the memory size is greater than the disk size,
-	  then the overlap should be filled with zeros.  In this way
-	  you can save considerable space in your binaries by not
-	  having to waste space for empty global variables.  Finally
-	  <computeroutput>p_flags</computeroutput> indicates the
-	  permissions on the segment.  Execute, read and write
-	  permissions can be specified in any combination; for example
-	  code segments should be marked as read and execute only,
-	  data sections as read and write with no execute.
+          <computeroutput>PT_LOAD</computeroutput> in the
+          <computeroutput>p_type</computeroutput> field.  Each segment
+          is then described by the other fields in the program header.
+          The <computeroutput>p_offset</computeroutput> field tells
+          you how far into the file on disk the data for the segment
+          is.  The <computeroutput>p_vaddr</computeroutput> field
+          tells you what address that data is to live at in virtual
+          memory (<computeroutput>p_addr</computeroutput> describes
+          the physical address, which is only really useful for small
+          embedded systems that do not implement virtual memory).  The
+          two flags <computeroutput>p_filesz</computeroutput> and
+          <computeroutput>p_memsz</computeroutput> work to tell you
+          how big the segment is on disk and how big it should be in
+          memory.  If the memory size is greater than the disk size,
+          then the overlap should be filled with zeros.  In this way
+          you can save considerable space in your binaries by not
+          having to waste space for empty global variables.  Finally
+          <computeroutput>p_flags</computeroutput> indicates the
+          permissions on the segment.  Execute, read and write
+          permissions can be specified in any combination; for example
+          code segments should be marked as read and execute only,
+          data sections as read and write with no execute.
 	  </para>
           <para>There are a few other segment types defined in the
-	  program headers, they are described more fully in the
-	  standards specification (XXX).</para>
+          program headers, they are described more fully in the
+          standards specification.</para>
         </section>
-        <section>
+        <section xml:id="sections">
           <info>
             <title>Sections</title>
           </info>
           <para>As we have mentioned, sections make up segments.
-	  Sections are a way to organise the binary into logical areas
-	  to communicate information between the compiler and the
-	  linker.  In some special binaries, such as the Linux kernel,
-	  sections are used in more specific ways.</para>
+          Sections are a way to organise the binary into logical areas
+          to communicate information between the compiler and the
+          linker.  In some special binaries, such as the Linux kernel,
+          sections are used in more specific ways (see <xref
+          linkend="extra_sections" />).</para>
           <para>We've seen how segments ultimately come down to a blob
-	  of data in a file on disk with some descriptions about where
-	  it should be loaded and what permissions it has. (XXX)</para>
-          <para>Sections have a similar header to segments.</para>
+          of data in a file on disk with some descriptions about where
+          it should be loaded and what permissions it has.  Sections
+          have a similar header to segments, as shown in <xref
+          linkend="section-header" />.</para>
           <example xml:id="section-header">
             <info>
               <title>Sections </title>
@@ -365,83 +366,82 @@
             <programlisting linenumbering="numbered"><xi:include href="code/section-header.txt" parse="text"/></programlisting>
           </example>
           <para>Sections have a few more types defined for the
-	  <computeroutput>sh_type</computeroutput> field; for example
-	  a section of type
-	  <computeroutput>SH_PROGBITS</computeroutput> is defined as a
-	  section that hold binary data for use by the program.  Other
-	  flags say if this section is a symbol table (used by the
-	  linker or debugger for example) or maybe something for the
-	  dynamic loader.</para>
-          <para>There are also more attributes, such as the
-	  <emphasis>allocate</emphasis> attribute which flags that
-	  this section will need memory allocated for it.</para>
-          <para>It is probably best to examine sections through an
-	  example of them in use.  Consider the following
-	  program.</para>
+          <computeroutput>sh_type</computeroutput> field; for example
+          a section of type
+          <computeroutput>SH_PROGBITS</computeroutput> is defined as a
+          section that hold binary data for use by the program.  Other
+          flags say if this section is a symbol table (used by the
+          linker or debugger for example) or maybe something for the
+          dynamic loader.  There are also more attributes, such as the
+          <emphasis>allocate</emphasis> attribute which flags that
+          this section will need memory allocated for it.</para>
+          <para>Below we will examine the program listed in <xref
+          linkend="section" />.</para>
           <example xml:id="section">
             <info>
               <title>Sections </title>
             </info>
             <programlisting linenumbering="numbered" language="c"><xi:include href="code/sections.c" parse="text"/></programlisting>
           </example>
+          <para><xref linkend="section-readelf" /> shows the output of
+          <application>readelf</application> with some parts stripped
+          clarity.  Using this output we can analyse each part of our
+          simple program and see where it ends up in the final output
+          binary.</para>
           <example xml:id="section-readelf">
             <info>
               <title>Sections readelf output </title>
             </info>
             <programlisting linenumbering="numbered"><xi:include href="code/sections.txt" parse="text"/></programlisting>
           </example>
-          <para>Above we have stripped some parts of the
-	  <application>readelf</application> output for clarity.  We
-	  can analyse each part of our simple program and see what
-	  happens to it.</para>
           <para>Firstly, let us look at the variable
-	  <computeroutput>big_big_array</computeroutput>, which as the
-	  name suggests is a fairly large global array.  If we skip
-	  down to the symbol table we can see that the variable is at
-	  location <computeroutput>0x100109cc</computeroutput> which
-	  we can correlate to the
-	  <computeroutput>.bss</computeroutput> section in the section
-	  listing, since it starts just below it at
-	  <computeroutput>0x100109c8</computeroutput>.  Note the size,
-	  and how it is quite large.  We mentioned that BSS is a
-	  standard part of a binary image since it would be silly to
-	  require that binary on disk have 10 megabytes of space
-	  allocated to it, when all of that space is going to be zero.
-	  Note that this section has a type of
-	  <computeroutput>NOBITS</computeroutput> meaning that it does
-	  not have any bytes on disk.</para>
+          <computeroutput>big_big_array</computeroutput>, which as the
+          name suggests is a fairly large global array.  If we skip
+          down to the symbol table we can see that the variable is at
+          location <computeroutput>0x100109cc</computeroutput> which
+          we can correlate to the
+          <computeroutput>.bss</computeroutput> section in the section
+          listing, since it starts just below it at
+          <computeroutput>0x100109c8</computeroutput>.  Note the size,
+          and how it is quite large.  We mentioned that BSS is a
+          standard part of a binary image since it would be silly to
+          require that binary on disk have 10 megabytes of space
+          allocated to it, when all of that space is going to be zero.
+          Note that this section has a type of
+          <computeroutput>NOBITS</computeroutput> meaning that it does
+          not have any bytes on disk.</para>
           <para>Thus the <computeroutput>.bss</computeroutput> section
-	  is defined for global variables whose value should be zero
-	  when the program starts.  We have seen how the memory size
-	  can be different to the on disk size in our discussion of
-	  segments; variables being in the
-	  <computeroutput>.bss</computeroutput> section are an
-	  indication that they will be given zero value on program
-	  start.</para>
+          is defined for global variables whose value should be zero
+          when the program starts.  We have seen how the memory size
+          can be different to the on disk size in our discussion of
+          segments; variables being in the
+          <computeroutput>.bss</computeroutput> section are an
+          indication that they will be given zero value on program
+          start.</para>
           <para>The <computeroutput>a_string</computeroutput> variable
-	  lives in the <computeroutput>.sdata</computeroutput>
-	  section, which stands for <emphasis>small data</emphasis>.
-	  Small data (and the corresponding
-	  <computeroutput>.sbss</computeroutput> section) are sections
-	  that can be reached by an offset from some known pointer.
-	  This means it is much faster to get to data in the sections
-	  as there are no extra lookups and loading of addresses into
-	  memory required.  On the other hand, most architectures are
-	  limited to the size of immediate values you can add to a
-	  register (e.g. saying <computeroutput>r1 = add r2,
-	  70;</computeroutput> 70 is an immediate value, as opposed to
-	  say, adding two values stored in registers
-	  <computeroutput>r1 = add r2,r3</computeroutput>) and can
-	  thus only offset a certain "small" distance from an address
-	  (XXX).
-	  </para>
-          <para>We can also see that our
-	  <computeroutput>a_var_with_value</computeroutput> lives in
-	  the same place.</para>
+          lives in the <computeroutput>.sdata</computeroutput>
+          section, which stands for <emphasis>small data</emphasis>.
+          Small data (and the corresponding
+          <computeroutput>.sbss</computeroutput> section) are sections
+          available on some architectures where data can be reached by
+          an offset from some known pointer.  This means a fixed-value
+          can be added to the base-address, making it faster to get to
+          data in the sections as there are no extra lookups and
+          loading of addresses into memory required.  Most
+          architectures are limited to the size of immediate values
+          you can add to a register (e.g. if performing the
+          instruction <computeroutput>r1 = add r2,
+          70;</computeroutput>, 70 is an <emphasis>immediate
+          value</emphasis>, as opposed to say, adding two values
+          stored in registers <computeroutput>r1 = add
+          r2,r3</computeroutput>) and can thus only offset a certain
+          "small" distance from an address.  We can also see that our
+          <computeroutput>a_var_with_value</computeroutput> lives in
+          the same place.</para>
           <para><computeroutput>main</computeroutput> however lives in
-	  the <computeroutput>.text</computeroutput> section, as we
-	  expect (remember the name "text" and "code" are used
-	  interchangeably to refer to a program in memory.</para>
+          the <computeroutput>.text</computeroutput> section, as we
+          expect (remember the name "text" and "code" are used
+          interchangeably to refer to a program in memory.</para>
         </section>
         <section>
           <info>
@@ -453,285 +453,49 @@
             </info>
             <programlisting linenumbering="numbered"><xi:include href="code/sections-segments.txt" parse="text"/></programlisting>
           </example>
-          <para><computeroutput>readelf</computeroutput> shows us the
-	  segments and section mappings in the ELF file for the binary
-	  <computeroutput>/bin/ls</computeroutput>. </para>
+          <para><xref linkend="sections-segments" /> shows how
+          <computeroutput>readelf</computeroutput> shows us the
+          segments and section mappings in the ELF file for the binary
+          <computeroutput>/bin/ls</computeroutput>. </para>
           <para>Skipping to the bottom of the output, we can see what
-	  sections have been moved into what segments.  So, for
-	  example the <computeroutput>.interp</computeroutput> section
-	  is placed into an <computeroutput>INTERP</computeroutput>
-	  flagged segment.  Notice that readelf tells us it is
-	  requesting the interpreter
-	  <computeroutput>/lib/ld.so.1</computeroutput>; this is the
-	  dynamic linker which is run to prepare the binary for
-	  execution.</para>
+          sections have been moved into what segments.  So, for
+          example the <computeroutput>.interp</computeroutput> section
+          is placed into an <computeroutput>INTERP</computeroutput>
+          flagged segment.  Notice that readelf tells us it is
+          requesting the interpreter
+          <computeroutput>/lib/ld.so.1</computeroutput>; this is the
+          dynamic linker which is run to prepare the binary for
+          execution.</para>
           <para>Looking at the two
-	  <computeroutput>LOAD</computeroutput> segments we can see
-	  the distinction between text and data.  Notice how the first
-	  one has only "read" and "execute" permissions, whilst the
-	  next one has read, write and execute permissions?  These
-	  describe the code (r/w) and data (r/w/e) segments.</para>
+          <computeroutput>LOAD</computeroutput> segments we can see
+          the distinction between text and data.  Notice how the first
+          one has only "read" and "execute" permissions, whilst the
+          next one has read, write and execute permissions?  These
+          describe the code (r/w) and data (r/w/e) segments.</para>
           <para>But data should not need to be executable!  Indeed, on
-	  most architectures (for example, the most common x86) the
-	  data section will not be marked as having the data section
-	  executable.  However, the example output above was taken
-	  from a PowerPC machine which has a slightly different
-	  programming model (ABI, see below) requiring that the data
-	  section be executable <footnote><para>For those that are
-	  curious, the PowerPC ABI calls stubs for functions in
-	  dynamic libraries directly in the GOT, rather than having
-	  them bounce through a separate PLT entry.  Thus the
-	  processor needs execute permissions for the GOT section,
-	  which you can see is embedded in the data segment.  This
-	  should make sense after reading the dynamic linking
-	  chapter!</para></footnote>.  Such is the life of a systems
-	  programmer, where rules were made to be broken!</para>
+          most architectures (for example, the most common x86) the
+          data section will not be marked as having the data section
+          executable.  However, the example output above was taken
+          from a PowerPC machine which has a slightly different
+          programming model (ABI, see below) requiring that the data
+          section be executable <footnote><para>For those that are
+          curious, the PowerPC ABI calls stubs for functions in
+          dynamic libraries directly in the GOT, rather than having
+          them bounce through a separate PLT entry.  Thus the
+          processor needs execute permissions for the GOT section,
+          which you can see is embedded in the data segment.  This
+          should make sense after reading the dynamic linking
+          chapter!</para></footnote>.  Such is the life of a systems
+          programmer, where rules were made to be broken!</para>
           <para>The other interesting thing to note is that the file
-	  size is the same as the memory size for the code segment,
-	  however memory size is greater than the file size for the
-	  data segment.  This comes from the BSS section which holds
-	  zeroed global variables.</para>
+          size is the same as the memory size for the code segment,
+          however memory size is greater than the file size for the
+          data segment.  This comes from the BSS section which holds
+          zeroed global variables.</para>
         </section>
       </section>
     </section>
-    <section xml:id="elf_debugging">
-      <info>
-        <title>Debugging</title>
-      </info>
-      <para>Traditionally the primary method of post mortem debugging is
-	referred to as the <emphasis>core dump</emphasis>.  The term
-	<emphasis>core</emphasis> comes from the original physical
-	characteristics of magnetic core memory, which uses the
-	orientation of small magnetic rings to store state.
-      </para>
-      <para>Thus a core dump is simply a complete snapshot of the
-	program as it was running at a particular time.  A
-	<emphasis>debugger</emphasis> can then be used to examine this
-	dump and reconstruct the program state.  <xref linkend="coredump_gdb"/> shows a sample program that
-	writes to a random memory location in order to force a crash.
-	At this point the processes will be halted and a dump of the
-	current state is recorded.</para>
-      <example xml:id="coredump_gdb">
-        <info>
-          <title>Example of creating a core dump and using it with <productname>gdb</productname></title>
-        </info>
-        <programlisting linenumbering="numbered"><xi:include href="code/core-gdb.txt" parse="text"/></programlisting>
-      </example>
-      <section>
-        <info>
-          <title>Symbols and Debugging Information</title>
-        </info>
-        <para>As the example shows, the debugger
-	  <productname>gdb</productname> requires the original
-	  executable and the core dump to provide the debugging session.
-	  Note that the original executable was built with the
-	  <computeroutput>-g</computeroutput> flag, which instructs the
-	  compiler to include all <emphasis>debugging
-	    information</emphasis>.  Debugging information created by the
-	  compiler and is kept in special sections of the ELF file.  It
-	  describes in detail things like what register values currently
-	  hold which variables used in the code, size of variables,
-	  length of arrays, etc.  It is generally in the standard
-	  <emphasis>DWARF</emphasis> format (a pun on the homonym ELF).
-	</para>
-        <para>Including debugging information can make executable
-	  files and libraries very large; although this data is not
-	  required resident in memory for actually running it can
-	  still take up considerable disk space.  Thus the usual
-	  process is to <emphasis>strip</emphasis> this information
-	  from the ELF file.  While it is possible to arrange for
-	  shipping of both stripped and unstripped files, most all
-	  current binary distribution methods provide the debugging
-	  information in separate files.  The
-	  <productname>objcopy</productname> tool can be used to
-	  extract the debugging information
-	  (<computeroutput>--only-keep-debug</computeroutput>) and
-	  then add a link in the original executable to this stripped
-	  information
-	  (<computeroutput>--add-gnu-debuglink</computeroutput>).
-	  After this is done, a special section called
-	  <computeroutput>.gnu_debuglink</computeroutput> will be
-	  present in the original executable, which contains a hash so
-	  that when a debugging sessions starts the debugger can be
-	  sure it associates the right debugging information with the
-	  right executable.</para>
-        <example xml:id="strip_debug">
-          <info>
-            <title>Example of stripping debugging information into
-	    separate files using
-	    <productname>objcopy</productname></title>
-          </info>
-          <programlisting linenumbering="numbered"><xi:include href="code/debuglink.txt" parse="text"/></programlisting>
-        </example>
-        <para>Symbols take up much less space, but are also targets
-	for removal from final output.  Once the individual object
-	files of an executable are linked into the single final image
-	there is generally no need for most symbols to remain.  As
-	discussed in <xref linkend="symbols_and_relocations"/>
-	symbols are required to fix up relocation entries, but once
-	this is done the symbols are not strictly necessary for
-	running the final program.  On Linux the GNU toolchain
-	<productname>strip</productname> program provides options to
-	remove symbols.  Note that some symbols are required to be
-	resolved at run-time (for <emphasis>dynamic
-	linking</emphasis>, the focus of <xref linkend="chapter08"/>) but these are put in separate
-	<emphasis>dynamic</emphasis> symbol tables so they will not be
-	removed and render the final output useless.</para>
-      </section>
-      <section>
-        <info>
-          <title>Inside coredumps</title>
-        </info>
-        <para>A coredump is really just another ELF file; this
-	illustrates the flexibility of ELF as a binary format.</para>
-        <example xml:id="coredump_internal">
-          <info>
-            <title>Example of using <productname>readelf</productname>
-	  and <productname>eu-readelf</productname> to examine a
-	  coredump.</title>
-          </info>
-          <programlisting linenumbering="numbered"><xi:include href="code/core-internal.txt" parse="text"/></programlisting>
-        </example>
-        <para>In <xref linkend="coredump_internal"/> we can see
-	an examination of the core file produced by <xref linkend="coredump_gdb"/> using firstly the
-	<productname>readelf</productname> tool.  There are no
-	sections, relocations or other extraneous information in the
-	file that may be required for loading an executable or
-	library; it simply consists of a series of program headers
-	describing <computeroutput>LOAD</computeroutput> segments.
-	These segments are raw data dumps, created by the kernel, of
-	the current memory allocations.
-	</para>
-        <para>The other component of the core dump is the
-	<computeroutput>NOTE</computeroutput> sections which contain
-	data necessary for debugging but not necessarily captured in
-	straight snapshot of the memory allocations.  The
-	<productname>eu-readelf</productname> program used in the
-	second part of the figure provides a more complete view of the
-	data by decoding it.</para>
-        <para>The <computeroutput>PRSTATUS</computeroutput> note gives
-	a range of interesting information about the process as it was
-	running; for example we can see from
-	<computeroutput>cursig</computeroutput> that the program
-	received a signal 11, or segmentation fault, as we would
-	expect.  Along with process number information, it also
-	includes a dump of all the current registers.  Given the
-	register values, the debugger can reconstruct the stack state
-	and hence provide a <emphasis>backtrace</emphasis>; combined
-	with the symbol and debugging information from the original
-	binary the debugger can show exactly how you reached the
-	current point of execution.</para>
-        <para>Another interesting output is the current
-	  <emphasis>auxiliary vector</emphasis>
-	  (<computeroutput>AUXV</computeroutput>), discussed in <xref linkend="auxv"/>.  The
-	  <computeroutput>386_TLS</computeroutput> describes
-	  <emphasis>global descriptor table</emphasis> entries used
-	  for the x86 implementation of <emphasis>thread-local
-	  storage</emphasis> (see <xref linkend="fast_system_calls"/> for more information on
-	  use of segmentation, and <xref linkend="threads"/> for
-	  information on threads<footnote><para>For a multi-threaded
-	  application, there would be duplicate entries for each
-	  thread running.  The debugger will understand this, and it
-	  is how <productname>gdb</productname> implements the
-	  <computeroutput>thread</computeroutput> command to show and
-	  switch between threads.</para></footnote>).
-	  </para>
-        <para>The kernel creates the core dump file within the bounds
-	  of the current <computeroutput>ulimit</computeroutput>
-	  settings &#x2014; since a program using a lot of memory could
-	  result in a very large dump, potentially filling up disk and
-	  making problems even worse, generally the
-	  <computeroutput>ulimit</computeroutput> is set low or even
-	  at zero, since most non-developers have little use for a
-	  core dump file.  However the core dump remains the single
-	  most useful way to debug an unexpected situation in a
-	  postmortem fashion.</para>
-      </section>
-      <section xml:id="extra_sections">
-	<info>
-	  <title>Cusomised sections</title>
-	</info>
 
-	<para>For the most part, organisation of code, data and
-	symbols is something a programmer can leave up the toolchain
-	defaults.  However, there are times when it makes sense to
-	extend or customise sections and their contents.  One common
-	example of this is with Linux kernel
-	<emphasis>modules</emphasis> which are used to dynamically
-	load drivers and other features into the running kernel.
-	Because these modules are not portable, in so much as they
-	only work with one fixed kernel build version, the interface
-	between modules and the kernel can be flexible and is not
-	bound to particular standards.</para>
-
-	<para>For example, the
-	<computeroutput>modinfo</computeroutput> tool can show you a
-	range of information about a module such as its authors,
-	license type, dependencies and paramaters.</para>
-
-	<example xml:id="modinfo">
-	  <info>
-	    <title>Example of <computeroutput>modinfo</computeroutput>
-	    output</title>
-	  </info>
-	  <programlisting linenumbering="numbered"><xi:include href="code/modules.txt" parse="text"/></programlisting>
-	</example>
-
-	<para>As you can see above,
-	<computeroutput>modinfo</computeroutput> is parsing the
-	<computeroutput>.modinfo</computeroutput> section embedded
-	within the module file to present the details of the module.
-	<xref linkend="modinfo_sections" /> shows how one field, the
-	"author" is put into the module.  The code mostly comes from
-	<computeroutput>include/linux/module.h</computeroutput>.
-	</para>
-
-	<example xml:id="modinfo_sections">
-	  <info>
-	    <title>Putting module info into sections</title>
-	  </info>
-	  <programlisting linenumbering="numbered" language="c"><xi:include href="code/modinfo.c" parse="text"/></programlisting>
-	</example>
-
-	<para>At first, this looks like a macro nightmare, but it can
-	be unravelled step by step.  We see that
-	<computeroutput>MODULE_AUTHOR</computeroutput> is a wrapper
-	around the more generic
-	<computeroutput>__MODULE_INFO</computeroutput> macro, which is
-	where most of the magic happens.  There, we can see that we
-	are building up a <computeroutput>static const char
-	[]</computeroutput> variable to hold the string
-	<computeroutput>author=Your Name
-	&lt;your@name.com&gt;</computeroutput>.  The interesting thing
-	to note is that the variable has an extra parameter
-	<computeroutput>__attribute__((section(".modinfo")))</computeroutput>
-	which is telling the compiler to not put this in the
-	<computeroutput>data</computeroutput> section with all the
-	other variables, but to stash it in its own ELF section called
-	<computeroutput>.modinfo</computeroutput>.  The other
-	parameters stop the variable being optimised away because it
-	looks unused (<computeroutput>unused</computeroutput>) and
-	ensure we pack the variables in next to each other by
-	specifying the alignment.</para>
-
-	<para>There is extensive use of
-	<emphasis>stringification</emphasis> macros, which are rather
-	arcane tricks used within the C pre-processor to ensure that
-	strings and definitions can live together.  The only other
-	trick is the use of the
-	<computeroutput>__COUNTER__</computeroutput> special define
-	provided by <command>gcc</command>, which provides a unique,
-	incrementing value each time it is called; this allows
-	multiple <computeroutput>MODULE_AUTHOR</computeroutput> calls
-	to in the one file and not end up with the same variable
-	name.</para>
-
-	<para>XXX: put final example in here</para>
-
-      </section>
-
-    </section>
-  </section>
   <section xml:id="executables">
     <info>
       <title>ELF Executables</title>
@@ -910,7 +674,315 @@
       process.</para>
     </section>
   </section>
-  <section xml:id="abi">
+
+  <section xml:id="elf-sections-others">
+    <info>
+      <title>Extending ELF concepts</title>
+    </info>
+    <section xml:id="elf_debugging">
+      <info>
+        <title>Debugging</title>
+      </info>
+      <para>Traditionally the primary method of post mortem debugging
+      is referred to as the <emphasis>core dump</emphasis>.  The term
+      <emphasis>core</emphasis> comes from the original physical
+      characteristics of magnetic core memory, which uses the
+      orientation of small magnetic rings to store state.
+      </para>
+      <para>Thus a core dump is simply a complete snapshot of the
+      program as it was running at a particular time.  A
+      <emphasis>debugger</emphasis> can then be used to examine this
+      dump and reconstruct the program state.  <xref
+      linkend="coredump_gdb"/> shows a sample program that writes to a
+      random memory location in order to force a crash.  At this point
+      the processes will be halted and a dump of the current state is
+      recorded.</para>
+      <example xml:id="coredump_gdb">
+        <info>
+          <title>Example of creating a core dump and using it with <productname>gdb</productname></title>
+        </info>
+        <programlisting linenumbering="numbered"><xi:include href="code/core-gdb.txt" parse="text"/></programlisting>
+      </example>
+
+      <para>Thus a core-dump is just another ELF file with a range of
+      sections understood to the debugger to represent parts of the
+      running program.</para>
+
+      <section>
+        <info>
+          <title>Symbols and Debugging Information</title>
+        </info>
+        <para>As <xref linkend="coredump_gdb" /> shows, the debugger
+        <productname>gdb</productname> requires the original
+        executable and the core dump to reconstruct the environment
+        for the debugging session.  Note that the original executable
+        was built with the <computeroutput>-g</computeroutput> flag,
+        which instructs the compiler to include all
+        <emphasis>debugging information</emphasis>.  This extra
+        debugging information is kept in special sections of the ELF
+        file.  It describes in detail things like what register values
+        currently hold which variables used in the code, size of
+        variables, length of arrays, etc.  It is generally in the
+        standard <emphasis>DWARF</emphasis> format (a pun on the
+        homonym ELF).
+	</para>
+        <para>Including debugging information can make executable
+        files and libraries very large; although this data is not
+        required resident in memory for actually running it can still
+        take up considerable disk space.  Thus the usual process is to
+        <emphasis>strip</emphasis> this information from the ELF file.
+        While it is possible to arrange for shipping of both stripped
+        and unstripped files, most all current binary distribution
+        methods provide the debugging information in separate files.
+        The <productname>objcopy</productname> tool can be used to
+        extract the debugging information
+        (<computeroutput>--only-keep-debug</computeroutput>) and then
+        add a link in the original executable to this stripped
+        information
+        (<computeroutput>--add-gnu-debuglink</computeroutput>).  After
+        this is done, a special section called
+        <computeroutput>.gnu_debuglink</computeroutput> will be
+        present in the original executable, which contains a hash so
+        that when a debugging sessions starts the debugger can be sure
+        it associates the right debugging information with the right
+        executable.</para>
+        <example xml:id="strip_debug">
+          <info>
+            <title>Example of stripping debugging information into
+            separate files using
+            <productname>objcopy</productname></title>
+          </info>
+          <programlisting linenumbering="numbered"><xi:include href="code/debuglink.txt" parse="text"/></programlisting>
+        </example>
+        <para>Symbols take up much less space, but are also targets
+        for removal from final output.  Once the individual object
+        files of an executable are linked into the single final image
+        there is generally no need for most symbols to remain.  As
+        discussed in <xref linkend="symbols_and_relocations"/> symbols
+        are required to fix up relocation entries, but once this is
+        done the symbols are not strictly necessary for running the
+        final program.  On Linux the GNU toolchain
+        <productname>strip</productname> program provides options to
+        remove symbols.  Note that some symbols are required to be
+        resolved at run-time (for <emphasis>dynamic
+        linking</emphasis>, the focus of <xref linkend="chapter08"/>)
+        but these are put in separate <emphasis>dynamic</emphasis>
+        symbol tables so they will not be removed and render the final
+        output useless.</para>
+      </section>
+      <section>
+        <info>
+          <title>Inside coredumps</title>
+        </info>
+        <para>A coredump is really just another ELF file; this
+        illustrates the flexibility of ELF as a binary format.</para>
+        <example xml:id="coredump_internal">
+          <info>
+            <title>Example of using <productname>readelf</productname>
+            and <productname>eu-readelf</productname> to examine a
+            coredump.</title>
+          </info>
+          <programlisting linenumbering="numbered"><xi:include href="code/core-internal.txt" parse="text"/></programlisting>
+        </example>
+        <para>In <xref linkend="coredump_internal"/> we can see an
+        examination of the core file produced by <xref
+        linkend="coredump_gdb"/> using firstly the
+        <productname>readelf</productname> tool.  There are no
+        sections, relocations or other extraneous information in the
+        file that may be required for loading an executable or
+        library; it simply consists of a series of program headers
+        describing <computeroutput>LOAD</computeroutput> segments.
+        These segments are raw data dumps, created by the kernel, of
+        the current memory allocations.
+	</para>
+        <para>The other component of the core dump is the
+        <computeroutput>NOTE</computeroutput> sections which contain
+        data necessary for debugging but not necessarily captured in
+        straight snapshot of the memory allocations.  The
+        <productname>eu-readelf</productname> program used in the
+        second part of the figure provides a more complete view of the
+        data by decoding it.</para>
+        <para>The <computeroutput>PRSTATUS</computeroutput> note gives
+        a range of interesting information about the process as it was
+        running; for example we can see from
+        <computeroutput>cursig</computeroutput> that the program
+        received a signal 11, or segmentation fault, as we would
+        expect.  Along with process number information, it also
+        includes a dump of all the current registers.  Given the
+        register values, the debugger can reconstruct the stack state
+        and hence provide a <emphasis>backtrace</emphasis>; combined
+        with the symbol and debugging information from the original
+        binary the debugger can show exactly how you reached the
+        current point of execution.</para>
+        <para>Another interesting output is the current
+        <emphasis>auxiliary vector</emphasis>
+        (<computeroutput>AUXV</computeroutput>), discussed in <xref
+        linkend="auxv"/>.  The
+        <computeroutput>386_TLS</computeroutput> describes
+        <emphasis>global descriptor table</emphasis> entries used for
+        the x86 implementation of <emphasis>thread-local
+        storage</emphasis> (see <xref linkend="fast_system_calls"/>
+        for more information on use of segmentation, and <xref
+        linkend="threads"/> for information on
+        threads<footnote><para>For a multi-threaded application, there
+        would be duplicate entries for each thread running.  The
+        debugger will understand this, and it is how
+        <productname>gdb</productname> implements the
+        <computeroutput>thread</computeroutput> command to show and
+        switch between threads.</para></footnote>).
+	  </para>
+        <para>The kernel creates the core dump file within the bounds
+        of the current <computeroutput>ulimit</computeroutput>
+        settings &#x2014; since a program using a lot of memory could
+        result in a very large dump, potentially filling up disk and
+        making problems even worse, generally the
+        <computeroutput>ulimit</computeroutput> is set low or even at
+        zero, since most non-developers have little use for a core
+        dump file.  However the core dump remains the single most
+        useful way to debug an unexpected situation in a postmortem
+        fashion.</para>
+      </section>
+    </section>
+
+    <section xml:id="extra_sections">
+      <info>
+	<title>Custom sections</title>
+      </info>
+
+      <para>For the most part, organisation of code, data and symbols
+      is something a programmer can leave up the toolchain defaults.
+      However, there are times when it makes sense to extend or
+      customise sections and their contents.  One common example of
+      this is with Linux kernel <emphasis>modules</emphasis> which are
+      used to dynamically load drivers and other features into the
+      running kernel.  Because these modules are not portable, in so
+      much as they only work with one fixed kernel build version, the
+      interface between modules and the kernel can be flexible and is
+      not bound to particular standards.  This means the methods of
+      storing things like license information, authorship,
+      dependencies and paramaters for the moudule can be uniquely and
+      wholly defined by the kernel.</para>
+
+      <para>The <computeroutput>modinfo</computeroutput> tool can
+      inspect this information within a module and present it to the
+      user.  Below we use the example of the <command>FUSE</command>
+      Linux kernel module, which allows user-space libraries to
+      provide file-system implementations to the kernel.</para>
+
+      <example xml:id="modinfo">
+	<info>
+	  <title>Example of <computeroutput>modinfo</computeroutput>
+	  output</title>
+	</info>
+	<programlisting linenumbering="numbered"><xi:include href="code/modules.txt" parse="text"/></programlisting>
+      </example>
+
+      <para>As you can see above,
+      <computeroutput>modinfo</computeroutput> is parsing the
+      <computeroutput>.modinfo</computeroutput> section embedded
+      within the module file to present the details of the module.
+      <xref linkend="modinfo_sections" /> shows how one field, the
+      "author" is put into the module.  The code mostly comes from
+      <computeroutput>include/linux/module.h</computeroutput>.
+      </para>
+
+      <example xml:id="modinfo_sections">
+	<info>
+	  <title>Putting module info into sections</title>
+	</info>
+	<programlisting linenumbering="numbered" language="c"><xi:include href="code/modinfo.c" parse="text"/></programlisting>
+      </example>
+
+      <para>At first, this looks like a macro nightmare, but it can be
+      unravelled step by step.  Starting at the bottom, we see that
+      <computeroutput>MODULE_AUTHOR</computeroutput> is a wrapper
+      around the more generic
+      <computeroutput>__MODULE_INFO</computeroutput> macro, which is
+      where most of the magic happens.  There, we can see that we are
+      building up a <computeroutput>static const char
+      []</computeroutput> variable to hold the string
+      <computeroutput>"author=Your Name
+      &lt;your@name.com&gt;"</computeroutput>.  The interesting thing
+      to note is that the variable has an extra parameter
+      <computeroutput>__attribute__((section(".modinfo")))</computeroutput>
+      which is telling the compiler to not put this in the
+      <computeroutput>data</computeroutput> section with all the other
+      variables, but to stash it in its own ELF section called
+      <computeroutput>.modinfo</computeroutput>.  The other parameters
+      stop the variable being optimised away because it looks unused
+      and to ensure we pack the variables in next to each other by
+      specifying the alignment.</para>
+
+      <para>There is extensive use of
+      <emphasis>stringification</emphasis> macros, which are rather
+      arcane tricks used within the C pre-processor to ensure that
+      strings and definitions can live together.  The only other
+      trick is the use of the
+      <computeroutput>__COUNTER__</computeroutput> special define
+      provided by <command>gcc</command>, which provides a unique,
+      incrementing value each time it is called; this allows
+      multiple <computeroutput>MODULE_AUTHOR</computeroutput> calls
+      to in the one file and not end up with the same variable
+      name.</para>
+
+      <para>We can inspect the symbols placed in the final
+      module to see the end result:</para>
+
+      <example xml:id="module-symbols">
+        <info>
+          <title>Module symbols in
+          <computeroutput>.modinfo</computeroutput> sections</title>
+        </info>
+        <programlisting linenumbering="numbered"><xi:include href="code/module-symbols.txt" parse="text"/></programlisting>
+        </example>
+
+      </section>
+
+      <section>
+        <info>
+          <title>Linker Scripts</title>
+        </info>
+
+       <para>
+         In <xref linkend="section" /> we described how sections make
+         up segments in the final output.  It is the job of the linker
+         to build these sections into segments; to achieve this it
+         uses a <emphasis>linker script</emphasis> which describes
+         where segments start, what sections go into them and various
+         other parameters.  </para>
+
+       <para><xref linkend="linker-script" /> shows an extract of the
+       default linker script, which the linker will show when given
+       its verbose flag via specifying
+       <computeroutput>-Wl,--verbose</computeroutput> to
+       <application>gcc</application>.  The default script is built-in
+       to the linker and is based on the standard API definitions to
+       create working user-space programs for the building
+       platform.</para>
+
+       <example xml:id="linker-script">
+         <info>
+           <title>The default linker script</title>
+         </info>
+         <programlisting linenumbering="numbered"><xi:include href="code/linker-script.txt" parse="text"/></programlisting>
+       </example>
+
+       <para>You can roughly see how the linker script specifies
+       things like starting locations and what sections to group into
+       various segments.  In the same way
+       <computeroutput>-Wl</computeroutput> is used to pass the
+       <computeroutput>--verbose</computeroutput> to the linker via
+       <application>gcc</application>, customised linker scripts can
+       be provided by flags.  Regular user-space developers are
+       unlikely to need to override the default linker script.
+       However, often very customised applications such as kernel
+       builds require customised linker scripts.
+       </para>
+
+      </section>
+    </section>
+
+    <section xml:id="abi">
     <info>
       <title>ABI's</title>
     </info>
@@ -1073,7 +1145,7 @@
 	fast system call method.</para>
       </section>
     </section>
-    <section>
+    <section xml:id="startup">
       <info>
         <title>Starting the program</title>
       </info>
@@ -1196,4 +1268,5 @@
       start, and even a little after you think it is finished!</para>
     </section>
   </section>
+
 </chapter>
