@@ -156,9 +156,7 @@
           <info>
             <title>The ELF Header</title>
           </info>
-          <programlisting linenumbering="numbered">
-            <xi:include href="code/elf-header.txt" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered"><xi:include href="code/elf-header.txt" parse="text"/></programlisting>
         </example>
         <para>Above is the description as given in the API
 	documentation.  This is the layout of the C structure which
@@ -167,9 +165,7 @@
           <info>
             <title>The ELF Header, as shown by <application>readelf</application></title>
           </info>
-          <programlisting linenumbering="numbered">
-            <xi:include href="code/readelf-elf-header.txt" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered"><xi:include href="code/readelf-elf-header.txt" parse="text"/></programlisting>
         </example>
         <para>Above is a more human readable form as present by the
 	<application>readelf</application> program, which is part of
@@ -184,9 +180,7 @@
           <info>
             <title>Inspecting the ELF magic number</title>
           </info>
-          <programlisting linenumbering="numbered">
-            <xi:include href="code/elf-magic.txt" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered"><xi:include href="code/elf-magic.txt" parse="text"/></programlisting>
         </example>
         <para>Note the 0x7F to start, then the ASCII encoded "ELF"
 	string.  Have a look at the standard and see what the rest of
@@ -213,9 +207,7 @@
           <info>
             <title>Investigating the entry point</title>
           </info>
-          <programlisting linenumbering="numbered">
-            <xi:include href="code/entry-point.txt" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered"><xi:include href="code/entry-point.txt" parse="text"/></programlisting>
         </example>
         <para>Above we can see that the entry point is actually a
 	  function called <computeroutput>_start</computeroutput>.
@@ -290,9 +282,7 @@
             <info>
               <title>The Program Header</title>
             </info>
-            <programlisting linenumbering="numbered">
-              <xi:include href="code/program-header.txt" parse="text"/>
-            </programlisting>
+            <programlisting linenumbering="numbered"><xi:include href="code/program-header.txt" parse="text"/></programlisting>
           </example>
           <para>The definition of the program header is seen above.
 	  You might have noticed from the ELF header definition above
@@ -372,9 +362,7 @@
             <info>
               <title>Sections </title>
             </info>
-            <programlisting linenumbering="numbered">
-              <xi:include href="code/section-header.txt" parse="text"/>
-            </programlisting>
+            <programlisting linenumbering="numbered"><xi:include href="code/section-header.txt" parse="text"/></programlisting>
           </example>
           <para>Sections have a few more types defined for the
 	  <computeroutput>sh_type</computeroutput> field; for example
@@ -394,17 +382,13 @@
             <info>
               <title>Sections </title>
             </info>
-            <programlisting linenumbering="numbered" language="c">
-              <xi:include href="code/sections.c" parse="text"/>
-            </programlisting>
+            <programlisting linenumbering="numbered" language="c"><xi:include href="code/sections.c" parse="text"/></programlisting>
           </example>
           <example xml:id="section-readelf">
             <info>
               <title>Sections readelf output </title>
             </info>
-            <programlisting linenumbering="numbered">
-              <xi:include href="code/sections.txt" parse="text"/>
-            </programlisting>
+            <programlisting linenumbering="numbered"><xi:include href="code/sections.txt" parse="text"/></programlisting>
           </example>
           <para>Above we have stripped some parts of the
 	  <application>readelf</application> output for clarity.  We
@@ -467,9 +451,7 @@
             <info>
               <title>Sections and Segments</title>
             </info>
-            <programlisting linenumbering="numbered">
-              <xi:include href="code/sections-segments.txt" parse="text"/>
-            </programlisting>
+            <programlisting linenumbering="numbered"><xi:include href="code/sections-segments.txt" parse="text"/></programlisting>
           </example>
           <para><computeroutput>readelf</computeroutput> shows us the
 	  segments and section mappings in the ELF file for the binary
@@ -533,9 +515,7 @@
         <info>
           <title>Example of creating a core dump and using it with <productname>gdb</productname></title>
         </info>
-        <programlisting linenumbering="numbered">
-          <xi:include href="code/core-gdb.txt" parse="text"/>
-        </programlisting>
+        <programlisting linenumbering="numbered"><xi:include href="code/core-gdb.txt" parse="text"/></programlisting>
       </example>
       <section>
         <info>
@@ -581,9 +561,7 @@
 	    separate files using
 	    <productname>objcopy</productname></title>
           </info>
-          <programlisting linenumbering="numbered">
-            <xi:include href="code/debuglink.txt" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered"><xi:include href="code/debuglink.txt" parse="text"/></programlisting>
         </example>
         <para>Symbols take up much less space, but are also targets
 	for removal from final output.  Once the individual object
@@ -612,9 +590,7 @@
 	  and <productname>eu-readelf</productname> to examine a
 	  coredump.</title>
           </info>
-          <programlisting linenumbering="numbered">
-            <xi:include href="code/core-internal.txt" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered"><xi:include href="code/core-internal.txt" parse="text"/></programlisting>
         </example>
         <para>In <xref linkend="coredump_internal"/> we can see
 	an examination of the core file produced by <xref linkend="coredump_gdb"/> using firstly the
@@ -700,9 +676,7 @@
       <info>
         <title>Segments of an executable file</title>
       </info>
-      <programlisting linenumbering="numbered">
-        <xi:include href="code/executable.txt" parse="text"/>
-      </programlisting>
+      <programlisting linenumbering="numbered"><xi:include href="code/executable.txt" parse="text"/></programlisting>
     </example>
     <para>The program segments must be loaded at these addresses; the
     last step of the linker is to resolve most relocations (<xref linkend="symbols_and_relocations"/>) and patch them with the
@@ -761,9 +735,7 @@
           <info>
             <title>Creating and using a static library</title>
           </info>
-          <programlisting linenumbering="numbered">
-            <xi:include href="code/static.txt" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered"><xi:include href="code/static.txt" parse="text"/></programlisting>
         </example>
         <para>Firstly we compile or library to an object file, just as
 	we have seen in the previous chapter.</para>
@@ -1031,9 +1003,7 @@
         <info>
           <title>Disassembley of program startup</title>
         </info>
-        <programlisting linenumbering="numbered">
-          <xi:include href="code/startup.txt" parse="text"/>
-        </programlisting>
+        <programlisting linenumbering="numbered"><xi:include href="code/startup.txt" parse="text"/></programlisting>
       </example>
       <para>Above we investigate the very simplest program.  Using
       <application>readelf</application> we can see that the entry
@@ -1096,9 +1066,7 @@
         <info>
           <title>Constructors and Destructors</title>
         </info>
-        <programlisting linenumbering="numbered">
-          <xi:include href="code/construct-destruct.txt" parse="text"/>
-        </programlisting>
+        <programlisting linenumbering="numbered"><xi:include href="code/construct-destruct.txt" parse="text"/></programlisting>
       </example>
       <para>The last value pushed onto the stack for the
       <computeroutput>__libc_start_main</computeroutput> was the
