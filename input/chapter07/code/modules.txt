@@ -1,0 +1,51 @@
+$ cd /lib/modules/$(uname -r)
+
+$ sudo modinfo ./kernel/fs/fuse/fuse.ko 
+filename:       /lib/modules/3.2.0-4-amd64/./kernel/fs/fuse/fuse.ko
+alias:          devname:fuse
+alias:          char-major-10-229
+license:        GPL
+description:    Filesystem in Userspace
+author:         Miklos Szeredi <miklos@szeredi.hu>
+depends:        
+intree:         Y
+vermagic:       3.2.0-4-amd64 SMP mod_unload modversions 
+parm:           max_user_bgreq:Global limit for the maximum number of backgrounded requests an unprivileged user can set (uint)
+parm:           max_user_congthresh:Global limit for the maximum congestion threshold an unprivileged user can set (uint)
+
+$ objdump -s -j .modinfo ./kernel/fs/fuse/fuse.ko 
+
+./kernel/fs/fuse/fuse.ko:     file format elf64-x86-64
+
+Contents of section .modinfo:
+ 0000 616c6961 733d6465 766e616d 653a6675  alias=devname:fu
+ 0010 73650061 6c696173 3d636861 722d6d61  se.alias=char-ma
+ 0020 6a6f722d 31302d32 32390070 61726d3d  jor-10-229.parm=
+ 0030 6d61785f 75736572 5f636f6e 67746872  max_user_congthr
+ 0040 6573683a 476c6f62 616c206c 696d6974  esh:Global limit
+ 0050 20666f72 20746865 206d6178 696d756d   for the maximum
+ 0060 20636f6e 67657374 696f6e20 74687265   congestion thre
+ 0070 73686f6c 6420616e 20756e70 72697669  shold an unprivi
+ 0080 6c656765 64207573 65722063 616e2073  leged user can s
+ 0090 65740070 61726d74 7970653d 6d61785f  et.parmtype=max_
+ 00a0 75736572 5f636f6e 67746872 6573683a  user_congthresh:
+ 00b0 75696e74 00706172 6d3d6d61 785f7573  uint.parm=max_us
+ 00c0 65725f62 67726571 3a476c6f 62616c20  er_bgreq:Global 
+ 00d0 6c696d69 7420666f 72207468 65206d61  limit for the ma
+ 00e0 78696d75 6d206e75 6d626572 206f6620  ximum number of 
+ 00f0 6261636b 67726f75 6e646564 20726571  backgrounded req
+ 0100 75657374 7320616e 20756e70 72697669  uests an unprivi
+ 0110 6c656765 64207573 65722063 616e2073  leged user can s
+ 0120 65740070 61726d74 7970653d 6d61785f  et.parmtype=max_
+ 0130 75736572 5f626772 65713a75 696e7400  user_bgreq:uint.
+ 0140 6c696365 6e73653d 47504c00 64657363  license=GPL.desc
+ 0150 72697074 696f6e3d 46696c65 73797374  ription=Filesyst
+ 0160 656d2069 6e205573 65727370 61636500  em in Userspace.
+ 0170 61757468 6f723d4d 696b6c6f 7320537a  author=Miklos Sz
+ 0180 65726564 69203c6d 696b6c6f 7340737a  eredi <miklos@sz
+ 0190 65726564 692e6875 3e000000 00000000  eredi.hu>.......
+ 01a0 64657065 6e64733d 00696e74 7265653d  depends=.intree=
+ 01b0 59007665 726d6167 69633d33 2e322e30  Y.vermagic=3.2.0
+ 01c0 2d342d61 6d643634 20534d50 206d6f64  -4-amd64 SMP mod
+ 01d0 5f756e6c 6f616420 6d6f6476 65727369  _unload modversi
+ 01e0 6f6e7320 00                          ons .           

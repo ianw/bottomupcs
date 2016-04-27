@@ -647,6 +647,89 @@
 	  most useful way to debug an unexpected situation in a
 	  postmortem fashion.</para>
       </section>
+      <section xml:id="extra_sections">
+	<info>
+	  <title>Cusomised sections</title>
+	</info>
+
+	<para>For the most part, organisation of code, data and
+	symbols is something a programmer can leave up the toolchain
+	defaults.  However, there are times when it makes sense to
+	extend or customise sections and their contents.  One common
+	example of this is with Linux kernel
+	<emphasis>modules</emphasis> which are used to dynamically
+	load drivers and other features into the running kernel.
+	Because these modules are not portable, in so much as they
+	only work with one fixed kernel build version, the interface
+	between modules and the kernel can be flexible and is not
+	bound to particular standards.</para>
+
+	<para>For example, the
+	<computeroutput>modinfo</computeroutput> tool can show you a
+	range of information about a module such as its authors,
+	license type, dependencies and paramaters.</para>
+
+	<example xml:id="modinfo">
+	  <info>
+	    <title>Example of <computeroutput>modinfo</computeroutput>
+	    output</title>
+	  </info>
+	  <programlisting linenumbering="numbered"><xi:include href="code/modules.txt" parse="text"/></programlisting>
+	</example>
+
+	<para>As you can see above,
+	<computeroutput>modinfo</computeroutput> is parsing the
+	<computeroutput>.modinfo</computeroutput> section embedded
+	within the module file to present the details of the module.
+	<xref linkend="modinfo_sections" /> shows how one field, the
+	"author" is put into the module.  The code mostly comes from
+	<computeroutput>include/linux/module.h</computeroutput>.
+	</para>
+
+	<example xml:id="modinfo_sections">
+	  <info>
+	    <title>Putting module info into sections</title>
+	  </info>
+	  <programlisting linenumbering="numbered" language="c"><xi:include href="code/modinfo.c" parse="text"/></programlisting>
+	</example>
+
+	<para>At first, this looks like a macro nightmare, but it can
+	be unravelled step by step.  We see that
+	<computeroutput>MODULE_AUTHOR</computeroutput> is a wrapper
+	around the more generic
+	<computeroutput>__MODULE_INFO</computeroutput> macro, which is
+	where most of the magic happens.  There, we can see that we
+	are building up a <computeroutput>static const char
+	[]</computeroutput> variable to hold the string
+	<computeroutput>author=Your Name
+	&lt;your@name.com&gt;</computeroutput>.  The interesting thing
+	to note is that the variable has an extra parameter
+	<computeroutput>__attribute__((section(".modinfo")))</computeroutput>
+	which is telling the compiler to not put this in the
+	<computeroutput>data</computeroutput> section with all the
+	other variables, but to stash it in its own ELF section called
+	<computeroutput>.modinfo</computeroutput>.  The other
+	parameters stop the variable being optimised away because it
+	looks unused (<computeroutput>unused</computeroutput>) and
+	ensure we pack the variables in next to each other by
+	specifying the alignment.</para>
+
+	<para>There is extensive use of
+	<emphasis>stringification</emphasis> macros, which are rather
+	arcane tricks used within the C pre-processor to ensure that
+	strings and definitions can live together.  The only other
+	trick is the use of the
+	<computeroutput>__COUNTER__</computeroutput> special define
+	provided by <command>gcc</command>, which provides a unique,
+	incrementing value each time it is called; this allows
+	multiple <computeroutput>MODULE_AUTHOR</computeroutput> calls
+	to in the one file and not end up with the same variable
+	name.</para>
+
+	<para>XXX: put final example in here</para>
+
+      </section>
+
     </section>
   </section>
   <section xml:id="executables">
