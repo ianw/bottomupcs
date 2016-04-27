@@ -5,11 +5,15 @@
 body {
     font-family: Open Sans, arial, sans-serif;
 /*    background-image: url(draft.png); */
-    margin-left: 20%;
-    margin-right: 20%;
     line-height: 1.428x571429;
 }
 
+@media screen and (min-width:1200px) {
+    body {
+        margin-left:20%;
+        margin-right:20%;
+    }
+}
 
 /* FIGURES AND LISTINGS */
 
@@ -137,29 +141,6 @@ h2.title {
     width: 400px;
 }
 
-/* CHAPTER AND SECT1 HEADERS */
-.chapter h1 {
-    color: #800000;
-    padding: 5px;
-    background: #f5f5f5;
-    border-bottom: 5px solid #990000;
-}
-
-.sect1 h1 {
-    color: #990000;
-    padding: 5px;
-    background: #FFCCCC;
-    border-left: 5px solid #990000;
-
-}
-
-.sect2 h2 {
-    color: #006400;
-    background: #B4EEB4;
-    padding: 2px;
-    padding-left: 5px;
-    border-left: 3px solid #006400;
-}
 
 /* HEADER */
 .navheader {
