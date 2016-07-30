@@ -12,9 +12,14 @@
     <emphasis>text</emphasis> for historical reasons) and
     <emphasis>data</emphasis>.  We also know, however, an executable
     does not live its life in memory, but spends most of its life as a
-    file on a disk.  This file is in what is referred to as a binary
-    format, since the bits and bytes of the file are to be interpreted
-    directly by processor hardware.</para>
+    file on a disk waiting to be loaded an run.  Since a file is, in
+    essence, simply a contiguous array of bits, all systems come up
+    with methods of organising code and data within files for
+    on-demand execution.  This file-format is generally referred to as
+    a <emphasis>binary</emphasis> or an
+    <emphasis>executable</emphasis>.  The bits and bytes of the file
+    are generally in a format ready to be placed in memory and
+    interpreted directly by processor hardware.</para>
   </section>
   <section xml:id="representing_executables">
     <info>
@@ -24,22 +29,28 @@
       <info>
         <title>Three Standard Sections</title>
       </info>
-      <para>Any executable file format will need to specify where the
-      code and data are in the binary file.</para>
+
+      <para>At a minimum, any executable file format will need to
+      specify where the code and data are in the binary file.  These
+      are the two primary sections within an executable file.</para>
+
       <para>One additional component we have not mentioned until now
       is storage space of uninitialised global variables.  If we
-      declare a variable and give it an initial value this obviously
-      needs to be stored in the executable file so that upon execution
-      the value is correct.  However many variables are uninitialised
-      (or zero) when the program is first executed.  Making space for
-      these in the executable and then simply storing zero or NULL
-      values in it is a waste of space, needlessly bloating the
-      executable file size.  Thus each executable file can define a
-      BSS section which simply gives a size for the uninitialised data;
-      on program load the extra memory can be allocated (and set to
-      zero!).<footnote><para>BSS probably stands for Block Started by
-      Symbol, an assembly command for a old IBM
-      computer.</para></footnote></para>
+      declare a variable and give it an initial value, this value
+      needs to be stored in the executable file so that at program
+      start it can be initalised to the correct value.  However many
+      variables are uninitialised (or zero) when the program is first
+      executed.  Making space for these in the executable and then
+      simply storing zero or NULL values is a waste of space,
+      needlessly bloating the executable file-size on disk.  Thus most
+      binary formats define the concept of a additional
+      <computeroutput>BSS</computeroutput> section as a place-holder
+      size for zeroed, uninitialised data.  On program load the extra
+      memory described by the BSS can be allocated (and set to zero!).
+      BSS <emphasis>probably</emphasis> stands for Block Started by
+      Symbol, an assembly command for a old IBM computer; the exact
+      derivation is probably lost to history.</para>
+
     </section>
     <section>
       <info>
@@ -724,8 +735,8 @@
         currently hold which variables used in the code, size of
         variables, length of arrays, etc.  It is generally in the
         standard <emphasis>DWARF</emphasis> format (a pun on the
-        homonym ELF).
-	</para>
+        almost-synonym ELF).
+        </para>
         <para>Including debugging information can make executable
         files and libraries very large; although this data is not
         required resident in memory for actually running it can still
