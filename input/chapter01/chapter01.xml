@@ -274,7 +274,7 @@
 	  We refer to 4 bytes as a <emphasis>word</emphasis>; this is
 	  analogous to language where letters (bits) make up words in a
 	  sentence, except in computing every word has the same size!
-	  The size of a C <computeroutput>it</computeroutput>
+	  The size of a C <computeroutput>int</computeroutput>
 	  variable is 32 bits.  Newer architectures are 64 bits, which
 	  doubles the size the processor works with (8 bytes).</para>
         </section>
@@ -1573,7 +1573,7 @@
       variable is smaller, we loose the correct value of the integer.
       Further down, we attempt to assign a pointer to a
       <computeroutput>char</computeroutput> to memory we designated as
-      an<computeroutput>integer</computeroutput>.  This operation can
+      an <computeroutput>integer</computeroutput>.  This operation can
       be done; but it is not safe.  The first example is run on a
       32-bit Pentium machine, and the correct value is returned.
       However, as shown in the second example, on a 64-bit Itanium
@@ -1793,7 +1793,7 @@
 	    <emphasis>sign-extension</emphasis> and is usually handled
 	    by the compiler in situations as defined by the language
 	    standard, with the processor generally providing special
-	    instructions to take a value an sign-extended it to some
+	    instructions to take a value and sign-extend it to some
 	    larger value.</para>
           </section>
         </section>

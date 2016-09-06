@@ -311,7 +311,7 @@
       an example of a RISC approach to computing -- only performing
       operations on values in registers and explicitly loading and
       storing values to and from memory.</para>
-      <para>A CISC approach may only a single instruction taking
+      <para>A CISC approach may be only a single instruction taking
       values from memory, performing the addition internally and
       writing the result back.  This means the instruction may take
       many cycles, but ultimately both approaches achieve the same
