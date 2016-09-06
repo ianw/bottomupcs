@@ -1793,7 +1793,7 @@
 	    <emphasis>sign-extension</emphasis> and is usually handled
 	    by the compiler in situations as defined by the language
 	    standard, with the processor generally providing special
-	    instructions to take a value an sign-extended it to some
+	    instructions to take a value and sign-extend it to some
 	    larger value.</para>
           </section>
         </section>
