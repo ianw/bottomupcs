@@ -274,7 +274,7 @@
 	  We refer to 4 bytes as a <emphasis>word</emphasis>; this is
 	  analogous to language where letters (bits) make up words in a
 	  sentence, except in computing every word has the same size!
-	  The size of a C <computeroutput>it</computeroutput>
+	  The size of a C <computeroutput>int</computeroutput>
 	  variable is 32 bits.  Newer architectures are 64 bits, which
 	  doubles the size the processor works with (8 bytes).</para>
         </section>
