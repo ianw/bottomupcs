@@ -311,7 +311,7 @@
       an example of a RISC approach to computing -- only performing
       operations on values in registers and explicitly loading and
       storing values to and from memory.</para>
-      <para>A CISC approach may only a single instruction taking
+      <para>A CISC approach may be only a single instruction taking
       values from memory, performing the addition internally and
       writing the result back.  This means the instruction may take
       many cycles, but ultimately both approaches achieve the same
@@ -368,15 +368,15 @@
 	ahead and try to make decisions about how to organise the
 	incoming instructions.</para>
         <para>The theory behind EPIC is that there is more information
-	available at higher levels which can make these decisions
-	better than the processor.  Analysing a stream of assembly
-	language instructions, as current processors do, looses a lot
-	of information that the programmer may have provided in the
-	original source code.  Think of it as the difference between
-	studying a Shakespeare play and reading the Cliff's Notes
-	version of the same.  Both give you the same result, but the
-	original has all sorts of extra information that sets the
-	scene and gives you insight into the characters.</para>
+        available at higher levels which can make these decisions
+        better than the processor.  Analysing a stream of assembly
+        language instructions, as current processors do, loses a lot
+        of information that the programmer may have provided in the
+        original source code.  Think of it as the difference between
+        studying a Shakespeare play and reading the Cliff's Notes
+        version of the same.  Both give you the same result, but the
+        original has all sorts of extra information that sets the
+        scene and gives you insight into the characters.</para>
         <para>Thus the logic of ordering instructions can be moved
 	from the processor to the compiler.  This means that compiler
 	writers need to be smarter to try and find the best ordering
@@ -386,7 +386,7 @@
 	around EPIC is Very Long Instruction World (VLIW), which is
 	where each instruction to the processor is extended to tell
 	the processor about where it should execute the instruction in
-	it's internal units.  The problem with this approach is that
+	its internal units.  The problem with this approach is that
 	code is then completely dependent on the model of processor is
 	has been compiled for.  Companies are always making revisions
 	to hardware, and making customers recompile their application
@@ -412,7 +412,7 @@
 	from cache memory, located directly on the processor chip.
 	Cache memory must be loaded in from the main system memory
 	(the Random Access Memory, or RAM).  RAM however, only retains
-	it's contents when the power is on, so needs to be stored on
+	its contents when the power is on, so needs to be stored on
 	more permanent storage.</para>
       <para>We call these layers of memory the <emphasis>memory
       hierarchy</emphasis></para>
@@ -467,10 +467,10 @@
           </tbody>
         </tgroup>
       </table>
-      <para>The important point to know about the memory hierarchy
-	is the trade offs between speed an size -- the faster the
-	memory the smaller it is.  Of course, if you can find a way to
-	change this equation, you'll end up a billionaire!</para>
+      <para>The important point to know about the memory hierarchy is
+      the trade offs between speed and size &#x2014; the faster the
+      memory the smaller it is.  Of course, if you can find a way to
+      change this equation, you'll end up a billionaire!</para>
       <para>The reason caches are effective is because computer code
         generally exhibits two forms of locality<indexterm xml:id="locality"><primary>locality</primary></indexterm>
 	<orderedlist><listitem><para><emphasis>Spatial</emphasis> locality suggests that
@@ -491,15 +491,15 @@
 	  have an understanding of how the cache in their systems
 	  works.</para>
       <para>The cache is a very fast copy of the slower main system
-	memory.  Cache is much smaller than main memories because it
-	is included inside the processor chip alongside the registers
-	and processor logic.  This is prime real estate in computing
-	terms, and there are both economic and physical limits to it's
-	maximum size.  As manufacturers find more and more ways to
-	cram more and more transistors onto a chip cache sizes grow
-	considerably, but even the largest caches are tens of
-	megabytes, rather than the gigabytes of main memory or
-	terabytes of hard disk otherwise common.</para>
+      memory.  Cache is much smaller than main memories because it is
+      included inside the processor chip alongside the registers and
+      processor logic.  This is prime real estate in computing terms,
+      and there are both economic and physical limits to its maximum
+      size.  As manufacturers find more and more ways to cram more and
+      more transistors onto a chip cache sizes grow considerably, but
+      even the largest caches are tens of megabytes, rather than the
+      gigabytes of main memory or terabytes of hard disk otherwise
+      common.</para>
       <para>The cache is made up of small chunks of mirrored main
 	memory.  The size of these chunks is called the <emphasis>line
 	size</emphasis>, and is typically something like 32 or 64
@@ -902,7 +902,7 @@ multiplex the output of the many sets, which can also add latency.
       <para>Direct Memory Access (DMA) is a method of transferring
 	data directly between an peripheral and system RAM.</para>
       <para>The driver can setup a device to do a DMA transfer by
-	giving it the area of RAM to put it's data into.  It can then
+	giving it the area of RAM to put its data into.  It can then
 	start the DMA transfer and allow the CPU to continue with
 	other tasks.</para>
       <para>Once the device is finished, it will raise an interrupt
@@ -951,7 +951,7 @@ multiplex the output of the many sets, which can also add latency.
         </itemizedlist>
         <para>There can be many interfaces (made of multiple
 	end-points) and interfaces are grouped into
-	<emphasis>configurations</emphasis>.  However Most devices
+	<emphasis>configurations</emphasis>.  However most devices
 	only have a single configuration.</para>
         <figure xml:id="uhci">
           <info>
@@ -1041,14 +1041,14 @@ multiplex the output of the many sets, which can also add latency.
       independently; each has its own set of registers, program
       counter, etc.  Despite running separately, there is one
       component that requires strict synchronisation.</para>
-        <para>This is the CPU cache; remember the cache is a small area
-      of quickly access able memory that mirrors values stored in main
-      system memory.  If one CPU modifies data in main memory and
-      another CPU has an old copy of that memory in its cache the
-      system will obviously not be in a consistent state.  Note that
-      the problem only occurs when processors are writing to memory,
-      since if a value is only read the data will be
-      consistent.</para>
+        <para>This is the CPU cache; remember the cache is a small
+        area of quickly accessible memory that mirrors values stored
+        in main system memory.  If one CPU modifies data in main
+        memory and another CPU has an old copy of that memory in its
+        cache the system will obviously not be in a consistent state.
+        Note that the problem only occurs when processors are writing
+        to memory, since if a value is only read the data will be
+        consistent.</para>
         <para>To co-ordinate keeping the cache coherent on all
 	processors an SMP system uses <emphasis>snooping</emphasis>.
 	Snooping is where a processor listens on a bus which all
@@ -1513,9 +1513,9 @@ multiplex the output of the many sets, which can also add latency.
           <title>Locking</title>
         </info>
         <para>Knowing the memory ordering requirements of each
-	architecture is no practical for all programmers, and would
-	make programs difficult to port and debug across different
-	processor types.</para>
+        architecture is not practical for all programmers, and would
+        make programs difficult to port and debug across different
+        processor types.</para>
         <para>Programmers use a higher level of abstraction called
 	<emphasis>locking</emphasis> to allow simultaneous
 	operation of programs when there are multiple CPUs.</para>

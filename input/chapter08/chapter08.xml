@@ -281,14 +281,14 @@
           </listitem>
         </orderedlist>
         <para>The ABI continues to say that that relocation means "the
-	value of the symbol pointed to by the relocation, plus any
-	addend".  We can see we have an addend of 8, since
-	<computeroutput>sizeof(int) == 4</computeroutput> and we have
-	moved two int's into the array (<computeroutput>*j = i +
-	2</computeroutput>).  So at runtime, to fix this relocation
-	you need to find the address of symbol
-	<computeroutput>i</computeroutput> and put it's value, plus 8
-	into <computeroutput>0x104f8</computeroutput>.</para>
+        value of the symbol pointed to by the relocation, plus any
+        addend".  We can see we have an addend of 8, since
+        <computeroutput>sizeof(int) == 4</computeroutput> and we have
+        moved two int's into the array (<computeroutput>*j = i +
+        2</computeroutput>).  So at runtime, to fix this relocation
+        you need to find the address of symbol
+        <computeroutput>i</computeroutput> and put its value, plus 8
+        into <computeroutput>0x104f8</computeroutput>.</para>
       </section>
     </section>
     <section>
@@ -622,7 +622,7 @@
             <xi:include href="code/hello-dynamic.txt" parse="text"/>
           </programlisting>
         </example>
-        <para>Do you notice anything about it?  It's the same value as
+        <para>Do you notice anything about it?  Its the same value as
 	the GOT.  This means that the first three 8 byte entries in
 	the GOT are actually the reserved area; thus will always be
 	pointed to by the global pointer.</para>

@@ -37,8 +37,8 @@
       <para>We call this type of compiled program a
       <emphasis>interpreter</emphasis> because it interprets each line
       of the input file and executes it as code.  This way the program
-      does does not need to be compiled, and any changes will be seen
-      the next time the interpreter runs the code.</para>
+      does not need to be compiled, and any changes will be seen the
+      next time the interpreter runs the code.</para>
       <para>For their convenience, interpreted programs usually run
       slower than a compiled counterpart.  The overhead in the program
       reading and interpreting the code each time is only encountered
@@ -55,9 +55,9 @@
           <title>Virtual Machines</title>
         </info>
         <para>A compiled program is completely dependent on the
-	hardware of the machine it is compiled for, since it must be
-	able to simply be copied to memory an executed.  A virtual
-	machine is an abstraction of hardware into software.</para>
+        hardware of the machine it is compiled for, since it must be
+        able to simply be copied to memory and executed.  A virtual
+        machine is an abstraction of hardware into software.</para>
         <para>For example, Java is a hybrid language that is partly
       compiled and partly interpreted.  Java code is complied into a
       program that runs inside a <emphasis>Java Virtual
@@ -270,9 +270,9 @@
 	  and the other cache line loaded into the same place in the
 	  cache.</para>
           <para>Obviously if this situation repeats the performance
-	  will be significantly reduced.  The situation would be
-	  relieved if the conflicting data were organised in slightly
-	  different ways to avoid the cache line conflict.</para>
+          will be significantly reduced.  The situation would be
+          relieved if the conflicting data was organised in slightly
+          different ways to avoid the cache line conflict.</para>
           <para>One possible way to detect this sort of situation is
 	  <emphasis>profiling</emphasis>.  When you profile your code
 	  you "watch" it to analyse what code paths are taken and how
@@ -553,7 +553,7 @@
       this variable, and leave this symbol in the object code where it
       will be fixed up later.  The compiler can not possibly know
       where the symbol is actually defined but the
-      <emphasis>linker</emphasis>does, since it is it's job to look at
+      <emphasis>linker</emphasis>does, since it is its job to look at
       all object files together and combine them into a single
       executable.  So the linker will see the symbol left over in the
       second file, and say "I've seen that symbol before in file 1,

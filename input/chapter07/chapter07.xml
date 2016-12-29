@@ -107,8 +107,8 @@
           <title>COFF</title>
         </info>
         <para>The Common Object File Format, or COFF, was the
-	precursor to ELF.  It's header format was more flexible,
-	allowing an more (but limited) sections in the file.</para>
+        precursor to ELF.  Its header format was more flexible,
+        allowing more (but limited) sections in the file.</para>
         <para>COFF also has difficulties with elegant support of
 	shared libraries, and ELF was selected as an alternative
 	implementation on Linux.</para>
@@ -131,7 +131,7 @@
 
     <para>ELF extends on COFF and gives the header sufficient
     flexibility to define an arbitrary number of sections, each with
-    it's own properties.  This facilitates easier dynamic linking and
+    its own properties.  This facilitates easier dynamic linking and
     debugging.</para>
 
     <figure>
@@ -253,7 +253,7 @@
         <emphasis>address</emphasis> of
         <computeroutput>foo</computeroutput> must be a 4-byte value,
         so any time the compiler needs to use that address (to say,
-        assign a value) it can simply leave 4-byes of blank space and
+        assign a value) it can simply leave 4-bytes of blank space and
         keep a relocation that essentially says to the linker "place
         the real value of "foo" into the 4 bytes at this address".  As
         mentioned, this requires the symbol "foo" to be resolved.
@@ -654,11 +654,11 @@
         <para>Static linking is very straight forward, but has a number
       of drawbacks.</para>
         <para>There are two main disadvantages; firstly if the library
-      code is updated (to fix a bug, say) you have to recompile your
-      program into a new executable and secondly, every program in the
-      system that uses that library contains a copy in it's
-      executable.  This is very inefficient (and a pain if you find a
-      bug and have to recompile, as per point one).</para>
+        code is updated (to fix a bug, say) you have to recompile your
+        program into a new executable and secondly, every program in
+        the system that uses that library contains a copy in its
+        executable.  This is very inefficient (and a pain if you find
+        a bug and have to recompile, as per point one).</para>
         <para>For example, the C library
       (<application>glibc</application>) is included in all programs,
       and provides all the common functions such as
@@ -1086,7 +1086,7 @@
     dynamic linker in depth in the next chapter, but suffice to say it
     does some setup like loading any libraries required by the
     application (as specified in the dynamic section of the binary)
-    and then starts execution of the program binary at it's entry
+    and then starts execution of the program binary at its entry
     point address (i.e. the <computeroutput>_init</computeroutput>
     function).</para>
     <section xml:id="auxv">
@@ -1108,7 +1108,7 @@
       specify these for the program.</para>
       <para>The kernel communicates this by putting all the required
       information on the stack for the newly created program to pick
-      up.  Thus when the program starts it can use it's stack pointer
+      up.  Thus when the program starts it can use its stack pointer
       to find the all the startup information required.</para>
       <para>The auxiliary vector is a special structure that is for
       passing information directly from the kernel to the newly
@@ -1217,7 +1217,7 @@
       function will have pushed onto the stack addresses for functions
       to handle <computeroutput>init</computeroutput>,
       <computeroutput>fini</computeroutput>, and finally the address
-      of the main function it's self.</para>
+      of the main function itself.</para>
       <para>We need some way to indicate in the source code that a
       function should be called by
       <computeroutput>init</computeroutput> or
@@ -1266,7 +1266,7 @@
       call it <emphasis>finally</emphasis> calls the
       <computeroutput>main()</computeroutput> function!  Remember that
       it had the stack setup initially with the arguments and
-      environment pointers from the kernel; this is how main gets it's
+      environment pointers from the kernel; this is how main gets its
       <computeroutput>argc, argv[], envp[]</computeroutput> arguments.
       The process now runs and the setup phase is complete.</para>
       <para>A similar process is enacted with the
