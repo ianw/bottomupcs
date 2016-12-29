@@ -595,8 +595,8 @@
           </info>
           <programlisting linenumbering="numbered"><xi:include href="code/static.txt" parse="text"/></programlisting>
         </example>
-        <para>Firstly we compile or library to an object file, just as
-	we have seen in the previous chapter.</para>
+        <para>Firstly we compile our library to an object file, just
+        as we have seen in the previous chapter.</para>
         <para>Notice that we define the library API in the header
 	file.  The API consists of function definitions for the
 	functions in the library; this is so that the compiler knows
@@ -995,7 +995,7 @@
 
     <section xml:id="abi">
     <info>
-      <title>ABI's</title>
+      <title>ABIs</title>
     </info>
     <para>An ABI is a term you will hear a lot about when working with
     systems programming.  We have talked extensively about

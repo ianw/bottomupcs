@@ -11,9 +11,9 @@
     </info>
     <para>An often-quoted tenet of UNIX-like systems such as Linux or
     BSD is <emphasis>everything is a file</emphasis>.</para>
-    <para>Imagine a file in the context something familiar like a word
-    processor.  There are two fundamental operations we could use on
-    this imaginary word processing file:</para>
+    <para>Imagine a file in the context of something familiar like a
+    word processor.  There are two fundamental operations we could use
+    on this imaginary word processing file:</para>
     <orderedlist>
       <listitem>
         <para>Read it (existing saved data from the word processor).</para>
@@ -104,8 +104,8 @@
     <para>For example, many large web applications provide an API
     accessible via HTTP.  Accessing data via this method surely
     triggers many complicated series of remote procedure calls,
-    database queries and data transfers; all of which is opaque to the
-    end user who simply receives the contracted data.</para>
+    database queries and data transfers, all of which are opaque to
+    the end user who simply receives the contracted data.</para>
     <para>Those familiar with <emphasis>object-oriented</emphasis>
       languages such as Java, Python or C++ would be familiar with the
       abstraction provided by <emphasis>classes</emphasis>.  Methods
