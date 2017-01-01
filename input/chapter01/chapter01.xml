@@ -205,7 +205,7 @@
             <title>ASCII</title>
           </info>
           <para>Given that a byte can represent any of the values 0
-	  through 256, anyone could arbitrarily make up a mapping
+	  through 255, anyone could arbitrarily make up a mapping
 	  between characters and numbers.  For example, a video card
 	  manufacturer could decide that
 	  <computeroutput>1</computeroutput> represents

@@ -56,9 +56,9 @@
       section of memory.</para>
       <para>In this memory all the program code is stored, along with
       variables and any other allocated storage.</para>
-      <para>Parts of the memory can be shared between process (called,
-      not surprisingly <emphasis>shared memory</emphasis>).  You will
-      often see this called <emphasis>System Five Shared
+      <para>Parts of the memory can be shared between processes
+      (called, not surprisingly <emphasis>shared memory</emphasis>).
+      You will often see this called <emphasis>System Five Shared
       Memory</emphasis> (or SysV SHM) after the original
       implementation in an older operating system.</para>
       <para>Another important concept a process may utilise is that of
