@@ -65,7 +65,7 @@
       the best and most innovative ways.  In this book, we are
       concerned with abstractions at the lowest layers; between
       applications and the operating system and the operating system
-      and hardware.  Above this lies many more layers, each worthy of
+      and hardware.  Above this lie many more layers, each worthy of
       their own books.  As these chapters progress, you will hopefully
       gain some insight into the abstractions presented by a modern
       operating system.</para>
