@@ -207,7 +207,7 @@
 	abstraction.</para>
       <itemizedlist>
         <listitem>
-          <para>Allow programmers to reuse commonly accessed code.</para>
+          <para>Allow programmers to reuse commonly access sed code.</para>
         </listitem>
         <listitem>
           <para>Act as a <emphasis>black box</emphasis> implementing
@@ -306,7 +306,7 @@
         </textobject>
       </mediaobject>
     </figure>
-    <para>This raises the question what an <emphasis>open
+    <para>This raises the question of what an <emphasis>open
         file</emphasis> represents.  The value returned by an
         <computeroutput>open</computeroutput> call is termed a
         <emphasis>file descriptor</emphasis> and is essentially an
