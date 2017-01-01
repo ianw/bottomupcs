@@ -267,116 +267,150 @@
             <title>16, 32 and 64 bit computers</title>
           </info>
           <para>Numbers do not fit into bytes; hopefully your bank
-	  balance in dollars will need more range than can fit into
-	  one byte!  Most modern architectures are <emphasis>32
-	  bit</emphasis> computers.  This means they work with 4 bytes
-	  at a time when processing and reading or writing to memory.
-	  We refer to 4 bytes as a <emphasis>word</emphasis>; this is
-	  analogous to language where letters (bits) make up words in a
-	  sentence, except in computing every word has the same size!
-	  The size of a C <computeroutput>int</computeroutput>
-	  variable is 32 bits.  Newer architectures are 64 bits, which
-	  doubles the size the processor works with (8 bytes).</para>
+          balance in dollars will need more range than can fit into
+          one byte!  Modern architectures are at least <emphasis>32
+          bit</emphasis> computers.  This means they work with 4 bytes
+          at a time when processing and reading or writing to memory.
+          We refer to 4 bytes as a <emphasis>word</emphasis>; this is
+          analogous to language where letters (bits) make up words in
+          a sentence, except in computing every word has the same
+          size!  The size of a C <computeroutput>int</computeroutput>
+          variable is 32 bits.  Modern architectures are 64 bits,
+          which doubles the size the processor works with to 8
+          bytes.</para>
         </section>
         <section>
           <info>
             <title>Kilo, Mega and Giga Bytes</title>
           </info>
           <para>Computers deal with a lot of bytes; that's what makes
-	  them so powerful!</para>
-          <para>We need a way to talk about large numbers of bytes,
-	  and a natural way is to use the "International System of
-	  Units" (SI) prefixes as used in most other scientific areas.
-	  So for example, kilo refers to
-	  10<superscript>3</superscript> or 1000 units, as in a
-	  kilogram has 1000 grams.</para>
+          them so powerful!  We need a way to talk about large numbers
+          of bytes, and a natural way is to use the "International
+          System of Units" (SI) prefixes as used in most other
+          scientific areas.  So for example, kilo refers to
+          10<superscript>3</superscript> or 1000 units, as in a
+          kilogram has 1000 grams.</para>
           <para>1000 is a nice round number in base 10, but in binary
-	  it is <computeroutput>1111101000</computeroutput> which is
-	  not a particularly "round" number.  However, 1024 (or
-	  2<superscript>10</superscript>) is
-	  (<computeroutput>10000000000</computeroutput>), and happens
-	  to be quite close to the base ten meaning of kilo (1000 as
-	  opposed to 1024).</para>
-          <para>Hence 1024 bytes became known as a
-	  <emphasis>kilobyte</emphasis>.  The first mass market
-	  computer was the Commodore 64, so named because it had 64
-	  kilobytes of storage.</para>
-          <para>Today, kilobytes of memory would be small for a wrist
-	  watch, let alone a personal computer.  The next SI unit is
-	  "mega" for
-	  <computeroutput>10<superscript>6</superscript></computeroutput>.
-	  As it happens,
-	  <computeroutput>2<superscript>20</superscript></computeroutput>
-	  is again close to the SI base 10 definition; 1048576 as
-	  opposed to 1000000.</para>
-          <para>The units keep increasing by powers of 10; each
-	  time it diverges further from the base SI meaning.</para>
+          it is <computeroutput>1111101000</computeroutput> which is
+          not a particularly "round" number.  However, 1024 (or
+          2<superscript>10</superscript>) is a round number &#x2014;
+          (<computeroutput>10000000000</computeroutput> &#x2014; and
+          happens to be quite close to the base 10 meaning value of
+          "kilo" (1000 as opposed to 1024).  Thus 1024 bytes naturally
+          became known as a <emphasis>kilobyte</emphasis>.  The next
+          SI unit is "mega" for
+          <computeroutput>10<superscript>6</superscript></computeroutput>
+          and the prefixes continue upwards by
+          10<superscript>3</superscript> (corresponding to the usual
+          grouping of three digits when writing large numbers).  As it
+          happens,
+          <computeroutput>2<superscript>20</superscript></computeroutput>
+          is again close to the SI base 10 definition for mega;
+          1048576 as opposed to 1000000.  Increasing the base 2 units
+          by powers of 10 remains functionally close to the SI base 10
+          value, although each increasing factor diverges slightly
+          further from the base SI meaning.  Thus the SI base-10 units
+          are "close enough" and have become the commonly used for
+          base 2 values.</para>
           <table>
             <info>
-              <title>Bytes</title>
+              <title>Base 2 and 10 factors related to bytes</title>
             </info>
-            <tgroup cols="2">
+            <tgroup cols="5">
+              <thead>
+                <row>
+                  <entry>Name</entry>
+                  <entry>Base 2 Factor</entry>
+                  <entry>Bytes</entry>
+                  <entry>Close Base 10 Factor</entry>
+                  <entry>Base 10 bytes</entry>
+                </row>
+              </thead>
               <tbody>
                 <row>
+                  <entry>1 Kilobyte</entry>
                   <entry>2<superscript>10</superscript></entry>
-                  <entry>Kilobyte</entry>
+                  <entry>1,024</entry>
+                  <entry>10<superscript>3</superscript></entry>
+                  <entry>1,000</entry>
                 </row>
                 <row>
+                  <entry>1 Megabyte</entry>
                   <entry>2<superscript>20</superscript></entry>
-                  <entry>Megabyte</entry>
+                  <entry>1,048,576</entry>
+                  <entry>10<superscript>6</superscript></entry>
+                  <entry>1,000,000</entry>
                 </row>
                 <row>
+                  <entry>1 Gigabyte</entry>
                   <entry>2<superscript>30</superscript></entry>
-                  <entry>Gigabyte</entry>
+                  <entry>1,073,741,824</entry>
+                  <entry>10<superscript>9</superscript></entry>
+                  <entry>1,000,000,000</entry>
                 </row>
                 <row>
+                  <entry>1 Terabyte</entry>
                   <entry>2<superscript>40</superscript></entry>
-                  <entry>Terabyte</entry>
+                  <entry>1,099,511,627,776</entry>
+                  <entry>10<superscript>12</superscript></entry>
+                  <entry>1,000,000,000,000</entry>
                 </row>
                 <row>
+                  <entry>1 Petabyte</entry>
                   <entry>2<superscript>50</superscript></entry>
-                  <entry>Petabyte</entry>
+                  <entry>1,125,899,906,842,624</entry>
+                  <entry>10<superscript>15</superscript></entry>
+                  <entry>1,000,000,000,000,000</entry>
                 </row>
                 <row>
+                  <entry>1 Exabyte</entry>
                   <entry>2<superscript>60</superscript></entry>
-                  <entry>Exabyte</entry>
+                  <entry>1,152,921,504,606,846,976</entry>
+                  <entry>10<superscript>18</superscript></entry>
+                  <entry>1,000,000,000,000,000,000</entry>
                 </row>
               </tbody>
             </tgroup>
+            <caption><para>SI units compared in base 2 and base 10</para></caption>
           </table>
-          <para>Therefore a 32 bit computer can address up to four
-	  gigabytes of memory; the extra two bits can represent four
-	  groups of <computeroutput>2<superscript>30</superscript>
-	  bytes.</computeroutput>.  A 64 bit computer can address up
-	  to 8 exabytes; you might be interested in working out just
-	  how big a number this is!  To get a feel for how big that
-	  number is, calculate how long it would take to count to
-	  <computeroutput>2<superscript>64</superscript></computeroutput>
-	  if you incremented once per second.</para>
+          <para>It can be very useful to commit the base 2 factors to
+          memory as an aid to quickly correlate the relationship
+          between number-of-bits and "human" sizes.  For example, we
+          can quickly calculate that a 32 bit computer can address up
+          to four gigabytes of memory by noting the recombination of
+          2<superscript>2</superscript> (4) &#43;
+          2<superscript>30</superscript>.  A 64-bit value could
+          similarly address up to 16 exabytes
+          (2<superscript>4</superscript> &#43;
+          2<superscript>60</superscript>); you might be interested in
+          working out just how big a number this is.  To get a feel
+          for how big that number is, calculate how long it would take
+          to count to
+          <computeroutput>2<superscript>64</superscript></computeroutput>
+          if you incremented once per second.</para>
         </section>
         <section>
           <info>
             <title>Kilo, Mega and Giga Bits</title>
           </info>
           <para>Apart from the confusion related to the overloading of
-	  SI units between binary and base 10, capacities will often
-	  be quoted in terms of <emphasis>bits</emphasis> rather than
-	  bytes.</para>
-          <para>Generally this happens when talking about networking
-	  or storage devices; you may have noticed that your ADSL
-	  connection is described as something like 1500
-	  kilobits/second.  The calculation is simple; multiply by
-	  1000 (for the kilo), divide by 8 to get bytes and then 1024
-	  to get kilobytes (so 1500 kilobits/s=183 kilobytes
-	  per second).</para>
+          SI units between binary and base 10, capacities will often
+          be quoted in terms of <emphasis>bits</emphasis> rather than
+          bytes.  Generally this happens when talking about networking
+          or storage devices; you may have noticed that your ADSL
+          connection is described as something like 1500
+          kilobits/second.  The calculation is simple; multiply by
+          1000 (for the kilo), divide by 8 to get bytes and then 1024
+          to get kilobytes (so 1500 kilobits/s=183 kilobytes per
+          second).</para>
           <para>The SI standardisation body has recognised these dual
-	  uses, and has specified unique prefixes for binary usage.
-	  Under the standard 1024 bytes is a
-	  <computeroutput>kibibyte</computeroutput>, short for
-	  <emphasis>kilo binary</emphasis> byte (shortened to KiB).
-	  The other prefixes have a similar prefix (Mebibyte, for
-	  example).  Tradition largely prevents use of these terms,
-	  but you may seem them in some literature.</para>
+          uses and has specified unique prefixes for binary usage.
+          Under the standard 1024 bytes is a
+          <computeroutput>kibibyte</computeroutput>, short for
+          <emphasis>kilo binary</emphasis> byte (shortened to KiB).
+          The other prefixes have a similar prefix (Mebibyte, MiB, for
+          example).  Tradition largely prevents use of these terms,
+          but you may seem them in some literature.</para>
         </section>
         <section>
           <info>
