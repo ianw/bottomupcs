@@ -19,6 +19,33 @@
 <xsl:param name="suppress.navigation" select="0"></xsl:param>
 <xsl:param name="html.stylesheet">csbu.css</xsl:param>
 
+
+<xsl:variable name="articleOpen">
+<xsl:text disable-output-escaping="yes">
+<![CDATA[
+<article>
+]]>
+</xsl:text>
+</xsl:variable>
+
+<xsl:template name="user.header.content">
+    <xsl:value-of select="$articleOpen" disable-output-escaping="yes"/>
+</xsl:template>
+
+
+<xsl:variable name="articleClose">
+<xsl:text disable-output-escaping="yes">
+<![CDATA[
+</article>
+]]>
+</xsl:text>
+</xsl:variable>
+
+<xsl:template name="user.footer.content">
+    <xsl:value-of select="$articleClose" disable-output-escaping="yes"/>
+</xsl:template>
+
+
 <xsl:template name="user.footer.navigation">
 <script type="text/javascript">
 
