@@ -103,7 +103,7 @@
       <para>The first step of compiling a source file to an executable
     file is converting the code from the high level, human
     understandable language to <emphasis>assembly code</emphasis>.  We
-    know from previous chapters than assembly code works directly with
+    know from previous chapters that assembly code works directly with
     the instructions and registers provided by the processor.</para>
       <para>The compiler is the most complex step of process for a
     number of reasons.  Firstly, humans are very unpredictable and
