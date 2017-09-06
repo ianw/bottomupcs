@@ -1194,8 +1194,8 @@
           </figure>
           <para>To get the top (blue) four bits, we would invert the
 	mask.  You will note this gives a result of
-	<computeroutput>0x90</computeroutput> when really we want a
-	value of <computeroutput>0x09</computeroutput>.  To get the
+	<computeroutput>0xA0</computeroutput> when really we want a
+	value of <computeroutput>0x0A</computeroutput>.  To get the
 	bits into the right position we use the <computeroutput>right
 	shift</computeroutput> operation.</para>
           <para><emphasis>Setting</emphasis> the bits requires the
