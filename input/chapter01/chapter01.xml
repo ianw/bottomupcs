@@ -378,10 +378,10 @@
           between number-of-bits and "human" sizes.  For example, we
           can quickly calculate that a 32 bit computer can address up
           to four gigabytes of memory by noting the recombination of
-          2<superscript>2</superscript> (4) &#43;
+          2<superscript>2</superscript> (4) &#42;
           2<superscript>30</superscript>.  A 64-bit value could
           similarly address up to 16 exabytes
-          (2<superscript>4</superscript> &#43;
+          (2<superscript>4</superscript> &#42;
           2<superscript>60</superscript>); you might be interested in
           working out just how big a number this is.  To get a feel
           for how big that number is, calculate how long it would take
