@@ -245,7 +245,6 @@
         <info>
           <title>Reordering</title>
         </info>
-        <para>This bit is crap</para>
         <para>In fact, if the CPU is the hose, it is free to reorder
 	the marbles within the hose, as long as they pop out the end
 	in the same order you put them in.  We call this
