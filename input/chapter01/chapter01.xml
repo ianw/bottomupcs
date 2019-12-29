@@ -1158,17 +1158,20 @@
 	either waste four bits, or find some way to use those left
 	over bits.</para>
           <para>We can easily do this by the process of
-	<emphasis>masking</emphasis>.  Remembering the rules of the
-	logical operations, it should become clear how the values are
-	extracted.</para>
-          <para>The process is illustrated in the figure below.  We are
-	interested in the lower four bits, so set our mask to have
-	these bits set to <computeroutput>1</computeroutput>.  Since
-	the <computeroutput>logical and</computeroutput> operation
-	will only set the bit if <emphasis>both</emphasis> bits are
-	<computeroutput>1</computeroutput>, those bits of the mask set
-	to <computeroutput>0</computeroutput> effectively hide the bits
-	we are not interested in.</para>
+          <emphasis>masking</emphasis>.  This uses the rules of
+          logical operations to extract values.</para>
+          <para>The process is illustrated in the figure below.  We
+          can keep two separate 4-bit values "inside" a single 8-bit
+          character.  We consider the upper four-bits as one value
+          (blue) and the lower 4-bits (red) as another.  To extract
+          the lower four bits, we set our mask to have the lower-4
+          bits set to <computeroutput>1</computeroutput>
+          (<computeroutput>0x0F</computeroutput>).  Since the
+          <computeroutput>logical and</computeroutput> operation will
+          only set the bit if <emphasis>both</emphasis> bits are
+          <computeroutput>1</computeroutput>, those bits of the mask
+          set to <computeroutput>0</computeroutput> effectively hide
+          the bits we are not interested in.</para>
           <figure>
             <info>
               <title>Masking</title>
@@ -1193,11 +1196,27 @@
             </mediaobject>
           </figure>
           <para>To get the top (blue) four bits, we would invert the
-	mask.  You will note this gives a result of
-	<computeroutput>0x90</computeroutput> when really we want a
-	value of <computeroutput>0x09</computeroutput>.  To get the
-	bits into the right position we use the <computeroutput>right
-	shift</computeroutput> operation.</para>
+          mask; in other words, set the top 4 bits to
+          <computeroutput>1</computeroutput> and the lower 4-bits to
+          <computeroutput>0</computeroutput>.  You will note this
+          gives a result of <computeroutput>1010 0000</computeroutput>
+          (or, in hexadecimal <computeroutput>0xA0</computeroutput>)
+          when really we want to consider this as a unique 4-bit value
+          <computeroutput>1010</computeroutput>
+          (<computeroutput>0x0A</computeroutput>).  To get the bits
+          into the right position we use the <computeroutput>right
+          shift</computeroutput> operation 4 times, giving a final
+          value of <computeroutput>0000 1010</computeroutput>.</para>
+
+          <example xml:id="flag-mask">
+            <info>
+              <title>Using masks</title>
+            </info>
+            <programlisting language="c" linenumbering="numbered">
+              <xi:include href="code/mask.c" parse="text"/>
+            </programlisting>
+          </example>
+
           <para><emphasis>Setting</emphasis> the bits requires the
 	<computeroutput>logical or</computeroutput> operation.
 	However, rather than using
