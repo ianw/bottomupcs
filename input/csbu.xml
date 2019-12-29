@@ -58,6 +58,5 @@
   <xi:include href="chapter06/chapter06.xml"/>
   <xi:include href="chapter07/chapter07.xml"/>
   <xi:include href="chapter08/chapter08.xml"/>
-  <xi:include href="chapter09/chapter09.xml"/>
   <xi:include href="glossary.xml"/>
 </book>
