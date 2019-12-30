@@ -126,9 +126,7 @@
         <info>
           <title>Abstraction with function pointers</title>
         </info>
-        <programlisting language="c">
-          <xi:include href="code/abstraction.c" parse="text"/>
-        </programlisting>
+        <programlisting language="c"><xi:include href="code/abstraction.c" parse="text"/></programlisting>
       </example>
       <para>Code such as the above is the simplest example of
       constructs used repeatedly throughout the Linux Kernel and other
@@ -183,9 +181,7 @@
           <title>Abstraction in
 	<computeroutput>include/linux/virtio.h</computeroutput></title>
         </info>
-        <programlisting language="c">
-          <xi:include href="code/virtio.h" parse="text"/>
-        </programlisting>
+        <programlisting language="c"><xi:include href="code/virtio.h" parse="text"/></programlisting>
       </example>
       <para> It's only necessary to vaguely understand that this
       structure is a description of a virtual I/O device.  We can see
