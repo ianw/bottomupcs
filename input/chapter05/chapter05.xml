@@ -44,7 +44,7 @@
       <para>New processors are generally all 64-bit processors, which
         as the name suggests has registers 64 bits wide.  As an exercise,
         you should work out the address space available to these
-        processors (hint: it's big!).</para>
+        processors (hint: it is big!).</para>
       <para>64-bit computing does have some trade-offs against using
         smaller bit-width processors.  Every program compiled in
         64-bit mode requires 8-byte pointers, which can increase code
@@ -477,7 +477,7 @@
       initially requests a small part of the file, it is highly likely
       that as it continues processing it will want to access the rest
       of file.  When the operating system has to read or write to a
-      file, it first checks if the file is in it's memory
+      file, it first checks if the file is in its memory
       cache.</para>
       <para>These pages should be the first to be removed as memory
       pressure in the system increases.</para>
@@ -619,7 +619,7 @@
 	interrupt (as discussed before) which the operating system
 	must handle.</para>
         <para>When the operating system gets a page fault, it needs to
-	go through it's page-table to find the correct translation and
+	go through its page-table to find the correct translation and
 	insert it into the TLB.</para>
         <para> In the case that the operating system can not find a
 	translation in the page table, or alternatively if the
@@ -842,7 +842,7 @@
       deep, the Linux scheme is most commonly referred to as the
       <emphasis>three level page table</emphasis>.  The three level
       page table has proven to be robust choice, although it is not
-      without it's criticism.  The details of the virtual memory
+      without its criticism.  The details of the virtual memory
       implementation of each processor vary Whitley meaning that the
       generic page table Linux chooses must be portable and relatively
       generic.</para>
@@ -851,7 +851,7 @@
       page number and an offset in the physical memory page.  In a
       three level page table, the virtual address is further split up
       into a number <emphasis>levels</emphasis>.</para>
-      <para>Each level is a page table of it's own right; i.e. it maps
+      <para>Each level is a page table of its own right; i.e. it maps
       a page number of a physical page.  In a single level page table
       the "level 1" entry would directly map to the physical frame.
       In the multilevel version each of the upper levels gives the
@@ -883,7 +883,7 @@
       <para>At first, this model seems to be needlessly complex.  The
       main reason this model is implemented is for size
       considerations.  Imagine the theoretical situation of a process
-      with only one single page mapped right near the end of it's
+      with only one single page mapped right near the end of its
       virtual address space.  We said before that the page table entry
       is found as an offset from the page table base register, so the
       page table needs to be a contiguous array in memory.  So the

@@ -162,7 +162,7 @@
       example) separate from more complex implementation, which often
       eases the path to significant changes in the internal workings
       whilst ensuring the API remains constant.  Our implementation is
-      very simple, however, and doesn't even need it's own support
+      very simple, however, and doesn't even need its own support
       functions.  In various projects, single-, double- or even
       triple-underscore function prefixes will mean different things,
       but universally it is a visual warning that the function is not

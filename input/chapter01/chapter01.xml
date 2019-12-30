@@ -158,7 +158,7 @@
         made up of millions of discrete <emphasis>pixels</emphasis>,
         each too small for the human eye to distinguish but combining
         to make a complete image.  Generally each pixel has a certain
-        red, green and blue component that makes up it's display
+        red, green and blue component that makes up its display
         color.  Of course, these values can be represented by numbers,
         which of course can be represented by binary!  Thus any image
         can be broken up into millions of individual dots, each dot

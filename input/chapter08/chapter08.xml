@@ -797,7 +797,7 @@
 	dynamic section in a shared library; the library author can
 	specify this version when they build the library.</para>
         <para>Thus each minor version library file on disc can specify
-	 the same major version number in it's
+	 the same major version number in its
 	 <computeroutput>DT_SONAME</computeroutput> field, allowing
 	 the dynamic linker to know that this particular library file
 	 implements a particular major revision of the library API and
