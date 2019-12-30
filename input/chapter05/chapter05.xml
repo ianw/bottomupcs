@@ -314,18 +314,20 @@
       us with 0x80001.  Thus (in decimal) the value in row 524289 of
       the linear page table would be the physical frame corresponding
       to this page.</para>
-      <para>You might see a problem with a linear page-table : since
+      <para>You might see a problem with a linear page-table: since
       every page must be accounted for, whether in use or not, a
       physically linear page-table is completely impractical with a
       64-bit address space.  Consider a 64-bit address space divided
-      into (generously large) 64 KiB pages creates
+      into 64 KiB pages creates
       2<superscript>64</superscript>/2<superscript>16</superscript> =
       2<superscript>52</superscript> pages to be managed; assuming
       each page requires an 8-byte pointer to a physical location a
       total of
-      2<superscript>52</superscript>/2<superscript>3</superscript> =
-      2<superscript>49</superscript> or 512 GiB of contiguous memory
-      is required just for the page table!</para>
+      2<superscript>52</superscript>*2<superscript>3</superscript> =
+      2<superscript>55</superscript> or 32 PiB of contiguous memory
+      would be required just for the page table!  There are ways to
+      split addressing up that avoid this which we will discuss
+      later.</para>
     </section>
   </section>
   <section xml:id="virtual_address_and_page_tables">
