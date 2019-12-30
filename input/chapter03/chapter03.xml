@@ -163,10 +163,10 @@
       hardware has important roles to play in running multiple tasks
       and keeping the system secure, but these rules do not apply to
       the kernel.  We know that the kernel must handle programs that
-      crash (remember it is the operating systems job arbitrate
+      crash (remember it is the operating system's job arbitrate
       between multiple programs running on the same system, and there
       is no guarantee that they will behave), but if any internal part
-      of the operating system crashes chances are the entire system
+      of the operating system crashes, chances are the entire system
       will become useless.  Similarly security issues can be exploited
       by user processes to escalate themselves to the privilege level
       of the kernel; at that point they can access any part of the
@@ -185,8 +185,8 @@
 	file system accesses controls, permissions checking and
 	services such as Network File System (NFS).</para>
         <para>Since the kernel is always privileged, if any part of it
-	crashes the whole system has the potential to comes to a halt.
-	If one driver has a bug it can overwrite any memory in the
+	crashes the whole system has the potential to come to a halt.
+	If one driver has a bug, it can overwrite any memory in the
 	system with no problems, ultimately causing the system to
 	crash.</para>
         <para>A microkernel architecture tries to minimise this
@@ -227,7 +227,7 @@
 	for.  The enhanced protection from having components run
 	separately was not sufficient to overcome these hurdles in
 	early microkernel systems, so they fell out of fashion.</para>
-        <para>In a monolithic kernel calls between components are
+        <para>In a monolithic kernel, calls between components are
 	simple function calls, as all programmers are familiar
 	with.</para>
         <para>There is no definitive answer as to which is the best
@@ -240,7 +240,7 @@
             <title>Modules</title>
           </info>
           <para>The Linux kernel implements a module system, where
-	  drivers can loaded into the running kernel "on the fly" as
+	  drivers can be loaded into the running kernel "on the fly" as
 	  they are required.  This is good in that drivers, which make
 	  up a large part of operating system code, are not loaded for
 	  devices that are not present in the system.  Someone who
@@ -260,7 +260,7 @@
         </info>
         <para>Closely related to kernel is the concept of
 	virtualisation of hardware.  Modern computers are very
-	powerful, and often it is useful to not thing of them as one
+	powerful, and often it is useful to not think of them as one
 	whole system but split a single physical computer up into
 	separate "virtual" machines.  Each of these virtual machines
 	looks for all intents and purposes as a completely separate
@@ -307,12 +307,12 @@
 	on many large IBM machines are actually quite complicated
 	affairs, with many millions of lines of code.  It provides a
 	multitude of system management services.</para>
-        <para>Another option is to have the operating system aware of
-        the underlying hypervisor, and request system resources
+        <para>Another option is to have the operating system be aware
+        of the underlying hypervisor, and request system resources
         through it.  This is sometimes referred to as
         <emphasis>paravirtualisation</emphasis> due to its halfway
         nature.  This is similar to the way early versions of the Xen
-        system works and is a compromise solution.  It hopefully
+        system work and is a compromise solution.  It hopefully
         provides better performance since the operating system is
         explicitly asking for system resources from the hypervisor
         when required, rather than the hypervisor having to work
@@ -332,7 +332,7 @@
 	Rosetta system does with Apple software which moved from the
 	PowerPC processor to Intel based processors).</para>
         <para>Performance is major concern when using any of these
-	virtualisation techniques, as what was once fast operations
+	virtualisation techniques, as what were once fast operations
 	directly on hardware need to make their way through layers of
 	abstraction.</para>
         <para>Intel have discussed hardware support for virtualisation
@@ -342,7 +342,7 @@
 	monitor.  Thus the processor looks the same as a
 	non-virtualised processor to the application running on it,
 	but when that application makes requests for resources that
-	might be shared between other guest operating systems the
+	might be shared between other guest operating systems, the
 	virtual machine monitor can be invoked.</para>
         <para>This provides superior performance because the virtual
 	machine monitor does not need to monitor every operation to
@@ -384,7 +384,7 @@
 	  rate of one bit per second is not astounding, but
 	  information is flowing.</para>
           <para>This is called a <emphasis>covert channel</emphasis>,
-	  and whilst admittedly far fetched there have been examples
+	  and whilst admittedly far-fetched there have been examples
 	  of security breaches from such mechanisms.  It just goes to
 	  show that the life of a systems programmer is never simple!</para>
         </section>
@@ -394,8 +394,8 @@
       <info>
         <title>Userspace</title>
       </info>
-      <para>We call the theoretical place where programs run by the
-      user <emphasis>userspace</emphasis>.  Each program runs in
+      <para>We call the theoretical place where programs are run by
+      the user <emphasis>userspace</emphasis>.  Each program runs in
       userspace, talking to the kernel through <emphasis>system
       calls</emphasis> (discussed below).</para>
       <para>As previously discussed, userspace is
