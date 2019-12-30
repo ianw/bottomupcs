@@ -1212,9 +1212,7 @@
             <info>
               <title>Using masks</title>
             </info>
-            <programlisting language="c" linenumbering="numbered">
-              <xi:include href="code/mask.c" parse="text"/>
-            </programlisting>
+            <programlisting language="c" linenumbering="numbered"><xi:include href="code/mask.c" parse="text"/></programlisting>
           </example>
 
           <para><emphasis>Setting</emphasis> the bits requires the
@@ -1250,9 +1248,7 @@
             <info>
               <title>Using flags</title>
             </info>
-            <programlisting language="c" linenumbering="numbered">
-              <xi:include href="code/flags.c" parse="text"/>
-            </programlisting>
+            <programlisting language="c" linenumbering="numbered"><xi:include href="code/flags.c" parse="text"/></programlisting>
           </example>
         </section>
       </section>
@@ -2040,9 +2036,7 @@
           <info>
             <title>Floats versus Doubles</title>
           </info>
-          <programlisting linenumbering="numbered">
-            <xi:include href="code/floatvdouble.txt" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered"><xi:include href="code/floatvdouble.txt" parse="text"/></programlisting>
         </example>
         <para>A practical example is illustrated above.  Notice that
 	for the default 6 decimal places of precision given by
@@ -2168,9 +2162,7 @@
               <info>
                 <title>Program to find first set bit</title>
               </info>
-              <programlisting linenumbering="numbered" language="c">
-                <xi:include href="code/ffs.c" parse="text"/>
-              </programlisting>
+              <programlisting linenumbering="numbered" language="c"><xi:include href="code/ffs.c" parse="text"/></programlisting>
             </example>
           </section>
         </section>
@@ -2188,9 +2180,7 @@
             <info>
               <title>Examining Floats</title>
             </info>
-            <programlisting linenumbering="numbered" language="c">
-              <xi:include href="code/float.c" parse="text"/>
-            </programlisting>
+            <programlisting linenumbering="numbered" language="c"><xi:include href="code/float.c" parse="text"/></programlisting>
           </example>
           <para>Sample output of the value
 	  <computeroutput>8.45</computeroutput>, which we previously
@@ -2199,13 +2189,11 @@
             <info>
               <title>Analysis of <computeroutput>8.45</computeroutput></title>
             </info>
-            <programlisting>
-$ ./float 8.45
+            <programlisting>$ ./float 8.45
 8.450000 = 1 * (1/2^0 + 1/2^5 + 1/2^6 + 1/2^7 + 1/2^10 + 1/2^11 + 1/2^14 + 1/2^15 + 1/2^18 + 1/2^19 + 1/2^22 + 1/2^23) * 2^3
 8.450000 = 1 * (1/1 + 1/32 + 1/64 + 1/128 + 1/1024 + 1/2048 + 1/16384 + 1/32768 + 1/262144 + 1/524288 + 1/4194304 + 1/8388608) * 2^3
 8.450000 = 1 * 1.05624997616 * 8.000000
-8.450000 = 8.44999980927
-</programlisting>
+8.450000 = 8.44999980927</programlisting>
           </example>
           <para>From this example, we get some idea of how the
 	  inaccuracies creep into our floating point numbers.</para>

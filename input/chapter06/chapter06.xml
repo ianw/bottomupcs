@@ -224,9 +224,7 @@
             <info>
               <title>Struct padding example</title>
             </info>
-            <programlisting linenumbering="numbered">
-              <xi:include href="code/struct-padding.txt" parse="text"/>
-            </programlisting>
+            <programlisting linenumbering="numbered"><xi:include href="code/struct-padding.txt" parse="text"/></programlisting>
           </example>
           <para>In the example above, we contrive a structure that has
 	  two bytes (<computeroutput>chars</computeroutput> followed
@@ -319,9 +317,7 @@
             <info>
               <title>Stack alignment example</title>
             </info>
-            <programlisting linenumbering="numbered">
-              <xi:include href="code/stack-align.txt" parse="text"/>
-            </programlisting>
+            <programlisting linenumbering="numbered"><xi:include href="code/stack-align.txt" parse="text"/></programlisting>
           </example>
           <para>In the example above, taken from an Itanium machine,
 	  we can see that the padding and alignment of the stack has
@@ -349,9 +345,7 @@
             <info>
               <title>Page alignment manipulations</title>
             </info>
-            <programlisting linenumbering="numbered">
-              <xi:include href="code/page.txt" parse="text"/>
-            </programlisting>
+            <programlisting linenumbering="numbered"><xi:include href="code/page.txt" parse="text"/></programlisting>
           </example>
           <para>Above we can see that there are a number of different
 	  options for page sizes within the kernel, ranging from 4KB
@@ -619,17 +613,13 @@
       <info>
         <title>Hello World</title>
       </info>
-      <programlisting linenumbering="numbered" language="c">
-        <xi:include href="code/hello.c" parse="text"/>
-      </programlisting>
+      <programlisting linenumbering="numbered" language="c"><xi:include href="code/hello.c" parse="text"/></programlisting>
     </example>
     <example>
       <info>
         <title>Function Example</title>
       </info>
-      <programlisting linenumbering="numbered" language="c">
-        <xi:include href="code/function.c" parse="text"/>
-      </programlisting>
+      <programlisting linenumbering="numbered" language="c"><xi:include href="code/function.c" parse="text"/></programlisting>
     </example>
     <section>
       <info>
@@ -647,9 +637,7 @@
         <info>
           <title>Compilation Example</title>
         </info>
-        <programlisting linenumbering="numbered">
-          <xi:include href="code/compiled.txt" parse="text"/>
-        </programlisting>
+        <programlisting linenumbering="numbered"><xi:include href="code/compiled.txt" parse="text"/></programlisting>
       </example>
       <para>The assembly is a little to complex to fully describe, but
       you should be able to see where i is defined as a
@@ -673,9 +661,7 @@
         <info>
           <title>Assembly Example</title>
         </info>
-        <programlisting linenumbering="numbered">
-          <xi:include href="code/assembly.txt" parse="text"/>
-        </programlisting>
+        <programlisting linenumbering="numbered"><xi:include href="code/assembly.txt" parse="text"/></programlisting>
       </example>
       <para>After assembling we have <emphasis>object</emphasis> code,
       which is ready to be linked together into the final executable.
@@ -694,9 +680,7 @@
         <info>
           <title>Readelf Example</title>
         </info>
-        <programlisting linenumbering="numbered">
-          <xi:include href="code/readelf.txt" parse="text"/>
-        </programlisting>
+        <programlisting linenumbering="numbered"><xi:include href="code/readelf.txt" parse="text"/></programlisting>
       </example>
       <para>Although the output is quite complicated (again!) you
       should be able to understand much of it.  For example</para>
@@ -752,9 +736,7 @@
         <info>
           <title>Linking Example</title>
         </info>
-        <programlisting linenumbering="numbered">
-          <xi:include href="code/linking.txt" parse="text"/>
-        </programlisting>
+        <programlisting linenumbering="numbered"><xi:include href="code/linking.txt" parse="text"/></programlisting>
       </example>
       <para>The first thing you notice is that a program called
       <application>collect2</application> is being called.  This is a
@@ -823,9 +805,7 @@
         <info>
           <title>Executable Example</title>
         </info>
-        <programlisting linenumbering="numbered">
-          <xi:include href="code/executable.txt" parse="text"/>
-        </programlisting>
+        <programlisting linenumbering="numbered"><xi:include href="code/executable.txt" parse="text"/></programlisting>
       </example>
       <para>Some things to note</para>
       <itemizedlist>

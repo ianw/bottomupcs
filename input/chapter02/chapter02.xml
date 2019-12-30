@@ -1438,9 +1438,7 @@ multiplex the output of the many sets, which can also add latency.
         <info>
           <title>Memory Ordering</title>
         </info>
-        <programlisting linenumbering="numbered" language="c">
-          <xi:include href="code/memorder.c" parse="text"/>
-        </programlisting>
+        <programlisting linenumbering="numbered" language="c"><xi:include href="code/memorder.c" parse="text"/></programlisting>
       </example>
       <para>In this example, we have two stores that can be done in
       any particular order, as it suits the processor.  However, in

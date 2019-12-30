@@ -103,9 +103,7 @@
           <info>
             <title>Specifying Dynamic Libraries</title>
           </info>
-          <programlisting linenumbering="numbered">
-            <xi:include href="code/dynamic-needed.txt" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered"><xi:include href="code/dynamic-needed.txt" parse="text"/></programlisting>
         </example>
         <para>You can see that it specifies three libraries.  The most
 	common library shared by most, if not all, programs on the
@@ -122,9 +120,7 @@
           <info>
             <title>Looking at dynamic libraries</title>
           </info>
-          <programlisting linenumbering="numbered">
-            <xi:include href="code/ldd.txt" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered"><xi:include href="code/ldd.txt" parse="text"/></programlisting>
         </example>
         <para>We can see above that
 	<computeroutput>libpthread</computeroutput> has been required
@@ -151,9 +147,7 @@
       <info>
         <title>Checking the program interpreter</title>
       </info>
-      <programlisting linenumbering="numbered">
-        <xi:include href="code/interpreter.txt" parse="text"/>
-      </programlisting>
+      <programlisting linenumbering="numbered"><xi:include href="code/interpreter.txt" parse="text"/></programlisting>
     </example>
     <para>You can see above that the interpreter is set to be
     <application>/lib/ld-linux-ia64.so.2</application>, which is the
@@ -208,9 +202,7 @@
         <info>
           <title>Relocation as defined by ELF</title>
         </info>
-        <programlisting linenumbering="numbered">
-          <xi:include href="code/elfrelocs.txt" parse="text"/>
-        </programlisting>
+        <programlisting linenumbering="numbered"><xi:include href="code/elfrelocs.txt" parse="text"/></programlisting>
       </example>
       <para>The <computeroutput>r_offset</computeroutput> field refers
       to the offset in the file that needs to be fixed up.  The
@@ -258,9 +250,7 @@
           <info>
             <title>Specifying Dynamic Libraries</title>
           </info>
-          <programlisting linenumbering="numbered">
-            <xi:include href="code/relocs.txt" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered"><xi:include href="code/relocs.txt" parse="text"/></programlisting>
         </example>
         <para>We thus have one relocation in
 	<computeroutput>addendtest.so</computeroutput> of type
@@ -391,9 +381,7 @@
           <info>
             <title>Using the GOT</title>
           </info>
-          <programlisting linenumbering="numbered">
-            <xi:include href="code/got.txt" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered"><xi:include href="code/got.txt" parse="text"/></programlisting>
         </example>
         <para>Above we create a simple shared library which refers to
 	an external symbol.  We do not know the address of this symbol
@@ -432,9 +420,7 @@
           <info>
             <title>Relocations against the GOT</title>
           </info>
-          <programlisting linenumbering="numbered">
-            <xi:include href="code/got-relocs.txt" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered"><xi:include href="code/got-relocs.txt" parse="text"/></programlisting>
         </example>
         <para>We can also check out the relocation for this entry too.
 	The relocation says "replace the value at offset 10588 with
@@ -943,9 +929,7 @@
           <info>
             <title>Symbol definition from ELF</title>
           </info>
-          <programlisting linenumbering="numbered">
-            <xi:include href="code/symbol.txt" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered"><xi:include href="code/symbol.txt" parse="text"/></programlisting>
         </example>
         <table>
           <info>
@@ -1046,9 +1030,7 @@
           <info>
             <title>Examples of symbol bindings</title>
           </info>
-          <programlisting linenumbering="numbered">
-            <xi:include href="code/bindings.txt" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered"><xi:include href="code/bindings.txt" parse="text"/></programlisting>
         </example>
         <para>Notice the use of
 	<computeroutput>#pragma</computeroutput> to define the weak
@@ -1082,9 +1064,7 @@
             <info>
               <title>Example of <computeroutput>LD_PRELOAD</computeroutput></title>
             </info>
-            <programlisting linenumbering="numbered">
-              <xi:include href="code/ld_preload.txt" parse="text"/>
-            </programlisting>
+            <programlisting linenumbering="numbered"><xi:include href="code/ld_preload.txt" parse="text"/></programlisting>
           </example>
           <para>In the above example we override the
 	  <computeroutput>getpid</computeroutput> function to print
@@ -1172,9 +1152,7 @@
             <info>
               <title>Example of symbol versioning</title>
             </info>
-            <programlisting linenumbering="numbered">
-              <xi:include href="code/symbolver.txt" parse="text"/>
-            </programlisting>
+            <programlisting linenumbering="numbered"><xi:include href="code/symbolver.txt" parse="text"/></programlisting>
           </example>
           <para>In the simplest case as above, we simply state if the
 	  symbol is <emphasis>global</emphasis> or

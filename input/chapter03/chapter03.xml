@@ -498,9 +498,7 @@
         <info>
           <title>getpid() example</title>
         </info>
-        <programlisting linenumbering="numbered" language="c">
-          <xi:include href="code/getpid.c" parse="text"/>
-        </programlisting>
+        <programlisting linenumbering="numbered" language="c"><xi:include href="code/getpid.c" parse="text"/></programlisting>
       </example>
       <para>We start by writing a small C program which we can start
       to illustrate the mechanism behind system calls.  The first
@@ -545,9 +543,7 @@
           <info>
             <title>PowerPC system call example</title>
           </info>
-          <programlisting linenumbering="numbered" language="c">
-            <xi:include href="code/unistd-powerpc.h" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered" language="c"><xi:include href="code/unistd-powerpc.h" parse="text"/></programlisting>
         </example>
         <para>This code snippet from the kernel header file
 	<computeroutput>asm/unistd.h</computeroutput> shows how we can
@@ -669,9 +665,7 @@
           <info>
             <title>x86 system call example</title>
           </info>
-          <programlisting linenumbering="numbered" language="c">
-            <xi:include href="code/unistd-x86.h" parse="text"/>
-          </programlisting>
+          <programlisting linenumbering="numbered" language="c"><xi:include href="code/unistd-x86.h" parse="text"/></programlisting>
         </example>
         <para>The x86 architecture is very different from the PowerPC
 	that we looked at previously.  The x86 is classed as a CISC

@@ -377,9 +377,7 @@
       <info>
         <title>Example of major and minor numbers</title>
       </info>
-      <programlisting>
-        <xi:include href="code/major-minor.txt" parse="text"/>
-      </programlisting>
+      <programlisting><xi:include href="code/major-minor.txt" parse="text"/>     </programlisting>
     </example>
     <para>This brings us to the file descriptor, which is the handle
     user-space uses to talk to the underlying device.  In a broad
