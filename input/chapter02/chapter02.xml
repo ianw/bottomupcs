@@ -987,7 +987,7 @@ multiplex the output of the many sets, which can also add latency.
 	created by software.  Each entry in this table points to a
 	queue of <emphasis>transfer descriptors</emphasis>.  Software
 	sets up this data in memory, and it is read by the host
-	controller which is a separate chip the drives the USB bus.
+	controller which is a separate chip that drives the USB bus.
 	Software needs to schedule the work queues so that 90% of a
 	frame time is given to isochronous data, and 10% left for
 	interrupt, control and bulk data..</para>
