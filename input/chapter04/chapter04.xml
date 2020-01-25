@@ -806,7 +806,7 @@ run next.  All possible tasks are kept on a
 <emphasis>run queue</emphasis>, which is simply a linked list of
 processes which the kernel knows are in a "runnable" state (i.e. not
 waiting on disk activity or otherwise asleep).  The problem arises
-that to calculate the next process to run, every possible runnable
+when to calculate the next process to run, every possible runnable
 process must have its goodness calculated and the one with the highest
 goodness ``wins''.  You can see that for more tasks, it will take
 longer and longer to decide which processes will run next.</para>
