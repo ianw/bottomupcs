@@ -1463,7 +1463,7 @@ multiplex the output of the many sets, which can also add latency.
       that is a fence that allows any load or stores to be done before
       it (move upwards), but nothing before it to move downwards past
       it.  Thus, when load or store with release semantics is
-      processed, you can be store that any earlier load or stores will
+      processed, you can be sure that any earlier load or stores will
       have been complete.</para>
       <figure>
         <info>
