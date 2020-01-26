@@ -1252,7 +1252,7 @@ multiplex the output of the many sets, which can also add latency.
 	single frame of the movie which contains the wire-frame models,
 	textures and light sources which needs to be combined
 	(rendered) into the amazing special effects we now take for
-	grained.  Since each frame is static, once the computer has
+	granted.  Since each frame is static, once the computer has
 	the initial input it does not need any more communication
 	until the final frame is ready to be sent back and combined
 	into the move.  For example the block-buster Lord of the Rings
