@@ -1741,8 +1741,8 @@
               </tbody>
             </tgroup>
           </table>
-          <para>If you add the bits one by one, you find you end up
-	  with a carry bit at the end (highlighted above).  By adding
+          <para>If you add the leftmost bits, you find you end up
+	  with a carry bit at the top (highlighted above).  By adding
 	  this back to the original we end up with the correct value,
 	  10</para>
           <para>Again we still have the problem with two zeros being
