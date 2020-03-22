@@ -274,7 +274,7 @@
 	<emphasis>brk</emphasis>, so called for the system call which
 	modifies it.  By using the
 	<computeroutput>brk</computeroutput> call to grow the area
-	downwards the process can request the kernel allocate
+	upwards the process can request the kernel allocate
 	more memory for it to use.</para>
         <para>The heap is most commonly managed by the
 	<computeroutput>malloc</computeroutput> library call.  This
@@ -506,7 +506,7 @@
 	provides a level of abstraction in how the Linux kernel can
 	create processes.</para>
         <para><computeroutput>clone</computeroutput> allows you to
-	explicitly specify which parts of the new process are copied
+	explicitly specify which parts of the old process are copied
 	into the new process, and which parts are shared between the
 	two processes.  This may seem a bit strange at first, but
 	allows us to easily implement <emphasis>threads</emphasis>
@@ -778,7 +778,7 @@
       <para>UNIX systems assign each process a
       <emphasis>nice</emphasis> value.  The scheduler looks at the
       nice value and can give priority to those processes that have a
-      higher "niceness".</para>
+      less "niceness".</para>
     </section>
     <section>
       <info>
@@ -796,7 +796,7 @@ given increasing inputs.  If the algorithm takes twice as long to run
 for twice as much input, this is increasing linearly.  If another
 algorithm takes four times as long to run given twice as much input,
 then it is increasing exponentially.  Finally if it takes the same
-amount of time now matter how much input, then the algorithm runs in
+amount of time no matter how much input, then the algorithm runs in
 constant time.  Intuitively you can see that the slower the algorithm
 grows for more input, the better it is.  Computer science text books
 deal with algorithm analysis in more detail.</para></footnote>.</para>

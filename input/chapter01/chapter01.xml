@@ -411,7 +411,7 @@
           <emphasis>kilo binary</emphasis> byte (shortened to KiB).
           The other prefixes have a similar prefix (Mebibyte, MiB, for
           example).  Tradition largely prevents use of these terms,
-          but you may seem them in some literature.</para>
+          but you may see them in some literature.</para>
         </section>
         <section>
           <info>
@@ -1766,7 +1766,7 @@
 	  <computeroutput>2^<superscript>8</superscript> =
 	  256</computeroutput> possible values; with our sign bit
 	  representation we could represent -127 thru 127 but with
-	  two's complement we can represent -127 thru 128.  This is
+	  two's complement we can represent -128 thru 127.  This is
 	  because we have removed the problem of having two zeros;
 	  consider that "negative zero" is <computeroutput>(~00000000
 	 +1)=(11111111+1)=00000000</computeroutput> (note

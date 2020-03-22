@@ -12,7 +12,7 @@
     <emphasis>text</emphasis> for historical reasons) and
     <emphasis>data</emphasis>.  We also know, however, an executable
     does not live its life in memory, but spends most of its life as a
-    file on a disk waiting to be loaded an run.  Since a file is, in
+    file on a disk waiting to be loaded a run.  Since a file is, in
     essence, simply a contiguous array of bits, all systems come up
     with methods of organising code and data within files for
     on-demand execution.  This file-format is generally referred to as
@@ -605,13 +605,13 @@
 	(e.g. <computeroutput>program.c</computeroutput>, which
 	<computeroutput>#include</computeroutput>s the header
 	file).</para>
-        <para>We create the library <application>ar</application>
+        <para>We create the library using <application>ar</application>
 	(short for "archive") command.  By convention static library
 	file names are prefixed with
 	<computeroutput>lib</computeroutput> and have the extension
 	<computeroutput>.a</computeroutput>.  The
 	<computeroutput>c</computeroutput> argument tells the program
-	to create the archive, and <computeroutput>a</computeroutput>
+	to create the archive, and <computeroutput>r</computeroutput>
 	tells archive to add the object files specified into the
 	library file.<footnote><para>Archives created with
 	<application>ar</application> pop up in a few different places
@@ -1034,7 +1034,7 @@
 	pointer</emphasis> (gp).  The ABI specifies that r1 should
 	always contain the gp value for a function.  This means that
 	when you call a function, it is the
-	<computeroutput>callees</computeroutput> job to save their gp
+	<computeroutput>callers</computeroutput> job to save their gp
 	value, set r1 to be the new value (from the function
 	descriptor) and <computeroutput>then</computeroutput> call the
 	function.</para>
