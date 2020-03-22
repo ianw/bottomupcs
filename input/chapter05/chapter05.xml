@@ -34,7 +34,7 @@
     to load from stored in a register.  For example, registers that
     are 32 bits wide can hold addresses in a register range from
     <computeroutput>0x00000000</computeroutput> to
-    <computeroutput>0xFFFFFFF</computeroutput>.
+    <computeroutput>0xFFFFFFFF</computeroutput>.
     2^<superscript>32</superscript> is equal to 4GB, so a 32 bit
     processor can load or store to up to 4GB of memory.</para>
     <section>
@@ -320,11 +320,11 @@
       64-bit address space.  Consider a 64-bit address space divided
       into 64 KiB pages creates
       2<superscript>64</superscript>/2<superscript>16</superscript> =
-      2<superscript>52</superscript> pages to be managed; assuming
+      2<superscript>48</superscript> pages to be managed; assuming
       each page requires an 8-byte pointer to a physical location a
       total of
-      2<superscript>52</superscript>*2<superscript>3</superscript> =
-      2<superscript>55</superscript> or 32 PiB of contiguous memory
+      2<superscript>48</superscript>*2<superscript>3</superscript> =
+      2<superscript>51</superscript> or 2 PiB of contiguous memory
       would be required just for the page table!  There are ways to
       split addressing up that avoid this which we will discuss
       later.</para>
@@ -662,7 +662,7 @@
           <title>Other page related faults</title>
         </info>
         <para>There are two other important faults that the TLB can
-	generally generate which help to mange accessed and dirty
+	generally generate which help to manage accessed and dirty
 	pages.  Each page generally contains an attribute in the form
 	of a single bit which flags if the page has been accessed or
 	is dirty.</para>
@@ -695,7 +695,7 @@
 	to manage pages.  The general concept is that a page has two
 	extra bits; the dirty bit and the accessed bit.  When the page
 	is put into the TLB, these bits are set to indicate that the
-	CPU should raise a fault .</para>
+	CPU should not raise a fault .</para>
         <para>When a process tries to reference memory, the hardware
 	does the usual translation process.  However, it also does an
 	extra check to see if the accessed flag is
@@ -1061,7 +1061,7 @@
         resolved by the OS and the processor becomes a software-loaded
         architecture.  However, the performance impact of disabling
         the HPW is so considerable it is very unlikely any benefit
-        could be gained from doing so</para>
+        could be gained from doing so.</para>
         <section xml:id="virtual_linear_pagetable">
           <info>
             <title>Virtual Linear Page-Table</title>
