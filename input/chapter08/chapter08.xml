@@ -1040,7 +1040,7 @@
 	do out of the ordinary operations.x</para>
         <para>We inspect the symbols with two different tools; in both
 	cases the binding is shown in the second column; the codes
-	should be quite straight forward (are are documented in the
+	should be quite straight forward (all are documented in the
 	tools <application>man</application> page).</para>
         <section>
           <info>
