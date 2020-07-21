@@ -1878,7 +1878,7 @@
 	available bits to represent the sign, mantissa and exponent of
 	a decimal number.  A decimal number is represented by
 	<computeroutput>sign &#xD7; significand &#xD7;
-	2^<superscript>exponent</superscript></computeroutput>.</para>
+	10^<superscript>exponent</superscript></computeroutput>.</para>
         <para>The sign bit equates to either
 	<computeroutput>1</computeroutput> or
 	<computeroutput>-1</computeroutput>.  Since we are working in
