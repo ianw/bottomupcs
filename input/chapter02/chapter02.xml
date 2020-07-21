@@ -31,7 +31,7 @@
         </caption>
       </mediaobject>
     </figure>
-    <para>To greatly simplify, a computer consists of a central
+    <para>To simplify, a computer consists of a central
     processing unit (CPU) attached to memory.  The figure above
     illustrates the general principle behind all computer
     operations.</para>
@@ -1137,7 +1137,7 @@ multiplex the output of the many sets, which can also add latency.
 	    be reflected by L1. This reduces the complexity of the L1
 	    and de-couples it from the snooping process allowing it to
 	    be faster.</para>
-          <para>Again, in general, most all modern high-end
+          <para>Most modern high-end
 	    (e.g. not targeted at embedded) processors have a
 	    write-through policy for the L1 cache, and a write-back
 	    policy for the lower level caches. There are several
