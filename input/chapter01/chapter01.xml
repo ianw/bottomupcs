@@ -1745,9 +1745,9 @@
 	  with a carry bit at the end (highlighted above).  By adding
 	  this back to the original we end up with the correct value,
 	  10</para>
-          <para>Again we still have the problem with two zeros being
-	  represented.  Again no modern computer uses one's
-	  complement, mostly because there is a better scheme.</para>
+          <para>As with the sign bit, one’s complement has two zeroes.
+		  No modern computer uses one's
+	  complement.</para>
         </section>
         <section>
           <info>
