@@ -1,0 +1,135 @@
+:root {
+    --csbu-blue: rgb(0, 76, 153);
+    max-width: inherit;
+}
+
+nav .title {
+    background-color: var(--tng-blue);
+    color: #ffffff;
+}
+
+html {
+    font-size: 1.5rem;
+    line-height: 1.5;
+}
+
+.book > header .fill {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 100%;
+    min-height: 640px;
+}
+
+.book > header {
+    display: table;
+    padding: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 2px solid #afafaf;
+    border-radius: 0;
+    text-align: right;
+}
+
+.book > header {
+    padding-bottom: 1rem;
+}
+
+.book > header .cover {
+    display: table-row;
+}
+
+.book > header .cover .image {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.book > header .cover .text {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.book > header h1 {
+    text-align: right;
+}
+
+/* ============================================================ */
+
+nav.top {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+    background-color: var(--csbu-blue);
+    color: #fffff8;
+    text-align: center;
+}
+
+nav.top .nav {
+    float: left;
+    margin-left: 0.25rem;
+    margin-left: 4rem;
+}
+
+nav.top .title {
+    font-family: var(--title-family);
+}
+
+nav.top .logo {
+    float: right;
+    font-size: 18px;
+    margin-right: 4rem;
+    display: inline-block;
+    padding-top: 6pt;
+}
+
+nav.bottom {
+    background-color: var();
+    border-top-style: solid;
+    border-top-width: 1px;
+    color: white;
+    display: grid;
+    font-size: 1.0rem;
+    margin-bottom: 0px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 3rem;
+    min-height: 1.0rem;
+    padding-bottom: 10px;
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+.navrow {
+    display: grid;
+    grid-template-columns: 33% 34% 33%;
+}
+
+.navleft {
+    text-align: left;
+    grid-column: 1;
+}
+
+.navmiddle {
+    text-align: center;
+    grid-column: 2;
+}
+
+.navright {
+    text-align: right;
+    grid-column: 3;
+}
+
+.navrow .navtitle {
+    font-size: 18px;
+}
+
+nav .version {
+    display: none;
+}
+
+nav a,
+nav a:visited {
+    color: #fffff8;
+}
