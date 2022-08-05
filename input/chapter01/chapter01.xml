@@ -1090,9 +1090,10 @@
       bits used by a computer (occasionally you will also see base 8
       used, for example for file permissions under UNIX).  We simply
       represent larger numbers of bits with more numerals.  For
-      example, a sixteen bit variable can be represented by 0xAB12,
-      and to find it in binary simply take each individual numeral,
-      convert it as per the table and join them all together (so
+      example, a sixteen bit variable can be represented by
+      <computeroutput>0xAB12</computeroutput>, and to find it in
+      binary simply take each individual numeral, convert it as per
+      the table and join them all together (so
       <computeroutput>0xAB12</computeroutput> ends up as the 16-bit
       binary number
       <computeroutput>1010101100010010</computeroutput>).  We can use
@@ -1845,7 +1846,7 @@
 	    <computeroutput>1</computeroutput> to maintain the same
 	    sign as the original.</para>
             <para>Thanks to two's complement, it is sufficient to take
-            the top bit of the exiting value and replace all the added
+            the top bit of the existing value and replace all the added
             bits with this value.  This processes is referred to as
             <emphasis>sign-extension</emphasis> and is usually handled
             by the compiler in situations as defined by the language
