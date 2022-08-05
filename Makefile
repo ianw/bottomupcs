@@ -20,9 +20,6 @@ svgs := $(gen_svgs) $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.svg))
 html.output=html.output
 html.css=css/csbu.css
 
-pdf.output=pdf.output
-epub.output=pdf.output
-
 #rules to convert xfigs to png/eps
 %.png : %.xfig
 	fig2dev -L png $< $@
@@ -33,40 +30,10 @@ epub.output=pdf.output
 %.svg : %.xfig
 	fig2dev -L svg $< $@
 
-.PHONY: pdf
-pdf: $(pdf.output)/csbu.pdf
-
-$(pdf.output)/csbu.pdf: $(svgs) $(pdf.output)/csbu.html $(pdf.output)/csbu.html
-	cd $(pdf.output); prince -o csbu.pdf csbu.html
-
-$(pdf.output)/csbu.html :  input/csbu.xml csbu-pdf.xsl $(html.css) $(sources) $(pngs) $(svgs)
-	rm -rf $(pdf.output)
-	mkdir -p $(pdf.output)
-
-	#copy all .c files into appropriate places
-	-cd input; \
-	 for dir in $(sourcedirs:input/%=%); do \
-		cp -r --parents $$dir/code/* ../$(pdf.output); \
-		cp -r --parents $$dir/figures/*.png ../$(pdf.output); \
-		cp -r --parents $$dir/images/*.png ../$(pdf.output); \
-		cp -r --parents $$dir/figures/*.svg ../$(pdf.output); \
-		cp -r --parents $$dir/images/*.svg ../$(pdf.output); \
-	done
-	xmllint --relaxng ./docbook-5.0.1/docbook.rng --xinclude --noent --output $(pdf.output)/csbu.xml ./input/csbu.xml
-	cd $(pdf.output); ../docbook-xslTNG-1.8.0/bin/docbook \
-	  --resources:. \
-	  ./csbu.xml -xsl:../csbu-pdf.xsl -o:csbu.html
-
-.PHONY: epub
-epub: $(epub.output)/csbu.epub
-
-$(epub.output)/csbu.epub: $(pdf.output)/csbu.html
-	cd $(epub.output); ebook-convert csbu.html csbu.epub
-
 .PHONY: html
 html: $(html.output)/index.html
 
-$(html.output)/index.html: input/csbu.xml csbu-html.xsl $(sources) $(pngs) $(svgs)
+$(html.output)/index.html: input/csbu.xml csbu-html.xsl $(sources) $(pngs) $(svgs) $(html.css)
 	rm -rf ./html.output
 	mkdir -p ./html.output
 
@@ -87,6 +54,24 @@ $(html.output)/index.html: input/csbu.xml csbu-html.xsl $(sources) $(pngs) $(svg
 	cp $(html.css) $(html.output)/css
 	cp google726839f49cefc875.html $(html.output)
 
+.PHONY: pdf
+pdf: $(html.output)/csbu.pdf
+
+$(html.output)/csbu.pdf: $(svgs) $(html.output)/csbu-print.html
+	cd $(html.output); prince -o csbu.pdf csbu-print.html
+
+$(html.output)/csbu-print.html : $(html.output)/index.html
+	cd $(html.output); ../docbook-xslTNG-1.8.0/bin/docbook \
+	  --resources:. \
+	  ./csbu.xml -xsl:../csbu-pdf.xsl -o:csbu-print.html
+
+.PHONY: epub
+epub: $(html.output)/csbu.epub
+
+$(html.output)/csbu.epub: $(html.output)/csbu-print.html
+	cd $(html.output); ebook-convert csbu-print.html csbu.epub
+
+
 .PHONY: clean
 clean:
-	rm -rf $(html.output) $(pdf.output) $(epub.output) $(gen_pngs) $(gen_epss) $(gen_svgs)
+	rm -rf $(html.output) $(gen_pngs) $(gen_epss) $(gen_svgs)
