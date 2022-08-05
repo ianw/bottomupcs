@@ -1,6 +1,6 @@
-ianw@lime:~/programs/csbu/wk7/code$ gcc -S hello.c
-ianw@lime:~/programs/csbu/wk7/code$ gcc -S function.c
-ianw@lime:~/programs/csbu/wk7/code$ cat function.s
+$ gcc -S hello.c
+$ gcc -S function.c
+$ cat function.s
         .file   "function.c"
         .pred.safe_across_calls p1-p5,p16-p63
         .section        .sdata,"aw",@progbits

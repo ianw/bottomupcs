@@ -1,4 +1,4 @@
-ianw@lime:~/programs/csbu/wk7/code$ readelf --symbols ./hello.o
+$ readelf --symbols ./hello.o
 
 Symbol table '.symtab' contains 15 entries:
    Num:    Value          Size Type    Bind   Vis      Ndx Name
@@ -18,7 +18,7 @@ Symbol table '.symtab' contains 15 entries:
     13: 0000000000000000     0 NOTYPE  GLOBAL DEFAULT  UND function
     14: 0000000000000000     0 NOTYPE  GLOBAL DEFAULT  UND exit
 
-ianw@lime:~/programs/csbu/wk7/code$ readelf --symbols ./function.o
+$ readelf --symbols ./function.o
 
 Symbol table '.symtab' contains 14 entries:
    Num:    Value          Size Type    Bind   Vis      Ndx Name
