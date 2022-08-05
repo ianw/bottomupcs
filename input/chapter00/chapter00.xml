@@ -326,20 +326,20 @@
           by device drivers with a file interface provided to a
           user.</phrase>
         </textobject>
+	<caption>
+          <para>File descriptors are an index into a file descriptor
+          table stored by the kernel.  The kernel creates a file
+          descriptor in response to an
+          <computeroutput>open</computeroutput> call and associates the
+          file descriptor with some abstraction of an underlying
+          file-like object, be that an actual hardware device, or a
+          file system or something else entirely.  Consequently a
+          process's <computeroutput>read</computeroutput> or
+          <computeroutput>write</computeroutput> calls that reference
+          that file descriptor are routed to the correct place by the
+          kernel to ultimately do something useful.</para>
+	</caption>
       </mediaobject>
-      <caption>
-        <para>File descriptors are an index into a file descriptor
-        table stored by the kernel.  The kernel creates a file
-        descriptor in response to an
-        <computeroutput>open</computeroutput> call and associates the
-        file descriptor with some abstraction of an underlying
-        file-like object, be that an actual hardware device, or a
-        file system or something else entirely.  Consequently a
-        process's <computeroutput>read</computeroutput> or
-        <computeroutput>write</computeroutput> calls that reference
-        that file descriptor are routed to the correct place by the
-        kernel to ultimately do something useful.</para>
-      </caption>
     </figure>
     <para>In short, the file descriptor is the gateway into the
     kernel's abstractions of underlying hardware.  An overall view of
@@ -531,15 +531,15 @@
 	  kernel which allows the output of one process to be consumed
 	  as the input to another.</phrase>
             </textobject>
+            <caption>
+              <para>The pipe is an in-memory buffer that connects two
+              processes together.  file descriptors point to the pipe
+              object, which buffers data sent to it (via a
+              <computeroutput>write</computeroutput>) to be
+              <emphasis>drained</emphasis> (via a
+              <computeroutput>read</computeroutput>).</para>
+            </caption>
           </mediaobject>
-          <caption>
-            <para>The pipe is an in-memory buffer that connects two
-            processes together.  file descriptors point to the pipe
-            object, which buffers data sent to it (via a
-            <computeroutput>write</computeroutput>) to be
-            <emphasis>drained</emphasis> (via a
-            <computeroutput>read</computeroutput>).</para>
-          </caption>
         </figure>
         <para>Writes to the pipe are stored by the kernel until a
         corresponding read from the other side

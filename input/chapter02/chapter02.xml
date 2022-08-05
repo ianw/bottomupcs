@@ -145,11 +145,11 @@
             <imageobject role="html">
               <imagedata fileref="chapter02/figures/block.png" format="PNG"/>
             </imageobject>
+            <caption>
+              <para>The CPU is made up of many different
+	      sub-components, each doing a dedicated task.</para>
+            </caption>
           </mediaobject>
-          <caption>
-            <para>The CPU is made up of many different
-	  sub-components, each doing a dedicated task.</para>
-          </caption>
         </figure>
         <para><xref linkend="inside_the_cpu"/> shows a very
 	      simple block diagram illustrating some of the main parts
@@ -536,12 +536,12 @@
           <imageobject role="html">
             <imagedata fileref="chapter02/figures/sets.png" format="PNG"/>
           </imageobject>
-        </mediaobject>
-        <caption>
-          <para>
-	    A given cache line may find a valid home in one
+          <caption>
+            <para>
+	      A given cache line may find a valid home in one
 	    of the shaded entries.</para>
-        </caption>
+          </caption>
+        </mediaobject>
       </figure>
       <para>During normal operation the processor is constantly
 	      asking the cache to check if a particular address is
@@ -763,15 +763,15 @@ multiplex the output of the many sets, which can also add latency.
             <imageobject role="html">
               <imagedata fileref="chapter02/figures/interrupt.png" format="PNG"/>
             </imageobject>
+            <caption>
+              <para>A generic overview of handling an interrupt.  The
+	      device raises the interrupt to the interrupt controller,
+	      which passes the information onto the processor.  The
+	      processor looks at its descriptor table, filled out by the
+	      operating system, to find the code to handle the
+	      fault.</para>
+            </caption>
           </mediaobject>
-          <caption>
-            <para>A generic overview of handling an interrupt.  The
-	    device raises the interrupt to the interrupt controller,
-	    which passes the information onto the processor.  The
-	    processor looks at its descriptor table, filled out by the
-	    operating system, to find the code to handle the
-	    fault.</para>
-          </caption>
         </figure>
         <para>Most drivers will split up handling of interrupts into
 	<emphasis>bottom</emphasis> and <emphasis>top</emphasis>
