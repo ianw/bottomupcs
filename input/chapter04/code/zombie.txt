@@ -24,6 +24,6 @@ int main(void)
         }
 }
 
-ianw@lime:~$ ps ax | grep [z]ombie
+$ ps ax | grep [z]ombie
 16168 pts/9    S      0:00 ./zombie
 16169 pts/9    Z      0:00 [zombie] <defunct>

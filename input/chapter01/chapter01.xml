@@ -1649,7 +1649,7 @@
             <title>Example of warnings when types are not matched</title>
           </info>
           <programlisting linenumbering="numbered" language="c"><xi:include href="code/types.c" parse="text" /></programlisting>
-          <programlisting linenumbering="numbered"><xi:include href="code/type-warnings.txt" parse="text"/></programlisting>
+          <programlisting linenumbering="numbered" language="shell"><xi:include href="code/type-warnings.txt" parse="text"/></programlisting>
         </example>
       </section>
     </section>
@@ -2045,7 +2045,7 @@
           <info>
             <title>Floats versus Doubles</title>
           </info>
-          <programlisting linenumbering="numbered"><xi:include href="code/floatvdouble.txt" parse="text"/></programlisting>
+          <programlisting linenumbering="numbered" language="shell"><xi:include href="code/floatvdouble.txt" parse="text"/></programlisting>
         </example>
         <para>A practical example is illustrated above.  Notice that
 	for the default 6 decimal places of precision given by

@@ -237,7 +237,7 @@
           <info>
             <title>Stack pointer example</title>
           </info>
-          <programlisting linenumbering="numbered"><xi:include href="code/sp.txt" parse="text"/></programlisting>
+          <programlisting linenumbering="numbered" language="shell"><xi:include href="code/sp.txt" parse="text"/></programlisting>
         </example>
         <para>Above we show a simple function allocating three
 	variables on the stack.  The disassembly illustrates the use
@@ -669,7 +669,7 @@
           <info>
             <title>Zombie example process</title>
           </info>
-          <programlisting linenumbering="numbered"><xi:include href="code/zombie.txt" parse="text"/></programlisting>
+          <programlisting linenumbering="numbered" language="shell"><xi:include href="code/zombie.txt" parse="text"/></programlisting>
         </example>
         <para>Above we create a zombie process.  The parent process
 	will sleep forever, whilst the child will exit after a few
