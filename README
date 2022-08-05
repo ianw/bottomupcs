@@ -9,30 +9,16 @@ or
 
 make pdf (output in csbu.pdf)
 
-Included for simplicity are the docbook dtds, xsl stylesheets and fop
-distribution.  You need some other things for this to work out of the
-box.  If you have the Debian packages
+Dependencies are roughly
 
-* java (1.8 ... 1.7 seems to have some issues with saxon; see
-    https://sourceforge.net/p/docbook/bugs/1373/ )
+* java
 * libxml2-utils
-* jing
 * transfig (for fig2dev)
-
-you will probably be ok.
+* pdf : prince - https://www.princexml.com/
+* epub : calibre
 
 I am always interested in contribution and feedback so please feel
 free to email
 
 Ian Wienand
 ian@wienand.org
-
----
-
-Notes
-
- 2016-01-13 : fop-2.0/lib/batik-all-svn-trunk.jar from [1] is included
- to work around [2]
-
-[1] https://svn.apache.org/repos/asf/xmlgraphics/fop/trunk/lib/batik-all-svn-trunk.jar
-[2] https://issues.apache.org/jira/browse/FOP-2489

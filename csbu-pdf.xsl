@@ -1,28 +1,16 @@
-<?xml version='1.0'?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <xsl:stylesheet
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:d="http://docbook.org/ns/docbook"
-    version="1.0">
+    xmlns:db="http://docbook.org/ns/docbook"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://www.w3.org/1999/xhtml"
+    exclude-result-prefixes="db xs"
+    version="3.0">
 
-<xsl:import href="docbook-xsl-ns-1.79.1/fo/docbook.xsl"/>
-<xsl:import href="docbook-xsl-ns-1.79.1/fo/highlight.xsl"/>
+<!-- This href has to point to your local copy
+     of the stylesheets. -->
 
-<xsl:param name="highlight.source" select="1" />
-
-<xsl:param name="body.font.family">Helvetica</xsl:param>
-<xsl:param name="body.font.size">11pt</xsl:param>
-
-<xsl:attribute-set name="monospace.verbatim.properties">
-  <xsl:attribute name="font-size">0.7em</xsl:attribute>
-</xsl:attribute-set>
-
-<xsl:param name="shade.verbatim" select="1" />
-<xsl:attribute-set name="shade.verbatim.style">
-  <xsl:attribute name="background-color">#F8F8F8</xsl:attribute>
-  <xsl:attribute name="border-width">0.5pt</xsl:attribute>
-  <xsl:attribute name="border-style">solid</xsl:attribute>
-  <xsl:attribute name="border-color">#575757</xsl:attribute>
-  <xsl:attribute name="padding">2pt</xsl:attribute>
-</xsl:attribute-set>
+<xsl:import href="docbook-xslTNG-1.8.0/xslt/print.xsl"/>
 
 </xsl:stylesheet>

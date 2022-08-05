@@ -20,13 +20,8 @@ svgs := $(gen_svgs) $(foreach dir,$(imagedirs),$(wildcard $(dir)/*.svg))
 html.output=html.output
 html.css=css/csbu.css
 
-docbook.xsl=docbook-xsl-ns-1.79.1
-
-saxon.classpath="../saxon65/saxon.jar:../$(docbook.xsl)/extensions/saxon65.jar:../xslthl-2.1.3/xslthl-2.1.3.jar"
 pdf.output=pdf.output
-fop=fop-2.0/fop
-
-epub.output=epub.output
+epub.output=pdf.output
 
 #rules to convert xfigs to png/eps
 %.png : %.xfig
@@ -38,67 +33,40 @@ epub.output=epub.output
 %.svg : %.xfig
 	fig2dev -L svg $< $@
 
-# general overview
-#
-#  use xmllint to build a .xml file (xmllint has xincludes support,
-#  saxon doesn't.  xinclude seems more reliable for finding souce
-#  files for .txt or .c examples)
-#
-#  use saxon to apply xsl and get final output
-
-#pdf depends on having eps figures around.
 .PHONY: pdf
-pdf: $(svgs) $(pdf.output)/csbu.pdf
+pdf: $(pdf.output)/csbu.pdf
 
-$(pdf.output)/csbu.pdf : $(pdf.output)/csbu.fo
-	$(fop) $< $@
+$(pdf.output)/csbu.pdf: $(svgs) $(pdf.output)/csbu.html $(pdf.output)/csbu.html
+	cd $(pdf.output); prince -o csbu.pdf csbu.html
 
-$(pdf.output)/csbu.fo: input/csbu.xml csbu-pdf.xsl $(sources)
-	rm -rf ./pdf.output
-	mkdir -p ./pdf.output
-	#a bit hacky; copy all svg to be alongside .fo for fop to find
-	#as image references are like "chapterXX/foo.svg"
-	cd input ; cp -r --parents $(svgs:input/%=%) ../$(pdf.output)
+$(pdf.output)/csbu.html :  input/csbu.xml csbu-pdf.xsl $(html.css) $(sources) $(pngs) $(svgs)
+	rm -rf $(pdf.output)
+	mkdir -p $(pdf.output)
+
+	#copy all .c files into appropriate places
+	-cd input; \
+	 for dir in $(sourcedirs:input/%=%); do \
+		cp -r --parents $$dir/code/* ../$(pdf.output); \
+		cp -r --parents $$dir/figures/*.png ../$(pdf.output); \
+		cp -r --parents $$dir/images/*.png ../$(pdf.output); \
+		cp -r --parents $$dir/figures/*.svg ../$(pdf.output); \
+		cp -r --parents $$dir/images/*.svg ../$(pdf.output); \
+	done
 	xmllint --xinclude --noent ./input/csbu.xml > $(pdf.output)/csbu.xml
-	jing ./docbook-5.0/rng/docbookxi.rng $(pdf.output)/csbu.xml
-	cd $(pdf.output) ; java -classpath $(saxon.classpath) \
-		-Dxslthl.config="file://$(CURDIR)/$(docbook.xsl)/highlighting/xslthl-config.xml" \
-		com.icl.saxon.StyleSheet \
-		-o csbu.fo \
-		csbu.xml ../csbu-pdf.xsl \
-                use.extensions=1
+	cd $(pdf.output); ../docbook-xslTNG-1.8.0/bin/docbook \
+	  --resources:. \
+	  /csbu.xml -xsl:../csbu-pdf.xsl -o:csbu.html
 
-epub: input/csbu.xml csbu-epub.xsl $(sources) $(pngs)
-	rm -rf $(epub.output)
-	mkdir -p $(epub.output) $(epub.output)/OEBPS
-	# copy once for the epub build process to read the images, it
-	# puts the output into $(epub.output)/OEBPS.  Copy again so
-	# the images are in the OEBPS directory for packaging.
-	-cd input; \
-	 for dir in $(sourcedirs:input/%=%); do \
-		cp -r --parents $$dir/figures/*.png ../$(epub.output); \
-		cp -r --parents $$dir/images/*.png ../$(epub.output); \
-	 done
-	-cd input; \
-	 for dir in $(sourcedirs:input/%=%); do \
-		cp -r --parents $$dir/figures/*.png ../$(epub.output)/OEBPS; \
-		cp -r --parents $$dir/images/*.png ../$(epub.output)/OEBPS; \
-	 done
-	xmllint --xinclude --noent ./input/csbu.xml > $(epub.output)/csbu.xml
-	jing ./docbook-5.0/rng/docbookxi.rng $(epub.output)/csbu.xml
-	cd $(epub.output) ; java -classpath $(saxon.classpath) \
-		-Dxslthl.config="file://$(CURDIR)/$(docbook.xsl)/highlighting/xslthl-config.xml" \
-		com.icl.saxon.StyleSheet \
-		csbu.xml ../csbu-epub.xsl \
-	        base.dir=OEBPS \
-                use.extensions=1
-	cd $(epub.output); \
-	zip -X0 csbu.epub mimetype; \
-	zip -r -X9 csbu.epub META-INF OEBPS
+.PHONY: epub
+epub: $(epub.output)/csbu.epub
 
+$(epub.output)/csbu.epub: $(pdf.output)/csbu.html
+	cd $(epub.output); ebook-convert csbu.html csbu.epub
 
-#html depends on having png figures around.
-html: input/csbu.xml csbu-html.xsl $(html.css) $(sources) $(pngs)
+.PHONY: html
+html: $(html.output)/index.html
+
+$(html.output)/index.html: input/csbu.xml csbu-html.xsl $(sources) $(pngs) $(svgs)
 	rm -rf ./html.output
 	mkdir -p ./html.output
 
@@ -108,18 +76,15 @@ html: input/csbu.xml csbu-html.xsl $(html.css) $(sources) $(pngs)
 		cp -r --parents $$dir/code/* ../$(html.output); \
 		cp -r --parents $$dir/figures/*.png ../$(html.output); \
 		cp -r --parents $$dir/images/*.png ../$(html.output); \
+		cp -r --parents $$dir/figures/*.svg ../$(html.output); \
+		cp -r --parents $$dir/images/*.svg ../$(html.output); \
 	done
 	xmllint --xinclude --noent ./input/csbu.xml > $(html.output)/csbu.xml
-	jing ./docbook-5.0/rng/docbookxi.rng $(html.output)/csbu.xml
-	cd $(html.output); java -classpath $(saxon.classpath) \
-		-Dxslthl.config="file://$(CURDIR)/$(docbook.xsl)/highlighting/xslthl-config.xml" \
-		com.icl.saxon.StyleSheet \
-		./csbu.xml ../csbu-html.xsl \
-		base.dir=. \
-		use.extensions=1 \
-		tablecolumns.extension=1
+	cd $(html.output); ../docbook-xslTNG-1.8.0/bin/docbook \
+	  --resources:. \
+	  ./csbu.xml -xsl:../csbu-html.xsl
 
-	cp $(html.css) draft.png $(html.output)
+	cp $(html.css) $(html.output)/css
 	cp google726839f49cefc875.html $(html.output)
 
 .PHONY: clean

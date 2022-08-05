@@ -1,40 +1,28 @@
-<?xml version='1.0'?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <xsl:stylesheet
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:d="http://docbook.org/ns/docbook"
-    version="1.0">
+    xmlns:db="http://docbook.org/ns/docbook"
+    xmlns:m="http://docbook.org/ns/docbook/modes"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://www.w3.org/1999/xhtml"
+    exclude-result-prefixes="db xs"
+    version="3.0">
 
-<xsl:import href="docbook-xsl-ns-1.79.1/xhtml5/chunk.xsl"/>
-<xsl:import href="docbook-xsl-ns-1.79.1/xhtml/highlight.xsl"/>
+<!-- This href has to point to your local copy
+     of the stylesheets. -->
 
-<xsl:param name="highlight.source" select="1" />
-<xsl:param name="chunker.output.encoding" select="'UTF-8'"/>
-<xsl:param name="make.clean.html" select="1"></xsl:param>
-<xsl:param name="use.id.as.filename" select="1"></xsl:param>
-<xsl:param name="chunk.first.selection" select="1"></xsl:param>
-<!--<xsl:param name="html.ext">.html</xsl:param>-->
-<xsl:param name="docbook.css.link" select="0"></xsl:param>
-<xsl:param name="docbook.css.source"></xsl:param>
-<xsl:param name="suppress.navigation" select="0"></xsl:param>
-<xsl:param name="html.stylesheet">csbu.css</xsl:param>
+<xsl:import href="docbook-xslTNG-1.8.0/xslt/docbook.xsl"/>
 
-<xsl:template name="user.footer.navigation">
-<script type="text/javascript">
+<xsl:param name="chunk" select="'index.html'" />
+<xsl:param name="chunk-output-base-uri" select="'.'" />
+<xsl:param name="verbatim-syntax-highlighter" select="'highlight.js'" />
+<xsl:param name="persistent-toc" select="'true'" />
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-25195980-1']);
-  _gaq.push(['_trackPageview']);
+<xsl:template match="*" mode="m:html-head-links">
+  <xsl:next-match/>
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-
+  <link rel="stylesheet" href="css/csbu.css"/>
 </xsl:template>
-
 
 </xsl:stylesheet>
