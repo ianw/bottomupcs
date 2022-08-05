@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<l:l10n xmlns:l="http://docbook.org/ns/docbook/l10n"
+         xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+         language="la"
+         english-language-name="Latin">
+   <l:gentext name="title">
+      <l:tokens key="abstract">Summarium</l:tokens>
+      <l:tokens key="acknowledgements">???ACKNOWLEDGEMENTS???</l:tokens>
+      <l:tokens key="bibliography">Conspectus librorum</l:tokens>
+      <l:tokens key="caution">Caveat</l:tokens>
+      <l:tokens key="danger">???DANGER???</l:tokens>
+      <l:tokens key="dedication">Dedicatoria</l:tokens>
+      <l:tokens key="glossary">Glossarium</l:tokens>
+      <l:tokens key="important">Grave</l:tokens>
+      <l:tokens key="index">Index</l:tokens>
+      <l:tokens key="legalnotice">Nuntius legalis</l:tokens>
+      <l:tokens key="listofequations">Index aequationum</l:tokens>
+      <l:tokens key="listofexamples">Index exemplorum</l:tokens>
+      <l:tokens key="listoffigures">Index descriptionum</l:tokens>
+      <l:tokens key="listofprocedures">Index progressiorum</l:tokens>
+      <l:tokens key="listoftables">Index tabularum</l:tokens>
+      <l:tokens key="listofunknown">Index ignotorum</l:tokens>
+      <l:tokens key="msgaud">Legentes</l:tokens>
+      <l:tokens key="msglevel">Libra</l:tokens>
+      <l:tokens key="msgorig">Fons</l:tokens>
+      <l:tokens key="note">Nota</l:tokens>
+      <l:tokens key="revhistory">Revisionum historia</l:tokens>
+      <l:tokens key="setindex">Complexi index</l:tokens>
+      <l:tokens key="tableofcontents">index rerum notabilium</l:tokens>
+      <l:tokens key="tip">Consilium</l:tokens>
+      <l:tokens key="warning">MONITUS</l:tokens>
+   </l:gentext>
+   <l:gentext name="label">
+      <l:tokens key="abstract">Summarium</l:tokens>
+      <l:tokens key="appendix">Additamentum</l:tokens>
+      <l:tokens key="chapter">Capitulum</l:tokens>
+      <l:tokens key="equation">Equatio</l:tokens>
+      <l:tokens key="example">Exemplum</l:tokens>
+      <l:tokens key="figure">Descriptio</l:tokens>
+      <l:tokens key="glossary">Glossarium</l:tokens>
+      <l:tokens key="glosssee">Cfr.</l:tokens>
+      <l:tokens key="glossseealso">Cfr. autem</l:tokens>
+      <l:tokens key="index">Index</l:tokens>
+      <l:tokens key="legalnotice">Nuntius legalis</l:tokens>
+      <l:tokens key="part">Pars</l:tokens>
+      <l:tokens key="procedure">Progressio</l:tokens>
+      <l:tokens key="reference">Mentio</l:tokens>
+      <l:tokens key="refname">Mentionis signum</l:tokens>
+      <l:tokens key="section">Sectio</l:tokens>
+      <l:tokens key="see">videtur</l:tokens>
+      <l:tokens key="seealso">videtur autem</l:tokens>
+      <l:tokens key="step">Peractio</l:tokens>
+      <l:tokens key="subfigure">???SUBFIGURE???</l:tokens>
+      <l:tokens key="subtable">???SUBTABLE???</l:tokens>
+      <l:tokens key="subequation">???SUBEQUATION???</l:tokens>
+      <l:tokens key="subexample">???SUBEXAMPLE???</l:tokens>
+      <l:tokens key="table">Tabula</l:tokens>
+      <l:tokens key="edited-by">Editum a</l:tokens>
+   </l:gentext>
+   <l:gentext name="xref">
+      <l:tokens key="abstract">Summarium</l:tokens>
+      <l:tokens key="appendix">Additamentum</l:tokens>
+      <l:tokens key="chapter">Capitulum</l:tokens>
+      <l:tokens key="equation">Equatio</l:tokens>
+      <l:tokens key="example">Exemplum</l:tokens>
+      <l:tokens key="figure">Descriptio</l:tokens>
+      <l:tokens key="glossary">Glossarium</l:tokens>
+      <l:tokens key="glosssee">Cfr.</l:tokens>
+      <l:tokens key="glossseealso">Cfr. autem</l:tokens>
+      <l:tokens key="index">Index</l:tokens>
+      <l:tokens key="legalnotice">Nuntius legalis</l:tokens>
+      <l:tokens key="part">Pars</l:tokens>
+      <l:tokens key="procedure">Progressio</l:tokens>
+      <l:tokens key="reference">Mentio</l:tokens>
+      <l:tokens key="refname">Mentionis signum</l:tokens>
+      <l:tokens key="section">Sectio</l:tokens>
+      <l:tokens key="see">videtur</l:tokens>
+      <l:tokens key="seealso">videtur autem</l:tokens>
+      <l:tokens key="sectioncalled">sectio vocata</l:tokens>
+      <l:tokens key="step">peractio</l:tokens>
+      <l:tokens key="table">Tabula</l:tokens>
+      <l:tokens key="edited-by">Editum a</l:tokens>
+   </l:gentext>
+   <l:gentext name="iso690"/>
+   <l:gentext name="label-separator">
+      <l:tokens key="_default"> </l:tokens>
+   </l:gentext>
+   <l:gentext name="number-separator">
+      <l:tokens key="_default">. </l:tokens>
+   </l:gentext>
+   <l:gentext name="intra-number-separator">
+      <l:tokens key="_default">.</l:tokens>
+   </l:gentext>
+   <l:gentext name="number-format">
+      <l:tokens key="_default">1</l:tokens>
+      <l:tokens key="appendix">A</l:tokens>
+      <l:tokens key="part">I</l:tokens>
+      <l:tokens key="reference">I</l:tokens>
+   </l:gentext>
+   <l:gentext name="separator">
+      <l:tokens key="author-sep">, </l:tokens>
+      <l:tokens key="author-sep2"> et </l:tokens>
+      <l:tokens key="author-seplast">, et </l:tokens>
+      <l:tokens key="refname-sep">, </l:tokens>
+      <l:tokens key="refpurpose-sep"> — </l:tokens>
+      <l:tokens key="term-sep">, </l:tokens>
+      <l:tokens key="term-sep2">, </l:tokens>
+      <l:tokens key="term-seplast">, </l:tokens>
+      <l:tokens key="glossterm-sep">, </l:tokens>
+      <l:tokens key="xlink-arclist-before"> [</l:tokens>
+      <l:tokens key="xlink-arclist-after">] </l:tokens>
+      <l:tokens key="xlink-arclist-titlesep">: </l:tokens>
+      <l:tokens key="xlink-arclist-sep">, </l:tokens>
+   </l:gentext>
+   <l:gentext name="style">
+      <l:tokens key="personname">first-last</l:tokens>
+   </l:gentext>
+   <l:gentext name="keycap"/>
+   <l:letters/>
+</l:l10n>

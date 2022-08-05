@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tmp:templates xmlns:tmp="http://docbook.org/ns/docbook/templates"
+               xmlns:db="http://docbook.org/ns/docbook"
+               xmlns="http://www.w3.org/1999/xhtml">
+
+<tmp:titlepage-division>
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h1><tmp:content/></h1>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h2><tmp:content/></h2>
+    </tmp:apply-templates>
+  </header>
+</tmp:titlepage-division>
+
+<tmp:titlepage-component>
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h1><tmp:content/></h1>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h2><tmp:content/></h2>
+    </tmp:apply-templates>
+  </header>
+</tmp:titlepage-component>
+
+<tmp:titlepage-component-nested>
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h2><tmp:content/></h2>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h3><tmp:content/></h3>
+    </tmp:apply-templates>
+  </header>
+</tmp:titlepage-component-nested>
+
+<db:set>
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h1><tmp:content/></h1>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h2><tmp:content/></h2>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:authorgroup">
+      <div class="authorgroup">
+        <tmp:apply-templates select="db:author">
+          <div class="author">
+            <h3><tmp:content/></h3>
+          </div>
+        </tmp:apply-templates>
+        <tmp:apply-templates select="db:editor">
+          <div class="author">
+            <h3><tmp:content/></h3>
+          </div>
+        </tmp:apply-templates>
+      </div>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:author">
+      <div class="author">
+        <h3><tmp:content/></h3>
+      </div>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:editor">
+      <div class="editor">
+        <h3><tmp:content/></h3>
+      </div>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:releaseinfo">
+      <p class="releaseinfo">
+        <tmp:content/>
+      </p>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:copyright"/>
+    <tmp:apply-templates select="db:pubdate">
+      <p class="pubdate"><tmp:content/></p>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:legalnotice"/>
+    <tmp:apply-templates select="db:abstract"/>
+    <tmp:apply-templates select="db:revhistory"/>
+  </header>
+</db:set>
+
+<db:book>
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h1><tmp:content/></h1>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h2><tmp:content/></h2>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:authorgroup">
+      <div class="authorgroup">
+        <tmp:apply-templates select="db:author">
+          <div class="author">
+            <h3><tmp:content/></h3>
+          </div>
+        </tmp:apply-templates>
+        <tmp:apply-templates select="db:editor">
+          <div class="author">
+            <h3><tmp:content/></h3>
+          </div>
+        </tmp:apply-templates>
+      </div>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:author">
+      <div class="author">
+        <h3><tmp:content/></h3>
+      </div>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:editor">
+      <div class="editor">
+        <h3><tmp:content/></h3>
+      </div>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:releaseinfo">
+      <p class="releaseinfo">
+        <tmp:content/>
+      </p>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:pubdate">
+      <p class="pubdate"><tmp:content/></p>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:legalnotice"/>
+    <tmp:apply-templates select="db:abstract"/>
+    <tmp:apply-templates select="db:revhistory"/>
+    <tmp:apply-templates select="db:copyright"/>
+  </header>
+</db:book>
+
+<db:part>
+  <tmp:insert ref="titlepage-division"/>
+</db:part>
+
+<db:reference>
+  <tmp:insert ref="titlepage-division"/>
+</db:reference>
+
+<db:partintro>
+  <tmp:insert ref="titlepage-component"/>
+</db:partintro>
+
+<db:article context="empty(parent::*)">
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h1><tmp:content/></h1>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h2><tmp:content/></h2>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:authorgroup">
+      <div class="authorgroup">
+        <tmp:apply-templates select="db:author">
+          <div class="author">
+            <h3><tmp:content/></h3>
+          </div>
+        </tmp:apply-templates>
+      </div>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:author">
+      <div class="author">
+        <h3><tmp:content/></h3>
+      </div>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:editor">
+      <div class="editor">
+        <h3><tmp:content/></h3>
+      </div>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:pubdate">
+      <p class="pubdate"><tmp:content/></p>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:copyright"/>
+    <tmp:apply-templates select="db:legalnotice"/>
+    <tmp:apply-templates select="db:abstract"/>
+  </header>
+</db:article>
+
+<db:article>
+  <tmp:insert ref="titlepage-component"/>
+</db:article>
+
+<db:topic context="empty(parent::*)">
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h1><tmp:content/></h1>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h2><tmp:content/></h2>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:authorgroup">
+      <div class="authorgroup">
+        <tmp:apply-templates select="db:author">
+          <div class="author">
+            <h3><tmp:content/></h3>
+          </div>
+        </tmp:apply-templates>
+      </div>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:author">
+      <div class="author">
+        <h3><tmp:content/></h3>
+      </div>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:editor">
+      <div class="editor">
+        <h3><tmp:content/></h3>
+      </div>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:pubdate">
+      <p class="pubdate"><tmp:content/></p>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:copyright"/>
+    <tmp:apply-templates select="db:legalnotice"/>
+    <tmp:apply-templates select="db:abstract"/>
+  </header>
+</db:topic>
+
+<db:topic>
+  <tmp:insert ref="titlepage-component"/>
+</db:topic>
+
+<db:preface context="parent::db:book">
+  <tmp:insert ref="titlepage-component-nested"/>
+</db:preface>
+
+<db:preface context="parent::db:article">
+  <tmp:insert ref="titlepage-component-nested"/>
+</db:preface>
+
+<db:preface>
+  <tmp:insert ref="titlepage-component"/>
+</db:preface>
+
+<db:chapter context="parent::db:book">
+  <tmp:insert ref="titlepage-component-nested"/>
+</db:chapter>
+
+<db:chapter>
+  <tmp:insert ref="titlepage-component"/>
+</db:chapter>
+
+<db:appendix context="parent::db:book">
+  <tmp:insert ref="titlepage-component-nested"/>
+</db:appendix>
+
+<db:appendix context="parent::db:article">
+  <tmp:insert ref="titlepage-component-nested"/>
+</db:appendix>
+
+<db:appendix>
+  <tmp:insert ref="titlepage-component"/>
+</db:appendix>
+
+<db:bibliography context="empty(parent::*)">
+  <tmp:insert ref="titlepage-component"/>
+</db:bibliography>
+
+<db:bibliography>
+  <tmp:insert ref="titlepage-component-nested"/>
+</db:bibliography>
+
+<db:bibliodiv context="empty(parent::*) or empty(parent::*/parent::*)">
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h2><tmp:content/></h2>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h3><tmp:content/></h3>
+    </tmp:apply-templates>
+  </header>
+</db:bibliodiv>
+
+<db:bibliodiv context="empty(parent::*) or empty(parent::*/parent::*)">
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h3><tmp:content/></h3>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h4><tmp:content/></h4>
+    </tmp:apply-templates>
+  </header>
+</db:bibliodiv>
+
+<db:glossary context="parent::db:book">
+  <tmp:insert ref="titlepage-component-nested"/>
+</db:glossary>
+
+<db:glossary context="parent::db:article">
+  <tmp:insert ref="titlepage-component-nested"/>
+</db:glossary>
+
+<db:glossary>
+  <tmp:insert ref="titlepage-component"/>
+</db:glossary>
+
+<db:index context="parent::db:book">
+  <tmp:insert ref="titlepage-component-nested"/>
+</db:index>
+
+<db:index context="parent::db:article">
+  <tmp:insert ref="titlepage-component-nested"/>
+</db:index>
+
+<db:index>
+  <tmp:insert ref="titlepage-component"/>
+</db:index>
+
+<db:setindex>
+  <tmp:insert ref="titlepage-component"/>
+</db:setindex>
+
+<db:acknowledgements context="parent::db:book">
+  <tmp:insert ref="titlepage-component-nested"/>
+</db:acknowledgements>
+
+<db:acknowledgements context="parent::db:article">
+  <tmp:insert ref="titlepage-component-nested"/>
+</db:acknowledgements>
+
+<db:acknowledgements>
+  <tmp:insert ref="titlepage-component"/>
+</db:acknowledgements>
+
+<db:dedication context="parent::db:book">
+  <tmp:insert ref="titlepage-component-nested"/>
+</db:dedication>
+
+<db:dedication context="parent::db:article">
+  <tmp:insert ref="titlepage-component-nested"/>
+</db:dedication>
+
+<db:dedication>
+  <tmp:insert ref="titlepage-component"/>
+</db:dedication>
+
+<db:colophon context="parent::db:book">
+  <tmp:insert ref="titlepage-component-nested"/>
+</db:colophon>
+
+<db:colophon context="parent::db:article">
+  <tmp:insert ref="titlepage-component-nested"/>
+</db:colophon>
+
+<db:colophon>
+  <tmp:insert ref="titlepage-component"/>
+</db:colophon>
+
+<db:sect1>
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h2><tmp:content/></h2>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h3><tmp:content/></h3>
+    </tmp:apply-templates>
+  </header>
+</db:sect1>
+
+<db:sect2>
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h3><tmp:content/></h3>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h4><tmp:content/></h4>
+    </tmp:apply-templates>
+  </header>
+</db:sect2>
+
+<db:sect3>
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h4><tmp:content/></h4>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h5><tmp:content/></h5>
+    </tmp:apply-templates>
+  </header>
+</db:sect3>
+
+<db:sect4>
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h5><tmp:content/></h5>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h6><tmp:content/></h6>
+    </tmp:apply-templates>
+  </header>
+</db:sect4>
+
+<!-- h5/h6 is small enough ... -->
+<db:sect5>
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h5><tmp:content/></h5>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h6><tmp:content/></h6>
+    </tmp:apply-templates>
+  </header>
+</db:sect5>
+
+<!-- h5/h6 is small enough ... -->
+<db:section
+    context="parent::db:section/parent::db:section/parent::db:section">
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h5><tmp:content/></h5>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h6><tmp:content/></h6>
+    </tmp:apply-templates>
+  </header>
+</db:section>
+
+<db:section
+    context="parent::db:section/parent::db:section">
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h4><tmp:content/></h4>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h5><tmp:content/></h5>
+    </tmp:apply-templates>
+  </header>
+</db:section>
+
+<db:section context="parent::db:section">
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h3><tmp:content/></h3>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h4><tmp:content/></h4>
+    </tmp:apply-templates>
+  </header>
+</db:section>
+
+<db:section>
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h2><tmp:content/></h2>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h3><tmp:content/></h3>
+    </tmp:apply-templates>
+  </header>
+</db:section>
+
+<db:refsect3>
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h4><tmp:content/></h4>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h5><tmp:content/></h5>
+    </tmp:apply-templates>
+  </header>
+</db:refsect3>
+
+<db:refsect2>
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h3><tmp:content/></h3>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h4><tmp:content/></h4>
+    </tmp:apply-templates>
+  </header>
+</db:refsect2>
+
+<db:refsect1>
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h2><tmp:content/></h2>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h3><tmp:content/></h3>
+    </tmp:apply-templates>
+  </header>
+</db:refsect1>
+
+<db:refsection
+    context="parent::db:refsection/parent::db:refsection/parent::db:refsection">
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h5><tmp:content/></h5>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h6><tmp:content/></h6>
+    </tmp:apply-templates>
+  </header>
+</db:refsection>
+
+<db:refsection
+    context="parent::db:refsection/parent::db:refsection">
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h4><tmp:content/></h4>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h5><tmp:content/></h5>
+    </tmp:apply-templates>
+  </header>
+</db:refsection>
+
+<db:refsection context="parent::db:refsection">
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h3><tmp:content/></h3>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h4><tmp:content/></h4>
+    </tmp:apply-templates>
+  </header>
+</db:refsection>
+
+<db:refsection>
+  <header>
+    <tmp:apply-templates select="db:title">
+      <h2><tmp:content/></h2>
+    </tmp:apply-templates>
+    <tmp:apply-templates select="db:subtitle">
+      <h3><tmp:content/></h3>
+    </tmp:apply-templates>
+  </header>
+</db:refsection>
+
+<db:formalpara>
+  <tmp:apply-templates select="db:title">
+    <tmp:content/>
+  </tmp:apply-templates>
+</db:formalpara>
+
+<db:formalpara>
+  <tmp:apply-templates select="db:title">
+    <tmp:content/>
+  </tmp:apply-templates>
+</db:formalpara>
+
+<tmp:admonition>
+  <header>
+    <tmp:apply-templates select="db:title">
+      <div class="title"><tmp:content/></div>
+    </tmp:apply-templates>
+  </header>
+</tmp:admonition>
+
+<db:tip>
+  <tmp:insert ref="admonition"/>
+</db:tip>
+
+<db:note>
+  <tmp:insert ref="admonition"/>
+</db:note>
+
+<db:important>
+  <tmp:insert ref="admonition"/>
+</db:important>
+
+<db:caution>
+  <tmp:insert ref="admonition"/>
+</db:caution>
+
+<db:warning>
+  <tmp:insert ref="admonition"/>
+</db:warning>
+
+<db:danger>
+  <tmp:insert ref="admonition"/>
+</db:danger>
+
+<tmp:biblioset-article>
+  <tmp:apply-templates select="db:biblioset[@relation='article']">
+    <span class="biblioset article">
+      <tmp:apply-templates select="db:title"><tmp:content/>. </tmp:apply-templates>
+      <tmp:apply-templates select="db:subtitle"><tmp:content/>. </tmp:apply-templates>
+      <tmp:apply-templates select="db:author"><tmp:content/>. </tmp:apply-templates>
+      <tmp:apply-templates select="db:pubdate"><tmp:content/>. </tmp:apply-templates>
+      <tmp:apply-templates select="db:copyright"><tmp:content/>. </tmp:apply-templates>
+      <tmp:apply-templates select="db:pagenums"><tmp:content/>. </tmp:apply-templates>
+    </span>
+  </tmp:apply-templates>
+</tmp:biblioset-article>
+
+<tmp:biblioset-journal>
+  <tmp:apply-templates select="db:biblioset[@relation='journal']">
+    <span class="biblioset journal">
+      <tmp:apply-templates select="db:title"><tmp:content/>. </tmp:apply-templates>
+      <tmp:apply-templates select="db:subtitle"><tmp:content/>. </tmp:apply-templates>
+      <tmp:apply-templates select="db:author"><tmp:content/>. </tmp:apply-templates>
+      <tmp:apply-templates select="db:pubdate"><tmp:content/>. </tmp:apply-templates>
+      <tmp:apply-templates select="db:copyright"><tmp:content/>. </tmp:apply-templates>
+      <tmp:apply-templates select="db:pagenums"><tmp:content/>. </tmp:apply-templates>
+    </span>
+  </tmp:apply-templates>
+</tmp:biblioset-journal>
+
+<db:biblioentry>
+  <tmp:apply-templates select="db:abbrev">[<tmp:content/>] </tmp:apply-templates>
+  <tmp:insert ref="biblioset-article"/>
+  <tmp:insert ref="biblioset-journal"/>
+  <tmp:apply-templates select="db:title"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:subtitle"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:address"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:artpagenums"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:author"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:authorinitials"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:collab"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:confgroup"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:contractnum"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:contractsponsor"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:copyright"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:date"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:edition"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:editor"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates
+      select="db:biblioid[@class='isbn']"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates
+      select="db:biblioid[@class='issn']"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:issenum"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:orgname"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:othercredit"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:pagenums"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:productname"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:productnumber"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:pubdate"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:publisher">
+    <tmp:apply-templates select="db:publishername"><tmp:content/>. </tmp:apply-templates>
+    <tmp:apply-templates select="db:address"><tmp:content/>. </tmp:apply-templates>
+  </tmp:apply-templates>
+  <tmp:apply-templates select="db:publishername"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates
+      select="db:biblioid[@class='pubsnumber']"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:releaseinfo"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:seriesvolnums"><tmp:content/>. </tmp:apply-templates>
+  <tmp:apply-templates select="db:volumenum"><tmp:content/>. </tmp:apply-templates>
+</db:biblioentry>
+
+</tmp:templates>

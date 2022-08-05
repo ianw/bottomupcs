@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<l:l10n xmlns:l="http://docbook.org/ns/docbook/l10n"
+         xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+         language="th"
+         english-language-name="Thai">
+   <l:gentext name="title">
+      <l:tokens key="abstract">บทคัดย่อ</l:tokens>
+      <l:tokens key="acknowledgements">???ACKNOWLEDGEMENTS???</l:tokens>
+      <l:tokens key="bibliography">บรรณานุกรม</l:tokens>
+      <l:tokens key="caution">คำเตือน</l:tokens>
+      <l:tokens key="danger">???DANGER???</l:tokens>
+      <l:tokens key="dedication">คำอุทิศ</l:tokens>
+      <l:tokens key="glossary">อภิธานศัพท์</l:tokens>
+      <l:tokens key="important">ข้อควรจำ</l:tokens>
+      <l:tokens key="index">ดรรชนี</l:tokens>
+      <l:tokens key="legalnotice">ข้อผูกพันตามกฎหมาย</l:tokens>
+      <l:tokens key="listofequations">สารบัญสมการ</l:tokens>
+      <l:tokens key="listofexamples">สารบัญตัวอย่าง</l:tokens>
+      <l:tokens key="listoffigures">สารบัญรูป</l:tokens>
+      <l:tokens key="listofprocedures">???LISTOFPROCEDURES???</l:tokens>
+      <l:tokens key="listoftables">สารบัญตาราง</l:tokens>
+      <l:tokens key="listofunknown">สารบัญอื่น ๆ</l:tokens>
+      <l:tokens key="msgaud">ผู้อ่าน</l:tokens>
+      <l:tokens key="msglevel">ระดับ</l:tokens>
+      <l:tokens key="msgorig">ที่มา</l:tokens>
+      <l:tokens key="note">หมายเหตุ</l:tokens>
+      <l:tokens key="revhistory">บันทึกรุ่น</l:tokens>
+      <l:tokens key="setindex">สารบัญชุด</l:tokens>
+      <l:tokens key="tableofcontents">สารบัญ</l:tokens>
+      <l:tokens key="tip">คำแนะนำ</l:tokens>
+      <l:tokens key="warning">คำเตือน</l:tokens>
+   </l:gentext>
+   <l:gentext name="label">
+      <l:tokens key="abstract">บทคัดย่อ</l:tokens>
+      <l:tokens key="appendix">ภาคผนวก</l:tokens>
+      <l:tokens key="chapter">บทที่</l:tokens>
+      <l:tokens key="equation">สมการ</l:tokens>
+      <l:tokens key="example">ตัวอย่าง</l:tokens>
+      <l:tokens key="figure">รูป</l:tokens>
+      <l:tokens key="glossary">อภิธานศัพท์</l:tokens>
+      <l:tokens key="glosssee">ดู</l:tokens>
+      <l:tokens key="glossseealso">ดูเพิ่มเติม</l:tokens>
+      <l:tokens key="index">ดรรชนี</l:tokens>
+      <l:tokens key="legalnotice">ข้อผูกพันตามกฎหมาย</l:tokens>
+      <l:tokens key="part">ภาค</l:tokens>
+      <l:tokens key="procedure">ระเบียบการ</l:tokens>
+      <l:tokens key="reference">หนังสืออ้างอิง</l:tokens>
+      <l:tokens key="refname">ชื่อ</l:tokens>
+      <l:tokens key="section">ตอนที่</l:tokens>
+      <l:tokens key="see">ดู</l:tokens>
+      <l:tokens key="seealso">ดูเพิ่มเติม</l:tokens>
+      <l:tokens key="step">ลำดับ</l:tokens>
+      <l:tokens key="subfigure">???SUBFIGURE???</l:tokens>
+      <l:tokens key="subtable">???SUBTABLE???</l:tokens>
+      <l:tokens key="subequation">???SUBEQUATION???</l:tokens>
+      <l:tokens key="subexample">???SUBEXAMPLE???</l:tokens>
+      <l:tokens key="table">ตาราง</l:tokens>
+      <l:tokens key="edited-by">เรียบเรียงโดย</l:tokens>
+   </l:gentext>
+   <l:gentext name="xref">
+      <l:tokens key="abstract">บทคัดย่อ</l:tokens>
+      <l:tokens key="appendix">ภาคผนวก</l:tokens>
+      <l:tokens key="chapter">บทที่</l:tokens>
+      <l:tokens key="equation">สมการ</l:tokens>
+      <l:tokens key="example">ตัวอย่าง</l:tokens>
+      <l:tokens key="figure">รูป</l:tokens>
+      <l:tokens key="glossary">อภิธานศัพท์</l:tokens>
+      <l:tokens key="glosssee">ดู</l:tokens>
+      <l:tokens key="glossseealso">ดูเพิ่มเติม</l:tokens>
+      <l:tokens key="index">ดรรชนี</l:tokens>
+      <l:tokens key="legalnotice">ข้อผูกพันตามกฎหมาย</l:tokens>
+      <l:tokens key="part">ภาค</l:tokens>
+      <l:tokens key="procedure">ระเบียบการ</l:tokens>
+      <l:tokens key="reference">หนังสืออ้างอิง</l:tokens>
+      <l:tokens key="refname">ชื่อ</l:tokens>
+      <l:tokens key="section">ตอนที่</l:tokens>
+      <l:tokens key="see">ดู</l:tokens>
+      <l:tokens key="seealso">ดูเพิ่มเติม</l:tokens>
+      <l:tokens key="sectioncalled">หัวข้อ</l:tokens>
+      <l:tokens key="step">ลำดับ</l:tokens>
+      <l:tokens key="table">ตาราง</l:tokens>
+      <l:tokens key="edited-by">เรียบเรียงโดย</l:tokens>
+   </l:gentext>
+   <l:gentext name="iso690"/>
+   <l:gentext name="label-separator">
+      <l:tokens key="_default"> </l:tokens>
+   </l:gentext>
+   <l:gentext name="number-separator">
+      <l:tokens key="_default">. </l:tokens>
+   </l:gentext>
+   <l:gentext name="intra-number-separator">
+      <l:tokens key="_default">.</l:tokens>
+   </l:gentext>
+   <l:gentext name="number-format">
+      <l:tokens key="_default">1</l:tokens>
+      <l:tokens key="appendix">A</l:tokens>
+      <l:tokens key="part">I</l:tokens>
+      <l:tokens key="reference">I</l:tokens>
+   </l:gentext>
+   <l:gentext name="separator">
+      <l:tokens key="author-sep">, </l:tokens>
+      <l:tokens key="author-sep2"> และ </l:tokens>
+      <l:tokens key="author-seplast">, และ </l:tokens>
+      <l:tokens key="refname-sep">, </l:tokens>
+      <l:tokens key="refpurpose-sep"> — </l:tokens>
+      <l:tokens key="term-sep">, </l:tokens>
+      <l:tokens key="term-sep2">, </l:tokens>
+      <l:tokens key="term-seplast">, </l:tokens>
+      <l:tokens key="glossterm-sep">, </l:tokens>
+      <l:tokens key="xlink-arclist-before"> [</l:tokens>
+      <l:tokens key="xlink-arclist-after">] </l:tokens>
+      <l:tokens key="xlink-arclist-titlesep">: </l:tokens>
+      <l:tokens key="xlink-arclist-sep">, </l:tokens>
+   </l:gentext>
+   <l:gentext name="style">
+      <l:tokens key="personname">first-last</l:tokens>
+   </l:gentext>
+   <l:gentext name="keycap"/>
+   <l:letters/>
+</l:l10n>

@@ -1,0 +1,56 @@
+/* DocBook xslTNG version 1.8.0
+ *
+ * This is xlink.css providing support for multi-targeted links.
+ * The "js" class is added by JavaScript. This enables graceful
+ * fallback in the non-JS case.
+ *
+ * See https://xsltng.docbook.org/
+ *
+ */
+
+.xlink .source {
+    border-bottom: 1px dotted black;
+    cursor: pointer;
+}
+
+.xlink-arc-list {
+    display: inline;
+    font-style: normal;
+    cursor: pointer;
+    font-size: 70%;
+}
+
+.xlink-arc-list.js::before {
+    content: " "; /* thin space */
+}
+
+.nhrefs.js .xlink-arc-delim {
+    display: none;
+}
+
+.nhrefs.js {
+    font-style: normal;
+    display: none;
+    margin-left: 4px;
+    margin-right: 0;
+    padding-bottom: 1em;
+    border: 2px solid var(--primary-variant-color);
+    border-radius: 4px;
+    z-index: 2;
+    background-color: var(--primary-color);
+    color: var(--on-primary-color);
+}
+
+.nhrefs.js .arc {
+    display: list-item;
+    margin-left: 1.5em;
+    padding-right: 1em;
+}
+
+.nhrefs.js .xlink-arc-title {
+    display: block;
+    background-color: #afafaf;
+    margin-left: 0;
+    margin-bottom: 0.5em;
+    text-align: center;
+}
