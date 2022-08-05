@@ -3,13 +3,11 @@ Computer Science from the Bottom Up
 
 You should be able to make the course materials by typing
 
-make html (output in ./html directory)
+``make <html|pdf|epub>``
 
-or
+Output is in ``html.output``
 
-make pdf (output in csbu.pdf)
-
-Dependencies are roughly
+Dependencies are roughly:
 
 * java
 * libxml2-utils
