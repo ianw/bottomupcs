@@ -52,10 +52,10 @@ $(pdf.output)/csbu.html :  input/csbu.xml csbu-pdf.xsl $(html.css) $(sources) $(
 		cp -r --parents $$dir/figures/*.svg ../$(pdf.output); \
 		cp -r --parents $$dir/images/*.svg ../$(pdf.output); \
 	done
-	xmllint --xinclude --noent ./input/csbu.xml > $(pdf.output)/csbu.xml
+	xmllint --relaxng ./docbook-5.0.1/docbook.rng --xinclude --noent --output $(pdf.output)/csbu.xml ./input/csbu.xml
 	cd $(pdf.output); ../docbook-xslTNG-1.8.0/bin/docbook \
 	  --resources:. \
-	  /csbu.xml -xsl:../csbu-pdf.xsl -o:csbu.html
+	  ./csbu.xml -xsl:../csbu-pdf.xsl -o:csbu.html
 
 .PHONY: epub
 epub: $(epub.output)/csbu.epub
@@ -79,7 +79,7 @@ $(html.output)/index.html: input/csbu.xml csbu-html.xsl $(sources) $(pngs) $(svg
 		cp -r --parents $$dir/figures/*.svg ../$(html.output); \
 		cp -r --parents $$dir/images/*.svg ../$(html.output); \
 	done
-	xmllint --xinclude --noent ./input/csbu.xml > $(html.output)/csbu.xml
+	xmllint --relaxng ./docbook-5.0.1/docbook.rng --xinclude --noent --output $(html.output)/csbu.xml ./input/csbu.xml
 	cd $(html.output); ../docbook-xslTNG-1.8.0/bin/docbook \
 	  --resources:. \
 	  ./csbu.xml -xsl:../csbu-html.xsl
