@@ -378,16 +378,22 @@
           memory as an aid to quickly correlate the relationship
           between number-of-bits and "human" sizes.  For example, we
           can quickly calculate that a 32 bit computer can address up
-          to four gigabytes of memory by noting the recombination of
-          2<superscript>2 &#43; 30</superscript> into 4 &#215;
-          2<superscript>30</superscript>, where we know
-          2<superscript>30</superscript> is a gigabyte.  A 64-bit
-          value could similarly address up to 16 exabytes
-          (2<superscript>4</superscript> &#215;
-          2<superscript>60</superscript>); you might be interested in
-          working out just how big a number this is.  To get a feel
-          for how big that number is, calculate how long it would take
-          to count to
+          to four gigabytes of memory by noting that
+          <computeroutput>2<superscript>32</superscript></computeroutput>
+          can recombine to <computeroutput>2<superscript>(2 &#43;
+          30)</superscript></computeroutput> or
+          <computeroutput>2<superscript>2</superscript> &#215;
+          2<superscript>30</superscript></computeroutput>, which is
+          just <computeroutput>4 &#215;
+          2<superscript>30</superscript></computeroutput>, where we
+          know
+          <computeroutput>2<superscript>30</superscript></computeroutput>
+          is a gigabyte.  A 64-bit value could similarly address up to
+          16 exabytes (<computeroutput>2<superscript>4</superscript>
+          &#215; 2<superscript>60</superscript></computeroutput>); you
+          might be interested in working out just how big a number
+          this is.  To get a feel for how big that number is,
+          calculate how long it would take to count to
           <computeroutput>2<superscript>64</superscript></computeroutput>
           if you incremented once per second.</para>
         </section>
