@@ -268,10 +268,11 @@
           </info>
           <para>Numbers do not fit into bytes; hopefully your bank
           balance in dollars will need more range than can fit into
-          one byte!  Modern architectures are at least <emphasis>32
-          bit</emphasis> computers.  This means they work with 4 bytes
-          at a time when processing and reading or writing to memory.
-          We refer to 4 bytes as a <emphasis>word</emphasis>; this is
+          one byte!  All most all general-purpose architectures are at
+          least <emphasis>32 bit</emphasis> computers.  This means
+          that their internal registers are 32-bits (or 4-bytes) wide,
+          and that operations generally work on 32-bit values.  We
+          refer to 4 bytes as a <emphasis>word</emphasis>; this is
           analogous to language where letters (bits) make up words in
           a sentence, except in computing every word has the same
           size!  The size of a C <computeroutput>int</computeroutput>
