@@ -353,8 +353,8 @@
           <imageobject>
             <imagedata fileref="chapter08/figures/got-plt.eps" format="EPS"/>
           </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="figures/got-plt.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+          <imageobject >
+            <imagedata fileref="figures/got-plt.svg" format="SVG" />
           </imageobject>
           <imageobject role="html">
             <imagedata fileref="chapter08/figures/got-plt.png" format="PNG"/>
@@ -842,8 +842,8 @@
             <imageobject>
               <imagedata fileref="chapter08/figures/libs.eps" format="EPS"/>
             </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="figures/libs.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            <imageobject >
+              <imagedata fileref="figures/libs.svg" format="SVG" />
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="chapter08/figures/libs.png" format="PNG"/>

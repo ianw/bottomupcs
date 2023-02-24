@@ -83,8 +83,8 @@
             <imageobject>
               <imagedata fileref="chapter05/figures/canonical.eps" format="EPS"/>
             </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="figures/canonical.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            <imageobject >
+              <imagedata fileref="figures/canonical.svg" format="SVG" />
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="chapter05/figures/canonical.png" format="PNG"/>
@@ -159,8 +159,8 @@
         <imageobject>
           <imagedata fileref="chapter05/figures/page.eps" format="EPS"/>
         </imageobject>
-        <imageobject role="fo">
-          <imagedata fileref="figures/page.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+        <imageobject >
+          <imagedata fileref="figures/page.svg" format="SVG" />
         </imageobject>
         <imageobject role="html">
           <imagedata fileref="chapter05/figures/page.png" format="PNG"/>
@@ -292,8 +292,8 @@
           <imageobject>
             <imagedata fileref="chapter05/figures/virtaddress.eps" format="EPS"/>
           </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="figures/virtaddress.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+          <imageobject >
+            <imagedata fileref="figures/virtaddress.svg" format="SVG" />
           </imageobject>
           <imageobject role="html">
             <imagedata fileref="chapter05/figures/virtaddress.png" format="PNG"/>
@@ -568,8 +568,8 @@
             <imageobject>
               <imagedata fileref="chapter05/figures/segmentation.eps" format="EPS"/>
             </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="figures/segmentation.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            <imageobject >
+              <imagedata fileref="figures/segmentation.svg" format="SVG" />
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="chapter05/figures/segmentation.png" format="PNG"/>
@@ -819,8 +819,8 @@
           <imageobject>
             <imagedata fileref="chapter05/figures/linux-layout.eps" format="EPS"/>
           </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="figures/linux-layout.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+          <imageobject >
+            <imagedata fileref="figures/linux-layout.svg" format="SVG" />
           </imageobject>
           <imageobject role="html">
             <imagedata fileref="chapter05/figures/linux-layout.png" format="PNG"/>
@@ -867,8 +867,8 @@
           <imageobject>
             <imagedata fileref="chapter05/figures/threelevel.eps" format="EPS"/>
           </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="figures/threelevel.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+          <imageobject >
+            <imagedata fileref="figures/threelevel.svg" format="SVG" />
           </imageobject>
           <imageobject role="html">
             <imagedata fileref="chapter05/figures/threelevel.png" format="PNG"/>
@@ -955,8 +955,8 @@
             <imageobject>
               <imagedata fileref="chapter05/figures/ia64-regions-keys.eps" format="EPS"/>
             </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="figures/ia64-regions-keys.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            <imageobject >
+              <imagedata fileref="figures/ia64-regions-keys.svg" format="SVG" />
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="chapter05/figures/ia64-regions-keys.png" format="PNG"/>
@@ -988,8 +988,8 @@
             <imageobject>
               <imagedata fileref="chapter05/figures/ia64-tlb-translation.eps" format="EPS"/>
             </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="figures/ia64-tlb-translation.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            <imageobject >
+              <imagedata fileref="figures/ia64-tlb-translation.svg" format="SVG" />
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="chapter05/figures/ia64-tlb-translation.png" format="PNG"/>
@@ -1088,8 +1088,8 @@
               <imageobject>
                 <imagedata fileref="chapter05/figures/hierarchical-pt.eps" format="EPS"/>
               </imageobject>
-              <imageobject role="fo">
-                <imagedata fileref="figures/hierarchical-pt.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+              <imageobject >
+                <imagedata fileref="figures/hierarchical-pt.svg" format="SVG" />
               </imageobject>
               <imageobject role="html">
                 <imagedata fileref="chapter05/figures/hierarchical-pt.png" format="PNG"/>
@@ -1124,8 +1124,8 @@
               <imageobject>
                 <imagedata fileref="chapter05/figures/ia64-short-format.eps" format="EPS"/>
               </imageobject>
-              <imageobject role="fo">
-                <imagedata fileref="figures/ia64-short-format.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+              <imageobject >
+                <imagedata fileref="figures/ia64-short-format.svg" format="SVG" />
               </imageobject>
               <imageobject role="html">
                 <imagedata fileref="chapter05/figures/ia64-short-format.png" format="PNG"/>
@@ -1149,8 +1149,8 @@
               <imageobject>
                 <imagedata fileref="chapter05/figures/ia64-ptes.eps" format="EPS"/>
               </imageobject>
-              <imageobject role="fo">
-                <imagedata fileref="figures/ia64-ptes.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+              <imageobject >
+                <imagedata fileref="figures/ia64-ptes.svg" format="SVG" />
               </imageobject>
               <imageobject role="html">
                 <imagedata fileref="chapter05/figures/ia64-ptes.png" format="PNG"/>

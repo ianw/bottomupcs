@@ -15,10 +15,10 @@
         <imageobject>
           <imagedata fileref="chapter02/figures/computer.eps" format="EPS"/>
         </imageobject>
-        <imageobject role="fo">
-          <imagedata fileref="figures/computer.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+        <imageobject>
+          <imagedata fileref="figures/computer.svg" format="SVG" />
         </imageobject>
-        <imageobject role="html">
+        <imageobject>
           <imagedata fileref="chapter02/figures/computer.png" format="PNG"/>
         </imageobject>
         <caption>
@@ -139,8 +139,8 @@
             <imageobject>
               <imagedata fileref="chapter02/figures/block.eps" format="EPS"/>
             </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="figures/block.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            <imageobject>
+              <imagedata fileref="figures/block.svg" format="SVG" />
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="chapter02/figures/block.png" format="PNG"/>
@@ -530,8 +530,8 @@
           <imageobject>
             <imagedata fileref="chapter02/figures/sets.eps" format="EPS"/>
           </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="figures/sets.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+          <imageobject >
+            <imagedata fileref="figures/sets.svg" format="SVG" />
           </imageobject>
           <imageobject role="html">
             <imagedata fileref="chapter02/figures/sets.png" format="PNG"/>
@@ -647,8 +647,8 @@
             <imageobject>
               <imagedata fileref="chapter02/figures/tags.eps" format="EPS"/>
             </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="figures/tags.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            <imageobject >
+              <imagedata fileref="figures/tags.svg" format="SVG" />
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="chapter02/figures/tags.png" format="PNG"/>
@@ -757,8 +757,8 @@ multiplex the output of the many sets, which can also add latency.
             <imageobject>
               <imagedata fileref="chapter02/figures/interrupt.eps" format="EPS"/>
             </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="figures/interrupt.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            <imageobject >
+              <imagedata fileref="figures/interrupt.svg" format="SVG" />
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="chapter02/figures/interrupt.png" format="PNG"/>
@@ -960,8 +960,8 @@ multiplex the output of the many sets, which can also add latency.
             <imageobject>
               <imagedata fileref="chapter02/images/uhci.eps" format="EPS"/>
             </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="images/uhci.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            <imageobject >
+              <imagedata fileref="images/uhci.svg" format="SVG" />
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="chapter02/images/uhci.png" format="PNG"/>
@@ -1310,8 +1310,8 @@ multiplex the output of the many sets, which can also add latency.
             <imageobject>
               <imagedata fileref="chapter02/figures/hypercube.eps" format="EPS"/>
             </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="figures/hypercube.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            <imageobject >
+              <imagedata fileref="figures/hypercube.svg" format="SVG" />
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="chapter02/figures/hypercube.png" format="PNG"/>
@@ -1473,8 +1473,8 @@ multiplex the output of the many sets, which can also add latency.
           <imageobject>
             <imagedata fileref="chapter02/figures/memorder.eps" format="EPS"/>
           </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="figures/memorder.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+          <imageobject >
+            <imagedata fileref="figures/memorder.svg" format="SVG" />
           </imageobject>
           <imageobject role="html">
             <imagedata fileref="chapter02/figures/memorder.png" format="PNG"/>

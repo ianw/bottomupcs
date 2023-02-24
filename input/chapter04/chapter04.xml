@@ -25,8 +25,8 @@
         <imageobject>
           <imagedata fileref="chapter04/figures/theprocess.eps" format="EPS"/>
         </imageobject>
-        <imageobject role="fo">
-          <imagedata fileref="figures/theprocess.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+        <imageobject >
+          <imagedata fileref="figures/theprocess.svg" format="SVG" />
         </imageobject>
         <imageobject role="html">
           <imagedata fileref="chapter04/figures/theprocess.png" format="PNG"/>
@@ -126,8 +126,8 @@
             <imageobject>
               <imagedata fileref="chapter04/figures/stack.eps" format="EPS"/>
             </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="figures/stack.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            <imageobject >
+              <imagedata fileref="figures/stack.svg" format="SVG" />
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="chapter04/figures/stack.png" format="PNG"/>
@@ -305,8 +305,8 @@
             <imageobject>
               <imagedata fileref="chapter04/figures/memory-layout.eps" format="EPS"/>
             </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="figures/memory-layout.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            <imageobject >
+              <imagedata fileref="figures/memory-layout.svg" format="SVG" />
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="chapter04/figures/memory-layout.png" format="PNG"/>
@@ -529,8 +529,8 @@
               <imageobject>
                 <imagedata fileref="chapter04/figures/threads.eps" format="EPS"/>
               </imageobject>
-              <imageobject role="fo">
-                <imagedata fileref="figures/threads.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+              <imageobject >
+                <imagedata fileref="figures/threads.svg" format="SVG" />
               </imageobject>
               <imageobject role="html">
                 <imagedata fileref="chapter04/figures/threads.png" format="PNG"/>
@@ -818,8 +818,8 @@ longer and longer to decide which processes will run next.</para>
           <imageobject>
             <imagedata fileref="chapter04/figures/o1queue.eps" format="EPS"/>
           </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="figures/o1queue.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+          <imageobject >
+            <imagedata fileref="figures/o1queue.svg" format="SVG" />
           </imageobject>
           <imageobject role="html">
             <imagedata fileref="chapter04/figures/o1queue.png" format="PNG"/>

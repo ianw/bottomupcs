@@ -1189,8 +1189,8 @@
               <imageobject>
                 <imagedata fileref="chapter01/figures/masking.eps" format="EPS"/>
               </imageobject>
-              <imageobject role="fo">
-                <imagedata fileref="figures/masking.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+              <imageobject>
+                <imagedata fileref="figures/masking.svg" format="SVG"/>
               </imageobject>
               <imageobject role="html">
                 <imagedata fileref="chapter01/figures/masking.png" format="PNG"/>
@@ -1349,10 +1349,10 @@
           <imageobject>
             <imagedata fileref="chapter01/figures/types.eps" format="EPS"/>
           </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="figures/types.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+          <imageobject>
+            <imagedata fileref="figures/types.svg" format="SVG"/>
           </imageobject>
-          <imageobject role="html">
+          <imageobject>
             <imagedata fileref="chapter01/figures/types.png" format="PNG"/>
           </imageobject>
           <textobject>

@@ -169,8 +169,8 @@
             <imageobject>
               <imagedata fileref="chapter06/figures/alignment.eps" format="EPS"/>
             </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="figures/alignment.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            <imageobject >
+              <imagedata fileref="figures/alignment.svg" format="SVG" />
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="chapter06/figures/alignment.png" format="PNG"/>
@@ -235,8 +235,8 @@
               <title>Alignment</title>
             </info>
             <mediaobject>
-              <imageobject role="fo">
-                <imagedata fileref="figures/padding.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+              <imageobject >
+                <imagedata fileref="figures/padding.svg" format="SVG" />
               </imageobject>
               <imageobject role="html">
                 <imagedata fileref="chapter06/figures/padding.png" format="PNG"/>

@@ -77,8 +77,8 @@
         <imageobject>
           <imagedata fileref="chapter00/figures/abstraction.eps" format="EPS"/>
         </imageobject>
-        <imageobject role="fo">
-          <imagedata fileref="figures/abstraction.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+        <imageobject >
+          <imagedata fileref="figures/abstraction.svg" format="SVG" />
         </imageobject>
         <imageobject role="html">
           <imagedata fileref="chapter00/figures/abstraction.png" format="PNG"/>
@@ -291,8 +291,8 @@
         <imageobject>
           <imagedata fileref="chapter00/figures/stdfds.eps" format="EPS"/>
         </imageobject>
-        <imageobject role="fo">
-          <imagedata fileref="figures/stdfds.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+        <imageobject >
+          <imagedata fileref="figures/stdfds.svg" format="SVG" />
         </imageobject>
         <imageobject role="html">
           <imagedata fileref="chapter00/figures/stdfds.png" format="PNG"/>
@@ -315,8 +315,8 @@
         <imageobject>
           <imagedata fileref="chapter00/figures/file-descriptors.eps" format="EPS"/>
         </imageobject>
-        <imageobject role="fo">
-          <imagedata fileref="figures/file-descriptors.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+        <imageobject >
+          <imagedata fileref="figures/file-descriptors.svg" format="SVG" />
         </imageobject>
         <imageobject role="html">
           <imagedata fileref="chapter00/figures/file-descriptors.png" format="PNG"/>
@@ -520,8 +520,8 @@
             <imageobject>
               <imagedata fileref="chapter00/figures/pipe.eps" format="EPS"/>
             </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="figures/pipe.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            <imageobject >
+              <imagedata fileref="figures/pipe.svg" format="SVG" />
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="chapter00/figures/pipe.png" format="PNG"/>

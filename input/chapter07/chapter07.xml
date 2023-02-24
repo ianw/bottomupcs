@@ -142,8 +142,8 @@
           <imageobject>
             <imagedata fileref="chapter07/figures/elf-overview.eps" format="EPS"/>
           </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="figures/elf-overview.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+          <imageobject >
+            <imagedata fileref="figures/elf-overview.svg" format="SVG" />
           </imageobject>
           <imageobject role="html">
             <imagedata fileref="chapter07/figures/elf-overview.png" format="PNG"/>

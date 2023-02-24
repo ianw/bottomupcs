@@ -129,8 +129,8 @@
         <imageobject>
           <imagedata fileref="chapter03/figures/kernel.eps" format="EPS"/>
         </imageobject>
-        <imageobject role="fo">
-          <imagedata fileref="figures/kernel.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+        <imageobject >
+          <imagedata fileref="figures/kernel.svg" format="SVG" />
         </imageobject>
         <imageobject role="html">
           <imagedata fileref="chapter03/figures/kernel.png" format="PNG"/>
@@ -274,8 +274,8 @@
             <imageobject>
               <imagedata fileref="chapter03/figures/virtual.eps" format="EPS"/>
             </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="figures/virtual.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            <imageobject >
+              <imagedata fileref="figures/virtual.svg" format="SVG" />
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="chapter03/figures/virtual.png" format="PNG"/>
@@ -778,8 +778,8 @@
             <imageobject>
               <imagedata fileref="chapter03/figures/priv.eps" format="EPS"/>
             </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="figures/priv.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+            <imageobject >
+              <imagedata fileref="figures/priv.svg" format="SVG" />
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="chapter03/figures/priv.png" format="PNG"/>
@@ -872,8 +872,8 @@
               <imageobject>
                 <imagedata fileref="chapter03/figures/ia32-segmentation.eps" format="EPS"/>
               </imageobject>
-              <imageobject role="fo">
-                <imagedata fileref="figures/ia32-segmentation.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+              <imageobject >
+                <imagedata fileref="figures/ia32-segmentation.svg" format="SVG" />
               </imageobject>
               <imageobject role="html">
                 <imagedata fileref="chapter03/figures/ia32-segmentation.png" format="PNG"/>
@@ -911,8 +911,8 @@
               <imageobject>
                 <imagedata fileref="chapter03/figures/ia32-segments.eps" format="EPS"/>
               </imageobject>
-              <imageobject role="fo">
-                <imagedata fileref="figures/ia32-segments.svg" format="SVG" scalefit="1" width="100%" contentdepth="100%"/>
+              <imageobject >
+                <imagedata fileref="figures/ia32-segments.svg" format="SVG" />
               </imageobject>
               <imageobject role="html">
                 <imagedata fileref="chapter03/figures/ia32-segments.png" format="PNG"/>
