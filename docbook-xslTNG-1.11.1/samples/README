@@ -1,0 +1,11 @@
+DocBook Sample Documents
+========================
+
+This directory contains a few small sample documents. The reference
+guide and other introductions use these documents as examples.
+
+If you're in the samples directory, you can try out the stylesheets by
+running:
+
+   java -jar ../lib/
+

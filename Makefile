@@ -47,7 +47,7 @@ $(html.output)/index.html: input/csbu.xml csbu-html.xsl $(sources) $(pngs) $(svg
 		cp -r --parents $$dir/images/*.svg ../$(html.output); \
 	done
 	xmllint --relaxng ./docbook-5.0.1/docbook.rng --xinclude --noent --output $(html.output)/csbu.xml ./input/csbu.xml
-	cd $(html.output); ../docbook-xslTNG-1.8.0/bin/docbook \
+	cd $(html.output); ../docbook-xslTNG-1.11.1/bin/docbook \
 	  --resources:. \
 	  ./csbu.xml -xsl:../csbu-html.xsl
 
@@ -61,7 +61,7 @@ $(html.output)/csbu.pdf: $(svgs) $(html.output)/csbu-print.html
 	cd $(html.output); prince -o csbu.pdf csbu-print.html
 
 $(html.output)/csbu-print.html : $(html.output)/index.html
-	cd $(html.output); ../docbook-xslTNG-1.8.0/bin/docbook \
+	cd $(html.output); ../docbook-xslTNG-1.11.1/bin/docbook \
 	  --resources:. \
 	  ./csbu.xml -xsl:../csbu-pdf.xsl -o:csbu-print.html
 

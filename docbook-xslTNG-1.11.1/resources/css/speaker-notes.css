@@ -1,0 +1,33 @@
+/* DocBook xslTNG version 1.11.1
+ *
+ * This is speaker-notes.css. This CSS supports the notion of "speaker
+ * notes" in the chunked output. It allows chunked output to be used
+ * as a set of foils for a presentation.
+ *
+ * See https://xsltng.docbook.org/
+ *
+ */
+
+main .speaker-notes {
+    display: none;
+}
+
+main .speaker-notes .foil-wrapper {
+    float: right;
+    width: 400px;
+}
+
+main .speaker-notes .foil {
+    border: 1px solid #7f7f7f;
+    border-radius: 4px;
+    padding: 1em;
+    width: 800px;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+}
+
+main .speaker-notes .foil h1 {
+    margin-top: 0;
+    font-size: 24pt;
+    text-align: center;
+}

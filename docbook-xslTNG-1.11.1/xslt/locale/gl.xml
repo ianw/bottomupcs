@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<l:l10n xmlns:l="http://docbook.org/ns/docbook/l10n"
+         xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+         language="gl"
+         english-language-name="Galician">
+   <l:gentext name="title">
+      <l:tokens key="abstract">Resumo</l:tokens>
+      <l:tokens key="acknowledgements">???ACKNOWLEDGEMENTS???</l:tokens>
+      <l:tokens key="bibliography">Bibliografía</l:tokens>
+      <l:tokens key="caution">Cuidado</l:tokens>
+      <l:tokens key="danger">???DANGER???</l:tokens>
+      <l:tokens key="dedication">Dedicatoria</l:tokens>
+      <l:tokens key="glossary">Glosario</l:tokens>
+      <l:tokens key="important">Importante</l:tokens>
+      <l:tokens key="index">Índice</l:tokens>
+      <l:tokens key="legalnotice">Aviso Legal</l:tokens>
+      <l:tokens key="listofequations">Lista de Ecuacións</l:tokens>
+      <l:tokens key="listofexamples">Lista de Exemplos</l:tokens>
+      <l:tokens key="listoffigures">Lista de Figuras</l:tokens>
+      <l:tokens key="listofprocedures">Lista de Procedimentos</l:tokens>
+      <l:tokens key="listoftables">Lista de Táboas</l:tokens>
+      <l:tokens key="listofunknown">Lista de Descoñecido</l:tokens>
+      <l:tokens key="msgaud">Audiencia</l:tokens>
+      <l:tokens key="msglevel">Nível</l:tokens>
+      <l:tokens key="msgorig">Orixen</l:tokens>
+      <l:tokens key="note">Nota</l:tokens>
+      <l:tokens key="revhistory">Historial de Revisións</l:tokens>
+      <l:tokens key="setindex">Índice de Conxuntos</l:tokens>
+      <l:tokens key="tableofcontents">Índice</l:tokens>
+      <l:tokens key="tip">Axuda</l:tokens>
+      <l:tokens key="warning">Atención</l:tokens>
+   </l:gentext>
+   <l:gentext name="label">
+      <l:tokens key="abstract">Resumo</l:tokens>
+      <l:tokens key="appendix">Apêndice</l:tokens>
+      <l:tokens key="chapter">Capítulo</l:tokens>
+      <l:tokens key="equation">Ecuación</l:tokens>
+      <l:tokens key="example">Exemplo</l:tokens>
+      <l:tokens key="figure">Figura</l:tokens>
+      <l:tokens key="glossary">Glosario</l:tokens>
+      <l:tokens key="glosssee">Consulte</l:tokens>
+      <l:tokens key="glossseealso">Vexa Tamén</l:tokens>
+      <l:tokens key="index">Índice</l:tokens>
+      <l:tokens key="legalnotice">Aviso Legal</l:tokens>
+      <l:tokens key="part">Parte</l:tokens>
+      <l:tokens key="procedure">Procedimento</l:tokens>
+      <l:tokens key="reference">Referencia</l:tokens>
+      <l:tokens key="refname">Nome</l:tokens>
+      <l:tokens key="section">Sección</l:tokens>
+      <l:tokens key="see">Vexa</l:tokens>
+      <l:tokens key="seealso">Consulte Tamén</l:tokens>
+      <l:tokens key="step">Paso</l:tokens>
+      <l:tokens key="subfigure">???SUBFIGURE???</l:tokens>
+      <l:tokens key="subtable">???SUBTABLE???</l:tokens>
+      <l:tokens key="subequation">???SUBEQUATION???</l:tokens>
+      <l:tokens key="subexample">???SUBEXAMPLE???</l:tokens>
+      <l:tokens key="table">Táboa</l:tokens>
+      <l:tokens key="edited-by">Editado por</l:tokens>
+   </l:gentext>
+   <l:gentext name="xref">
+      <l:tokens key="abstract">Resumo</l:tokens>
+      <l:tokens key="appendix">Apêndice</l:tokens>
+      <l:tokens key="chapter">Capítulo</l:tokens>
+      <l:tokens key="equation">Ecuación</l:tokens>
+      <l:tokens key="example">Exemplo</l:tokens>
+      <l:tokens key="figure">Figura</l:tokens>
+      <l:tokens key="glossary">Glosario</l:tokens>
+      <l:tokens key="glosssee">Consulte</l:tokens>
+      <l:tokens key="glossseealso">Vexa Tamén</l:tokens>
+      <l:tokens key="index">Índice</l:tokens>
+      <l:tokens key="legalnotice">Aviso Legal</l:tokens>
+      <l:tokens key="part">Parte</l:tokens>
+      <l:tokens key="procedure">Procedimento</l:tokens>
+      <l:tokens key="reference">Referencia</l:tokens>
+      <l:tokens key="refname">Nome</l:tokens>
+      <l:tokens key="section">Sección</l:tokens>
+      <l:tokens key="see">vexa</l:tokens>
+      <l:tokens key="seealso">Consulte Tamén</l:tokens>
+      <l:tokens key="sectioncalled">a sección chamada</l:tokens>
+      <l:tokens key="step">paso</l:tokens>
+      <l:tokens key="table">Táboa</l:tokens>
+      <l:tokens key="edited-by">Editado por</l:tokens>
+   </l:gentext>
+   <l:gentext name="iso690"/>
+   <l:gentext name="label-separator">
+      <l:tokens key="_default"> </l:tokens>
+   </l:gentext>
+   <l:gentext name="number-separator">
+      <l:tokens key="_default">. </l:tokens>
+   </l:gentext>
+   <l:gentext name="intra-number-separator">
+      <l:tokens key="_default">.</l:tokens>
+   </l:gentext>
+   <l:gentext name="number-format">
+      <l:tokens key="_default">1</l:tokens>
+      <l:tokens key="appendix">A</l:tokens>
+      <l:tokens key="part">I</l:tokens>
+      <l:tokens key="reference">I</l:tokens>
+   </l:gentext>
+   <l:gentext name="separator">
+      <l:tokens key="author-sep">, </l:tokens>
+      <l:tokens key="author-sep2"> e </l:tokens>
+      <l:tokens key="author-seplast">, e </l:tokens>
+      <l:tokens key="refname-sep">, </l:tokens>
+      <l:tokens key="refpurpose-sep"> — </l:tokens>
+      <l:tokens key="term-sep">, </l:tokens>
+      <l:tokens key="term-sep2">, </l:tokens>
+      <l:tokens key="term-seplast">, </l:tokens>
+      <l:tokens key="glossterm-sep">, </l:tokens>
+      <l:tokens key="xlink-arclist-before"> [</l:tokens>
+      <l:tokens key="xlink-arclist-after">] </l:tokens>
+      <l:tokens key="xlink-arclist-titlesep">: </l:tokens>
+      <l:tokens key="xlink-arclist-sep">, </l:tokens>
+   </l:gentext>
+   <l:gentext name="style">
+      <l:tokens key="personname">first-last</l:tokens>
+   </l:gentext>
+   <l:gentext name="keycap"/>
+   <l:letters/>
+</l:l10n>

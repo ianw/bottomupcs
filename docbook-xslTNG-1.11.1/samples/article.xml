@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<article xmlns="http://docbook.org/ns/docbook"
+         xml:id="article" version="5.0">
+<info>
+  <title>Sample Article</title>
+</info>
+
+<para>This is a very simple <phrase xml:id="docbook">DocBook</phrase>
+document. It serves as a kind of <quote xml:id="smoketest">smoke
+test</quote> to demonstrate that the stylesheets are working.</para>
+
+</article>
