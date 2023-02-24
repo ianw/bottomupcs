@@ -11,6 +11,6 @@
 <!-- This href has to point to your local copy
      of the stylesheets. -->
 
-<xsl:import href="docbook-xslTNG-1.8.0/xslt/print.xsl"/>
+<xsl:import href="docbook-xslTNG-1.11.1/xslt/print.xsl"/>
 
 </xsl:stylesheet>

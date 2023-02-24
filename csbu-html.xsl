@@ -15,7 +15,7 @@
 <!-- This href has to point to your local copy
      of the stylesheets. -->
 
-<xsl:import href="docbook-xslTNG-1.8.0/xslt/docbook.xsl"/>
+<xsl:import href="docbook-xslTNG-1.11.1/xslt/docbook.xsl"/>
 
 <xsl:param name="chunk" select="'index.html'" />
 <xsl:param name="chunk-output-base-uri" select="'.'" />
