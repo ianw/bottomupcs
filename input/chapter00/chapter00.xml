@@ -93,19 +93,19 @@
     <info>
       <title>Implementing abstraction</title>
     </info>
-    <para>In general, abstraction is implemented by what is
-    generically termed an <emphasis>Application Programming
-    Interface</emphasis> (API).  API is a somewhat nebulous term that
-    means different things in the context of various programming
-    endeavours.  Fundamentally, a programmer designs a set of
-    functions and documents their interface and functionality with the
-    principle that the actual implementation providing the API is
-    opaque.</para>
-    <para>For example, many large web applications provide an API
-    accessible via HTTP.  Accessing data via this method surely
-    triggers many complicated series of remote procedure calls,
+    <para>By defining an interface—a set of function calls named
+	    after the thing someone wants to do, but not bothering
+	    them with exactly how that is done—lower-level programmers
+	    (such as library developers) help higher-level programmers
+	    say what they mean and (hopefully) get their work done
+	    more easily. The acronym “API” is used synonymously with
+	    “interface”. What are some examples of API’s you may be familiar with?
+	  </para>
+    <para>Many web applications provide an API
+    accessible via HTTP.  Accessing data via <code>curl</code> may
+    trigger a series of remote procedure calls,
     database queries and data transfers, all of which are opaque to
-    the end user who simply receives the contracted data.</para>
+    the end user who simply receives an answer to a question.</para>
     <para>Those familiar with <emphasis>object-oriented</emphasis>
       languages such as Java, Python or C++ would be familiar with the
       abstraction provided by <emphasis>classes</emphasis>.  Methods
