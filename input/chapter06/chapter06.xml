@@ -103,7 +103,7 @@
       <para>The first step of compiling a source file to an executable
     file is converting the code from the high level, human
     understandable language to <emphasis>assembly code</emphasis>.  We
-    know from previous chapters than assembly code works directly with
+    know from previous chapters that assembly code works directly with
     the instructions and registers provided by the processor.</para>
       <para>The compiler is the most complex step of process for a
     number of reasons.  Firstly, humans are very unpredictable and
@@ -416,7 +416,7 @@
           <title>Inlining functions</title>
         </info>
         <para>Similar to unrolling loops, it is possible to put embed
-	called functions within the callee.  The programmer can
+	called functions within the caller.  The programmer can
 	specify that the compiler should try to do this by specifying
 	the function as <computeroutput>inline</computeroutput> in the
 	function definition.  Once again, you may trade code size for
@@ -541,7 +541,7 @@
       with the prefix <computeroutput>extern</computeroutput>.
       <computeroutput>extern</computeroutput> stands for
       <emphasis>external</emphasis> and to a human means that this
-      variable is declared somewhere else.</para>
+      variable is defined somewhere else.</para>
         <para>What <computeroutput>extern</computeroutput> says to a
       compiler is that it should not allocate any space in memory for
       this variable, and leave this symbol in the object code where it

@@ -519,7 +519,7 @@
 	  instructions also allows for alternate implementations which
 	  may take advantage of the nature of instruction streaming;
 	  they are read-only so do not need expensive on-chip features
-	  such as multi-porting, nor need to handle handle sub-block
+	  such as multi-porting, nor need to handle sub-block
 	  reads because the instruction stream generally uses more
 	  regular sized accesses.</para>
       <figure xml:id="cache_associativity">
@@ -584,7 +584,7 @@
 	      particular address could be located in any way. Thus an
 	      <emphasis>n</emphasis>-way set associative cache will
 	      allow a cache line to exist in any entry of a set sized
-	      total blocks mod n &#x2014; <xref linkend="cache_associativity"/> shows a sample
+	      total blocks n &#x2014; <xref linkend="cache_associativity"/> shows a sample
 	      8-element, 4-way set associative cache; in this case the
 	      two addresses have four possible locations, meaning only
 	      half the cache must be searched upon lookup.  The more
@@ -655,8 +655,8 @@
             </imageobject>
             <caption>
               <para>Tags need to be checked in parallel to keep
-latency times low; more tag bits (i.e. less set associativity)
-requires more complex hardware to achieve this. Alternatively more set
+latency times low; more tag bits (i.e. more set associativity)
+requires more complex hardware to achieve this. Alternatively less set
 associativity means less tags, but the processor now needs hardware to
 multiplex the output of the many sets, which can also add latency.
 </para>
@@ -735,7 +735,7 @@ multiplex the output of the many sets, which can also add latency.
 	a separate chip that is part of the motherboard which buffers
 	and communicates interrupt information to the main processor.
 	Each device has a physical <emphasis>interrupt line</emphasis>
-	between it an one of the PIC's provided by the system.  When
+	between it and one of the PIC's provided by the system.  When
 	the device wants to interrupt, it will modify the voltage on
 	this line.</para>
         <para>A very broad description of the PIC's role is that it
@@ -775,9 +775,9 @@ multiplex the output of the many sets, which can also add latency.
         </figure>
         <para>Most drivers will split up handling of interrupts into
 	<emphasis>bottom</emphasis> and <emphasis>top</emphasis>
-	halves.  The bottom half will acknowledge the interrupt, queue
+	halves.  The top half will acknowledge the interrupt, queue
 	actions for processing and return the processor to what it was
-	doing quickly.  The top half will then run later when the CPU
+	doing quickly.  The bottom half will then run later when the CPU
 	is free and do the more intensive processing.  This is to stop
 	an interrupt hogging the entire CPU.</para>
         <section>
@@ -836,7 +836,7 @@ multiplex the output of the many sets, which can also add latency.
 	  indicate to the PIC that an interrupt has occurred, which it
 	  will signal to the operating system for handling.  However,
 	  if further pulses come in on the already asserted line from
-	  another device.</para>
+	  another device.xxx</para>
           <para>The issue with level-triggered interrupts is that it
 	  may require some considerable amount of time to handle an
 	  interrupt for a device.  During this time, the interrupt
@@ -1030,7 +1030,7 @@ multiplex the output of the many sets, which can also add latency.
       system.</para>
       <para>The symmetric term refers to the fact that all the CPUs in
       the system are the same (e.g. architecture, clock speed).  In a
-      SMP system there are multiple processors that share other all
+      SMP system there are multiple processors that share all
       other system resources (memory, disk, etc).</para>
       <section>
         <info>
@@ -1463,7 +1463,7 @@ multiplex the output of the many sets, which can also add latency.
       that is a fence that allows any load or stores to be done before
       it (move upwards), but nothing before it to move downwards past
       it.  Thus, when load or store with release semantics is
-      processed, you can be store that any earlier load or stores will
+      processed, you can be sure that any earlier load or stores will
       have been complete.</para>
       <figure>
         <info>

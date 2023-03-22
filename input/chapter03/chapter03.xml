@@ -289,7 +289,7 @@
 	simplest case, a small <emphasis>virtual machine monitor
 	</emphasis> can run directly on the hardware and provide an
 	interface to the guest operating systems running on top.  This
-	VMM is often often called a hypervisor (from the word
+	VMM is often called a hypervisor (from the word
 	"supervisor")<footnote><para>In fact, the hypervisor shares
 	much in common with a micro-kernel; both strive to be small
 	layers to present the hardware in a safe fashion to layers
@@ -426,7 +426,7 @@
 	is <computeroutput>read()</computeroutput>, etc.</para>
         <para>The <emphasis>Application Binary Interface</emphasis>
 	(ABI) is very similar to an API but rather than being for
-	software is for hardware.  The API will define which register
+	software is for hardware.  The ABI will define which register
 	the system call number should be put in so the kernel can find
 	it when it is asked to do the system call.</para>
       </section>
@@ -815,7 +815,7 @@
           <para>The 386 protection model has four rings, though most
 	  operating systems (such as Linux and Windows) only use two
 	  of the rings to maintain compatibility with other
-	  architectures that do now allow as many discrete protection
+	  architectures that do not allow as many discrete protection
 	  levels.</para>
           <para>386 maintains privileges by making each piece of
 	  application code running in the system have a small
