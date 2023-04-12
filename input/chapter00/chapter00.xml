@@ -148,7 +148,7 @@
       <para>We then have our implementation of the API.  Often for
       more complex functionality you will see an idiom where API
       implementation functions will only be a wrapper around other
-      functions that are conventionally prepended with one or or two
+      functions that are conventionally prepended with one or two
       underscores<footnote><para>A double-underscore function
       <computeroutput>__foo</computeroutput> may conversationally be
       referred to as "dunder foo".</para></footnote>
