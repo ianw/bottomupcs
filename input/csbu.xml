@@ -48,7 +48,7 @@
     <releaseinfo>
       A PDF version is available at <link xlink:href="https://www.bottomupcs.com/csbu.pdf">https://www.bottomupcs.com/csbu.pdf</link>.
       A EPUB version is available at <link xlink:href="https://www.bottomupcs.com/csbu.epub">https://www.bottomupcs.com/csbu.epub</link>
-      The original souces are available at <link xlink:href="https://github.com/ianw/bottomupcs">https://github.com/ianw/bottomupcs</link>
+      The original sources are available at <link xlink:href="https://github.com/ianw/bottomupcs">https://github.com/ianw/bottomupcs</link>
     </releaseinfo>
   </info>
   <xi:include href="intro.xml"/>
