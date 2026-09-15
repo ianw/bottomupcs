@@ -1281,9 +1281,11 @@ multiplex the output of the many sets, which can also add latency.
       interconnects required.  One such layout common in modern NUMA
       architectures is the hypercube.</para>
         <para>A hypercube has a strict mathematical definition (way
-      beyond this discussion) but as a cube is a 3 dimensional
-      counterpart of a square, so a hypercube is a 4 dimensional
-      counterpart of a cube.</para>
+      beyond this discussion) but just as a square is the 2 dimensional
+      counterpart of a line and a cube is the 3 dimensional counterpart
+      of a square, a hypercube is the generalisation of a cube to any
+      number of dimensions.  The figure below illustrates the 4
+      dimensional case.</para>
         <figure>
           <info>
             <title>A Hypercube</title>
